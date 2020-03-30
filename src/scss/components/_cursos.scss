@@ -1,0 +1,47 @@
+.c-cursos {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 22rem;
+  height: 100%;
+  z-index: 9000;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(-10px);
+
+  @include transition(0.3s);
+  @include box-shadow(right, rgba($gray, 0.4), 10px, 30px, 50px);
+
+  &__item {
+    a {
+      text-transform: uppercase;
+      color: $dark;
+      padding: 1rem 1.5rem;
+      border-bottom: solid 1px $medium-gray;
+
+      @include transition(0.25s);
+
+      &:hover {
+        background-color: $secondary-alt;
+        border-bottom: solid 1px $secondary-alt;
+        color: $white;
+      }
+    }
+  }
+
+  &__item.active {
+    a {
+      background-color: $secondary-alt;
+      border-bottom: solid 1px $secondary-alt;
+      color: $white;
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-cursos.active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

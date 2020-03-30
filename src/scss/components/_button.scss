@@ -1,0 +1,94 @@
+.c-button {
+  font-size: $fs-16;
+  padding: 0.7rem 1rem;
+
+  @include b-radious(5px);
+  @include transition(0.25s);
+
+  &--primary {
+    background-color: $primary-color;
+    color: $white;
+
+    &:hover,
+    &:focus {
+      background-color: $primary-alt;
+      color: $white;
+    }
+  }
+
+  &--secondary {
+    background-color: $secondary-color;
+    color: $white;
+
+    &:hover,
+    &:focus {
+      background-color: $secondary-dark;
+      color: $white;
+    }
+  }
+
+  &--secondary-alt {
+    background-color: $secondary-alt;
+    color: $white;
+
+    &:hover,
+    &:focus {
+      background-color: $secondary-medium;
+      color: $white;
+    }
+  }
+
+  &--secondary-light {
+    background-color: $secondary-light;
+    color: $white;
+
+    &:hover,
+    &:focus {
+      background-color: $secondary-lighter;
+      color: $white;
+    }
+  }
+
+  &--ghost-secondary {
+    border: solid 1px $black;
+    color: $black;
+
+    &:hover,
+    &:focus {
+      color: $secondary-alt;
+      border-color: $secondary-alt;
+    }
+  }
+
+  &--ghost {
+    border: solid 1px $primary-color;
+    color: $black;
+
+    .c-icon {
+      color: $secondary-alt;
+
+      @include transition(0.25s);
+    }
+
+    &:hover,
+    &:focus {
+      color: $white;
+      background-color: $primary-color;
+
+      .c-icon {
+        color: $white;
+      }
+    }
+  }
+
+  &--ghost-primary {
+    border: solid 1px $primary-color;
+    color: $primary-color;
+
+    &:hover,
+    &:focus {
+      color: $white;
+      background-color: $primary-color;
+    }
+  }
+}

@@ -1,0 +1,65 @@
+.c-section--course {
+  .c-title {
+    text-transform: uppercase;
+  }
+
+  .c-unity {
+    &__title {
+      text-transform: uppercase;
+
+      .c-icon {
+        @include transition(0.3s);
+      }
+    }
+
+    &__topics {
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+
+      @include transition(0.4s);
+    }
+  }
+
+  .c-unity.active {
+    .c-unity__title {
+      .c-icon {
+        transform: rotateZ(-180deg);
+      }
+    }
+
+    .c-unity__topics {
+      overflow: visible;
+      opacity: 1;
+      max-height: 1000px;
+    }
+  }
+
+  .c-topic {
+    margin-bottom: 1.5rem;
+
+    &__video {
+      padding: 0.25rem 1rem;
+
+      @include transition(0.25s);
+
+      &:hover {
+        background-color: $light-gray;
+      }
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-section--course {
+    .c-content {
+      @include transition(0.3s);
+
+      transition-delay: 0.3s;
+    }
+
+    .c-content.active {
+      padding-left: 22rem;
+    }
+  }
+}

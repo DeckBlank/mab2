@@ -1,0 +1,39 @@
+.c-comments {
+  .c-counter {
+    padding-left: 3rem;
+
+    &__icon {
+      margin-right: 0.5rem;
+    }
+  }
+
+  .c-comment {
+    &__body {
+      padding-left: 3.25rem;
+    }
+
+    &__date::first-letter {
+      text-transform: uppercase;
+    }
+
+    .c-answer-text-area {
+      display: none;
+    }
+
+    .c-answer-text-area.showed {
+      @include flex;
+    }
+  }
+
+  .c-show-answers {
+    .c-icon {
+      @include transition(0.3s);
+    }
+  }
+
+  .c-show-answers.showed {
+    .c-icon {
+      transform: rotateZ(-180deg);
+    }
+  }
+}

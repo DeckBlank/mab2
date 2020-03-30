@@ -1,0 +1,47 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--login">
+    <div class="grid-container padding-top-3 margin-bottom-2">
+      <div class="grid-x align-center">
+        <div class="cell medium-6 large-4">
+          <figure class="c-brand c-brand--full flex-container align-center-middle margin-bottom-2">
+            <a class="c-brand__link" href="{{ site.url }}">
+            </a>
+          </figure>
+          <h1 class="fs-18 w-bold dark text-center margin-bottom-1">{{title}}</h1>
+          <div class="margin-bottom-2 text-center">
+            <p class="f2 margin-bottom-0 dark">{{phrase.content}}</p>
+            <p class="margin-bottom-0 gray-gray fs-14">{{phrase.author}}</p>
+          </div>
+          <p class="error-message margin-bottom-1 alert text-center" :class="{ showed : isShowedErrorMessage }">${errorMessage}</p>
+          <div class="c-form margin-bottom-1">
+            <div class="margin-bottom-1">
+              <label>
+                <p class="mb-05 gray-gray">ID</p>
+                <input type="text" class="c-form__input input-reset" v-model="user" @keyup.enter="login">
+              </label>
+            </div>
+            <div class="margin-bottom-2">
+              <label>
+                <p class="mb-05 gray-gray">CONTRASEÑA</p>
+                <input type="password" class="c-form__input input-reset" v-model="password" @keyup.enter="login">
+              </label>
+            </div>
+            <button class="c-button c-button--secondary width-100 w-bold f2" :disabled="isLoading" @click="login">
+              INGRESAR 
+            </button>
+          </div>
+          <p class="f2 text-center margin-bottom-3">¿No tienes un ID? <a href="{{site.url}}/solicitar-id" class="c-link c-link--sec margin-left-1 w-bold">Solicitar ID</a></p>
+          <a href="{{site.url}}/solicitar-id" class="c-button c-button--ghost-secondary f2 display-block text-center">
+            SOLICITAR UN ID
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

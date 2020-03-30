@@ -1,0 +1,13 @@
+.c-avatar {
+  width: 36px;
+  height: 36px;
+
+  img {
+    vertical-align: baseline;
+  }
+
+  &--small {
+    width: 25px;
+    height: 25px;
+  }
+}

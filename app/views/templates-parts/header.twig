@@ -1,0 +1,45 @@
+<header class="c-header width-100" :class="{ shadowed : isHeaderWithShadow }">
+  <div class="grid-container">
+    <nav class="c-nav width-100">
+      <div class="c-nav__left flex-container align-center-middle margin-right-1">
+        <figure class="c-brand c-brand--normal flex-container align-center-middle">
+          <a class="c-brand__link" href="{{ site.url }}">
+          </a>
+        </figure>
+      </div>
+      <div class="c-nav__center flex-container align-center" :class="{ visible : isActiveBrowserToggle }">
+        <ul class="c-menu flex-container ul-reset">
+          {% for item in primary_menu.items %}
+            {% if item.slug == "cursos" %}              
+              <li>
+                <div class="c-menu__item" :class="{ active : isActiveCursosMenuDesk }">
+                  <a class="position-relative flex-container align-middle" @click="updateStatusCursosMenuDesk">
+                    {{ item.name }}<span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
+                  </a>
+                </div>
+              </li>
+
+            {% else %}              
+              <li class="{% if 'current-menu-item' in item.class %} activate {% endif %}">
+                <div class="c-menu__item">
+                  <a href="{{ item.link }}" class="position-relative">{{ item.name }}</a>
+                </div>
+              </li>
+
+            {% endif %}
+          {% endfor %}
+        </ul>
+        <browser></browser>
+      </div>
+      <div class="c-nav__right flex-container align-middle">
+        <button class="c-search-toggle margin-right-1" @click="updateStatusBrowserToggle">
+          <span><i class="far fa-search"></i></span>
+        </button>     
+        <profile v-if="logedUser"></profile>
+        <a v-else href="{{site.url}}/login" class="c-login w-bold dark">INGRESAR</a>
+      </div>      
+    </nav>     
+  </div>
+</header>
+  
+  

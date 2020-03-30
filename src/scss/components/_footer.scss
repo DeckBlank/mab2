@@ -1,0 +1,70 @@
+.c-footer {
+  margin-bottom: 5rem;
+
+  &__content {
+    flex-wrap: wrap;
+  }
+
+  .c-social-media {
+    width: 100%;
+    margin-bottom: 1rem;
+    justify-content: center;
+
+    &__link {
+      margin: 0 0.5rem;
+      width: 40px;
+      height: 40px;
+      background-color: $dark;
+      color: $white;
+
+      @include transition(0.25s);
+
+      &:hover {
+        background-color: $primary-color;
+        color: $white;
+      }
+    }
+  }
+
+  .c-contacts {
+    width: 100%;
+    justify-content: center;
+
+    .c-contact {
+      margin: 0 0.5rem;
+    }
+  }
+}
+
+@include breakpoint(medium) {
+  .c-footer {
+    margin-bottom: 0;
+  }
+}
+
+@include breakpoint(large) {
+  .c-footer {
+    margin-bottom: 0;
+
+    &__content {
+      align-items: center;
+      justify-content: center;
+    }
+
+    .c-social-media,
+    .c-contacts {
+      width: auto;
+      margin: 0 0.5rem;
+    }
+
+    .c-social-media {
+      margin-bottom: 0;
+    }
+
+    .c-contacts {
+      .c-contact {
+        margin: 0 1rem;
+      }
+    }
+  }
+}

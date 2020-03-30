@@ -1,0 +1,68 @@
+.c-browser-container {
+  width: 100%;
+}
+
+.c-browser {
+  outline: none;
+  height: 40px;
+
+  &__icon {
+    padding: 0 1rem;
+
+    @include transition(0.3s);
+
+    &:hover {
+      background-color: $primary-color;
+      color: $white;
+    }
+  }
+
+  &__input {
+    background-color: $medium-gray !important;
+    box-shadow: none;
+
+    @include transition(0.25s);
+  }
+}
+
+.c-browser.active {
+  .c-browser__icon {
+    background-color: $primary-color;
+    color: $white;
+  }
+
+  .c-browser__input {
+    border: solid 1px $primary-color;
+  }
+}
+
+.c-browser-result {
+  visibility: hidden;
+  opacity: 0;
+  padding-top: 0;
+
+  @include transition(0.3s);
+  @include box-shadow(right, rgba($gray, 0.4), 0, 10px, 50px);
+
+  &__item > a > p {
+    flex-grow: 1;
+
+    @include transition(0.25s);
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+.c-browser-result.showed {
+  visibility: visible;
+  opacity: 1;
+}
+
+@include breakpoint(medium) {
+  .c-browser-container {
+    width: auto;
+    flex-grow: 1;
+  }
+}

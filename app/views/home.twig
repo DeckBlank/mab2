@@ -1,0 +1,79 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--home">
+    <div class="grid-container padding-top-2">
+      <div class="c-title flex-container align-middle align-justify margin-bottom-2">
+        <h1 class="f2 dark w-bold fs-25">Descubre</h1>
+        <div class="c-title__label f2 fs-18 flex-container align-middle">
+          <span class="c-icon fs-21"><i class="far fa-gift"></i></span>
+          <p class="margin-left-1 margin-bottom-0">Contenido pagado</p>
+        </div> 
+      </div>
+      <div class="flex-container align-right margin-bottom-2">
+        <div class="c-filter position-relative" :class="{ active : isActiveFilter }">
+          <button class="c-filter__toggle position-relative" @click="isActiveFilter = !isActiveFilter">
+            <span class="c-icon fs-21"><i class="far fa-filter"></i></span>
+          </button>
+          <div class="c-filter__content br--small position-absolute bg-white">
+            <button 
+              class="c-filter__clean flex-container align-middle f2 fs-18 margin-bottom-2" 
+              @click="cleanFilter"
+              :disabled="filterOptions.length == 0"
+            >
+              <span class="margin-right-1"><i class="far fa-times-circle fs-21"></i></span>
+              Limpiar filtros
+            </button>
+            <ul class="c-list ul-reset fs-18">
+              {% for category in video_categories %}
+                <li class="c-list__item dark flex-container align-middle">
+                  <input id="category-{{loop.index}}" value="{{category.slug}}" type="checkbox" class="hide" v-model="filterOptions">
+                  <label for="category-{{loop.index}}" class="c-option fs-18 align-middle width-100">
+                    <div class="c-option__checkbox position-relative margin-right-1 br--small">
+                    </div>
+                    {{category.name}}
+                  </label>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="c-loader c-loader--full" :class="{ active : isFeedLoading }">
+        <div class="container height-100 flex-container align-center-middle">
+          <div class="loader">
+            {% for item in [1,2,3,4,5] %}              
+              <div class="loader--dot"></div>
+            {% endfor %}       
+          </div>
+        </div>
+      </div>
+      <div class="c-feed grid-x grid-margin-x grid-margin-y margin-bottom-2">
+        <div class="cell" v-for="(video, index) of videos" :key="video.id" :class="{ 'medium-6' : (index != 0) }">
+          <video-c 
+            v-if="index == 0"
+            :title="video.title" 
+            :link="video.link" 
+            :author="video.author" 
+            :thumbnail="video.thumbnail.guid"
+            modifier="full"
+          >
+          </video-c>
+          <video-c 
+            v-else
+            :title="video.title" 
+            :link="video.link" 
+            :author="video.author" 
+            :thumbnail="video.thumbnail.guid"            
+          >
+          </video-c>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+

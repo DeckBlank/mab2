@@ -1,0 +1,43 @@
+.c-likes {
+  &__list {
+    padding: 0.5rem 0;
+    bottom: 2.5rem;
+    left: 0;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(10px);
+
+    @include transition(0.3s);
+  }
+
+  &__item button {
+    padding: 0.5rem 1rem;
+    color: $dark;
+
+    @include transition(0.25s);
+
+    .c-icon {
+      margin-right: 0.5rem;
+    }
+
+    &:hover,
+    &:focus {
+      color: $secondary-alt;
+    }
+  }
+}
+
+.c-likes.done {
+  .c-likes__toggle,
+  .c-likes__toggle > p {
+    color: $secondary-alt;
+  }
+}
+
+.c-likes.active {
+  .c-likes__list {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

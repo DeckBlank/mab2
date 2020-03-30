@@ -1,0 +1,16 @@
+.c-section--login {
+  .error-message {
+    display: none;
+  }
+
+  .error-message.showed {
+    display: block;
+  }
+
+  .c-button {
+    &:disabled {
+      opacity: 0.5;
+      cursor: no-drop;
+    }
+  }
+}

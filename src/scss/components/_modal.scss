@@ -1,0 +1,42 @@
+.c-modal {
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  background-color: rgba($black, 0.5);
+  visibility: hidden;
+  opacity: 0;
+
+  @include transition(0.3s);
+
+  &__content {
+    padding: 1rem;
+    height: 80vh;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+
+    @include transition(0.3s);
+
+    transition-delay: 0.3s;
+  }
+}
+
+.c-modal.opened {
+  visibility: visible;
+  opacity: 1;
+
+  .c-modal__content {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@include breakpoint(large) {
+  .c-modal {
+    &__content {
+      padding: 2rem;
+      height: 85vh;
+    }
+  }
+}

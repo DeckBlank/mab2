@@ -1,0 +1,19 @@
+.c-section--solicitar-id {
+  .c-form {
+    label p:first-child,
+    label p:last-child {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  .wpcf7-response-output {
+    text-align: center;
+    border: none !important;
+    margin: 0 !important;
+    color: $alert-color;
+  }
+
+  .wpcf7-response-output.wpcf7-mail-sent-ok {
+    color: $secondary-color;
+  }
+}

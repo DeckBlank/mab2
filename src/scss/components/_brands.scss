@@ -1,0 +1,22 @@
+.c-brand {
+  &__link {
+    display: block;
+    height: 50px;
+    width: 90px;
+    background-image: url('../images/logo.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+
+  &__image {
+    height: 100%;
+    object-fit: contain;
+  }
+
+  &--full {
+    .c-brand__link {
+      width: 150px;
+      height: 80px;
+    }
+  }
+}

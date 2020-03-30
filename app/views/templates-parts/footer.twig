@@ -1,0 +1,37 @@
+<footer class="c-footer padding-vertical-2">
+  <div class="grid-container">
+    <div class="c-footer__content flex-container">
+      <div class="c-social-media flex-container">
+        {% for item in social_menu.items %}
+          {% set social_icon = "" %}
+
+          {% if item.name|lower == "facebook" %}
+            {% set social_icon = "facebook-f" %}
+
+          {% else %}
+            {% set social_icon = item.name|lower %}
+
+          {% endif %}   
+
+          <a href="{{item.link}}" target="_blank" class="c-social-media__link flex-container align-center-middle rounded">
+            <span class="c-icon"><i class="fab fa-{{social_icon}}"></i></span>
+          </a>
+        {% endfor %}
+      </div>
+      <div class="c-contacts flex-container">
+        <div class="c-contact flex-container align-middle dark">
+          <span class="c-contact__icon margin-right-1 fs-21">
+            <i class="far fa-phone"></i>
+          </span>
+          <p class="margin-bottom-0 fs-18">{{information.phone}}</p>
+        </div>
+        <div class="c-contact flex-container align-middle dark">
+          <span class="c-contact__icon margin-right-1 fs-21">
+            <i class="far fa-envelope"></i>
+          </span>
+          <p class="margin-bottom-0 fs-18">{{information.email}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

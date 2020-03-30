@@ -1,0 +1,82 @@
+.c-loader {
+  &--full {
+    $loader--width: 250px;
+    $loader-dot--size: 20px;
+
+    margin-bottom: 2rem;
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+
+    @include transition(0.3s);
+
+    .loader {
+      height: $loader-dot--size;
+      width: $loader--width;
+    }
+
+    .loader--dot {
+      animation: loader ease-in-out 3s infinite;
+      height: $loader-dot--size;
+      width: $loader-dot--size;
+      border-radius: 100%;
+      background-color: black;
+      position: absolute;
+      border: 2px solid white;
+
+      &:first-child {
+        background-color: $primary-color;
+        animation-delay: 0.5s;
+      }
+
+      &:nth-child(2) {
+        background-color: $primary-color;
+        animation-delay: 0.4s;
+      }
+
+      &:nth-child(3) {
+        background-color: $secondary-alt;
+        animation-delay: 0.3s;
+      }
+
+      &:nth-child(4) {
+        background-color: $secondary-medium;
+        animation-delay: 0.2s;
+      }
+
+      &:nth-child(5) {
+        background-color: $secondary-dark;
+        animation-delay: 0.1s;
+      }
+
+      &:nth-child(6) {
+        background-color: $primary-color;
+        animation-delay: 0s;
+      }
+    }
+
+    @keyframes loader {
+      15% {
+        transform: translateX(0);
+      }
+
+      45% {
+        transform: translateX($loader--width - $loader-dot--size);
+      }
+
+      65% {
+        transform: translateX($loader--width - $loader-dot--size);
+      }
+
+      95% {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &--full.active {
+    visibility: visible;
+    opacity: 1;
+    height: 50px;
+  }
+}

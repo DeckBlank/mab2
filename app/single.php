@@ -1,0 +1,58 @@
+<?php
+
+use Timber\Timber;
+
+/**
+ * Lib
+ */
+function __getTopicsSanitize($topics){
+    $topics_sanitize = [];
+
+    foreach($topics as $topic){
+        array_push($topics_sanitize, (object)[
+            "title" => $topic['topic']->post_title,
+            "link" => get_the_permalink($topic['topic']->ID),
+            "summary" => get_field('summary', $topic['topic']->ID)['url']
+        ]);
+    }
+
+    return $topics_sanitize;
+}
+
+$context         = Timber::get_context();
+$context['post'] = Timber::get_post();
+
+if($post->post_type == "video"){
+    $context['author'] = (object)[
+        "first_name" =>  $context['post']->author->first_name,
+        "last_name" =>  $context['post']->author->last_name,
+        "avatar" => get_field('picture', 'user_'. $context['post']->author->ID )
+    ];
+
+}else if($post->post_type == "course"){
+    $context['unities'] = [];
+
+    foreach( get_field('unities', $post->ID) as $unity){
+        array_push($context['unities'],(object)[
+            "title" => $unity['title'],
+            "topics" => __getTopicsSanitize( $unity['topics'] )
+        ]);
+    }
+
+}else if($post->post_type == "topic"){
+    $context['author'] = (object)[
+        "first_name" =>  $context['post']->author->first_name,
+        "last_name" =>  $context['post']->author->last_name,
+        "avatar" => get_field('picture', 'user_'. $context['post']->author->ID )
+    ];
+
+    $context['source'] = get_field('source', $post->ID);
+    $context['summary'] = get_field('summary', $post->ID)['url'];
+}
+
+$templates = [
+    'single-' . $post->post_type . '.twig',
+    'single.twig'
+];
+
+Timber::render( $templates, $context );

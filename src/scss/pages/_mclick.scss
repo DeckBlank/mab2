@@ -1,0 +1,76 @@
+.c-section--mclick {
+  .c-brand {
+    &__image {
+      height: 278px;
+    }
+  }
+
+  .c-links {
+    margin-bottom: 5rem;
+  }
+
+  .c-explanation {
+    &__item {
+      span {
+        font-size: 96px;
+        margin-bottom: -0.5rem;
+      }
+    }
+  }
+
+  .c-request {
+    overflow-y: auto;
+    flex-grow: 1;
+
+    .c-form {
+      input {
+        margin: 0 !important;
+      }
+
+      .el-input__inner {
+        &:hover,
+        &:focus {
+          border: solid 1px $primary-color !important;
+        }
+      }
+
+      .el-upload-dragger {
+        @include transition(0.25s);
+
+        &:hover,
+        &:focus {
+          border: dashed 1px $primary-color !important;
+        }
+      }
+    }
+  }
+
+  .c-success-message {
+    z-index: 500;
+    width: 80%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+
+    &__body {
+      padding: 4rem 2rem;
+    }
+
+    &__icon {
+      width: 134px;
+      height: 134px;
+    }
+  }
+}
+
+@include breakpoint(medium) {
+  .c-section--mclick {
+    .c-brand {
+      &__image {
+        width: 438px;
+      }
+    }
+  }
+}

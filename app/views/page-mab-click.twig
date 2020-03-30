@@ -1,0 +1,250 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/header-mclick.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--mclick">
+    <section class="grid-container padding-top-3 margin-bottom-2">
+      <div class="grid-x align-center">
+        <div class="cell medium-10 large-8 text-center">
+          <div class="c-brand flex-container flex-dir-column align-middle margin-bottom-3">
+            <figure class="c-brand__image br--medium overflow-hidden margin-bottom-2">
+              <img class="width-100 height-100 of--cover" src="{{theme.link}}/static/images/example.jpg" alt="">
+            </figure>
+            <h1 class="text-center pri-color f2 fs-40 w-bold margin-bottom-0">MAB CLICK</h1>
+            <p class="margin-bottom-2 text-center f2 dark">Sesiones directas de tutoría online</p>
+            <p class="margin-bottom-0 text-center f2 fs-18">
+              Somos Mab  tu cocah online y creemos en una educación que apoye tanto emocional, como académicamente.
+            </p>
+          </div>
+          <div class="c-links flex-container flex-dir-column align-middle">
+            <button 
+              class="c-button c-button--primary f2 rounded padding-horizontal-2 margin-bottom-2 display-block"
+              @click="isOpenedRequestModal = true"
+            >
+              Solicitar sesión
+            </button>
+            <p>Si ya tienes una sesión programada ingresa aquí</p>
+            <button 
+              class="c-button c-button--ghost f2 w-bold rounded padding-horizontal-2 flex-container align-center-middle"
+              @click="isOpenedValidateCodeModal = true"
+            >
+              <span class="c-icon margin-right-1 sec-alt"><i class="far fa-video"></i></span>
+              INGRESAR
+            </button>
+          </div>
+          <div class="c-explanation">
+            <h2 class="f2 w-bold fs-25 black margin-bottom-1">Una educación diferente</h2>
+            <p class="f2 w-bold fs-25">¿CÓMO FÚNCIONA?</p>
+            <ul class="c-explanation__list ul-reset">
+              <li class="c-explanation__item flex-container flex-dir-column align-middle margin-bottom-2">
+                <span class="display-block f2 w-bold">1</span>
+                <p class="margin-bottom-0 fs-25 f2">Separa tu sesión online según los temas y necesidades que tengas.</p>
+              </li>
+              <li class="c-explanation__item flex-container flex-dir-column align-middle margin-bottom-2">
+                <span class="display-block f2 w-bold">2</span>
+                <p class="margin-bottom-0 fs-25 f2">Te llegara un correo con los pasos siguientes y tu código de sesión.</p>
+              </li>
+              <li class="c-explanation__item flex-container flex-dir-column align-middle margin-bottom-2">
+                <span class="display-block f2 w-bold">3</span>
+                <p class="margin-bottom-0 fs-25 f2">Listo. Conecta y aprende con nosotros</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section> 
+    <section class="c-modal position-fixed width-100 height-100" :class="{ opened : isOpenedRequestModal }">
+      <div class="grid-container height-100">
+        <div class="grid-x align-center-middle height-100">
+          <div class="cell medium-10 large-8">
+            <div class="c-modal__content br--medium position-relative bg-white flex-container flex-dir-column">
+              <div class="c-success-message position-absolute">
+                <div class="flex-container width-100 height-100 align-center-middle">
+                  <div class="c-success-message__body br--medium bg-sec-alt white text-center flex-container flex-dir-column align-middle">
+                    <div class="c-success-message__icon flex-container align-center-middle bg-white margin-bottom-2 rounded">
+                      <figure class="c-icon">
+                        <img src="{{theme.link}}/static/images/icons/click.png" alt="">
+                      </figure>
+                    </div>
+                    <h2 class="f2 w-bold fs-35 margin-bottom-2">Genial, nos comunicaremos contigo para confirmar</h2>
+                    <p class="f2 margin-bottom-0">
+                      Te enviaremos un link a tu correo para confirmar tu clase con un código de activación. Recuerda tener todas tus preguntas listas. 
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex-container align-right margin-bottom-1">
+                <button @click="isOpenedRequestModal = false">
+                  <span class="c-icon fs-30"><i class="far fa-times"></i></span>
+                </button>
+              </div>
+              <h2 class="f2 fs-25 w-bold pri-color text-center margin-bottom-1">MAB CLICK</h2>
+              <p class="black text-center fs-18 margin-bottom-3">“Una buena educación comienza desde el corazón”</p>
+              <div class="c-request padding-right-1">
+                <h3 class="f2 margin-bottom-1 fs-16">DEJANOS TUS DATOS PARA CONFIRMAR Y MANDARTE CODIGO DE ACTIVACIÓN</h3>
+                <div class="c-form margin-bottom-3">
+                  <div class="margin-bottom-1">
+                    <label>
+                      <p class="mb-05 gray-gray">Nombre :*</p>
+                      <input type="text" class="c-form__input input-reset">
+                    </label>
+                  </div>
+                  <div class="margin-bottom-2">
+                    <label>
+                      <p class="mb-05 gray-gray">Correo :*</p>
+                      <input type="email" class="c-form__input input-reset">
+                    </label>
+                  </div>
+                </div>              
+                <h3 class="f2 margin-bottom-1 fs-16">INFORMACIÓN DE LA SESIÓN</h3>
+                <div class="c-form margin-bottom-1">
+                  <!-- <div class="margin-bottom-1">
+                    <label>
+                      <p class="mb-05 gray-gray">Seleccionas las fechas y horas en las que puedes tener la sesión</p>
+                      <div class="grid-x grid-margin-x grid-margin-y">
+                        <div class="cell large-6">
+                          <el-date-picker
+                            class="width-100 input-reset"
+                            v-model="value"
+                            type="datetime"
+                            placeholder="Selecciona fecha y hora">
+                          </el-date-picker>
+                        </div>
+                        <div class="cell large-6">
+                          <el-date-picker
+                            class="width-100 input-reset"
+                            v-model="value2"
+                            type="datetime"
+                            placeholder="Selecciona fecha y hora">
+                          </el-date-picker>
+                        </div>
+                      </div>
+                    </label>
+                  </div> -->
+                  <div class="margin-bottom-1">
+                    <p class="mb-05 gray-gray">Seleccionas las fechas y horas en las que puedes tener la sesión</p>
+                    <div class="grid-x grid-margin-x grid-margin-y">
+                      <div class="cell large-6">
+                        <div class="grid-x grid-margin-x grid-margin-y">
+                          <div class="cell large-6">
+                            <el-date-picker
+                              v-model="value"
+                              class="width-100"
+                              format="d MMMM"
+                              type="date"
+                              placeholder="Fecha">
+                            </el-date-picker>
+                          </div>
+                          <div class="cell large-6">
+                            <el-time-select
+                              v-model="value2"
+                              class="width-100"
+                              :picker-options="{
+                                start: '08:30',
+                                step: '00:15',
+                                end: '18:30'
+                              }"
+                              placeholder="Hora">
+                            </el-time-select>                                                        
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell large-6">
+                        <div class="grid-x grid-margin-x grid-margin-y">
+                          <div class="cell large-6">
+                            <el-date-picker
+                              v-model="value"
+                              class="width-100"
+                              format="d MMMM"
+                              type="date"
+                              placeholder="Fecha">
+                            </el-date-picker>
+                          </div>
+                          <div class="cell large-6">
+                            <el-time-select
+                              v-model="value2"
+                              class="width-100"
+                              :picker-options="{
+                                start: '08:30',
+                                step: '00:15',
+                                end: '18:30'
+                              }"
+                              placeholder="Hora">
+                            </el-time-select>                                                        
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="margin-bottom-2">
+                    <label>
+                      <p class="mb-05 gray-gray">¿Qué curso vamos a reforzar?</p>
+                      <select class="c-form__select input-reset">
+                        <option value="">Logica</option>
+                        <option value="">Logica</option>
+                        <option value="">Logica</option>
+                        <option value="">Logica</option>
+                      </select>
+                    </label>
+                  </div>
+                  <div class="margin-bottom-3">
+                    <p class="mb-05 gray-gray">Subir archivos para trabajar en la sesión</p>
+                    <el-upload
+                      class="c-form__file width-100"
+                      drag
+                      action="https://jsonplaceholder.typicode.com/posts/"
+                      :on-preview="handlePreview"
+                      :on-remove="handleRemove"
+                      :file-list="fileList"
+                      multiple>
+                      <i class="el-icon-upload"></i>
+                      <div class="el-upload__text">Arrastrar el archivo aquí o <em>click en subir</em></div>
+                      <div class="el-upload__tip" slot="tip">Archivos .zip/.rar con tamaño menor que 500kb</div>
+                    </el-upload>
+                  </div>
+                  <button class="c-button c-button--ghost-primary padding-horizontal-2 rounded width-100">
+                    ENVIAR SOLICITUD
+                  </button>
+                </div>              
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>     
+    <section class="c-modal position-fixed width-100 height-100" :class="{ opened : isOpenedValidateCodeModal }">
+      <div class="grid-container height-100">
+        <div class="grid-x align-center-middle height-100">
+          <div class="cell medium-10 large-8">
+            <div class="c-modal__content br--medium bg-white flex-container flex-dir-column text-center">
+              <div class="flex-container align-right margin-bottom-1">
+                <button @click="isOpenedValidateCodeModal = false">
+                  <span class="c-icon fs-30"><i class="far fa-times"></i></span>
+                </button>
+              </div>
+              <figure class="margin-bottom-1">
+                <img src="{{theme.link}}/static/images/mab-click.png" alt="">
+              </figure>
+              <h2 class="f2 fs-40 w-bold pri-color text-center margin-bottom-3">MAB CLICK</h2>
+              <div class="c-form margin-bottom-1 text-left">
+                <div class="margin-bottom-3">
+                  <label>
+                    <p class="mb-05 gray-gray">Ingresa el código de activación que se envio</p>
+                    <input type="text" class="c-form__input input-reset">
+                  </label>
+                  <p class="margin-bottom-0 alert" :class="{ hide : !isRightCode }">El codigo ingresado no existe</p>
+                </div>
+                <button class="c-button c-button--secondary-alt padding-horizontal-2 rounded width-100">
+                  INGRESAR
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>     
+  </section>
+{% endblock %}

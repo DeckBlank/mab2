@@ -1,0 +1,20 @@
+.c-form {
+  &__input,
+  &__select {
+    border: solid 1px $gray;
+
+    @include transition(0.25s);
+
+    &:focus {
+      border: solid 1px $primary-color !important;
+    }
+  }
+
+  &__select {
+    cursor: pointer;
+  }
+
+  &__file * {
+    width: 100%;
+  }
+}

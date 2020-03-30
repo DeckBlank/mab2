@@ -1,0 +1,27 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+
+  {% set form = post.get_field('form') %}
+  {% set title = post.get_field('title') %}
+
+  <section class="c-section c-section--solicitar-id">
+    <div class="grid-container padding-top-3 margin-bottom-2">
+      <div class="grid-x align-center">
+        <div class="cell medium-8 large-6">
+          <figure class="c-brand c-brand--full flex-container align-center-middle margin-bottom-2">
+            <a class="c-brand__link" href="{{ site.url }}">
+              <img class="c-brand__image" src="{{ theme.link }}/static/images/logo.png" alt="Veterinaria Triton - Logo" />
+            </a>
+          </figure>
+          <h1 class="fs-18 w-bold dark text-center margin-bottom-2">{{title}}</h1>
+          {{function('do_shortcode', form)}}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

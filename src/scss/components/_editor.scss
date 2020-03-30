@@ -1,0 +1,12 @@
+.c-editor {
+  &__textarea {
+    flex-grow: 1;
+    resize: none;
+    border: solid 1px $light-gray;
+
+    &:focus {
+      background-color: $light-gray;
+      border: solid 1px $primary-color;
+    }
+  }
+}

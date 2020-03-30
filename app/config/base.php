@@ -1,0 +1,105 @@
+<?php
+
+$GOOGLE_API_KEY = '*********************************';
+$FONTS_FAMILIES = 'Lato:wght@400;700';
+
+return [
+    'GOOGLE_API_KEY' => $GOOGLE_API_KEY,
+
+    'resources' => [
+
+        /**
+         * Google
+         * */
+        'google_fonts' => 'https://fonts.googleapis.com/css?family=' . $FONTS_FAMILIES . '&display=swap',
+
+        'google_maps' => 'https://maps.googleapis.com/maps/api/js?key=' . $GOOGLE_API_KEY . '&callback=initMap',
+
+        /**
+         * Fontawesome
+         * */
+        'fontawesome' => [
+            'cdn' => [
+                'base' => 'https://pandora-space-america.nyc3.digitaloceanspaces.com/statics/icons/5.6.3/js/fontawesome.min.js',
+                'style' => 'https://pandora-space-america.nyc3.digitaloceanspaces.com/statics/icons/5.6.3/js/regular.min.js',
+                'brands' => 'https://pandora-space-america.nyc3.digitaloceanspaces.com/statics/icons/5.6.3/js/brands.min.js'
+            ]
+        ],
+
+        /**
+         * Packages
+         * */
+        'package_jquery' => [
+            'cdn' => 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js',
+            'local' => get_theme_file_uri('/static/js/libs/jquery/jquery.min.js')
+        ],
+
+        // 'package_foundation' => get_theme_file_uri('/static/js/package.foundation-sites.bundle.js'),
+
+        'package_fancyapps' => get_theme_file_uri('/static/js/package.fancyapps.bundle.js'),
+
+        'package_dom7' => get_theme_file_uri('/static/js/package.dom7.bundle.js'),
+
+        'package_swiper' => get_theme_file_uri('/static/js/package.swiper.bundle.js'),
+
+        'package_vaswiper' => get_theme_file_uri('/static/js/package.vue-awesome-swiper.bundle.js'),
+
+        'package_vue' => get_theme_file_uri('/static/js/package.vue.bundle.js'),
+
+        'package_setimmediate' => get_theme_file_uri('/static/js/package.setimmediate.bundle.js'),
+
+        'package_process' => get_theme_file_uri('/static/js/package.process.bundle.js'),
+
+        'package_vuex' => get_theme_file_uri('/static/js/package.vuex.bundle.js'),
+
+        'package_timers_bf' => get_theme_file_uri('/static/js/package.timers-browserify.bundle.js'),
+
+        'package_corejs' => get_theme_file_uri('/static/js/package.core-js.bundle.js'),
+
+        'package_element_ui' => get_theme_file_uri('/static/js/package.element-ui.bundle.js'),
+
+        'package_async_val' => get_theme_file_uri('/static/js/package.async-validator.bundle.js'),
+
+        'package_normalize_w' => get_theme_file_uri('/static/js/package.normalize-wheel.bundle.js'),
+
+        'package_resize_obv' => get_theme_file_uri('/static/js/package.resize-observer-polyfill.bundle.js'),   
+
+        /**
+         * Styles
+         * */
+        'style_main' => get_theme_file_uri('/static/css/main.css'),
+
+        /**
+         * Scripts
+         * */
+        'script_main' => get_theme_file_uri('/static/js/main.bundle.js'),
+
+        //Components
+        'component_map' => get_theme_file_uri('/static/js/component-map.bundle.js'),
+
+        'component_form' => get_theme_file_uri('/static/js/component-form.bundle.js'),
+
+        //Pages
+        'page_home' => get_theme_file_uri('/static/js/page-home.bundle.js'),
+
+        'page_mab_click' => get_theme_file_uri('/static/js/page-mab-click.bundle.js'),
+
+        'page_login' => get_theme_file_uri('/static/js/page-login.bundle.js'),
+
+        'page_solicitar_id' => get_theme_file_uri('/static/js/page-solicitar-id.bundle.js'),
+
+        'page_404' => get_theme_file_uri('/static/js/page-404.bundle.js'),
+
+        'page_video' => get_theme_file_uri('/static/js/page-video.bundle.js'),
+
+        'page_course' => get_theme_file_uri('/static/js/page-course.bundle.js'),
+
+        'page_topic' => get_theme_file_uri('/static/js/page-topic.bundle.js'),
+
+        //Galleries
+        'script_galleries' => get_theme_file_uri('/static/js/galleries.bundle.js'),
+
+        //Sliders
+        'sliders_home' => get_theme_file_uri('/static/js/sliders-home.bundle.js'),
+    ]
+];

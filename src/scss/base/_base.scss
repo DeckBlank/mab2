@@ -1,0 +1,46 @@
+::-moz-selection {
+  color: #fff;
+  background: $primary-color;
+}
+
+::selection {
+  color: #fff;
+  background: $primary-color;
+}
+
+body {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $secondary-lightest;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: $secondary-alt;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: $secondary-medium;
+}
+
+.c-link {
+  &--sec {
+    color: $secondary-color;
+
+    &:hover,
+    &:focus {
+      color: $secondary-color;
+    }
+  }
+}
