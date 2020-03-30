@@ -58,7 +58,7 @@ function file_version ( $version_file = '0.0.1' ) {
  * @return array
  *
  */
-function __autoload_functions_by_dir($path) {
+function __autoload_functions_by_dir(String $path) {
     $dir = scandir(get_template_directory() . $path);
     $files = [];
 
