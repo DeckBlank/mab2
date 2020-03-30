@@ -9,7 +9,6 @@
         }
     ],
     "require": {
-        "php": "^7.3",
         "symfony/console": "^4.0",
         "timber/timber": "^1.10"                
     },
