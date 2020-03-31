@@ -1,0 +1,56 @@
+<header class="c-header c-header--session" :class="{ shadowed : isHeaderWithShadow }">
+  <div class="c-header__top padding-horizontal-1">
+    <div class="flex-container height-100 align-middle align-justify">
+      <a href="{{site.url}}/mab-click" class="c-goback flex-container align-middle pri-color">
+        <figure class="c-icon margin-right-1">
+          <img class="of--contain width-100 height-100" src="{{theme.link}}/static/images/mab-click.png" alt="">
+        </figure>
+        <p class="margin-bottom-0 f2 w-bold">MAB CLICK</p>
+      </a>
+      <a href="">
+        Finalizar sesión
+      </a>
+    </div>
+  </div>
+  <div class="c-header__bottom bg-light-gray padding-vertical-1">
+    <div class="padding-horizontal-1 flex-container height-100 align-middle align-justify position-relative">
+      <div class="f2">
+        CODIGO DE SESIÓN: <span class="sec-alt w-bold fs-18">5245214</span>
+      </div>
+      <div class="c-media-controls position-absolute flex-container align-center">
+        <button class="c-media-controls__item rounded overflow-hidden">
+          <div class="c-icons flex-container flex-dir-column">
+            <div class="c-icon-container flex-container align-center-middle">
+              <span class="c-icon"><i class="far fa-video"></i></span>
+            </div>
+            <div class="c-icon-container flex-container align-center-middle">
+              <span class="c-icon"><i class="far fa-video-slash"></i></span>
+            </div>
+          </div>
+        </button>
+        <button class="c-media-controls__item disabled rounded overflow-hidden">
+          <div class="c-icons flex-container flex-dir-column">
+            <div class="c-icon-container flex-container align-center-middle">
+              <span class="c-icon"><i class="far fa-microphone"></i></span>
+            </div>
+            <div class="c-icon-container flex-container align-center-middle">
+              <span class="c-icon"><i class="far fa-microphone-slash"></i></span>
+            </div>
+          </div>
+        </button>
+        <button class="c-media-controls__item c-media-controls__item--alone rounded flex-container align-center-middle overflow-hidden">
+          <span class="c-icon"><i class="far fa-desktop-alt"></i></span>
+        </button>
+      </div>
+      <div class="c-another-user flex-container align-middle">
+        <figure class="c-another-user__avatar margin-right-1 rounded overflow-hidden">
+          <img class="of--cover width-100 height-100" src="{{theme.link}}/static/images/example.jpg" alt="">
+        </figure>
+        <p class="c-another-user__nickname margin-bottom-0 f2 dark">
+          Fika AJ
+        </p>
+        <span class="c-another-user__state margin-left-1 sec-alt w-bold">EN LINEA</span>
+      </div>
+    </div>
+  </div>
+</header>

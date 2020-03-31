@@ -96,6 +96,8 @@ return [
 
         'page_topic' => get_theme_file_uri('/static/js/page-topic.bundle.js'),
 
+        'page_session' => get_theme_file_uri('/static/js/page-session.bundle.js'),
+
         //Galleries
         'script_galleries' => get_theme_file_uri('/static/js/galleries.bundle.js'),
 

@@ -131,6 +131,81 @@
       }
     }
   }
+
+  &--session {
+    height: auto;
+    position: relative;
+
+    .c-goback {
+      color: $primary-color;
+
+      @include transition(0.25s);
+
+      &:hover,
+      &:focus {
+        color: $primary-color;
+        transform: translateX(5px);
+      }
+    }
+
+    .c-another-user {
+      &__avatar {
+        width: 41px;
+        height: 41px;
+      }
+
+      &__state {
+        display: none;
+      }
+    }
+
+    .c-media-controls {
+      left: 0;
+      right: 0;
+      margin: auto;
+      bottom: -4.5rem;
+
+      .c-icons {
+        background-color: $light-gray;
+        color: $dark;
+
+        @include transition(0.25s);
+      }
+
+      .c-icon-container {
+        width: 40px;
+        height: 40px;
+      }
+
+      &__item {
+        width: 40px;
+        height: 40px;
+        margin: 0 0.5rem;
+
+        @include transition(0.25s);
+      }
+
+      &__item--alone {
+        background-color: $light-gray;
+        color: $dark;
+      }
+
+      &__item.disabled .c-icons {
+        transform: translateY(-40px);
+        background-color: $primary-color;
+        color: $white;
+      }
+    }
+
+    .c-header__top {
+      height: 46px;
+
+      .c-icon {
+        width: 21px;
+        height: 24px;
+      }
+    }
+  }
 }
 
 .c-header.shadowed {
@@ -293,6 +368,19 @@
 
         .c-login {
           @include transition(0.25s);
+        }
+      }
+    }
+
+    &--session {
+      .c-media-controls {
+        top: 0;
+        bottom: 0;
+      }
+
+      .c-another-user {
+        &__state {
+          display: block;
         }
       }
     }

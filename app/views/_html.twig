@@ -28,13 +28,13 @@
         {# Content #}
       {% endblock %}
 
-      {% include "_html-footer.twig" %}
+      {% block footer %}
+        {% include "_html-footer.twig" %}
+        
+        {# Content #}
+      {% endblock %}      
     </main>
 
     {{ function('wp_footer') }}
-    
-    {% block footer %}
-      {# Content #}
-    {% endblock %}
   </body>
 </html>

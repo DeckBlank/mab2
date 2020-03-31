@@ -56,6 +56,11 @@ const topic = new Vue({
       return this.$refs.slider_questions.$swiper
     }     
   },
+  created(){
+    if(!this.logedUser){
+      window.location = this.SITE_URL;
+    }
+  },
   mounted(){
     this.topicID = this.$refs.topic.getAttribute('data-id');
 
@@ -160,21 +165,21 @@ const topic = new Vue({
       })
 
       fetch(`${this.API}/topic/${this.topicID}/test_score?result=${test_result}&user=${this.logedUser.user_auth}`,{
-        method: 'PUT'
-      })
-      .then(res => {
-        if (res.status >= 200 && res.status < 300) {
-          return res.json()
-        }else{
-          throw res
-        }
-      })
-      .then(score => {
-        
-      })
-      .catch(err => {
-        throw err;          
-      })      
+          method: 'PUT'
+        })
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            return res.json()
+          }else{
+            throw res
+          }
+        })
+        .then(score => {
+          
+        })
+        .catch(err => {
+          throw err;          
+        })      
     },
     getTestScore: function(){
       fetch(`${this.API}/topic/${this.topicID}/test_score?user=${this.logedUser.user_auth}`,{

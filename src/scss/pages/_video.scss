@@ -1,12 +1,4 @@
 .c-section--video {
-  .c-details {
-    flex-wrap: wrap;
-
-    &__label p {
-      display: none;
-    }
-  }
-
   .c-category {
     background-color: $gray;
     color: $white;
@@ -17,16 +9,6 @@
     &:hover,
     &:focus {
       background-color: $secondary-alt;
-    }
-  }
-}
-
-@include breakpoint(medium) {
-  .c-section--video {
-    .c-details {
-      &__label p {
-        display: block;
-      }
     }
   }
 }

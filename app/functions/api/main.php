@@ -15,6 +15,7 @@ require_once(__DIR__."/controllers/UserController.php");
 require_once(__DIR__."/controllers/VideoController.php");
 require_once(__DIR__."/controllers/CourseController.php");
 require_once(__DIR__."/controllers/TopicController.php");
+require_once(__DIR__."/controllers/SessionController.php");
 
 /**
  * Routes
@@ -127,4 +128,14 @@ add_action( 'rest_api_init', function () {
         'methods' => 'POST',
         'callback' => array($topicController,'addAnswer'),
     ));     
+});
+
+//4. Topic ----------------------------------//
+add_action( 'rest_api_init', function () {
+    $sessionController = new SessionController();
+
+    register_rest_route( 'custom/v1', '/session/(?P<session_id>\d+)/resource', array(
+        'methods' => 'POST',
+        'callback' => array($sessionController,'saveResource'),
+    ));    
 });

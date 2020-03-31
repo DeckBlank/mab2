@@ -1,9 +1,29 @@
 .c-section {
   outline: none;
+
+  &--video,
+  &--topic {
+    .c-details {
+      flex-wrap: wrap;
+
+      &__label p {
+        display: none;
+      }
+    }
+  }
 }
 
 @include breakpoint(large) {
   .c-section {
     outline: none;
+
+    &--video,
+    &--topic {
+      .c-details {
+        &__label p {
+          display: block;
+        }
+      }
+    }
   }
 }

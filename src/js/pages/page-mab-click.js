@@ -17,12 +17,28 @@ const mab_click = new Vue({
   ...baseConfig(store),
   data() {
     return {
-      isOpenedRequestModal: false,
+      isOpenedRequestModal: true,
       isOpenedValidateCodeModal: false,
+
+      //Request
+      isSentRequest: false,
+      request: {
+        fullname: '',
+        email: '',
+        date1: '',
+        date2: '',
+        time1: '',
+        time2: '',
+        course: '',
+        resources: []
+      },
+      form: '',
+
+      //Validate
       isRightCode: false,
       value: '',
       value2: '',
-      fileList: [],
+      attachments: [],
       fullname: '',
       email: ''
     }
@@ -30,13 +46,18 @@ const mab_click = new Vue({
   computed: {
     ...baseState()
   },
+  mounted(){    
+  },
   methods: {
     ...baseActions(),
-    handlePreview: function(){
-
-    },
     handleRemove: function(){
 
+    },
+    sendRequest: function(){
+      console.log(this.attachments)
+    },
+    addAtachments: function(file){
+      this.attachments.push(file) 
     }
   }
 })

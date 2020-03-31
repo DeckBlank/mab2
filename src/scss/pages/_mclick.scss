@@ -18,9 +18,18 @@
     }
   }
 
+  .c-body {
+    @include transition(0.3s);
+  }
+
+  .c-body.unshowed {
+    visibility: hidden;
+    opacity: 0;
+  }
+
   .c-request {
-    overflow-y: auto;
     flex-grow: 1;
+    overflow-y: auto;
 
     .c-form {
       input {
@@ -34,7 +43,13 @@
         }
       }
 
+      .el-upload {
+        width: 100%;
+      }
+
       .el-upload-dragger {
+        width: 100%;
+
         @include transition(0.25s);
 
         &:hover,
@@ -53,6 +68,10 @@
     bottom: 0;
     top: 0;
     margin: auto;
+    visibility: hidden;
+    opacity: 0;
+
+    @include transition(0.3s);
 
     &__body {
       padding: 4rem 2rem;
@@ -62,6 +81,11 @@
       width: 134px;
       height: 134px;
     }
+  }
+
+  .c-success-message.showed {
+    visibility: visible;
+    opacity: 1;
   }
 }
 

@@ -1,6 +1,6 @@
 <?php
 
-$assets_version = '1585015066815';
+$assets_version = '1585680512684';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -330,6 +330,15 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         register_assets('script', [
             'handle'    => 'pandawp/js/page/topic',
             'src'       => $config['resources']['page_topic'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);        
+
+    }elseif (is_singular('session')){
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/session',
+            'src'       => $config['resources']['page_session'],
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true

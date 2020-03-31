@@ -16,7 +16,7 @@ const login = new Vue({
   computed: {
     ...baseState()
   },
-  mounted(){
+  created(){
     if(this.logedUser){
       window.location = this.SITE_URL;
     }
