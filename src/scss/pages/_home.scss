@@ -446,14 +446,18 @@
     margin-left: 0;
   }
   .mab_contact_social li {
-    margin-right: 5px;
+    margin-right: 12px;
   }
   .mab_contact_social li a{
     text-decoration: none;
+    color: #fff;
+    font-size: 70px;
   }
   .mab_contact_social li a img {
     width: 50px;
+    filter: brightness(0.5);
   }
+  
   .mab_contact_item{
     margin-bottom: 0px;
     font-size: 50px;
@@ -690,6 +694,9 @@
     .block_rigth, .block, .mab_boxes_item{
       font-size: 20px;
     }
+    .mab_contact_social li a{
+      font-size: 50px;
+    }
     
   }
 }
@@ -789,7 +796,7 @@
     }
   
     .mab_boxes_item .box_content{
-        font-size: 15px;
+        font-size: 20px;
     }
   
     .mab_contact .section_content{
@@ -948,6 +955,12 @@
  .mab_contact_figure img:nth-child(1){
    width: 50px;
 
+  }
+  .mab_contact_social li {
+    margin: 0 5px;
+  }
+  .mab_boxes_item .box_content{
+    font-size: 20px;
   }
   }
 }
