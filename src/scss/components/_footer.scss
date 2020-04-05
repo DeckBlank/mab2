@@ -1,5 +1,8 @@
 .c-footer {
   margin-bottom: 5rem;
+  background-image: url('../images/vectors/icons.png');
+  background-position: calc(100% - 1rem) center;
+  background-repeat: no-repeat;
 
   &__content {
     flex-wrap: wrap;

@@ -1,0 +1,30 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--forms">
+    <section class="form_section">
+      <div class="init_line">
+        <a href="" target="_blank">www.mabclick.com</a>
+      </div>
+      <div class="section_content">
+        <h2 class="title_block">
+          <span class="title">
+            QUEREMOS <br> CONOCERTE
+          </span> 
+          <span class="subtitle">Para seguir dándote lo mejor</span>
+        </h2>
+        <form-student v-if="type == 'estudiante'"></form-student>
+        <form-teacher v-else-if="type == 'profesor'"></form-teacher>
+        <form-tutor v-else-if="type == 'tutor'"></form-tutor>
+        <form-student v-else></form-student>
+      </div>
+    </section>   
+    </div>
+  </section>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

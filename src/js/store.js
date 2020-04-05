@@ -1,5 +1,6 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
+import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 
 Vue.use(Vuex)
 
@@ -10,11 +11,13 @@ export const store = new Vuex.Store({
     SITE_URL: `${document.getElementById('app').getAttribute('data-site')}`,    
 
     //User
-    logedUser: (window.localStorage.getItem('mab_session')) ? JSON.parse(window.localStorage.getItem('mab_session')) : false,
+    logedUser: (window.localStorage.getItem('mab_loged_user')) ? JSON.parse(window.localStorage.getItem('mab_loged_user')) : false,
+
+    //Session
+    activedSession: (window.localStorage.getItem('mab_session')) ? JSON.parse(window.localStorage.getItem('mab_session')) : false,
 
     //Menu
     isActiveMenu: false,
-    isActiveCursosMenuMob: false,
     isActiveCursosMenuDesk: false,
     isHeaderWithShadow: false,
 

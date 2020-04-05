@@ -1,21 +1,93 @@
 .c-section--session {
   height: 100vh;
 
-  .c-meeting {
-    flex-grow: 1;
-    z-index: 2000;
+  .c-users {
+    top: 4rem;
+
+    &__prev,
+    &__next {
+      width: 40px;
+      height: 40px;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      z-index: 10;
+      visibility: hidden;
+      opacity: 0;
+
+      @include transition(0.3s);
+    }
+
+    &__prev {
+      left: 2rem;
+    }
+
+    &__next {
+      right: 2rem;
+    }
+
+    &__prev.swiper-button-disabled,
+    &__next.swiper-button-disabled {
+      visibility: hidden !important;
+      opacity: 0 !important;
+    }
+
+    &__toggle {
+      padding: 0.5rem 1rem;
+
+      .c-icon {
+        @include transition(0.35s);
+      }
+    }
+
+    &__toggle.active {
+      .c-icon {
+        transform: rotateZ(-180deg);
+      }
+    }
+
+    &:hover {
+      .c-users__prev,
+      .c-users__next {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
   }
 
-  .c-publisher {
+  .c-slider-users {
+    max-height: 1000px;
+
+    @include transition(0.4s);
+  }
+
+  .c-slider-users.unshowed {
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(5px);
+  }
+
+  .c-user {
     width: 122px;
-    height: 151px;
-    z-index: 200;
-    left: 1rem;
-    bottom: 1rem;
+    cursor: pointer;
+
+    &__camera {
+      height: 145px !important;
+    }
+
+    &__name {
+      border: 0 0 5px 5px;
+      padding: 0.25rem 0.5rem;
+    }
+  }
+
+  .c-meeting {
+    flex-grow: 1;
   }
 
   .c-chat {
-    z-index: 250;
+    z-index: 2500;
     height: 100%;
     width: 100%;
     top: 0;
@@ -40,6 +112,7 @@
 
       &__body {
         overflow-y: auto;
+        scroll-behavior: smooth;
       }
     }
   }
@@ -79,6 +152,14 @@
         color: $white;
         background-color: $primary-color;
       }
+    }
+  }
+}
+
+@include breakpoint(medium) {
+  .c-section--session {
+    .c-users {
+      top: 0;
     }
   }
 }

@@ -64,6 +64,10 @@ return [
 
         'package_resize_obv' => get_theme_file_uri('/static/js/package.resize-observer-polyfill.bundle.js'),   
 
+        'package_ssr_window' => get_theme_file_uri('/static/js/package.ssr-window.bundle.js'),   
+
+        'package_opentok' => get_theme_file_uri('/static/js/package.opentok.bundle.js'),   
+
         /**
          * Styles
          * */
@@ -80,13 +84,15 @@ return [
         'component_form' => get_theme_file_uri('/static/js/component-form.bundle.js'),
 
         //Pages
-        'page_home' => get_theme_file_uri('/static/js/page-home.bundle.js'),
+        'page_emotional' => get_theme_file_uri('/static/js/page-emotional.bundle.js'),
 
         'page_mab_click' => get_theme_file_uri('/static/js/page-mab-click.bundle.js'),
 
         'page_login' => get_theme_file_uri('/static/js/page-login.bundle.js'),
 
         'page_solicitar_id' => get_theme_file_uri('/static/js/page-solicitar-id.bundle.js'),
+
+        'page_forms' => get_theme_file_uri('/static/js/page-forms.bundle.js'),
 
         'page_404' => get_theme_file_uri('/static/js/page-404.bundle.js'),
 
@@ -103,5 +109,8 @@ return [
 
         //Sliders
         'sliders_home' => get_theme_file_uri('/static/js/sliders-home.bundle.js'),
+
+        //WP
+        'wp_session' => get_theme_file_uri('/static/js/wp-session.bundle.js')
     ]
 ];

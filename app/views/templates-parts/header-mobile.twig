@@ -4,22 +4,35 @@
       <div class="c-nav__left width-100 flex-container align-center-middle margin-bottom-1">
         <figure class="c-brand c-brand--normal flex-container align-center-middle">
           <a class="c-brand__link" href="{{ site.url }}">
-            <img class="c-brand__image" src="{{ theme.link }}/static/images/logo.png" alt="Veterinaria Triton - Logo" />
           </a>
-        </figure>       
+        </figure>
       </div>
       <div class="c-nav__right width-100">
         <ul class="c-menu flex-container flex-dir-column ul-reset">
           {% for item in primary_menu.items %}
             <li class="flex-container flex-dir-column {% if 'current-menu-item' in item.class %} activate {% endif %}">              
               {% if item.children %}
-                <div class="c-menu__item flex-container align-justify padding-1" :class="{ active : isActiveCursosMenuMob }">
+                <label for="sector-{{loop.index}}" class="c-menu__item flex-container align-justify align-middle padding-1">
                   <a class="position-relative">{{ item.name }}</a>
                   <span class="c-icon" @click="updateStatusCursosMenuMob"><i class="far fa-chevron-down"></i></span>
-                </div>              
-                <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden" :class="{ active : isActiveCursosMenuMob }">
+                </label>              
+                <input id="sector-{{loop.index}}" type="checkbox" class="hide">
+
+                <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
                   {% for child in item.children %}
-                    <li class="c-submenu__item"><a class="display-block" href="{{child.link}}">{{child.name}}</a></li>
+                    <label for="grado-{{item.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
+                      <a class="position-relative">{{child.name}}</a>
+                      <span class="c-icon white" @click=""><i class="far fa-chevron-down"></i></span>
+                    </label>
+                    <input id="grado-{{item.slug}}-{{loop.index}}" type="checkbox" class="hide">
+
+                    <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                      {% for child in [1,2,3] %}
+                        <div class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
+                          <a href="{{child.link}}" class="position-relative">Curso</a>
+                        </div>                 
+                      {% endfor %}
+                    </ul>                
                   {% endfor %}
                 </ul>
               {% else %}

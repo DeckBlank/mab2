@@ -1,5 +1,18 @@
 <?php
 
+/**
+ * Lib
+ */
+function add_button(){
+    ?>
+        <input type="submit" class="button button-primary" style="width: 100%" value="Generar codigo" id="generate-key"/>
+    <?php 
+}
+
+/**
+ * Setup
+ */
+
 add_action( 'after_setup_theme', function() {
     register_nav_menus([
         'primary-menu' => __( 'Menú Principal', 'pandawp' ),
@@ -75,15 +88,11 @@ add_action('template_redirect', function () {
        wp_redirect(site_url(), 301);
    }
 });
-
-add_filter('post_type_link', 'custom_sesion_permalink', 1, 3);
-function custom_sesion_permalink($post_link, $id = 0, $leavename) {
-    if ( strpos('%sesion_id%', $post_link) === 'FALSE' ) {
-        return $post_link;
+  
+add_action('add_meta_boxes', function(){
+    $types = array("post","session");
+  
+    foreach($types as $type){
+      add_meta_box('meta-session-1', 'Avanzado', "add_button", $type, 'side', 'high');
     }
-    $post = get_post($id);
-    if ( is_wp_error($post) || $post->post_type != 'sesion' ) {
-        return $post_link;
-    }
-    return str_replace('%sesion_id%', $post->ID, $post_link);
-}
+}); 

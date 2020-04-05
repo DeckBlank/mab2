@@ -12,15 +12,18 @@ const course = new Vue({
   computed: {
     ...baseState()
   },
-  created(){
-    if(!this.logedUser){
-      window.location = this.SITE_URL;
-    }
-  },
   mounted: function(){
     setTimeout(()=>{
       this.updateStatusCursosMenuDesk();
     }, 100)
+
+    if(!this.logedUser){
+      let topics = document.querySelectorAll('.c-topic__video')
+  
+      topics.forEach(topic => {
+        topic.removeAttribute('href')
+      })
+    }
   },
   methods: {
     ...baseActions()

@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 Vue.component('browser',{
   template: /*html*/`
     <div class="c-browser-container position-relative">
-      <div class="c-browser flex-container" :class="{ active: isActiveBrowser }">
+      <div class="c-browser flex-container">
         <button class="c-browser__icon bg-light-gray height-100 flex-container align-middle" @click="search">
           <span class="c-icon"><i class="far fa-search"></i></span>
         </button>

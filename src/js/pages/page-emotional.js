@@ -2,11 +2,12 @@ import Vue from 'vue'
 import {baseConfig, baseState, baseActions} from '../app'
 import {store} from '../store'
 
-const home = new Vue({
+const emotional = new Vue({
   ...baseConfig(store),
   data() {
     return {
       //Filter
+      isUsedFilter: false,
       isActiveFilter: false,
       filterOptions: [],
 
@@ -70,6 +71,7 @@ const home = new Vue({
     },
     getVideosByCategories: function(categories){
       this.isFeedLoading = true;
+      this.isUsedFilter = true;
 
       fetch(`${this.API}/videos?categories=${categories}`,{
           method: 'GET'

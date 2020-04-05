@@ -31,7 +31,7 @@ select {
   font-size: $fs-16;
   margin: 0 !important;
   width: 100%;
-  box-shadow: none;
+  box-shadow: none !important;
 
   &:focus {
     border: none;
@@ -50,6 +50,7 @@ select {
   font-size: $fs-16;
   background-image: linear-gradient(transparent, transparent) !important;
   cursor: pointer;
+  box-shadow: none !important;
 
   &:focus {
     border: none;

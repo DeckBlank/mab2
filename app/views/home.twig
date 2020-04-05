@@ -1,79 +1,169 @@
 {% extends '_html.twig' %}
 
 {% block hero %}
-  {% include 'templates-parts/hero.twig' %}
 {% endblock %}
 
 {% block content %}
   <section class="c-section c-section--home">
-    <div class="grid-container padding-top-2">
-      <div class="c-title flex-container align-middle align-justify margin-bottom-2">
-        <h1 class="f2 dark w-bold fs-25">Descubre</h1>
-        <div class="c-title__label f2 fs-18 flex-container align-middle">
-          <span class="c-icon fs-21"><i class="far fa-gift"></i></span>
-          <p class="margin-left-1 margin-bottom-0">Contenido pagado</p>
-        </div> 
+    <section class="init">
+      <div class="init_line">
+        <a href="{{site.url}}" target="_blank">www.mabclick.com</a>
       </div>
-      <div class="flex-container align-right margin-bottom-2">
-        <div class="c-filter position-relative" :class="{ active : isActiveFilter }">
-          <button class="c-filter__toggle position-relative" @click="isActiveFilter = !isActiveFilter">
-            <span class="c-icon fs-21"><i class="far fa-filter"></i></span>
-          </button>
-          <div class="c-filter__content br--small position-absolute bg-white">
-            <button 
-              class="c-filter__clean flex-container align-middle f2 fs-18 margin-bottom-2" 
-              @click="cleanFilter"
-              :disabled="filterOptions.length == 0"
-            >
-              <span class="margin-right-1"><i class="far fa-times-circle fs-21"></i></span>
-              Limpiar filtros
-            </button>
-            <ul class="c-list ul-reset fs-18">
-              {% for category in video_categories %}
-                <li class="c-list__item dark flex-container align-middle">
-                  <input id="category-{{loop.index}}" value="{{category.slug}}" type="checkbox" class="hide" v-model="filterOptions">
-                  <label for="category-{{loop.index}}" class="c-option fs-18 align-middle width-100">
-                    <div class="c-option__checkbox position-relative margin-right-1 br--small">
-                    </div>
-                    {{category.name}}
-                  </label>
-                </li>
-              {% endfor %}
-            </ul>
+      <div class="init_corner">
+        <button class="init_corner_btn">¡HOLA!</button>
+        <div class="init_corner_btn_container d-none">
+          <a href="" target="_blank">Sector Público</a>
+          <a href="" target="_blank">Sector Privado</a>
+        </div>
+      </div>
+      <div class="init_logo">
+        <img src="{{theme.link}}/static/images/landing/mab_icon.png" alt="">
+      </div>
+      <div class="init_mabClick">
+        <span class="init_mabClick_text">
+          MAB<br> CLICK
+          <img class="init_mabClick_corner" src="{{theme.link}}/static/images/landing/corner_white.png" alt="">
+        </span>
+        <div class="init_brazo">
+          <img src="{{theme.link}}/static/images/landing/mano.png" alt="">
+        </div>
+      </div>
+    </section>
+    <section class="mab_linkForm">
+      <div class="section_content">
+        <h2 class="title">
+          Queremos <br> conocerte
+        </h2>
+        <h3 class="subtitle">
+          Para seguir dandote lo mejor
+        </h3>
+        <ul class="mab_linkForm_list">
+          <li>
+            <a href="{{site.url}}/formularios?type=profesor" >Profesor</a>
+            <span></span>
+          </li>
+          <li>
+            <a href="{{site.url}}/formularios?type=estudiante">Estudiante</a>
+            <span></span> 
+          </li>
+          <li>
+            <a href="{{site.url}}/formularios?type=tutor">Padre/Tutor</a>
+            <span></span>    
+          </li>
+          <li>
+            <a href="{{site.url}}/emotional">Visitante</a>
+            <span></span>    
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section class="mab_resume">
+      <div class="section_content">            
+        <div class="block">
+          En MAB buscamos girar la educación hacia una mucho más emocional y humana, que forme mejores personas, para así construír una mejor sociedad.
+        </div>
+        <div class="block_rigth">
+          Con MAB CLICK podrás exponenciar tus conocimientos de la forma más lúdica posible, teniendo siempre un balance académico y emocional.
+          <br>
+          <br> Encontrarás videos emocionales que tratan diferentes temas sociales importantes, así como videos y otros recursos dinámicos educativos de todos los grados de primaria y de secundaria y actividades para fomentar tus habilidades blancas.
+          <br>
+          <br> Cada herramienta ha sido creada para adaptarse al estilo de aprendizaje del estudiante, porque entendemos que todos aprendemos distinto.
+        </div>
+        <img class="mab_resume_img" src="{{theme.link}}/static/images/landing/chica_corner.png" alt="">
+      </div>
+    </section>
+    <section class="mab_balance">
+      <div class="section_content">
+        <h2 class="title">
+          BALANCE <br> ACADÉMICO Y EMOCIONAL
+        </h2>
+        <figure class="mab_balance_figure">
+          <img src="{{theme.link}}/static/images/landing/mapa.png" alt="">
+        </figure>
+      </div>
+    </section>
+    <section class="mab_boxes">
+      <div class="mab_boxes_item">
+        <div class="box_content">
+          Trabajamos con el sector privado y con el sector público, adaptándonos a sus áreas curriculares.
+        </div>
+      </div>
+      <div class="mab_boxes_item">
+        <div class="box_content">
+          Todos los estudiantes pasan por una evaluación de estilos de aprendizaje.
+        </div>
+      </div>
+      <div class="mab_boxes_item">
+        <div class="box_content">
+          Cada curso se trabaja con diferentes materiales que se adaptan a los distintos estilos de aprendizaje.
+        </div>
+      </div>
+      <div class="mab_boxes_item">
+        <div class="box_content">
+          El sistema lanzará estadísticas de avance en cada curso.
+        </div>
+      </div>
+      <div class="mab_boxes_item">
+        <div class="box_content">
+          Invitamos a estudiantes, profesores, padres, porque entendemos que la educación nos involucra a todos.
+        </div>
+      </div>
+      <div class="mab_boxes_item">
+        <div class="box_content">
+          Explicaciones
+          <br> a TU medida
+        </div>
+      </div>
+    </section>
+    <section class="mab_pantalla">
+      <figure class="mab_pantalla_figure">
+        <img class="" src="{{theme.link}}/static/images/landing/pantalla.jpg" alt="">
+        <div class="mab_pantalla_figure_base">
+          <img src="{{theme.link}}/static/images/landing/panta.png" alt="">
+        </div>
+      </figure>
+    </section>
+    <section class="mab_contact">
+      <div class="section_content">
+        <div class="mab_contact_info">
+          <div class="mab_contact_item">
+            Únete a  nuestra <br> comunidad
           </div>
         </div>
-      </div>
-      <div class="c-loader c-loader--full" :class="{ active : isFeedLoading }">
-        <div class="container height-100 flex-container align-center-middle">
-          <div class="loader">
-            {% for item in [1,2,3,4,5] %}              
-              <div class="loader--dot"></div>
-            {% endfor %}       
-          </div>
+        <div class="mab_contact_figure">
+          <img src="{{theme.link}}/static/images/landing/ojo.jpg" alt="">
         </div>
       </div>
-      <div class="c-feed grid-x grid-margin-x grid-margin-y margin-bottom-2">
-        <div class="cell" v-for="(video, index) of videos" :key="video.id" :class="{ 'medium-6' : (index != 0) }">
-          <video-c 
-            v-if="index == 0"
-            :title="video.title" 
-            :link="video.link" 
-            :author="video.author" 
-            :thumbnail="video.thumbnail.guid"
-            modifier="full"
-          >
-          </video-c>
-          <video-c 
-            v-else
-            :title="video.title" 
-            :link="video.link" 
-            :author="video.author" 
-            :thumbnail="video.thumbnail.guid"            
-          >
-          </video-c>
+    </section>
+    <footer class="footer">
+      <div class="section_content">
+        <div class="footer_left">
+          mab@lovers.com.pe <span>|</span> 997524368
         </div>
+        <ul class="footer_list">
+          <li>
+            <img src="{{theme.link}}/static/images/landing/footer_img/footer_1.png" alt="">
+          </li>
+          <li>
+            <img src="{{theme.link}}/static/images/landing/footer_img/footer_2.png" alt="">                
+          </li>
+          <li>
+            <img src="{{theme.link}}/static/images/landing/footer_img/footer_3.png" alt="">                        
+          </li>
+          <li>
+            <img src="{{theme.link}}/static/images/landing/footer_img/footer_4.png" alt="">
+          </li>
+          <li>
+            <img src="{{theme.link}}/static/images/landing/footer_img/footer_5.png" alt="">
+          </li>
+          <li>
+            <img src="{{theme.link}}/static/images/landing/footer_img/footer_6.png" alt="">
+          </li>
+        </ul>
       </div>
-    </div>
+    </footer>
   </section>
 {% endblock %}
 
+{% block footer %}
+{% endblock %}

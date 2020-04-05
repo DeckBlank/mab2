@@ -1,53 +1,89 @@
 {% extends '_html.twig' %}
 
 {% block content %}
-  <section class="c-section c-section--session flex-container flex-dir-column">
+  <section class="c-section c-section--session position-relative flex-container flex-dir-column">
     {% include 'templates-parts/header-session.twig' %}
 
-    <section class="c-meeting position-relative">
-      <section class="c-suscriber bg-black height-100">
+    <section class="c-meeting position-relative bg-black">
+      <section class="c-users position-absolute padding-1 width-100">
+        <button 
+          class="c-users__prev position-absolute bg-sec-alt white rounded flex-container align-center-middle"
+          :class="{ hide : !isShowedUsersList }">
+          <span><i class="far fa-arrow-left"></i></span>
+        </button>
+        <button 
+          class="c-users__next position-absolute bg-sec-alt white rounded flex-container align-center-middle"
+          :class="{ hide : !isShowedUsersList }">
+          <span><i class="far fa-arrow-right"></i></span>
+        </button>
+        <swiper 
+          :options="swiperOptions" 
+          ref="slider_users" 
+          class="c-slider-users margin-bottom-1"
+          :class="{ unshowed : !isShowedUsersList }">
+          <swiper-slide
+            v-for="user of users" 
+            :key="user.id"
+            class="c-user br--medium overflow-hidden margin-right-1">
+            <div class="c-user__camera bg-pri-color width-100" :id="'user-' + user.stream.id"></div>
+            <p class="c-user__name margin-bottom-0 white bg-shadow flex-container align-justify" @click="setMonitor(user.stream.id)">
+              ${user.stream.name}
+              <span v-if="user.stream.id != 'publisher' && user.stream.id != 'publisher-screen'" class="margin-left-1"><i class="far fa-thumbtack"></i></span>
+            </p>
+          </swiper-slide>
+        </swiper>
+        <button 
+          class="c-users__toggle white bg-sec-alt rounded flex-container aling-middle"
+          :class="{ active : !isShowedUsersList }"
+          @click="isShowedUsersList = !isShowedUsersList">
+          <span class="c-icon display-block"><i class="far fa-chevron-up"></i></span>
+        </button>
       </section>
-      <section class="c-publisher position-absolute bg-pri-color br--medium">
-      </section>
-      <div class="c-chat position-absolute bg-white overflow-hidden flex-container flex-dir-column" :class="{ active : isActiveChat }">
-        <header class="c-chat__header text-center fs-18 padding-1 flex-container align-middle">
-          Chat
-          <button class="fs-21" @click="isActiveChat = false">
-            <span class="c-icon"><i class="far fa-times"></i></span>
-          </button>
-        </header>
-        <div class="c-chat-inbox padding-1">
-          <div class="c-chat-inbox__body height-100">
-            <ul class="ul-reset">
-              {% for item in [1,2,3] %}            
-                <li class="c-user-message margin-bottom-1">
-                  <div class="flex-container align-middle align-justify margin-bottom-1">
-                    <p class="margin-bottom-0 fs-18 dark">
-                      Cleiver Valera
-                    </p>
-                    <span>7:00</span>
-                  </div>
-                  <p class="margin-bottom-0">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Beatae numquam velit quaerat aliquid, quis itaque optio. Magnam sed enim deleniti. Necessitatibus iure nostrum nisi ratione quam saepe velit dicta provident!</p>
-                </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
-        <div class="c-chat-editor flex-container margin-1">
-          <input type="text" class="c-chat-editor__input input-reset height-100">
-          <div class="c-chat-editor__button flex-container align-middle padding-horizontal-1 height-100">
-            <span class="c-icon"><i class="far fa-paper-plane"></i></span>
-          </div>
+      <section id="monitor" class="c-suscriber bg-black height-100">
+      </section>      
+    </section>
+    <div class="c-chat position-fixed bg-white overflow-hidden flex-container flex-dir-column" :class="{ active : isActiveChat }">
+      <header class="c-chat__header text-center fs-18 padding-1 flex-container align-middle">
+        Chat
+        <button class="fs-21" @click="isActiveChat = false">
+          <span class="c-icon"><i class="far fa-times"></i></span>
+        </button>
+      </header>
+      <div class="c-chat-inbox padding-1">
+        <div class="c-chat-inbox__body height-100">
+          <ul class="ul-reset">          
+            <li v-for="(message,index) of messages" :ref="'message-' + index" class="c-user-message margin-bottom-1">
+              <div class="flex-container align-middle align-justify margin-bottom-1">
+                <p class="margin-bottom-0 fs-18 dark">
+                  ${message.author}
+                </p>
+                <span>${message.time}</span>
+              </div>
+              <p class="margin-bottom-0">${message.content}</p>
+            </li>
+          </ul>
         </div>
       </div>
-      <button 
-        class="c-chat-toggle c-button c-button--primary rounded flex-container align-middle position-absolute"
-        @click="isActiveChat = true"
-        >
-        <span class="c-icon"><i class="far fa-comment-dots"></i></span>
-        <p class="margin-bottom-0 margin-left-1">Chatear</p>
-      </button>      
-    </section>
+      <div class="c-chat-editor flex-container margin-1">
+        <input 
+          type="text" 
+          class="c-chat-editor__input input-reset height-100" 
+          v-model="chatEditor"
+          @keyup.enter="sendMessage">
+        <div 
+          class="c-chat-editor__button flex-container align-middle padding-horizontal-1 height-100"
+          @click="sendMessage">
+          <span class="c-icon"><i class="far fa-paper-plane"></i></span>
+        </div>
+      </div>
+    </div>
+    <button 
+      class="c-chat-toggle c-button c-button--primary rounded flex-container align-middle position-fixed"
+      @click="isActiveChat = true"
+      >
+      <span class="c-icon"><i class="far fa-comment-dots"></i></span>
+      <p class="margin-bottom-0 margin-left-1">Chatear</p>
+    </button>    
     <!-- http://localhost/mab/sesion/sesion-1/?key=11225334346 -->
   </section>
 {% endblock %}

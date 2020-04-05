@@ -7,18 +7,21 @@
         </figure>
         <p class="margin-bottom-0 f2 w-bold">MAB CLICK</p>
       </a>
-      <a href="">
+      <a @click="endSession">
         Finalizar sesión
       </a>
     </div>
   </div>
-  <div class="c-header__bottom bg-light-gray padding-vertical-1">
+  <div class="c-header__bottom bg-light-gray">
     <div class="padding-horizontal-1 flex-container height-100 align-middle align-justify position-relative">
-      <div class="f2">
-        CODIGO DE SESIÓN: <span class="sec-alt w-bold fs-18">5245214</span>
+      <div class="f2 padding-vertical-1">
+        CODIGO DE SESIÓN: <span class="sec-alt w-bold fs-18">${activedSession.key}</span>
       </div>
-      <div class="c-media-controls position-absolute flex-container align-center">
-        <button class="c-media-controls__item rounded overflow-hidden">
+      <div class="c-media-controls position-absolute flex-container align-center-middle height-100">
+        <button 
+          class="c-media-controls__item rounded overflow-hidden"
+          :class="{ disabled : !mediaControls.video }"
+          @click="updateMediaStatus('video')">
           <div class="c-icons flex-container flex-dir-column">
             <div class="c-icon-container flex-container align-center-middle">
               <span class="c-icon"><i class="far fa-video"></i></span>
@@ -28,7 +31,10 @@
             </div>
           </div>
         </button>
-        <button class="c-media-controls__item disabled rounded overflow-hidden">
+        <button 
+          class="c-media-controls__item rounded overflow-hidden"
+          :class="{ disabled : !mediaControls.audio }"
+          @click="updateMediaStatus('audio')">
           <div class="c-icons flex-container flex-dir-column">
             <div class="c-icon-container flex-container align-center-middle">
               <span class="c-icon"><i class="far fa-microphone"></i></span>
@@ -38,11 +44,17 @@
             </div>
           </div>
         </button>
-        <button class="c-media-controls__item c-media-controls__item--alone rounded flex-container align-center-middle overflow-hidden">
+        <button 
+          class="c-media-controls__item c-media-controls__item--alone rounded flex-container align-center-middle overflow-hidden"
+          @click="shareScreen">
           <span class="c-icon"><i class="far fa-desktop-alt"></i></span>
         </button>
       </div>
-      <div class="c-another-user flex-container align-middle">
+      <div class="flex-container padding-vertical-1">
+        <span class="c-icon margin-right-1"><i class="far fa-user"></i></span>
+        ${users.length} Participantes
+      </div>
+      <!-- <div class="c-another-user flex-container align-middle">
         <figure class="c-another-user__avatar margin-right-1 rounded overflow-hidden">
           <img class="of--cover width-100 height-100" src="{{theme.link}}/static/images/example.jpg" alt="">
         </figure>
@@ -50,7 +62,7 @@
           Fika AJ
         </p>
         <span class="c-another-user__state margin-left-1 sec-alt w-bold">EN LINEA</span>
-      </div>
+      </div> -->
     </div>
   </div>
 </header>

@@ -33,4 +33,3 @@ array_map(function ($file) {
 array_map(function ($file) {
     require_once get_theme_file_path("registers/taxonomies/") . "{$file}.php";
 }, __autoload_functions_by_dir('/registers/taxonomies'));
-

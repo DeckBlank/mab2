@@ -1,6 +1,6 @@
 <?php
 
-// require(__DIR__ . '/../models/SessionModel.php');
+require(__DIR__ . '/../models/SessionModel.php');
 
 class SessionController{
 
@@ -11,22 +11,13 @@ class SessionController{
     /**
      * Methods
      */
-    public function saveResource($request) {
-        $target_dir = __DIR__ . "/../uploads/";
+    public function getSession($request) {
+        $session = SessionModel::getSession($request);
 
-        $type = explode('.', $_FILES['fileToUpload']['name']);
-        $type = $type[count($type)-1];
-        $url = $target_dir . $_FILES['fileToUpload']['name'];
-        $urlpdf = strtok($url, ".."); 
-
-        if(is_uploaded_file($_FILES['fileToUpload']['tmp_name'])) {			
-            if(move_uploaded_file($_FILES['fileToUpload']['tmp_name'], $url)) {
-                return "Ok";
-            }else{
-                return "No";
-            }
+        if(empty($session)){
+            return new WP_Error( 'no_session', __("No session found"), array( 'status' => 404 ) );
         }else{
-            return "No";
+            return new WP_REST_Response($session, 200);
         }
     }
 }

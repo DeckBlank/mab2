@@ -1,0 +1,14 @@
+.c-category {
+  background-color: $secondary-opacity;
+  color: $white;
+  padding: 0.15rem 1rem;
+  line-height: 1.6;
+
+  @include transition(0.25s);
+
+  &:hover,
+  &:focus {
+    color: $white;
+    background-color: $secondary-alt;
+  }
+}

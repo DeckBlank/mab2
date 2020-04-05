@@ -24,10 +24,10 @@ const login = new Vue({
   methods: {
     ...baseActions(),
     saveSession: function(user){
-      let mabSession = window.localStorage.getItem('mab_session')
+      let mabSession = window.localStorage.getItem('mab_loged_user')
 
       if(!mabSession){
-        window.localStorage.setItem('mab_session',JSON.stringify({
+        window.localStorage.setItem('mab_loged_user',JSON.stringify({
           user_auth: user.data.user_login,
           session_token: user.data.user_pass
         }))

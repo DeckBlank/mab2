@@ -10,6 +10,15 @@
     }
   }
 
+  &__input.valid,
+  &__select.valid {
+    border-color: $success-color;
+
+    &:focus {
+      border-color: $success-color !important;
+    }
+  }
+
   &__select {
     cursor: pointer;
   }

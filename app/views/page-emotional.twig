@@ -1,0 +1,85 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--emotional">
+    <section class="c-banner padding-vertical-3" :class="{ disabled : isUsedFilter }">
+      <div class="grid-container">
+        <div class="flex-container align-right margin-bottom-2">
+          <div class="c-filter position-relative" :class="{ active : isActiveFilter }">
+            <div class="flex-container align-middle">
+              <div class="c-filter__label f2 fs-18 flex-container align-middle margin-right-2">
+                <span class="c-icon fs-21"><i class="far fa-gift"></i></span>
+                <p class="margin-left-1 margin-bottom-0">Contenido pagado</p>
+              </div>          
+              <button class="c-filter__toggle position-relative" @click="isActiveFilter = !isActiveFilter">
+                <span class="c-icon fs-21"><i class="far fa-filter"></i></span>
+              </button>
+            </div>
+            <div class="c-filter__content br--small position-absolute bg-white">
+              <button 
+                class="c-filter__clean flex-container align-middle f2 fs-18 margin-bottom-2" 
+                @click="cleanFilter"
+                :disabled="filterOptions.length == 0"
+              >
+                <span class="margin-right-1"><i class="far fa-times-circle fs-21"></i></span>
+                Limpiar filtros
+              </button>
+              <ul class="c-list ul-reset fs-18">
+                {% for category in video_categories %}
+                  <li class="c-list__item dark flex-container align-middle">
+                    <input id="category-{{loop.index}}" value="{{category.slug}}" type="checkbox" class="hide" v-model="filterOptions">
+                    <label for="category-{{loop.index}}" class="c-option fs-18 align-middle width-100">
+                      <div class="c-option__checkbox position-relative margin-right-1 br--small">
+                      </div>
+                      {{category.name}}
+                    </label>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+        </div>      
+      </div>      
+      <div class="c-banner__content grid-container">
+        <a href="" class="c-banner-video position-relative display-block overflow-hidden br--medium margin-bottom-3">
+          <img class="width-100 height-100 of--cover" src="{{theme.link}}/static/images/example.jpg" alt="">
+          <div class="c-banner-video__play position-absolute flex-container align-center-middle">
+            <span class="c-icon"><i class="far fa-play"></i></span>
+          </div>          
+        </a>
+        <div class="grid-x align-center">
+          <div class="cell medium-8 large-6">
+            <p class="white text-center fs-18">Accede a todo nuestro contenido online gratuito y pago. Comienza aprender con mab desde cualquier lugar</p>
+          </div>
+        </div>
+      </div>
+    </section>    
+    <div class="grid-container padding-top-1">
+      <div class="c-loader c-loader--full" :class="{ active : isFeedLoading }">
+        <div class="container height-100 flex-container align-center-middle">
+          <div class="loader">
+            {% for item in [1,2,3,4,5] %}              
+              <div class="loader--dot"></div>
+            {% endfor %}       
+          </div>
+        </div>
+      </div>
+      <div class="c-feed grid-x grid-margin-x grid-margin-y margin-bottom-2">
+        <div class="cell medium-6" v-for="(video, index) of videos" :key="video.id">
+          <video-c
+            :title="video.title" 
+            :link="video.link" 
+            :author="video.author" 
+            :thumbnail="video.thumbnail.guid"            
+          >
+          </video-c>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+

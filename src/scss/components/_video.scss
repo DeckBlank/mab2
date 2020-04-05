@@ -5,6 +5,17 @@
     img {
       @include transition(0.35s);
     }
+
+    &:hover {
+      img {
+        transform: scale(1.4) rotateZ(-10deg);
+      }
+
+      .c-card-video__play {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
   }
 
   &__play {
@@ -21,22 +32,5 @@
     transform: scale(0.9);
 
     @include transition(0.3s);
-  }
-
-  &:hover {
-    .c-card-video__thumbnail img {
-      transform: scale(1.4) rotateZ(-10deg);
-    }
-
-    .c-card-video__play {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-  &--full {
-    .c-card-video__thumbnail {
-      height: 485px;
-    }
   }
 }

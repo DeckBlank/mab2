@@ -18,21 +18,14 @@
   }
 
   &__input {
-    background-color: $medium-gray !important;
+    background-color: $white !important;
     box-shadow: none;
 
     @include transition(0.25s);
-  }
-}
 
-.c-browser.active {
-  .c-browser__icon {
-    background-color: $primary-color;
-    color: $white;
-  }
-
-  .c-browser__input {
-    border: solid 1px $primary-color;
+    &:focus {
+      border: solid 1px $primary-color;
+    }
   }
 }
 

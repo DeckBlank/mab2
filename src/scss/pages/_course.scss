@@ -1,9 +1,17 @@
 .c-section--course {
+  background-image: url('../images/vectors/arrows/arrow-yellow-2.png'), url('../images/vectors/arrows/arrow-white-2.png');
+  background-position: right 3rem, right 0.5rem;
+  background-repeat: no-repeat;
+
   .c-title {
     text-transform: uppercase;
   }
 
   .c-unity {
+    @include box-shadow(right, rgba($gray, 0.4), 0, 10px, 50px);
+
+    padding: 1rem;
+
     &__title {
       text-transform: uppercase;
 
@@ -16,8 +24,13 @@
       max-height: 0;
       overflow: hidden;
       opacity: 0;
+      margin-top: 0;
 
       @include transition(0.4s);
+
+      .c-topic .c-icon {
+        width: 20px;
+      }
     }
   }
 
@@ -29,6 +42,7 @@
     }
 
     .c-unity__topics {
+      margin-top: 1rem;
       overflow: visible;
       opacity: 1;
       max-height: 1000px;

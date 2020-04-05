@@ -69,9 +69,9 @@ $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
   primary: #de0d46,
-  secondary: #04086a,
-  success: #3adb76,
-  warning: #ffae00,
+  secondary: #0166d0,
+  success: #090,
+  warning: #fbee23,
   alert: #f32e21,
 );
 
@@ -79,16 +79,18 @@ $light-gray: #f4f4f4;
 $medium-gray: #e5e5e5;
 $gray: #aaa;
 $dark-gray: #747272;
+$shadow: #484747;
 $black: #373737;
 $dark: #000;
 $white: #fff;
 
 //Basic Color Alters
-$primary-alt: #f04;
+$primary-alt: #ff3334;
 
 $secondary-lightest: #d2e7ff;
 $secondary-light: #5ec5ea;
 $secondary-lighter: #3faad1;
+$secondary-opacity: #9ac2ec;
 $secondary-alt: #377ac8;
 $secondary-medium: #1c5ba3;
 $secondary-gray: #787d99;

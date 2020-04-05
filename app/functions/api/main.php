@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * Settings
+ */
+date_default_timezone_set('America/Lima');
+
+/**
  * Libs
  */
 include_once __DIR__ . "/config/main.php";
@@ -15,7 +20,9 @@ require_once(__DIR__."/controllers/UserController.php");
 require_once(__DIR__."/controllers/VideoController.php");
 require_once(__DIR__."/controllers/CourseController.php");
 require_once(__DIR__."/controllers/TopicController.php");
+require_once(__DIR__."/controllers/SessionRequestController.php");
 require_once(__DIR__."/controllers/SessionController.php");
+require_once(__DIR__."/controllers/FormController.php");
 
 /**
  * Routes
@@ -130,12 +137,42 @@ add_action( 'rest_api_init', function () {
     ));     
 });
 
-//4. Topic ----------------------------------//
+//5. SessionRequest ----------------------------------//
+add_action( 'rest_api_init', function () {
+    $sessionRequestController = new SessionRequestController();
+
+    register_rest_route( 'custom/v1', '/session_request', array(
+        'methods' => 'POST',
+        'callback' => array($sessionRequestController,'addSessionRequest'),
+    ));    
+});
+
+//6. Session ----------------------------------//
 add_action( 'rest_api_init', function () {
     $sessionController = new SessionController();
 
-    register_rest_route( 'custom/v1', '/session/(?P<session_id>\d+)/resource', array(
+    register_rest_route( 'custom/v1', '/session', array(
+        'methods' => 'GET',
+        'callback' => array($sessionController,'getSession'),
+    ));    
+});
+
+//7. Forms ----------------------------------//
+add_action( 'rest_api_init', function () {
+    $formController = new FormController();
+
+    register_rest_route( 'custom/v1', '/form/tutor', array(
         'methods' => 'POST',
-        'callback' => array($sessionController,'saveResource'),
+        'callback' => array($formController,'addTutorForm'),
+    ));  
+    
+    register_rest_route( 'custom/v1', '/form/student', array(
+        'methods' => 'POST',
+        'callback' => array($formController,'addStudentForm'),
+    ));
+    
+    register_rest_route( 'custom/v1', '/form/teacher', array(
+        'methods' => 'POST',
+        'callback' => array($formController,'addTeacherForm'),
     ));    
 });

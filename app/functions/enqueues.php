@@ -1,6 +1,6 @@
 <?php
 
-$assets_version = '1585684229634';
+$assets_version = '1586049913791';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -76,12 +76,44 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
     ]);
 
     register_assets('script', [
+        'handle'    => 'pandawp/package/ssr_window',
+        'src'       => $config['resources']['package_ssr_window'],
+        'deps'      => [ ],
+        'ver'       => $assets_version,
+        'in_footer' => true
+    ]);
+
+    register_assets('script', [
         'handle'    => 'pandawp/js/main',
         'src'       => $config['resources']['script_main'],
         'deps'      => [ ],
         'ver'       => $assets_version,
         'in_footer' => true
     ]);
+
+    register_assets('script', [
+        'handle'    => 'pandawp/package/swiper',
+        'src'       => $config['resources']['package_swiper'],
+        'deps'      => [ ],
+        'ver'       => $assets_version,
+        'in_footer' => true
+    ]);
+
+    register_assets('script', [
+        'handle'    => 'pandawp/package/dom7',
+        'src'       => $config['resources']['package_dom7'],
+        'deps'      => [ ],
+        'ver'       => $assets_version,
+        'in_footer' => true
+    ]); 
+
+    register_assets('script', [
+        'handle'    => 'pandawp/package/vaswiper',
+        'src'       => $config['resources']['package_vaswiper'],
+        'deps'      => [ ],
+        'ver'       => $assets_version,
+        'in_footer' => true
+    ]);    
 
     /**
      * --------------------------------------------------------------------------
@@ -143,50 +175,10 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
      * --------------------------------------------------------------------------
      *
      */
-    if ( is_front_page() ) {
+    if ( is_page('emotional') ) {
         register_assets('script', [
-            'handle'    => 'pandawp/package/fancyapps',
-            'src'       => $config['resources']['package_fancyapps'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);
-
-        register_assets('script', [
-            'handle'    => 'pandawp/package/swiper',
-            'src'       => $config['resources']['package_swiper'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);
-
-        register_assets('script', [
-            'handle'    => 'pandawp/package/dom7',
-            'src'       => $config['resources']['package_dom7'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);
-
-        register_assets('script', [
-            'handle'    => 'pandawp/js/galleries',
-            'src'       => $config['resources']['script_galleries'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);
-
-        register_assets('script', [
-            'handle'    => 'pandawp/js/sliders/home',
-            'src'       => $config['resources']['sliders_home'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);
-
-        register_assets('script', [
-            'handle'    => 'pandawp/js/page/home',
-            'src'       => $config['resources']['page_home'],
+            'handle'    => 'pandawp/js/page/emotional',
+            'src'       => $config['resources']['page_emotional'],
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
@@ -239,32 +231,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
-        ]);
-
-    }elseif (is_page('contacto')){
-        register_assets('script', [
-            'handle'    => 'pandawp/js/component/form',
-            'src'       => $config['resources']['component_form'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);
-
-        register_assets('script', [
-            'handle'    => 'pandawp/js/component/map',
-            'src'       => $config['resources']['component_map'],
-            'deps'      => [],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);
-    
-        register_assets('script', [
-            'handle'    => 'api-google-maps',
-            'src'       => $config['resources']['google_maps'],
-            'deps'      => [],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);     
+        ]);   
 
     }elseif (is_page('login')){
         register_assets('script', [
@@ -279,6 +246,15 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         register_assets('script', [
             'handle'    => 'pandawp/js/page/solicitar-id',
             'src'       => $config['resources']['page_solicitar_id'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+
+    }elseif (is_page('formularios')){
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/forms',
+            'src'       => $config['resources']['page_forms'],
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
@@ -302,31 +278,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);        
 
-    }elseif (is_singular('topic')){
-        register_assets('script', [
-            'handle'    => 'pandawp/package/swiper',
-            'src'       => $config['resources']['package_swiper'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);
-
-        register_assets('script', [
-            'handle'    => 'pandawp/package/dom7',
-            'src'       => $config['resources']['package_dom7'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]); 
-
-        register_assets('script', [
-            'handle'    => 'pandawp/package/vaswiper',
-            'src'       => $config['resources']['package_vaswiper'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]); 
-        
+    }elseif (is_singular('topic')){      
         register_assets('script', [
             'handle'    => 'pandawp/js/page/topic',
             'src'       => $config['resources']['page_topic'],
@@ -336,6 +288,22 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         ]);        
 
     }elseif (is_singular('session')){
+        register_assets('script', [
+            'handle'    => 'pandawp/package/vaswiper',
+            'src'       => $config['resources']['package_vaswiper'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]); 
+
+        register_assets('script', [
+            'handle'    => 'pandawp/package/opentok',
+            'src'       => $config['resources']['package_opentok'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]); 
+
         register_assets('script', [
             'handle'    => 'pandawp/js/page/session',
             'src'       => $config['resources']['page_session'],
@@ -353,4 +321,17 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);
     }
+});
+
+add_action('admin_enqueue_scripts', function ($hook) use ($config, $assets_version) {
+    if ('post.php' !== $hook) {
+        return;
+    }
+    register_assets('script', [
+        'handle'    => 'pandawp/wp/session',
+        'src'       =>  $config['resources']['wp_session'],
+        'deps'      => [ ],
+        'ver'       => $assets_version,
+        'in_footer' => true
+    ]);
 });

@@ -61,7 +61,7 @@
         <div class="grid-x align-center-middle height-100">
           <div class="cell medium-10 large-8">
             <div class="c-modal__content br--medium position-relative bg-white">
-              <div class="c-success-message position-absolute" :class="{ showed : isSentRequest }">
+              <div class="c-success-message position-absolute" :class="{ showed : isSentSessionRequest && isOpenedRequestModal }">
                 <div class="flex-container width-100 height-100 align-center-middle">
                   <div class="c-success-message__body br--medium bg-sec-alt white text-center flex-container flex-dir-column align-middle">
                     <div class="c-success-message__icon flex-container align-center-middle bg-white margin-bottom-2 rounded">
@@ -76,8 +76,8 @@
                   </div>
                 </div>
               </div>
-              <div class="c-body flex-container flex-dir-column height-100" :class="{ unshowed : isSentRequest }">
-                <div class="flex-container align-right margin-bottom-1">
+              <div class="c-body flex-container position-relative flex-dir-column height-100" :class="{ unshowed : isSentSessionRequest && isOpenedRequestModal }">
+                <div class="c-modal__close flex-container align-right margin-bottom-1 position-relative">
                   <button @click="isOpenedRequestModal = false">
                     <span class="c-icon fs-30"><i class="far fa-times"></i></span>
                   </button>
@@ -89,60 +89,41 @@
                   <div class="c-form margin-bottom-3">
                     <div class="margin-bottom-1">
                       <label>
-                        <p class="mb-05 gray-gray">Nombres y apellidos :*</p>
-                        <input type="text" class="c-form__input input-reset" v-model="request.fullname">
+                        <p class="mb-05 gray-gray">Nombres y apellidos <span class="alert">*</span></p>
+                        <input 
+                          type="text" 
+                          name="fullname"
+                          class="c-form__input input-reset"
+                          :class="{ valid : sessionRequest.fullname.isValid }"
+                          v-model="sessionRequest.fullname.value">
                       </label>
                     </div>
                     <div class="margin-bottom-2">
                       <label>
-                        <p class="mb-05 gray-gray">Correo :*</p>
-                        <input type="email" class="c-form__input input-reset" v-model="request.email">
+                        <p class="mb-05 gray-gray">Correo <span class="alert">*</span></p>
+                        <input 
+                          type="email" 
+                          name="email"
+                          class="c-form__input input-reset"
+                          :class="{ valid : sessionRequest.email.isValid }"
+                          v-model="sessionRequest.email.value">
                       </label>
                     </div>
                   </div>
                   <h3 class="f2 margin-bottom-1 fs-16">INFORMACIÓN DE LA SESIÓN</h3>
                   <div class="c-form margin-bottom-1">
-                    <!-- <div class="margin-bottom-1">
-                      <label>
-                        <p class="mb-05 gray-gray">Seleccionas las fechas y horas en las que puedes tener la sesión</p>
-                        <div class="grid-x grid-margin-x grid-margin-y">
-                          <div class="cell large-6">
-                            <el-date-picker
-                              class="width-100 input-reset"
-                              v-model="value"
-                              type="datetime"
-                              format="d MMMM hh mm a"
-                              value-format="d MMMM hh mm a"
-                              :picker-options="{
-                                start: '09:00',
-                                step: '00:30',
-                                end: '20:00'
-                              }"
-                              placeholder="Selecciona fecha y hora">
-                            </el-date-picker>
-                          </div>
-                          <div class="cell large-6">
-                            <el-date-picker
-                              class="width-100 input-reset"
-                              v-model="value2"
-                              type="datetime"
-                              placeholder="Selecciona fecha y hora">
-                            </el-date-picker>
-                          </div>
-                        </div>
-                      </label>
-                    </div> -->
                     <div class="margin-bottom-1">
-                      <p class="mb-05 gray-gray">Seleccionas las fechas y horas en las que puedes tener la sesión</p>
+                      <p class="mb-05 gray-gray">Seleccionas las fechas y horas en las que puedes tener la sesión <span class="alert">*</span></p>
                       <div class="grid-x grid-margin-x grid-margin-y">
                         <div class="cell large-6">
                           <div class="grid-x grid-margin-x grid-margin-y">
                             <div class="cell large-6">
                               <el-date-picker
-                                v-model="request.date1"
+                                v-model="sessionRequest.date1"
                                 class="width-100"
+                                :class="{ valid : sessionRequest.date1}"
                                 format="d MMMM"
-                                value-format="d MMMM"
+                                value-format="yyyy-MM-dd"
                                 type="date"
                                 placeholder="Fecha 1"
                                 >
@@ -150,10 +131,9 @@
                             </div>
                             <div class="cell large-6">
                               <el-time-select
-                                v-model="request.time1"                                
+                                v-model="sessionRequest.time1"                                
                                 class="width-100"
-                                format="hh:mm:ss A"
-                                value-format="hh:mm:ss A"
+                                :class="{ valid : sessionRequest.time1 }"
                                 :picker-options="{
                                   start: '09:00',
                                   step: '00:30',
@@ -169,18 +149,20 @@
                           <div class="grid-x grid-margin-x grid-margin-y">
                             <div class="cell large-6">
                               <el-date-picker
-                                v-model="request.date2"
+                                v-model="sessionRequest.date2"
                                 class="width-100"
+                                :class="{ valid : sessionRequest.date2 }"
                                 format="d MMMM"
-                                value-format="d MMMM"
+                                value-format="yyyy-MM-dd"
                                 type="date"
                                 placeholder="Fecha 2">
                               </el-date-picker>
                             </div>
                             <div class="cell large-6">
                               <el-time-select
-                                v-model="request.time2"
+                                v-model="sessionRequest.time2"
                                 class="width-100"
+                                :class="{ valid : sessionRequest.time2 }"
                                 :picker-options="{
                                   start: '08:30',
                                   step: '00:15',
@@ -195,8 +177,11 @@
                     </div>
                     <div class="margin-bottom-2">
                       <label>
-                        <p class="mb-05 gray-gray">¿Qué curso vamos a reforzar?</p>
-                        <select class="c-form__select input-reset" v-model="request.course">
+                        <p class="mb-05 gray-gray">¿Qué curso vamos a reforzar? <span class="alert">*</span></p>
+                        <select 
+                          class="c-form__select input-reset"
+                          :class="{ valid : sessionRequest.course != '' }"
+                          v-model="sessionRequest.course">
                           <option value="" selected disabled>- Curso -</option>
                           {% for course in courses %}
                             <option value="{{course.title}}">{{course.title}}</option>                      
@@ -205,23 +190,26 @@
                       </label>
                     </div>
                     <div class="margin-bottom-3">
-                      <p class="mb-05 gray-gray">Subir archivos para trabajar en la sesión</p>
+                      <p class="mb-05 gray-gray">Subir archivos para trabajar en la sesión (opcional)</p>
                       <el-upload
-                        class="c-form__file"
+                        :class="{ valid : sessionRequest.resources.length > 0 }"
                         drag
                         action=""
                         :http-request="addAtachments"
-                        accept=".jpg, .jpeg, .png"
+                        :on-remove="handleRemove"
+                        :before-upload="handleBeforeUpload"
+                        accept=".jpg, .jpeg, .pdf"
                         multiple
                         >
                         <i class="el-icon-upload"></i>
                         <div class="el-upload__text">Arrastrar el archivo aquí o <em>click en subir</em></div>
-                        <div class="el-upload__tip" slot="tip">Archivos .zip/.rar con tamaño menor que 500kb</div>
+                        <div class="el-upload__tip" slot="tip">Archivos .jpg/.jpeg/.pdf con tamaño menor que 500kb</div>
                       </el-upload>
                     </div>
                     <button 
                       class="c-button c-button--ghost-primary padding-horizontal-2 rounded width-100"
-                      @click="sendRequest"
+                      @click="sendSessionRequest"
+                      :disabled="sessionRequest.counter != 8"
                       >
                       ENVIAR SOLICITUD
                     </button>
@@ -248,15 +236,38 @@
               </figure>
               <h2 class="f2 fs-40 w-bold pri-color text-center margin-bottom-3">MAB CLICK</h2>
               <div class="c-form margin-bottom-1 text-left">
-                <div class="margin-bottom-3">
+                <div v-if="!isRightCode || isRightCode == null" class="margin-bottom-3">
                   <label>
                     <p class="mb-05 gray-gray">Ingresa el código de activación que se envio</p>
-                    <input type="text" class="c-form__input input-reset">
+                    <input 
+                      v-model="sessionKey" 
+                      type="text" 
+                      class="c-form__input input-reset"
+                      @keyup.enter="getSession">
                   </label>
-                  <p class="margin-bottom-0 alert" :class="{ hide : !isRightCode }">El codigo ingresado no existe</p>
+                  <p class="margin-bottom-0 alert" :class="{ hide : (isRightCode || isRightCode == null) }">El codigo ingresado no existe</p>
                 </div>
-                <button class="c-button c-button--secondary-alt padding-horizontal-2 rounded width-100">
-                  INGRESAR
+                <div v-else class="margin-bottom-3">
+                  <label>
+                    <p class="mb-05 gray-gray">Ingresa tu nombre</p>
+                    <input 
+                      v-model="sessionUser" 
+                      type="text" 
+                      class="c-form__input input-reset"
+                      @keyup.enter="joinSession">
+                  </label>
+                </div>
+                <button
+                  v-if="!isRightCode || isRightCode == null"
+                  class="c-button c-button--secondary-alt padding-horizontal-2 rounded width-100"
+                  @click="getSession">
+                  VALIDAR CODIGO
+                </button>
+                <button
+                  v-else
+                  class="c-button c-button--secondary-alt padding-horizontal-2 rounded width-100"
+                  @click="joinSession">
+                  UNIRSE A LA SESIÓN
                 </button>
               </div>
             </div>
@@ -266,9 +277,3 @@
     </section>     
   </section>
 {% endblock %}
-
-{#
-  1. Todos los campos son necesarios no?
-  2. Fechas
-  3. Archivos
-#}

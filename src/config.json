@@ -8,8 +8,7 @@
       "src/js/main.js",
       "src/js/galleries.js",
       "src/js/sliders/*.js",
-      "src/js/components/component-map.js",
-      "src/js/components/component-form.js",
+      "src/js/wp-session.js",
       "src/js/pages/*.js"
     ]
   },

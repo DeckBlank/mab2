@@ -32,11 +32,13 @@ if($post->post_type == "video"){
 }else if($post->post_type == "course"){
     $context['unities'] = [];
 
-    foreach( get_field('unities', $post->ID) as $unity){
-        array_push($context['unities'],(object)[
-            "title" => $unity['title'],
-            "topics" => __getTopicsSanitize( $unity['topics'] )
-        ]);
+    if(get_field('unities', $post->ID)){
+        foreach( get_field('unities', $post->ID) as $unity){
+            array_push($context['unities'],(object)[
+                "title" => $unity['title'],
+                "topics" => __getTopicsSanitize( $unity['topics'] )
+            ]);
+        }
     }
 
 }else if($post->post_type == "topic"){
