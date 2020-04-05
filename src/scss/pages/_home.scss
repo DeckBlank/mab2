@@ -1,7 +1,7 @@
 .c-section--home {
 
   .init{
-    background: #3f67b1;
+    background: rgb(2,102,208);
     min-height: 100vh;
     display: flex;
     justify-content: center;
@@ -12,7 +12,7 @@
   }
 
   .init_line{
-    display: none;
+   display: none;
     width: calc(100% - 60px);
     position: absolute;
     top: 30px;
@@ -20,8 +20,12 @@
     background: #fff; 
     padding: 12px;
     text-align: center;
+    color: #000
   }
 
+  .init .init_line{
+    display: block;
+  }
   .init_line a{
     color: #000;
   }
@@ -37,7 +41,7 @@
   .init_corner_btn {
     padding: 4px 30px;
     border: none;
-    background: #149b48;
+    background: rgb(0,153,0);
     color: #fff;
     outline: none;
   }
@@ -64,12 +68,12 @@
   }
 
   .init_corner_btn_container a:nth-child(1){
-    background: #fdd604;
+    background: rgb(252,238,33);
     color: #000
   }
 
   .init_corner_btn_container a:nth-child(2){
-    background: #149b48;
+    background: rgb(0,153,0);
     color: #fff;
     
   }
@@ -97,7 +101,7 @@
   }
 
   .init_mabClick_text{
-    color: #fdd604;
+    color: rgb(252,238,33);
     font-size: 100px;
     line-height: 86px;
     position: relative;
@@ -126,7 +130,7 @@
 
   /* mab resume */
   .mab_resume {
-    background: #dd1c47;
+    background: rgb(204,0,51);
     color: #fff;
     position: relative;
     display: flex;
@@ -159,23 +163,24 @@
   .block_rigth{
     position: relative;
     z-index: 5;
-    margin-left: 50%;
+    margin-left: 33%;
     min-height: 300px;
     font-family: $font-family-secondary;
     font-weight: $black-font;
+    font-size: 25px;
   }
 
   .mab_resume_img{
     position: absolute;
     left: 0;
-    top:0;
+    bottom:0;
     height: 100%;
   }
 
   /* mab balance  */
 
   .mab_balance{
-    background: #fdd604;
+    background: rgb(252,238,33);
     color: #000;
     padding: 100px;
     display: flex;
@@ -203,7 +208,7 @@
   /* mab link form */
 
   .mab_linkForm{
-    background: #149b48;
+    background: rgb(0,153,0);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -214,7 +219,7 @@
     width: 100%;
   }
   .mab_linkForm .title {
-    color: #fdd604;
+    color: rgb(252,238,33);
     font-size: 100px;
     line-height: 88px;
     text-align: center;
@@ -223,8 +228,8 @@
   }
   .mab_linkForm .subtitle{
     text-align: center;
-    color: #fdd604;
-    font-size: 22px;
+    color: rgb(252,238,33);
+    font-size: 25px;
     text-transform: uppercase;
     font-family: 'FestivoLetters';
     font-weight: 300;
@@ -236,10 +241,14 @@
     list-style: none;
     margin-top: 50px;
     flex-wrap: wrap;
+    margin-left: 0;
   }
   .mab_linkForm_list li {
     margin: 0 15px 15px;
     position: relative;
+    background: rgb(252,238,33);
+    width: 260px;
+    
   } 
   .mab_linkForm_list li span{
     position: absolute;
@@ -247,10 +256,13 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: #fdd604;
-    transform: skewX(-30deg)
+    background: rgb(252,238,33);
+    display: none;
+
+
   }  
   .mab_linkForm_list li a {
+    
     position: relative;
     font-family: $font-family-secondary;
     font-weight: $black-font;
@@ -263,26 +275,27 @@
     text-align: center;
     text-decoration: none;
     font-size: 25px;
+    width: 100%;
   }
 
-  .mab_linkForm_list li:nth-child(1) a::after{
-    content: "";
-    width: 50px;
-    height: 100%;
-    background: #149b48;
-    position: absolute;
-    top: 0;
-    left: -34px;
-  }
-  .mab_linkForm_list li:nth-child(3) a::after{
-    content: "";
-    width: 50px;
-    height: 100%;
-    background: #149b48;
-    position: absolute;
-    top: 0;
-    right: -34px;
-    }
+  // .mab_linkForm_list li:nth-child(1) a::after{
+  //   content: "";
+  //   width: 50px;
+  //   height: 100%;
+  //   background: rgb(0,153,0);
+  //   position: absolute;
+  //   top: 0;
+  //   left: -34px;
+  // }
+  // .mab_linkForm_list li:nth-child(3) a::after{
+  //   content: "";
+  //   width: 50px;
+  //   height: 100%;
+  //   background: rgb(0,153,0);
+  //   position: absolute;
+  //   top: 0;
+  //   right: -34px;
+  //   }
 
   .mab_linkForm_list li a:hove, .mab_linkForm_list li a:focus, .mab_linkForm_list li a:active{
     text-decoration: none;
@@ -325,15 +338,15 @@
     justify-content: flex-start 
   }
   .mab_boxes_item:nth-child(1), .mab_boxes_item:nth-child(4), .mab_boxes_item:nth-child(5) {
-    background: #149b48;
+    background: rgb(0,153,0);
   }
   .mab_boxes_item:nth-child(2), .mab_boxes_item:nth-child(3), .mab_boxes_item:nth-child(6) {
-    background: #3f67b1;
+    background: rgb(2,102,208);
   }
 
 
   .mab_pantalla {
-    background: #ef3938;
+    background: rgb(255,51,51);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -354,7 +367,7 @@
     text-align: center;
     padding: 10px 30px;
     color:#000;
-    background: #fdd604;
+    background: rgb(252,238,33);
     border-radius: 10px;
     font-family: $font-family-secondary;
     font-weight: $black-font;
@@ -372,7 +385,7 @@
     top: 28px;
     left: 137px;
     width: 534px;
-    height: 302px;
+    height: 293px;
     background: blue;
   }
 
@@ -388,7 +401,7 @@
 
   /* mab contact  */
   .mab_contact{
-    background: #fdd604;
+    background: rgb(252,238,33);
     padding: 85px 100px 38px;
     display:flex;
     justify-content: center;
@@ -411,7 +424,7 @@
   .mab_contact_figure{
     width: 430px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
   }
 
@@ -429,10 +442,11 @@
     align-items: center;
     margin-bottom: 0;
     list-style: none;
-    margin-top: 25px;
+    margin-top: 0px;
+    margin-left: 0;
   }
   .mab_contact_social li {
-    margin-right: 15px;
+    margin-right: 5px;
   }
   .mab_contact_social li a{
     text-decoration: none;
@@ -441,7 +455,7 @@
     width: 50px;
   }
   .mab_contact_item{
-    margin-bottom: 20px;
+    margin-bottom: 0px;
     font-size: 50px;
     font-family: 'FestivoLetters';
   }
@@ -449,7 +463,7 @@
 
   /* Forms */
   .form_section{
-    background: #3f67b1;
+    background: rgb(2,102,208);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -457,7 +471,7 @@
   }
 
   .form_section .title{
-    color: #fdd604;
+    color: rgb(252,238,33);
     font-size:100px;
     line-height: 84px;
     margin-bottom: 20px
@@ -473,7 +487,7 @@
 
   }
   .form_section .subtitle{
-    color: #fdd604;
+    color: rgb(252,238,33);
     font-size: 25px;
     text-transform: uppercase;
     display: inline-block;
@@ -508,7 +522,7 @@
   }
 
   .form_box .input_container input{
-    background: #fdd604;
+    background: rgb(252,238,33);
     width: 100%;
     border: none;
     height: 40px;
@@ -519,7 +533,7 @@
   .form_box .input_container select{
     font-family: 'FestivoLetters';
     width: 100%;
-    background: #fdd604;
+    background: rgb(252,238,33);
     border: none;
     height: 40px;
     padding: 0 15px;
@@ -537,7 +551,7 @@
   }
 
   .form_box .btn_container button{
-    background: #dd1c47;
+    background: rgb(204,0,51);
     color: #fff;
     padding: 11px 61px;
     border: none;
@@ -588,13 +602,12 @@
 
   .footer_list li img{
     width: 100%;
-    height: 100%;
     object-fit: cover;
     object-position: center;
   }
 
   .modal-content{
-    background: #149b48;
+    background: rgb(0,153,0);
     color: #fff;
     font-family: $font-family-secondary;
     font-weight: $black-font;
@@ -611,10 +624,11 @@
     text-transform: uppercase;
   }
   .modal_btn_container a {
+    font-family: dinoround;
     display: inline-block;
     padding: 8px 20px;
     color: #fff;
-    background: #ef3938;
+    background: rgb(255,51,51);
   }
 
   .modal_btn_container a:hover, .modal_btn_container a:focus, .modal_btn_container a:active{
@@ -622,8 +636,34 @@
   }
 }
 
+@media (max-width:1895px){
+  .c-section--home {
+    .block_rigth{
+      margin-left: 40%;
+    }
+  }
+
+}
+
+@media (max-width:1700px){
+  .c-section--home {
+
+    .block {
+      margin-left: 16%;
+    }
+  .block_rigth{
+    margin-left: 50%;
+  }
+}
+
+}
+
+
 @media (max-width:1600px){
   .c-section--home {
+    .mab_resume_img{
+      max-height: 620px;
+    }
     .init_logo{
       /* height: 220px;
       margin-top: 40px; */
@@ -643,11 +683,24 @@
       width: 45px;
       height: 45px;
     }
+
+    .block {
+      margin-left: 150px;
+    }
+
+    .block_rigth, .block, .mab_boxes_item{
+      font-size: 20px;
+    }
+    
   }
 }
 
 @media (max-width:1024px){
   .c-section--home {
+
+    .mab_contact_social{
+      margin-top: 15px;
+    }
     .init{
         height: auto;
     }
@@ -708,6 +761,7 @@
         height: auto;
         margin-top: 30px;
         margin-left: -30px;
+        max-height: none;
   
     }
     .mab_balance{
@@ -724,13 +778,13 @@
     }
   
     .mab_boxes_item:nth-child(odd){
-        background: #3f67b1;
+        background: rgb(2,102,208);
         padding: 50px 30px;
         justify-content: center
     
     }
     .mab_boxes_item:nth-child(even){
-        background: #149b48;
+        background: rgb(0,153,0);
         padding: 50px 30px;
         justify-content: center;
     }
@@ -740,18 +794,18 @@
     }
   
     .mab_contact .section_content{
-        flex-direction: column-reverse;
+        // flex-direction: column-reverse;
     }
   
     .mab_contact_figure{
-        width: 100%;
-        margin-bottom: 20px;
+        // width: 100%;
+        // margin-bottom: 20px;
     }
     .mab_contact_figure img:nth-child(1), .mab_contact_figure img:nth-child(2){
-        width: 50px;
+        width: 175px;
     }
     .mab_contact_social{
-        justify-content: center;
+        // justify-content: center;
     }
   
     .mab_pantalla_figure > img{
@@ -761,7 +815,7 @@
         top: 5%;
         left: 17%;
         width: 67%;
-        height: 59%;
+        height: 58%;
     }
     .mab_pantalla{
         padding: 50px 30px;
@@ -816,7 +870,8 @@
         width: 100%;
     }
     .mab_contact_item{
-        text-align: center;
+        // text-align: center;
+        line-height: normal;
     }
     .footer_list li{
         width: 30px;
@@ -837,10 +892,60 @@
   }
 }
 
+@media (max-width:768){
+  .c-section--home {
+
+  }
+}
 @media(max-width:600px){
   .c-section--home {
+
+    .init_line{
+      background: transparent;
+      color: #fff;
+    }
+    .init_mabClick{
+      padding-left: 15px;
+    }
+    .init_mabClick_text{
+      font-size: 85px;
+    }
     .mab_resume_img{
         margin-top: 0;
     }
+    .mab_linkForm .title, .mab_balance .title{
+      font-size: 52px;
+    line-height: initial
+    }
+    .mab_linkForm .subtitle{
+      font-size: 17px;
+    }
+    .mab_linkForm_list li a{
+      font-size: 20px;
+    }
+    .mab_boxes_item:nth-child(odd), .mab_boxes_item:nth-child(even) {
+      padding: 80px 30px;
+    }
+    .mab_contact .section_content{
+      flex-direction: column-reverse;
+  }
+  
+  .mab_contact_figure{
+      width: 100%;
+      margin-bottom: 20px;
+  }
+  .mab_contact_item{
+    text-align: center;
+  }
+  .mab_contact_social{
+    justify-content: center;
+  }
+  .mab_contact_figure{
+    justify-content: center;
+  }
+ .mab_contact_figure img:nth-child(1){
+   width: 50px;
+
+  }
   }
 }
