@@ -18,6 +18,12 @@ if(is_page('login')){
         "post_type" => "course",
         "posts_per_page" => -1
     ]);
+
+}else if(is_page('emotional')){
+    $context['video_categories'] = Timber::get_terms([
+        "taxonomy" => "tax-video"
+    ]);
+
 }
 
 $templates = [

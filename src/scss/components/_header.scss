@@ -1,5 +1,5 @@
 .c-header {
-  background: $warning-color;
+  background: $secondary-color;
   position: sticky;
   z-index: 1000 !important;
 
@@ -24,16 +24,16 @@
     }
 
     &__menu {
-      top: calc(35px + 1rem);
+      top: calc(35px + 2rem);
       right: 0;
       width: 10rem;
-      border: solid 1px $gray;
       visibility: hidden;
       opacity: 0;
       transform: translateY(-10px);
       padding-top: 0.5rem;
       padding-bottom: 0.5rem;
 
+      @include triangle();
       @include transition(0.3s);
     }
 
@@ -75,24 +75,9 @@
   }
 
   .c-login {
-    padding: 0 1rem;
-
     &:hover,
     &:focus {
       color: $white;
-    }
-
-    &::after {
-      content: '';
-      width: 110%;
-      height: 100%;
-      background-color: $secondary-color;
-      position: absolute;
-      z-index: -1;
-      top: 0;
-      left: 0;
-      margin: auto;
-      transform: skewX(-10deg);
     }
   }
 
@@ -173,6 +158,23 @@
       visibility: visible;
       opacity: 1;
       transform: translateY(0);
+    }
+
+    &__right {
+      padding: 0 1rem;
+
+      &::after {
+        content: '';
+        width: 110%;
+        height: 100%;
+        background-color: $secondary-color;
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        right: -1rem;
+        margin: auto;
+        transform: skewX(-10deg);
+      }
     }
   }
 
@@ -363,6 +365,8 @@
 
 @include breakpoint(medium) {
   .c-header {
+    background-color: $warning-color;
+
     .c-nav {
       .c-search-toggle {
         display: none;
@@ -398,8 +402,16 @@
   .c-header {
     position: sticky;
 
-    .c-login {
-      padding: 0 2rem;
+    .c-user {
+      height: 100%;
+
+      @include flex;
+
+      align-items: center;
+
+      &__menu {
+        top: calc(35px + 3.5rem);
+      }
     }
 
     .c-nav {
@@ -464,6 +476,7 @@
 
       &__right {
         display: block;
+        padding: 0 2rem;
 
         .c-login {
           @include transition(0.25s);

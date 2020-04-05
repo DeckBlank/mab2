@@ -8,10 +8,7 @@
   }
 
   .c-banner {
-    background-color: $secondary-alt;
-    background-image: url('../images/vectors/banner/hand-left.png'), url('../images/vectors/banner/hand-right.png'), url('../images/vectors/banner/pencil.png');
-    background-position: 1rem top, calc(100% - 1rem) top, center -2rem;
-    background-repeat: no-repeat;
+    background-color: $primary-color;
 
     @include transition(0.25s);
 
@@ -42,6 +39,8 @@
 
   .c-banner-video {
     height: 531px;
+    border: solid 1rem $white;
+    z-index: 5;
 
     &__play {
       top: 0;
@@ -70,7 +69,7 @@
 
   .c-filter {
     &__label {
-      color: $secondary-opacity;
+      color: $white;
     }
 
     &__toggle {
@@ -90,7 +89,7 @@
     &__content {
       width: 15rem;
       height: auto;
-      top: 0;
+      top: 4rem;
       right: 2rem;
       padding: 1rem;
       z-index: 100;
@@ -106,7 +105,7 @@
       display: flex !important;
 
       &__checkbox {
-        border: solid 1px $dark;
+        border: solid 1px $success-color;
         width: 17px;
         height: 17px;
 
@@ -118,7 +117,7 @@
         width: 11px;
         height: 11px;
         border-radius: 50%;
-        background-color: $primary-color;
+        background-color: $success-color;
         position: absolute;
         top: 0;
         left: 0;
@@ -133,12 +132,14 @@
 
     .c-list {
       &__item input:checked + .c-option .c-option__checkbox {
-        border-color: $primary-color;
+        border-color: $success-color;
       }
 
       &__item input:checked + .c-option .c-option__checkbox::after {
         opacity: 1;
       }
+
+      @include triangle();
     }
   }
 
@@ -168,16 +169,45 @@
         display: block;
       }
     }
+
+    .c-banner {
+      margin-bottom: 4rem;
+    }
+
+    .c-banner.disabled {
+      margin-bottom: 0;
+    }
+
+    .c-banner-video {
+      &::before {
+        content: '';
+        position: absolute;
+        left: 5rem;
+        bottom: -200px;
+        height: 196px;
+        width: 186px;
+        background-image: url('../images/vectors/banner/arrow.png');
+        background-repeat: no-repeat;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        left: -4rem;
+        bottom: -300px;
+        height: 250px;
+        width: 200px;
+        background-size: contain;
+        background-image: url('../images/vectors/banner/face-invert.png');
+        background-repeat: no-repeat;
+      }
+    }
   }
 }
 
 @include breakpoint(large) {
   .c-section--emotional {
     outline: none;
-
-    .c-banner {
-      background-position: center top, calc(50% + 10rem) top, calc(50% - 10rem) 1rem;
-    }
 
     .c-filter {
       &__content {

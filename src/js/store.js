@@ -18,7 +18,9 @@ export const store = new Vuex.Store({
 
     //Menu
     isActiveMenu: false,
-    isActiveCursosMenuDesk: false,
+    isActivePubSectorMenu: false,
+    isActivePrivSectorMenu: false,
+    isActivePubGradoMenu: false,
     isHeaderWithShadow: false,
 
     //Browser
@@ -29,12 +31,16 @@ export const store = new Vuex.Store({
       state.isActiveMenu = !state.isActiveMenu
     },
 
-    setStatusCursosMenuMob(state){
-      state.isActiveCursosMenuMob = !state.isActiveCursosMenuMob
+    setStatusPubSectorMenu(state){
+      state.isActivePubSectorMenu = !state.isActivePubSectorMenu
     },
 
-    setStatusCursosMenuDesk(state){
-      state.isActiveCursosMenuDesk = !state.isActiveCursosMenuDesk
+    setStatusPrivSectorMenu(state){
+      state.isActivePrivSectorMenu = !state.isActivePrivSectorMenu
+    },
+
+    setStatusPubGradoMenu(state){
+      state.isActivePubGradoMenu = !state.isActivePubGradoMenu
     },
 
     setStatusHeaderShadow(state, status){
@@ -50,12 +56,16 @@ export const store = new Vuex.Store({
       commit('setStatusMenu')
     },
 
-    updateStatusCursosMenuMob: ({commit})=>{
-      commit('setStatusCursosMenuMob')
+    updateStatusPubSectorMenu: ({commit})=>{
+      commit('setStatusPubSectorMenu')
     },
 
-    updateStatusCursosMenuDesk: ({commit})=>{
-      commit('setStatusCursosMenuDesk')
+    updateStatusPrivSectorMenu: ({commit})=>{
+      commit('setStatusPrivSectorMenu')
+    },
+
+    updateStatusPubGradoMenu: ({commit})=>{
+      commit('setStatusPubGradoMenu')
     },
 
     updateStatusHeaderShadow: ({commit}, status)=>{

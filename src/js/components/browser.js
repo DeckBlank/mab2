@@ -17,7 +17,7 @@ Vue.component('browser',{
           @keyup.enter="search"
         >
       </div>
-      <div class="c-browser-result padding-horizontal-1 padding-top-1 position-absolute width-100 bg-white" :class="{ showed : (isActiveBrowser && (isLoadingBrowser || courses.length > 0 || videos.length > 0)) }">
+      <div class="c-browser-result f2 padding-horizontal-1 padding-top-1 position-absolute width-100 bg-white" :class="{ showed : (isActiveBrowser && (isLoadingBrowser || courses.length > 0 || videos.length > 0)) }">
         <div class="c-browser-result__loading text-center padding-bottom-1" :class="{ hide : !isLoadingBrowser }">Loading...</div>
         <ul class="c-browser-result__list ul-reset">
           <li class="c-browser-result__item padding-bottom-1" v-for="course of courses" :key="course.id">

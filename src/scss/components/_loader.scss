@@ -30,22 +30,22 @@
       }
 
       &:nth-child(2) {
-        background-color: $primary-color;
+        background-color: $secondary-color;
         animation-delay: 0.4s;
       }
 
       &:nth-child(3) {
-        background-color: $secondary-alt;
+        background-color: $success-color;
         animation-delay: 0.3s;
       }
 
       &:nth-child(4) {
-        background-color: $secondary-medium;
+        background-color: $warning-color;
         animation-delay: 0.2s;
       }
 
       &:nth-child(5) {
-        background-color: $secondary-dark;
+        background-color: $primary-alt;
         animation-delay: 0.1s;
       }
 

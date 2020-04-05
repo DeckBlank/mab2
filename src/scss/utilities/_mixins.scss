@@ -72,6 +72,30 @@
   }
 }
 
+//Triangle
+@mixin triangle($x: right, $y: top, $xdesp: 1rem, $ydesp: -80px,$t: 50px, $l: 50px, $r: 20px, $b: 30px) {
+  &::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: solid $t transparent;
+    border-left: solid $l transparent;
+    border-right: solid $r transparent;
+    border-bottom: solid $b $white;
+
+    @if $x == right and $y == top {
+      right: $xdesp;
+      top: $ydesp;
+    }
+
+    @else if $x == left and $y == top {
+      left: $xdesp;
+      top: $ydesp;
+    }
+  }
+}
+
 //Reset
 @mixin ul-reset {
   list-style: none;

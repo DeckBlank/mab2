@@ -18,7 +18,7 @@ const login = new Vue({
   },
   created(){
     if(this.logedUser){
-      window.location = this.SITE_URL;
+      window.location = `${this.SITE_URL}/emotional`;
     }
   },
   methods: {
@@ -52,7 +52,7 @@ const login = new Vue({
             this.isLoading = false
             this.isShowedErrorMessage = false
 
-            window.location = `${this.SITE_URL}`
+            window.location = `${this.SITE_URL}/emotional`
           })
           .catch(err => {
             this.isLoading = false

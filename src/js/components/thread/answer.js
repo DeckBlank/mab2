@@ -5,7 +5,7 @@ import './answer';
 
 Vue.component('answer',{
   template: /*html*/`
-    <div class="c-comment">
+    <div class="c-comment fs-18">
       <div class="flex-container align-middle margin-bottom-1">
         <div class="margin-right-1">
           <figure class="c-avatar c-avatar--small overflow-hidden rounded">
@@ -13,8 +13,8 @@ Vue.component('answer',{
           </figure>                  
         </div>
         <div class="flex-container align-middle">
-          <p class="margin-bottom-0 margin-right-1">{{body.comment_author}}</p>
-          <span class="c-comment__date gray-gray fs-14">{{(new Date(body.comment_date)).toLocaleDateString('es', { weekday: 'long', month: 'long', day: 'numeric' })}}</span>
+          <p class="margin-bottom-0 fs-18 margin-right-1">{{body.comment_author}}</p>
+          <span class="c-comment__date fs-16 gray-gray">{{(new Date(body.comment_date)).toLocaleDateString('es', { weekday: 'long', month: 'long', day: 'numeric' })}}</span>
         </div>
       </div>
       <div class="c-comment__body">

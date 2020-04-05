@@ -6,7 +6,7 @@ import './answer';
 
 Vue.component('comment',{
   template: /*html*/`
-    <div class="c-comment margin-bottom-2">
+    <div class="c-comment fs-18 margin-bottom-2">
       <div class="flex-container align-middle margin-bottom-1">
         <div class="margin-right-1">
           <figure class="c-avatar overflow-hidden rounded">
@@ -14,8 +14,8 @@ Vue.component('comment',{
           </figure>                  
         </div>
         <div class="flex-container align-middle">
-          <p class="margin-bottom-0 margin-right-1">{{body.author}}</p>
-          <span class="c-comment__date gray-gray fs-14">{{(new Date(body.date)).toLocaleDateString('es', { weekday: 'long', month: 'long', day: 'numeric' })}}</span>
+          <p class="margin-bottom-0 fs-18 margin-right-1">{{body.author}}</p>
+          <span class="c-comment__date gray-gray fs-16">{{(new Date(body.date)).toLocaleDateString('es', { weekday: 'long', month: 'long', day: 'numeric' })}}</span>
         </div>
       </div>
       <div class="c-comment__body">

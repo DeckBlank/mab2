@@ -5,27 +5,31 @@
 {% endblock %}
 
 {% block content %}
-  <section class="c-section c-section--course">
+  <section class="c-section c-section--course bg-pri-alt">
     <div class="grid-container padding-top-3 margin-bottom-2">
-      <section class="c-content" :class="{ active : isActiveCursosMenuDesk }">
-        <h1 class="c-title fs-35 sec-dark margin-bottom-1 padding-left-1">{{post.title}}</h1>
+      <section class="c-content" :class="{ active : isActivePubSectorMenu || isActivePrivSectorMenu }">
+        <h1 class="c-title f1 w-bold white margin-bottom-1 padding-left-1">{{post.title}}</h1>
         <ul class="ul-reset">
           {% for unity in unities %}          
             <li class="c-unity margin-bottom-1 br--medium" :class="{ active : isActiveUnity }">
               <h2 class="margin-bottom-0">
-                <button class="c-unity__title flex-container align-justify width-100" @click="isActiveUnity = !isActiveUnity">
-                  <p class="text-left margin-bottom-0 margin-right-1 w-bold fs-18 sec-gray">
-                    Unidad {{loop.index}}: <span>{{unity.title}}</span>
+                <button class="c-unity__toggle flex-container align-justify width-100" @click="isActiveUnity = !isActiveUnity">
+                  <p class="text-left margin-bottom-0 margin-right-1 w-bold fs-25 white">
+                    Unidad {{loop.index}}:
                   </p>
-                  <span class="c-icon display-block fs-21"><i class="far fa-chevron-down"></i></span>
+                  <span class="c-icon display-block white fs-21"><i class="far fa-chevron-down"></i></span>
                 </button>
               </h2>
-              <ul class="c-unity__topics ul-reset">
-                {% for topic in unity.topics %}
-                 
-                  <li class="c-topic">
+              <ul class="c-unity__topics position-relative ul-reset bg-white br--medium padding-1">
+                <li class="c-unity__title margin-bottom-1">
+                  <h3 class="fs-25 f2 dark-gray w-bold">{{unity.title}}</h3>
+                  <p class="margin-bottom-0 padding-left-2 fs-25 w-black">.....</p>
+                </li>
+
+                {% for topic in unity.topics %}                 
+                  <li class="c-topic f2 fs-21 dar-gray w-medium">
                     <a href="{{topic.link}}" class="c-topic__video flex-container align-justify align-middle">
-                      <p class="margin-bottom-0 flex-container align-middle black">
+                      <p class="margin-bottom-0 flex-container dark-gray align-middle">
                         <span class="c-icon margin-right-1 fs-21 pri-color"><i class="far fa-play-circle"></i></span>
                         {{topic.title}}
                       </p>
@@ -35,7 +39,7 @@
                       </p>
                     </a>
                     <a href="{{topic.summary}}" target="_blank" class="c-topic__video flex-container align-justify align-middle">
-                      <p class="margin-bottom-0 flex-container align-middle black">
+                      <p class="margin-bottom-0 flex-container align-middle dark-gray">
                         <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
                         {{topic.title}}
                       </p>

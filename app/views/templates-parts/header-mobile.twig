@@ -14,7 +14,7 @@
               {% if item.children %}
                 <label for="sector-{{loop.index}}" class="c-menu__item flex-container align-justify align-middle padding-1">
                   <a class="position-relative">{{ item.name }}</a>
-                  <span class="c-icon" @click="updateStatusCursosMenuMob"><i class="far fa-chevron-down"></i></span>
+                  <span class="c-icon"><i class="far fa-chevron-down"></i></span>
                 </label>              
                 <input id="sector-{{loop.index}}" type="checkbox" class="hide">
 
@@ -22,7 +22,7 @@
                   {% for child in item.children %}
                     <label for="grado-{{item.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
                       <a class="position-relative">{{child.name}}</a>
-                      <span class="c-icon white" @click=""><i class="far fa-chevron-down"></i></span>
+                      <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
                     </label>
                     <input id="grado-{{item.slug}}-{{loop.index}}" type="checkbox" class="hide">
 

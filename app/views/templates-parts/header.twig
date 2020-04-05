@@ -6,25 +6,29 @@
         </a>
       </figure>
       <ul class="c-menu flex-container ul-reset">
-        {% for item in [primary_menu.items[0], primary_menu.items[1], primary_menu.items[2]] %}
-          {% if item.slug == "cursos" %}              
-            <li>
-              <div class="c-menu__item" :class="{ active : isActiveCursosMenuDesk }">
-                <a class="position-relative flex-container align-middle" @click="updateStatusCursosMenuDesk">
-                  {{ item.name }}<span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
-                </a>
-              </div>
-            </li>
+        {% set home = primary_menu.items[0] %}
+        {% set sec_pub = primary_menu.items[1] %}
+        {% set sec_priv = primary_menu.items[2] %}
 
-          {% else %}              
-            <li>
-              <div class="c-menu__item">
-                <a href="{{ item.link }}" class="position-relative">{{ item.name }}</a>
-              </div>
-            </li>
-
-          {% endif %}
-        {% endfor %}
+        <li>
+          <div class="c-menu__item">
+            <a href="{{ home.link }}" class="position-relative">{{ home.name }}</a>
+          </div>
+        </li>
+        <li>
+          <div class="c-menu__item">
+            <a class="position-relative flex-container align-middle" @click="updateStatusPubSectorMenu">
+              {{ sec_pub.name }}<span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
+            </a>
+          </div>
+        </li> 
+        <li>
+          <div class="c-menu__item">
+            <a class="position-relative flex-container align-middle" @click="updateStatusPrivSectorMenu">
+              {{ sec_priv.name }}<span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
+            </a>
+          </div>
+        </li>
       </ul>        
     </div>
     <div class="c-nav__center flex-container align-center-middle bg-warning" :class="{ visible : isActiveBrowserToggle }">
@@ -37,15 +41,15 @@
       </ul>
       <browser></browser>
     </div>
-    <div class="c-nav__right flex-container align-middle height-100">
-      <button class="c-search-toggle black margin-right-1" @click="updateStatusBrowserToggle">
+    <div class="c-nav__right position-relative flex-container align-middle height-100">
+      <button class="c-search-toggle margin-right-1 white" @click="updateStatusBrowserToggle">
         <span><i class="far fa-search"></i></span>
       </button>
       <profile v-if="logedUser"></profile>
       <a 
         v-else 
         href="{{site.url}}/login" 
-        class="c-login position-relative flex-container align-center-middle height-100 w-bold white">INGRESAR</a>
+        class="c-login flex-container f2 fs-18 align-center-middle height-100 w-bold white">INGRESAR</a>
     </div>      
   </nav>
 </header>

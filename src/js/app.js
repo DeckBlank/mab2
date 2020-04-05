@@ -27,8 +27,10 @@ function baseState(){
     'SITE_URL', 
     'logedUser',
     'isActiveMenu', 
-    'isActiveCursosMenuMob', 
-    'isActiveCursosMenuDesk',
+    'isActivePubSectorMenu', 
+    'isActivePrivSectorMenu',
+    'isActivePubGradoMenu',
+    'isActivePrivGradoMenu',
     'isHeaderWithShadow',
     'isActiveBrowserToggle'
   ])
@@ -36,8 +38,10 @@ function baseState(){
 
 function baseActions(){
   return {...Vuex.mapActions([
-      'updateStatusCursosMenuMob', 
-      'updateStatusCursosMenuDesk',
+      'updateStatusPubSectorMenu', 
+      'updateStatusPrivSectorMenu',
+      'updateStatusPubGradoMenu',
+      'updateStatusPrivGradoMenu',
       'updateStatusHeaderShadow',
       'updateStatusBrowserToggle'
     ]),

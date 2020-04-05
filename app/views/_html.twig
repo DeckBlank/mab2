@@ -3,25 +3,69 @@
 
   {% include '_html-head.twig' %}
 
-  <body>
-    <main class="c-main position-relative" id="app" data-site="{{site.url}}">
+  <body class="{% if post.post_type == 'course' %} bg-pri-alt {% endif %}">
+    <main class="c-main position-relative overflow-hidden" id="app" data-site="{{site.url}}">
       {% block hero %}
         {# Content #}
       {% endblock %}
       
-      <div class="c-cursos bg-white" :class="{ active : isActiveCursosMenuDesk }">
+      <div class="c-cursos bg-medium-gray position-fixed" :class="{ active : isActivePubSectorMenu }">
+        <h2 class="c-cursos__title margin-bottom-1 w-black dark">PUBLICO</h2>
         <ul class="c-cursos__list ul-reset">
-          {% for item in primary_menu.items %}
-            {% if item.slug == "cursos" %}
-              {% for course in item.children %}
-                <li class="c-cursos__item fs-25 f2 {% if post.slug == course.slug %} active {% endif %}">
-                  <a href="{{course.link}}" class="display-block">{{course.title}}</a>
-                </li>
-              {% endfor %}
-            {% endif %}          
+          {% for item in [1,2,3,4,5,6] %}
+            <li class="c-cursos__item fs-25 f2">
+              <a class="display-block" @click="updateStatusPubGradoMenu">{{loop.index}} Grado</a>
+            </li>         
           {% endfor %}
         </ul>
-      </div>  
+      </div>
+
+      <div class="c-cursos bg-medium-gray position-fixed" :class="{ active : isActivePubGradoMenu }">
+        <h2 class="c-cursos__title margin-bottom-1 w-black dark">1 GRADO</h2>
+        <ul class="c-cursos__list ul-reset">
+          <li class="c-cursos__item fs-25 f2">
+            <a class="flex-container align-middle" @click="updateStatusPubGradoMenu">
+              <span class="c-icon margin-right-1"><i class="far fa-arrow-left"></i></span>
+              Volver
+            </a>
+          </li>
+
+          {% for item in [1,2,3,4,5,6,6,6,6,6,6,6] %}
+            <li class="c-cursos__item fs-25 f2">
+              <a href="{{item.link}}" class="display-block">{{loop.index}} Curso</a>
+            </li>         
+          {% endfor %}
+        </ul>
+      </div>
+      
+      <div class="c-cursos bg-medium-gray position-fixed" :class="{ active : isActivePrivSectorMenu }">
+        <h2 class="c-cursos__title margin-bottom-1 w-black dark">PRIVADO</h2>
+        <ul class="c-cursos__list ul-reset">
+          {% for item in [1,2,3,4,5,6] %}
+            <li class="c-cursos__item fs-25 f2">
+              <a class="display-block" @click="updateStatusPrivGradoMenu">{{loop.index}} Grado</a>
+            </li>         
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div class="c-cursos bg-medium-gray position-fixed" :class="{ active : isActivePrivGradoMenu }">
+        <h2 class="c-cursos__title margin-bottom-1 w-black dark">2 GRADO</h2>
+        <ul class="c-cursos__list ul-reset">
+          <li class="c-cursos__item fs-25 f2">
+            <a class="flex-container align-middle" @click="updateStatusPrivGradoMenu">
+              <span class="c-icon margin-right-1"><i class="far fa-arrow-left"></i></span>
+              Volver
+            </a>
+          </li>
+
+          {% for item in [1,2,3,4,5,6,6,6,6,6,6,6] %}
+            <li class="c-cursos__item fs-25 f2">
+              <a href="{{item.link}}" class="display-block">{{loop.index}} Curso</a>
+            </li>         
+          {% endfor %}
+        </ul>
+      </div>
 
       {% block content %}
         {# Content #}

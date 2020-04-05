@@ -12,7 +12,6 @@
       }
 
       .c-card-video__play {
-        opacity: 1;
         transform: scale(1);
       }
     }
@@ -28,9 +27,13 @@
     height: 50px;
     font-size: 3rem;
     color: $white;
-    opacity: 0;
     transform: scale(0.9);
 
     @include transition(0.3s);
+  }
+
+  &__title::first-line {
+    font-weight: $regular-font;
+    line-height: 0.8;
   }
 }

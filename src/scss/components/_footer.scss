@@ -1,40 +1,32 @@
 .c-footer {
-  margin-bottom: 5rem;
-  background-image: url('../images/vectors/icons.png');
-  background-position: calc(100% - 1rem) center;
-  background-repeat: no-repeat;
-
   &__content {
     flex-wrap: wrap;
+    margin-bottom: 5rem;
   }
 
-  .c-social-media {
+  .c-vectors {
     width: 100%;
-    margin-bottom: 1rem;
     justify-content: center;
 
-    &__link {
-      margin: 0 0.5rem;
-      width: 40px;
-      height: 40px;
-      background-color: $dark;
-      color: $white;
-
-      @include transition(0.25s);
-
-      &:hover {
-        background-color: $primary-color;
-        color: $white;
-      }
+    &__item {
+      width: 50px;
+      height: 50px;
+      margin: 0 0.25rem;
     }
   }
 
   .c-contacts {
     width: 100%;
     justify-content: center;
+    margin-bottom: 1rem;
 
     .c-contact {
       margin: 0 0.5rem;
+    }
+
+    .c-contact:first-child {
+      padding-right: 2rem;
+      border-right: solid 2px $white;
     }
   }
 }
@@ -47,26 +39,33 @@
 
 @include breakpoint(large) {
   .c-footer {
-    margin-bottom: 0;
-
     &__content {
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
+      margin-bottom: 0;
     }
 
-    .c-social-media,
+    .c-vectors,
     .c-contacts {
       width: auto;
       margin: 0 0.5rem;
     }
 
-    .c-social-media {
+    .c-vectors {
       margin-bottom: 0;
+
+      &__item:last-child {
+        margin-right: 0;
+      }
     }
 
     .c-contacts {
       .c-contact {
         margin: 0 1rem;
+      }
+
+      .c-contact:first-child {
+        margin-left: 0;
       }
     }
   }

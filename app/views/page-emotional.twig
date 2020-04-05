@@ -26,13 +26,13 @@
                 :disabled="filterOptions.length == 0"
               >
                 <span class="margin-right-1"><i class="far fa-times-circle fs-21"></i></span>
-                Limpiar filtros
+                LIMPIAR FILTROS
               </button>
               <ul class="c-list ul-reset fs-18">
                 {% for category in video_categories %}
-                  <li class="c-list__item dark flex-container align-middle">
+                  <li class="c-list__item position-relative dark flex-container align-middle">
                     <input id="category-{{loop.index}}" value="{{category.slug}}" type="checkbox" class="hide" v-model="filterOptions">
-                    <label for="category-{{loop.index}}" class="c-option fs-18 align-middle width-100">
+                    <label for="category-{{loop.index}}" class="c-option f2 fs-18 align-middle width-100">
                       <div class="c-option__checkbox position-relative margin-right-1 br--small">
                       </div>
                       {{category.name}}
@@ -45,7 +45,7 @@
         </div>      
       </div>      
       <div class="c-banner__content grid-container">
-        <a href="" class="c-banner-video position-relative display-block overflow-hidden br--medium margin-bottom-3">
+        <a href="" class="c-banner-video position-relative display-block br--medium margin-bottom-3">
           <img class="width-100 height-100 of--cover" src="{{theme.link}}/static/images/example.jpg" alt="">
           <div class="c-banner-video__play position-absolute flex-container align-center-middle">
             <span class="c-icon"><i class="far fa-play"></i></span>
@@ -53,7 +53,9 @@
         </a>
         <div class="grid-x align-center">
           <div class="cell medium-8 large-6">
-            <p class="white text-center fs-18">Accede a todo nuestro contenido online gratuito y pago. Comienza aprender con mab desde cualquier lugar</p>
+            <p class="white f2 text-center fs-21">
+              Accede a todo nuestro contenido online gratuito y pago. Comienza aprender de donde quiera que estes con Mab
+            </p>
           </div>
         </div>
       </div>
