@@ -11,8 +11,12 @@
     }
   }
 
+  .c-course {
+    font-size: 60px;
+  }
+
   .c-content {
-    @include triangle(left, top, 8rem, -80px, 50px, 20px, 50px);
+    @include triangle(left, top, 10rem, -80px, 50px, 20px, 50px);
   }
 
   .c-download {

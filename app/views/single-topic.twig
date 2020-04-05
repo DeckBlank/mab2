@@ -9,9 +9,8 @@
     <div class="grid-container padding-vertical-3">
       <div class="grid-x align-center">
         <div class="cell medium-10 large-8">
-          <h2 class="c-course white">CASTELLANO</h2>
-          <h2 class="c-unity fs-30 f2 w-bold white">UNIDAD 1:</h2>
-
+          <h2 class="c-course w-bold white">CASTELLANO</h2>
+          <h2 class="c-unity fs-30 f2 w-bold white margin-bottom-2">UNIDAD 1:</h2>
           <section class="c-content position-relative br--medium bg-white">
             <h1 class="c-title fs-40 f1 w-bold dark-gray margin-bottom-2">
               <p>
@@ -24,9 +23,9 @@
                 <figure class="c-avatar margin-right-1 overflow-hidden rounded">
                   <img src="{{author.avatar.sizes['thumbnail']}}" alt="">
                 </figure>
-                <p class="margin-bottom-0 fs-18 f2 dark">{{author.first_name}} {{author.last_name}}</p>
+                <p class="margin-bottom-0 fs-21 w-medium f2 dark">{{author.first_name}} {{author.last_name}}</p>
               </div>
-              <div class="c-details__label f2 fs-18 flex-container align-middle">
+              <div class="c-details__label  f2 fs-21 flex-container align-middle">
                 <span class="c-icon fs-21"><i class="far fa-lock"></i></span>
                 <p class="margin-left-1 margin-bottom-0">Contenido pagado</p>
               </div>        
@@ -38,16 +37,16 @@
                 <div class="margin-right-2">
                   <Likes :average="likesAverage" :target="{ id : {{post.id}}, type: 'topic' }"></Likes>
                 </div>
-                <a href="{{summary}}" target="_blank" class="c-download flex-container align-middle">
+                <a href="{{summary}}" target="_blank" class="c-download f2 fs-18 w-medium flex-container align-middle">
                   <span class="c-icon margin-right-1"><i class="far fa-download"></i></span>
                   Descargar resumen
                 </a>
               </div>
-              <button class="c-questions-toggle c-button c-button--secondary-light flex-container align-middle" @click="isOpenedQuestionsModal = true">
+              <button class="c-questions-toggle c-button  f2 fs-18 w-medium c-button--primary flex-container align-middle" @click="isOpenedQuestionsModal = true">
                 <p class="margin-bottom-0">Preguntas</p>
               </button>
             </div>
-            <div class="c-comments margin-bottom-2">
+            <div class="c-comments f2 margin-bottom-2">
               <div class="c-counter flex-container align-middle margin-bottom-2">
                 <span class="c-counter__icon"><i class="far fa-comment-lines fs-21"></i></span>
                 <p v-if="comments.number > 1 || comments.number == 0" class="margin-bottom-0 gray-gray">${comments.number} comentarios</p>
