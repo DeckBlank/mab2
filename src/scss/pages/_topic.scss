@@ -1,4 +1,24 @@
 .c-section--topic {
+  .c-title {
+    p {
+      &:first-child {
+        margin-bottom: -1rem;
+      }
+
+      &:last-child {
+        letter-spacing: 0.6rem;
+      }
+    }
+  }
+
+  .c-course {
+    font-size: 60px;
+  }
+
+  .c-content {
+    @include triangle(left, top, 10rem, -80px, 50px, 20px, 50px);
+  }
+
   .c-download {
     color: $secondary-alt;
 

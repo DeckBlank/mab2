@@ -1,6 +1,6 @@
 .c-button {
   font-size: $fs-16;
-  padding: 0.7rem 1rem;
+  padding: 0.5rem 1rem;
 
   @include b-radious(5px);
   @include transition(0.25s);
