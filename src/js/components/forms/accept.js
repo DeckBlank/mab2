@@ -10,9 +10,10 @@ Vue.component('form-accept',{
           <div class="cell medium-8 large-6">
             <div class="c-modal__content flex-container align-middle">
               <div class="c-accept bg-success modal-content padding-2 br--medium">
-                <p>Gracias por dejar tu datos. Ahora ya puedes continuar a nuestros cursos</p>
+                <p>Gracias por dejar tus datos.
+                </p>
                 <div class="modal_btn_container">
-                  <a :href="SITE_URL + '/emotional'">Ingresar</a>
+                  <a :href="SITE_URL + '/emotional'">¡Bienvenido!</a>
                 </div>
               </div>    
             </div>
