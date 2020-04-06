@@ -39,6 +39,15 @@
   }
 
   .c-questions {
+    &__title {
+      &::first-line {
+        font-family: $font-family-secondary;
+        font-weight: $regular-font;
+        line-height: 0.8;
+        font-size: $fs-50;
+      }
+    }
+
     &__list {
       .swiper-wrapper {
         align-items: center;
