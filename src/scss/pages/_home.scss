@@ -982,18 +982,20 @@
   
   }
 }
-@media (max-width:338px){
-  .c-section--home {
-    .footer_left{
-      font-size: 16px
-    }
-  }
-}
+
 
 @media (max-width:375px){
   .c-section--home {
     .footer_left{
-      font-size: 15px
+      font-size: 19px
+    }
+  }
+}
+
+@media (max-width:330px){
+  .c-section--home {
+    .footer_left{
+      font-size: 16px
     }
   }
 }
