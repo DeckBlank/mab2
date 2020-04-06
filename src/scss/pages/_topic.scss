@@ -154,7 +154,29 @@
     }
 
     .c-modal {
-      background-image: url('../images/vectors/topic/left-hand.png');
+      &::after {
+        content: '';
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        top: 40%;
+        left: 0;
+        background-size: contain;
+        background-image: url('../images/vectors/topic/left-hand.png');
+        background-repeat: no-repeat;
+      }
+
+      &::before {
+        content: '';
+        width: 200px;
+        height: 200px;
+        position: absolute;
+        bottom: 10%;
+        right: 0;
+        background-size: contain;
+        background-image: url('../images/vectors/topic/right-hand.png');
+        background-repeat: no-repeat;
+      }
 
       &__content {
         @include triangle(left, bottom, -70px, 3rem, 70px, 20px, 70px);
