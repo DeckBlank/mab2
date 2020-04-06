@@ -450,7 +450,7 @@
   }
   .mab_contact_social li a{
     text-decoration: none;
-    color: #fff;
+    color: #000;
     font-size: 70px;
   }
   .mab_contact_social li a img {
@@ -483,7 +483,6 @@
 
   .title_block{
     margin-bottom: 63px;
-    height: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -583,6 +582,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  .footer_left{
+    font-size: 20px;
   }
   .footer_left span {
     padding: 0 15px;
@@ -853,7 +855,7 @@
         font-size: 19px
     }
     .form_section .title_block{
-        margin-bottom: 0
+        margin-bottom: 35px
     }
   
     footer {
@@ -882,6 +884,7 @@
     .footer_list li{
         width: 30px;
         height: 30px;
+        margin: 0 5px 8px;
     }
   
     .form_box .input_container label{
@@ -962,5 +965,35 @@
   .mab_boxes_item .box_content{
     font-size: 20px;
   }
+
+  .init_mabClick{
+    margin-bottom: 0;
+    margin-top: 30px;
+  }
+  .init_logo{
+    margin-top: 130px;
+  }
+  .footer_left{
+    font-size: 20px
+  }
+  .footer_left span{
+    padding: 0 0px;
+  }
+  
+  }
+}
+@media (max-width:338px){
+  .c-section--home {
+    .footer_left{
+      font-size: 16px
+    }
+  }
+}
+
+@media (max-width:375px){
+  .c-section--home {
+    .footer_left{
+      font-size: 15px
+    }
   }
 }
