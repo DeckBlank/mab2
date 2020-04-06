@@ -1,7 +1,7 @@
 .c-toggle {
   bottom: 1rem;
   right: 1rem;
-  z-index: 90000;
+  z-index: 1000;
   background: $primary-color;
 
   @include b-radious(10px);

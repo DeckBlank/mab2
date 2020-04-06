@@ -2,10 +2,9 @@
   top: 0;
   left: 0;
   z-index: 2000;
-  background-color: rgba($black, 0.5);
+  background-color: rgba($primary-alt, 0.85);
   visibility: hidden;
   opacity: 0;
-  overflow-y: auto;
 
   @include transition(0.3s);
 
@@ -13,11 +12,18 @@
     padding: 1rem;
     visibility: hidden;
     opacity: 0;
+    height: 89vh;
     transform: translateY(20px);
 
     @include transition(0.3s);
 
     transition-delay: 0.3s;
+  }
+
+  &__body {
+    height: 100%;
+    flex-grow: 1;
+    overflow-y: auto;
   }
 }
 

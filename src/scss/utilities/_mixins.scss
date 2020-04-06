@@ -79,19 +79,32 @@
     position: absolute;
     width: 0;
     height: 0;
-    border-top: solid $t transparent;
-    border-left: solid $l transparent;
-    border-right: solid $r transparent;
-    border-bottom: solid $b $white;
 
     @if $x == right and $y == top {
       right: $xdesp;
       top: $ydesp;
+      border-top: solid $t transparent;
+      border-left: solid $l transparent;
+      border-right: solid $r transparent;
+      border-bottom: solid $b $white;
     }
 
     @else if $x == left and $y == top {
       left: $xdesp;
       top: $ydesp;
+      border-top: solid $t transparent;
+      border-left: solid $l transparent;
+      border-right: solid $r transparent;
+      border-bottom: solid $b $white;
+    }
+
+    @else if $x == left and $y == bottom {
+      left: $xdesp;
+      bottom: $ydesp;
+      border-top: solid $t transparent;
+      border-left: solid $l transparent;
+      border-right: solid $r $white;
+      border-bottom: solid $b transparent;
     }
   }
 }

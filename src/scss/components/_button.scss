@@ -50,7 +50,7 @@
   }
 
   &--ghost-secondary {
-    border: solid 1px $black;
+    border: solid 2px $black;
     color: $black;
 
     &:hover,
@@ -61,7 +61,7 @@
   }
 
   &--ghost {
-    border: solid 1px $primary-color;
+    border: solid 2px $primary-color;
     color: $black;
 
     .c-icon {
@@ -82,13 +82,24 @@
   }
 
   &--ghost-primary {
-    border: solid 1px $primary-color;
+    border: solid 2px $primary-color;
     color: $primary-color;
 
     &:hover,
     &:focus {
       color: $white;
       background-color: $primary-color;
+    }
+  }
+
+  &--ghost-gray {
+    border: solid 2px $gray;
+    color: $gray;
+
+    &:hover,
+    &:focus {
+      color: $white;
+      background-color: $gray;
     }
   }
 }

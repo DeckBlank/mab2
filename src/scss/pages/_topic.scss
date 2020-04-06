@@ -17,6 +17,18 @@
 
   .c-content {
     @include triangle(left, top, 10rem, -80px, 50px, 20px, 50px);
+
+    &::before {
+      content: '';
+      width: calc(220px - 50px);
+      height: calc(126px - 50px);
+      position: absolute;
+      top: calc(-126px + 50px);
+      right: -1rem;
+      background-size: contain;
+      background-image: url('../images/vectors/topic/bolbs.png');
+      background-repeat: no-repeat;
+    }
   }
 
   .c-download {
@@ -44,7 +56,7 @@
         font-family: $font-family-secondary;
         font-weight: $regular-font;
         line-height: 0.8;
-        font-size: $fs-50;
+        font-size: $fs-40;
       }
     }
 
@@ -78,6 +90,20 @@
       transform: translateX(-10px);
 
       @include transition(0.3s);
+
+      .c-icon {
+        width: 30px;
+        height: 30px;
+        border: solid 2px transparent;
+      }
+
+      &--right .c-icon {
+        border-color: $success-color;
+      }
+
+      &--wrong .c-icon {
+        border-color: $alert-color;
+      }
     }
 
     &__result.showed {
@@ -88,9 +114,6 @@
   }
 
   .c-question {
-    overflow-y: auto;
-    height: 200px;
-
     &__item input:checked + .c-option .c-option__checkbox {
       border-color: $secondary-alt;
       background-color: $secondary-alt;
@@ -112,13 +135,30 @@
 
 @include breakpoint(large) {
   .c-section--topic {
-    .c-question {
-      height: 220px;
+    .c-content {
+      &::before {
+        width: 220px;
+        height: 126px;
+        top: -126px;
+        right: 1rem;
+      }
     }
+  }
+}
 
+@include breakpoint(large) {
+  .c-section--topic {
     .c-questions-toggle {
       margin-top: 0;
       width: auto;
+    }
+
+    .c-modal {
+      background-image: url('../images/vectors/topic/left-hand.png');
+
+      &__content {
+        @include triangle(left, bottom, -70px, 3rem, 70px, 20px, 70px);
+      }
     }
   }
 }

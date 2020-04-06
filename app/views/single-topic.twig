@@ -77,79 +77,92 @@
         </div>
       </div>
     </div>
-    <section v-if="questions.length > 0" class="c-modal position-fixed width-100 height-100" :class="{ opened : true }">
+    <section v-if="questions.length > 0" class="c-modal position-fixed width-100 height-100 padding-vertical-2" :class="{ opened : true }">
       <div class="grid-container height-100">
         <div class="grid-x align-center-middle height-100">
           <div class="cell medium-10 large-8">
-            <div class="c-modal__content questions br--medium bg-white">
+            <div class="c-modal__content position-relative flex-container flex-dir-column questions br--medium bg-white">
               <div class="flex-container align-right margin-bottom-1">
                 <button @click="isOpenedQuestionsModal = false">
                   <span class="c-icon fs-30"><i class="far fa-times"></i></span>
                 </button>
               </div>
-              <h2 class="c-questions__title f1 dark-gray fs-25 w-bold margin-bottom-2 text-center fs-60">{{post.title}}</h2>
-              <p class="c-questions__progress fs-18 sec-dark text-center margin-bottom-2">
-                <span>${currentQuestion}</span> de <span>${questions.length}</span>
-              </p>
-              <swiper ref="slider_questions" class="c-questions__list margin-bottom-1" :options="swiperOptions">                
-                <swiper-slide v-for="(q_, qindex) of questions" :key="q_.id">
-                  <h3 class="fs-18 dark margin-bottom-2">${q_.question.title}</h3>                  
-                  <ul class="c-question ul-reset">
-                    <li 
-                      class="c-question__item dark flex-container align-middle margin-bottom-1" 
-                      v-for="(o_, oindex) of q_.question.options" :key="o_.id">
-                      <input 
-                        :id="'option-' + qindex + oindex" 
-                        :name="'question-' + qindex"
-                        :value="oindex + 1" 
-                        type="radio" 
-                        class="hide"                       
-                        v-model="testResult[qindex].value"
-                        @change="verifyOptionSelected(qindex)"
-                        :disabled="testResult[qindex].value != ''"
-                      >
-                      <label 
-                        :for="'option-' + qindex + oindex" 
-                        class="c-option fs-18 align-middle width-100"
-                      >
-                        <div class="c-option__checkbox position-relative margin-right-1 rounded">
-                        </div>
-                        <p class="margin-bottom-0 black">                      
-                          ${o_.option}
-                        </p>
-                      </label>
-                    </li>
-                  </ul>
-                </swiper-slide>
-                <swiper-slide>
-                  <div class="flex-container flex-dir-column align-center-middle height-100">
-                    <p class="sec-alt fs-18 flex-container align-middle">
-                      <span class="fs-35 margin-right-1">${totalRightAnswers}</span> Respuesta(s) correctas <span class="c-icon fs-35 margin-left-1"><i class="far fa-check"></i></span>
+              <section class="c-modal__body padding-vertical-1">
+                <h2 class="c-questions__title f1 text-uppercase dark-gray fs-25 w-bold margin-bottom-2 text-center fs-60">{{post.title}}</h2>
+                <swiper ref="slider_questions" class="c-questions__list margin-bottom-1" :options="swiperOptions">                
+                  <swiper-slide v-for="(q_, qindex) of questions" :key="q_.id">
+                    <h3 class="fs-21 f2 dark-gray w-bold  margin-bottom-2">${q_.question.title}</h3>                  
+                    <ul class="c-question f2 w-medium ul-reset">
+                      <li 
+                        class="c-question__item dark flex-container align-middle margin-bottom-1" 
+                        v-for="(o_, oindex) of q_.question.options" :key="o_.id">
+                        <input 
+                          :id="'option-' + qindex + oindex" 
+                          :name="'question-' + qindex"
+                          :value="oindex + 1" 
+                          type="radio" 
+                          class="hide"                       
+                          v-model="testResult[qindex].value"
+                          @change="verifyOptionSelected(qindex)"
+                          :disabled="testResult[qindex].value != ''"
+                        >
+                        <label 
+                          :for="'option-' + qindex + oindex" 
+                          class="c-option fs-18 align-middle width-100"
+                        >
+                          <div class="c-option__checkbox position-relative margin-right-1 rounded">
+                          </div>
+                          <p class="margin-bottom-0 black">                      
+                            ${o_.option}
+                          </p>
+                        </label>
+                      </li>
+                    </ul>
+                  </swiper-slide>
+                  <swiper-slide>
+                    <div class="flex-container f2 flex-dir-column align-center-middle height-100">
+                      <div class="margin-bottom-2">
+                        <h4 class="f2 fs-25 w-bold dark-gray">Resultado</h4>
+                        <figure class="margin-bottom-1 text-center">
+                          <img src="{{theme.link}}/static/images/vectors/topic/apple.png" alt="">
+                        </figure>
+                      </div>
+                      <p class="sec-alt fs-21 w-medium flex-container align-middle">
+                        <span class="fs-35 margin-right-1">${totalRightAnswers}</span> Respuesta(s) correctas <span class="c-icon fs-35 margin-left-1"><i class="far fa-check"></i></span>
+                      </p>
+                      <p class="alert fs-21 w-medium flex-container align-middle margin-bottom-0">
+                        <span class="fs-35 margin-right-1">${totalWrongAnswers}</span> Respuesta(s) correctas <span class="c-icon fs-35 margin-left-1"><i class="far fa-times"></i></span>
+                      </p>
+                    </div>
+                  </swiper-slide>
+                </swiper>              
+                <div class="flex-container align-middle align-justify">
+                  <div class="flex-container f2 position-relative width-50">
+                    <p class="c-questions__result c-questions__result--right flex-container margin-bottom-0 success fs-18" :class="{ showed : (testResult[currentQuestion - 1].isRight && !testDone) }">
+                      <span class="c-icon flex-container align-center-middle rounded margin-right-1"><i class="far fa-check"></i></span>
+                      Es correcto
                     </p>
-                    <p class="alert fs-18 flex-container align-middle margin-bottom-0">
-                      <span class="fs-35 margin-right-1">${totalWrongAnswers}</span> Respuesta(s) correctas <span class="c-icon fs-35 margin-left-1"><i class="far fa-times"></i></span>
+                    <p class="c-questions__result c-questions__result--wrong flex-container margin-bottom-0 alert fs-18 position-absolute width-100 height-100" :class="{ showed : (!testResult[currentQuestion - 1].isRight && testResult[currentQuestion - 1].value && !testDone) }">
+                      <span class="c-icon flex-container align-center-middle rounded margin-right-1"><i class="far fa-times"></i></span>
+                      Es incorrecto
                     </p>
                   </div>
-                </swiper-slide>
-              </swiper>              
-              <div class="flex-container align-middle align-justify">
-                <div class="flex-container position-relative width-50">
-                  <p class="c-questions__result margin-bottom-0 sec-alt fs-18" :class="{ showed : (testResult[currentQuestion - 1].isRight && !testDone) }">
-                    <span class="c-icon margin-right-1"><i class="far fa-check"></i></span>
-                    Es correcto
-                  </p>
-                  <p class="c-questions__result margin-bottom-0 alert fs-18 position-absolute width-100 height-100" :class="{ showed : (!testResult[currentQuestion - 1].isRight && testResult[currentQuestion - 1].value && !testDone) }">
-                    <span class="c-icon margin-right-1"><i class="far fa-times"></i></span>
-                    Es incorrecto
-                  </p>
+                  <div class="flex-container align-middle">
+                    <button class="flex-container align-center-middle dark-gray" @click="changeQuestion" :class="{ enable: isEnableChange, hide: testDone }" :disabled="!isEnableChange">
+                      <span class="c-icon"><i class="far fa-chevron-left"></i></span>
+                    </button>                       
+                    <p class="c-questions__progress margin-bottom-0 fs-18 f2 w-medium dark-gray text-center margin-horizontal-1">
+                      <span>${currentQuestion}</span> de <span>${questions.length}</span>
+                    </p>
+                    <button class="flex-container align-center-middle dark-gray" @click="changeQuestion" :class="{ enable: isEnableChange, hide: testDone }" :disabled="!isEnableChange">
+                      <span class="c-icon"><i class="far fa-chevron-right"></i></span>
+                    </button>                                   
+                  </div>
+                  <button class="c-button c-button--ghost-gray f2 w-medium flex-container align-center-middle br--medium dark" @click="restartTest" :class="{ enable: isEnableChange, hide : !testDone }">
+                    <span class="c-icon margin-right-1"><i class="far fa-undo-alt"></i></span>Intentar de nuevo
+                  </button>
                 </div>
-                <button class="c-questions__change flex-container align-center-middle br--medium dark" @click="changeQuestion" :class="{ enable: isEnableChange, hide: testDone }" :disabled="!isEnableChange">
-                  <span class="c-icon"><i class="far fa-chevron-right"></i></span>
-                </button>
-                <button class="c-button bg-light-gray flex-container align-center-middle br--medium dark" @click="restartTest" :class="{ enable: isEnableChange, hide : !testDone }">
-                  <span class="c-icon margin-right-1"><i class="far fa-undo-alt"></i></span>Intentar de nuevo
-                </button>
-              </div>
+              </section>
             </div>
           </div>
         </div>
