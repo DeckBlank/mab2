@@ -33,7 +33,7 @@
       padding-top: 0.5rem;
       padding-bottom: 0.5rem;
 
-      @include triangle();
+      @include triangle(right, top, 1rem, -30px, 0);
       @include transition(0.3s);
     }
 
@@ -132,7 +132,7 @@
         top: 0;
         left: -1rem;
         margin: auto;
-        transform: skewX(10deg);
+        transform: skewX(-10deg);
       }
     }
 
@@ -286,6 +286,11 @@
     justify-content: flex-start;
 
     &__right {
+      &::after {
+        width: 0;
+        height: 0;
+      }
+
       .c-menu .c-menu__item + input:checked + .c-submenu {
         padding: 0.5rem 0 0.5rem 1rem;
         visibility: visible;
@@ -316,6 +321,8 @@
       .c-submenu .c-submenu__item > a {
         color: $white;
         padding: 0.5rem 0;
+        font-family: $font-family-secondary;
+        font-size: $fs-18;
       }
     }
 

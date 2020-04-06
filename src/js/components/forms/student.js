@@ -93,11 +93,13 @@ Vue.component('form-student',{
       </div>
       <div class="input_container">
         <label for="">Grado escolar</label>
-        <input 
-          class="c-form-box__input input-reset" 
+        <select 
+          class="c-form-box__select select-reset"
           :class="{ valid : grade.isValid }"
-          type="number"
           v-model="grade.value">
+          <option disabled value="" selected>Selecciona una opción</option>
+          <option v-for="_grade of grades" :key="_grade.id" :value="_grade" >{{_grade}}</option>
+        </select>
       </div>
       <div class="input_container">
         <label for="">Edad</label>
@@ -159,7 +161,6 @@ Vue.component('form-student',{
       },    
       grade: {
         value: '',
-        pattern: '^([0-9]+)$',
         isValid: false
       },
       age: {
@@ -175,13 +176,13 @@ Vue.component('form-student',{
   watch: {
     ...baseWatch(),
     'grade.value': function(){
-      this.grade.isValid = this.validateText(this.grade)
+      this.validateSelect(this.grade)
     },
     'age.value': function(){
       this.age.isValid = this.validateText(this.age)
     },
     'school.value': function(value){
-      this.validateSelect(this.school)   
+      this.validateSelect(this.school)
     }
   },  
   methods: {

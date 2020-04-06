@@ -8,7 +8,7 @@ Vue.component('form-accept',{
       <div class="grid-container height-100">
         <div class="grid-x align-center-middle height-100">
           <div class="cell medium-8 large-6">
-            <div class="c-modal__content flex-container align-middle">
+            <div class="c-modal__content flex-container align-center-middle">
               <div class="c-accept bg-success modal-content padding-2 br--medium">
                 <p>Gracias por dejar tus datos.
                 </p>

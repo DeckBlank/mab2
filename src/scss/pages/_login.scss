@@ -1,4 +1,10 @@
 .c-section--login {
+  .c-content {
+    padding: 2rem;
+
+    @include triangle(right, top, 3rem, -30px, 0);
+  }
+
   .error-message {
     display: none;
   }
@@ -11,6 +17,26 @@
     &:disabled {
       opacity: 0.5;
       cursor: no-drop;
+    }
+  }
+
+  .c-social-media {
+    margin: 0 0.5rem;
+
+    a {
+      color: $primary-color;
+
+      &:hover {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-section--login {
+    .c-content {
+      padding: 3rem;
     }
   }
 }

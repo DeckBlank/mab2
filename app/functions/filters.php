@@ -18,5 +18,9 @@ add_filter('timber/context', function($context) {
         "email" => get_field('email', 'options')
     ];
 
+    $context['public_sector'] = Timber::get_terms([
+        "taxonomy" => "tax-course"
+    ]);
+    
     return $context;
 });

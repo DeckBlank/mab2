@@ -8,6 +8,20 @@ function baseData(){
     //Schools
     ugels: [],
     schools: [],
+    grades: [
+      "1RO PRIMARIA",
+      "2DO PRIMARIA",
+      "3RO PRIMARIA",
+      "4TO PRIMARIA",
+      "5TO PRIMARIA",
+      "6TO PRIMARIA",
+      "1RO SECUNDARIA",
+      "2DO SECUNDARIA",
+      "3RO SECUNDARIA",
+      "4TO SECUNDARIA",
+      "5TO SECUNDARIA",
+      "6TO SECUNDARIA"
+    ],
 
     //Form
     isSentForm: false,

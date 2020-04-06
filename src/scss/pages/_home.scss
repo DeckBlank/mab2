@@ -625,11 +625,11 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    font-family: dinoround;
+    font-family: $font-family-secondary;
     text-transform: uppercase;
   }
   .modal_btn_container a {
-    font-family: dinoround;
+    font-family: $font-family-secondary;
     display: inline-block;
     padding: 8px 20px;
     color: #fff;

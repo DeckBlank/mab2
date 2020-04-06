@@ -114,26 +114,52 @@
   }
 
   .c-question {
+    &__item {
+      @include transition(0.25s);
+
+      &:hover {
+        background: $success-color;
+        color: $white;
+      }
+
+      &:hover .c-option {
+        color: $white;
+      }
+
+      &:hover .c-option__checkbox {
+        border-color: $white;
+      }
+    }
+
+    &__item input:checked + .c-option {
+      background-color: $success-color;
+      color: $white;
+    }
+
     &__item input:checked + .c-option .c-option__checkbox {
-      border-color: $secondary-alt;
-      background-color: $secondary-alt;
+      border-color: $white;
+      background-color: $white;
     }
 
     .c-option {
       display: flex !important;
+      padding: 0.5rem 0.5rem;
+      margin: 0 0 !important;
+
+      @include transition(0.25s);
 
       &__checkbox {
         border: solid 1px $dark;
         width: 17px;
         height: 17px;
 
-        @include transition(0.5s);
+        @include transition(0.25s);
       }
     }
   }
 }
 
-@include breakpoint(large) {
+@include breakpoint(medium) {
   .c-section--topic {
     .c-content {
       &::before {
@@ -143,16 +169,16 @@
         right: 1rem;
       }
     }
+
+    .c-questions-toggle {
+      margin-top: 0;
+      width: auto;
+    }
   }
 }
 
 @include breakpoint(large) {
   .c-section--topic {
-    .c-questions-toggle {
-      margin-top: 0;
-      width: auto;
-    }
-
     .c-modal {
       &::after {
         content: '';

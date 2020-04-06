@@ -9,17 +9,14 @@
   {% set form = post.get_field('form') %}
   {% set title = post.get_field('title') %}
 
-  <section class="c-section c-section--solicitar-id">
-    <div class="grid-container padding-top-3 margin-bottom-2">
+  <section class="c-section c-section--solicitar-id bg-sec-color">
+    <div class="grid-container padding-vertical-3">
       <div class="grid-x align-center">
-        <div class="cell medium-8 large-6">
-          <figure class="c-brand c-brand--full flex-container align-center-middle margin-bottom-2">
-            <a class="c-brand__link" href="{{ site.url }}">
-              <img class="c-brand__image" src="{{ theme.link }}/static/images/logo.png" alt="Veterinaria Triton - Logo" />
-            </a>
-          </figure>
-          <h1 class="fs-18 w-bold dark text-center margin-bottom-2">{{title}}</h1>
-          {{function('do_shortcode', form)}}
+        <div class="cell medium-10 large-8 padding-vertical-2">
+          <section class="c-content position-relative bg-white br--medium">
+            <h1 class="fs-50 w-bold dark-gray text-center margin-bottom-2">{{title}}</h1>
+            {{function('do_shortcode', form)}}
+          </section>
         </div>
       </div>
     </div>

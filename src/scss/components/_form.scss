@@ -2,6 +2,8 @@
   &__input,
   &__select {
     border: solid 1px $gray;
+    font-family: $font-family-secondary !important;
+    font-weight: $medium-font;
 
     @include transition(0.25s);
 
