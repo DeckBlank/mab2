@@ -27,14 +27,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         'in_footer' => true
     ]);
 
-    // register_assets('script', [
-    //     'handle'    => 'pandawp/package/foundation',
-    //     'src'       => $config['resources']['package_foundation'],
-    //     'deps'      => [ ],
-    //     'ver'       => $assets_version,
-    //     'in_footer' => true
-    // ]);
-
     register_assets('script', [
         'handle'    => 'pandawp/package/vue',
         'src'       => $config['resources']['package_vue'],
@@ -78,14 +70,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
     register_assets('script', [
         'handle'    => 'pandawp/package/ssr_window',
         'src'       => $config['resources']['package_ssr_window'],
-        'deps'      => [ ],
-        'ver'       => $assets_version,
-        'in_footer' => true
-    ]);
-
-    register_assets('script', [
-        'handle'    => 'pandawp/js/main',
-        'src'       => $config['resources']['script_main'],
         'deps'      => [ ],
         'ver'       => $assets_version,
         'in_footer' => true
