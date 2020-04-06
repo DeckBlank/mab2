@@ -22,14 +22,17 @@
                   {% for child in item.children %}
                     <label for="grado-{{item.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
                       <a class="position-relative">{{child.name}}</a>
-                      <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
+
+                      {% if child.children %}
+                        <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
+                      {% endif %}                      
                     </label>
                     <input id="grado-{{item.slug}}-{{loop.index}}" type="checkbox" class="hide">
 
                     <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-                      {% for child in [1,2,3] %}
+                      {% for _child in child.children %}
                         <div class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
-                          <a href="{{child.link}}" class="position-relative">Curso</a>
+                          <a href="{{_child.link}}" class="position-relative">{{_child.name}}</a>
                         </div>                 
                       {% endfor %}
                     </ul>                

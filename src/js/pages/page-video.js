@@ -22,6 +22,9 @@ const video = new Vue({
   computed: {
     ...baseState(),
   },
+  beforeMount(){
+    this.initSectors();
+  },  
   mounted(){
     this.videoID = this.$refs.video.getAttribute('data-id');
 

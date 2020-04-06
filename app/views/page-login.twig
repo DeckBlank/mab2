@@ -41,16 +41,13 @@
               SOLICITAR UN ID
             </a>
             <ul class="flex-container align-center-middle ul-reset">
-              <li class="c-social-media fs-35">
-                <a href="">
-                  <span class="c-icon"><i class="fab fa-facebook"></i></span>
-                </a>
-              </li>
-              <li class="c-social-media fs-35">
-                <a href="">
-                  <span class="c-icon"><i class="fab fa-instagram"></i></span>
-                </a>
-              </li>
+              {% for item in social_menu.items %}                
+                <li class="c-social-media fs-35">
+                  <a href="{{item.link}}" target="_blank">
+                    <span class="c-icon"><i class="fab fa-{{item.slug}}"></i></span>
+                  </a>
+                </li>
+              {% endfor %}
             </ul>
           </section>
         </div>

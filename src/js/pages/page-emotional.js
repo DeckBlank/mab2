@@ -32,6 +32,8 @@ const emotional = new Vue({
     }else{
       this.getVideos()
     }
+
+    this.initSectors();
   },
   methods: {
     ...baseActions(),

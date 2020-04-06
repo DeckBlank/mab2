@@ -26,7 +26,10 @@ function baseState(){
     'API', 
     'SITE_URL', 
     'logedUser',
-    'isActiveMenu', 
+    'isActiveMenu',
+    'sectors',
+    'pubGrade',
+    'privGrade',
     'isActivePubSectorMenu', 
     'isActivePrivSectorMenu',
     'isActivePubGradoMenu',
@@ -38,6 +41,8 @@ function baseState(){
 
 function baseActions(){
   return {...Vuex.mapActions([
+      'initSectors',
+      'defineGrade',
       'updateStatusPubSectorMenu', 
       'updateStatusPrivSectorMenu',
       'updateStatusPubGradoMenu',

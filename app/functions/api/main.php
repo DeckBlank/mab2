@@ -23,6 +23,8 @@ require_once(__DIR__."/controllers/TopicController.php");
 require_once(__DIR__."/controllers/SessionRequestController.php");
 require_once(__DIR__."/controllers/SessionController.php");
 require_once(__DIR__."/controllers/FormController.php");
+require_once(__DIR__."/controllers/SectorController.php");
+require_once(__DIR__."/controllers/RegistrationController.php");
 
 /**
  * Routes
@@ -174,5 +176,25 @@ add_action( 'rest_api_init', function () {
     register_rest_route( 'custom/v1', '/form/teacher', array(
         'methods' => 'POST',
         'callback' => array($formController,'addTeacherForm'),
+    ));    
+});
+
+//8. Sector ----------------------------------//
+add_action( 'rest_api_init', function () {
+    $sectorController = new SectorController();
+
+    register_rest_route( 'custom/v1', '/sectors', array(
+        'methods' => 'GET',
+        'callback' => array($sectorController,'getAll'),
+    ));    
+});
+
+//9. Registration ----------------------------------//
+add_action( 'rest_api_init', function () {
+    $registrationController = new RegistrationController();
+
+    register_rest_route( 'custom/v1', '/registration', array(
+        'methods' => 'GET',
+        'callback' => array($registrationController,'getRegistration'),
     ));    
 });

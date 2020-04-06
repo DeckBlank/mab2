@@ -9,19 +9,17 @@
         {# Content #}
       {% endblock %}
       
-      <div class="c-cursos bg-medium-gray position-fixed" :class="{ active : isActivePubSectorMenu }">
+      <div v-if="sectors[0]" class="c-cursos bg-medium-gray position-fixed" :class="{ active : isActivePubSectorMenu }">
         <h2 class="c-cursos__title margin-bottom-1 w-black dark">PUBLICO</h2>
         <ul class="c-cursos__list ul-reset">
-          {% for item in [1,2,3,4,5,6] %}
-            <li class="c-cursos__item fs-25 f2">
-              <a class="display-block" @click="updateStatusPubGradoMenu">{{loop.index}} Grado</a>
-            </li>         
-          {% endfor %}
+          <li v-for="grade of sectors[0].children" class="c-cursos__item fs-25 f2">
+            <a class="display-block" @click="defineGrade({type: 'pub', name: grade.name})">${grade.name.replace('Pub','')}</a>
+          </li>
         </ul>
       </div>
 
-      <div class="c-cursos bg-medium-gray position-fixed" :class="{ active : isActivePubGradoMenu }">
-        <h2 class="c-cursos__title margin-bottom-1 w-black dark">1 GRADO</h2>
+      <div v-if="pubGrade" class="c-cursos bg-medium-gray position-fixed" :class="{ active : isActivePubGradoMenu }">
+        <h2 class="c-cursos__title margin-bottom-1 w-black dark">${pubGrade.name.replace('Pub','')}</h2>
         <ul class="c-cursos__list ul-reset">
           <li class="c-cursos__item fs-25 f2">
             <a class="flex-container align-middle" @click="updateStatusPubGradoMenu">
@@ -30,27 +28,23 @@
             </a>
           </li>
 
-          {% for item in [1,2,3,4,5,6,6,6,6,6,6,6] %}
-            <li class="c-cursos__item fs-25 f2">
-              <a href="{{item.link}}" class="display-block">{{loop.index}} Curso</a>
-            </li>         
-          {% endfor %}
+          <li v-for="course of pubGrade.children" class="c-cursos__item fs-25 f2">
+            <a :href="course.url" class="display-block">${course.name}</a>
+          </li>
         </ul>
       </div>
       
-      <div class="c-cursos bg-medium-gray position-fixed" :class="{ active : isActivePrivSectorMenu }">
+      <div v-if="sectors[1]" class="c-cursos bg-medium-gray position-fixed" :class="{ active : isActivePrivSectorMenu }">
         <h2 class="c-cursos__title margin-bottom-1 w-black dark">PRIVADO</h2>
         <ul class="c-cursos__list ul-reset">
-          {% for item in [1,2,3,4,5,6] %}
-            <li class="c-cursos__item fs-25 f2">
-              <a class="display-block" @click="updateStatusPrivGradoMenu">{{loop.index}} Grado</a>
-            </li>         
-          {% endfor %}
+          <li v-for="grade of sectors[1].children" class="c-cursos__item fs-25 f2">
+            <a class="display-block" @click="defineGrade({type: 'priv', name: grade.name})">${grade.name.replace('Priv','')}</a>
+          </li>
         </ul>
       </div>
 
-      <div class="c-cursos bg-medium-gray position-fixed" :class="{ active : isActivePrivGradoMenu }">
-        <h2 class="c-cursos__title margin-bottom-1 w-black dark">2 GRADO</h2>
+      <div v-if="privGrade" class="c-cursos bg-medium-gray position-fixed" :class="{ active : isActivePrivGradoMenu }">
+        <h2 class="c-cursos__title margin-bottom-1 w-black dark">${privGrade.name.replace('Priv','')}</h2>
         <ul class="c-cursos__list ul-reset">
           <li class="c-cursos__item fs-25 f2">
             <a class="flex-container align-middle" @click="updateStatusPrivGradoMenu">
@@ -59,11 +53,9 @@
             </a>
           </li>
 
-          {% for item in [1,2,3,4,5,6,6,6,6,6,6,6] %}
-            <li class="c-cursos__item fs-25 f2">
-              <a href="{{item.link}}" class="display-block">{{loop.index}} Curso</a>
-            </li>         
-          {% endfor %}
+          <li v-for="course of privGrade.children" class="c-cursos__item fs-25 f2">
+            <a :href="course.url" class="display-block">${course.name}</a>
+          </li>
         </ul>
       </div>
 

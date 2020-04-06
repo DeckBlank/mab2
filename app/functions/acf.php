@@ -54,6 +54,17 @@ if( function_exists('acf_add_options_page') ) {
         'menu_slug'       => 'options-contact',
         'redirect'        => false, // true
         'icon_url'        => 'dashicons-phone',
+        'position'        => 3,
+        'update_button'   => __('Actualizar', 'acf'),
+        'updated_message' => __('Cambios Guardados exitosamente', 'acf')
+    ]);
+
+    $pm_inscriptions = acf_add_options_page([
+        'page_title'      => 'Inscripciones',
+        'menu_title'      => 'Inscripciones',
+        'menu_slug'       => 'options-inscriptions',
+        'redirect'        => false, // true
+        'icon_url'        => 'dashicons-id-alt',
         'position'        => 2,
         'update_button'   => __('Actualizar', 'acf'),
         'updated_message' => __('Cambios Guardados exitosamente', 'acf')

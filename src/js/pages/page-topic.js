@@ -38,6 +38,7 @@ const topic = new Vue({
       swiperOptions: {
         allowTouchMove: false,
         speed: 500,
+        loop: false,
         preventClicks: false,
         preventClicksPropagation: false
       }      
@@ -58,9 +59,12 @@ const topic = new Vue({
   },
   created(){
     if(!this.logedUser){
-      window.location = this.SITE_URL;
+      window.location = `${this.SITE_URL}/emotional`;
     }
   },
+  beforeMount(){
+    this.initSectors();
+  },  
   mounted(){
     this.topicID = this.$refs.topic.getAttribute('data-id');
 
@@ -114,21 +118,27 @@ const topic = new Vue({
           throw err;          
         })      
     },     
-    changeQuestion: function(){
-      if(this.swiper.slideNext()){
-        this.isEnableChange = false
-
-        if(this.currentQuestion < this.questions.length){
-          this.currentQuestion += 1;
-          this.testResult.push({
-            value: '',
-            isRight: null            
-          })
+    changeQuestion: function(direction){
+      if (direction == 'next') {
+        if(this.swiper.slideNext()){
+          this.isEnableChange = false
+  
+          if(this.currentQuestion < this.questions.length){
+            this.currentQuestion += 1;
+            this.testResult.push({
+              value: '',
+              isRight: null            
+            })
+          }
+          else{
+            this.testDone = true
+            this.addNewTestScore()
+          }
         }
-        else{
-          this.testDone = true
-          this.addNewTestScore()
-        }
+      } else if (direction == 'prev') {
+        // if(this.swiper.slidePrev()){
+        //   this.isEnableChange = false
+        // }
       }
     },
     verifyOptionSelected: function(qindex){

@@ -38,15 +38,55 @@
                         4:00
                       </p>
                     </a>
-                    <a href="{{topic.summary}}" target="_blank" class="c-topic__video flex-container align-justify align-middle">
-                      <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                        <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                        {{topic.title}}
-                      </p>
-                      <p class="gray-gray margin-bottom-0">
-                        <span class="c-icon"><i class="far fa-download"></i></span>
-                      </p>
-                    </a>
+
+                    {% if topic.summary %}                      
+                      <a href="{{topic.summary}}" target="_blank" class="c-topic__video flex-container align-justify align-middle">
+                        <p class="margin-bottom-0 flex-container align-middle dark-gray">
+                          <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
+                          Resumen
+                        </p>
+                        <p class="gray-gray margin-bottom-0">
+                          <span class="c-icon"><i class="far fa-download"></i></span>
+                        </p>
+                      </a>
+                    {% endif %}
+                    
+                    {% if topic.map %}                      
+                      <a href="{{topic.map}}" target="_blank" class="c-topic__video flex-container align-justify align-middle">
+                        <p class="margin-bottom-0 flex-container align-middle dark-gray">
+                          <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
+                          Mapa Mental
+                        </p>
+                        <p class="gray-gray margin-bottom-0">
+                          <span class="c-icon"><i class="far fa-download"></i></span>
+                        </p>
+                      </a>
+                    {% endif %}
+
+                    {% if topic.worksheet %}                      
+                      <a href="{{topic.worksheet}}" target="_blank" class="c-topic__video flex-container align-justify align-middle">
+                        <p class="margin-bottom-0 flex-container align-middle dark-gray">
+                          <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
+                          Worksheet
+                        </p>
+                        <p class="gray-gray margin-bottom-0">
+                          <span class="c-icon"><i class="far fa-download"></i></span>
+                        </p>
+                      </a>
+                    {% endif %}
+
+                    {% if topic.solutions %}                      
+                      <a href="{{topic.solutions}}" target="_blank" class="c-topic__video flex-container align-justify align-middle">
+                        <p class="margin-bottom-0 flex-container align-middle dark-gray">
+                          <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
+                          Solucionario
+                        </p>
+                        <p class="gray-gray margin-bottom-0">
+                          <span class="c-icon"><i class="far fa-download"></i></span>
+                        </p>
+                      </a>
+                    {% endif %}
+
                   </li>
                 {% endfor %}
               </ul>

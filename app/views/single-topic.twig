@@ -87,7 +87,7 @@
                   <span class="c-icon fs-30"><i class="far fa-times"></i></span>
                 </button>
               </div>
-              <section class="c-modal__body padding-vertical-1">
+              <section class="c-modal__body padding-vertical-1 padding-right-1">
                 <h2 class="c-questions__title f1 text-uppercase dark-gray fs-25 w-bold margin-bottom-2 text-center fs-60">{{post.title}}</h2>
                 <swiper ref="slider_questions" class="c-questions__list margin-bottom-1" :options="swiperOptions">                
                   <swiper-slide v-for="(q_, qindex) of questions" :key="q_.id">
@@ -123,14 +123,17 @@
                     <div class="flex-container f2 flex-dir-column align-center-middle height-100">
                       <div class="margin-bottom-2">
                         <h4 class="f2 fs-25 w-bold dark-gray">Resultado</h4>
-                        <figure class="margin-bottom-1 text-center">
+                        <figure v-if="questions.length == totalRightAnswers" class="margin-bottom-1 text-center">
+                          <img src="{{theme.link}}/static/images/vectors/topic/award.png" alt="">
+                        </figure>
+                        <figure v-else class="margin-bottom-1 text-center">
                           <img src="{{theme.link}}/static/images/vectors/topic/apple.png" alt="">
                         </figure>
                       </div>
                       <p class="sec-alt fs-21 w-medium flex-container align-middle">
                         <span class="fs-35 margin-right-1">${totalRightAnswers}</span> Respuesta(s) correctas <span class="c-icon fs-35 margin-left-1"><i class="far fa-check"></i></span>
                       </p>
-                      <p class="alert fs-21 w-medium flex-container align-middle margin-bottom-0">
+                      <p class="alert fs-21 w-medium flex-container align-middle margin-bottom-0" :class="{ hide : totalWrongAnswers == 0 }">
                         <span class="fs-35 margin-right-1">${totalWrongAnswers}</span> Respuesta(s) correctas <span class="c-icon fs-35 margin-left-1"><i class="far fa-times"></i></span>
                       </p>
                     </div>
@@ -147,14 +150,18 @@
                       Es incorrecto
                     </p>
                   </div>
-                  <div class="flex-container align-middle">
-                    <button class="flex-container align-center-middle dark-gray" @click="changeQuestion" :class="{ enable: isEnableChange, hide: testDone }" :disabled="!isEnableChange">
+                  <div class="flex-container align-middle" :class="{ enable: isEnableChange, hide: testDone }">
+                    <button class="flex-container align-center-middle dark-gray" @click="changeQuestion('prev')">
                       <span class="c-icon"><i class="far fa-chevron-left"></i></span>
                     </button>                       
                     <p class="c-questions__progress margin-bottom-0 fs-18 f2 w-medium dark-gray text-center margin-horizontal-1">
                       <span>${currentQuestion}</span> de <span>${questions.length}</span>
                     </p>
-                    <button class="flex-container align-center-middle dark-gray" @click="changeQuestion" :class="{ enable: isEnableChange, hide: testDone }" :disabled="!isEnableChange">
+                    <button 
+                      class="flex-container align-center-middle"
+                      :class="{ 'sec-color' : isEnableChange }"
+                      @click="changeQuestion('next')" 
+                      :disabled="!isEnableChange">
                       <span class="c-icon"><i class="far fa-chevron-right"></i></span>
                     </button>                                   
                   </div>

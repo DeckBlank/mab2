@@ -40,7 +40,7 @@ Vue.component('likes',{
     }
   },
   computed: {
-    ...Vuex.mapState(['API', 'logedUser'])
+    ...Vuex.mapState(['API', 'SITE_URL', 'logedUser'])
   },
   watch: {
     average: function(){
@@ -52,26 +52,30 @@ Vue.component('likes',{
   },
   methods: {
     addNewLike: function(level){
-      fetch(`${this.API}/${this.target.type}/${this.target.id}/likes?level=${level}&now_average=${this.average}&user=${this.logedUser.user_auth}`,{
-          method: 'PUT'
-        })
-        .then(res => {
-          if (res.status >= 200 && res.status < 300) {
-            return res.json()
-          }else{
-            throw res
-          }
-        })
-        .then(saved_level => {
-          this.likesAverage = saved_level
-          this.isActiveLikes = false;
-          this.isLiked = true
-        })
-        .catch(err => {
-          this.likesAverage = 0;
-          this.isActiveLikes = false;
-          throw err;          
-        }) 
+      if(!this.logedUser){
+        window.location = `${this.SITE_URL}/login`;
+      }else{
+        fetch(`${this.API}/${this.target.type}/${this.target.id}/likes?level=${level}&now_average=${this.average}&user=${this.logedUser.user_auth}`,{
+            method: 'PUT'
+          })
+          .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              return res.json()
+            }else{
+              throw res
+            }
+          })
+          .then(saved_level => {
+            this.likesAverage = saved_level
+            this.isActiveLikes = false;
+            this.isLiked = true
+          })
+          .catch(err => {
+            this.likesAverage = 0;
+            this.isActiveLikes = false;
+            throw err;          
+          }) 
+      }  
     },
     isUserLiked: function(){
       fetch(`${this.API}/${this.target.type}/${this.target.id}/likes/checkout?user=${this.logedUser.user_auth}`,{

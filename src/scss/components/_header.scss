@@ -275,6 +275,7 @@
   transform: translateY(-100%);
   z-index: 500 !important;
   height: 100vh;
+  overflow-y: auto;
   opacity: 0;
   visibility: hidden;
 
@@ -328,6 +329,7 @@
 
     &__left {
       height: 83px;
+      padding: 1rem 0;
 
       &::after {
         width: 0;

@@ -12,11 +12,10 @@ const course = new Vue({
   computed: {
     ...baseState()
   },
+  beforeMount(){
+    this.initSectors();
+  },  
   mounted: function(){
-    setTimeout(()=>{
-      this.updateStatusCursosMenuDesk();
-    }, 100)
-
     if(!this.logedUser){
       let topics = document.querySelectorAll('.c-topic__video')
   

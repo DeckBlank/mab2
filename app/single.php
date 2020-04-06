@@ -12,7 +12,10 @@ function __getTopicsSanitize($topics){
         array_push($topics_sanitize, (object)[
             "title" => $topic['topic']->post_title,
             "link" => get_the_permalink($topic['topic']->ID),
-            "summary" => get_field('summary', $topic['topic']->ID)['url']
+            "summary" => ( get_field('summary', $topic['topic']->ID) ) ? get_field('summary', $topic['topic']->ID)['url'] : false,
+            "map" => ( get_field('map', $topic['topic']->ID) ) ? get_field('map', $topic['topic']->ID)['url'] : false,
+            "worksheet" => ( get_field('worksheet', $topic['topic']->ID) ) ? get_field('worksheet', $topic['topic']->ID)['url'] : false,
+            "solutions" => ( get_field('solutions', $topic['topic']->ID) ) ? get_field('solutions', $topic['topic']->ID)['url'] : false
         ]);
     }
 

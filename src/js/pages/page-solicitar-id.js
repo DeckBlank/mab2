@@ -11,6 +11,9 @@ const solicitar_id = new Vue({
   computed: {
     ...baseState()
   },
+  beforeMount(){
+    this.initSectors();
+  },  
   mounted(){
     if(this.logedUser){
       window.location = this.SITE_URL;

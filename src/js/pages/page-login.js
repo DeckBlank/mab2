@@ -21,6 +21,9 @@ const login = new Vue({
       window.location = `${this.SITE_URL}/emotional`;
     }
   },
+  beforeMount(){
+    this.initSectors();
+  },  
   methods: {
     ...baseActions(),
     saveSession: function(user){
