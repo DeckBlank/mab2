@@ -34,8 +34,6 @@ return [
             'local' => get_theme_file_uri('/static/js/libs/jquery/jquery.min.js')
         ],
 
-        // 'package_foundation' => get_theme_file_uri('/static/js/package.foundation-sites.bundle.js'),
-
         'package_fancyapps' => get_theme_file_uri('/static/js/package.fancyapps.bundle.js'),
 
         'package_dom7' => get_theme_file_uri('/static/js/package.dom7.bundle.js'),
@@ -76,12 +74,6 @@ return [
         /**
          * Scripts
          * */
-        'script_main' => get_theme_file_uri('/static/js/main.bundle.js'),
-
-        //Components
-        'component_map' => get_theme_file_uri('/static/js/component-map.bundle.js'),
-
-        'component_form' => get_theme_file_uri('/static/js/component-form.bundle.js'),
 
         //Pages
         'page_emotional' => get_theme_file_uri('/static/js/page-emotional.bundle.js'),
@@ -103,12 +95,6 @@ return [
         'page_topic' => get_theme_file_uri('/static/js/page-topic.bundle.js'),
 
         'page_session' => get_theme_file_uri('/static/js/page-session.bundle.js'),
-
-        //Galleries
-        'script_galleries' => get_theme_file_uri('/static/js/galleries.bundle.js'),
-
-        //Sliders
-        'sliders_home' => get_theme_file_uri('/static/js/sliders-home.bundle.js'),
 
         //WP
         'wp_session' => get_theme_file_uri('/static/js/wp-session.bundle.js')
