@@ -1,6 +1,6 @@
 <?php
 
-$assets_version = '1586161249630';
+$assets_version = '1586239532520';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -19,13 +19,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
      * --------------------------------------------------------------------------
      *
      */
-    register_assets('script', [
-        'handle'    => 'pandawp/package/jquery',
-        'src'       =>  $config['resources']['package_jquery']['cdn'],
-        'deps'      => [ ],
-        'ver'       => $assets_version,
-        'in_footer' => true
-    ]);
 
     register_assets('script', [
         'handle'    => 'pandawp/package/vue',

@@ -29,10 +29,6 @@ return [
         /**
          * Packages
          * */
-        'package_jquery' => [
-            'cdn' => 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js',
-            'local' => get_theme_file_uri('/static/js/libs/jquery/jquery.min.js')
-        ],
 
         'package_fancyapps' => get_theme_file_uri('/static/js/package.fancyapps.bundle.js'),
 
