@@ -1,6 +1,6 @@
 <?php
 
-$assets_version = '1586297317205';
+$assets_version = '1586297539722';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -128,7 +128,16 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
      * --------------------------------------------------------------------------
      *
      */
-    if ( is_page('emotional') ) {
+    if ( is_front_page() ) {
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/home',
+            'src'       => $config['resources']['page_home'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+
+    }elseif ( is_page('emotional') ) {
         register_assets('script', [
             'handle'    => 'pandawp/js/page/emotional',
             'src'       => $config['resources']['page_emotional'],

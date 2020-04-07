@@ -64,14 +64,14 @@
     <section class="mab_resume">
       <div class="section_content">            
         <div class="block">
-          En MAB buscamos girar la educación hacia una mucho más emocional y humana, que forme mejores personas, para así construír una mejor sociedad.
+          En MAB buscamos revolucionar la educación hacia una más emocional y humana, que forme mejores personas, para así construir una mejor sociedad.
         </div>
         <div class="block_rigth">
-          Con MAB CLICK podrás exponenciar tus conocimientos de la forma más lúdica posible, teniendo siempre un balance académico y emocional.
+         Con MAB CLICK podrás potenciar tus conocimientos adaptándonos a tu estilo de aprendizaje, manteniendo un balance académico y emocional.
           <br>
-          <br> Encontrarás videos emocionales que tratan diferentes temas sociales importantes, así como videos y otros recursos dinámicos educativos de todos los grados de primaria y de secundaria y actividades para fomentar tus habilidades blancas.
+          <br> Encontrarás videos de desarrollo personal y habilidades blandas, así como videos educativos y herramientas para reforzar tu aprendizaje en toda la etapa escolar.
           <br>
-          <br> Cada herramienta ha sido creada para adaptarse al estilo de aprendizaje del estudiante, porque entendemos que todos aprendemos distinto.
+          <br> Todos aprendemos distinto por lo que hemos creado distintas opciones que se adapten a tu estilo.
         </div>
         <img class="mab_resume_img" src="{{theme.link}}/static/images/landing/chica_corner.png" alt="">
       </div>
@@ -183,6 +183,28 @@
         </ul>
       </div>
     </footer>
+
+    <section class="c-modal discount position-fixed width-100 height-100 padding-vertical-2" :class="{ opened : isActiveModal }">
+      <div class="grid-container height-100">
+        <div class="grid-x align-center-middle height-100">
+          <div class="cell medium-10 large-9">
+            <div class="c-modal__content position-relative flex-container flex-dir-column questions br--medium bg-white">
+              <div class="flex-container align-right margin-bottom-1">
+                <button class="white" @click="isActiveModal = false">
+                  <span class="c-icon fs-30"><i class="far fa-times"></i></span>
+                </button>
+              </div>
+              <section class="c-modal__body padding-vertical-1 padding-right-1">
+                <a href=""> 
+                  <img class="modal_img_desktop" src="{{theme.link}}/static/images/landing/modal_descuento_desktop.png" alt="" >
+                  <img class="modal_img_mobile" src="{{theme.link}}/static/images/landing/modal_descuento_mobile.png" alt="" >                            
+                </a>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> 
   </section>
 {% endblock %}
 
