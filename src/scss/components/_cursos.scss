@@ -8,9 +8,9 @@
   visibility: hidden;
   opacity: 0;
   transform: translateX(-10px);
-  background-image: url('../images/vectors/courses/plant.png'), url('../images/vectors/courses/shower.png');
-  background-position: left calc(100% + 1rem), right 80px;
-  background-size: 100px, 180px;
+  background-image: url('../images/vectors/courses/plant.png');
+  background-position: center calc(100% + 1rem);
+  background-size: 100px;
   background-repeat: no-repeat;
   overflow-y: auto;
 
