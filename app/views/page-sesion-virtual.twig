@@ -22,25 +22,9 @@
                 {{post.content}}
               </div>
             </div>
-            <div class="c-links flex-container flex-dir-column align-middle">
-              <button 
-                class="c-button c-button--primary f2 fs-18 w-medium br--medium padding-horizontal-2 margin-bottom-2 display-block"
-                @click="isOpenedRequestModal = true"
-                >
-                Solicitar sesión
-              </button>
-              <p class="f2 fs-18 w-medium">Si ya tienes una sesión programada ingresa aquí</p>
-              <button 
-                class="c-button c-button--ghost-primary f2 fs-18 w-medium br--medium padding-horizontal-2 flex-container align-center-middle"
-                @click="isOpenedValidateCodeModal = true"
-                >
-                <span class="c-icon margin-right-1"><i class="far fa-video"></i></span>
-                INGRESAR
-              </button>
-            </div>
-            <div class="c-explanation margin-bottom-2">
+            <div class="c-explanation">
               <h2 class="f2 w-bold fs-21 dark margin-bottom-1">Una educación diferente</h2>
-              <p class="f2 w-black fs-35 dark margin-bottom-3">¿CÓMO FÚNCIONA?</p>
+              <p class="f2 w-black fs-35 dark margin-bottom-3">¿CÓMO FUNCIONA?</p>
               <ul class="c-explanation__list flex-container align-center-middle ul-reset">
                 <li class="c-explanation__item position-relative flex-container flex-dir-column align-middle">
                   <span class="display-block f2 w-black dark position-absolute">1</span>
@@ -61,6 +45,22 @@
                   </div>
                 </li>
               </ul>
+            </div>            
+            <div class="c-links flex-container flex-dir-column align-middle">
+              <button 
+                class="c-button c-button--primary f2 fs-18 w-medium br--medium padding-horizontal-2 margin-bottom-2 display-block"
+                @click="isOpenedRequestModal = true"
+                >
+                Solicitar sesión
+              </button>
+              <p class="f2 fs-18 w-medium">Si ya tienes una sesión programada ingresa aquí</p>
+              <button 
+                class="c-button c-button--ghost-primary f2 fs-18 w-medium br--medium padding-horizontal-2 flex-container align-center-middle"
+                @click="isOpenedValidateCodeModal = true"
+                >
+                <span class="c-icon margin-right-1"><i class="far fa-video"></i></span>
+                INGRESAR
+              </button>
             </div>
           </section>
         </div>
@@ -103,7 +103,7 @@
                   <p class="margin-bottom-0 white fs-18">"Nelson mandela"</p>
                 </div>
                 <div class="c-request padding-right-1">
-                  <h3 class="f2 margin-bottom-1 fs-18 w-medium white">Dejanos tus datos para confirmar y mandarte un codigo de activación</h3>
+                  <h3 class="f2 margin-bottom-1 fs-18 w-medium white">Déjanos tus datos para confirmar y mandarte un codigo de activación</h3>
                   <div class="c-form margin-bottom-3">
                     <div class="margin-bottom-1">
                       <label>
@@ -266,7 +266,7 @@
                         class="c-form__input input-reset"
                         @keyup.enter="getSession">
                     </label>
-                    <p class="margin-bottom-0 alert" :class="{ hide : (isRightCode || isRightCode == null) }">El codigo ingresado no existe</p>
+                    <p class="margin-bottom-0 alert" :class="{ hide : (isRightCode || isRightCode == null) }">El código ingresado no existe</p>
                   </div>
                   <div v-else class="margin-bottom-3">
                     <label>
