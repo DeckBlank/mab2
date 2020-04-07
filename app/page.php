@@ -13,7 +13,7 @@ if(is_page('login')){
     $context['title'] = get_field('title', $post->ID);
     $context['phrase'] = get_field('phrase', $post->ID);
 
-}else if(is_page('mab-click')){
+}else if(is_page('sesion-virtual')){
     $context['courses'] = Timber::get_posts([
         "post_type" => "course",
         "posts_per_page" => -1

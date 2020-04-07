@@ -56,7 +56,7 @@ function baseActions(){
       }else{
         this.updateStatusHeaderShadow(false)
       }
-    }    
+    }
   }
 }
 

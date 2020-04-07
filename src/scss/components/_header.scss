@@ -1,6 +1,6 @@
 .c-header {
   background: $secondary-color;
-  position: sticky;
+  position: fixed;
   z-index: 1000 !important;
 
   @include transition(0.5s);
@@ -94,6 +94,7 @@
         color: $dark;
         font-family: $font-family-secondary;
         font-size: $fs-18;
+        font-weight: $medium-font;
         text-transform: uppercase;
 
         @include transition(0.2s);
@@ -116,10 +117,13 @@
 
     &__left {
       .c-menu {
-        display: none;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+      }
+
+      .c-menu .c-menu__item {
+        display: none;
       }
 
       &::after {
@@ -409,7 +413,7 @@
 
 @include breakpoint(large) {
   .c-header {
-    position: sticky;
+    position: fixed;
 
     .c-user {
       height: 100%;
@@ -433,14 +437,6 @@
       align-items: center;
       flex-direction: row;
 
-      .c-menu {
-        @include flex;
-
-        flex-direction: row;
-        justify-content: flex-start;
-        height: 100%;
-      }
-
       .c-menu .c-menu__item > a {
         margin-right: 3rem;
       }
@@ -458,7 +454,16 @@
         }
 
         .c-menu {
-          justify-content: flex-end;
+          @include flex;
+
+          flex-direction: row;
+          justify-content: space-between;
+          width: 100%;
+          height: 100%;
+        }
+
+        .c-menu .c-menu__item {
+          display: block;
         }
       }
 

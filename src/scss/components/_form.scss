@@ -1,24 +1,22 @@
 .c-form {
   &__input,
   &__select {
-    border: solid 1px $gray;
-    font-family: $font-family-secondary !important;
+    border: none !important;
     font-weight: $medium-font;
+    background-color: $warning-color;
+    color: $dark;
 
     @include transition(0.25s);
 
     &:focus {
-      border: solid 1px $primary-color !important;
+      background-color: $warning-color;
+      box-shadow: none !important;
     }
   }
 
   &__input.valid,
   &__select.valid {
-    border-color: $success-color;
-
-    &:focus {
-      border-color: $success-color !important;
-    }
+    box-shadow: $success-color 0 0 0 5px !important;
   }
 
   &__select {

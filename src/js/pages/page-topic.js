@@ -10,6 +10,7 @@ const topic = new Vue({
   ...baseConfig(store),
   data() {
     return {
+      metas: new URLSearchParams(window.location.search),
       topicID: null,
 
       //Likes
@@ -41,7 +42,7 @@ const topic = new Vue({
         loop: false,
         preventClicks: false,
         preventClicksPropagation: false
-      }      
+      }
     }
   },
   components: {
@@ -57,17 +58,14 @@ const topic = new Vue({
       return this.$refs.slider_questions.$swiper
     }     
   },
-  created(){
-    if(!this.logedUser){
-      window.location = `${this.SITE_URL}/emotional`;
-    }
+  created(){    
+    this.isUserAuthOnTopic(this.metas.get('course_id'))
   },
   beforeMount(){
     this.initSectors();
   },  
   mounted(){
     this.topicID = this.$refs.topic.getAttribute('data-id');
-
     this.getLikesAverage();
     this.getComments();
     this.getQuestions();
@@ -236,6 +234,32 @@ const topic = new Vue({
             throw err;          
           })          
       }
-    }    
+    },
+    isUserAuthOnTopic: function(course_id){
+      let topics = document.querySelectorAll('.c-topic__video')
+
+      if(!this.logedUser || !this.metas.get('course_name') || !this.metas.get('unity')){
+        window.location = `${this.SITE_URL}/solicitar-id`;      
+      }else{
+        fetch(`${this.API}/registration?user=${this.logedUser.user_auth}&course=${course_id}`,{
+            method: 'GET'
+          })
+          .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              return res.json()
+            }else{
+              throw res
+            }
+          })
+          .then(registration => { 
+
+          })
+          .catch(err => {
+            window.location = `${this.SITE_URL}/solicitar-id`;
+            
+            throw err;          
+          })        
+      }
+    }
   }
 })

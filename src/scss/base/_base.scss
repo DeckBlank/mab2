@@ -43,4 +43,13 @@ body {
       color: $secondary-color;
     }
   }
+
+  &--white {
+    color: $white;
+
+    &:hover,
+    &:focus {
+      color: $white;
+    }
+  }
 }

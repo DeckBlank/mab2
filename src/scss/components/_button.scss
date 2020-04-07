@@ -1,5 +1,4 @@
 .c-button {
-  font-size: $fs-16;
   padding: 0.5rem 1rem;
 
   @include b-radious(5px);
@@ -100,6 +99,17 @@
     &:focus {
       color: $white;
       background-color: $gray;
+    }
+  }
+
+  &--ghost-white {
+    border: solid 2px $white;
+    color: $white;
+
+    &:hover,
+    &:focus {
+      color: $secondary-color;
+      background-color: $white;
     }
   }
 }

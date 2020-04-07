@@ -78,7 +78,7 @@ return [
         //Pages
         'page_emotional' => get_theme_file_uri('/static/js/page-emotional.bundle.js'),
 
-        'page_mab_click' => get_theme_file_uri('/static/js/page-mab-click.bundle.js'),
+        'page_virtual_sesion' => get_theme_file_uri('/static/js/page-virtual-sesion.bundle.js'),
 
         'page_login' => get_theme_file_uri('/static/js/page-login.bundle.js'),
 

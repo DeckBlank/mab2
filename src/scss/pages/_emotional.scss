@@ -177,6 +177,12 @@
     .c-banner.disabled {
       margin-bottom: 0;
     }
+  }
+}
+
+@include breakpoint(large) {
+  .c-section--emotional {
+    outline: none;
 
     .c-banner-video {
       &::before {
@@ -198,16 +204,10 @@
         height: 250px;
         width: 200px;
         background-size: contain;
-        background-image: url('../images/vectors/banner/face-invert.png');
+        background-image: url('../images/vectors/banner/face-invert-v2.png');
         background-repeat: no-repeat;
       }
     }
-  }
-}
-
-@include breakpoint(large) {
-  .c-section--emotional {
-    outline: none;
 
     .c-filter {
       &__content {

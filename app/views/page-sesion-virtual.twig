@@ -1,58 +1,68 @@
 {% extends '_html.twig' %}
 
 {% block hero %}
-  {% include 'templates-parts/header-mclick.twig' %}
+  {% include 'templates-parts/header.twig' %}
 {% endblock %}
 
 {% block content %}
-  <section class="c-section c-section--mclick">
-    <section class="grid-container padding-top-3 margin-bottom-2">
+  <section class="c-section c-section--virtual-session bg-success">
+    <section class="grid-container padding-vertical-3">
       <div class="grid-x align-center">
-        <div class="cell medium-10 large-8 text-center">
-          <div class="c-brand flex-container flex-dir-column align-middle margin-bottom-3">
-            <figure class="c-brand__image br--medium overflow-hidden margin-bottom-2">
-              <img class="width-100 height-100 of--cover" src="{{post.thumbnail}}" alt="">
-            </figure>
-            <h1 class="text-center pri-color f2 fs-40 w-bold margin-bottom-0">MAB CLICK</h1>
-            <p class="margin-bottom-2 text-center f2 dark">Sesiones directas de tutoría online</p>
-            <div class="text-center f2 fs-18">
-              {{post.content}}
+        <div class="cell medium-8 large-10 text-center padding-vertical-2">
+          <section class="c-content bg-white br--medium">
+            <div class="c-brand flex-container flex-dir-column align-middle margin-bottom-3">
+              <div class="c-title flex-container">
+                <h2 class="fs-60 dark w-bold pri-color text-center display-block">SESIÓN VIRTUAL</h2>
+                <figure class="text-center large-text-left">
+                  <img src="{{theme.link}}/static/images/vectors/login/hearts.png" alt="">
+                </figure>
+              </div>
+              <p class="margin-bottom-2 text-center f2 w-medium fs-21 dark">Sesiones y/o tutorías virtuales personalizadas</p>
+              <div class="text-center f2 w-medium fs-25">
+                {{post.content}}
+              </div>
             </div>
-          </div>
-          <div class="c-links flex-container flex-dir-column align-middle">
-            <button 
-              class="c-button c-button--primary f2 rounded padding-horizontal-2 margin-bottom-2 display-block"
-              @click="isOpenedRequestModal = true"
-              >
-              Solicitar sesión
-            </button>
-            <p>Si ya tienes una sesión programada ingresa aquí</p>
-            <button 
-              class="c-button c-button--ghost f2 w-bold rounded padding-horizontal-2 flex-container align-center-middle"
-              @click="isOpenedValidateCodeModal = true"
-              >
-              <span class="c-icon margin-right-1 sec-alt"><i class="far fa-video"></i></span>
-              INGRESAR
-            </button>
-          </div>
-          <div class="c-explanation">
-            <h2 class="f2 w-bold fs-25 black margin-bottom-1">Una educación diferente</h2>
-            <p class="f2 w-bold fs-25">¿CÓMO FÚNCIONA?</p>
-            <ul class="c-explanation__list ul-reset">
-              <li class="c-explanation__item flex-container flex-dir-column align-middle margin-bottom-2">
-                <span class="display-block f2 w-bold">1</span>
-                <p class="margin-bottom-0 fs-25 f2">Separa tu sesión online según los temas y necesidades que tengas.</p>
-              </li>
-              <li class="c-explanation__item flex-container flex-dir-column align-middle margin-bottom-2">
-                <span class="display-block f2 w-bold">2</span>
-                <p class="margin-bottom-0 fs-25 f2">Te llegara un correo con los pasos siguientes y tu código de sesión.</p>
-              </li>
-              <li class="c-explanation__item flex-container flex-dir-column align-middle margin-bottom-2">
-                <span class="display-block f2 w-bold">3</span>
-                <p class="margin-bottom-0 fs-25 f2">Listo. Conecta y aprende con nosotros</p>
-              </li>
-            </ul>
-          </div>
+            <div class="c-links flex-container flex-dir-column align-middle">
+              <button 
+                class="c-button c-button--primary f2 fs-18 w-medium br--medium padding-horizontal-2 margin-bottom-2 display-block"
+                @click="isOpenedRequestModal = true"
+                >
+                Solicitar sesión
+              </button>
+              <p class="f2 fs-18 w-medium">Si ya tienes una sesión programada ingresa aquí</p>
+              <button 
+                class="c-button c-button--ghost-primary f2 fs-18 w-medium br--medium padding-horizontal-2 flex-container align-center-middle"
+                @click="isOpenedValidateCodeModal = true"
+                >
+                <span class="c-icon margin-right-1"><i class="far fa-video"></i></span>
+                INGRESAR
+              </button>
+            </div>
+            <div class="c-explanation margin-bottom-2">
+              <h2 class="f2 w-bold fs-21 dark margin-bottom-1">Una educación diferente</h2>
+              <p class="f2 w-black fs-35 dark margin-bottom-3">¿CÓMO FÚNCIONA?</p>
+              <ul class="c-explanation__list flex-container align-center-middle ul-reset">
+                <li class="c-explanation__item position-relative flex-container flex-dir-column align-middle">
+                  <span class="display-block f2 w-black dark position-absolute">1</span>
+                  <div class="width-100 height-100 fs-18 f2 w-bold bg-sec-color rounded white">
+                    <p class="margin-bottom-0">Separa tu sesión online según los temas y necesidades que tengas.</p>
+                  </div>
+                </li>
+                <li class="c-explanation__item position-relative flex-container flex-dir-column align-middle">
+                  <span class="display-block f2 w-black dark position-absolute">2</span>
+                  <div class="width-100 height-100 fs-18 f2 w-bold bg-sec-color rounded white">
+                    <p class="margin-bottom-0">Te llegara un correo con los pasos siguientes y tu código de sesión.</p>
+                  </div>
+                </li>
+                <li class="c-explanation__item position-relative flex-container flex-dir-column align-middle">
+                  <span class="display-block f2 w-black dark position-absolute">3</span>
+                  <div class="width-100 height-100 fs-18 f2 w-bold bg-sec-color rounded white">
+                    <p class="margin-bottom-0">Listo. Conecta y aprende con nosotros.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
         </div>
       </div>
     </section>
@@ -60,7 +70,7 @@
       <div class="grid-container height-100">
         <div class="grid-x align-center-middle height-100">
           <div class="cell medium-10 large-8">
-            <div class="c-modal__content br--medium position-relative bg-white">
+            <div class="c-modal__content br--medium position-relative flex-container flex-dir-column bg-sec-color">
               <div class="c-success-message position-absolute" :class="{ showed : isSentSessionRequest && isOpenedRequestModal }">
                 <div class="flex-container width-100 height-100 align-center-middle">
                   <div class="c-success-message__body br--medium bg-sec-alt white text-center flex-container flex-dir-column align-middle">
@@ -76,20 +86,28 @@
                   </div>
                 </div>
               </div>
-              <div class="c-body flex-container position-relative flex-dir-column height-100" :class="{ unshowed : isSentSessionRequest && isOpenedRequestModal }">
-                <div class="c-modal__close flex-container align-right margin-bottom-1 position-relative">
-                  <button @click="isOpenedRequestModal = false">
-                    <span class="c-icon fs-30"><i class="far fa-times"></i></span>
-                  </button>
+              <div class="flex-container align-right margin-bottom-1 position-relative">
+                <button @click="isOpenedRequestModal = false" class="white">
+                  <span class="c-icon fs-30"><i class="far fa-times"></i></span>
+                </button>
+              </div>              
+              <div class="c-modal__body padding-left-1 flex-container position-relative flex-dir-column height-100" :class="{ unshowed : isSentSessionRequest && isOpenedRequestModal }">
+                <div class="c-title flex-container">
+                  <h2 class="fs-60 warning w-bold pri-color text-center display-block">SESIÓN VIRTUAL</h2>
+                  <figure class="text-center large-text-left">
+                    <img src="{{theme.link}}/static/images/vectors/login/hearts.png" alt="">
+                  </figure>
                 </div>
-                <h2 class="f2 fs-25 w-bold pri-color text-center margin-bottom-1">MAB CLICK</h2>
-                <p class="black text-center fs-18 margin-bottom-3">“Una buena educación comienza desde el corazón”</p>
+                <div class="margin-bottom-2 f2 text-center">
+                  <p class="fs-21 w-medium margin-bottom-0 warning">Una buena educación comienza desde el corazón</p>
+                  <p class="margin-bottom-0 white fs-18">"Nelson mandela"</p>
+                </div>
                 <div class="c-request padding-right-1">
-                  <h3 class="f2 margin-bottom-1 fs-16">DEJANOS TUS DATOS PARA CONFIRMAR Y MANDARTE CODIGO DE ACTIVACIÓN</h3>
+                  <h3 class="f2 margin-bottom-1 fs-18 w-medium white">Dejanos tus datos para confirmar y mandarte un codigo de activación</h3>
                   <div class="c-form margin-bottom-3">
                     <div class="margin-bottom-1">
                       <label>
-                        <p class="mb-05 gray-gray">Nombres y apellidos <span class="alert">*</span></p>
+                        <p class="mb-05 f2 fs-25 w-bold white">Nombres y apellidos</p>
                         <input 
                           type="text" 
                           name="fullname"
@@ -100,7 +118,7 @@
                     </div>
                     <div class="margin-bottom-2">
                       <label>
-                        <p class="mb-05 gray-gray">Correo <span class="alert">*</span></p>
+                        <p class="mb-05 f2 fs-25 w-bold white">Correo</p>
                         <input 
                           type="email" 
                           name="email"
@@ -110,10 +128,10 @@
                       </label>
                     </div>
                   </div>
-                  <h3 class="f2 margin-bottom-1 fs-16">INFORMACIÓN DE LA SESIÓN</h3>
+                  <h3 class="f2 margin-bottom-1 fs-18 w-medium white">Información de la sesión</h3>
                   <div class="c-form margin-bottom-1">
                     <div class="margin-bottom-1">
-                      <p class="mb-05 gray-gray">Seleccionas las fechas y horas en las que puedes tener la sesión <span class="alert">*</span></p>
+                      <p class="mb-05 f2 fs-25 w-bold white">Seleccionas las fechas y horas en las que puedes tener la sesión</p>
                       <div class="grid-x grid-margin-x grid-margin-y">
                         <div class="cell large-6">
                           <div class="grid-x grid-margin-x grid-margin-y">
@@ -177,7 +195,7 @@
                     </div>
                     <div class="margin-bottom-2">
                       <label>
-                        <p class="mb-05 gray-gray">¿Qué curso vamos a reforzar? <span class="alert">*</span></p>
+                        <p class="mb-05 f2 fs-25 w-bold white">¿Qué curso vamos a reforzar?</p>
                         <select 
                           class="c-form__select input-reset"
                           :class="{ valid : sessionRequest.course != '' }"
@@ -190,7 +208,7 @@
                       </label>
                     </div>
                     <div class="margin-bottom-3">
-                      <p class="mb-05 gray-gray">Subir archivos para trabajar en la sesión (opcional)</p>
+                      <p class="mb-05 f2 fs-25 w-bold white">Subir archivos para trabajar en la sesión</p>
                       <el-upload
                         :class="{ valid : sessionRequest.resources.length > 0 }"
                         drag
@@ -207,7 +225,7 @@
                       </el-upload>
                     </div>
                     <button 
-                      class="c-button c-button--ghost-primary padding-horizontal-2 rounded width-100"
+                      class="c-button c-button--ghost-white padding-horizontal-2 f2 fs-18 w-medium br--medium width-100"
                       @click="sendSessionRequest"
                       :disabled="sessionRequest.counter != 8"
                       >
@@ -225,50 +243,54 @@
       <div class="grid-container height-100">
         <div class="grid-x align-center-middle height-100">
           <div class="cell medium-10 large-8">
-            <div class="c-modal__content br--medium bg-white flex-container flex-dir-column text-center">
+            <div class="c-modal__content br--medium bg-sec-color flex-container flex-dir-column text-center">
               <div class="flex-container align-right margin-bottom-1">
-                <button @click="isOpenedValidateCodeModal = false">
+                <button @click="isOpenedValidateCodeModal = false" class="white">
                   <span class="c-icon fs-30"><i class="far fa-times"></i></span>
                 </button>
               </div>
-              <figure class="margin-bottom-1">
-                <img src="{{theme.link}}/static/images/mab-click.png" alt="">
-              </figure>
-              <h2 class="f2 fs-40 w-bold pri-color text-center margin-bottom-3">MAB CLICK</h2>
-              <div class="c-form margin-bottom-1 text-left">
-                <div v-if="!isRightCode || isRightCode == null" class="margin-bottom-3">
-                  <label>
-                    <p class="mb-05 gray-gray">Ingresa el código de activación que se envio</p>
-                    <input 
-                      v-model="sessionKey" 
-                      type="text" 
-                      class="c-form__input input-reset"
-                      @keyup.enter="getSession">
-                  </label>
-                  <p class="margin-bottom-0 alert" :class="{ hide : (isRightCode || isRightCode == null) }">El codigo ingresado no existe</p>
+              <div class="c-modal__body">
+                <div class="c-title flex-container">
+                  <h2 class="fs-60 warning w-bold pri-color text-center display-block">SESIÓN VIRTUAL</h2>
+                  <figure class="text-center large-text-left">
+                    <img src="{{theme.link}}/static/images/vectors/login/hearts.png" alt="">
+                  </figure>
                 </div>
-                <div v-else class="margin-bottom-3">
-                  <label>
-                    <p class="mb-05 gray-gray">Ingresa tu nombre</p>
-                    <input 
-                      v-model="sessionUser" 
-                      type="text" 
-                      class="c-form__input input-reset"
-                      @keyup.enter="joinSession">
-                  </label>
+                <div class="c-form margin-bottom-1 text-left">
+                  <div v-if="!isRightCode || isRightCode == null" class="margin-bottom-3">
+                    <label>
+                      <p class="mb-05 f2 fs-25 w-bold white">Ingresa el código de activación que se envio</p>
+                      <input 
+                        v-model="sessionKey" 
+                        type="text" 
+                        class="c-form__input input-reset"
+                        @keyup.enter="getSession">
+                    </label>
+                    <p class="margin-bottom-0 alert" :class="{ hide : (isRightCode || isRightCode == null) }">El codigo ingresado no existe</p>
+                  </div>
+                  <div v-else class="margin-bottom-3">
+                    <label>
+                      <p class="mb-05 f2 fs-25 w-bold white">Ingresa tu nombre</p>
+                      <input 
+                        v-model="sessionUser" 
+                        type="text" 
+                        class="c-form__input input-reset"
+                        @keyup.enter="joinSession">
+                    </label>
+                  </div>
+                  <button
+                    v-if="!isRightCode || isRightCode == null"
+                    class="c-button c-button--primary f2 w-medium fs-18 padding-horizontal-2 br--medium width-100"
+                    @click="getSession">
+                    VALIDAR CODIGO
+                  </button>
+                  <button
+                    v-else
+                    class="c-button c-button--primary f2 w-medium fs-18 padding-horizontal-2 br--medium width-100"
+                    @click="joinSession">
+                    UNIRSE A LA SESIÓN
+                  </button>
                 </div>
-                <button
-                  v-if="!isRightCode || isRightCode == null"
-                  class="c-button c-button--secondary-alt padding-horizontal-2 rounded width-100"
-                  @click="getSession">
-                  VALIDAR CODIGO
-                </button>
-                <button
-                  v-else
-                  class="c-button c-button--secondary-alt padding-horizontal-2 rounded width-100"
-                  @click="joinSession">
-                  UNIRSE A LA SESIÓN
-                </button>
               </div>
             </div>
           </div>

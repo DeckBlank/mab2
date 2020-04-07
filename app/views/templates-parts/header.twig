@@ -1,15 +1,15 @@
 <header class="c-header width-100" :class="{ shadowed : isHeaderWithShadow }">
   <nav class="c-nav width-100">
     <div class="c-nav__left padding-horizontal-1 position-relative height-100 flex-container align-left align-middle margin-right-1">
-      <figure class="c-brand c-brand--normal flex-container align-center-middle">
-        <a class="c-brand__link" href="{{ site.url }}">
-        </a>
-      </figure>
       <ul class="c-menu flex-container ul-reset">
         {% set home = primary_menu.items[0] %}
         {% set sec_pub = primary_menu.items[1] %}
         {% set sec_priv = primary_menu.items[2] %}
-
+        <figure class="c-brand c-brand--normal flex-container align-center-middle">
+          <a class="c-brand__link" href="{{ site.url }}">
+          </a>
+        </figure>
+        
         <li>
           <div class="c-menu__item">
             <a href="{{ home.link }}" class="position-relative">{{ home.name }}</a>

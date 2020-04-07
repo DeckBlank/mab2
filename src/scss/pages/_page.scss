@@ -1,5 +1,10 @@
 .c-section {
   outline: none;
+  padding-top: 80px;
+
+  &--home {
+    padding-top: 0;
+  }
 
   &--video,
   &--topic {

@@ -9,9 +9,32 @@
 
     &__toggle {
       text-transform: uppercase;
+      cursor: pointer;
+      display: flex !important;
+      padding: 0 !important;
+      margin: 0 !important;
 
       .c-icon {
         @include transition(0.3s);
+      }
+    }
+
+    &__checkbox:checked + .c-unity__toggle {
+      .c-icon {
+        transform: rotateZ(-180deg);
+      }
+    }
+
+    &__checkbox:checked ~ .c-unity__topics {
+      margin-top: 1rem;
+      max-height: 1000px;
+
+      .c-unity__title {
+        opacity: 1;
+      }
+
+      .c-topic {
+        opacity: 1;
       }
     }
 
@@ -44,27 +67,6 @@
 
       .c-topic .c-icon {
         width: 20px;
-      }
-    }
-  }
-
-  .c-unity.active {
-    .c-unity__toggle {
-      .c-icon {
-        transform: rotateZ(-180deg);
-      }
-    }
-
-    .c-unity__title {
-      opacity: 1;
-    }
-
-    .c-unity__topics {
-      margin-top: 1rem;
-      max-height: 1000px;
-
-      .c-topic {
-        opacity: 1;
       }
     }
   }

@@ -21,30 +21,38 @@
     letter-spacing: 0.5rem;
     padding-bottom: 1rem;
     margin: 2rem 1.5rem;
-    border-bottom: solid 1px $dark;
+    border-bottom: solid 1px $warning-color;
+
+    &--grade {
+      font-size: $fs-30;
+      text-shadow: 2px 2px $primary-color;
+    }
   }
 
   &__item {
     a {
       text-transform: uppercase;
-      color: $dark;
-      background-color: $medium-gray;
-      padding: 0.5rem 1.5rem;
-
-      @include transition(0.25s);
-
-      &:hover {
-        background-color: $primary-color;
-        color: $white;
-      }
-    }
-  }
-
-  &__item.active {
-    a {
-      background-color: $secondary-alt;
-      border-bottom: solid 1px $secondary-alt;
       color: $white;
+      padding: 0.5rem 1.5rem;
+      position: relative;
+      z-index: 5;
+
+      &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        content: '';
+        width: 0;
+        height: 100%;
+        background-color: $primary-color;
+
+        @include transition(0.3s);
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
     }
   }
 }

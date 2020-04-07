@@ -13,11 +13,11 @@ const solicitar_id = new Vue({
   },
   beforeMount(){
     this.initSectors();
-  },  
-  mounted(){
-    if(this.logedUser){
-      window.location = this.SITE_URL;
-    }
+  },
+  created(){
+    document.querySelector("[name='course'").innerHTML += `
+      <option value="Otro" data-id="0">Otro</option>
+    `
   },
   methods: {
     ...baseActions()

@@ -20,7 +20,6 @@ class RegistrationController{
             ], 200);
         }else{
             return new WP_Error( 'no_registration', __('No registration found'), array( 'status' => 404 ) );
-        }            
-        
+        }
     }
 }

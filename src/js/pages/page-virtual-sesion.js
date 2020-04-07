@@ -13,7 +13,7 @@ Vue.component(DatePicker.name, DatePicker)
 Vue.component(TimeSelect.name, TimeSelect)
 Vue.component(Upload.name, Upload)
 
-const mab_click = new Vue({
+const virtual_sesion = new Vue({
   ...baseConfig(store),
   data() {
     return {
@@ -82,6 +82,9 @@ const mab_click = new Vue({
       }
     },
   },
+  beforeMount(){
+    this.initSectors();
+  },  
   methods: {
     ...baseActions(),
     handleRemove: function(file){

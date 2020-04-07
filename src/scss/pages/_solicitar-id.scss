@@ -3,6 +3,10 @@
     padding: 2rem;
 
     @include triangle(right, top, 3rem, -30px, 0);
+
+    &::after {
+      border-bottom-color: $secondary-color;
+    }
   }
 
   .c-form {
@@ -12,15 +16,20 @@
     }
   }
 
+  .wpcf7-not-valid-tip {
+    color: $white;
+    font-weight: $medium-font;
+    font-family: $font-family-secondary;
+  }
+
   .wpcf7-response-output {
     text-align: center;
     border: none !important;
     margin: 0 !important;
-    color: $alert-color;
-  }
-
-  .wpcf7-response-output.wpcf7-mail-sent-ok {
-    color: $secondary-color;
+    color: $white;
+    font-size: $fs-18;
+    font-weight: $medium-font;
+    font-family: $font-family-secondary;
   }
 }
 

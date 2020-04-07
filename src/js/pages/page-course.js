@@ -16,15 +16,39 @@ const course = new Vue({
     this.initSectors();
   },  
   mounted: function(){
-    if(!this.logedUser){
-      let topics = document.querySelectorAll('.c-topic__video')
-  
-      topics.forEach(topic => {
-        topic.removeAttribute('href')
-      })
-    }
+    this.isUserAuthOnCourse( this.$refs.course.getAttribute('data-id') )
   },
   methods: {
-    ...baseActions()
+    ...baseActions(),
+    isUserAuthOnCourse: function(course_id){
+      let topics = document.querySelectorAll('.c-topic__video')
+
+      if(!this.logedUser){
+        topics.forEach(topic => {
+          topic.setAttribute('href', `${this.SITE_URL}/solicitar-id`)
+        })      
+      }else{
+        fetch(`${this.API}/registration?user=${this.logedUser.user_auth}&course=${course_id}`,{
+            method: 'GET'
+          })
+          .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              return res.json()
+            }else{
+              throw res
+            }
+          })
+          .then(registration => { 
+
+          })
+          .catch(err => {
+            topics.forEach(topic => {
+              topic.setAttribute('href', `${this.SITE_URL}/solicitar-id`)
+            })
+
+            throw err;          
+          })        
+      }   
+    }        
   }
 })

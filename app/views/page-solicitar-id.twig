@@ -9,12 +9,12 @@
   {% set form = post.get_field('form') %}
   {% set title = post.get_field('title') %}
 
-  <section class="c-section c-section--solicitar-id bg-sec-color">
+  <section class="c-section c-section--solicitar-id bg-success">
     <div class="grid-container padding-vertical-3">
       <div class="grid-x align-center">
         <div class="cell medium-10 large-8 padding-vertical-2">
-          <section class="c-content position-relative bg-white br--medium">
-            <h1 class="fs-50 w-bold dark-gray text-center margin-bottom-2">{{title}}</h1>
+          <section class="c-content position-relative bg-sec-color br--medium">
+            <h1 class="fs-50 w-bold warning text-center margin-bottom-2">{{title}}</h1>
             {{function('do_shortcode', form)}}
           </section>
         </div>
