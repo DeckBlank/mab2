@@ -48,7 +48,7 @@
 
   .c-modal {
     &__close {
-      z-index: 10;
+      z-index: 600;
     }
 
     ::-webkit-scrollbar-thumb {
@@ -98,6 +98,10 @@
       &::placeholder {
         color: $black !important;
       }
+
+      &:read-only {
+        cursor: pointer;
+      }
     }
 
     .el-input__icon {
@@ -141,7 +145,8 @@
       }
 
       .el-icon-close {
-        color: $alert-color !important;
+        color: $white !important;
+        background-color: $alert-color !important;
       }
 
       &__item-name {
@@ -189,7 +194,7 @@
 
   .c-success-message {
     z-index: 500;
-    width: 80%;
+    width: 100%;
     left: 0;
     right: 0;
     bottom: 0;
@@ -202,7 +207,6 @@
 
     &__body {
       padding: 4rem 2rem;
-      height: 90%;
     }
 
     &__icon {
@@ -214,20 +218,6 @@
   .c-success-message.showed {
     visibility: visible;
     opacity: 1;
-  }
-}
-
-@include breakpoint(medium) {
-  .c-section--virtual-session {
-    .c-explanation {
-      &__list {
-        flex-direction: row;
-      }
-
-      &__item {
-        margin: 0 2rem 0 2rem;
-      }
-    }
   }
 }
 
@@ -255,6 +245,16 @@
 
     .c-content {
       padding: 3rem;
+    }
+
+    .c-explanation {
+      &__list {
+        flex-direction: row;
+      }
+
+      &__item {
+        margin: 0 2rem 0 2rem;
+      }
     }
   }
 }

@@ -66,27 +66,27 @@
         </div>
       </div>
     </section>
-    <section class="c-modal position-fixed width-100 height-100" :class="{ opened : true }">
+    <section class="c-modal position-fixed width-100 height-100" :class="{ opened : isOpenedRequestModal }">
       <div class="grid-container height-100">
         <div class="grid-x align-center-middle height-100">
           <div class="cell medium-10 large-8">
             <div class="c-modal__content br--medium position-relative flex-container flex-dir-column bg-sec-color">
-              <div class="c-success-message position-absolute" :class="{ showed : isSentSessionRequest && isOpenedRequestModal }">
+              <div class="c-success-message position-absolute br--medium bg-sec-color width-100 height-100 " :class="{ showed : isSentSessionRequest && isOpenedRequestModal }">
                 <div class="flex-container width-100 height-100 align-center-middle">
-                  <div class="c-success-message__body br--medium bg-white text-center flex-container flex-dir-column align-middle">
+                  <div class="c-success-message__body text-center flex-container flex-dir-column align-middle">
                     <div class="c-success-message__icon flex-container align-center-middle bg-white margin-bottom-2 rounded">
                       <figure class="c-icon">
-                        <img src="{{theme.link}}/static/images/icons/click.png" alt="">
+                        <img src="{{theme.link}}/static/images/vectors/virtual-session/arrow.png" alt="">
                       </figure>
                     </div>
-                    <h2 class="f2 w-bold fs-35 dark margin-bottom-2">Genial, nos comunicaremos contigo para confirmar</h2>
-                    <p class="f2 fs-18 dark-gray margin-bottom-0">
-                      Te enviaremos enviando todos los detalles a tu correo con información de pago y ID. 
+                    <h2 class="f2 w-bold fs-35 white margin-bottom-2">Genial, nos comunicaremos contigo para confirmar</h2>
+                    <p class="f2 fs-18 white margin-bottom-0">
+                      Te estaremos enviando todos los detalles a tu correo con información de pago y ID. 
                     </p>
                   </div>
                 </div>
               </div>
-              <div class="flex-container align-right margin-bottom-1 position-relative">
+              <div class="c-modal__close flex-container align-right margin-bottom-1 position-relative">
                 <button @click="isOpenedRequestModal = false" class="white">
                   <span class="c-icon fs-30"><i class="far fa-times"></i></span>
                 </button>
@@ -137,9 +137,9 @@
                           <div class="grid-x grid-margin-x grid-margin-y">
                             <div class="cell large-6">
                               <el-date-picker
-                                v-model="sessionRequest.date1"
+                                v-model="sessionRequest.date1.value"
                                 class="width-100"
-                                :class="{ valid : sessionRequest.date1}"
+                                :class="{ valid : sessionRequest.date1.isValid }"
                                 format="d MMMM"
                                 value-format="yyyy-MM-dd"
                                 type="date"
@@ -149,9 +149,9 @@
                             </div>
                             <div class="cell large-6">
                               <el-time-select
-                                v-model="sessionRequest.time1"                                
+                                v-model="sessionRequest.time1.value"                                
                                 class="width-100"
-                                :class="{ valid : sessionRequest.time1 }"
+                                :class="{ valid : sessionRequest.time1.isValid }"
                                 :picker-options="{
                                   start: '09:00',
                                   step: '00:30',
@@ -167,9 +167,9 @@
                           <div class="grid-x grid-margin-x grid-margin-y">
                             <div class="cell large-6">
                               <el-date-picker
-                                v-model="sessionRequest.date2"
+                                v-model="sessionRequest.date2.value"
                                 class="width-100"
-                                :class="{ valid : sessionRequest.date2 }"
+                                :class="{ valid : sessionRequest.date2.isValid }"
                                 format="d MMMM"
                                 value-format="yyyy-MM-dd"
                                 type="date"
@@ -178,9 +178,9 @@
                             </div>
                             <div class="cell large-6">
                               <el-time-select
-                                v-model="sessionRequest.time2"
+                                v-model="sessionRequest.time2.value"
                                 class="width-100"
-                                :class="{ valid : sessionRequest.time2 }"
+                                :class="{ valid : sessionRequest.time2.isValid }"
                                 :picker-options="{
                                   start: '08:30',
                                   step: '00:15',
@@ -198,8 +198,8 @@
                         <p class="mb-05 f2 fs-25 w-bold white">¿Qué curso vamos a reforzar?</p>
                         <select 
                           class="c-form__select input-reset"
-                          :class="{ valid : sessionRequest.course != '' }"
-                          v-model="sessionRequest.course">
+                          :class="{ valid : sessionRequest.course.isValid }"
+                          v-model="sessionRequest.course.value">
                           <option value="" selected disabled>- Curso -</option>
                           {% for course in courses %}
                             <option value="{{course.title}}">{{course.title}}</option>                      
@@ -210,7 +210,7 @@
                     <div class="margin-bottom-3">
                       <p class="mb-05 f2 fs-25 w-bold white">Subir archivos para trabajar en la sesión</p>
                       <el-upload
-                        :class="{ valid : sessionRequest.resources.length > 0 }"
+                        :class="{ valid : sessionRequest.resources.isValid }"
                         drag
                         action=""
                         :http-request="addAtachments"

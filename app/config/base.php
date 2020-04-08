@@ -56,9 +56,7 @@ return [
 
         'package_normalize_w' => get_theme_file_uri('/static/js/package.normalize-wheel.bundle.js'),
 
-        'package_resize_obv' => get_theme_file_uri('/static/js/package.resize-observer-polyfill.bundle.js'),   
-
-        'package_ssr_window' => get_theme_file_uri('/static/js/package.ssr-window.bundle.js'),   
+        'package_resize_obv' => get_theme_file_uri('/static/js/package.resize-observer-polyfill.bundle.js'),
 
         'package_opentok' => get_theme_file_uri('/static/js/package.opentok.bundle.js'),   
 

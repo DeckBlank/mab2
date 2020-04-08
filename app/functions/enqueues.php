@@ -1,6 +1,6 @@
 <?php
 
-$assets_version = '1586301118238';
+$assets_version = '1586338522710';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -59,14 +59,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         'ver'       => $assets_version,
         'in_footer' => true
     ]);
-
-    register_assets('script', [
-        'handle'    => 'pandawp/package/ssr_window',
-        'src'       => $config['resources']['package_ssr_window'],
-        'deps'      => [ ],
-        'ver'       => $assets_version,
-        'in_footer' => true
-    ]);   
 
     /**
      * --------------------------------------------------------------------------

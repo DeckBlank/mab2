@@ -133,10 +133,6 @@ const topic = new Vue({
             this.addNewTestScore()
           }
         }
-      } else if (direction == 'prev') {
-        // if(this.swiper.slidePrev()){
-        //   this.isEnableChange = false
-        // }
       }
     },
     verifyOptionSelected: function(qindex){
