@@ -241,7 +241,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 100px;
+    padding: 60px 100px 30px;
   }
   .mab_linkForm .section_content{
     max-width: 1070px;
@@ -1195,7 +1195,7 @@
   }
  
   .init_mabClick_corner{
-    left: -42px;
+    left: -37px;
     top: calc(50% - 100px)
   }
   .init_mabClick_text{
@@ -1257,6 +1257,7 @@
  .init_mabClick_text{
    transform: scale(0.7);
    margin-bottom: 8px;
+   justify-content: flex-start;
  }
     .init_logo{
       margin-bottom: 25px;
@@ -1275,7 +1276,7 @@
     }
     .init_mabClick_corner{
       left: -39px;
-    top: calc(50% - 95px)
+    top: calc(50% - 91px)
     }
     .init_line{
       font-size: 10px;
