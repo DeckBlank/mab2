@@ -21,7 +21,7 @@
                 <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
                   {% for child in item.children %}
                     <label for="grado-{{item.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
-                      <a class="position-relative">{{child.name}}</a>
+                      <a class="position-relative">{{child.name|replace({'Priv': '', 'Pub': ''})}}</a>
 
                       {% if child.children %}
                         <span class="c-icon white"><i class="far fa-chevron-down"></i></span>

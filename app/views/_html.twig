@@ -13,7 +13,7 @@
       {% endblock %}
       
       <div v-if="sectors[0]" class="c-cursos bg-sec-color position-fixed" :class="{ active : isActivePubSectorMenu }">
-        <h2 class="c-cursos__title margin-bottom-1 w-black white">PUBLICO</h2>
+        <h2 class="c-cursos__title margin-bottom-1 w-black white">PÚBLICO</h2>
         <ul class="c-cursos__list ul-reset">
           <li v-for="grade of sectors[0].children" class="c-cursos__item fs-18 f2">
             <a class="display-block" @click="defineGrade({type: 'pub', name: grade.name})">${grade.name.replace('Pub','')}</a>
@@ -22,7 +22,7 @@
       </div>
 
       <div v-if="pubGrade" class="c-cursos bg-sec-color position-fixed" :class="{ active : isActivePubGradoMenu }">
-        <h2 class="c-cursos__title margin-bottom-1 w-black white">${pubGrade.name.replace('Pub','')}</h2>
+        <h2 class="c-cursos__title c-cursos__title--grade margin-bottom-1 w-black white">${pubGrade.name.replace('Pub','')}</h2>
         <ul class="c-cursos__list ul-reset">
           <li class="c-cursos__item fs-18 f2">
             <a class="flex-container align-middle" @click="updateStatusPubGradoMenu">

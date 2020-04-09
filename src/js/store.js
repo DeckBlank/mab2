@@ -48,20 +48,20 @@ export const store = new Vuex.Store({
       }
     },
 
-    setStatusPubSectorMenu(state){
-      state.isActivePubSectorMenu = !state.isActivePubSectorMenu
+    setStatusPubSectorMenu(state, status){
+      state.isActivePubSectorMenu = (status == undefined) ? !state.isActivePubSectorMenu : status
     },
 
-    setStatusPrivSectorMenu(state){
-      state.isActivePrivSectorMenu = !state.isActivePrivSectorMenu
+    setStatusPrivSectorMenu(state, status){
+      state.isActivePrivSectorMenu =  (status == undefined) ? !state.isActivePrivSectorMenu : status
     },
 
-    setStatusPubGradoMenu(state){
-      state.isActivePubGradoMenu = !state.isActivePubGradoMenu
+    setStatusPubGradoMenu(state, status){
+      state.isActivePubGradoMenu = (status == undefined) ? !state.isActivePubGradoMenu : status
     },
 
-    setStatusPrivGradoMenu(state){
-      state.isActivePrivGradoMenu = !state.isActivePrivGradoMenu
+    setStatusPrivGradoMenu(state, status){
+      state.isActivePrivGradoMenu = (status == undefined) ? !state.isActivePrivGradoMenu : status
     },
 
     setStatusHeaderShadow(state, status){
@@ -106,10 +106,14 @@ export const store = new Vuex.Store({
 
     updateStatusPubSectorMenu: ({commit})=>{
       commit('setStatusPubSectorMenu')
+      commit('setStatusPrivSectorMenu', false)
+      commit('setStatusPrivGradoMenu', false)
     },
 
     updateStatusPrivSectorMenu: ({commit})=>{
       commit('setStatusPrivSectorMenu')
+      commit('setStatusPubSectorMenu', false)
+      commit('setStatusPubGradoMenu', false)
     },
 
     updateStatusPubGradoMenu: ({commit})=>{
