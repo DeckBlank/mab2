@@ -24,9 +24,8 @@ class FormModel{
                     ugel,
                     children_school,
                     children_quantity,
-                    department,
-                    province,
-                    district) 
+                    children,
+                    location) 
             VALUES(
                 '". date("Y-m-d") ."',
                 '". $request['name'] ."',
@@ -39,9 +38,8 @@ class FormModel{
                 '". $request['ugel'] ."',
                 '". $request['children_school'] ."',
                 '". $request['children_quantity'] ."',
-                '". $request['department'] ."',
-                '". $request['province'] ."',
-                '". $request['district'] ."'
+                '". $request['children'] ."',
+                '". $request['location'] ."'
             )
         ");  
     }
@@ -62,9 +60,7 @@ class FormModel{
                     school,
                     grade,
                     age,
-                    department,
-                    province,
-                    district) 
+                    location) 
             VALUES(
                 '". date("Y-m-d") ."',
                 '". $request['name'] ."',
@@ -78,9 +74,7 @@ class FormModel{
                 '". $request['school'] ."',
                 '". $request['grade'] ."',
                 '". $request['age'] ."',
-                '". $request['department'] ."',
-                '". $request['province'] ."',
-                '". $request['district'] ."'
+                '". $request['location'] ."'
             )
         ");  
     }
@@ -101,9 +95,7 @@ class FormModel{
                     school,
                     grade,
                     age,
-                    department,
-                    province,
-                    district) 
+                    location) 
             VALUES(
                 '". date("Y-m-d") ."',
                 '". $request['name'] ."',
@@ -117,9 +109,7 @@ class FormModel{
                 '". $request['school'] ."',
                 '". $request['grade'] ."',
                 '". $request['age'] ."',
-                '". $request['department'] ."',
-                '". $request['province'] ."',
-                '". $request['district'] ."'
+                '". $request['location'] ."'
             )
         ");  
     }

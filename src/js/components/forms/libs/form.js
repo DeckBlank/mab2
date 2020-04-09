@@ -8,20 +8,6 @@ function baseData(){
     //Schools
     ugels: [],
     schools: [],
-    grades: [
-      "1RO PRIMARIA",
-      "2DO PRIMARIA",
-      "3RO PRIMARIA",
-      "4TO PRIMARIA",
-      "5TO PRIMARIA",
-      "6TO PRIMARIA",
-      "1RO SECUNDARIA",
-      "2DO SECUNDARIA",
-      "3RO SECUNDARIA",
-      "4TO SECUNDARIA",
-      "5TO SECUNDARIA",
-      "6TO SECUNDARIA"
-    ],
 
     //Form
     isSentForm: false,
@@ -108,20 +94,25 @@ function baseWatch(){
       this.validateSelect(this.schoolType) 
 
       if(value == 'privado'){
-        this.counter.limit = 13;
+        this.counter.limit = (this.counter.base) ? this.counter.base : 13;
         this.getSchools(value)
 
         if(this.school.value != ''){
           this.school.value = ''
           this.school.isValid = false         
           this.counter.status--;
+
+        }else if(this.childrenSchool.value != ''){
+          this.childrenSchool.value = ''
+          this.childrenSchool.isValid = false         
+          this.counter.status--;       
         }
 
         if(this.ugel.value != ''){              
           this.counter.status--;
         }
       }else if(value == 'publico'){
-        this.counter.limit = 14;
+        this.counter.limit = (this.counter.base) ? this.counter.base + 1 : 14;
         this.ugels = Object.keys(require('../../../extras/schools/publics.json'))
 
         if(this.school.value != ''){
@@ -129,6 +120,14 @@ function baseWatch(){
 
           this.school.value = ''
           this.school.isValid = false
+
+          this.counter.status--;
+
+        }else if(this.childrenSchool.value != ''){
+          this.schools = []
+
+          this.childrenSchool.value = ''
+          this.childrenSchool.isValid = false
 
           this.counter.status--;
         }

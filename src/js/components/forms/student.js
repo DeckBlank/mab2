@@ -155,6 +155,22 @@ Vue.component('form-student',{
   data() {
     return {
       ...baseData(),
+      //School
+      grades: [
+        "1RO PRIMARIA",
+        "2DO PRIMARIA",
+        "3RO PRIMARIA",
+        "4TO PRIMARIA",
+        "5TO PRIMARIA",
+        "6TO PRIMARIA",
+        "1RO SECUNDARIA",
+        "2DO SECUNDARIA",
+        "3RO SECUNDARIA",
+        "4TO SECUNDARIA",
+        "5TO SECUNDARIA",
+        "6TO SECUNDARIA"
+      ],
+
       counter: {
         status: 0,
         limit: 13,
@@ -202,9 +218,7 @@ Vue.component('form-student',{
       tutor_form_data.append('school', this.school.value)
       tutor_form_data.append('grade', this.grade.value)
       tutor_form_data.append('age', this.age.value)
-      tutor_form_data.append('department', this.department.value)
-      tutor_form_data.append('province', this.province.value)
-      tutor_form_data.append('district', this.district.value)
+      tutor_form_data.append('location', `${this.department.value}, ${this.province.value}, ${this.district.value}`)
 
       fetch(`${this.API}/form/student`,{
           method: 'POST',

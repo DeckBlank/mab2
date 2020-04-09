@@ -99,6 +99,26 @@ Vue.component('form-tutor',{
           type="number"
           v-model="childrenQuantity.value">
       </div>
+      <div v-for="(child,index) of children" >
+        <div class="input_container">
+          <label for="">Grado escolar hijo {{index + 1}}</label>
+          <select 
+            class="c-form-box__select select-reset"
+            :class="{ valid : children[index].grade != '' }"
+            v-model="children[index].grade">
+            <option disabled value="" selected>Selecciona una opción</option>
+            <option v-for="_grade of grades" :key="_grade.id" :value="_grade" >{{_grade}}</option>
+          </select>            
+        </div>
+        <div class="input_container">
+          <label for="">Edad hijo {{index + 1}}</label>
+          <input 
+            class="c-form-box__input input-reset" 
+            :class="{ valid : (children[index].age > 0) }"
+            type="number"
+            v-model="children[index].age">
+        </div>
+      </div>
       <div class="input_container">
         <label for="">Departamento</label>
         <select
@@ -136,7 +156,7 @@ Vue.component('form-tutor',{
         <button 
           class="c-form-box__sender" 
           type="button" 
-          :disabled="counter.status != counter.limit"
+          
           @click="sendForm">Listo</button>
       </div>
     </form>  
@@ -145,15 +165,33 @@ Vue.component('form-tutor',{
   data() {
     return {
       ...baseData(),
+      //School
+      grades: [
+        "1RO PRIMARIA",
+        "2DO PRIMARIA",
+        "3RO PRIMARIA",
+        "4TO PRIMARIA",
+        "5TO PRIMARIA",
+        "6TO PRIMARIA",
+        "1RO SECUNDARIA",
+        "2DO SECUNDARIA",
+        "3RO SECUNDARIA",
+        "4TO SECUNDARIA",
+        "5TO SECUNDARIA",
+        "6TO SECUNDARIA"
+      ],
+      
       counter: {
         status: 0,
-        limit: 12,
+        base: 12,
+        limit: 12
       },
       childrenQuantity: {
         value: '',
         pattern: '^([0-9]+)$',
         isValid: false
-      },      
+      },
+      children: [],
       childrenSchool: {
         value: '',
         isValid: false
@@ -165,17 +203,28 @@ Vue.component('form-tutor',{
   },
   watch: {
     ...baseWatch(),
-    'childrenQuantity.value': function(){
+    'childrenQuantity.value': function(val){
       this.childrenQuantity.isValid = this.validateText(this.childrenQuantity)
+      this.children = [];
+
+      for (let index = 0; index < val; index++) {
+        this.children.push({
+          numero: (index + 1),
+          grade: '',
+          age: 0
+        })
+      }
     },
     'childrenSchool.value': function(value){
-      this.validateSelect(this.childrenSchool)   
+      this.validateSelect(this.childrenSchool)
     }
   },
   methods: {
     ...baseMethods(),
     sendForm: function(){
       let tutor_form_data = new FormData();
+
+      console.log(JSON.stringify(this.children))
 
       tutor_form_data.append('name', this.name.value)
       tutor_form_data.append('last_father_name', this.lastFatherName.value)
@@ -187,9 +236,8 @@ Vue.component('form-tutor',{
       tutor_form_data.append('ugel', this.ugel.value)
       tutor_form_data.append('children_school', this.childrenSchool.value)
       tutor_form_data.append('children_quantity', this.childrenQuantity.value)
-      tutor_form_data.append('department', this.department.value)
-      tutor_form_data.append('province', this.province.value)
-      tutor_form_data.append('district', this.district.value)
+      tutor_form_data.append('children', JSON.stringify(this.children))
+      tutor_form_data.append('location', `${this.department.value}, ${this.province.value}, ${this.district.value}`)
 
       fetch(`${this.API}/form/tutor`,{
           method: 'POST',

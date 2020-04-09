@@ -73,9 +73,8 @@ class DBConnection{
             ugel VARCHAR(100) NOT NULL,
             children_school VARCHAR(100) NOT NULL,
             children_quantity INT NOT NULL,
-            department VARCHAR(100) NOT NULL,
-            province VARCHAR(100) NOT NULL,
-            district VARCHAR(100) NOT NULL,
+            children TEXT NOT NULL,
+            location VARCHAR(100) NOT NULL,
             PRIMARY KEY (id)
         )");
     }
@@ -95,9 +94,7 @@ class DBConnection{
             school VARCHAR(100) NOT NULL,
             grade INT NOT NULL,
             age INT NOT NULL,
-            department VARCHAR(100) NOT NULL,
-            province VARCHAR(100) NOT NULL,
-            district VARCHAR(100) NOT NULL,
+            location VARCHAR(100) NOT NULL,
             PRIMARY KEY (id)
         )");
     }
@@ -117,9 +114,7 @@ class DBConnection{
             school VARCHAR(100) NOT NULL,
             grade INT NOT NULL,
             age INT NOT NULL,
-            department VARCHAR(100) NOT NULL,
-            province VARCHAR(100) NOT NULL,
-            district VARCHAR(100) NOT NULL,
+            location VARCHAR(100) NOT NULL,
             PRIMARY KEY (id)
         )");
     }
