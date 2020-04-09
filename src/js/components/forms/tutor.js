@@ -156,7 +156,7 @@ Vue.component('form-tutor',{
         <button 
           class="c-form-box__sender" 
           type="button" 
-          
+          :disabled="counter.status != counter.limit"
           @click="sendForm">Listo</button>
       </div>
     </form>  
