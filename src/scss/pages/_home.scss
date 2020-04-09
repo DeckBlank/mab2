@@ -115,14 +115,14 @@
     line-height: 130px;
     position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    padding-top: 125px;
   }
 
   .init_mabClick_corner{
     position: absolute;
-    left: -80px;
-    top: calc(50% - 192px);
+
+    left: -79px;
+    top: 58px;
     width: 90px;
     height: 90px;
   }
@@ -798,12 +798,13 @@
       font-size: 100px;
       line-height: 75px;
       padding-right: 50px;
+      padding-top: 60px;
     }
   
     .init_mabClick_corner {
       position: absolute;
-      left: -37px;
-      top: calc(50% - 109px);
+      left: -39px;
+    top: 25px;
       width: 45px;
       height: 45px;
     }
@@ -1196,9 +1197,10 @@
  
   .init_mabClick_corner{
     left: -37px;
-    top: calc(50% - 100px)
+    top: -30px
   }
   .init_mabClick_text{
+    padding-top: 0px;
     font-size: 79px;
     line-height: 64px;
     width: auto;
@@ -1276,7 +1278,7 @@
     }
     .init_mabClick_corner{
       left: -39px;
-    top: calc(50% - 91px)
+    top: -30px
     }
     .init_line{
       font-size: 10px;
