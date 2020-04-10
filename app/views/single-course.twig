@@ -93,20 +93,19 @@
               </li>
             {% else %}
               <li class="c-unity margin-bottom-1 br--medium">
-                <h2 class="margin-bottom-0">
-                  <button class="c-unity__toggle flex-container align-justify width-100" @click="isActiveUnity = !isActiveUnity">
-                    <p class="text-left margin-bottom-0 margin-right-1 w-bold fs-25 white">
-                      Unidad {{loop.index}}:
-                    </p>
-                    <span class="c-icon display-block white fs-21"><i class="far fa-chevron-down"></i></span>
-                  </button>
-                </h2>
+                <input id="unity-{{loop.index}}" type="checkbox" class="hide c-unity__checkbox">           
+                <label for="unity-{{loop.index}}" class="c-unity__toggle align-justify width-100">
+                  <p class="text-left margin-bottom-0 margin-right-1 w-bold fs-25 white">
+                    Unidad {{loop.index}}:
+                  </p>
+                  <span class="c-icon display-block white fs-21"><i class="far fa-chevron-down"></i></span>
+                </label>
                 <ul class="c-unity__topics position-relative ul-reset bg-white br--medium padding-1">
                   <li class="c-unity__title margin-bottom-1">
                     <h3 class="fs-25 f2 dark-gray w-bold">{{unity.title}}</h3>
                     <p class="margin-bottom-0 padding-left-2 fs-25 w-black">.....</p>
                   </li>
-  
+
                   {% for topic in unity.topics %}                 
                     <li class="c-topic f2 fs-21 dar-gray w-medium">
                       <a href="{{topic.link}}?course_id={{post.id}}&course_name={{post.title}}&unity={{loop.index}}" class="c-topic__video flex-container align-justify align-middle">
@@ -119,7 +118,7 @@
                           4:00
                         </p>
                       </a>
-  
+
                       {% if topic.summary %}                      
                         <a href="{{topic.summary}}" target="_blank" class="c-topic__video flex-container align-justify align-middle">
                           <p class="margin-bottom-0 flex-container align-middle dark-gray">
@@ -143,7 +142,7 @@
                           </p>
                         </a>
                       {% endif %}
-  
+
                       {% if topic.worksheet %}                      
                         <a href="{{topic.worksheet}}" target="_blank" class="c-topic__video flex-container align-justify align-middle">
                           <p class="margin-bottom-0 flex-container align-middle dark-gray">
@@ -155,7 +154,7 @@
                           </p>
                         </a>
                       {% endif %}
-  
+
                       {% if topic.solutions %}                      
                         <a href="{{topic.solutions}}" target="_blank" class="c-topic__video flex-container align-justify align-middle">
                           <p class="margin-bottom-0 flex-container align-middle dark-gray">
@@ -167,7 +166,7 @@
                           </p>
                         </a>
                       {% endif %}
-  
+
                     </li>
                   {% endfor %}
                 </ul>
