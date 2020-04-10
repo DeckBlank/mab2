@@ -41,12 +41,6 @@ add_action( 'after_setup_theme', function() {
     add_theme_support( 'editor-styles' );
 });
 
-add_action( 'pre_get_posts', function ( $query ) {
-    if ( is_post_type_archive() ) {
-        set_query_var('posts_per_page', 4);
-    }
-});
-
 add_action( 'widgets_init', function () {
     if ( WP_DEBUG ) {
         register_sidebar( array(
