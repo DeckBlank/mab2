@@ -25,7 +25,7 @@ class FormModel{
                     children_school,
                     children_quantity,
                     children,
-                    location) 
+                    location)
             VALUES(
                 '". date("Y-m-d") ."',
                 '". $request['name'] ."',

@@ -73,10 +73,10 @@
       <div class="c-feed grid-x grid-margin-x grid-margin-y margin-bottom-2">
         <div class="cell medium-6" v-for="(video, index) of videos" :key="video.id">
           <video-c
-            :title="video.title" 
+            :title="video.title"
             :link="video.link" 
-            :author="video.author" 
-            :thumbnail="video.thumbnail.guid"            
+            :author="video.author"
+            :thumbnail="video.thumbnail"
           >
           </video-c>
         </div>

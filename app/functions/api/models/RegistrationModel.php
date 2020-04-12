@@ -19,9 +19,9 @@ class RegistrationModel{
                 $registration['registration']['state'] == true ){
 
                 return true;
-            }else {
-                return false;
             }
         }
+
+        return false;
     }
 }

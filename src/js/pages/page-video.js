@@ -30,6 +30,7 @@ const video = new Vue({
 
     this.getLikesAverage()
     this.getComments()
+    this.hideLoading();
   },
   methods: {
     ...baseActions(),

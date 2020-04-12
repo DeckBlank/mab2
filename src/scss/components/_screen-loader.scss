@@ -1,0 +1,8 @@
+.c-page-loader {
+  @include transition(0.3s);
+}
+
+.c-page-loader.hidden {
+  visibility: hidden;
+  opacity: 0;
+}

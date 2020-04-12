@@ -110,6 +110,9 @@ const virtual_sesion = new Vue({
   beforeMount(){
     this.initSectors();
   },
+  mounted(){
+    this.hideLoading();
+  },
   updated(){
     [...document.querySelectorAll('.el-input__inner')].forEach(el => {
       el.readOnly = true

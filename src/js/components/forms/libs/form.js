@@ -11,26 +11,31 @@ function baseData(){
 
     //Form
     isSentForm: false,
+    isSentFormError: false,
     
     //Model
     name: {
       value: '',
-      pattern: '^([a-zA-Z ]+)$',
+      pattern: "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",
       isValid: null
     },
     lastFatherName: {
       value: '',
-      pattern: '^([a-zA-Z ]+)$',
+      pattern: "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",
       isValid: false
     },
     lastMotherName: {
       value: '',
-      pattern: '^([a-zA-Z ]+)$',
+      pattern: "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",
       isValid: false
     },
     email: {
       value: '',
       pattern: "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
+      isValid: false
+    },
+    password: {
+      value: '',
       isValid: false
     },
     phone: {
@@ -84,6 +89,15 @@ function baseWatch(){
     'email.value': function(){
       this.email.isValid = this.validateText(this.email)
     },
+    'password.value': function(value){
+      if(value != '' && this.password.isValid == false){
+        this.password.isValid = true
+        this.counter.status++;
+      }else if(value == '' && this.password.isValid == true){
+        this.password.isValid = false
+        this.counter.status--;
+      }
+    },
     'phone.value': function(){
       this.phone.isValid = this.validateText(this.phone)
     },
@@ -94,15 +108,15 @@ function baseWatch(){
       this.validateSelect(this.schoolType) 
 
       if(value == 'privado'){
-        this.counter.limit = (this.counter.base) ? this.counter.base : 13;
+        this.counter.limit = this.counter.base;
         this.getSchools(value)
 
-        if(this.school.value != ''){
+        if(this.school && this.school.value != ''){
           this.school.value = ''
           this.school.isValid = false         
           this.counter.status--;
 
-        }else if(this.childrenSchool.value != ''){
+        }else if(this.childrenSchool && this.childrenSchool.value != ''){
           this.childrenSchool.value = ''
           this.childrenSchool.isValid = false         
           this.counter.status--;       
@@ -112,10 +126,10 @@ function baseWatch(){
           this.counter.status--;
         }
       }else if(value == 'publico'){
-        this.counter.limit = (this.counter.base) ? this.counter.base + 1 : 14;
+        this.counter.limit = this.counter.base + 1;
         this.ugels = Object.keys(require('../../../extras/schools/publics.json'))
 
-        if(this.school.value != ''){
+        if(this.school && this.school.value != ''){
           this.schools = []
 
           this.school.value = ''
@@ -123,7 +137,7 @@ function baseWatch(){
 
           this.counter.status--;
 
-        }else if(this.childrenSchool.value != ''){
+        }else if(this.childrenSchool && this.childrenSchool.value != ''){
           this.schools = []
 
           this.childrenSchool.value = ''

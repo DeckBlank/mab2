@@ -69,6 +69,7 @@ const topic = new Vue({
     this.getLikesAverage();
     this.getComments();
     this.getQuestions();
+    this.hideLoading();
   },
   methods: {
     ...baseActions(),
@@ -235,7 +236,7 @@ const topic = new Vue({
       let topics = document.querySelectorAll('.c-topic__video')
 
       if(!this.logedUser || !this.metas.get('course_name') || !this.metas.get('unity')){
-        window.location = `${this.SITE_URL}/solicitar-id`;      
+        window.location = `${this.SITE_URL}/solicitar-cursos`;      
       }else{
         fetch(`${this.API}/registration?user=${this.logedUser.user_auth}&course=${course_id}`,{
             method: 'GET'
@@ -251,7 +252,7 @@ const topic = new Vue({
 
           })
           .catch(err => {
-            window.location = `${this.SITE_URL}/solicitar-id`;
+            window.location = `${this.SITE_URL}/solicitar-cursos`;
             
             throw err;          
           })        

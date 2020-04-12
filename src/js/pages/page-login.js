@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import {baseConfig, baseState, baseActions} from '../app'
+import {saveUserLoginSession} from '../libs/login'
 import {store} from '../store'
 
 const login = new Vue({
@@ -23,19 +24,12 @@ const login = new Vue({
   },
   beforeMount(){
     this.initSectors();
+  },
+  mounted(){
+    this.hideLoading();
   },  
   methods: {
     ...baseActions(),
-    saveSession: function(user){
-      let mabSession = window.localStorage.getItem('mab_loged_user')
-
-      if(!mabSession){
-        window.localStorage.setItem('mab_loged_user',JSON.stringify({
-          user_auth: user.data.user_login,
-          session_token: user.data.user_pass
-        }))
-      }
-    },
     login: function(){
       if(this.user != '' && this.password != ''){
         this.isLoading = true
@@ -51,7 +45,7 @@ const login = new Vue({
             }
           })
           .then(user => {
-            this.saveSession(user)
+            saveUserLoginSession(user)
             this.isLoading = false
             this.isShowedErrorMessage = false
 

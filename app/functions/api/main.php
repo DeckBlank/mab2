@@ -37,6 +37,11 @@ add_action( 'rest_api_init', function () {
         'methods' => 'GET',
         'callback' => array($userController,'auth'),
     ));
+
+    register_rest_route( 'custom/v1', '/user', array(
+        'methods' => 'POST',
+        'callback' => array($userController,'createUser'),
+    ));
 });
 
 //2. Video ----------------------------------//

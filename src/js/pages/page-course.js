@@ -17,6 +17,8 @@ const course = new Vue({
   },  
   mounted: function(){
     this.isUserAuthOnCourse( this.$refs.course.getAttribute('data-id') )
+    this.saveCourseOnMetas()
+    this.hideLoading();
   },
   methods: {
     ...baseActions(),
@@ -25,8 +27,8 @@ const course = new Vue({
 
       if(!this.logedUser){
         topics.forEach(topic => {
-          topic.setAttribute('href', `${this.SITE_URL}/solicitar-id`)
-        })      
+          topic.setAttribute('href', `${this.SITE_URL}/solicitar-cursos`)
+        })
       }else{
         fetch(`${this.API}/registration?user=${this.logedUser.user_auth}&course=${course_id}`,{
             method: 'GET'
@@ -43,12 +45,17 @@ const course = new Vue({
           })
           .catch(err => {
             topics.forEach(topic => {
-              topic.setAttribute('href', `${this.SITE_URL}/solicitar-id`)
+              topic.setAttribute('href', `${this.SITE_URL}/solicitar-cursos`)
             })
 
             throw err;          
           })        
       }   
-    }        
+    },
+    saveCourseOnMetas: function(){
+      window.localStorage.setItem('mab_metas', JSON.stringify({
+        course: this.$refs.course.getAttribute('data-title')
+      }))
+    }
   }
 })

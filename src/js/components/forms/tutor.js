@@ -7,7 +7,7 @@ Vue.component('form-tutor',{
   template: /*html*/
   ` 
   <section class="width-100">
-    <form-accept :switcher.sync="isSentForm"></form-accept>
+    <form-accept :switcher.sync="isSentForm" :user="email.value" :password="password.value"></form-accept>
     <form class="c-form-box form_box" action="">
       <div class="input_container">
         <label for="">Nombre Completo</label>
@@ -41,6 +41,14 @@ Vue.component('form-tutor',{
           type="email" 
           v-model="email.value">
       </div>
+      <div class="input_container">
+        <label for="">Contraseña</label>
+        <input 
+          class="c-form-box__input input-reset"
+          :class="{ valid : password.isValid }"
+          type="password" 
+          v-model="password.value">
+      </div>      
       <div class="input_container">
         <label for="">Teléfono</label>
         <input 
@@ -152,6 +160,9 @@ Vue.component('form-tutor',{
           <option v-for="dis of distritos" :key="dis.id" :value="dis.nombre_ubigeo" >{{dis.nombre_ubigeo}}</option>                                             
         </select>
       </div>
+      <div v-if="isSentFormError" class="margin-bottom-1">
+        <p class="white fs-18 f2 w-medium text-center margin-bottom-0">El usuario ya existe</p>
+      </div>
       <div class="btn_container">
         <button 
           class="c-form-box__sender" 
@@ -183,8 +194,8 @@ Vue.component('form-tutor',{
       
       counter: {
         status: 0,
-        base: 12,
-        limit: 12
+        base: 13,
+        limit: 13
       },
       childrenQuantity: {
         value: '',
@@ -222,26 +233,26 @@ Vue.component('form-tutor',{
   methods: {
     ...baseMethods(),
     sendForm: function(){
-      let tutor_form_data = new FormData();
+      let form_data = new FormData();
 
-      console.log(JSON.stringify(this.children))
+      form_data.append('type', 'tutor')
+      form_data.append('user_name', `${this.name.value} ${this.lastFatherName.value} ${this.lastMotherName.value}`)
+      form_data.append('first_name', this.name.value)
+      form_data.append('last_name', `${this.lastFatherName.value} ${this.lastMotherName.value}`)
+      form_data.append('email', this.email.value)
+      form_data.append('password', this.password.value)
+      form_data.append('phone', this.phone.value)
+      form_data.append('mobile', this.mobile.value)
+      form_data.append('school_type', this.schoolType.value)
+      form_data.append('ugel', this.ugel.value)
+      form_data.append('children_school', this.childrenSchool.value)
+      form_data.append('children_quantity', this.childrenQuantity.value)
+      form_data.append('children', JSON.stringify(this.children))
+      form_data.append('location', `${this.department.value}, ${this.province.value}, ${this.district.value}`)
 
-      tutor_form_data.append('name', this.name.value)
-      tutor_form_data.append('last_father_name', this.lastFatherName.value)
-      tutor_form_data.append('last_mother_name', this.lastMotherName.value)
-      tutor_form_data.append('email', this.email.value)
-      tutor_form_data.append('phone', this.phone.value)
-      tutor_form_data.append('mobile', this.mobile.value)
-      tutor_form_data.append('school_type', this.schoolType.value)
-      tutor_form_data.append('ugel', this.ugel.value)
-      tutor_form_data.append('children_school', this.childrenSchool.value)
-      tutor_form_data.append('children_quantity', this.childrenQuantity.value)
-      tutor_form_data.append('children', JSON.stringify(this.children))
-      tutor_form_data.append('location', `${this.department.value}, ${this.province.value}, ${this.district.value}`)
-
-      fetch(`${this.API}/form/tutor`,{
+      fetch(`${this.API}/user`,{
           method: 'POST',
-          body: tutor_form_data
+          body: form_data
         })
         .then(res => {
           if (res.status >= 200 && res.status < 300) {
@@ -251,9 +262,12 @@ Vue.component('form-tutor',{
           }
         })
         .then(response => {
+          this.isSentFormError = false;
           this.isSentForm = true;
         })
         .catch(err => {
+          this.isSentFormError = true;
+
           throw err;          
         })      
     }

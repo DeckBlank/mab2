@@ -35,6 +35,9 @@ const emotional = new Vue({
 
     this.initSectors();
   },
+  mounted(){
+    this.hideLoading();
+  },  
   methods: {
     ...baseActions(),
     cleanFilter: function(){

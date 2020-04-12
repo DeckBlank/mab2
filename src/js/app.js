@@ -35,7 +35,8 @@ function baseState(){
     'isActivePubGradoMenu',
     'isActivePrivGradoMenu',
     'isHeaderWithShadow',
-    'isActiveBrowserToggle'
+    'isActiveBrowserToggle',
+    'isLoadedPage'
   ])
 }
 
@@ -48,7 +49,8 @@ function baseActions(){
       'updateStatusPubGradoMenu',
       'updateStatusPrivGradoMenu',
       'updateStatusHeaderShadow',
-      'updateStatusBrowserToggle'
+      'updateStatusBrowserToggle',
+      'hideLoading'
     ]),
     handleScroll: function(event){
       if(window.scrollY > 100){

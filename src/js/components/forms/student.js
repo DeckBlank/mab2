@@ -7,7 +7,7 @@ Vue.component('form-student',{
   template: /*html*/
   `
   <section class="width-100">
-    <form-accept :switcher.sync="isSentForm"></form-accept>
+    <form-accept :switcher.sync="isSentForm" :user="email.value" :password="password.value"></form-accept>
     <form class="c-form-box form_box" action="">
       <div class="input_container">
         <label for="">Nombre Completo</label>
@@ -40,6 +40,14 @@ Vue.component('form-student',{
           :class="{ valid : email.isValid }"
           type="email" 
           v-model="email.value">
+      </div>
+      <div class="input_container">
+        <label for="">Contraseña</label>
+        <input 
+          class="c-form-box__input input-reset"
+          :class="{ valid : password.isValid }"
+          type="password" 
+          v-model="password.value">
       </div>
       <div class="input_container">
         <label for="">Teléfono</label>
@@ -142,6 +150,9 @@ Vue.component('form-student',{
           <option v-for="dis of distritos" :key="dis.id" :value="dis.nombre_ubigeo" >{{dis.nombre_ubigeo}}</option>                                             
         </select>
       </div>
+      <div v-if="isSentFormError" class="margin-bottom-1">
+        <p class="white fs-18 f2 w-medium text-center margin-bottom-0">El usuario ya existe</p>
+      </div>      
       <div class="btn_container">
         <button 
           class="c-form-box__sender" 
@@ -173,8 +184,9 @@ Vue.component('form-student',{
 
       counter: {
         status: 0,
-        limit: 13,
-      },    
+        base: 14,
+        limit: 14
+      },
       grade: {
         value: '',
         isValid: false
@@ -205,24 +217,26 @@ Vue.component('form-student',{
     ...baseMethods(),
     sendForm: function(){
 
-      let tutor_form_data = new FormData();
+      let form_data = new FormData();
 
-      tutor_form_data.append('name', this.name.value)
-      tutor_form_data.append('last_father_name', this.lastFatherName.value)
-      tutor_form_data.append('last_mother_name', this.lastMotherName.value)
-      tutor_form_data.append('email', this.email.value)
-      tutor_form_data.append('phone', this.phone.value)
-      tutor_form_data.append('mobile', this.mobile.value)
-      tutor_form_data.append('school_type', this.schoolType.value)
-      tutor_form_data.append('ugel', this.ugel.value)
-      tutor_form_data.append('school', this.school.value)
-      tutor_form_data.append('grade', this.grade.value)
-      tutor_form_data.append('age', this.age.value)
-      tutor_form_data.append('location', `${this.department.value}, ${this.province.value}, ${this.district.value}`)
+      form_data.append('type', 'student')
+      form_data.append('user_name', `${this.name.value} ${this.lastFatherName.value} ${this.lastMotherName.value}`)
+      form_data.append('first_name', this.name.value)
+      form_data.append('last_name', `${this.lastFatherName.value} ${this.lastMotherName.value}`)
+      form_data.append('email', this.email.value)
+      form_data.append('password', this.password.value)
+      form_data.append('phone', this.phone.value)
+      form_data.append('mobile', this.mobile.value)
+      form_data.append('school_type', this.schoolType.value)
+      form_data.append('ugel', this.ugel.value)
+      form_data.append('school', this.school.value)
+      form_data.append('grade', this.grade.value)
+      form_data.append('age', this.age.value)
+      form_data.append('location', `${this.department.value}, ${this.province.value}, ${this.district.value}`)
 
-      fetch(`${this.API}/form/student`,{
+      fetch(`${this.API}/user`,{
           method: 'POST',
-          body: tutor_form_data
+          body: form_data
         })
         .then(res => {
           if (res.status >= 200 && res.status < 300) {
@@ -232,9 +246,12 @@ Vue.component('form-student',{
           }
         })
         .then(response => {
+          this.isSentFormError = false;
           this.isSentForm = true;
         })
         .catch(err => {
+          this.isSentFormError = true;
+
           throw err;          
         })      
     }    

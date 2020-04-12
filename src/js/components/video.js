@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import Vuex from 'vuex'
 
 Vue.component('video-c',{
   template: /*html*/`
@@ -6,7 +7,8 @@ Vue.component('video-c',{
       <a 
         :href="link" 
         class="c-card-video__thumbnail br--medium display-block margin-bottom-2 position-relative overflow-hidden">
-        <img class="width-100 height-100 of--cover" :src="thumbnail" alt="">
+        <img v-if="thumbnail" class="width-100 height-100 of--cover" :src="thumbnail.guid" alt="">
+        <img v-else class="width-100 height-100 of--cover" :src="THEME_URL + '/static/images/example.jpg' " alt="">
         <div class="c-card-video__play position-absolute flex-container align-center-middle">
           <span class="c-icon"><i class="far fa-play"></i></span>
         </div>
@@ -16,11 +18,15 @@ Vue.component('video-c',{
       </h3>
       <div class="flex-container align-middle">
         <figure class="c-avatar margin-right-1 overflow-hidden rounded">
-          <img class="width-100 height-100 of--cover" :src="author.avatar.sizes.thumbnail" alt="">
+          <img v-if="author.avatar" class="width-100 height-100 of--cover" :src="author.avatar.sizes.thumbnail" alt="">
+          <img v-else class="width-100 height-100 of--cover" :src=" THEME_URL + '/static/images/user.png' " alt="">
         </figure>
         <p class="margin-bottom-0 fs-21 w-medium f2 dark">{{author.first_name}} {{author.last_name}}</p>
       </div>
     </article>
   `,
-  props: ['title', 'link', 'author', 'thumbnail', 'modifier']
+  props: ['title', 'link', 'author', 'thumbnail', 'modifier'],
+  computed: {
+    ...Vuex.mapState(['THEME_URL'])
+  },
 })

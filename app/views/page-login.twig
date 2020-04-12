@@ -19,10 +19,10 @@
               <p class="margin-bottom-0 warning fs-18">{{phrase.author}}</p>
             </div>
             <p class="error-message margin-bottom-1 f2 fs-21 w-medium white text-center" :class="{ showed : isShowedErrorMessage }">${errorMessage}</p>
-            <div class="c-form margin-bottom-1">
+            <div class="c-form margin-bottom-3">
               <div class="margin-bottom-1">
                 <label>
-                  <p class="mb-05 f2 fs-25 w-bold white">ID</p>
+                  <p class="mb-05 f2 fs-25 w-bold white">CORREO ELECTRÓNICO</p>
                   <input type="text" class="c-form__input input-reset" v-model="user" @keyup.enter="login">
                 </label>
               </div>
@@ -36,9 +36,8 @@
                 INGRESAR 
               </button>
             </div>
-            <p class="f2 text-center margin-bottom-3 fs-18 w-medium warning">¿No tienes un ID? <a href="{{site.url}}/solicitar-id" class="c-link c-link--white margin-left-1 w-bold">Solicitar ID</a></p>
             <a href="{{site.url}}/solicitar-id" class="c-button c-button--ghost-white margin-bottom-2 w-medium f2 display-block text-center">
-              SOLICITAR UN ID
+              SOLICITAR CURSOS
             </a>
             <ul class="flex-container align-center-middle ul-reset">
               {% for item in social_menu.items %}                

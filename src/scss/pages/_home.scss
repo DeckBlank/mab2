@@ -671,7 +671,7 @@
   }
 
   .modal-content{
-    background: rgb(0,153,0);
+    background: $secondary-color;
     color: #fff;
     font-family: $font-family-secondary;
     font-weight: $black-font;
@@ -691,9 +691,8 @@
     font-family: $font-family-secondary;
     display: inline-block;
     padding: 8px 20px;
-    color: #fff;
-    // background: rgb(255,51,51);
-    background: rgb(2,102,208);
+    color: $dark;
+    background: $warning-color;
   }
 
   .modal_btn_container a:hover, .modal_btn_container a:focus, .modal_btn_container a:active{

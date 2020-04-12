@@ -8,6 +8,7 @@ export const store = new Vuex.Store({
     //Site
     API: `${document.getElementById('app').getAttribute('data-site')}/wp-json/custom/v1`,
     SITE_URL: `${document.getElementById('app').getAttribute('data-site')}`,
+    THEME_URL: `${document.getElementById('app').getAttribute('data-theme')}`,
 
     //User
     logedUser: (window.localStorage.getItem('mab_loged_user')) ? JSON.parse(window.localStorage.getItem('mab_loged_user')) : false,
@@ -27,7 +28,10 @@ export const store = new Vuex.Store({
     isHeaderWithShadow: false,
 
     //Browser
-    isActiveBrowserToggle: false
+    isActiveBrowserToggle: false,
+
+    //Page
+    isLoadedPage: false
   },
   mutations: {
     setStatusMenu(state){
@@ -70,6 +74,10 @@ export const store = new Vuex.Store({
 
     setStatusBrowserToggle(state){
       state.isActiveBrowserToggle = !state.isActiveBrowserToggle
+    },
+
+    disableLoading(state){
+      state.isLoadedPage = true
     },
   },
   actions: {
@@ -130,6 +138,12 @@ export const store = new Vuex.Store({
 
     updateStatusBrowserToggle: ({commit})=>{
       commit('setStatusBrowserToggle')
+    },
+
+    hideLoading: ({commit})=>{      
+      window.setTimeout(()=>{
+        commit('disableLoading')
+      }, 1000)    
     }
   }
 })

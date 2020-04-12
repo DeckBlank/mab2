@@ -78,7 +78,7 @@ return [
 
         'page_login' => get_theme_file_uri('/static/js/page-login.bundle.js'),
 
-        'page_solicitar_id' => get_theme_file_uri('/static/js/page-solicitar-id.bundle.js'),
+        'page_solicitar_cursos' => get_theme_file_uri('/static/js/page-solicitar-cursos.bundle.js'),
 
         'page_forms' => get_theme_file_uri('/static/js/page-forms.bundle.js'),
 

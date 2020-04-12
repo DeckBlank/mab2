@@ -1,6 +1,6 @@
 <?php
 
-$assets_version = '1586559391816';
+$assets_version = '1586717950488';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -20,7 +20,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
      *
      */
 
-    register_assets('script', [
+    register_assets('package', [
         'handle'    => 'pandawp/package/vue',
         'src'       => $config['resources']['package_vue'],
         'deps'      => [ ],
@@ -28,7 +28,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         'in_footer' => true
     ]);    
 
-    register_assets('script', [
+    register_assets('package', [
         'handle'    => 'pandawp/package/setimmediate',
         'src'       => $config['resources']['package_setimmediate'],
         'deps'      => [ ],
@@ -36,7 +36,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         'in_footer' => true
     ]);    
 
-    register_assets('script', [
+    register_assets('package', [
         'handle'    => 'pandawp/package/process',
         'src'       => $config['resources']['package_process'],
         'deps'      => [ ],
@@ -44,7 +44,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         'in_footer' => true
     ]);
 
-    register_assets('script', [
+    register_assets('package', [
         'handle'    => 'pandawp/package/vuex',
         'src'       => $config['resources']['package_vuex'],
         'deps'      => [ ],
@@ -52,7 +52,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         'in_footer' => true
     ]);
 
-    register_assets('script', [
+    register_assets('package', [
         'handle'    => 'pandawp/package/timers_bf',
         'src'       => $config['resources']['package_timers_bf'],
         'deps'      => [ ],
@@ -139,7 +139,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         ]);
         
     }elseif (is_page('sesion-virtual')){
-        register_assets('script', [
+        register_assets('package', [
             'handle'    => 'pandawp/package/corejs',
             'src'       => $config['resources']['package_corejs'],
             'deps'      => [ ],
@@ -147,7 +147,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);
 
-        register_assets('script', [
+        register_assets('package', [
             'handle'    => 'pandawp/package/element_ui',
             'src'       => $config['resources']['package_element_ui'],
             'deps'      => [ ],
@@ -155,7 +155,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);
 
-        register_assets('script', [
+        register_assets('package', [
             'handle'    => 'pandawp/package/async_val',
             'src'       => $config['resources']['package_async_val'],
             'deps'      => [ ],
@@ -163,7 +163,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);
 
-        register_assets('script', [
+        register_assets('package', [
             'handle'    => 'pandawp/package/normalize_w',
             'src'       => $config['resources']['package_normalize_w'],
             'deps'      => [ ],
@@ -171,7 +171,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);
 
-        register_assets('script', [
+        register_assets('package', [
             'handle'    => 'pandawp/package/resize_obv',
             'src'       => $config['resources']['package_resize_obv'],
             'deps'      => [ ],
@@ -196,10 +196,10 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);
 
-    }elseif (is_page('solicitar-id')){
+    }elseif (is_page('solicitar-cursos')){
         register_assets('script', [
-            'handle'    => 'pandawp/js/page/solicitar-id',
-            'src'       => $config['resources']['page_solicitar_id'],
+            'handle'    => 'pandawp/js/page/solicitar-cursos',
+            'src'       => $config['resources']['page_solicitar_cursos'],
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
@@ -233,7 +233,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         ]);        
 
     }elseif (is_singular('topic')){
-        register_assets('script', [
+        register_assets('package', [
             'handle'    => 'pandawp/package/swiper',
             'src'       => $config['resources']['package_swiper'],
             'deps'      => [ ],
@@ -241,7 +241,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);
     
-        register_assets('script', [
+        register_assets('package', [
             'handle'    => 'pandawp/package/dom7',
             'src'       => $config['resources']['package_dom7'],
             'deps'      => [ ],
@@ -249,7 +249,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]); 
     
-        register_assets('script', [
+        register_assets('package', [
             'handle'    => 'pandawp/package/vaswiper',
             'src'       => $config['resources']['package_vaswiper'],
             'deps'      => [ ],
@@ -266,7 +266,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         ]);        
 
     }elseif (is_singular('session')){
-        register_assets('script', [
+        register_assets('package', [
             'handle'    => 'pandawp/package/vaswiper',
             'src'       => $config['resources']['package_vaswiper'],
             'deps'      => [ ],
@@ -274,7 +274,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]); 
 
-        register_assets('script', [
+        register_assets('package', [
             'handle'    => 'pandawp/package/opentok',
             'src'       => $config['resources']['package_opentok'],
             'deps'      => [ ],
@@ -291,7 +291,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         ]);        
 
     }elseif (is_404()){
-        register_assets('script', [
+        register_assets('package', [
             'handle'    => 'pandawp/package/swiper',
             'src'       => $config['resources']['package_swiper'],
             'deps'      => [ ],
@@ -299,7 +299,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);
     
-        register_assets('script', [
+        register_assets('package', [
             'handle'    => 'pandawp/package/dom7',
             'src'       => $config['resources']['package_dom7'],
             'deps'      => [ ],
@@ -307,7 +307,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]); 
     
-        register_assets('script', [
+        register_assets('package', [
             'handle'    => 'pandawp/package/vaswiper',
             'src'       => $config['resources']['package_vaswiper'],
             'deps'      => [ ],

@@ -14,7 +14,7 @@ function __get_sanitize_videos($videos, $level = "advanced"){
                 "author" => (object)[
                     "first_name" =>  $video->author->first_name,
                     "last_name" =>  $video->author->last_name,
-                    "avatar" => get_field('picture', 'user_'. $video->author->ID )
+                    "avatar" => get_field('picture', 'user_'. $video->author->ID)
                 ]
             ]);
         }else if($level == "simple"){
@@ -22,7 +22,7 @@ function __get_sanitize_videos($videos, $level = "advanced"){
                 "title" => $video->title,
                 "link" => $video->link,
                 "slug" => $video->slug,
-                "thumbnail" => $video->thumbnail                
+                "thumbnail" => $video->thumbnail
             ]);
         }
     }

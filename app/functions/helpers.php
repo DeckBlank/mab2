@@ -29,6 +29,19 @@ function register_assets($type, $resource) {
             $resource['in_footer']
         );
         wp_enqueue_script( $resource['handle'] );
+    }else if($type === 'package'){
+        $resource_src = explode('/', $resource['src']);
+
+        if ( file_exists(__DIR__ . '/../static/js/' . $resource_src[ count($resource_src) - 1 ]) ) {
+            wp_register_script(
+                $resource['handle'],
+                $resource['src'],
+                $resource['deps'],
+                $resource['ver'],
+                $resource['in_footer']
+            );
+            wp_enqueue_script( $resource['handle'] );
+        }
     }
 }
 

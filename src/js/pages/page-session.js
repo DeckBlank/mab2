@@ -93,6 +93,7 @@ const session = new Vue({
     })
 
     this.openRoom()
+    this.hideLoading();
   },
   methods: {
     ...baseActions(),

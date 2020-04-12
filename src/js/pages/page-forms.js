@@ -15,10 +15,13 @@ const forms = new Vue({
   computed: {
     ...baseState()
   },
-  methods: {
-    ...baseActions()
-  },
   beforeMount(){
     this.type = (new URLSearchParams(window.location.search)).get('type');
-  }
+  },
+  mounted(){
+    this.hideLoading();
+  },
+  methods: {
+    ...baseActions()
+  } 
 })
