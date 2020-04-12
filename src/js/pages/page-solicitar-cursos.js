@@ -35,7 +35,12 @@ const solicitar_cursos = new Vue({
         fullname.value = this.logedUser.user_auth
         email.value = this.logedUser.user_email
         phone.value = this.logedUser.user_phone
-        course.value = JSON.parse( window.localStorage.getItem('mab_metas') ).course
+
+        let mab_metas = window.localStorage.getItem('mab_metas')
+
+        if(mab_metas){
+          course.value = JSON.parse(mab_metas).course
+        }        
       }
     }
   }
