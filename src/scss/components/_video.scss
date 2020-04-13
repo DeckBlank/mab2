@@ -32,8 +32,7 @@
     @include transition(0.3s);
   }
 
-  &__title::first-line {
+  &__title {
     font-weight: $regular-font;
-    line-height: 0.8;
   }
 }

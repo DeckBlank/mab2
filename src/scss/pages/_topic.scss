@@ -20,13 +20,13 @@
 
     &::before {
       content: '';
-      width: calc(220px - 50px);
-      height: calc(126px - 50px);
+      width: calc(68px - 20px);
+      height: calc(126px - 40px);
       position: absolute;
-      top: calc(-126px + 50px);
-      right: -1rem;
+      top: calc(-126px + 40px);
+      right: 0;
       background-size: contain;
-      background-image: url('../images/vectors/topic/bolbs.png');
+      background-image: url('../images/vectors/topic/bolbs.png?key=20200413');
       background-repeat: no-repeat;
     }
   }
@@ -163,10 +163,10 @@
   .c-section--topic {
     .c-content {
       &::before {
-        width: 220px;
-        height: 126px;
-        top: -126px;
-        right: 1rem;
+        width: 48px;
+        height: 86px;
+        top: -86px;
+        right: 0;
       }
     }
 

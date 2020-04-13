@@ -42,7 +42,7 @@ Vue.component('form-tutor',{
           v-model="email.value">
       </div>
       <div class="input_container">
-        <label for="">Contraseña</label>
+        <label for="">Crear contraseña</label>
         <input 
           class="c-form-box__input input-reset"
           :class="{ valid : password.isValid }"

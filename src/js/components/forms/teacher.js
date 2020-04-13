@@ -42,7 +42,7 @@ Vue.component('form-teacher',{
           v-model="email.value">
       </div>
       <div class="input_container">
-        <label for="">Contraseña</label>
+        <label for="">Crear contraseña</label>
         <input 
           class="c-form-box__input input-reset"
           :class="{ valid : password.isValid }"
@@ -100,7 +100,7 @@ Vue.component('form-teacher',{
         </select>
       </div>
       <div class="input_container">
-        <label for="">Grado escolar</label>
+        <label for="">Nivel en el que enseño</label>
         <select 
           class="c-form-box__select select-reset"
           :class="{ valid : grade.isValid }"

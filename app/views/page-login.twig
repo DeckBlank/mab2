@@ -9,9 +9,9 @@
     <div class="grid-container padding-vertical-3">
       <div class="grid-x align-center">
         <div class="cell medium-10 large-8 padding-vertical-2">
-          <section class="c-content position-relative bg-sec-color br--medium">
-            <figure class="text-center margin-bottom-2">
-              <img class="of--contain" src="{{theme.link}}/static/images/vectors/login/hearts.png" alt="">
+          <section class="c-content position-relative bg-sec-color br--medium flex-container flex-dir-column align-middle">
+            <figure class="c-vector text-center margin-bottom-2">
+              <img class="of--contain" src="{{theme.link}}/static/images/vectors/virtual-session/PC.png" alt="">
             </figure>
             <h1 class="fs-50 w-bold warning text-center margin-bottom-1">{{title}}</h1>
             <div class="margin-bottom-2 f2 text-center">
@@ -19,7 +19,7 @@
               <p class="margin-bottom-0 warning fs-18">{{phrase.author}}</p>
             </div>
             <p class="error-message margin-bottom-1 f2 fs-21 w-medium white text-center" :class="{ showed : isShowedErrorMessage }">${errorMessage}</p>
-            <div class="c-form margin-bottom-3">
+            <div class="c-form margin-bottom-3 width-100">
               <div class="margin-bottom-1">
                 <label>
                   <p class="mb-05 f2 fs-25 w-bold white">CORREO ELECTRÓNICO</p>
@@ -36,7 +36,7 @@
                 INGRESAR 
               </button>
             </div>
-            <a href="{{site.url}}/solicitar-id" class="c-button c-button--ghost-white margin-bottom-2 w-medium f2 display-block text-center">
+            <a href="{{site.url}}/solicitar-cursos" class="c-button c-button--ghost-white margin-bottom-2 w-medium f2 display-block width-100 text-center">
               SOLICITAR CURSOS
             </a>
             <ul class="flex-container align-center-middle ul-reset">

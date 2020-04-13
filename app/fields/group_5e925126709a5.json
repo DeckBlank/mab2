@@ -122,7 +122,7 @@
         },
         {
             "key": "field_5e925126a2b79",
-            "label": "Grado escolar",
+            "label": "Nivel en el que enseño",
             "name": "grade",
             "type": "text",
             "instructions": "",
@@ -176,5 +176,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1586656162
+    "modified": 1586809705
 }
