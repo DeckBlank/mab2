@@ -68,8 +68,8 @@ const _404 = new Vue({
     'testResult.list': {
       handler: function(value){
         let visualResult = value.filter(el => el.type == 'visual'),
-        auditiveResult = value.filter(el => el.type == 'auditive'),
-        kinestheticResult = value.filter(el => el.type == 'kinesthetic'),
+        auditiveResult = value.filter(el => el.type == 'auditivo'),
+        kinestheticResult = value.filter(el => el.type == 'kinestesico'),
         result = value.map(el => el.value).reduce((total, current)=>{ return total + current});
 
         if(visualResult.length > 0){
