@@ -1,5 +1,7 @@
 <?php
 
+use Timber\Timber;
+
 class TestModel{
     
     public function __construct(){
@@ -29,6 +31,15 @@ class TestModel{
         }else {
             return false;
         }
+    }
+
+    public static function getQuestions($request){
+        $test_page = Timber::get_post([
+            "post_type" => "page",
+            "name" => "test"
+        ]);
+
+        return get_field('questions', $test_page->ID);
     }
 
     public static function saveTest($request){

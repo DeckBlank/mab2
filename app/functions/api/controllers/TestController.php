@@ -19,6 +19,16 @@ class TestController{
         } else {
             return new WP_Error( 'no_test', __('No test found'), array( 'status' => 404 ) );
         }
+    }
+
+    public function getQuestions($request){
+        $questions = TestModel::getQuestions($request);
+
+        if ( empty($questions) ) {
+            return new WP_Error( 'no_questions', __('No questions found'), array( 'status' => 404 ) );
+        } else {
+            return new WP_REST_Response($questions, 200);
+        }
     } 
    
     public function saveTest($request){

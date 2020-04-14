@@ -33,44 +33,12 @@ const _404 = new Vue({
           credit: 1
         }
       ],
-      questions: [
-        {
-          question: {
-            title: '¿Question 1?',
-            type: 'visual'
-          }
-        },
-        {
-          question: {
-            title: '¿Question 2?',
-            type: 'auditive'
-          }
-        },
-        {
-          question: {
-            title: '¿Question 2?',
-            type: 'kinesthetic'
-          }
-        }
-      ],
+      questions: [],
       testResult: {
         visual: 0,   
         auditive: 0,
         kinesthetic: 0,        
-        list: [
-          {
-            value: 0,
-            type: 'visual'
-          },
-          {
-            value: 0,
-            type: 'auditive'
-          },
-          {
-            value: 0,
-            type: 'kinesthetic'
-          }
-        ]
+        list: []
       },
 
       //Swiper
@@ -99,10 +67,10 @@ const _404 = new Vue({
   watch: {
     'testResult.list': {
       handler: function(value){
-        let visualResult = value.list.filter(el => el.type == 'visual'),
-        auditiveResult = value.list.filter(el => el.type == 'auditive'),
-        kinestheticResult = value.list.filter(el => el.type == 'kinesthetic'),
-        result = value.list.map(el => el.value).reduce((total, current)=>{ return total + current});
+        let visualResult = value.filter(el => el.type == 'visual'),
+        auditiveResult = value.filter(el => el.type == 'auditive'),
+        kinestheticResult = value.filter(el => el.type == 'kinesthetic'),
+        result = value.map(el => el.value).reduce((total, current)=>{ return total + current});
 
         if(visualResult.length > 0){
           let visualSum = visualResult.map(el => el.value).reduce((total, current)=>{ return total + current})
@@ -131,7 +99,7 @@ const _404 = new Vue({
     this.initSectors();
   },
   mounted(){
-    this.getTest();
+    this.getQuestions();
     this.hideLoading();
   },
   methods: {
@@ -152,6 +120,34 @@ const _404 = new Vue({
     },
     enableNext: function(){
       this.isEnableChange = true
+    },
+    getQuestions: function(){
+      fetch(`${this.API}/test/questions`,{
+          method: 'GET'
+        })
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            return res.json()
+          }else{
+            throw res
+          }
+        })
+        .then(questions => {
+          questions.forEach(q => {
+            this.testResult.list.push({
+              value: 0,
+              type: q.question.type
+            })
+          })
+
+          console.log(this.testResult)
+
+          this.questions = questions;
+          this.getTest();
+        })
+        .catch(err => {
+          throw err;          
+        })      
     },
     getTest: function(){
       fetch(`${this.API}/test?user=${this.logedUser.user_email}`,{

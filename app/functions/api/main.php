@@ -198,6 +198,11 @@ add_action( 'rest_api_init', function () {
         'callback' => array($testController,'getTest'),
     ));    
 
+    register_rest_route( 'custom/v1', '/test/questions', array(
+        'methods' => 'GET',
+        'callback' => array($testController,'getQuestions'),
+    ));    
+
     register_rest_route( 'custom/v1', '/test', array(
         'methods' => 'POST',
         'callback' => array($testController,'saveTest'),

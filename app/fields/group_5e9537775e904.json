@@ -102,7 +102,7 @@
                                 "id": ""
                             },
                             "choices": {
-                                "visua": "Visual",
+                                "visual": "Visual",
                                 "auditivo": "Auditivo",
                                 "kinestesico": "Kinestésico"
                             },
@@ -136,5 +136,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1586837676
+    "modified": 1586849310
 }
