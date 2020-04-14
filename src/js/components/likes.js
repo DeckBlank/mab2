@@ -55,7 +55,7 @@ Vue.component('likes',{
       if(!this.logedUser){
         window.location = `${this.SITE_URL}/login`;
       }else{
-        fetch(`${this.API}/${this.target.type}/${this.target.id}/likes?level=${level}&now_average=${this.average}&user=${this.logedUser.user_auth}`,{
+        fetch(`${this.API}/${this.target.type}/${this.target.id}/likes?level=${level}&now_average=${this.average}&user=${this.logedUser.user_email}`,{
             method: 'PUT'
           })
           .then(res => {
@@ -78,7 +78,7 @@ Vue.component('likes',{
       }  
     },
     isUserLiked: function(){
-      fetch(`${this.API}/${this.target.type}/${this.target.id}/likes/checkout?user=${this.logedUser.user_auth}`,{
+      fetch(`${this.API}/${this.target.type}/${this.target.id}/likes/checkout?user=${this.logedUser.user_email}`,{
           method: 'GET'
         })
         .then(res => {

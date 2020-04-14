@@ -22,9 +22,9 @@ require_once(__DIR__."/controllers/CourseController.php");
 require_once(__DIR__."/controllers/TopicController.php");
 require_once(__DIR__."/controllers/SessionRequestController.php");
 require_once(__DIR__."/controllers/SessionController.php");
-require_once(__DIR__."/controllers/FormController.php");
 require_once(__DIR__."/controllers/SectorController.php");
 require_once(__DIR__."/controllers/RegistrationController.php");
+require_once(__DIR__."/controllers/TestController.php");
 
 /**
  * Routes
@@ -35,12 +35,17 @@ add_action( 'rest_api_init', function () {
 
     register_rest_route( 'custom/v1', '/user/auth', array(
         'methods' => 'GET',
-        'callback' => array($userController,'auth'),
+        'callback' => array($userController,'auth')
     ));
 
     register_rest_route( 'custom/v1', '/user', array(
         'methods' => 'POST',
-        'callback' => array($userController,'createUser'),
+        'callback' => array($userController,'createUser')
+    ));
+
+    register_rest_route( 'custom/v1', '/user/test', array(
+        'methods' => 'GET',
+        'callback' => array($userController,'getTest')
     ));
 });
 
@@ -164,27 +169,7 @@ add_action( 'rest_api_init', function () {
     ));    
 });
 
-//7. Forms ----------------------------------//
-add_action( 'rest_api_init', function () {
-    $formController = new FormController();
-
-    register_rest_route( 'custom/v1', '/form/tutor', array(
-        'methods' => 'POST',
-        'callback' => array($formController,'addTutorForm'),
-    ));  
-    
-    register_rest_route( 'custom/v1', '/form/student', array(
-        'methods' => 'POST',
-        'callback' => array($formController,'addStudentForm'),
-    ));
-    
-    register_rest_route( 'custom/v1', '/form/teacher', array(
-        'methods' => 'POST',
-        'callback' => array($formController,'addTeacherForm'),
-    ));    
-});
-
-//8. Sector ----------------------------------//
+//7. Sector ----------------------------------//
 add_action( 'rest_api_init', function () {
     $sectorController = new SectorController();
 
@@ -194,12 +179,27 @@ add_action( 'rest_api_init', function () {
     ));    
 });
 
-//9. Registration ----------------------------------//
+//8. Registration ----------------------------------//
 add_action( 'rest_api_init', function () {
     $registrationController = new RegistrationController();
 
     register_rest_route( 'custom/v1', '/registration', array(
         'methods' => 'GET',
         'callback' => array($registrationController,'getRegistration'),
+    ));    
+});
+
+//9. Test ----------------------------------//
+add_action( 'rest_api_init', function () {
+    $testController = new TestController();
+
+    register_rest_route( 'custom/v1', '/test', array(
+        'methods' => 'GET',
+        'callback' => array($testController,'getTest'),
+    ));    
+
+    register_rest_route( 'custom/v1', '/test', array(
+        'methods' => 'POST',
+        'callback' => array($testController,'saveTest'),
     ));    
 });

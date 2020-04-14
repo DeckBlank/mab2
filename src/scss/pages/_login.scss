@@ -1,7 +1,5 @@
 .c-section--login {
   .c-content {
-    padding: 2rem;
-
     @include triangle(right, top, 3rem, -30px, 0);
 
     &::after {
@@ -37,14 +35,6 @@
       &:hover {
         color: $white;
       }
-    }
-  }
-}
-
-@include breakpoint(large) {
-  .c-section--login {
-    .c-content {
-      padding: 3rem;
     }
   }
 }

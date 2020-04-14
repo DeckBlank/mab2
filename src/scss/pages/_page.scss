@@ -6,6 +6,16 @@
     padding-top: 0;
   }
 
+  &--test,
+  &--video,
+  &--topic,
+  &--login,
+  &--solicitar-cursos {
+    .c-content {
+      padding: 1rem;
+    }
+  }
+
   &--video,
   &--topic {
     .c-details {
@@ -22,10 +32,13 @@
   }
 }
 
-@include breakpoint(large) {
+@include breakpoint(medium) {
   .c-section {
+    &--test,
     &--video,
-    &--topic {
+    &--topic,
+    &--login,
+    &--solicitar-cursos {
       .c-content {
         padding: 2rem;
       }

@@ -82,6 +82,8 @@ return [
 
         'page_forms' => get_theme_file_uri('/static/js/page-forms.bundle.js'),
 
+        'page_test' => get_theme_file_uri('/static/js/page-test.bundle.js'),
+
         'page_404' => get_theme_file_uri('/static/js/page-404.bundle.js'),
 
         'page_video' => get_theme_file_uri('/static/js/page-video.bundle.js'),

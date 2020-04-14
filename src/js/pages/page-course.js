@@ -30,7 +30,7 @@ const course = new Vue({
           topic.setAttribute('href', `${this.SITE_URL}/solicitar-cursos`)
         })
       }else{
-        fetch(`${this.API}/registration?user=${this.logedUser.user_auth}&course=${course_id}`,{
+        fetch(`${this.API}/registration?user=${this.logedUser.user_email}&course=${course_id}`,{
             method: 'GET'
           })
           .then(res => {

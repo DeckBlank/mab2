@@ -1,0 +1,111 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--test bg-sec-color">
+    <h1 class="c-title white bg-alert margin-top-3 display-inline-block">Test de personalidad</h1>
+    <div class="grid-container position-relative padding-vertical-3">
+      <div class="c-result position-absolute width-100 height-100" :class="{ hidden : !testDone }">
+        <div class="grid-container padding-vertical-3">
+          <div class="grid-x align-center">
+            <div class="cell medium-10 large-8">
+              <h2 class="f2 fs-30 warning w-bold margin-bottom-3">TUS PUNTAJES FUERON</h2>
+              <div class="grid-x grid-margin-x grid-margin-y">
+                <div class="cell small-6 medium-6 large-4">
+                  <div class="c-behaviour flex-container flex-dir-column align-middle text-center">
+                    <figure class="c-behaviour__vector margin-bottom-1">
+                      <img class="of--contain" src="{{theme.link}}/static/images/vectors/test/visual.png" alt="">
+                    </figure>
+                    <h3 class="c-behaviour__title">
+                      <p class="f2 fs-40 w-bold warning">${testResult.visual}%</p>
+                      <p class="f2 fs-30 warning w-bold margin-bottom-0">VISUAL</p>
+                    </h3>
+                  </div>
+                </div>
+                <div class="cell small-6 medium-6 large-4">
+                  <div class="c-behaviour flex-container flex-dir-column align-middle text-center">
+                    <figure class="c-behaviour__vector margin-bottom-1">
+                      <img class="of--contain" src="{{theme.link}}/static/images/vectors/test/auditivo.png" alt="">
+                    </figure>
+                    <h3 class="c-behaviour__title">
+                      <p class="f2 fs-40 w-bold warning">${testResult.auditive}%</p>
+                      <p class="f2 fs-30 warning w-bold margin-bottom-0">AUDITIVO</p>
+                    </h3>
+                  </div>
+                </div>
+                <div class="cell small-6 medium-6 large-4">
+                  <div class="c-behaviour flex-container flex-dir-column align-middle text-center">
+                    <figure class="c-behaviour__vector margin-bottom-1">
+                      <img class="of--contain" src="{{theme.link}}/static/images/vectors/test/kinestesico.png" alt="">
+                    </figure>
+                    <h3 class="c-behaviour__title">
+                      <p class="f2 fs-40 w-bold warning">${testResult.kinesthetic}%</p>
+                      <p class="f2 fs-30 warning w-bold margin-bottom-0">KINESTÉSICO</p>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>      
+      <div class="grid-x align-center">
+        <div class="cell medium-10 large-8 padding-vertical-2">
+          <section class="c-content position-relative bg-white br--medium" :class="{ hidden : testDone }">
+            <section class="c-questions padding-vertical-1">
+              <h2 class="c-questions__title f1 text-uppercase dark w-bold margin-bottom-2 text-center">Test para determinar <br> el Canal de Aprendizaje de preferencia</h2>
+              <swiper ref="slider_questions" class="c-questions__list margin-bottom-1" :options="swiperOptions">                
+                <swiper-slide v-for="(q_, qindex) of questions" :key="q_.id">
+                  <h3 class="fs-21 f2 dark-gray w-bold  margin-bottom-2">${q_.question.title}</h3>                  
+                  <ul class="c-question f2 w-medium ul-reset overflow-hidden">
+                    <li 
+                      class="c-question__item dark" 
+                      v-for="(option, oindex) of options" :key="option.id">
+                      <input
+                        :id="'option-' + qindex + oindex"
+                        :name="'question-' + qindex"
+                        :value="option.credit" 
+                        type="radio" 
+                        class="hide"
+                        v-model="testResult.list[qindex].value"
+                        @change="enableNext"
+                      >
+                      <label 
+                        :for="'option-' + qindex + oindex" 
+                        class="c-option fs-18 align-middle width-100"
+                      >
+                        <div class="c-option__checkbox position-relative margin-right-1 rounded">
+                        </div>
+                        <p class="margin-bottom-0">                      
+                          ${option.value}
+                        </p>
+                      </label>
+                    </li>
+                  </ul>
+                </swiper-slide>
+              </swiper>              
+              <div class="flex-container align-middle align-right">
+                <div class="flex-container align-middle" :class="{ enable: isEnableChange, hide: testDone }">                       
+                  <p class="c-questions__progress margin-bottom-0 fs-18 f2 w-medium dark-gray text-center margin-horizontal-1">
+                    <span>${currentQuestion}</span> de <span>${questions.length}</span>
+                  </p>
+                  <button 
+                    class="flex-container f2 fs-18 w-medium align-center-middle"
+                    :class="{ 'sec-color' : isEnableChange }"
+                    @click="changeQuestion('next')" 
+                    :disabled="!isEnableChange">
+                    Siguiente
+                    <span class="c-icon margin-left-1"><i class="far fa-arrow-right"></i></span>
+                  </button>                                   
+                </div>
+              </div>
+            </section>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

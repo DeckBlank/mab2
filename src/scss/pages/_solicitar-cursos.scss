@@ -1,7 +1,5 @@
-.c-section--solicitar-id {
+.c-section--solicitar-cursos {
   .c-content {
-    padding: 2rem;
-
     @include triangle(right, top, 3rem, -30px, 0);
 
     &::after {
@@ -30,13 +28,5 @@
     font-size: $fs-18;
     font-weight: $medium-font;
     font-family: $font-family-secondary;
-  }
-}
-
-@include breakpoint(large) {
-  .c-section--solicitar-id {
-    .c-content {
-      padding: 3rem;
-    }
   }
 }

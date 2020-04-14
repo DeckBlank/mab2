@@ -124,10 +124,6 @@ const topic = new Vue({
   
           if(this.currentQuestion < this.questions.length){
             this.currentQuestion += 1;
-            this.testResult.push({
-              value: '',
-              isRight: null            
-            })
           }
           else{
             this.testDone = true
@@ -169,7 +165,7 @@ const topic = new Vue({
         rights: this.totalRightAnswers
       })
 
-      fetch(`${this.API}/topic/${this.topicID}/test_score?result=${test_result}&user=${this.logedUser.user_auth}`,{
+      fetch(`${this.API}/topic/${this.topicID}/test_score?result=${test_result}&user=${this.logedUser.user_email}`,{
           method: 'PUT'
         })
         .then(res => {
@@ -187,7 +183,7 @@ const topic = new Vue({
         })      
     },
     getTestScore: function(){
-      fetch(`${this.API}/topic/${this.topicID}/test_score?user=${this.logedUser.user_auth}`,{
+      fetch(`${this.API}/topic/${this.topicID}/test_score?user=${this.logedUser.user_email}`,{
           method: 'GET'
         })
         .then(res => {
@@ -236,9 +232,9 @@ const topic = new Vue({
       let topics = document.querySelectorAll('.c-topic__video')
 
       if(!this.logedUser || !this.metas.get('course_name') || !this.metas.get('unity')){
-        window.location = `${this.SITE_URL}/solicitar-cursos`;      
+        window.location = `${this.SITE_URL}/solicitar-cursos`;
       }else{
-        fetch(`${this.API}/registration?user=${this.logedUser.user_auth}&course=${course_id}`,{
+        fetch(`${this.API}/registration?user=${this.logedUser.user_email}&course=${course_id}`,{
             method: 'GET'
           })
           .then(res => {

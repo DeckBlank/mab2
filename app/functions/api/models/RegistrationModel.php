@@ -15,7 +15,7 @@ class RegistrationModel{
         foreach($registrations as $registration){
             if(
                 $registration['registration']['course']->ID == $request['course'] and 
-                $registration['registration']['user']['user_nicename'] == $request['user'] and
+                $registration['registration']['user']['user_email'] == $request['user'] and
                 $registration['registration']['state'] == true ){
 
                 return true;

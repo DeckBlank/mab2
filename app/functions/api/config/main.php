@@ -59,62 +59,12 @@ class DBConnection{
         )");
     }
 
-    public function createTutorFormTable(){
-        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_tutor_forms(
+    public function createUserTestTable(){
+        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_user_tests(
             id INT NOT NULL AUTO_INCREMENT,
-            date_at DATE NOT NULL,
-            name VARCHAR(100) NOT NULL,
-            last_father_name VARCHAR(100) NOT NULL,
-            last_mother_name VARCHAR(100) NOT NULL,
-            email VARCHAR(100) NOT NULL,
-            phone INT NOT NULL,
-            mobile INT NOT NULL,
-            school_type VARCHAR(100) NOT NULL,
-            ugel VARCHAR(100) NOT NULL,
-            children_school VARCHAR(100) NOT NULL,
-            children_quantity INT NOT NULL,
-            children TEXT NOT NULL,
-            location VARCHAR(100) NOT NULL,
-            PRIMARY KEY (id)
-        )");
-    }
-
-    public function createStudentFormTable(){
-        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_student_forms(
-            id INT NOT NULL AUTO_INCREMENT,
-            date_at DATE NOT NULL,
-            name VARCHAR(100) NOT NULL,
-            last_father_name VARCHAR(100) NOT NULL,
-            last_mother_name VARCHAR(100) NOT NULL,
-            email VARCHAR(100) NOT NULL,
-            phone INT NOT NULL,
-            mobile INT NOT NULL,
-            school_type VARCHAR(100) NOT NULL,
-            ugel VARCHAR(100) NOT NULL,
-            school VARCHAR(100) NOT NULL,
-            grade INT NOT NULL,
-            age INT NOT NULL,
-            location VARCHAR(100) NOT NULL,
-            PRIMARY KEY (id)
-        )");
-    }
-
-    public function createTeacherFormTable(){
-        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_teacher_forms(
-            id INT NOT NULL AUTO_INCREMENT,
-            date_at DATE NOT NULL,
-            name VARCHAR(100) NOT NULL,
-            last_father_name VARCHAR(100) NOT NULL,
-            last_mother_name VARCHAR(100) NOT NULL,
-            email VARCHAR(100) NOT NULL,
-            phone INT NOT NULL,
-            mobile INT NOT NULL,
-            school_type VARCHAR(100) NOT NULL,
-            ugel VARCHAR(100) NOT NULL,
-            school VARCHAR(100) NOT NULL,
-            grade INT NOT NULL,
-            age INT NOT NULL,
-            location VARCHAR(100) NOT NULL,
+            date_at DATE NOT NULL, 
+            user VARCHAR(100) NOT NULL,
+            result VARCHAR(100) NOT NULL,
             PRIMARY KEY (id)
         )");
     }
@@ -132,8 +82,4 @@ $connection->createVideoScoreTable();
 $connection->createTopicScoreTable();
 $connection->createTopicTestScoreTable();
 $connection->createSessionRequestTable();
-
-//Form
-$connection->createTutorFormTable();
-$connection->createStudentFormTable();
-$connection->createTeacherFormTable();
+$connection->createUserTestTable();

@@ -8,6 +8,9 @@ Vue.component('profile',{
       </div>
       <ul class="c-user__menu f2 fs-18 ul-reset position-absolute br--small bg-white">
         <li class="c-user__text black w-medium">Hola <span class="f1 w-bold">{{logedUser.user_auth}}</span></li>
+        <li class="c-user__option w-medium">
+          <a :href="SITE_URL + '/test'" class="display-block">Mi Test</a>
+        </li>
         <li class="c-user__option c-user__option--logout w-medium">
           <a href="" class="display-block" @click="logout">Cerrar sesión</a>
         </li>

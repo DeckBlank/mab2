@@ -1,0 +1,108 @@
+.c-questions {
+  &__title {
+    font-size: $fs-40;
+    line-height: 1.3;
+
+    &::first-line {
+      font-family: $font-family-secondary;
+      font-weight: $regular-font;
+    }
+  }
+
+  &__list {
+    .swiper-wrapper {
+      align-items: center;
+    }
+  }
+
+  &__change {
+    width: 44px;
+    height: 44px;
+
+    @include transition(0.25s);
+
+    &:disabled {
+      background-color: $light-gray;
+      color: $dark;
+      cursor: no-drop;
+    }
+  }
+
+  &__change.enable {
+    background-color: $secondary-alt;
+    color: $white;
+  }
+
+  &__result {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(-10px);
+
+    @include transition(0.3s);
+
+    .c-icon {
+      width: 30px;
+      height: 30px;
+      border: solid 2px transparent;
+    }
+
+    &--right .c-icon {
+      border-color: $success-color;
+    }
+
+    &--wrong .c-icon {
+      border-color: $alert-color;
+    }
+  }
+
+  &__result.showed {
+    visibility: visible;
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.c-question {
+  &__item {
+    @include transition(0.25s);
+
+    &:hover {
+      background: $success-color;
+      color: $white;
+    }
+
+    &:hover .c-option {
+      color: $white;
+    }
+
+    &:hover .c-option__checkbox {
+      border-color: $white;
+    }
+  }
+
+  &__item input:checked + .c-option {
+    background-color: $success-color;
+    color: $white;
+  }
+
+  &__item input:checked + .c-option .c-option__checkbox {
+    border-color: $white;
+    background-color: $white;
+  }
+
+  .c-option {
+    display: flex !important;
+    padding: 0.5rem 0.5rem;
+    margin: 0 0 !important;
+
+    @include transition(0.25s);
+
+    &__checkbox {
+      border: solid 1px $dark;
+      width: 17px;
+      height: 17px;
+
+      @include transition(0.25s);
+    }
+  }
+}
