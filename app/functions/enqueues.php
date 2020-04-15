@@ -1,6 +1,6 @@
 <?php
 
-$assets_version = '1586850038364';
+$assets_version = '1586917587645';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -246,6 +246,23 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]);
+
+    }elseif (is_page('progreso')){
+        register_assets('package', [
+            'handle'    => 'pandawp/package/apexcharts',
+            'src'       => $config['resources']['package_apexcharts'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+                
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/progress',
+            'src'       => $config['resources']['page_progress'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);        
 
     }elseif (is_singular('video')){
         register_assets('script', [

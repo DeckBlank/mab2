@@ -69,7 +69,12 @@ class TopicModel{
 
     public static function updateTestScore($request){
         $test_scores = DBConnection::getConnection()->query("
-            SELECT * FROM wp_topic_test_scores WHERE user='". $request['user'] ."' and topic_id=". $request['topic_id'] ."
+            SELECT 
+                * 
+            FROM 
+                wp_topic_test_scores 
+            WHERE 
+                user='". $request['user'] ."' and topic_id='". $request['topic_id'] ."'
         ");
 
         if($test_scores && $test_scores->num_rows > 0){
@@ -84,9 +89,10 @@ class TopicModel{
             ");
         }else{
             return DBConnection::getConnection()->query("
-                INSERT INTO wp_topic_test_scores(date_at,user,topic_id,score) VALUES(
+                INSERT INTO wp_topic_test_scores(date_at,user,course_id,topic_id,score) VALUES(
                     '". date("Y-m-d") ."',
                     '". $request['user'] ."',
+                    '". $request['course_id'] ."',
                     '". $request['topic_id'] ."',
                     '". $request['result'] ."'
                 )   

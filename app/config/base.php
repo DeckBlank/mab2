@@ -60,6 +60,8 @@ return [
 
         'package_opentok' => get_theme_file_uri('/static/js/package.opentok.bundle.js'),   
 
+        'package_apexcharts' => get_theme_file_uri('/static/js/package.apexcharts.bundle.js'),
+
         /**
          * Styles
          * */
@@ -83,6 +85,8 @@ return [
         'page_forms' => get_theme_file_uri('/static/js/page-forms.bundle.js'),
 
         'page_test' => get_theme_file_uri('/static/js/page-test.bundle.js'),
+
+        'page_progress' => get_theme_file_uri('/static/js/page-progress.bundle.js'),
 
         'page_404' => get_theme_file_uri('/static/js/page-404.bundle.js'),
 

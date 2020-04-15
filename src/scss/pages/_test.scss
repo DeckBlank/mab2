@@ -1,11 +1,4 @@
 .c-section--test {
-  .c-title {
-    width: text-content;
-    line-height: 1.1;
-    padding: 0.5rem 2rem;
-    font-size: $fs-40;
-  }
-
   .c-content {
     @include transition(0.3s);
   }
@@ -53,14 +46,6 @@
 
 @include breakpoint(large) {
   .c-section--test {
-    background-image: url('../images/vectors/courses/plant.png'), url('../images/vectors/courses/shower.png');
-    background-position: left bottom, right 70px;
-    background-repeat: no-repeat;
-
-    .c-title {
-      font-size: $fs-60;
-    }
-
     .c-content {
       @include triangle(left, bottom, -70px, 3rem, 70px, 20px, 70px);
     }

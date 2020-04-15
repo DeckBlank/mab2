@@ -54,7 +54,7 @@ if($post->post_type == "video"){
     ];
 
     $context['source'] = get_field('source', $post->ID);
-    $context['summary'] = get_field('summary', $post->ID)['url'];
+    $context['summary'] = ( get_field('summary', $post->ID) ) ? get_field('summary', $post->ID)['url'] : false;
 }
 
 $templates = [

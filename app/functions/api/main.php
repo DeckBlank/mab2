@@ -97,6 +97,11 @@ add_action( 'rest_api_init', function () {
         'methods' => 'GET',
         'callback' => array($courseController,'getAll'),
     ));
+
+    register_rest_route( 'custom/v1', '/courses/progress', array(
+        'methods' => 'GET',
+        'callback' => array($courseController,'getProgess'),
+    ));
 });
 
 //4. Topic ----------------------------------//

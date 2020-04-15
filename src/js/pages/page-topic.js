@@ -165,7 +165,7 @@ const topic = new Vue({
         rights: this.totalRightAnswers
       })
 
-      fetch(`${this.API}/topic/${this.topicID}/test_score?result=${test_result}&user=${this.logedUser.user_email}`,{
+      fetch(`${this.API}/topic/${this.topicID}/test_score?result=${test_result}&user=${this.logedUser.user_email}&course_id=${this.metas.get('course_id')}`,{
           method: 'PUT'
         })
         .then(res => {

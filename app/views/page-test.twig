@@ -54,8 +54,8 @@
       </div>      
       <div class="grid-x align-center">
         <div class="cell medium-10 large-8 padding-vertical-2">
-          <section class="c-content position-relative bg-white br--medium" :class="{ hidden : testDone }">
-            <section class="c-questions padding-vertical-1">
+          <section class="c-content c-content--protected position-relative bg-white br--medium" :class="{ hidden : testDone }">
+            <section class="c-questions">
               <h2 class="c-questions__title f1 text-uppercase dark w-bold margin-bottom-2 text-center">Test para determinar <br> el Canal de Aprendizaje de preferencia</h2>
               <swiper ref="slider_questions" class="c-questions__list margin-bottom-1" :options="swiperOptions">                
                 <swiper-slide v-for="(q_, qindex) of questions" :key="q_.id">

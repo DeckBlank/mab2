@@ -38,6 +38,7 @@ class DBConnection{
             id INT NOT NULL AUTO_INCREMENT,
             date_at DATE NOT NULL, 
             user VARCHAR(100) NOT NULL,
+            course_id INT NOT NULL,
             topic_id INT NOT NULL,
             score VARCHAR(100) NOT NULL,
             PRIMARY KEY (id)

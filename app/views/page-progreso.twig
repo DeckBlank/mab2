@@ -1,0 +1,37 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--progress bg-sec-color">
+    <h1 class="c-title white bg-alert margin-top-3 display-inline-block">Mi progreso</h1>
+    <div class="grid-container position-relative padding-vertical-3">
+      <div class="c-result width-100 height-100">
+        <div class="grid-container padding-vertical-3">
+          <div class="grid-x align-center">
+            <div class="cell medium-10">
+              <div class="grid-x grid-margin-x grid-margin-y">
+                <div v-for="progress of progresses" :key="progress.id" class="cell medium-6 large-4">
+                  <div class="c-chart flex-container flex-dir-column align-middle text-center">
+                    <h2 class="f2 fs-30 text-uppercase w-black warning text-center margin-bottom-1">${progress.course}</h2>
+                    <div class="c-chart__graph" :data-progress="progress.percentage"></div>
+                    <h3 class="c-chart__title">
+                      <p class="f2 fs-25 w-bold warning margin-bottom-0">${progress.completed}/${progress.total} completados</p>
+                      <p v-if="progress.percentage >= 0 && progress.percentage <=20" class="f2 fs-25 warning w-bold margin-bottom-0">¡Si se puede!</p>
+                      <p v-else-if="progress.percentage >= 21 && progress.percentage <=40" class="f2 fs-25 warning w-bold margin-bottom-0">¡Lo lograré!</p>
+                      <p v-else-if="progress.percentage >= 41 && progress.percentage <=60" class="f2 fs-25 warning w-bold margin-bottom-0">¡No me rendiré!</p>
+                      <p v-else-if="progress.percentage >= 61 && progress.percentage <=80" class="f2 fs-25 warning w-bold margin-bottom-0">¡Ya casi!</p>
+                      <p v-else-if="progress.percentage >= 81 && progress.percentage <=100" class="f2 fs-25 warning w-bold margin-bottom-0">¡Soy Crack!</p>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>     
+  </section>
+{% endblock %}

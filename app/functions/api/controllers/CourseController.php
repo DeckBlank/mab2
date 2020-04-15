@@ -1,6 +1,6 @@
 <?php
 
-// require(__DIR__ . '/../models/ConsultModel.php');
+require(__DIR__ . '/../models/CourseModel.php');
 
 class CourseController{
 
@@ -31,5 +31,15 @@ class CourseController{
         }else {
             return new WP_Error( 'no_courses', __('No courses found'), array( 'status' => 404 ) );
         }    
-    }   
+    }
+
+    public function getProgess($request){
+        $progess = CourseModel::getProgess($request);
+
+        if( empty($progess) ){
+            return new WP_Error( 'no_progess', __("No progess found"), array( 'status' => 404 ) );
+        }else{
+            return new WP_REST_Response($progess, 200);
+        }
+    }
 }
