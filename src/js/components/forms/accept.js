@@ -55,7 +55,7 @@ Vue.component('form-accept',{
             saveUserLoginSession(user)
             this.isLoading = false
 
-            window.location = `${this.SITE_URL}/solicitar-cursos`
+            window.location = `${this.SITE_URL}/emotional`
           })
           .catch(err => {
             this.isLoading = false

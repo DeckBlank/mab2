@@ -8,10 +8,15 @@
     opacity: 0;
   }
 
+  .c-content.filled {
+    height: 560px;
+  }
+
   .c-result {
     top: 0;
     left: 0;
     z-index: 100;
+    height: 100%;
 
     @include transition(0.3s);
   }
@@ -36,6 +41,10 @@
 
 @include breakpoint(medium) {
   .c-section--test {
+    .c-content.filled {
+      height: 650px;
+    }
+    
     .c-behaviour {
       &__vector {
         width: 150px;
@@ -49,5 +58,9 @@
     .c-content {
       @include triangle(left, bottom, -70px, 3rem, 70px, 20px, 70px);
     }
+
+    .c-content.filled {
+      height: 450px;
+    }    
   }
 }

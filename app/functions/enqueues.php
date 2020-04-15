@@ -1,6 +1,6 @@
 <?php
 
-$assets_version = '1586917587645';
+$assets_version = '1586938732185';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -229,15 +229,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
-        ]); 
-    
-        register_assets('package', [
-            'handle'    => 'pandawp/package/vaswiper',
-            'src'       => $config['resources']['package_vaswiper'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]); 
+        ]);
                 
         register_assets('script', [
             'handle'    => 'pandawp/js/page/test',

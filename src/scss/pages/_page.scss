@@ -18,7 +18,7 @@
   }
 
   &--test,
-  &--progress {    
+  &--progress {
     .c-title {
       width: text-content;
       line-height: 1.1;
@@ -40,7 +40,7 @@
       &--protected {
         padding: 2rem;
       }
-    }    
+    }
   }
 }
 
@@ -62,10 +62,10 @@
       background-image: url('../images/vectors/courses/plant.png'), url('../images/vectors/courses/shower.png');
       background-position: left bottom, right 70px;
       background-repeat: no-repeat;
-      
+
       .c-title {
         font-size: $fs-60;
-      }      
+      }
     }
   }
 }

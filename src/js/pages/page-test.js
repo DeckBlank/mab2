@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+import Swiper from 'swiper'
 import {baseConfig, baseState, baseActions} from '../app'
 import {store} from '../store'
 
@@ -10,6 +10,7 @@ const _404 = new Vue({
       //Questions
       isEnableChange: false,
       currentQuestion: 1,
+      testExists: false,
       testDone: false,
       options: [
         {
@@ -33,62 +34,21 @@ const _404 = new Vue({
           credit: 1
         }
       ],
-      questions: [],
+      questions: {
+        count: 0,
+        list: []
+      },
       testResult: {
         visual: 0,   
         auditive: 0,
         kinesthetic: 0,        
         list: []
       },
-
-      //Swiper
-      swiperOptions: {
-        allowTouchMove: false,
-        speed: 500,
-        loop: false,
-        preventClicks: false,
-        preventClicksPropagation: false
-      }      
+      sliderQuestions: null    
     }
   },
-  components: {
-    Swiper,
-    SwiperSlide
-  },
-  directives: {
-    swiper: directive
-  },  
   computed: {
-    ...baseState(),
-    swiper() {
-      return this.$refs.slider_questions.$swiper
-    }
-  },
-  watch: {
-    'testResult.list': {
-      handler: function(value){
-        let visualResult = value.filter(el => el.type == 'visual'),
-        auditiveResult = value.filter(el => el.type == 'auditivo'),
-        kinestheticResult = value.filter(el => el.type == 'kinestesico'),
-        result = value.map(el => el.value).reduce((total, current)=>{ return total + current});
-
-        if(visualResult.length > 0){
-          let visualSum = visualResult.map(el => el.value).reduce((total, current)=>{ return total + current})
-          this.testResult.visual = ((visualSum/result)*100).toFixed(2);
-        }
-
-        if(auditiveResult.length > 0){
-          let auditiveSum = auditiveResult.map(el => el.value).reduce((total, current)=>{ return total + current});
-          this.testResult.auditive = ((auditiveSum/result)*100).toFixed(2);
-        }
-
-        if(kinestheticResult.length > 0){
-          let kinestheticSum = kinestheticResult.map(el => el.value).reduce((total, current)=>{ return total + current});
-          this.testResult.kinesthetic = ((kinestheticSum/result)*100).toFixed(2);
-        }
-      },
-      deep: true
-    }
+    ...baseState()
   },
   created(){
     if(!this.logedUser){
@@ -99,20 +59,39 @@ const _404 = new Vue({
     this.initSectors();
   },
   mounted(){
-    this.getQuestions();
-    this.hideLoading();
+    this.getTest();
   },
   methods: {
     ...baseActions(),
     changeQuestion: function(direction){
       if (direction == 'next') {
-        if(this.swiper.slideNext()){
+        if(this.sliderQuestions.slideNext()){
           this.isEnableChange = false
-  
-          if(this.currentQuestion < this.questions.length){
+
+          if(this.currentQuestion < this.questions.count){
             this.currentQuestion += 1;
           }
         }else{
+          let visualResult = this.testResult.list.filter(el => el.type == 'visual'),
+          auditiveResult = this.testResult.list.filter(el => el.type == 'auditivo'),
+          kinestheticResult = this.testResult.list.filter(el => el.type == 'kinestesico'),
+          result = this.testResult.list.map(el => el.value).reduce((total, current)=>{ return total + current});
+  
+          if(visualResult.length > 0){
+            let visualSum = visualResult.map(el => el.value).reduce((total, current)=>{ return total + current})
+            this.testResult.visual = ((visualSum/result)*100).toFixed(0);
+          }
+  
+          if(kinestheticResult.length > 0){
+            let kinestheticSum = kinestheticResult.map(el => el.value).reduce((total, current)=>{ return total + current});
+            this.testResult.kinesthetic = ((kinestheticSum/result)*100).toFixed(0);
+          }
+
+          if(auditiveResult.length > 0){
+            let auditiveSum = auditiveResult.map(el => el.value).reduce((total, current)=>{ return total + current});
+            this.testResult.auditive = 100 - this.testResult.visual - this.testResult.kinesthetic;
+          }
+
           this.testDone = true
           this.saveTest();
         }
@@ -133,17 +112,23 @@ const _404 = new Vue({
           }
         })
         .then(questions => {
-          questions.forEach(q => {
+          questions.list.forEach(q => {
             this.testResult.list.push({
               value: 0,
               type: q.question.type
             })
           })
 
-          console.log(this.testResult)
-
           this.questions = questions;
-          this.getTest();
+          window.setTimeout(()=>{
+            this.sliderQuestions = new Swiper('#slider-questions', {
+              allowTouchMove: false,
+              slidesPerView: 1,
+              spaceBetween: 10,
+              speed: 500,
+              loop: false
+            })
+          }, 100)
         })
         .catch(err => {
           throw err;          
@@ -161,14 +146,19 @@ const _404 = new Vue({
           }
         })
         .then(result => {
+          this.testExists = true;
           this.testDone = true;
 
           this.testResult.visual = parseFloat(JSON.parse(result).visual)
           this.testResult.auditive = parseFloat(JSON.parse(result).auditive)
           this.testResult.kinesthetic = parseFloat(JSON.parse(result).kinesthetic)
+          
+          this.hideLoading();
         })
         .catch(err => {
-          throw err;          
+          this.getQuestions();
+          this.hideLoading();
+          throw err;
         })      
     },
     saveTest: function(){

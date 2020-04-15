@@ -38,8 +38,12 @@ class TestModel{
             "post_type" => "page",
             "name" => "test"
         ]);
+        $questions = get_field('questions', $test_page->ID);
 
-        return get_field('questions', $test_page->ID);
+        return (object)[
+            "list" => $questions,
+            "count" => count($questions)
+        ];
     }
 
     public static function saveTest($request){
