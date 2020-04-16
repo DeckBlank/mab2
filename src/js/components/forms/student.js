@@ -96,7 +96,7 @@ Vue.component('form-student',{
           :class="{ valid : school.isValid }"
           v-model="school.value">
           <option disabled value="" selected>Selecciona una opción</option>
-          <option v-for="school of schools" :key="school.id" :value="school" >{{school}}</option>
+          <option v-for="school of schools" :key="school.id" :value="school.E" >{{school.E}}</option>
         </select>
       </div>
       <div class="input_container">
@@ -208,9 +208,6 @@ Vue.component('form-student',{
     },
     'age.value': function(){
       this.age.isValid = this.validateText(this.age)
-    },
-    'school.value': function(value){
-      this.validateSelect(this.school)
     }
   },  
   methods: {

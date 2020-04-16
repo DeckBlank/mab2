@@ -8,7 +8,6 @@ const emotional = new Vue({
     return {
       //Filter
       isUsedFilter: false,
-      isActiveFilter: false,
       filterOptions: [],
 
       //Feed

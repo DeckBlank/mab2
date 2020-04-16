@@ -93,10 +93,10 @@ Vue.component('form-tutor',{
         <label for="">Colegio de su/s hijo/s</label>
         <select 
           class="c-form-box__select select-reset"
-          :class="{ valid : childrenSchool.isValid }"
-          v-model="childrenSchool.value">
+          :class="{ valid : school.isValid }"
+          v-model="school.value">
           <option disabled value="" selected>Selecciona una opción</option>
-          <option v-for="school of schools" :key="school.id" :value="school" >{{school}}</option>
+          <option v-for="school of schools" :key="school.id" :value="school.E" >{{school.E}}</option>
         </select>
       </div>
       <div class="input_container">
@@ -225,9 +225,6 @@ Vue.component('form-tutor',{
           age: 0
         })
       }
-    },
-    'childrenSchool.value': function(value){
-      this.validateSelect(this.childrenSchool)
     }
   },
   methods: {
@@ -245,7 +242,7 @@ Vue.component('form-tutor',{
       form_data.append('mobile', this.mobile.value)
       form_data.append('school_type', this.schoolType.value)
       form_data.append('ugel', this.ugel.value)
-      form_data.append('children_school', this.childrenSchool.value)
+      form_data.append('children_school', this.school.value)
       form_data.append('children_quantity', this.childrenQuantity.value)
       form_data.append('children', JSON.stringify(this.children))
       form_data.append('location', `${this.department.value}, ${this.province.value}, ${this.district.value}`)

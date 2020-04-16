@@ -6,40 +6,13 @@
 
 {% block content %}
   <section class="c-section c-section--emotional">
-    <section class="c-banner padding-vertical-3" :class="{ disabled : isUsedFilter }">
+    <section class="c-banner padding-vertical-3 margin-bottom-3">
       <div class="grid-container">
         <div class="flex-container align-right margin-bottom-2">
-          <div class="c-filter position-relative" :class="{ active : isActiveFilter }">
-            <div class="flex-container align-middle">
-              <div class="c-filter__label f2 fs-18 flex-container align-middle margin-right-2">
-                <span class="c-icon fs-21"><i class="far fa-gift"></i></span>
-                <p class="margin-left-1 margin-bottom-0">Contenido gratuito</p>
-              </div>          
-              <button class="c-filter__toggle position-relative" @click="isActiveFilter = !isActiveFilter">
-                <span class="c-icon fs-21"><i class="far fa-filter"></i></span>
-              </button>
-            </div>
-            <div class="c-filter__content br--small position-absolute bg-white">
-              <button 
-                class="c-filter__clean flex-container align-middle f2 fs-18 margin-bottom-2" 
-                @click="cleanFilter"
-                :disabled="filterOptions.length == 0"
-              >
-                <span class="margin-right-1"><i class="far fa-times-circle fs-21"></i></span>
-                LIMPIAR FILTROS
-              </button>
-              <ul class="c-list ul-reset fs-18">
-                {% for category in video_categories %}
-                  <li class="c-list__item position-relative dark flex-container align-middle">
-                    <input id="category-{{loop.index}}" value="{{category.slug}}" type="checkbox" class="hide" v-model="filterOptions">
-                    <label for="category-{{loop.index}}" class="c-option f2 fs-18 align-middle width-100">
-                      <div class="c-option__checkbox position-relative margin-right-1 br--small">
-                      </div>
-                      {{category.name}}
-                    </label>
-                  </li>
-                {% endfor %}
-              </ul>
+          <div class="flex-container align-middle">
+            <div class="white f2 fs-18 flex-container align-middle">
+              <span class="c-icon fs-21"><i class="far fa-gift"></i></span>
+              <p class="margin-left-1 margin-bottom-0">Contenido gratuito</p>
             </div>
           </div>
         </div>      
@@ -59,7 +32,21 @@
           </div>
         </div>
       </div>
-    </section>    
+    </section>
+    <div class="c-filter grid-container margin-bottom-1">
+      <div class="grid-x grid-margin-x grid-margin-y align-center">
+        {% for category in video_categories %}
+          <div class="cell medium-6 large-4">
+            <li class="c-filter__option text-uppercase position-relative dark flex-container align-middle">
+              <input id="category-{{loop.index}}" value="{{category.slug}}" type="checkbox" class="hide" v-model="filterOptions">
+              <label for="category-{{loop.index}}" class="c-button fs-18 w-medium f2 display-block width-100 text-center">
+                {{category.name}}
+              </label>
+            </li>
+          </div>
+        {% endfor %}        
+      </div>
+    </div>   
     <div class="grid-container padding-top-1">
       <div class="c-loader c-loader--full" :class="{ active : isFeedLoading }">
         <div class="container height-100 flex-container align-center-middle">

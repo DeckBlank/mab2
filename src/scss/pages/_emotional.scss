@@ -17,26 +17,6 @@
     }
   }
 
-  .c-banner.disabled {
-    background: transparent;
-    animation: an-banner 0.8s forwards;
-
-    .c-banner__content {
-      visibility: hidden;
-      opacity: 0;
-    }
-
-    .c-filter {
-      &__label {
-        color: $black;
-      }
-
-      &__toggle {
-        color: $black;
-      }
-    }
-  }
-
   .c-banner-video {
     height: 531px;
     border: solid 1rem $white;
@@ -68,86 +48,16 @@
   }
 
   .c-filter {
-    &__label {
-      color: $white;
-    }
-
-    &__toggle {
-      color: $white;
-    }
-
-    &__clean {
-      z-index: 200;
-
-      @include transition(0.25s);
-
-      &:hover {
+    &__option {
+      label {
+        border: solid 2px $primary-color;
         color: $primary-color;
       }
     }
 
-    &__content {
-      width: 15rem;
-      height: auto;
-      top: 4rem;
-      right: 2rem;
-      padding: 1rem;
-      z-index: 100;
-      visibility: hidden;
-      opacity: 0;
-      transform: translateY(-10px);
-
-      @include transition(0.3s);
-      @include box-shadow(right, rgba($gray, 0.4), 0, 10px, 50px);
-    }
-
-    .c-option {
-      display: flex !important;
-
-      &__checkbox {
-        border: solid 1px $success-color;
-        width: 17px;
-        height: 17px;
-
-        @include transition(0.3s);
-      }
-
-      &__checkbox::after {
-        content: '';
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-        background-color: $success-color;
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        margin: auto;
-        opacity: 0;
-
-        @include transition(0.3s);
-      }
-    }
-
-    .c-list {
-      &__item input:checked + .c-option .c-option__checkbox {
-        border-color: $success-color;
-      }
-
-      &__item input:checked + .c-option .c-option__checkbox::after {
-        opacity: 1;
-      }
-
-      @include triangle();
-    }
-  }
-
-  .c-filter.active {
-    .c-filter__content {
-      visibility: visible;
-      opacity: 1;
-      transform: translateY(0);
+    &__option input:checked + label {
+      background-color: $primary-color;
+      color: $white;
     }
   }
 
@@ -210,10 +120,7 @@
     }
 
     .c-filter {
-      &__content {
-        width: 18rem;
-        padding: 2rem;
-      }
+      padding-top: 5rem;
     }
   }
 }

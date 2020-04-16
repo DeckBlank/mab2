@@ -5,4 +5,9 @@
 .c-page-loader.hidden {
   visibility: hidden;
   opacity: 0;
+
+  .c-loader {
+    visibility: hidden;
+    opacity: 0;
+  }
 }

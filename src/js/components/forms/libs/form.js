@@ -127,7 +127,7 @@ function baseWatch(){
         }
       }else if(value == 'publico'){
         this.counter.limit = this.counter.base + 1;
-        this.ugels = Object.keys(require('../../../extras/schools/publics.json'))
+        this.ugels = [1,2,3,4,5,6,7]
 
         if(this.school && this.school.value != ''){
           this.schools = []
@@ -153,8 +153,11 @@ function baseWatch(){
       }
     },
     'ugel.value': function(value){
-      this.validateSelect(this.ugel)    
+      this.validateSelect(this.ugel)
       this.getSchools('publico', value)
+    },
+    'school.value': function(value){
+      this.validateSelect(this.school)
     },
     'department.value': function(){
       this.validateSelect(this.department)  
@@ -205,7 +208,7 @@ function baseMethods(){
       if(type == 'privado'){
         this.schools = require('../../../extras/schools/privates.json')
       }else if(type == 'publico'){
-        this.schools = require('../../../extras/schools/publics.json')[ugel]
+        this.schools = require('../../../extras/schools.json').filter(el => el.A == ugel)
       }
     }    
   }

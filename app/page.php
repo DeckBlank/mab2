@@ -21,7 +21,10 @@ if(is_page('login')){
 
 }else if(is_page('emotional')){
     $context['video_categories'] = Timber::get_terms([
-        "taxonomy" => "tax-video"
+        "taxonomy" => "tax-video",
+        'meta_key'  => 'order',
+        'orderby'   => 'meta_value_num',
+        'order' => 'ASC'
     ]);
 
 }

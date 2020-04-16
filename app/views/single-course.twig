@@ -11,7 +11,9 @@
         <h1 class="c-title f1 w-bold white margin-bottom-1 padding-left-1">{{post.title}}</h1>
         <ul class="ul-reset">
           {% for unity in unities %}
-            {% if loop.index == 1 %}            
+            {% if loop.index == 1 %}
+              {% set unity_id = loop.index %}
+            
               <li class="c-unity margin-bottom-1 br--medium">
                 <input id="unity-{{loop.index}}" type="checkbox" class="hide c-unity__checkbox" checked>           
                 <label for="unity-{{loop.index}}" class="c-unity__toggle align-justify width-100">
@@ -28,7 +30,7 @@
 
                   {% for topic in unity.topics %}                 
                     <li class="c-topic f2 fs-21 dar-gray w-medium">
-                      <a href="{{topic.link}}?course_id={{post.id}}&course_name={{post.title}}&unity={{loop.index}}" class="c-topic__video flex-container align-justify align-middle">
+                      <a href="{{topic.link}}?course_id={{post.id}}&course_name={{post.title}}&unity={{unity_id}}" class="c-topic__video flex-container align-justify align-middle">
                         <p class="margin-bottom-0 flex-container dark-gray align-middle">
                           <span class="c-icon margin-right-1 fs-21 pri-color"><i class="far fa-play-circle"></i></span>
                           {{topic.title}}
