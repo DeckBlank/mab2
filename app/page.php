@@ -26,7 +26,7 @@ if(is_page('login')){
         'orderby'   => 'meta_value_num',
         'order' => 'ASC'
     ]);
-
+    $context['banner'] = get_field('banner', $post->ID);
 }
 
 $templates = [

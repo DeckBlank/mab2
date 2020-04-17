@@ -6,25 +6,9 @@
 date_default_timezone_set('America/Lima');
 
 /**
- * Libs
+ * Requires
  */
-include_once __DIR__ . "/config/main.php";
-include_once __DIR__ . '/libs/videos.php';
-include_once __DIR__ . '/libs/comments.php';
-include_once __DIR__ . '/libs/likes.php';
-
-/**
- * Controllers
- */
-require_once(__DIR__."/controllers/UserController.php");
-require_once(__DIR__."/controllers/VideoController.php");
-require_once(__DIR__."/controllers/CourseController.php");
-require_once(__DIR__."/controllers/TopicController.php");
-require_once(__DIR__."/controllers/SessionRequestController.php");
-require_once(__DIR__."/controllers/SessionController.php");
-require_once(__DIR__."/controllers/SectorController.php");
-require_once(__DIR__."/controllers/RegistrationController.php");
-require_once(__DIR__."/controllers/TestController.php");
+include_once __DIR__ . "/config/requires.php";
 
 /**
  * Routes
@@ -212,4 +196,14 @@ add_action( 'rest_api_init', function () {
         'methods' => 'POST',
         'callback' => array($testController,'saveTest'),
     ));    
+});
+
+//10. Exercise ----------------------------------//
+add_action( 'rest_api_init', function () {
+    $exerciseController = new ExerciseController();
+
+    register_rest_route( 'custom/v1', '/exercises', array(
+        'methods' => 'GET',
+        'callback' => array($exerciseController,'getAll'),
+    ));
 });

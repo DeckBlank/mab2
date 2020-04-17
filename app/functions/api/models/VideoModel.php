@@ -24,7 +24,7 @@ class VideoModel{
     
             return get_posts($video_args);  
     
-        }else if( isset($request['categories']) && $request['categories'] != null ) {
+        }else if( isset($request['category']) && $request['category'] != null ) {
             $video_args = [
                 "post_type" => "video",
                 "posts_per_page" => -1,
@@ -32,7 +32,7 @@ class VideoModel{
                     [
                         'taxonomy' => 'tax-video',
                         'field' => 'slug',
-                        'terms' => $request['categories']
+                        'terms' => [$request['category']]
                     ]
                 ]
             ];

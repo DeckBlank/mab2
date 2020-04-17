@@ -16,35 +16,52 @@
             </div>
           </div>
         </div>      
-      </div>      
-      <div class="c-banner__content grid-container">
-        <a href="" class="c-banner-video position-relative display-block br--medium margin-bottom-3">
-          <img class="width-100 height-100 of--cover" src="{{theme.link}}/static/images/example.jpg" alt="">
-          <div class="c-banner-video__play position-absolute flex-container align-center-middle">
-            <span class="c-icon"><i class="far fa-play"></i></span>
-          </div>          
-        </a>
-        <div class="grid-x align-center">
-          <div class="cell medium-8 large-6">
-            <p class="white f2 text-center fs-21">
-              Accede a todo nuestro contenido online. Comienza a aprender donde quiera que estés con MAB.
-            </p>
+      </div>
+      <div class="grid-x align-center">
+        <div class="cell large-8">
+          
+          <div class="c-banner__content grid-container">
+            <div class="c-banner-video bg-white position-relative display-block br--medium margin-bottom-3">
+              <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/{{banner|split('/')[3]}}?color=de0d46&title=0&byline=0&autoplay=1" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div></div>
+            </div>
+            <div class="grid-x align-center">
+              <div class="cell medium-8 large-6">
+                <p class="white f2 text-center fs-21">
+                  Accede a todo nuestro contenido online. Comienza a aprender donde quiera que estés con MAB.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </div>    
     </section>
     <div class="c-filter grid-container margin-bottom-1">
       <div class="grid-x grid-margin-x grid-margin-y align-center">
         {% for category in video_categories %}
-          <div class="cell medium-6 large-4">
-            <li class="c-filter__option text-uppercase position-relative dark flex-container align-middle">
-              <input id="category-{{loop.index}}" value="{{category.slug}}" type="checkbox" class="hide" v-model="filterOptions">
-              <label for="category-{{loop.index}}" class="c-button fs-18 w-medium f2 display-block width-100 text-center">
-                {{category.name}}
-              </label>
-            </li>
-          </div>
-        {% endfor %}        
+          {% if loop.index == video_categories|length %}          
+            <div class="cell medium-6 large-4">
+              <li class="c-filter__option text-uppercase position-relative dark flex-container align-middle width-100">
+                <input id="category-{{loop.index}}" value="exercises" type="radio" name="filter" class="hide" v-model="filter">
+                <label for="category-{{loop.index}}" class="c-button fs-18 w-medium f2 width-100 height-100 text-center">
+                  <div class="flex-container align-center-middle width-100  height-100">
+                    {{category.name}}
+                  </div>
+                </label>
+              </li>
+            </div>          
+          {% else %}
+            <div class="cell medium-6 large-4">
+              <li class="c-filter__option text-uppercase position-relative dark flex-container align-middle width-100">
+                <input id="category-{{loop.index}}" value="{{category.slug}}" type="radio" name="filter" class="hide" v-model="filter">
+                <label for="category-{{loop.index}}" class="c-button fs-18 w-medium f2 width-100 height-100 text-center">
+                  <div class="flex-container align-center-middle width-100  height-100">
+                    {{category.name}}
+                  </div>
+                </label>
+              </li>
+            </div>
+          {% endif %}
+        {% endfor %}              
       </div>
     </div>   
     <div class="grid-container padding-top-1">
@@ -66,6 +83,21 @@
             :thumbnail="video.thumbnail"
           >
           </video-c>
+        </div>
+      </div>
+      <div class="c-exercises grid-x grid-margin-x grid-margin-y margin-bottom-2">
+        <div class="cell medium-4 large-3">
+          <a 
+            v-for="exercie of exercises" 
+            :key="exercie.id" 
+            :href="exercie.file.url"
+            target="_blank"
+            class="c-exercise">
+            <figure class="c-exercise__icon margin-bottom-1 text-center">
+              <img class="height-100" src="{{theme.link}}/static/images/icons/pdf.png" alt="">
+            </figure>
+            <p class="margin-bottom-0 f2 w-medium fs-18 text-uppercase text-center dark">${exercie.title}</p>
+          </a>
         </div>
       </div>
     </div>

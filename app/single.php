@@ -55,6 +55,9 @@ if($post->post_type == "video"){
 
     $context['source'] = get_field('source', $post->ID);
     $context['summary'] = ( get_field('summary', $post->ID) ) ? get_field('summary', $post->ID)['url'] : false;
+    $context['map'] = ( get_field('map', $post->ID) ) ? get_field('map', $post->ID)['url'] : false;
+    $context['worksheet'] = ( get_field('worksheet', $post->ID) ) ? get_field('worksheet', $post->ID)['url'] : false;
+    $context['solutions'] = ( get_field('solutions', $post->ID) ) ? get_field('solutions', $post->ID)['url'] : false;
 }
 
 $templates = [

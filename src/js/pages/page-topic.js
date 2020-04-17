@@ -33,7 +33,10 @@ const topic = new Vue({
       questions: [],
       testResult: [],
       totalRightAnswers: 0,      
-      totalWrongAnswers: 0,     
+      totalWrongAnswers: 0,
+      
+      //Material
+      isActiveMaterial: false,
 
       //Swiper
       swiperOptions: {

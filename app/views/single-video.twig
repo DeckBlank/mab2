@@ -31,7 +31,7 @@
             <div class="c-player margin-bottom-1">
               <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/{{source|split('/')[3]}}?color=de0d46&title=0&byline=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div>
             </div>
-            <div class="flex-container align-justify margin-bottom-3">
+            <div class="flex-container align-justify margin-bottom-1">
               <likes :average="likesAverage" :target="{ id : {{post.id}}, type: 'video' }"></likes>
   
               {% if post.terms[0] %}
@@ -40,6 +40,9 @@
                 </a>
               {% endif %}
             </div>
+            <a href="{{site.url}}/sesion-virtual" target="_blank" class="c-button c-button--secondary display-block margin-bottom-3 f2 w-medium fs-18 text-center">
+              Para un mayor aprendizaje personalizado, coordina tu sesión online
+            </a>
             <div class="c-comments f2">
               <div class="c-counter flex-container align-middle margin-bottom-2">
                 <span class="c-counter__icon"><i class="far fa-comment-lines fs-21"></i></span>

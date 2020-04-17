@@ -8,26 +8,31 @@ const emotional = new Vue({
     return {
       //Filter
       isUsedFilter: false,
-      filterOptions: [],
+      filter: '',
 
       //Feed
       isFeedLoading: false,
-      videos: []
+      videos: [],
+      exercises: []
     }
   },
   computed: {
     ...baseState()
   },
   watch: {
-    filterOptions: function(){
-      this.getVideosByCategories(this.filterOptions)
+    filter: function(value){
+      if(value !== 'exercises'){
+        this.getVideosByCategory(value)
+      }else{
+        this.getExcercies()
+      }
     }
   },    
   beforeMount(){
     const category = (new URLSearchParams(window.location.search)).get('category'); 
 
     if(category){
-      this.getVideosByCategories([category])
+      this.getVideosByCategory([category])
     }else{
       this.getVideos()
     }
@@ -35,14 +40,11 @@ const emotional = new Vue({
     this.initSectors();
   },
   mounted(){
+    this.ecualizeFilters();
     this.hideLoading();
   },  
   methods: {
     ...baseActions(),
-    cleanFilter: function(){
-      this.filterOptions = [];
-      this.isFeedLoading = false;
-    },
     getVideos: function(){
       this.isFeedLoading = true;
 
@@ -73,11 +75,12 @@ const emotional = new Vue({
           throw err;          
         })
     },
-    getVideosByCategories: function(categories){
+    getVideosByCategory: function(category){
       this.isFeedLoading = true;
+      this.exercises = []
       this.isUsedFilter = true;
 
-      fetch(`${this.API}/videos?categories=${categories}`,{
+      fetch(`${this.API}/videos?category=${category}`,{
           method: 'GET'
         })
         .then(res => { 
@@ -103,6 +106,49 @@ const emotional = new Vue({
                   
           throw err;
         })
-    }    
+    },
+    ecualizeFilters: function(){
+      let height_big = 0;
+
+      document.querySelectorAll('.c-filter__option').forEach(el => {
+        if (el.clientHeight > height_big) {
+          height_big = el.clientHeight
+        }
+      })
+  
+      document.querySelectorAll('.c-filter__option').forEach(el => {
+        el.style = `height: ${height_big}px`;
+      })
+    },
+    getExcercies: function(){
+      this.isFeedLoading = true;
+      this.videos = [];
+      this.isUsedFilter = true;
+
+      fetch(`${this.API}/exercises`,{
+          method: 'GET'
+        })
+        .then(res => { 
+          if (res.status >= 200 && res.status < 300) {
+            return res.json()
+          }else{
+            throw res
+          }
+        })
+        .then(exercises => {
+          this.exercises = exercises
+
+          window.setTimeout(()=>{
+            this.isFeedLoading = false
+          }, 500)          
+        })
+        .catch(err => {
+          window.setTimeout(()=>{
+            this.isFeedLoading = false
+          }, 500)
+                  
+          throw err;
+        })      
+    }
   }
 })

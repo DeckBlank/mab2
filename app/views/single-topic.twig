@@ -37,12 +37,48 @@
                 <div class="margin-right-2">
                   <Likes :average="likesAverage" :target="{ id : {{post.id}}, type: 'topic' }"></Likes>
                 </div>
-                {% if summary %}
-                  <a href="{{summary}}" target="_blank" class="c-download f2 fs-18 w-medium flex-container align-middle">
+                <div class="c-material position-relative">
+                  <button 
+                    class="c-material__toggle f2 fs-18 w-medium flex-container align-middle"
+                    @click="isActiveMaterial = !isActiveMaterial">
                     <span class="c-icon margin-right-1"><i class="far fa-download"></i></span>
-                    Descargar resumen
-                  </a>
-                {% endif %}
+                    Descargar material
+                  </button>
+                  <ul class="c-material__list ul-reset position-absolute bg-white br--medium padding-1" :class="{ hidden : !isActiveMaterial}">
+                    {% if summary %}
+                      <li class="c-material__item">
+                        <a href="{{summary}}" target="_blank" class="c-download f2 fs-18 w-medium flex-container align-middle">
+                          <span class="c-icon margin-right-1"><i class="far fa-file-pdf"></i></span>
+                          Resumen
+                        </a>                      
+                      </li>
+                    {% endif %}
+                    {% if map %}
+                      <li class="c-material__item">
+                        <a href="{{map}}" target="_blank" class="c-download f2 fs-18 w-medium flex-container align-middle">
+                          <span class="c-icon margin-right-1"><i class="far fa-file-pdf"></i></span>
+                          Mapa mental
+                        </a>                      
+                      </li>
+                    {% endif %}
+                    {% if worksheet %}
+                      <li class="c-material__item">
+                        <a href="{{worksheet}}" target="_blank" class="c-download f2 fs-18 w-medium flex-container align-middle">
+                          <span class="c-icon margin-right-1"><i class="far fa-file-pdf"></i></span>
+                          Hoja de trabajo
+                        </a>                      
+                      </li>
+                    {% endif %}
+                    {% if solutions %}
+                      <li class="c-material__item">
+                        <a href="{{solutions}}" target="_blank" class="c-download f2 fs-18 w-medium flex-container align-middle">
+                          <span class="c-icon margin-right-1"><i class="far fa-file-pdf"></i></span>
+                          Solucionario
+                        </a>                      
+                      </li>
+                    {% endif %}
+                  </ul>
+                </div>
               </div>
               <button class="c-questions-toggle c-button  f2 fs-18 w-medium c-button--primary flex-container align-middle" @click="isOpenedQuestionsModal = true">
                 <p class="margin-bottom-0">Preguntas</p>
