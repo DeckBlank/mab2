@@ -4,8 +4,8 @@
     "fields": [
         {
             "key": "field_5e8ade4391c6a",
-            "label": "Inscripciones",
-            "name": "registrations",
+            "label": "Cursos",
+            "name": "courses",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -23,7 +23,7 @@
             "sub_fields": [
                 {
                     "key": "field_5e8adee33da84",
-                    "label": "Inscripción",
+                    "label": "Curso",
                     "name": "",
                     "type": "accordion",
                     "instructions": "",
@@ -40,8 +40,8 @@
                 },
                 {
                     "key": "field_5e8ade7191c6b",
-                    "label": "Inscripción",
-                    "name": "registration",
+                    "label": "Curso",
+                    "name": "course",
                     "type": "group",
                     "instructions": "",
                     "required": 0,
@@ -76,10 +76,10 @@
                             "ui": 1
                         },
                         {
-                            "key": "field_5e8adea691c6d",
-                            "label": "Alumno, Profesor o Tutor (usuario)",
-                            "name": "user",
-                            "type": "user",
+                            "key": "field_5e9a0acd725f6",
+                            "label": "Inscripciones",
+                            "name": "registrations",
+                            "type": "repeater",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -88,33 +88,88 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "role": [
-                                "student",
-                                "tutor",
-                                "teacher"
-                            ],
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "return_format": "array"
-                        },
-                        {
-                            "key": "field_5e8adef43da85",
-                            "label": "Estado",
-                            "name": "state",
-                            "type": "true_false",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "message": "",
-                            "default_value": 1,
-                            "ui": 1,
-                            "ui_on_text": "Activado",
-                            "ui_off_text": "Desactivado"
+                            "collapsed": "",
+                            "min": 0,
+                            "max": 0,
+                            "layout": "table",
+                            "button_label": "",
+                            "sub_fields": [
+                                {
+                                    "key": "field_5e9a0b49725f8",
+                                    "label": "Inscripción",
+                                    "name": "registration",
+                                    "type": "group",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "layout": "block",
+                                    "sub_fields": [
+                                        {
+                                            "key": "field_5e8adea691c6d",
+                                            "label": "Alumno, Profesor o Tutor (usuario)",
+                                            "name": "user",
+                                            "type": "user",
+                                            "instructions": "",
+                                            "required": 0,
+                                            "conditional_logic": 0,
+                                            "wrapper": {
+                                                "width": "",
+                                                "class": "",
+                                                "id": ""
+                                            },
+                                            "role": [
+                                                "student",
+                                                "tutor",
+                                                "teacher"
+                                            ],
+                                            "allow_null": 0,
+                                            "multiple": 0,
+                                            "return_format": "array"
+                                        },
+                                        {
+                                            "key": "field_5e8adef43da85",
+                                            "label": "Estado",
+                                            "name": "state",
+                                            "type": "true_false",
+                                            "instructions": "",
+                                            "required": 0,
+                                            "conditional_logic": 0,
+                                            "wrapper": {
+                                                "width": "",
+                                                "class": "",
+                                                "id": ""
+                                            },
+                                            "message": "",
+                                            "default_value": 1,
+                                            "ui": 1,
+                                            "ui_on_text": "Activado",
+                                            "ui_off_text": "Desactivado"
+                                        },
+                                        {
+                                            "key": "field_5e9a0cb4f1d5c",
+                                            "label": "Fecha",
+                                            "name": "date",
+                                            "type": "date_picker",
+                                            "instructions": "",
+                                            "required": 0,
+                                            "conditional_logic": 0,
+                                            "wrapper": {
+                                                "width": "",
+                                                "class": "",
+                                                "id": ""
+                                            },
+                                            "display_format": "F j, Y",
+                                            "return_format": "d\/m\/Y",
+                                            "first_day": 1
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 }
@@ -138,5 +193,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1586726272
+    "modified": 1587155579
 }

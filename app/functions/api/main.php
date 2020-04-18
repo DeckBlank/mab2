@@ -86,6 +86,11 @@ add_action( 'rest_api_init', function () {
         'methods' => 'GET',
         'callback' => array($courseController,'getProgess'),
     ));
+
+    register_rest_route( 'custom/v1', '/course/(?P<course_id>\d+)/registration/checkout', array(
+        'methods' => 'GET',
+        'callback' => array($courseController,'registrationCheckout'),
+    ));
 });
 
 //4. Topic ----------------------------------//
@@ -155,6 +160,11 @@ add_action( 'rest_api_init', function () {
     register_rest_route( 'custom/v1', '/session', array(
         'methods' => 'GET',
         'callback' => array($sessionController,'getSession'),
+    ));   
+
+    register_rest_route( 'custom/v1', '/session', array(
+        'methods' => 'POST',
+        'callback' => array($sessionController,'createSession'),
     ));    
 });
 
@@ -168,17 +178,7 @@ add_action( 'rest_api_init', function () {
     ));    
 });
 
-//8. Registration ----------------------------------//
-add_action( 'rest_api_init', function () {
-    $registrationController = new RegistrationController();
-
-    register_rest_route( 'custom/v1', '/registration', array(
-        'methods' => 'GET',
-        'callback' => array($registrationController,'getRegistration'),
-    ));    
-});
-
-//9. Test ----------------------------------//
+//8. Test ----------------------------------//
 add_action( 'rest_api_init', function () {
     $testController = new TestController();
 
@@ -198,7 +198,7 @@ add_action( 'rest_api_init', function () {
     ));    
 });
 
-//10. Exercise ----------------------------------//
+//9. Exercise ----------------------------------//
 add_action( 'rest_api_init', function () {
     $exerciseController = new ExerciseController();
 

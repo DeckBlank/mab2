@@ -9,7 +9,8 @@
         }
     ],
     "require": {
-        "timber/timber": "^1.10"
+        "timber/timber": "^1.10",
+        "opentok/opentok": "^4.4"
     },
     "require-dev": {
         "symfony/console": "^4.0"

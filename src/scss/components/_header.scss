@@ -184,21 +184,10 @@
     }
   }
 
-  &--mclick {
-    .c-goback {
-      @include transition(0.25s);
-
-      &:hover,
-      &:focus {
-        transform: translateX(-5px);
-        color: $primary-color;
-      }
-    }
-  }
-
   &--session {
     height: auto;
     position: relative;
+    background: $white;
 
     .c-goback {
       color: $primary-color;
@@ -209,17 +198,6 @@
       &:focus {
         color: $primary-color;
         transform: translateX(5px);
-      }
-    }
-
-    .c-another-user {
-      &__avatar {
-        width: 41px;
-        height: 41px;
-      }
-
-      &__state {
-        display: none;
       }
     }
 
@@ -265,8 +243,17 @@
       height: 46px;
 
       .c-icon {
-        width: 21px;
-        height: 24px;
+        width: 30px;
+        height: 34px;
+      }
+    }
+
+    .c-logout {
+      color: $primary-color;
+
+      &:hover,
+      &:focus {
+        color: $primary-color;
       }
     }
   }
@@ -399,6 +386,8 @@
     }
 
     &--session {
+      background: $white;
+      
       .c-media-controls {
         top: 0;
         bottom: 0;
@@ -498,6 +487,10 @@
           @include transition(0.25s);
         }
       }
+    }
+
+    &--session {
+      position: relative;
     }
   }
 

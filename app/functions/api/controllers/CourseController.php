@@ -42,4 +42,8 @@ class CourseController{
             return new WP_REST_Response($progess, 200);
         }
     }
+
+    public function registrationCheckout($request){
+        return CourseModel::registrationCheckout($request);
+    }
 }

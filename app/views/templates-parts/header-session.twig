@@ -1,13 +1,13 @@
-<header class="c-header c-header--session" :class="{ shadowed : isHeaderWithShadow }">
+<header class="c-header c-header--session width-100" :class="{ shadowed : isHeaderWithShadow }">
   <div class="c-header__top padding-horizontal-1">
     <div class="flex-container height-100 align-middle align-justify">
-      <a href="{{site.url}}/mab-click" class="c-goback flex-container align-middle pri-color">
+      <div class="flex-container align-middle">
         <figure class="c-icon margin-right-1">
-          <img class="of--contain width-100 height-100" src="{{theme.link}}/static/images/mab-click.png" alt="">
+          <img class="of--contain width-100 height-100" src="{{theme.link}}/static/images/vectors/virtual-session/PC-min.png" alt="">
         </figure>
-        <p class="margin-bottom-0 f2 w-bold">MAB CLICK</p>
-      </a>
-      <a @click="endSession">
+        <p class="margin-bottom-0 f2 fs-18 dark w-bold">SESIÓN VIRTUAL</p>
+      </div>
+      <a @click="endSession" class="c-logout f2 fs-18 w-medium">
         Finalizar sesión
       </a>
     </div>
@@ -50,19 +50,10 @@
           <span class="c-icon"><i class="far fa-desktop-alt"></i></span>
         </button>
       </div>
-      <div class="flex-container padding-vertical-1">
+      <div class="flex-container padding-vertical-1 fs-18 f2 w-medium">
         <span class="c-icon margin-right-1"><i class="far fa-user"></i></span>
         ${users.length} Participantes
       </div>
-      <!-- <div class="c-another-user flex-container align-middle">
-        <figure class="c-another-user__avatar margin-right-1 rounded overflow-hidden">
-          <img class="of--cover width-100 height-100" src="{{theme.link}}/static/images/example.jpg" alt="">
-        </figure>
-        <p class="c-another-user__nickname margin-bottom-0 f2 dark">
-          Fika AJ
-        </p>
-        <span class="c-another-user__state margin-left-1 sec-alt w-bold">EN LINEA</span>
-      </div> -->
     </div>
   </div>
 </header>

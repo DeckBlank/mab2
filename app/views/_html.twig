@@ -1,7 +1,14 @@
 <!doctype html>
 <html lang="es">
+  <head>
+    {% include '_html-head.twig' %}
 
-  {% include '_html-head.twig' %}
+    {% block metas %}
+      {% include "_html-seo.twig" %}
+      
+      {# content #}
+    {% endblock %}
+  </head>
 
   <body class="{% if post.post_type == 'course' %} bg-pri-alt {% endif %}">
     <main class="c-main position-relative overflow-hidden" id="app" data-site="{{site.url}}" data-theme="{{theme.link}}">

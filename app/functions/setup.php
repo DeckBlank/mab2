@@ -3,9 +3,10 @@
 /**
  * Lib
  */
-function add_button(){
+function add_buttons(){
     ?>
-        <input type="submit" class="button button-primary" style="width: 100%" value="Generar codigo" id="generate-key"/>
+        <input type="submit" class="button button-primary" style="width: 100%; margin-bottom: 1rem" value="Generar codigo" id="generate-key"/>
+        <input type="submit" data-site="<?php echo get_site_url() ?>" class="button button-secondary" style="width: 100%" value="Crear sala" id="create-room"/>
     <?php 
 }
 
@@ -87,6 +88,6 @@ add_action('add_meta_boxes', function(){
     $types = array("post","session");
   
     foreach($types as $type){
-      add_meta_box('meta-session-1', 'Avanzado', "add_button", $type, 'side', 'high');
+      add_meta_box('meta-session-1', 'Avanzado', "add_buttons", $type, 'side', 'high');
     }
 }); 

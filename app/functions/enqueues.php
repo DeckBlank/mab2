@@ -1,6 +1,6 @@
 <?php
 
-$assets_version = '1587094322043';
+$assets_version = '1587174458574';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -55,14 +55,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
     register_assets('package', [
         'handle'    => 'pandawp/package/timers_bf',
         'src'       => $config['resources']['package_timers_bf'],
-        'deps'      => [ ],
-        'ver'       => $assets_version,
-        'in_footer' => true
-    ]);
-
-    register_assets('package', [
-        'handle'    => 'pandawp/package/babel',
-        'src'       => $config['resources']['package_babel'],
         'deps'      => [ ],
         'ver'       => $assets_version,
         'in_footer' => true
@@ -316,6 +308,22 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         ]);        
 
     }elseif (is_singular('session')){
+        register_assets('package', [
+            'handle'    => 'pandawp/package/swiper',
+            'src'       => $config['resources']['package_swiper'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+    
+        register_assets('package', [
+            'handle'    => 'pandawp/package/dom7',
+            'src'       => $config['resources']['package_dom7'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]); 
+                
         register_assets('package', [
             'handle'    => 'pandawp/package/vaswiper',
             'src'       => $config['resources']['package_vaswiper'],

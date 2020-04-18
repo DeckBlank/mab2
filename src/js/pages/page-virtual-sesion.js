@@ -225,6 +225,8 @@ const virtual_sesion = new Vue({
         id: this.session.id,
         name: this.session.name,
         key: this.session.key,
+        room: this.session.room,
+        credentials: this.session.credentials,
         teacher: this.session.teacher,
         publisher: this.sessionUser
       }))   

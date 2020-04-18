@@ -237,7 +237,7 @@ const topic = new Vue({
       if(!this.logedUser || !this.metas.get('course_name') || !this.metas.get('unity')){
         window.location = `${this.SITE_URL}/solicitar-cursos`;
       }else{
-        fetch(`${this.API}/registration?user=${this.logedUser.user_email}&course=${course_id}`,{
+        fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}`,{
             method: 'GET'
           })
           .then(res => {

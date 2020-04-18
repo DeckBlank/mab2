@@ -30,4 +30,4 @@ bundled/
 !.gitkeep
 *.lock
 package-lock.json
-.env
+env.php

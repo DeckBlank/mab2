@@ -134,6 +134,8 @@
     &__input {
       border: solid 1px $medium-gray;
       border-radius: 5px 0 0 5px;
+      font-family: $font-family-secondary !important;
+      font-weight: $medium-font;
 
       &:focus {
         border-color: $primary-color;

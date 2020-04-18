@@ -18,6 +18,5 @@ require_once(__DIR__."/../controllers/TopicController.php");
 require_once(__DIR__."/../controllers/SessionRequestController.php");
 require_once(__DIR__."/../controllers/SessionController.php");
 require_once(__DIR__."/../controllers/SectorController.php");
-require_once(__DIR__."/../controllers/RegistrationController.php");
 require_once(__DIR__."/../controllers/TestController.php");
 require_once(__DIR__."/../controllers/ExerciseController.php");

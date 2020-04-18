@@ -1,5 +1,7 @@
 {% extends '_html.twig' %}
 
+{% block metas %}{% endblock %}
+
 {% block hero %}
   {% include 'templates-parts/hero.twig' %}
 {% endblock %}
@@ -35,11 +37,16 @@
               <likes :average="likesAverage" :target="{ id : {{post.id}}, type: 'video' }"></likes>
   
               {% if post.terms[0] %}
-                <a href="{{site.url}}?category={{post.terms[0].slug}}" class="c-category f2 rounded display-block">
+                <a href="{{site.url}}/emotional?category={{post.terms[0].slug}}" class="c-category f2 rounded display-block">
                   {{post.terms[0].name}}
                 </a>
               {% endif %}
             </div>
+            {% if post.content %}
+              <div class="margin-bottom-2 f2 fs-18 w-medium black">
+                {{post.content}}
+              </div>
+            {% endif %}
             <a href="{{site.url}}/sesion-virtual" target="_blank" class="c-button c-button--secondary display-block margin-bottom-3 f2 w-medium fs-18 text-center">
               Para un mayor aprendizaje personalizado, coordina tu sesión online
             </a>

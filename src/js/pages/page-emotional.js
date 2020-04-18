@@ -32,7 +32,8 @@ const emotional = new Vue({
     const category = (new URLSearchParams(window.location.search)).get('category'); 
 
     if(category){
-      this.getVideosByCategory([category])
+      this.filter = category;
+      this.getVideosByCategory(category)
     }else{
       this.getVideos()
     }

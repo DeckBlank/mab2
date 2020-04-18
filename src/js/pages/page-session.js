@@ -16,13 +16,13 @@ const session = new Vue({
 
       //Session
       session: null,  
-      users: [],
-      isShowedUsersList: true,      
       credentials: {
         apiKey: '',
         sessionId: '',
         token: ''
       },          
+      users: [],
+      isShowedUsersList: true,      
       publisher: null,
       publisher_screen: null,
       subscribers: [],
@@ -92,33 +92,24 @@ const session = new Vue({
       },
     })
 
-    this.openRoom()
+    this.openRoom();
     this.hideLoading();
   },
   methods: {
     ...baseActions(),
     endSession: function(){
       window.localStorage.removeItem('mab_session')
-      window.location = `${this.SITE_URL}/mab-click`;
+      window.location = `${this.SITE_URL}/sesion-virtual`;
     },
     openRoom: function(){
-      const SERVER_BASE_URL = 'https://pkclass.cleivervalera.com';
+      this.credentials.apiKey = this.activedSession.credentials.api_key
+      this.credentials.sessionId = this.activedSession.room
+      this.credentials.token = this.activedSession.credentials.token
 
-      fetch(SERVER_BASE_URL + '/session')
-        .then(res => {
-          return res.json()
-        })
-        .then(res => {
-          this.apiKey = res.apiKey
-          this.sessionId = res.sessionId
-          this.token = res.token
-
-          this.initSession();
-        })
-        .catch(this.handleError);
+      this.initSession();
     },
     initSession: function(){
-      this.session = OT.initSession(this.apiKey, this.sessionId)
+      this.session = OT.initSession(this.credentials.apiKey, this.credentials.sessionId)
       this.session.on('streamCreated', (event)=> {
         this.users.push({
           stream: event.stream
@@ -155,7 +146,7 @@ const session = new Vue({
         },100)
       });   
 
-      this.session.connect(this.token, (error)=> {
+      this.session.connect(this.credentials.token, (error)=> {
         if (error) {
           this.handleError(error);
         } else {
