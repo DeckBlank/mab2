@@ -60,7 +60,7 @@ const virtual_sesion = new Vue({
 
       //Session
       session: null,
-      sessionKey: 'quRIjSV7',
+      sessionKey: '',
       sessionUser: '',
       isRightCode: null
     }
