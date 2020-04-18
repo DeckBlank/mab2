@@ -62,6 +62,8 @@ return [
 
         'package_apexcharts' => get_theme_file_uri('/static/js/package.apexcharts.bundle.js'),
 
+        'package_babel' => get_theme_file_uri('/static/js/package.babel.bundle.js'),
+
         /**
          * Styles
          * */

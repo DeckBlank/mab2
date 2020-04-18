@@ -1,6 +1,6 @@
 <?php
 
-$assets_version = '1587236931581';
+$assets_version = '1587238568260';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -55,6 +55,14 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
     register_assets('package', [
         'handle'    => 'pandawp/package/timers_bf',
         'src'       => $config['resources']['package_timers_bf'],
+        'deps'      => [ ],
+        'ver'       => $assets_version,
+        'in_footer' => true
+    ]);
+
+    register_assets('package', [
+        'handle'    => 'pandawp/package/babel',
+        'src'       => $config['resources']['package_babel'],
         'deps'      => [ ],
         'ver'       => $assets_version,
         'in_footer' => true

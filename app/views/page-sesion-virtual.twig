@@ -263,10 +263,10 @@
                       <input 
                         v-model="sessionKey" 
                         type="text" 
-                        class="c-form__input input-reset"
+                        class="c-form__input c-form__input--secondary input-reset"
                         @keyup.enter="getSession">
                     </label>
-                    <p class="margin-bottom-0 alert" :class="{ hide : (isRightCode || isRightCode == null) }">El código ingresado no existe</p>
+                    <p class="margin-bottom-0 f2 fs-18 w-medium white" :class="{ hide : (isRightCode || isRightCode == null) }">El código ingresado no existe</p>
                   </div>
                   <div v-else class="margin-bottom-3">
                     <label>

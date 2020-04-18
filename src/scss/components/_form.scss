@@ -14,6 +14,13 @@
     }
   }
 
+  &__input {
+    &--secondary {
+      font-family: $font-family-secondary;
+      font-size: $fs-18;
+    }
+  }
+
   &__input.valid,
   &__select.valid {
     box-shadow: $success-color 0 0 0 5px !important;
