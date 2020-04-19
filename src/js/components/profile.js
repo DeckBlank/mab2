@@ -9,7 +9,7 @@ Vue.component('profile',{
       <ul class="c-user__menu f2 fs-18 ul-reset position-absolute br--small bg-white">
         <li class="c-user__text black w-medium">Hola <span class="f1 w-bold">{{logedUser.user_auth}}</span></li>
         <li class="c-user__option w-bold">
-          <a :href="SITE_URL + '/test'" class="display-block">Mi test de personalidad</a>
+          <a :href="SITE_URL + '/test'" class="display-block">Mi test de estilos de aprendizaje</a>
         </li>
         <li class="c-user__option w-bold">
           <a :href="SITE_URL + '/progreso'" class="display-block">Mi progreso</a>
