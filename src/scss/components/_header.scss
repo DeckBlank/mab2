@@ -13,7 +13,8 @@
       width: 35px;
       height: 35px;
       cursor: pointer;
-      background-image: url('../images/vectors/user.png');
+      background-image: url('../images/vectors/user-profile.png');
+      background-size: contain;
 
       @include transition(0.25s);
 
@@ -289,7 +290,7 @@
         padding: 0.5rem 0 0.5rem 1rem;
         visibility: visible;
         opacity: 1;
-        max-height: 500px;
+        max-height: 2000px;
       }
 
       .c-menu .c-menu__item .c-icon {
@@ -309,7 +310,7 @@
         padding: 0.5rem 0 0.5rem 1rem;
         visibility: visible;
         opacity: 1;
-        max-height: 500px;
+        max-height: 2000px;
       }
 
       .c-submenu .c-submenu__item > a {

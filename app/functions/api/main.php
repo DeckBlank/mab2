@@ -84,7 +84,7 @@ add_action( 'rest_api_init', function () {
 
     register_rest_route( 'custom/v1', '/courses/progress', array(
         'methods' => 'GET',
-        'callback' => array($courseController,'getProgess'),
+        'callback' => array($courseController,'getProgress'),
     ));
 
     register_rest_route( 'custom/v1', '/course/(?P<course_id>\d+)/registration/checkout', array(

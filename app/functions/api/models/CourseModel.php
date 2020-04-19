@@ -23,36 +23,42 @@ class CourseModel{
         return $topics;
     }
 
-    public static function getProgess($request){
+    public static function getProgress($request){
         $progresses = [];
         
-        foreach(get_field('registrations', 'options') as $registration){
-            if($registration['registration']['user']['user_email'] == $request['user']){
-                $course = $registration['registration']['course'];
+        foreach(get_field('courses', 'options') as $course){
+            foreach($course['course']['registrations'] as $registration){
+                if(
+                    $registration['registration']['user']['user_email'] == $request['user'] and
+                    $registration['registration']['state'] == true ){
 
-                $tests = DBConnection::getConnection()->query("
-                    SELECT 
-                        *
-                    FROM
-                        wp_topic_test_scores
-                    WHERE
-                        user = '". $request['user'] ."' and course_id='". $course->ID ."'
-                ");
-                $test_scores = [];
+                    $course = $course['course']['course'];
 
-                if ($tests && $tests->num_rows > 0) {
-                    while($test_score = $tests->fetch_assoc()) {
-                        if($test_score)                            
-                            array_push($test_scores, $test_score);
+                    $tests = DBConnection::getConnection()->query("
+                        SELECT 
+                            *
+                        FROM
+                            wp_topic_test_scores
+                        WHERE
+                            user = '". $request['user'] ."' and course_id='". $course->ID ."'
+                    ");
+                    $test_scores = [];
+    
+                    if ($tests && $tests->num_rows > 0) {
+                        while($test_score = $tests->fetch_assoc()) {
+                            if($test_score)                            
+                                array_push($test_scores, $test_score);
+                        }
                     }
+    
+                    array_push($progresses, (object)[
+                        "course" => $course->post_title,
+                        "completed" => count($test_scores),
+                        "total" => self::getTopics($course->ID),
+                        "percentage" => bcdiv( (count($test_scores)*100), self::getTopics($course->ID), 2 )
+                    ]);    
+                    
                 }
-
-                array_push($progresses, (object)[
-                    "course" => $course->post_title,
-                    "completed" => count($test_scores),
-                    "total" => self::getTopics($course->ID),
-                    "percentage" => bcdiv( (count($test_scores)*100), self::getTopics($course->ID), 2 )
-                ]);                
             }
         }
 

@@ -22,8 +22,8 @@ class VideoModel{
                 's' => $request['query']
             ];
     
-            return get_posts($video_args);  
-    
+            return get_posts($video_args);
+            
         }else if( isset($request['category']) && $request['category'] != null ) {
             $video_args = [
                 "post_type" => "video",
@@ -40,12 +40,32 @@ class VideoModel{
             return __get_sanitize_videos( Timber::get_posts($video_args) );  
     
         }else {
-            $video_args = [
-                "post_type" => "video",
-                "posts_per_page" => -1
-            ];
-    
-            return __get_sanitize_videos( Timber::get_posts($video_args) );  
+            $video_categories = Timber::get_terms([
+                "taxonomy" => "tax-video",
+                'meta_key'  => 'order',
+                'orderby'   => 'meta_value_num',
+                'order' => 'ASC'                
+            ]);
+
+            $videos = [];
+
+            foreach($video_categories as $category){
+                $video_args = [
+                    "post_type" => "video",
+                    "posts_per_page" => -1,
+                    'tax_query' => [
+                        [
+                            'taxonomy' => 'tax-video',
+                            'field' => 'slug',
+                            'terms' => [$category->name]
+                        ]
+                    ]
+                ];
+
+                $videos = array_merge($videos, Timber::get_posts($video_args));
+            }
+
+            return __get_sanitize_videos($videos);  
         }
     }
     

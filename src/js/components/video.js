@@ -19,7 +19,6 @@ Vue.component('video-c',{
       <div class="flex-container align-middle">
         <figure class="c-avatar margin-right-1 overflow-hidden rounded">
           <img v-if="author.avatar" class="width-100 height-100 of--cover" :src="author.avatar.sizes.thumbnail" alt="">
-          <img v-else class="width-100 height-100 of--cover" :src=" THEME_URL + '/static/images/user.png' " alt="">
         </figure>
         <p class="margin-bottom-0 fs-21 w-medium f2 dark">{{author.first_name}} {{author.last_name}}</p>
       </div>

@@ -33,8 +33,8 @@ class CourseController{
         }    
     }
 
-    public function getProgess($request){
-        $progess = CourseModel::getProgess($request);
+    public function getProgress($request){
+        $progess = CourseModel::getProgress($request);
 
         if( empty($progess) ){
             return new WP_Error( 'no_progess', __("No progess found"), array( 'status' => 404 ) );
