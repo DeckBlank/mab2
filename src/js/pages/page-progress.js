@@ -23,7 +23,6 @@ const progress = new Vue({
   },
   mounted(){
     this.getProgresses();
-    this.hideLoading();
   },
   methods: {
     ...baseActions(),
@@ -99,7 +98,9 @@ const progress = new Vue({
           }
         })
         .then(progresses => {
-          this.progresses = progresses;
+          this.progresses = progresses;          
+          this.hideLoading();
+          
           window.setTimeout(()=>{
             this.initCharts()
           },100)
