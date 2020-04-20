@@ -41,7 +41,7 @@ const progress = new Vue({
             fontSize: '25px',
             fontFamily: 'DINRoundPro, Arial, sans-serif',
             fontWeight: 'bold',
-            colors: ['#fbee23']
+            colors: ['transparent', 'transparent']
           },
           dropShadow: {
             enabled: false

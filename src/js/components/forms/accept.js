@@ -11,7 +11,7 @@ Vue.component('form-accept',{
           <div class="cell medium-8 large-6">
             <div class="c-modal__content flex-container align-center-middle">
               <div class="c-accept modal-content padding-2 br--medium">
-                <p>Gracias por registrarte!
+                <p>¡Gracias por registrarte!
                 </p>
                 <div class="modal_btn_container">
                   <a @click="login">¡Bienvenido!</a>
