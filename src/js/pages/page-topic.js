@@ -235,23 +235,25 @@ const topic = new Vue({
       if(!this.metas.get('course_name') || !this.metas.get('unity') || !this.metas.get('sector')){
         window.location = `${this.SITE_URL}/solicitar-cursos`;
       }else{
-        fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}&topic=${this.topicID}`,{
-            method: 'GET'
-          })
-          .then(res => {
-            if (res.status >= 200 && res.status < 300) {
-              return res.json()
-            }else{
-              throw res
-            }
-          })
-          .then(registration => { 
-
-          })
-          .catch(err => {
-            window.location = `${this.SITE_URL}/solicitar-cursos`;
-            throw err;          
-          })        
+        if(this.metas.get('sector') == "privado"){
+          fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}&topic=${this.topicID}`,{
+              method: 'GET'
+            })
+            .then(res => {
+              if (res.status >= 200 && res.status < 300) {
+                return res.json()
+              }else{
+                throw res
+              }
+            })
+            .then(registration => { 
+  
+            })
+            .catch(err => {
+              window.location = `${this.SITE_URL}/solicitar-cursos`;
+              throw err;          
+            })        
+        }
       }
     }
   }
