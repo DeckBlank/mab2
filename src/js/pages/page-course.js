@@ -6,6 +6,7 @@ const course = new Vue({
   ...baseConfig(store),
   data() {
     return {
+      metas: new URLSearchParams(window.location.search),
       isActiveUnity: false
     }
   },
@@ -23,13 +24,7 @@ const course = new Vue({
   methods: {
     ...baseActions(),
     isUserAuthOnCourse: function(course_id){
-      let topics = document.querySelectorAll('.c-topic__video')
-
-      if(!this.logedUser){
-        topics.forEach(topic => {
-          topic.setAttribute('href', `${this.SITE_URL}/solicitar-cursos`)
-        })
-      }else{
+      if(this.metas.get('sector') == 'privado'){
         fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}`,{
             method: 'GET'
           })
@@ -44,13 +39,17 @@ const course = new Vue({
 
           })
           .catch(err => {
-            topics.forEach(topic => {
-              topic.setAttribute('href', `${this.SITE_URL}/solicitar-cursos`)
+            let topics = document.querySelectorAll('.c-topic__video')
+
+            topics.forEach((topic, index) => {
+              if(index != 0){
+                topic.setAttribute('href', `${this.SITE_URL}/solicitar-cursos`)
+              }
             })
 
             throw err;          
           })        
-      }   
+      }
     },
     saveCourseOnMetas: function(){
       window.localStorage.setItem('mab_metas', JSON.stringify({

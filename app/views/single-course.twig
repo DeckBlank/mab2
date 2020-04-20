@@ -30,7 +30,9 @@
 
                   {% for topic in unity.topics %}                 
                     <li class="c-topic f2 fs-21 dar-gray w-medium">
-                      <a href="{{topic.link}}?course_id={{post.id}}&course_name={{post.title}}&unity={{unity_id}}" class="c-topic__video flex-container align-justify align-middle">
+                      <a 
+                        :href="'{{topic.link}}?course_id={{post.id}}&course_name={{post.title}}&unity={{unity_id}}&sector=' + metas.get('sector')" 
+                        class="c-topic__video flex-container align-justify align-middle">
                         <p class="margin-bottom-0 flex-container dark-gray align-middle">
                           <span class="c-icon margin-right-1 fs-21 pri-color"><i class="far fa-play-circle"></i></span>
                           {{topic.title}}
@@ -110,7 +112,9 @@
 
                   {% for topic in unity.topics %}                 
                     <li class="c-topic f2 fs-21 dar-gray w-medium">
-                      <a href="{{topic.link}}?course_id={{post.id}}&course_name={{post.title}}&unity={{unity_id}}" class="c-topic__video flex-container align-justify align-middle">
+                      <a 
+                        :href="'{{topic.link}}?course_id={{post.id}}&course_name={{post.title}}&unity={{unity_id}}&sector=' + metas.get('sector')"
+                        class="c-topic__video flex-container align-justify align-middle">
                         <p class="margin-bottom-0 flex-container dark-gray align-middle">
                           <span class="c-icon margin-right-1 fs-21 pri-color"><i class="far fa-play-circle"></i></span>
                           {{topic.title}}

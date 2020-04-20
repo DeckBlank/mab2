@@ -1,7 +1,7 @@
 .c-section--course {
   .c-title {
     text-transform: uppercase;
-    font-size: 60px;
+    font-size: 50px;
   }
 
   .c-unity {
@@ -84,6 +84,12 @@
         background-color: $light-gray;
       }
     }
+  }
+}
+
+@include breakpoint(medium) {
+  .c-section--course {
+    font-size: 60px;
   }
 }
 

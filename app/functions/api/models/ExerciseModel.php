@@ -13,7 +13,8 @@ class ExerciseModel{
      */
     public static function getAll($request){
         $exercises = get_posts([
-            "post_type" => "exercise"
+            "post_type" => "exercise",
+            "posts_per_page" => -1
         ]);
         $exercises_array = []; 
 

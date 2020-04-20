@@ -44,6 +44,10 @@ class CourseController{
     }
 
     public function registrationCheckout($request){
-        return CourseModel::registrationCheckout($request);
+        if( CourseModel::registrationCheckout($request) ){
+            return new WP_REST_Response('ok', 200);
+        }else{
+            return new WP_Error( 'no_access_course', __("No access course"), array( 'status' => 404 ) );
+        }
     }
 }

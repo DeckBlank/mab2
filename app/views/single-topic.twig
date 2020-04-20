@@ -80,7 +80,7 @@
                   </ul>
                 </div>
               </div>
-              <button class="c-questions-toggle c-button  f2 fs-18 w-medium c-button--primary flex-container align-middle" @click="isOpenedQuestionsModal = true">
+              <button v-if="this.logedUser" class="c-questions-toggle c-button  f2 fs-18 w-medium c-button--primary flex-container align-middle" @click="isOpenedQuestionsModal = true">
                 <p class="margin-bottom-0">Preguntas</p>
               </button>
             </div>

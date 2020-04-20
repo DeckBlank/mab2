@@ -208,7 +208,7 @@ function baseMethods(){
       if(type == 'privado'){
         this.schools = require('../../../extras/schools/privates.json')
       }else if(type == 'publico'){
-        this.schools = require('../../../extras/schools.json').filter(el => el.A == ugel)
+        this.schools = require('../../../extras/schools.json').filter(el => el.A == ugel).map(el => el.E)
       }
     }    
   }

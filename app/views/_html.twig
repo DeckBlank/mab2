@@ -48,7 +48,7 @@
           </li>
 
           <li v-for="course of pubGrade.children" class="c-cursos__item fs-18 f2">
-            <a :href="course.url" class="display-block">${course.name}</a>
+            <a :href="course.url + '?sector=publico'" class="display-block">${course.name}</a>
           </li>
         </ul>
       </div>
@@ -73,7 +73,7 @@
           </li>
 
           <li v-for="course of privGrade.children" class="c-cursos__item fs-18 f2">
-            <a :href="course.url" class="display-block">${course.name}</a>
+            <a :href="course.url + '?sector=privado'" class="display-block">${course.name}</a>
           </li>
         </ul>
       </div>

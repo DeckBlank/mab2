@@ -67,19 +67,25 @@ class CourseModel{
     
     public static function registrationCheckout($request){
         $courses = get_field('courses', 'options');
-        
+
         foreach($courses as $course){
             if($course['course']['course']->ID == $request['course_id']){
-                foreach($course['course']['registrations'] as $registration){
-                    if(
-                        $registration['registration']['user']['user_email'] == $request['user'] and
-                        $registration['registration']['state'] == true ){
-        
-                        return true;
+                $first_unity =  get_field('unities',$course['course']['course']->ID)[0];
+
+                if( $first_unity['topics'][0]['topic']->ID == $request['topic'] ){
+                    return true;
+                }else{
+                    foreach($course['course']['registrations'] as $registration){
+                        if(
+                            $registration['registration']['user']['user_email'] == $request['user'] and
+                            $registration['registration']['state'] == true ){
+            
+                            return true;
+                        }
                     }
                 }
-                }
             }
+        }
 
         return false;
     }

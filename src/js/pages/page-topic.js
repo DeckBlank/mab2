@@ -61,14 +61,12 @@ const topic = new Vue({
       return this.$refs.slider_questions.$swiper
     }     
   },
-  created(){    
-    this.isUserAuthOnTopic(this.metas.get('course_id'))
-  },
   beforeMount(){
     this.initSectors();
   },  
   mounted(){
     this.topicID = this.$refs.topic.getAttribute('data-id');
+    this.isUserAuthOnTopic(this.metas.get('course_id'))
     this.getLikesAverage();
     this.getComments();
     this.getQuestions();
@@ -234,10 +232,10 @@ const topic = new Vue({
     isUserAuthOnTopic: function(course_id){
       let topics = document.querySelectorAll('.c-topic__video')
 
-      if(!this.logedUser || !this.metas.get('course_name') || !this.metas.get('unity')){
+      if(!this.metas.get('course_name') || !this.metas.get('unity') || !this.metas.get('sector')){
         window.location = `${this.SITE_URL}/solicitar-cursos`;
       }else{
-        fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}`,{
+        fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}&topic=${this.topicID}`,{
             method: 'GET'
           })
           .then(res => {
@@ -252,7 +250,6 @@ const topic = new Vue({
           })
           .catch(err => {
             window.location = `${this.SITE_URL}/solicitar-cursos`;
-            
             throw err;          
           })        
       }
