@@ -32,7 +32,7 @@ class CourseModel{
 
     public static function getProgress($request){
         $progresses = [];
-        $tests = DBConnection::getConnection()->query("
+        $all_tests = DBConnection::getConnection()->query("
             SELECT 
                 *
             FROM
@@ -40,12 +40,12 @@ class CourseModel{
             WHERE
                 user = '". $request['user'] ."'
         ");
-        $test_scores = [];  
+        $all_test_scores = [];
         
-        if ($tests && $tests->num_rows > 0) {
-            while($test_score = $tests->fetch_assoc()) {
+        if ($all_tests && $all_tests->num_rows > 0) {
+            while($test_score = $all_tests->fetch_assoc()) {
                 if($test_score)  
-                    array_push($test_scores, $test_score);
+                    array_push($all_test_scores, $test_score);
             }
         }
 
@@ -53,6 +53,23 @@ class CourseModel{
         $courses_id = array_unique( $courses_id );
 
         foreach($courses_id as $course_id){
+            $tests = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM
+                    wp_topic_test_scores
+                WHERE
+                    user = '". $request['user'] ."' and course_id = '". $course_id ."'
+            ");
+            $test_scores = [];
+            
+            if ($tests && $tests->num_rows > 0) {
+                while($test_score = $tests->fetch_assoc()) {
+                    if($test_score)  
+                        array_push($test_scores, $test_score);
+                }
+            }            
+
             array_push($progresses, (object)[
                 "course" => self::getCourseById($course_id)->post_title,
                 "completed" => count($test_scores),
