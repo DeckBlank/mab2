@@ -10,6 +10,7 @@
     flex-direction: column;
     overflow: hidden;
   }
+  
 
   .init_line{
    display: none;
@@ -116,6 +117,7 @@
     position: relative;
     display: flex;
     padding-top: 125px;
+    flex-direction: column;
   }
 
   .init_mabClick_corner{
@@ -187,6 +189,19 @@
     margin-left: 150px;
     font-family: $font-family-secondary;
     font-weight: $black-font;
+  }
+
+  .init_hashtag_desktop {
+    font-family: $font-family-secondary;
+    display: block;
+    font-size: 44px;
+    line-height: initial;
+    padding-top: 5px;
+
+  }
+  .init_hashtag_mobile{
+    display: none;
+
   }
 
   .block_rigth{
@@ -783,6 +798,10 @@
 @media (max-width:1600px){
   .c-section--home {
 
+
+    .init_hashtag_desktop{
+      font-size: 27px;
+    }
   .discount .grid-x.align-center-middle.height-100 .cell img {
     width:auto;
     height: 350px;
@@ -799,15 +818,16 @@
   
     .init_mabClick_text{
       font-size: 100px;
-      line-height: 75px;
+      line-height: 78px;
       padding-right: 50px;
       padding-top: 60px;
     }
   
     .init_mabClick_corner {
       position: absolute;
-      left: -39px;
-    top: 25px;
+      left: -41px;
+    // top: 25px;
+    top: 21px;
       width: 45px;
       height: 45px;
     }
@@ -1068,6 +1088,23 @@
 }
 @media(max-width:600px){
   .c-section--home {
+    .init_hashtag_desktop{
+      display: none;
+    }
+    .init_hashtag_mobile{
+      font-family: $font-family-secondary;
+      display: block;
+      font-size: 23px;
+      line-height: initial;
+      color: #fcee21;
+      position: absolute;
+      right: 0;
+      bottom: 10px;
+      width: 100%;
+      padding-left: 33%;
+      // font-weight: 800;
+      text-align: center;
+    }
     .modal_img_desktop{
       display: none
     }
@@ -1083,12 +1120,13 @@
       flex-wrap: wrap
     }
     .init_element_left{
-      width: 100%;
+      // width: 100%; antes
       // width: calc(50% + 28px);
       height: calc(45% + 24px);
       order: 3;
       margin-top: -22px;
       padding-bottom: 0;
+      width: calc(100% + 129px)
     }
     .init_element_left img{
       height: 100%;
