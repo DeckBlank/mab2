@@ -20,6 +20,7 @@ class UserModel{
                 "user_pass" => $user->data->user_pass,
                 "user_email" => $user->data->user_email,
                 "user_phone" => get_field('phone', 'user_' . $user->data->ID),
+                "user_sector" => get_field('school_type', 'user_' . $user->data->ID)
             ];
         }
     }

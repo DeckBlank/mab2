@@ -1,7 +1,7 @@
 <header class="c-header width-100" :class="{ shadowed : isHeaderWithShadow }">
   <nav class="c-nav width-100">
     <div class="c-nav__left padding-horizontal-1 position-relative height-100 flex-container align-left align-middle margin-right-1">
-      <ul class="c-menu flex-container ul-reset">
+      <ul class="c-menu flex-container ul-reset" :class="{logged : logedUser}">
         {% set home = primary_menu.items[0] %}
         {% set sec_pub = primary_menu.items[1] %}
         {% set sec_priv = primary_menu.items[2] %}
@@ -15,14 +15,28 @@
             <a href="{{ home.link }}" class="position-relative">{{ home.name }}</a>
           </div>
         </li>
-        <li>
+        <li v-if="logedUser.user_sector == 'publico'">
+          <div class="c-menu__item">
+            <a class="position-relative flex-container align-middle" @click="updateStatusPubSectorMenu">
+              Cursos <span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
+            </a>
+          </div>
+        </li> 
+        <li v-else-if="logedUser.user_sector != 'privado'">
           <div class="c-menu__item">
             <a class="position-relative flex-container align-middle" @click="updateStatusPubSectorMenu">
               {{ sec_pub.name }}<span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
             </a>
           </div>
         </li> 
-        <li>
+        <li v-if="logedUser.user_sector == 'privado'">
+          <div class="c-menu__item">
+            <a class="position-relative flex-container align-middle" @click="updateStatusPrivSectorMenu">
+              Cursos <span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
+            </a>
+          </div>
+        </li>
+        <li v-else-if="logedUser.user_sector != 'publico'" >
           <div class="c-menu__item">
             <a class="position-relative flex-container align-middle" @click="updateStatusPrivSectorMenu">
               {{ sec_priv.name }}<span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>

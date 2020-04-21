@@ -5,7 +5,8 @@ function saveUserLoginSession(user){
     user_auth: user.user_login,
     user_email: user.user_email,
     user_phone: user.user_phone,
-    session_token: user.user_pass
+    session_token: user.user_pass,
+    user_sector: user.user_sector
   }))
 }
 

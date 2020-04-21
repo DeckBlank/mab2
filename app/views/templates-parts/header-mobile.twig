@@ -9,42 +9,138 @@
       </div>
       <div class="c-nav__right width-100">
         <ul class="c-menu flex-container flex-dir-column ul-reset">
-          {% for item in primary_menu.items %}
-            <li class="flex-container flex-dir-column {% if 'current-menu-item' in item.class %} activate {% endif %}">              
-              {% if item.children %}
-                <label for="sector-{{loop.index}}" class="c-menu__item flex-container align-justify align-middle padding-1">
-                  <a class="position-relative">{{ item.name }}</a>
-                  <span class="c-icon"><i class="far fa-chevron-down"></i></span>
-                </label>              
-                <input id="sector-{{loop.index}}" type="checkbox" class="hide">
+          {% set emotional = primary_menu.items[0] %}
+          {% set sec_pub = primary_menu.items[1] %}
+          {% set sec_priv = primary_menu.items[2] %}
+          {% set sesion = primary_menu.items[3] %}
+
+          <li class="flex-container flex-dir-column {% if 'current-menu-item' in emotional.class %} activate {% endif %}">
+            <div class="c-menu__item flex-container align-justify padding-1">
+              <a href="{{ emotional.link }}" class="position-relative">{{ emotional.name }}</a>
+            </div>
+          </li>
+
+          <li v-if="logedUser.user_sector == 'publico'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_pub.class %} activate {% endif %}">              
+            <label for="sector-pub" class="c-menu__item flex-container align-justify align-middle padding-1">
+              <a class="position-relative">Cursos</a>
+              <span class="c-icon"><i class="far fa-chevron-down"></i></span>
+            </label>              
+            <input id="sector-pub" type="checkbox" class="hide">
+
+            <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+              {% for child in sec_pub.children %}
+                <label for="grado-{{sec_pub.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
+                  <a class="position-relative">{{child.name|replace({'Priv': '', 'Pub': ''})}}</a>
+
+                  {% if child.children %}
+                    <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
+                  {% endif %}                      
+                </label>
+                <input id="grado-{{sec_pub.slug}}-{{loop.index}}" type="checkbox" class="hide">
 
                 <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-                  {% for child in item.children %}
-                    <label for="grado-{{item.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
-                      <a class="position-relative">{{child.name|replace({'Priv': '', 'Pub': ''})}}</a>
-
-                      {% if child.children %}
-                        <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
-                      {% endif %}                      
-                    </label>
-                    <input id="grado-{{item.slug}}-{{loop.index}}" type="checkbox" class="hide">
-
-                    <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-                      {% for _child in child.children %}
-                        <div class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
-                          <a href="{{_child.link}}" class="position-relative">{{_child.name}}</a>
-                        </div>                 
-                      {% endfor %}
-                    </ul>                
+                  {% for _child in child.children %}
+                    <div class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
+                      <a href="{{_child.link}}" class="position-relative">{{_child.name}}</a>
+                    </div>                 
                   {% endfor %}
-                </ul>
-              {% else %}
-                <div class="c-menu__item flex-container align-justify padding-1">
-                  <a href="{{ item.link }}" class="position-relative">{{ item.name }}</a>
-                </div>                
-              {% endif %}
-            </li>
-          {% endfor %}
+                </ul>                
+              {% endfor %}
+            </ul>
+          </li>
+
+          <li v-else-if="logedUser.user_sector != 'privado'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_pub.class %} activate {% endif %}">              
+            <label for="sector-pub" class="c-menu__item flex-container align-justify align-middle padding-1">
+              <a class="position-relative">{{ sec_pub.name }}</a>
+              <span class="c-icon"><i class="far fa-chevron-down"></i></span>
+            </label>              
+            <input id="sector-pub" type="checkbox" class="hide">
+
+            <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+              {% for child in sec_pub.children %}
+                <label for="grado-{{sec_pub.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
+                  <a class="position-relative">{{child.name|replace({'Priv': '', 'Pub': ''})}}</a>
+
+                  {% if child.children %}
+                    <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
+                  {% endif %}                      
+                </label>
+                <input id="grado-{{sec_pub.slug}}-{{loop.index}}" type="checkbox" class="hide">
+
+                <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                  {% for _child in child.children %}
+                    <div class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
+                      <a href="{{_child.link}}" class="position-relative">{{_child.name}}</a>
+                    </div>                 
+                  {% endfor %}
+                </ul>                
+              {% endfor %}
+            </ul>
+          </li>
+
+          <li v-if="logedUser.user_sector == 'privado'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_priv.class %} activate {% endif %}">              
+            <label for="sector-priv" class="c-menu__item flex-container align-justify align-middle padding-1">
+              <a class="position-relative">Cursos</a>
+              <span class="c-icon"><i class="far fa-chevron-down"></i></span>
+            </label>              
+            <input id="sector-priv" type="checkbox" class="hide">
+
+            <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+              {% for child in sec_priv.children %}
+                <label for="grado-{{sec_priv.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
+                  <a class="position-relative">{{child.name|replace({'Priv': '', 'Pub': ''})}}</a>
+
+                  {% if child.children %}
+                    <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
+                  {% endif %}                      
+                </label>
+                <input id="grado-{{sec_priv.slug}}-{{loop.index}}" type="checkbox" class="hide">
+
+                <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                  {% for _child in child.children %}
+                    <div class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
+                      <a href="{{_child.link}}" class="position-relative">{{_child.name}}</a>
+                    </div>                 
+                  {% endfor %}
+                </ul>                
+              {% endfor %}
+            </ul>
+          </li>
+
+          <li v-else-if="logedUser.user_sector != 'publico'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_priv.class %} activate {% endif %}">              
+            <label for="sector-priv" class="c-menu__item flex-container align-justify align-middle padding-1">
+              <a class="position-relative">{{ sec_priv.name }}</a>
+              <span class="c-icon"><i class="far fa-chevron-down"></i></span>
+            </label>              
+            <input id="sector-priv" type="checkbox" class="hide">
+
+            <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+              {% for child in sec_priv.children %}
+                <label for="grado-{{sec_priv.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
+                  <a class="position-relative">{{child.name|replace({'Priv': '', 'Pub': ''})}}</a>
+
+                  {% if child.children %}
+                    <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
+                  {% endif %}                      
+                </label>
+                <input id="grado-{{sec_priv.slug}}-{{loop.index}}" type="checkbox" class="hide">
+
+                <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                  {% for _child in child.children %}
+                    <div class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
+                      <a href="{{_child.link}}" class="position-relative">{{_child.name}}</a>
+                    </div>                 
+                  {% endfor %}
+                </ul>                
+              {% endfor %}
+            </ul>
+          </li>
+
+          <li class="flex-container flex-dir-column {% if 'current-menu-item' in sesion.class %} activate {% endif %}">
+            <div class="c-menu__item flex-container align-justify padding-1">
+              <a href="{{ sesion.link }}" class="position-relative">{{ sesion.name }}</a>
+            </div>
+          </li>
         </ul>   
       </div>      
     </nav>
