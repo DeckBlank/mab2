@@ -49,7 +49,7 @@ class CourseModel{
             }
         }
 
-        $courses_id = array_map(function($score){ return $score['course_id']; }, $test_scores);
+        $courses_id = array_map(function($score){ return $score['course_id']; }, $all_test_scores);
         $courses_id = array_unique( $courses_id );
 
         foreach($courses_id as $course_id){
