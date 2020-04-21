@@ -27,7 +27,7 @@ class CourseModel{
         return Timber::get_post([
             "post_type" => "course",
             "p" => $course_id
-        ]);
+        ]); 
     }
 
     public static function getProgress($request){
