@@ -5,7 +5,8 @@
       "src/scss/main.scss"
     ],
     "js": [
-      "src/js/wp-session.js",
+      "src/js/core/wp-session.js",
+      "src/js/core/wp-registration.js",
       "src/js/pages/*.js"
     ]
   },

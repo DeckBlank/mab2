@@ -81,30 +81,30 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./src/js/core/wp-session.js":
-/*!***********************************!*\
-  !*** ./src/js/core/wp-session.js ***!
-  \***********************************/
+/***/ "./src/js/core/wp-registration.js":
+/*!****************************************!*\
+  !*** ./src/js/core/wp-registration.js ***!
+  \****************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-eval("/**\r\n * @generatePassword\r\n * @createRoom\r\n */\nfunction generatePassword() {\n  var length = 8,\n      charset = \"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\",\n      retVal = \"\";\n\n  for (var i = 0, n = charset.length; i < length; ++i) {\n    retVal += charset.charAt(Math.floor(Math.random() * n));\n  }\n\n  return retVal;\n}\n\nfunction createRoom(button, api) {\n  var roomInputEditor = document.querySelector('.acf-fields .acf-field:last-child input');\n  fetch(\"\".concat(api, \"/session\"), {\n    method: 'POST'\n  }).then(function (res) {\n    if (res.status >= 200 && res.status < 300) {\n      return res.json();\n    } else {\n      throw res;\n    }\n  }).then(function (session) {\n    roomInputEditor.value = session.id;\n    button.value = \"Crear sala\";\n  }).catch(function (err) {\n    throw err;\n  });\n}\n/**\r\n * DOM\r\n */\n\n\ndocument.getElementById('generate-key').onclick = function () {\n  var codeInputEditor = document.querySelector('.acf-fields .acf-field:first-child input');\n  codeInputEditor.value = generatePassword();\n};\n\ndocument.getElementById('create-room').onclick = function () {\n  this.value = 'Creando...';\n  createRoom(this, \"\".concat(this.getAttribute('data-site'), \"/wp-json/custom/v1\"));\n};\n\n//# sourceURL=webpack:///./src/js/core/wp-session.js?");
+eval("var metabox = document.querySelector('#side-sortables');\nmetabox.innerHTML += \"\\n  <div class=\\\"postbox \\\">\\n    <button type=\\\"button\\\" class=\\\"handlediv\\\" aria-expanded=\\\"true\\\"><span class=\\\"screen-reader-text\\\">Alternar panel: Exportar</span><span class=\\\"toggle-indicator\\\" aria-hidden=\\\"true\\\"></span></button>\\n    <h2 class=\\\"hndle ui-sortable-handle\\\"><span>Registos vencidos <b style=\\\"color: red\\\">12</b></span></h2>\\n    <div class=\\\"inside\\\">\\n      <div>\\n        <div style=\\\"display: flex; justify-content: flex-end\\\">\\n          <span id=\\\"export-spinner\\\" class=\\\"spinner\\\"></span>\\n          <button class=\\\"button button-primary button-large\\\" id=\\\"export\\\">Exportar (.xls)</button>\\n        </div>\\n        <div class=\\\"clear\\\"></div>\\n      </div>\\n    </div>\\n  </div>\\n\";\n/**\n * @exportRegistrations\n */\n\nfunction exportRegistrations() {\n  alert();\n}\n\nfunction spinnerLoading(state) {\n  if (state) {\n    document.querySelector('#export-spinner').style = \"visibility: visible\";\n  } else {\n    document.querySelector('#export-spinner').style = \"visibility: hidden\";\n  }\n}\n/**\n * DOM\n */\n\n\ndocument.querySelector('#export').onclick = function () {\n  spinnerLoading(true);\n  event.preventDefault();\n  exportRegistrations();\n  spinnerLoading(false);\n};\n\n//# sourceURL=webpack:///./src/js/core/wp-registration.js?");
 
 /***/ }),
 
-/***/ 0:
-/*!*****************************************!*\
-  !*** multi ./src/js/core/wp-session.js ***!
-  \*****************************************/
+/***/ 1:
+/*!**********************************************!*\
+  !*** multi ./src/js/core/wp-registration.js ***!
+  \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__(/*! C:\\xampp\\htdocs\\mab\\wp-content\\themes\\mab-theme\\src\\js\\core\\wp-session.js */\"./src/js/core/wp-session.js\");\n\n\n//# sourceURL=webpack:///multi_./src/js/core/wp-session.js?");
+eval("module.exports = __webpack_require__(/*! C:\\xampp\\htdocs\\mab\\wp-content\\themes\\mab-theme\\src\\js\\core\\wp-registration.js */\"./src/js/core/wp-registration.js\");\n\n\n//# sourceURL=webpack:///multi_./src/js/core/wp-registration.js?");
 
 /***/ })
 

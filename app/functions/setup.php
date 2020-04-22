@@ -90,4 +90,4 @@ add_action('add_meta_boxes', function(){
     foreach($types as $type){
       add_meta_box('meta-session-1', 'Avanzado', "add_buttons", $type, 'side', 'high');
     }
-}); 
+});

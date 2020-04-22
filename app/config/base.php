@@ -101,6 +101,8 @@ return [
         'page_session' => get_theme_file_uri('/static/js/page-session.bundle.js'),
 
         //WP
-        'wp_session' => get_theme_file_uri('/static/js/wp-session.bundle.js')
+        'wp_session' => get_theme_file_uri('/static/js/wp-session.bundle.js'),
+
+        'wp_registration' => get_theme_file_uri('/static/js/wp-registration.bundle.js')
     ]
 ];

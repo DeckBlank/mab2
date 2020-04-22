@@ -47,7 +47,6 @@ add_filter('acf/settings/load_json', function ($paths) {
  *
  * */
 if( function_exists('acf_add_options_page') ) {
-
     $pm_contact = acf_add_options_page([
         'page_title'      => 'Información',
         'menu_title'      => 'Información',

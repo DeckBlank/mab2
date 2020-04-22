@@ -403,3 +403,17 @@ add_action('admin_enqueue_scripts', function ($hook) use ($config, $assets_versi
         'in_footer' => true
     ]);
 });
+
+add_action( 'admin_head', function() use ($config, $assets_version) {
+    $current = get_current_screen();
+
+    if($current->base == 'toplevel_page_options-inscriptions' ){
+        register_assets('script', [
+            'handle'    => 'pandawp/wp/registration',
+            'src'       =>  $config['resources']['wp_registration'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);        
+    }
+});
