@@ -14,13 +14,10 @@ function exportRegistrations(){
   fetch(`${API}/courses/expired_registrations/download`)
     .then(res => {
       if (res.status >= 200 && res.status < 300) {
-        return res.json()
+        spinnerLoading(false); window.location = `${API}/courses/expired_registrations/download`
       }else{
         throw res
       }
-    })
-    .then(expireds => {
-      spinnerLoading(false);
     })
     .catch(err => {throw err})
 }
@@ -45,14 +42,11 @@ function getExpiredRegistrations(){
     .then(expireds => {
       document.querySelector('#expired-counter').innerHTML = expireds.length
     })
-    .catch(err => {throw err})
-}
+    .catch(err => {
+      document.querySelector('#export').setAttribute('disabled', true)
 
-/**
- * DOM
- */
-document.querySelector('#export').onclick = ()=>{
-  event.preventDefault(); exportRegistrations();
+      throw err
+    })
 }
 
 /**
@@ -76,3 +70,10 @@ metabox.innerHTML += `
   </div>
 `;
 
+/**
+ * DOM
+ */
+document.querySelector('#export').onclick = ()=>{
+  event.preventDefault(); exportRegistrations();
+}
+getExpiredRegistrations()
