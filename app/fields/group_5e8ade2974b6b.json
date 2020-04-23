@@ -152,7 +152,7 @@
                                         },
                                         {
                                             "key": "field_5e9a0cb4f1d5c",
-                                            "label": "Fecha",
+                                            "label": "Fecha de inicio",
                                             "name": "date",
                                             "type": "date_picker",
                                             "instructions": "",
@@ -164,6 +164,23 @@
                                                 "id": ""
                                             },
                                             "display_format": "F j, Y",
+                                            "return_format": "d\/m\/Y",
+                                            "first_day": 1
+                                        },
+                                        {
+                                            "key": "field_5ea078e11dde2",
+                                            "label": "Vencimiento",
+                                            "name": "date_finish",
+                                            "type": "date_picker",
+                                            "instructions": "",
+                                            "required": 0,
+                                            "conditional_logic": 0,
+                                            "wrapper": {
+                                                "width": "",
+                                                "class": "",
+                                                "id": ""
+                                            },
+                                            "display_format": "d\/m\/Y",
                                             "return_format": "d\/m\/Y",
                                             "first_day": 1
                                         }
@@ -193,5 +210,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1587155579
+    "modified": 1587575070
 }

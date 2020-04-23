@@ -91,6 +91,16 @@ add_action( 'rest_api_init', function () {
         'methods' => 'GET',
         'callback' => array($courseController,'registrationCheckout'),
     ));
+
+    register_rest_route( 'custom/v1', '/courses/expired_registrations', array(
+        'methods' => 'GET',
+        'callback' => array($courseController,'getExpiredRegistrations'),
+    ));
+
+    register_rest_route( 'custom/v1', '/courses/expired_registrations/download', array(
+        'methods' => 'GET',
+        'callback' => array($courseController,'downloadExpiredRegistrations'),
+    ));
 });
 
 //4. Topic ----------------------------------//

@@ -94,6 +94,7 @@ class CourseModel{
                     foreach($course['course']['registrations'] as $registration){
                         if(
                             $registration['registration']['user']['user_email'] == $request['user'] and
+                            $registration['registration']['date_finish'] >= date("d/m/Y") and
                             $registration['registration']['state'] == true ){
             
                             return true;
@@ -104,5 +105,26 @@ class CourseModel{
         }
 
         return false;
+    }
+
+    public static function getExpiredRegistrations($request){
+        $courses = get_field('courses', 'options');
+        $expired_registrations = [];
+
+        foreach($courses as $course){
+            foreach($course['course']['registrations'] as $registration){
+                if( $registration['registration']['date_finish'] < date("d/m/Y") ){
+                    array_push($expired_registrations, (object)[
+                        "fullname" => $registration['registration']['user']['user_firstname'] . ' ' . $registration['registration']['user']['user_lastname'],
+                        "type" => get_userdata( $registration['registration']['user']['ID'] )->roles[0],
+                        "course" => $course['course']['course']->post_title,
+                        "date_start" => $registration['registration']['date'],
+                        "date_end" => $registration['registration']['date_finish']
+                    ]);
+                }
+            }
+        }
+
+        return $expired_registrations;        
     }
 }
