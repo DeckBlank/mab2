@@ -118,6 +118,7 @@
     display: flex;
     padding-top: 125px;
     flex-direction: column;
+    margin-left: 6%;
   }
 
   .init_mabClick_corner{
@@ -259,7 +260,8 @@
     padding: 60px 100px 30px;
   }
   .mab_linkForm .section_content{
-    max-width: 1070px;
+    // max-width: 1070px;
+    max-width: 1400px;
     width: 100%;
   }
   .mab_linkForm .title {
@@ -278,6 +280,17 @@
     font-family: 'FestivoLetters';
     font-weight: 300;
   }
+
+  .mab_linkForm_list_bottom{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1400px;
+    list-style: none;
+    margin-left: 0;
+  }
+ 
   .mab_linkForm_list{
     display: flex;
     justify-content: center;
@@ -292,8 +305,40 @@
     position: relative;
     background: rgb(252,238,33);
     width: 260px;
-    
   } 
+
+  .mab_linkForm_list.black_list{
+margin-top: 0;
+flex-direction: column;
+
+  }
+  .mab_linkForm_list.black_list li{
+    background: #0266d0;
+    // background: #cc0033;
+
+  }
+ 
+  .mab_linkForm_list.black_list li a {
+    font-size: 27px;
+    padding: 5px;
+    color: #fff;
+    // color: #000;
+  }
+
+  .mab_linkForm_list li.li_blank{
+    width: 100%;
+    text-align: center;
+    background: transparent;
+    color: #fcee21;
+    margin-right: 0px;
+    margin-left: 0px;
+    // font-family: $font-family-secondary;
+    font-family: "FestivoLetters", sans-serif;
+    // font-weight: $black-font;
+    text-transform: uppercase;
+    font-size: 35px;
+  
+  }
   .mab_linkForm_list li span{
     position: absolute;
     top: 0;
@@ -849,6 +894,11 @@
     .init_line{
       padding: 7px 12px;
     }
+
+  .init_mabClick_text{
+    margin-left: 10%;
+
+    }
     
   }
 }
@@ -861,6 +911,11 @@
     }
     .init_line{
       font-size:20px;
+    }
+    
+
+    .mab_linkForm_list li {
+      width: 215px;
     }
   }
 }
@@ -1088,6 +1143,8 @@
 }
 @media(max-width:600px){
   .c-section--home {
+
+   
     .init_hashtag_desktop{
       display: none;
     }
@@ -1271,6 +1328,14 @@
   .mab_pantalla{
     padding: 30px 10px;
   }
+  .mab_linkForm_list li.li_blank{
+    font-size: 22px;
+    margin-bottom: 0;
+  }
+ .mab_linkForm_list.black_list li a{
+   font-size: 20px;
+   padding: 10px;
+ }
   
   }
 }
