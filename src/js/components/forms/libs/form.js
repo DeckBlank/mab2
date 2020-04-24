@@ -127,7 +127,7 @@ function baseWatch(){
         }
       }else if(value == 'publico'){
         this.counter.limit = this.counter.base + 1;
-        this.ugels = [1,2,3,4,5,6,7]
+        this.getUGELS();
 
         if(this.school && this.school.value != ''){
           this.schools = []
@@ -204,13 +204,46 @@ function baseMethods(){
       let distritos = require('../../../extras/ubigeo/distritos.json')
       this.distritos = distritos[this.provincias[option.target.selectedIndex - 1].id_ubigeo]
     },
+    getUGELS: function(){
+      fetch(`${this.API}/schools/ugels`,{
+          method: 'GET'
+        })
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            return res.json()
+          }else{
+            throw res
+          }
+        })
+        .then(ugels => {
+          this.ugels = ugels;
+        })
+        .catch(err => {    
+          throw err;          
+        })      
+    },
     getSchools: function(type, ugel){
       if(type == 'privado'){
         this.schools = require('../../../extras/schools/privates.json')
       }else if(type == 'publico'){
-        this.schools = require('../../../extras/schools.json').filter(el => el.A == ugel).map(el => el.E)
+        fetch(`${this.API}/schools?ugel=${ugel}`,{
+            method: 'GET'
+          })
+          .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              return res.json()
+            }else{
+              throw res
+            }
+          })
+          .then(schools => {
+            this.schools = schools;
+          })
+          .catch(err => {    
+            throw err;          
+          }) 
       }
-    }    
+    } 
   }
 }
 

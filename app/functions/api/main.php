@@ -217,3 +217,18 @@ add_action( 'rest_api_init', function () {
         'callback' => array($exerciseController,'getAll'),
     ));
 });
+
+//10. School ----------------------------------//
+add_action( 'rest_api_init', function () {
+    $schoolController = new SchoolController();
+
+    register_rest_route( 'custom/v1', '/schools', array(
+        'methods' => 'GET',
+        'callback' => array($schoolController,'getSchoolsByUGEL'),
+    ));
+
+    register_rest_route( 'custom/v1', '/schools/ugels', array(
+        'methods' => 'GET',
+        'callback' => array($schoolController,'getUGELS'),
+    ));
+});

@@ -39,11 +39,13 @@ const course = new Vue({
 
           })
           .catch(err => {
-            let topics = document.querySelectorAll('.c-topic__video')
+            let topics = document.querySelectorAll('.c-topic')
 
             topics.forEach((topic, index) => {
               if(index != 0){
-                topic.setAttribute('href', `${this.SITE_URL}/solicitar-cursos`)
+                topic.querySelectorAll('.c-topic__item').forEach((item)=> {
+                  item.setAttribute('href', `${this.SITE_URL}/solicitar-cursos`)
+                })                
               }
             })
 

@@ -20,3 +20,4 @@ require_once(__DIR__."/../controllers/SessionController.php");
 require_once(__DIR__."/../controllers/SectorController.php");
 require_once(__DIR__."/../controllers/TestController.php");
 require_once(__DIR__."/../controllers/ExerciseController.php");
+require_once(__DIR__."/../controllers/SchoolController.php");
