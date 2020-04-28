@@ -18,7 +18,7 @@ add_action( 'after_setup_theme', function() {
     register_nav_menus([
         'primary-menu' => __( 'Menú Principal', 'pandawp' ),
         'social-menu'  => __( 'Menú Redes Sociales', 'pandawp' ),
-        'footer-menu'  => __( 'Menú Pie de página', 'pandawp' ),
+        'footer-menu'  => __( 'Menú Pie de página', 'pandawp' )
     ]);
 
     add_theme_support( 'automatic-feed-links' );

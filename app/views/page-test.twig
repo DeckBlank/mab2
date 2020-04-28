@@ -5,17 +5,33 @@
 {% endblock %}
 
 {% block content %}
+  <div id="kinesthetic-template" style="display: none;">
+    <div class="c-behaviour-template padding-1 f2 w-medium fs-18">
+      {{info.kinesthetic}}
+    </div>
+  </div>  
+  <div id="visual-template" style="display: none;">
+    <div class="c-behaviour-template padding-1 f2 w-medium fs-18">
+      {{info.visual}}
+    </div>
+  </div>  
+  <div id="auditive-template" style="display: none;">
+    <div class="c-behaviour-template padding-1 f2 w-medium fs-18">
+      {{info.auditive}}
+    </div>
+  </div>
+
   <section class="c-section c-section--test bg-sec-color">
     <h1 class="c-title white bg-alert margin-top-3 display-inline-block">Test de estilos de aprendizaje</h1>
     <div class="grid-container position-relative padding-vertical-3">
-      <div class="c-result position-absolute width-100" :class="{ hidden : !testDone }">
+      <div class="c-result width-100" :class="{ hidden : !testDone, 'c-result--done' : testDone }">
         <div class="grid-container padding-vertical-3">
           <div class="grid-x align-center">
             <div class="cell medium-10 large-8">
               <div class="grid-x align-center grid-margin-x grid-margin-y">
-                <div class="cell small-6 medium-6 large-4">
+                <div class="cell medium-6 large-4">
                   <div class="c-behaviour flex-container flex-dir-column align-middle text-center">
-                    <figure class="c-behaviour__vector margin-bottom-2">
+                    <figure id="kinesthetic" class="c-behaviour__vector margin-bottom-2">
                       <img class="of--contain" src="{{theme.link}}/static/images/vectors/test/visual.png?key=20200419" alt="">
                     </figure>
                     <h3 class="c-behaviour__title">
@@ -24,9 +40,9 @@
                     </h3>
                   </div>
                 </div>
-                <div class="cell small-6 medium-6 large-4">
+                <div class="cell medium-6 large-4">
                   <div class="c-behaviour flex-container flex-dir-column align-middle text-center">
-                    <figure class="c-behaviour__vector margin-bottom-2">
+                    <figure id="visual" class="c-behaviour__vector margin-bottom-2">
                       <img class="of--contain" src="{{theme.link}}/static/images/vectors/test/auditivo.png?key=20200419" alt="">
                     </figure>
                     <h3 class="c-behaviour__title">
@@ -35,9 +51,9 @@
                     </h3>
                   </div>
                 </div>
-                <div class="cell small-6 medium-6 large-4">
+                <div class="cell medium-6 large-4">
                   <div class="c-behaviour flex-container flex-dir-column align-middle text-center">
-                    <figure class="c-behaviour__vector margin-bottom-2">
+                    <figure id="auditive" class="c-behaviour__vector margin-bottom-2">
                       <img class="of--contain" src="{{theme.link}}/static/images/vectors/test/kinestesico.png?key=20200419" alt="">
                     </figure>
                     <h3 class="c-behaviour__title">
@@ -50,10 +66,10 @@
             </div>
           </div>
         </div>
-      </div>      
-      <div class="grid-x align-center">
+      </div>
+      <div class="c-test grid-x align-center" :class="{ hidden : testDone, 'c-test--done' : testDone }">
         <div class="cell medium-10 large-8 padding-vertical-2">
-          <section class="c-content c-content--protected position-relative bg-white br--medium" :class="[{ hidden : testDone }, { filled : testExists || testDone }]">
+          <section class="c-content c-content--protected position-relative bg-white br--medium">
             <section class="c-questions">
               <h2 class="c-questions__title f1 text-uppercase dark w-bold margin-bottom-2 text-center">Test para determinar <br> el Canal de Aprendizaje de preferencia</h2>
               <div id="slider-questions" class="c-questions__list swiper-container margin-bottom-1">

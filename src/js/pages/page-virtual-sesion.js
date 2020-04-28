@@ -93,10 +93,8 @@ const virtual_sesion = new Vue({
     'sessionRequest.resources.value': function(val){
       if(val.length > 0 && this.sessionRequest.resources.isValid == false){
         this.sessionRequest.resources.isValid = true
-        this.sessionRequest.counter++;
       }else if(val.length == 0){
         this.sessionRequest.resources.isValid = false
-        this.sessionRequest.counter--;
       }
     },
     'isSentSessionRequest': function(val){
@@ -144,9 +142,11 @@ const virtual_sesion = new Vue({
       session_request_form.append('time2', this.sessionRequest.time2.value)
       session_request_form.append('course', this.sessionRequest.course.value)
 
-      this.sessionRequest.resources.value.forEach(el => {
-        session_request_form.append('resources[]', el.file)
-      })
+      if(this.sessionRequest.resources.value.length > 0){
+        this.sessionRequest.resources.value.forEach(el => {
+          session_request_form.append('resources[]', el.file)
+        })
+      }
 
       fetch(`${this.API}/session_request`,{
           method: 'POST',

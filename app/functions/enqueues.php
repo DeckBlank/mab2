@@ -1,6 +1,6 @@
 <?php
 
-$assets_version = '1587700012357';
+$assets_version = '1588051073546';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -234,6 +234,22 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         register_assets('package', [
             'handle'    => 'pandawp/package/dom7',
             'src'       => $config['resources']['package_dom7'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);                
+    
+        register_assets('package', [
+            'handle'    => 'pandawp/package/popperjs',
+            'src'       => $config['resources']['package_popperjs'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+
+        register_assets('package', [
+            'handle'    => 'pandawp/package/tippyjs',
+            'src'       => $config['resources']['package_tippyjs'],
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true

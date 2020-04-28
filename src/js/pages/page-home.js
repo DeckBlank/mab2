@@ -15,7 +15,7 @@ const home = new Vue({
   methods: {
     ...baseActions()
   },
-  mounted(){
+  mounted(){   
     this.hideLoading();
-  }
+  },
 })

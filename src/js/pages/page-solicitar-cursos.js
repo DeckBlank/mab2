@@ -10,12 +10,7 @@ const solicitar_cursos = new Vue({
   },
   computed: {
     ...baseState()
-  },
-  created(){
-    document.querySelector("[name='course'").innerHTML += `
-      <option value="Otro" data-id="0">Otro</option>
-    `
-  },  
+  }, 
   beforeMount(){
     this.initSectors();
   },

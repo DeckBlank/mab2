@@ -3,6 +3,8 @@ import Swiper from 'swiper'
 import {baseConfig, baseState, baseActions} from '../app'
 import {store} from '../store'
 
+import tippy from 'tippy.js';
+
 const _404 = new Vue({
   ...baseConfig(store),
   data() {
@@ -59,6 +61,7 @@ const _404 = new Vue({
     this.initSectors();
   },
   mounted(){
+    this.initTooltips();
     this.getTest();
   },
   methods: {
@@ -188,6 +191,29 @@ const _404 = new Vue({
         .catch(err => {
           throw err;
         }) 
+    },
+    initTooltips: function(){
+      const BASE_CONFIG = {
+        allowHTML: true,
+        theme: 'light',
+        inertia: true,
+        animation: 'scale-subtle'
+      }
+
+      tippy('#kinesthetic', {
+        content: document.querySelector('#kinesthetic-template').innerHTML,
+        ...BASE_CONFIG
+      });
+  
+      tippy('#visual', {
+        content: document.querySelector('#visual-template').innerHTML,
+        ...BASE_CONFIG
+      });
+  
+      tippy('#auditive', {
+        content: document.querySelector('#auditive-template').innerHTML,
+        ...BASE_CONFIG
+      });
     }
   }
 })

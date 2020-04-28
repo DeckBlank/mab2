@@ -1,3 +1,10 @@
+/* Global */
+.el-picker-panel__content,
+.el-date-table th {
+  font-family: $font-family-secondary;
+  font-weight: $medium-font;
+}
+
 .c-section--virtual-session {
   .c-title {
     flex-direction: column;

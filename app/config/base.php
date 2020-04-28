@@ -64,6 +64,10 @@ return [
 
         'package_babel' => get_theme_file_uri('/static/js/package.babel.bundle.js'),
 
+        'package_popperjs' => get_theme_file_uri('/static/js/package.popperjs.bundle.js'),
+        
+        'package_tippyjs' => get_theme_file_uri('/static/js/package.tippy.js.bundle.js'),
+
         /**
          * Styles
          * */

@@ -27,6 +27,9 @@ if(is_page('login')){
         'order' => 'ASC'
     ]);
     $context['banner'] = get_field('banner', $post->ID);
+
+}else if(is_page('test')){
+    $context['info'] = get_field('info', $post->ID);
 }
 
 $templates = [
