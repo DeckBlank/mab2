@@ -20,7 +20,7 @@
                       <div class="c-chart__graph" :data-progress="progress.percentage"></div>
                       <h3 class="c-chart__title">
                         <p class="f2 fs-25 w-bold warning margin-bottom-0">${progress.completed}/${progress.total} completados</p>
-                        <p v-if="progress.percentage >= 0 && progress.percentage <=20" class="f2 fs-25 warning w-bold margin-bottom-0">¡Si se puede!</p>
+                        <p v-if="progress.percentage >= 0 && progress.percentage <=20" class="f2 fs-25 warning w-bold margin-bottom-0">¡Sí se puede!</p>
                         <p v-else-if="progress.percentage >= 21 && progress.percentage <=40" class="f2 fs-25 warning w-bold margin-bottom-0">¡Lo lograré!</p>
                         <p v-else-if="progress.percentage >= 41 && progress.percentage <=60" class="f2 fs-25 warning w-bold margin-bottom-0">¡No me rendiré!</p>
                         <p v-else-if="progress.percentage >= 61 && progress.percentage <=80" class="f2 fs-25 warning w-bold margin-bottom-0">¡Ya casi!</p>
