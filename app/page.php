@@ -14,10 +14,7 @@ if(is_page('login')){
     $context['phrase'] = get_field('phrase', $post->ID);
 
 }else if(is_page('sesion-virtual')){
-    $context['courses'] = Timber::get_posts([
-        "post_type" => "course",
-        "posts_per_page" => -1
-    ]);
+    $context['courses'] = get_field('courses', $post->ID);
 
 }else if(is_page('emotional')){
     $context['video_categories'] = Timber::get_terms([
