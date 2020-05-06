@@ -94,7 +94,7 @@ class CourseModel{
                     foreach($course['course']['registrations'] as $registration){
                         if(
                             $registration['registration']['user']['user_email'] == $request['user'] and
-                            $registration['registration']['date_finish']->format('Y-m-d') >= date("Y-m-d") and
+                            $registration['registration']['date_finish'] >= date("Y-m-d") and
                             $registration['registration']['state'] == true ){
             
                             return true;
@@ -113,7 +113,7 @@ class CourseModel{
 
         foreach($courses as $course){
             foreach($course['course']['registrations'] as $registration){
-                if( $registration['registration']['date_finish']->format('Y-m-d') < date("Y-m-d") ){
+                if( $registration['registration']['date_finish'] < date("Y-m-d") ){
                     array_push($expired_registrations, (object)[
                         "fullname" => $registration['registration']['user']['user_firstname'] . ' ' . $registration['registration']['user']['user_lastname'],
                         "type" => get_userdata( $registration['registration']['user']['ID'] )->roles[0],
