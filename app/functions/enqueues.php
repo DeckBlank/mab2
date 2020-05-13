@@ -1,6 +1,6 @@
 <?php
 
-$assets_version = '1588799845187';
+$assets_version = '1589404544469';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -63,6 +63,14 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
     register_assets('package', [
         'handle'    => 'pandawp/package/babel',
         'src'       => $config['resources']['package_babel'],
+        'deps'      => [ ],
+        'ver'       => $assets_version,
+        'in_footer' => true
+    ]);
+
+    register_assets('package', [
+        'handle'    => 'pandawp/package/webpack',
+        'src'       => $config['resources']['package_webpack'],
         'deps'      => [ ],
         'ver'       => $assets_version,
         'in_footer' => true
@@ -272,6 +280,32 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);
                 
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/progress',
+            'src'       => $config['resources']['page_progress'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);        
+
+    }elseif (is_page('carrito')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/shop_cart',
+            'src'       => $config['resources']['page_shop_cart'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);        
+
+    }elseif (is_page('compra-exitosa')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/successfull_buy',
+            'src'       => $config['resources']['page_successfull_buy'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);        
+    }elseif (is_page('progreso')){               
         register_assets('script', [
             'handle'    => 'pandawp/js/page/progress',
             'src'       => $config['resources']['page_progress'],

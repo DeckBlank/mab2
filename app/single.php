@@ -46,6 +46,10 @@ if($post->post_type == "video"){
         }
     }
 
+    $context['price'] = 100;
+    $context['discount'] = 0;
+    $context['g_discount'] = 50;
+
 }else if($post->post_type == "topic"){
     $context['author'] = (object)[
         "first_name" =>  $context['post']->author->first_name,

@@ -1,0 +1,30 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section ref="course" class="c-section c-section--successfull-buy bg-pri-alt" data-id="{{post.id}}" data-title="{{post.title}}">
+    <div class="grid-container padding-vertical-3">
+      <div class="grid-x align-center">
+        <div class="cell medium-10">
+          <section class="c-content c-content--protected position-relative bg-white br--medium margin-bottom-2 text-center">
+            <h1 class="c-title f1 pri-color margin-bottom-0">
+              ¡Gracias por tu compra!
+            </h1>
+            <p class="fs-25 f2 w-medium margin-bottom-2">Ya puedes revisar tus cursos</p>
+            <div class="flex-container flex-dir-column align-center-middle margin-bottom-1">
+              <a v-for="course of courses" :key="course.id" :href="course.link" class="c-button c-button--secondary margin-bottom-1 fs-21">${course.title}</a>
+            </div>
+            <figure>
+              <img src="{{theme.link}}/static/images/vectors/login/hearts.png" alt="">
+            </figure>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block footer %}{% endblock %}

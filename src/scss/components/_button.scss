@@ -1,5 +1,6 @@
 .c-button {
   padding: 0.5rem 1rem;
+  line-height: inherit;
 
   @include b-radious(5px);
   @include transition(0.25s);
@@ -111,5 +112,10 @@
       color: $secondary-color;
       background-color: $white;
     }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: no-drop;
   }
 }

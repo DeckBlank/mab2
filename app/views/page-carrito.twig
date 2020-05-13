@@ -1,0 +1,116 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section ref="course" class="c-section c-section--shop bg-pri-alt" data-id="{{post.id}}" data-title="{{post.title}}">
+    <div class="grid-container padding-vertical-3">
+      <div class="grid-x align-center">
+        <div class="cell medium-10">
+          <h1 class="c-title f1 white margin-bottom-2">
+            Carrito de compras
+          </h1>
+          <section class="c-content c-content--protected position-relative bg-white br--medium margin-bottom-2">
+            <div v-if="!courses.list" class="grid-x grid-margin-x grid-margin-y align-center-middle text-center large-text-left">
+              <div class="cell large-2">
+                <figure class="c-heart">
+                  <img class="of--contain height-100" src="{{theme.link}}/static/images/404.png" alt="">
+                </figure>
+              </div>
+              <div class="cell large-10">
+                <h2 class="f2 fs-25 w-black dark margin-bottom-1">Tu carrito está vacío</h2>
+                <p class="f2 margin-bottom-0 fs-25">Explora los mejores cursos con <span class="w-medium dark">MAB CLICK</span></p>
+              </div>
+            </div>           
+            <div v-if="courses.list" class="grid-x grid-margin-x grid-margin-y margin-bottom-2">
+              <div class="cell large-6">
+                <ul class="c-courses ul-reset">
+                  <li class="c-course" v-for="course of courses.list" :key="course.id">
+                    <h3 class="c-course__title dark fs-30 f2 w-black margin-bottom-2">
+                      <span class="display-block">Course:</span>
+                      <p class="margin-bottom-0">${course.title}</p>
+                    </h3>
+                    <div class="f2 dark fs-25 w-medium margin-bottom-1">
+                      <p class="">Incluye</p>
+                      <ul class="c-course__unities">
+                        <li class="c-course__unity" v-for="unity of course.unities" :key="unity.id">${unity.title}</li>
+                      </ul>
+                    </div>
+                    <div class="fs-25 f2 flex-container">
+                      <p class="c-course__price pri-color margin-bottom-0 w-black margin-right-1">
+                        S/${(course.price - course.price*course.discount/100) - (course.price - course.price*course.discount/100)*courses.discount.global/100}
+                      </p>
+                      <p v-if="courses.discount.global > 0" class="c-course__old-price margin-bottom-0 w-sbold">
+                        S/${course.price}
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="cell large-6">
+                <div class="c-summary br--medium p1 large-p2 bg-light-gray">
+                  <h2 class="fs-25 f2 w-black dark margin-bottom-1">Resumen</h2>
+                  <div class="margin-bottom-3">
+                    <div 
+                      class="c-summary__row flex-container f2 fs-21 w-medium dark align-justify margin-bottom-1"
+                      v-for="course of courses.list">
+                      <p class="margin-bottom-0">${course.title}</p>
+                      <p class="margin-bottom-0 text-right">S/${course.price}</p>
+                    </div>
+
+                    <span class="c-hr display-block bg-dark margin-bottom-1"></span>
+                    <div class="c-summary__row flex-container f2 fs-21 w-medium dark align-justify margin-bottom-1">
+                      <p class="margin-bottom-0">Total</p>
+                      <p class="margin-bottom-0 text-right">S/${total}</p>
+                    </div>                  
+                    <div class="c-summary__row flex-container f2 fs-21 w-medium dark align-justify margin-bottom-1">
+                      <p class="margin-bottom-0">Descuentos aplicados</p>
+                      <p class="margin-bottom-0 text-right">-S/${total_discount}</p>
+                    </div>
+                    <span class="c-hr display-block bg-dark margin-bottom-1"></span>
+                    <div class="c-summary__row flex-container f2 fs-21 w-medium dark align-justify margin-bottom-1">
+                      <p class="margin-bottom-0">Total a pagar</p>
+                      <p class="margin-bottom-0 pri-color w-black text-right">S/${amount}</p>
+                    </div>                                                 
+                  </div>
+                  <form v-if="courses.list" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/" method="POST" class="text-center">
+                    <input name="merchantId"    type="hidden"  value="{{pasarell.merchan_id}}">
+                    <input name="accountId"     type="hidden"  value="{{pasarell.account_id}}">
+                    <input name="description"   type="hidden"  :value="'Compra de cursos: ' + [...(courses.list.map(course => course.title))].join(', ')"  >
+                    <input name="referenceCode" type="hidden"  :value="referenceCode" >
+                    <input name="amount"        type="hidden"  :value="amount"   >
+                    <input name="tax"           type="hidden"  value="0"  >
+                    <input name="taxReturnBase" type="hidden"  value="0" >
+                    <input name="currency"      type="hidden"  value="PEN" >
+                    <input name="signature"     type="hidden"  :value="signature"  >
+                    <input name="test"          type="hidden"  value="1" >
+                    <!-- <input name="buyerEmail"    type="hidden"  :value="logedUser.user_email" > -->
+                    <input name="buyerEmail"    type="hidden"  value="cvalera.id@gmail.com" >
+                    <input name="responseUrl"    type="hidden"  value="{{site.url}}/carrito" >
+                    <input name="confirmationUrl"    type="hidden"  value="{{site.url}}/compra-existosa" >
+                    <input type="submit" class="c-button c-button--secondary button-reset fs-21" value="COMPRAR AHORA">
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div v-if="courses.list">
+              <p class="f2 fs-14 w-medium">Compra con todos los medios de pago disponibles:</p>
+              <div class="c-payments flex-container">
+                {% for pay in ['visa', 'mastercard', 'american', 'paypal', 'pagoefectivo', 'dinners', 'tambo'] %}              
+                  <figure class="c-payments__item margin-right-1">
+                    <img class="of--contain height-100" src="{{theme.link}}/static/images/payments/{{pay}}.png" alt="">
+                  </figure>
+                {% endfor %}
+              </div>
+            </div>
+          </section>
+          <p v-if="courses.discount" class="margin-bottom-0 fs-25 w-black white f2 text-center display-block">¡Agrega el próximo curso con ${courses.discount.individual}% de dto!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block footer %}{% endblock %}

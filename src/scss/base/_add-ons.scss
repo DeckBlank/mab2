@@ -156,6 +156,22 @@ $font-families: (
   }
 }
 
+.c-link {
+  &--white {
+    color: $white;
+
+    &:hover {
+      color: $white;
+    }
+  }
+}
+
+.p {
+  &1 {
+    padding: 1rem;
+  }
+}
+
 .mb-05 {
   margin-bottom: 0.5rem;
 }
@@ -176,4 +192,16 @@ $font-families: (
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+@include breakpoint(large) {
+  .large-p {
+    &2 {
+      padding: 2rem;
+    }
+
+    &3 {
+      padding: 3rem;
+    }
+  }
 }

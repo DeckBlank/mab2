@@ -64,6 +64,8 @@ return [
 
         'package_babel' => get_theme_file_uri('/static/js/package.babel.bundle.js'),
 
+        'package_webpack' => get_theme_file_uri('/static/js/package.webpack.bundle.js'),
+
         'package_popperjs' => get_theme_file_uri('/static/js/package.popperjs.bundle.js'),
         
         'package_tippyjs' => get_theme_file_uri('/static/js/package.tippy.js.bundle.js'),
@@ -93,6 +95,10 @@ return [
         'page_test' => get_theme_file_uri('/static/js/page-test.bundle.js'),
 
         'page_progress' => get_theme_file_uri('/static/js/page-progress.bundle.js'),
+
+        'page_shop_cart' => get_theme_file_uri('/static/js/page-shop-cart.bundle.js'),
+
+        'page_successfull_buy' => get_theme_file_uri('/static/js/page-successfull-buy.bundle.js'),
 
         'page_404' => get_theme_file_uri('/static/js/page-404.bundle.js'),
 

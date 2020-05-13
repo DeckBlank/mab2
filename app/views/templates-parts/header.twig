@@ -56,9 +56,12 @@
       <browser></browser>
     </div>
     <div class="c-nav__right position-relative flex-container align-middle height-100">
-      <button class="c-search-toggle margin-right-1 white" @click="updateStatusBrowserToggle">
+      <button class="c-search-toggle margin-right-1 white fs-25" @click="updateStatusBrowserToggle">
         <span><i class="far fa-search"></i></span>
       </button>
+      <a href="{{site.url}}/carrito" class="c-link--white margin-right-1 fs-25">
+        <span><i class="far fa-shopping-cart"></i></span>
+      </a>
       <profile v-if="logedUser"></profile>
       <a 
         v-else 

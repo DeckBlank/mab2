@@ -8,12 +8,22 @@
   <section ref="course" class="c-section c-section--course bg-pri-alt" data-id="{{post.id}}" data-title="{{post.title}}">
     <div class="grid-container padding-top-3 margin-bottom-2">
       <section class="c-content" :class="{ active : isActivePubSectorMenu || isActivePrivSectorMenu }">
-        <h1 class="c-title f1 w-bold white margin-bottom-1 padding-left-1">{{post.title}}</h1>
+        <h1 class="c-title margin-bottom-1 padding-left-1">
+          <div class="grid-x grid-margin-x grid-margin-y align-justify align-middle">
+            <div class="cell medium-auto">
+              <p class="f1 w-bold white margin-bottom-0">{{post.title}}</p>
+            </div>
+            <!-- <div class="cell small-8 medium-4 large-2">
+              <button
+                :disabled="!isAvaibleCourse" 
+                class="fs-21 c-button c-button--secondary width-100 display-block text-center"
+                @click="addCourseToShopCart({{post.id}}, '{{post.title}}', '{{post.link}}')">Comprar curso</button>
+            </div> -->
+          </div>
+        </h1>
         <ul class="ul-reset">
           {% for unity in unities %}
             {% set unity_id = loop.index %}
-
-            {% if loop.index == 1 %}            
               <li class="c-unity margin-bottom-1 br--medium">
                 <input id="unity-{{loop.index}}" type="checkbox" class="hide c-unity__checkbox" checked>           
                 <label for="unity-{{loop.index}}" class="c-unity__toggle align-justify width-100">
@@ -95,92 +105,9 @@
                   {% endfor %}
                 </ul>
               </li>
-            {% else %}
-              <li class="c-unity margin-bottom-1 br--medium">
-                <input id="unity-{{loop.index}}" type="checkbox" class="hide c-unity__checkbox">           
-                <label for="unity-{{loop.index}}" class="c-unity__toggle align-justify width-100">
-                  <p class="text-left margin-bottom-0 margin-right-1 w-bold fs-25 white">
-                    Unidad {{loop.index}}:
-                  </p>
-                  <span class="c-icon display-block white fs-21"><i class="far fa-chevron-down"></i></span>
-                </label>
-                <ul class="c-unity__topics position-relative ul-reset bg-white br--medium padding-1">
-                  <li class="c-unity__title margin-bottom-1">
-                    <h3 class="fs-25 f2 dark-gray w-bold">{{unity.title}}</h3>
-                    <p class="margin-bottom-0 padding-left-2 fs-25 w-black">.....</p>
-                  </li>
-
-                  {% for topic in unity.topics %}                 
-                    <li class="c-topic f2 fs-21 dar-gray w-medium">
-                      <a 
-                        :href="'{{topic.link}}?course_id={{post.id}}&course_name={{post.title}}&unity={{unity_id}}&sector=' + metas.get('sector')"
-                        class="c-topic__item flex-container align-justify align-middle">
-                        <p class="margin-bottom-0 flex-container dark-gray align-middle">
-                          <span class="c-icon margin-right-1 fs-21 pri-color"><i class="far fa-play-circle"></i></span>
-                          {{topic.title}}
-                        </p>
-                        <!-- <p class="gray-gray margin-bottom-0">
-                          <span class="c-icon margin-right-1"><i class="far fa-clock"></i></span>
-                          4:00
-                        </p> -->
-                      </a>
-
-                      {% if topic.summary %}                      
-                        <a href="{{topic.summary}}" target="_blank" class="c-topic__item flex-container align-justify align-middle">
-                          <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                            <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                            Resumen
-                          </p>
-                          <p class="gray-gray margin-bottom-0">
-                            <span class="c-icon"><i class="far fa-download"></i></span>
-                          </p>
-                        </a>
-                      {% endif %}
-                      
-                      {% if topic.map %}                      
-                        <a href="{{topic.map}}" target="_blank" class="c-topic__item flex-container align-justify align-middle">
-                          <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                            <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                            Mapa Mental
-                          </p>
-                          <p class="gray-gray margin-bottom-0">
-                            <span class="c-icon"><i class="far fa-download"></i></span>
-                          </p>
-                        </a>
-                      {% endif %}
-
-                      {% if topic.worksheet %}                      
-                        <a href="{{topic.worksheet}}" target="_blank" class="c-topic__item flex-container align-justify align-middle">
-                          <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                            <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                            Hoja de trabajo
-                          </p>
-                          <p class="gray-gray margin-bottom-0">
-                            <span class="c-icon"><i class="far fa-download"></i></span>
-                          </p>
-                        </a>
-                      {% endif %}
-
-                      {% if topic.solutions %}                      
-                        <a href="{{topic.solutions}}" target="_blank" class="c-topic__item flex-container align-justify align-middle">
-                          <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                            <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                            Solucionario
-                          </p>
-                          <p class="gray-gray margin-bottom-0">
-                            <span class="c-icon"><i class="far fa-download"></i></span>
-                          </p>
-                        </a>
-                      {% endif %}
-
-                    </li>
-                  {% endfor %}
-                </ul>
-              </li>
-            {% endif %}
           {% endfor %}
         </ul>
-      </section>
+      </section>      
     </div>
   </section>
 {% endblock %}

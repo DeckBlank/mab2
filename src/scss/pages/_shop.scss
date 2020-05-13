@@ -1,0 +1,63 @@
+.c-section--shop {
+  .c-content {
+    @include triangle(left, top, 6rem, -80px, 50px, 20px, 50px);
+  }
+
+  .c-title {
+    font-size: 50px;
+  }
+
+  .c-heart {
+    height: 100px;
+  }
+
+  .c-course {
+    margin-bottom: 4rem;
+
+    &__title {
+      span {
+        margin-bottom: -0.5rem;
+      }
+    }
+
+    &__unity {
+      line-height: 1.5;
+      margin-bottom: 0.5rem;
+    }
+
+    &__old-price {
+      text-decoration: line-through;
+    }
+  }
+
+  .c-course:last-child {
+    margin-bottom: 0;
+  }
+
+  .c-payments {
+    flex-wrap: wrap;
+
+    &__item {
+      height: 15px;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .c-summary {
+    .c-hr {
+      height: 1px;
+    }
+
+    &__row {
+      p:last-child {
+        width: 22.5%;
+      }
+    }
+  }
+}
+
+.c-section--successfull-buy {
+  .c-content {
+    @include triangle(right, bottom, 70px, -70px, 70px, 70px, 20px, 0);
+  }
+}

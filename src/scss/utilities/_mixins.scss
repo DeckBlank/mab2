@@ -106,6 +106,15 @@
       border-right: solid $r $white;
       border-bottom: solid $b transparent;
     }
+
+    @else if $x == right and $y == bottom {
+      right: $xdesp;
+      bottom: $ydesp;
+      border-top: solid $t $white;
+      border-left: solid $l transparent;
+      border-right: solid $r transparent;
+      border-bottom: solid $b transparent;
+    }
   }
 }
 

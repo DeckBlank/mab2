@@ -21,12 +21,22 @@ if(is_page('login')){
         "taxonomy" => "tax-video",
         'meta_key'  => 'order',
         'orderby'   => 'meta_value_num',
-        'order' => 'ASC'
+        'order' => 'ASC',
+        'meta_query' => array(
+            array(
+                'key' => 'order',
+                'value' => 0,
+                'compare' => '>',
+            )
+        )
     ]);
     $context['banner'] = get_field('banner', $post->ID);
 
 }else if(is_page('test')){
     $context['info'] = get_field('info', $post->ID);
+
+}else if(is_page('carrito')){
+    $context['pasarell'] = get_field('sell', 'options')['pasarell'];
 }
 
 $templates = [

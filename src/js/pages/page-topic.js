@@ -246,9 +246,6 @@ const topic = new Vue({
                 throw res
               }
             })
-            .then(registration => { 
-  
-            })
             .catch(err => {
               window.location = `${this.SITE_URL}/solicitar-cursos`;
               throw err;          

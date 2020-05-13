@@ -11,6 +11,50 @@ class CourseModel{
     /**
      * Methods
      */
+    public static function getAll($request){
+        $ids = explode(',', $request['ids']);
+        $sell = get_field('sell', 'options');
+
+        if (isset($request['query'])) {
+            $course_args = [
+                "post_type" => "course",
+                "posts_per_page" => -1,
+                'orderby' => 'post_date',
+                "order" => "ASC",
+                's' => $_GET['query']
+            ];
+
+            return get_posts($course_args);
+        } else if (isset($request['ids'])){
+            $course_args = [
+                "post_type" => "course",
+                "posts_per_page" => -1,
+                "post__in" => $ids,
+                "orderby" => "post__in"
+            ];
+            $courses = get_posts($course_args);
+            $courses_array = [];
+
+            for ($i=0; $i < count($courses) ; $i++) {
+                array_push($courses_array, (object)[
+                    "title" => $courses[$i]->post_title,
+                    "unities" => get_field('unities', $courses[$i]->ID),
+                    "price" =>  floatval( $sell['course_price'] ),
+                    "discount" => ($courses[$i]->ID == $ids[0]) ? 0 : floatval( $sell['individual_discount'] )
+                ]);
+            }
+
+            return (object)[
+                "discount" => (object)[
+                    "global" => floatval( $sell['global_discount'] ),
+                    "individual" => floatval( $sell['individual_discount'] )
+                ],
+                "pasarell" => $sell['pasarell'],
+                "list" => $courses_array
+            ];
+        }        
+    }
+
     public static function getTopics($course_id){
         $topics = 0;
 
@@ -84,23 +128,32 @@ class CourseModel{
     public static function registrationCheckout($request){
         $courses = get_field('courses', 'options');
 
-        foreach($courses as $course){
-            if($course['course']['course']->ID == $request['course_id']){
-                $first_unity =  get_field('unities',$course['course']['course']->ID)[0];
+        if (!empty($courses)){
+            foreach($courses as $course){
+                if($course['course']['course']->ID == $request['course_id']){
+                    $first_unity =  get_field('unities',$course['course']['course']->ID)[0];
 
-                if( $first_unity['topics'][0]['topic']->ID == $request['topic'] ){
-                    return true;
-                }else{
-                    foreach($course['course']['registrations'] as $registration){
-                        if(
-                            $registration['registration']['user']['user_email'] == $request['user'] and
-                            $registration['registration']['date_finish'] >= date("Y-m-d") and
-                            $registration['registration']['state'] == true ){
-            
-                            return true;
+                    if( $first_unity['topics'][0]['topic']->ID == $request['topic'] ){
+                        return true;
+                    }else{
+                        foreach($course['course']['registrations'] as $registration){
+                            if(
+                                $registration['registration']['user']['user_email'] == $request['user'] and
+                                $registration['registration']['date_finish'] >= date("Y-m-d") and
+                                $registration['registration']['state'] == true ){
+                
+                                return true;
+                            }
                         }
                     }
                 }
+            }
+        }
+        else{
+            $first_unity =  get_field('unities',$request['course_id'])[0];
+
+            if( $first_unity['topics'][0]['topic']->ID == $request['topic'] ){
+                return true;
             }
         }
 

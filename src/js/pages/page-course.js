@@ -7,7 +7,8 @@ const course = new Vue({
   data() {
     return {
       metas: new URLSearchParams(window.location.search),
-      isActiveUnity: false
+      isActiveUnity: false,
+      isAvaibleCourse: true
     }
   },
   computed: {
@@ -19,6 +20,7 @@ const course = new Vue({
   mounted: function(){
     this.isUserAuthOnCourse( this.$refs.course.getAttribute('data-id') )
     this.saveCourseOnMetas()
+    this.verifyIsAvaibleCourse()
     this.hideLoading();
   },
   methods: {
@@ -57,6 +59,38 @@ const course = new Vue({
       window.localStorage.setItem('mab_metas', JSON.stringify({
         course: this.$refs.course.getAttribute('data-title')
       }))
+    },
+    addCourseToShopCart: function(course_id, course_title, course_link){
+      let shop_cart = window.localStorage.getItem('mab_shop_cart')
+
+      if(!shop_cart){
+        window.localStorage.setItem('mab_shop_cart', JSON.stringify([{
+          id: course_id,
+          title: course_title,
+          link: course_link,
+        }]))
+      }else{
+        shop_cart = JSON.parse(shop_cart);
+        shop_cart.push({
+          id: course_id,
+          title: course_title,
+          link: course_link,
+        })
+
+        window.localStorage.setItem('mab_shop_cart', JSON.stringify(shop_cart))
+      }
+
+      window.setTimeout(()=>{
+        window.location = `${this.SITE_URL}/carrito`
+      },100)
+    },
+    verifyIsAvaibleCourse: function(){
+      let shop_cart = window.localStorage.getItem('mab_shop_cart');
+        shop_cart = JSON.parse(shop_cart);
+
+      if(shop_cart){
+        this.isAvaibleCourse = !shop_cart.filter(course => course == this.$refs.course.getAttribute('data-id'))
+      }
     }
   }
 })

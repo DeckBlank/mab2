@@ -68,4 +68,15 @@ if( function_exists('acf_add_options_page') ) {
         'update_button'   => __('Actualizar', 'acf'),
         'updated_message' => __('Cambios Guardados exitosamente', 'acf')
     ]);
+
+    $pm_sells = acf_add_options_page([
+        'page_title'      => 'Ventas',
+        'menu_title'      => 'Ventas',
+        'menu_slug'       => 'options-sells',
+        'redirect'        => false, // true
+        'icon_url'        => 'dashicons-cart',
+        'position'        => 4,
+        'update_button'   => __('Actualizar', 'acf'),
+        'updated_message' => __('Cambios Guardados exitosamente', 'acf')
+    ]);
 }
