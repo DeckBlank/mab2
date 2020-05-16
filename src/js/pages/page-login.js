@@ -53,12 +53,12 @@ const login = new Vue({
           })
           .catch(err => {
             this.isLoading = false
-            this.errorMessage = 'El usuario no existe'
+            this.errorMessage = 'El usuario o contraseña son incorrectos'
             this.isShowedErrorMessage = true        
             throw err;          
           })
       }else{
-        this.errorMessage = 'Debe llenar el ID y contraseña'
+        this.errorMessage = 'Debe llenar tus accesos'
         this.isShowedErrorMessage = true
       }
     }

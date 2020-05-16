@@ -10,7 +10,8 @@
     ],
     "require": {
         "timber/timber": "^1.10",
-        "opentok/opentok": "^4.4"
+        "opentok/opentok": "^4.4",
+        "phpmailer/phpmailer": "^6.1"
     },
     "require-dev": {
         "symfony/console": "^4.0"

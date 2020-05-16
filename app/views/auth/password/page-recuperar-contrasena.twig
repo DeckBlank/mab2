@@ -1,0 +1,48 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--recovery-pass bg-success">
+    <div class="grid-container padding-vertical-3">
+      <div class="grid-x align-center">
+        <div class="cell medium-10 large-8 padding-vertical-2">
+          <section class="c-content c-content--protected position-relative bg-sec-color br--medium flex-container flex-dir-column align-middle">
+            <figure class="c-vector text-center margin-bottom-2">
+              <img class="of--contain" src="{{theme.link}}/static/images/vectors/virtual-session/PC.png" alt="">
+            </figure>
+            <h1 class="fs-50 w-bold warning text-center margin-bottom-1">MABCLICK</h1>
+            <div class="margin-bottom-2 f2 text-center">
+              <p class="fs-21 w-medium margin-bottom-0 warning">No todo esta perdido</p>
+              <p class="margin-bottom-0 warning fs-18">Ingresa el correo electrónico asociado a tu cuenta</p>
+            </div>
+            <p class="error-message margin-bottom-1 f2 fs-21 w-medium white text-center" :class="{ showed : isShowedErrorMessage }">${errorMessage}</p>
+            <div class="c-form width-100">
+              <div class="margin-bottom-2">
+                <label>
+                  <p class="mb-05 f2 fs-25 w-bold white">CORREO ELECTRÓNICO</p>
+                  <input type="text" class="c-form__input input-reset" v-model="user" @keyup.enter="sendInstructions">
+                </label>
+              </div>
+              <button 
+                class="c-button c-button--primary width-100 w-bold f2 padding-vertical-1" 
+                :disabled="isLoading" 
+                @click="sendInstructions">
+                ENVIAR INSTRUCCIONES 
+              </button>
+              <div class="grid-x align-center">
+                <div class="cell small-10">
+                  <p class="success-message margin-bottom-0 fs-21 f2 white text-center" :class="{ showed : isShowedSuccessMessage }">
+                    Acabamos de enviar un correo a <span class="w-bold">${user}</span> con las instrucciones
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

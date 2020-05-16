@@ -26,11 +26,14 @@
                   <input type="text" class="c-form__input input-reset" v-model="user" @keyup.enter="login">
                 </label>
               </div>
-              <div class="margin-bottom-2">
+              <div class="margin-bottom-1">
                 <label>
                   <p class="mb-05 f2 fs-25 w-bold white">CONTRASEÑA</p>
                   <input type="password" class="c-form__input input-reset" v-model="password" @keyup.enter="login">
                 </label>
+              </div>
+              <div class="margin-bottom-2 text-center">
+                <a href="{{site.url}}/recuperar-contrasena" class="c-link--white fs-18 w-mediun f2">¿Olvidaste tu contraseña?</a>
               </div>
               <button class="c-button c-button--primary width-100 w-bold f2 padding-vertical-1" :disabled="isLoading" @click="login">
                 INGRESAR 

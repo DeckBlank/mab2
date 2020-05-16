@@ -9,6 +9,11 @@ if (!isset($paged) || !$paged){
 $context         = Timber::get_context();
 $context['post'] = Timber::get_post();
 
+$templates = [
+    'page-' . $post->post_name . '.twig',
+    'page.twig'
+];
+
 if(is_page('login')){
     $context['title'] = get_field('title', $post->ID);
     $context['phrase'] = get_field('phrase', $post->ID);
@@ -37,11 +42,13 @@ if(is_page('login')){
 
 }else if(is_page('carrito')){
     $context['pasarell'] = get_field('sell', 'options')['pasarell'];
+}else if(is_page('recuperar-contrasena')){
+    if ($_GET['stage'] == 2) {
+        $templates = 'auth/password/page-actualizar-contrasena.twig' ;
+    } else {
+        $templates = 'auth/password/page-recuperar-contrasena.twig' ;
+    }
+    
 }
-
-$templates = [
-    'page-' . $post->post_name . '.twig',
-    'page.twig'
-];
 
 Timber::render( $templates, $context );

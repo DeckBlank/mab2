@@ -25,6 +25,10 @@ class UserModel{
         }
     }
 
+    public static function checkout($request){
+        return email_exists($request['user']);
+    }
+
     public static function createUser($request){
         if( !email_exists($request['email']) ){
             $username = $request['user_name'];
@@ -94,5 +98,40 @@ class UserModel{
         }else{
             return false;
         }
+    }
+
+    public static function createRecoverySession($user_id){
+        $recovery_session_id = uniqid();
+
+        $response = DBConnection::getConnection()->query("
+            INSERT INTO 
+                wp_recovery_sessions(id,date_at,user) 
+            VALUES(
+                '". $recovery_session_id ."',
+                '". date("Y-m-d") ."',
+                '". $user_id ."'
+            )
+        ");
+
+        if ($response) {
+            return $recovery_session_id;
+        } else {
+            return false;
+        }
+    }
+
+    public static function resetPassword($request, $recovery_session){
+        wp_set_password($request['new_pass'], $recovery_session['user']);
+    }
+
+    public static function getRecoverySession($request){
+        return DBConnection::getConnection()->query("
+            SELECT
+                *
+            FROM
+                wp_recovery_sessions
+            WHERE
+                id = '". $request['session_id'] ."'
+        ");
     }
 }

@@ -22,9 +22,24 @@ add_action( 'rest_api_init', function () {
         'callback' => array($userController,'auth')
     ));
 
+    register_rest_route( 'custom/v1', '/user/recovery_session', array(
+        'methods' => 'GET',
+        'callback' => array($userController,'getRecoverySession')
+    ));
+
+    register_rest_route( 'custom/v1', '/user/recovery_session', array(
+        'methods' => 'POST',
+        'callback' => array($userController,'createRecoverySession')
+    ));
+
     register_rest_route( 'custom/v1', '/user', array(
         'methods' => 'POST',
         'callback' => array($userController,'createUser')
+    ));
+
+    register_rest_route( 'custom/v1', '/user/password', array(
+        'methods' => 'PUT',
+        'callback' => array($userController,'resetPassword')
     ));
 
     register_rest_route( 'custom/v1', '/user/test', array(
