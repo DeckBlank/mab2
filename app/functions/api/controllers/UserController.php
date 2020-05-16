@@ -30,8 +30,6 @@ class UserController{
     
     public function createRecoverySession($request){
         if( isset($request['user']) ){
-            $request['user'] = explode('"', $request['user'])[1];
-
             $user_id = UserModel::checkout($request);
             
             if( !$user_id ){
