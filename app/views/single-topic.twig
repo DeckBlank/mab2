@@ -76,7 +76,7 @@
                   </ul>
                 </div>
               </div>
-              <button v-if="this.logedUser" class="c-questions-toggle c-button  f2 fs-18 w-medium c-button--primary flex-container align-middle" @click="isOpenedQuestionsModal = true">
+              <button v-if="this.logedUser" class="c-questions-toggle c-button f2 fs-18 w-medium c-button--primary flex-container align-center-middle" @click="isOpenedQuestionsModal = true">
                 <p class="margin-bottom-0">Preguntas</p>
               </button>
             </div>
@@ -152,7 +152,8 @@
                           :for="'option-' + qindex + oindex" 
                           class="c-option fs-18 align-middle width-100"
                         >
-                          <div class="c-option__checkbox position-relative margin-right-1 rounded">
+                          <div class="c-option__checkbox margin-right-1">
+                            <span class="display-block rounded position-relative"></span>
                           </div>
                           <p class="margin-bottom-0">                      
                             ${o_.option}
@@ -185,11 +186,11 @@
                   <div class="flex-container f2 position-relative width-50">
                     <p class="c-questions__result c-questions__result--right flex-container margin-bottom-0 success fs-18" :class="{ showed : (testResult[currentQuestion - 1].isRight && !testDone) }">
                       <span class="c-icon flex-container align-center-middle rounded margin-right-1"><i class="far fa-check"></i></span>
-                      Es correcto
+                      Correcto
                     </p>
                     <p class="c-questions__result c-questions__result--wrong flex-container margin-bottom-0 alert fs-18 position-absolute width-100 height-100" :class="{ showed : (!testResult[currentQuestion - 1].isRight && testResult[currentQuestion - 1].value && !testDone) }">
                       <span class="c-icon flex-container align-center-middle rounded margin-right-1"><i class="far fa-times"></i></span>
-                      Es incorrecto
+                      Incorrecto
                     </p>
                   </div>
                   <div class="flex-container align-middle" :class="{ enable: isEnableChange, hide: testDone }">                       

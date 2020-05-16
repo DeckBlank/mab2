@@ -100,6 +100,8 @@ return [
 
         'page_successfull_buy' => get_theme_file_uri('/static/js/page-successfull-buy.bundle.js'),
 
+        'page_recovery_password' => get_theme_file_uri('/static/js/page-recovery-password.bundle.js'),
+
         'page_404' => get_theme_file_uri('/static/js/page-404.bundle.js'),
 
         'page_video' => get_theme_file_uri('/static/js/page-video.bundle.js'),

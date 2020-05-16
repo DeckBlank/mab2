@@ -1,6 +1,6 @@
 <?php
 
-$assets_version = '1589404823629';
+$assets_version = '1589602954178';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -304,7 +304,17 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
-        ]);        
+        ]);
+
+    }elseif (is_page('recuperar-contrasena') || is_page('actualizar-contrasena')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/recovery_password',
+            'src'       => $config['resources']['page_recovery_password'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+
     }elseif (is_page('progreso')){               
         register_assets('script', [
             'handle'    => 'pandawp/js/page/progress',

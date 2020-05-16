@@ -7,18 +7,6 @@
     }
   }
 
-  .c-vector {
-    width: 180px;
-  }
-
-  .error-message {
-    display: none;
-  }
-
-  .error-message.showed {
-    display: block;
-  }
-
   .c-button {
     &:disabled {
       opacity: 0.5;

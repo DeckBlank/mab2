@@ -69,6 +69,15 @@ class DBConnection{
             PRIMARY KEY (id)
         )");
     }
+
+    public function createRecoverySessionsTable(){
+        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_recovery_sessions(
+            id VARCHAR(100) NOT NULL,
+            date_at DATE NOT NULL,
+            user VARCHAR(100) NOT NULL,
+            PRIMARY KEY (id)
+        )");
+    }
 }
 
 /**
@@ -84,3 +93,4 @@ $connection->createTopicScoreTable();
 $connection->createTopicTestScoreTable();
 $connection->createSessionRequestTable();
 $connection->createUserTestTable();
+$connection->createRecoverySessionsTable();

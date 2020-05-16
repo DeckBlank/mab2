@@ -75,7 +75,7 @@
       color: $white;
     }
 
-    &:hover .c-option__checkbox {
+    &:hover .c-option__checkbox span {
       border-color: $white;
     }
   }
@@ -85,7 +85,7 @@
     color: $white;
   }
 
-  &__item input:checked + .c-option .c-option__checkbox {
+  &__item input:checked + .c-option .c-option__checkbox span {
     border-color: $white;
     background-color: $white;
   }
@@ -98,11 +98,47 @@
     @include transition(0.25s);
 
     &__checkbox {
-      border: solid 1px $dark;
-      width: 17px;
-      height: 17px;
+      width: 10%;
 
-      @include transition(0.25s);
+      span {
+        border: solid 1px $dark;
+        width: 17px;
+        height: 17px;
+
+        @include transition(0.25s);
+      }
+    }
+
+    p {
+      width: 90%;
+    }
+  }
+}
+
+@include breakpoint(medium) {
+  .c-question {
+    .c-option {
+      &__checkbox {
+        width: 5%;
+      }
+
+      p {
+        width: 95%;
+      }
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-question {
+    .c-option {
+      &__checkbox {
+        width: 2.5%;
+      }
+
+      p {
+        width: calc(100% - 2.5%);
+      }
     }
   }
 }
