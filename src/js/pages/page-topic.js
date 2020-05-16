@@ -70,7 +70,6 @@ const topic = new Vue({
     this.getLikesAverage();
     this.getComments();
     this.getQuestions();
-    this.hideLoading();
   },
   methods: {
     ...baseActions(),
@@ -232,7 +231,7 @@ const topic = new Vue({
     isUserAuthOnTopic: function(course_id){
       let topics = document.querySelectorAll('.c-topic__video')
 
-      if(!this.metas.get('course_name') || !this.metas.get('unity') || !this.metas.get('sector')){
+      if(!this.metas.get('course_name') || !this.metas.get('unity') || (this.metas.get('sector') != 'privado' && this.metas.get('sector') != 'publico')){
         window.location = `${this.SITE_URL}/solicitar-cursos`;
       }else{
         if(this.metas.get('sector') == "privado"){
@@ -246,10 +245,15 @@ const topic = new Vue({
                 throw res
               }
             })
+            .then(registration => {
+              this.hideLoading();
+            })
             .catch(err => {
               window.location = `${this.SITE_URL}/solicitar-cursos`;
               throw err;          
             })        
+        }else{
+          this.hideLoading();
         }
       }
     }

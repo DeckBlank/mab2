@@ -21,38 +21,44 @@ const course = new Vue({
     this.isUserAuthOnCourse( this.$refs.course.getAttribute('data-id') )
     this.saveCourseOnMetas()
     this.verifyIsAvaibleCourse()
-    this.hideLoading();
   },
   methods: {
     ...baseActions(),
     isUserAuthOnCourse: function(course_id){
-      if(this.metas.get('sector') == 'privado'){
-        fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}`,{
-            method: 'GET'
-          })
-          .then(res => {
-            if (res.status >= 200 && res.status < 300) {
-              return res.json()
-            }else{
-              throw res
-            }
-          })
-          .then(registration => { 
-
-          })
-          .catch(err => {
-            let topics = document.querySelectorAll('.c-topic')
-
-            topics.forEach((topic, index) => {
-              if(index != 0){
-                topic.querySelectorAll('.c-topic__item').forEach((item)=> {
-                  item.setAttribute('href', `${this.SITE_URL}/solicitar-cursos`)
-                })                
+      if(this.metas.get('sector') != 'privado' && this.metas.get('sector') != 'publico'){
+        window.location = `${this.SITE_URL}/solicitar-cursos`;
+      }else{
+        if(this.metas.get('sector') == 'privado'){
+          fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}`,{
+              method: 'GET'
+            })
+            .then(res => {
+              if (res.status >= 200 && res.status < 300) {
+                return res.json()
+              }else{
+                throw res
               }
             })
-
-            throw err;          
-          })        
+            .then(registration => { 
+              this.hideLoading();
+            })
+            .catch(err => {
+              let topics = document.querySelectorAll('.c-topic')
+  
+              topics.forEach((topic, index) => {
+                if(index != 0){
+                  topic.querySelectorAll('.c-topic__item').forEach((item)=> {
+                    item.setAttribute('href', `${this.SITE_URL}/solicitar-cursos`)
+                  })                
+                }
+              })
+  
+              this.hideLoading();
+              throw err;          
+            })        
+        }else {
+          this.hideLoading();
+        }
       }
     },
     saveCourseOnMetas: function(){
