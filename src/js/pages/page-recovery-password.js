@@ -46,7 +46,7 @@ const recovery_password = new Vue({
         this.isShowedErrorMessage = false
         this.isLoading = true
 
-        let form_data = new FormData(); form_data.append('user', `"${this.user}"`)
+        let form_data = new FormData(); form_data.append('user', this.user)
   
         fetch(`${this.API}/user/recovery_session`,{
             method: 'POST',
