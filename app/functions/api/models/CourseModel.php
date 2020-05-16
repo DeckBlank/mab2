@@ -127,33 +127,31 @@ class CourseModel{
     
     public static function registrationCheckout($request){
         $courses = get_field('courses', 'options');
+        $first_unity =  get_field('unities',$request['course_id'])[0];
 
-        if (!empty($courses)){
-            foreach($courses as $course){
-                if($course['course']['course']->ID == $request['course_id']){
-                    $first_unity =  get_field('unities',$course['course']['course']->ID)[0];
-
-                    if( $first_unity['topics'][0]['topic']->ID == $request['topic'] ){
-                        return true;
-                    }else{
-                        foreach($course['course']['registrations'] as $registration){
-                            if(
-                                $registration['registration']['user']['user_email'] == $request['user'] and
-                                $registration['registration']['date_finish'] >= date("Y-m-d") and
-                                $registration['registration']['state'] == true ){
-                
-                                return true;
+        if( $first_unity['topics'][0]['topic']->ID == $request['topic'] ){
+            return true;
+        }else{
+            if (!empty($courses)){
+                foreach($courses as $course){
+                    if($course['course']['course']->ID == $request['course_id']){
+                        $first_unity =  get_field('unities',$course['course']['course']->ID)[0];
+    
+                        if( $first_unity['topics'][0]['topic']->ID == $request['topic'] ){
+                            return true;
+                        }else{
+                            foreach($course['course']['registrations'] as $registration){
+                                if(
+                                    $registration['registration']['user']['user_email'] == $request['user'] and
+                                    $registration['registration']['date_finish'] >= date("Y-m-d") and
+                                    $registration['registration']['state'] == true ){
+                    
+                                    return true;
+                                }
                             }
                         }
                     }
                 }
-            }
-        }
-        else{
-            $first_unity =  get_field('unities',$request['course_id'])[0];
-
-            if( $first_unity['topics'][0]['topic']->ID == $request['topic'] ){
-                return true;
             }
         }
 
