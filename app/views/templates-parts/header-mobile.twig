@@ -41,7 +41,7 @@
                 <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
                   {% for _child in child.children %}
                     <div class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
-                      <a href="{{_child.link}}" class="position-relative">{{_child.name}}</a>
+                      <a href="{{_child.link}}?sector=publico" class="position-relative">{{_child.name}}</a>
                     </div>                 
                   {% endfor %}
                 </ul>                
@@ -70,7 +70,7 @@
                 <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
                   {% for _child in child.children %}
                     <div class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
-                      <a href="{{_child.link}}" class="position-relative">{{_child.name}}</a>
+                      <a href="{{_child.link}}?sector=publico" class="position-relative">{{_child.name}}</a>
                     </div>                 
                   {% endfor %}
                 </ul>                
@@ -99,7 +99,7 @@
                 <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
                   {% for _child in child.children %}
                     <div class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
-                      <a href="{{_child.link}}" class="position-relative">{{_child.name}}</a>
+                      <a href="{{_child.link}}?sector=privado" class="position-relative">{{_child.name}}</a>
                     </div>                 
                   {% endfor %}
                 </ul>                
@@ -128,7 +128,7 @@
                 <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
                   {% for _child in child.children %}
                     <div class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
-                      <a href="{{_child.link}}" class="position-relative">{{_child.name}}</a>
+                      <a href="{{_child.link}}?sector=privado" class="position-relative">{{_child.name}}</a>
                     </div>                 
                   {% endfor %}
                 </ul>                
