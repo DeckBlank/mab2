@@ -17,6 +17,8 @@
           <section class="c-content c-content--protected bg-white br--medium">
             <h3 class="fs-40 f1 w-bold dark-gray margin-bottom-2">{{post.title}}</h3>
             <div class="c-details flex-container align-justify margin-bottom-2">
+              <span></span>
+              {#
               <div class="flex-container align-middle">
                 {% set author_avatar = author.avatar['sizes']['thumbnail'] %}
   
@@ -25,6 +27,7 @@
                 </figure>
                 <p class="margin-bottom-0 fs-21 w-medium f2 dark">{{author.first_name}} {{author.last_name}}</p>
               </div>
+              #}
               <div class="c-details__label f2 fs-21 flex-container align-middle">
                 <span class="c-icon"><i class="far fa-gift"></i></span>
                 <p class="margin-left-1 margin-bottom-0 w-medium">Contenido gratuito</p>
