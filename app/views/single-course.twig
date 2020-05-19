@@ -11,7 +11,7 @@
         <h1 class="c-title margin-bottom-1 padding-left-1">
           <div class="grid-x grid-margin-x grid-margin-y align-justify align-middle">
             <div class="cell medium-auto">
-              <p class="f1 w-bold white margin-bottom-0">{{post.title}}</p>
+              <p class="f1 w-bold white margin-bottom-0">{{post.title}}</p>              
             </div>
             <!-- <div class="cell small-8 medium-4 large-2">
               <button
@@ -21,6 +21,9 @@
             </div> -->
           </div>
         </h1>
+        <div class="margin-bottom-1 f2 fs-18 white w-medium padding-left-1">
+          {{post.content}}
+        </div>
         <ul class="ul-reset">
           {% for unity in unities %}
             {% set unity_id = loop.index %}

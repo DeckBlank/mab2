@@ -65,7 +65,8 @@ Vue.component('form-student',{
           type="tel" 
           v-model="mobile.value">
       </div>
-      <div class="input_container">
+      <div
+        class="input_container">
         <label for="">Tipo de colegio</label>
         <select 
           class="c-form-box__select school_type select-reset"
@@ -77,19 +78,9 @@ Vue.component('form-student',{
           <option value="publico">Público</option>                  
         </select>
       </div>
-      <div 
-        v-if="schoolType.value == 'publico' " 
-        class="input_container ugel_container d-none">
-        <label for="">UGEL</label>
-        <select 
-          class="c-form-box__select school_type select-reset"
-          :class="{ valid : ugel.isValid }"
-          v-model="ugel.value">
-          <option disabled value="" selected>Selecciona una opción</option>
-          <option v-for="ugel of ugels" :key="ugel.id" :value="ugel" >{{ugel}}</option>
-        </select>
-      </div>
-      <div class="input_container">
+      <div
+        v-if="schoolType.value == 'privado' "      
+        class="input_container">
         <label for="">Nombre de tu colegio</label>
         <select 
           class="c-form-box__select select-reset"
@@ -184,7 +175,7 @@ Vue.component('form-student',{
 
       counter: {
         status: 0,
-        base: 14,
+        base: 13,
         limit: 14
       },
       grade: {
@@ -225,7 +216,7 @@ Vue.component('form-student',{
       form_data.append('phone', this.phone.value)
       form_data.append('mobile', this.mobile.value)
       form_data.append('school_type', this.schoolType.value)
-      form_data.append('ugel', this.ugel.value)
+      form_data.append('ugel', '')
       form_data.append('school', this.school.value)
       form_data.append('grade', this.grade.value)
       form_data.append('age', this.age.value)
