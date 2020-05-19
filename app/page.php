@@ -37,9 +37,6 @@ if(is_page('login')){
     ]);
     $context['banner'] = get_field('banner', $post->ID);
 
-}else if(is_page('test')){
-    $context['info'] = get_field('info', $post->ID);
-
 }else if(is_page('carrito')){
     $context['pasarell'] = get_field('sell', 'options')['pasarell'];
 }else if(is_page('recuperar-contrasena')){

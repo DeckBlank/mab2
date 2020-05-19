@@ -3,9 +3,9 @@
     "title": "Solicitar Cursos Content",
     "fields": [
         {
-            "key": "field_5e7ce96905f60",
-            "label": "Formulario",
-            "name": "form",
+            "key": "field_5e7cfdb049ca8",
+            "label": "Titulo",
+            "name": "title",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -22,9 +22,9 @@
             "maxlength": ""
         },
         {
-            "key": "field_5e7cfdb049ca8",
-            "label": "Titulo",
-            "name": "title",
+            "key": "field_5e7ce96905f60",
+            "label": "Formulario",
+            "name": "form",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -44,9 +44,9 @@
     "location": [
         [
             {
-                "param": "page",
+                "param": "page_template",
                 "operator": "==",
-                "value": "13"
+                "value": "templates\/template-solicitar-cursos.php"
             }
         ]
     ],
@@ -58,5 +58,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1589930582
+    "modified": 1589931005
 }

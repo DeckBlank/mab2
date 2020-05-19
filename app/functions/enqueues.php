@@ -212,7 +212,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);
 
-    }elseif (is_page('solicitar-cursos')){
+    }elseif (is_page_template('templates/template-solicitar-cursos.php')){
         register_assets('script', [
             'handle'    => 'pandawp/js/page/solicitar-cursos',
             'src'       => $config['resources']['page_solicitar_cursos'],
@@ -230,7 +230,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);
 
-    }elseif (is_page('test')){
+    }elseif (is_page_template('templates/template-test.php')){
         register_assets('package', [
             'handle'    => 'pandawp/package/swiper',
             'src'       => $config['resources']['package_swiper'],
