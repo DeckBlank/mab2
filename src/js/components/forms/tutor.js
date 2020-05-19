@@ -78,18 +78,8 @@ Vue.component('form-tutor',{
         </select>
       </div>
       <div 
-        v-if="schoolType.value == 'publico' " 
-        class="input_container ugel_container d-none">
-        <label for="">UGEL</label>
-        <select 
-          class="c-form-box__select school_type select-reset"
-          :class="{ valid : ugel.isValid }"
-          v-model="ugel.value">
-          <option disabled value="" selected>Selecciona una opción</option>
-          <option v-for="ugel of ugels" :key="ugel.id" :value="ugel" >{{ugel}}</option>
-        </select>
-      </div>
-      <div class="input_container">
+        v-if="schoolType.value == 'privado' "
+        class="input_container">
         <label for="">Colegio de su/s hijo/s</label>
         <select 
           class="c-form-box__select select-reset"
@@ -194,7 +184,7 @@ Vue.component('form-tutor',{
       
       counter: {
         status: 0,
-        base: 13,
+        base: 12,
         limit: 13
       },
       childrenQuantity: {
@@ -241,7 +231,7 @@ Vue.component('form-tutor',{
       form_data.append('phone', this.phone.value)
       form_data.append('mobile', this.mobile.value)
       form_data.append('school_type', this.schoolType.value)
-      form_data.append('ugel', this.ugel.value)
+      form_data.append('ugel', '')
       form_data.append('children_school', this.school.value)
       form_data.append('children_quantity', this.childrenQuantity.value)
       form_data.append('children', JSON.stringify(this.children))

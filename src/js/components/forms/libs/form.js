@@ -6,7 +6,6 @@ function baseData(){
     distritos: [],
 
     //Schools
-    ugels: [],
     schools: [],
 
     //Form
@@ -49,10 +48,6 @@ function baseData(){
       isValid: false
     },
     schoolType: {
-      value: '',
-      isValid: false
-    },
-    ugel: {
       value: '',
       isValid: false
     },
@@ -108,53 +103,22 @@ function baseWatch(){
       this.validateSelect(this.schoolType) 
 
       if(value == 'privado'){
-        this.counter.limit = this.counter.base;
-        this.getSchools(value)
-
-        if(this.school && this.school.value != ''){
-          this.school.value = ''
-          this.school.isValid = false         
-          this.counter.status--;
-
-        }else if(this.childrenSchool && this.childrenSchool.value != ''){
-          this.childrenSchool.value = ''
-          this.childrenSchool.isValid = false         
-          this.counter.status--;       
-        }
-
-        if(this.ugel.value != ''){              
-          this.counter.status--;
-        }
-      }else if(value == 'publico'){
         this.counter.limit = this.counter.base + 1;
-        this.getUGELS();
-
-        if(this.school && this.school.value != ''){
-          this.schools = []
-
-          this.school.value = ''
-          this.school.isValid = false
-
-          this.counter.status--;
-
-        }else if(this.childrenSchool && this.childrenSchool.value != ''){
-          this.schools = []
-
-          this.childrenSchool.value = ''
-          this.childrenSchool.isValid = false
-
-          this.counter.status--;
-        }
-
-        if(this.ugel.value != ''){
-          this.ugel.value = ''
-          this.ugel.isValid = false          
-        }
+        this.getSchools(value)
+      }else if(value == 'publico'){
+        this.counter.limit = this.counter.base;
       }
-    },
-    'ugel.value': function(value){
-      this.validateSelect(this.ugel)
-      this.getSchools('publico', value)
+
+      if(this.school && this.school.value != ''){
+        this.school.value = ''
+        this.school.isValid = false         
+        this.counter.status--;
+
+      }else if(this.childrenSchool && this.childrenSchool.value != ''){
+        this.childrenSchool.value = ''
+        this.childrenSchool.isValid = false         
+        this.counter.status--;       
+      }      
     },
     'school.value': function(value){
       this.validateSelect(this.school)
@@ -167,7 +131,7 @@ function baseWatch(){
     },
     'district.value': function(value){
       this.validateSelect(this.district)  
-    }    
+    }
   }
 }
 
@@ -204,44 +168,9 @@ function baseMethods(){
       let distritos = require('../../../extras/ubigeo/distritos.json')
       this.distritos = distritos[this.provincias[option.target.selectedIndex - 1].id_ubigeo]
     },
-    getUGELS: function(){
-      fetch(`${this.API}/schools/ugels`,{
-          method: 'GET'
-        })
-        .then(res => {
-          if (res.status >= 200 && res.status < 300) {
-            return res.json()
-          }else{
-            throw res
-          }
-        })
-        .then(ugels => {
-          this.ugels = ugels;
-        })
-        .catch(err => {    
-          throw err;          
-        })      
-    },
     getSchools: function(type, ugel){
       if(type == 'privado'){
         this.schools = require('../../../extras/schools/privates.json')
-      }else if(type == 'publico'){
-        fetch(`${this.API}/schools?ugel=${ugel}`,{
-            method: 'GET'
-          })
-          .then(res => {
-            if (res.status >= 200 && res.status < 300) {
-              return res.json()
-            }else{
-              throw res
-            }
-          })
-          .then(schools => {
-            this.schools = schools;
-          })
-          .catch(err => {    
-            throw err;          
-          }) 
       }
     } 
   }
