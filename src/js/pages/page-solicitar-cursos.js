@@ -24,12 +24,12 @@ const solicitar_cursos = new Vue({
       if(this.logedUser){
         let fullname = document.querySelector("[name='fullname'"),
           email = document.querySelector("[name='email'"),
-          phone = document.querySelector("[name='phone'"),
+          mobile = document.querySelector("[name='phone'"),
           course = document.querySelector("[name='course'")
   
         fullname.value = this.logedUser.user_auth
         email.value = this.logedUser.user_email
-        phone.value = this.logedUser.user_phone
+        mobile.value = this.logedUser.user_mobile
 
         let mab_metas = window.localStorage.getItem('mab_metas')
 
