@@ -149,7 +149,7 @@ $connection->createUserTestTable();
 $connection->createRecoverySessionsTable();
 
 //2. Logs
-$connection->createLoginLogTable();
-$connection->createVideoViewLogTable();
-$connection->createExerciseDownloadLogTable();
-$connection->createAnswerLogTable();
+// $connection->createLoginLogTable();
+// $connection->createVideoViewLogTable();
+// $connection->createExerciseDownloadLogTable();
+// $connection->createAnswerLogTable();
