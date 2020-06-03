@@ -13,15 +13,21 @@ class UserModel{
         $user = wp_authenticate( $request['user'], $request['password'] );
 
         if( is_wp_error($user) ){
-            return false;
+            throw new Exception("Wrong credentials");
         }else{
-            return (object)[
-                "user_login" => $user->data->user_login,
-                "user_pass" => $user->data->user_pass,
-                "user_email" => $user->data->user_email,
-                "user_mobile" => get_field('mobile', 'user_' . $user->data->ID),
-                "user_sector" => get_field('school_type', 'user_' . $user->data->ID)
-            ];
+            try {
+                self::saveLoginLog($request);
+
+                return (object)[
+                    "user_login" => $user->data->user_login,
+                    "user_pass" => $user->data->user_pass,
+                    "user_email" => $user->data->user_email,
+                    "user_mobile" => get_field('mobile', 'user_' . $user->data->ID),
+                    "user_sector" => get_field('school_type', 'user_' . $user->data->ID)
+                ];                
+            } catch (Exception $e) {
+                throw new Exception($e->getMessage());
+            }
         }
     }
 
@@ -133,5 +139,52 @@ class UserModel{
             WHERE
                 id = '". $request['session_id'] ."'
         ");
+    }
+
+    public static function saveLoginLog($request){
+        $query = DBConnection::getConnection()->query("
+            SELECT
+                *
+            FROM
+                wp_login_logs
+            WHERE
+                user_email = '". $request['user'] ."'
+            
+        ");
+
+        if ($query->num_rows > 0) {
+            $login_counts = ($query->fetch_assoc()['login_count']) + 1;
+            $response = DBConnection::getConnection()->query("
+                UPDATE 
+                    wp_login_logs
+                SET
+                    login_count = '". $login_counts ."',
+                    last_date = '". date("Y-m-d G:i:s") ."'
+                WHERE
+                    user_email = '". $request['user'] ."'
+            ");
+
+            if ($response) {
+                return true;
+            } else {
+                throw new Exception("Log couldn't updated");
+            }
+        } else {
+            $response = DBConnection::getConnection()->query("
+                INSERT INTO 
+                    wp_login_logs(user_email, login_count, last_date)
+                VALUES(
+                    '". $request['user'] ."',
+                    '". $login_counts ."',
+                    '". date("Y-m-d G:i:s") ."'
+                )
+            ");
+
+            if ($response) {
+                return true;
+            } else {
+                throw new Exception("Log couldn't init");
+            }
+        }
     }
 }
