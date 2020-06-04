@@ -104,4 +104,28 @@ class VideoModel{
     public static function addAnswer($request){
         return __addAnswer($request);
     }
+
+    //4. Extras ---------------------------------------//
+    public static function saveViewLog($request){
+        $response = DBConnection::getConnection()->query("
+            INSERT INTO 
+                wp_video_views_logs(user_email, video_views, last_video, last_date)
+            VALUES(
+                '". $request['user'] ."',
+                1,
+                '". $request['post_id'] ."',
+                '". date("Y-m-d G:i:s") ."'
+            )
+            ON DUPLICATE KEY UPDATE
+                video_views = video_views + 1,
+                last_video = '". $request['post_id'] ."',
+                last_date = '". date("Y-m-d G:i:s") ."'                    
+        ");
+
+        if ($response) {
+            return true;
+        } else {
+            throw new Exception("Log couldn't saved");
+        }              
+    }
 }

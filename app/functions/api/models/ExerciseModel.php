@@ -27,4 +27,27 @@ class ExerciseModel{
 
         return $exercises_array;
     }
+
+    public static function saveDownloadLog($request){
+        $response = DBConnection::getConnection()->query("
+            INSERT INTO 
+                wp_exercise_download_logs(user_email, exercises_download, last_exercise, last_date)
+            VALUES(
+                '". $request['user'] ."',
+                1,
+                '". $request['exercise_id'] ."',
+                '". date("Y-m-d G:i:s") ."'
+            )
+            ON DUPLICATE KEY UPDATE
+                exercises_download = exercises_download + 1,
+                last_exercise = '". $request['exercise_id'] ."',
+                last_date = '". date("Y-m-d G:i:s") ."'                
+        ");
+
+        if ($response) {
+            return true;
+        } else {
+            throw new Exception("Log couldn't saved");
+        }        
+    }    
 }

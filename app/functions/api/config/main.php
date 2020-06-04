@@ -113,9 +113,10 @@ class DBConnection{
         )");
     }
 
-    public function createAnswerLogTable(){
-        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_answers_logs(
+    public function createTopicTestAnswerLogTable(){
+        $response = $this->connection->query("CREATE TABLE IF NOT EXISTS wp_topic_test_answers_logs(
             user_email VARCHAR(50) NOT NULL,
+            test_count INT NOT NULL,
             right_answers INT NOT NULL,
             wrong_answers INT NOT NULL,
             last_course VARCHAR(50) NULL,
@@ -124,6 +125,56 @@ class DBConnection{
             last_date DATETIME NULL,
             PRIMARY KEY (user_email)            
         )");
+
+        $this::seederTopicTestAnswerLogTable($this->connection);
+    }
+
+    private function seederTopicTestAnswerLogTable($db_connection){
+        $query = $db_connection->query("SELECT * FROM wp_topic_test_answers_logs");
+
+        if($query->num_rows == 0){
+            $users = get_users();
+
+            if (!empty($users )){
+                foreach($users as $user){
+                    $right_answers = 0;
+                    $wrong_answers = 0;
+                    $test_count = 0;
+
+                    $topic_test_scores_query = $db_connection->query("
+                        SELECT
+                            *
+                        FROM
+                            wp_topic_test_scores
+                        WHERE
+                            user = '". $user->user_email ."'
+                    ");
+
+                    while($topic_test_score = $topic_test_scores_query->fetch_assoc()){
+                        $right_answers += json_decode($topic_test_score['score'])->rights;
+                        $wrong_answers += json_decode($topic_test_score['score'])->wrongs;
+
+                         $test_count += 1;
+                    }
+
+                    $db_connection->query("
+                        INSERT INTO 
+                            wp_topic_test_answers_logs(
+                                user_email, 
+                                test_count,
+                                right_answers,
+                                wrong_answers
+                            )
+                        VALUES(
+                            '". $user->user_email ."',
+                            '". $test_count ."',
+                            '". $right_answers ."',
+                            '". $wrong_answers ."'
+                        )
+                    ");                    
+                }
+            }
+        }
     }
 }
 
@@ -149,7 +200,7 @@ $connection->createUserTestTable();
 $connection->createRecoverySessionsTable();
 
 //2. Logs
-// $connection->createLoginLogTable();
-// $connection->createVideoViewLogTable();
-// $connection->createExerciseDownloadLogTable();
-// $connection->createAnswerLogTable();
+$connection->createLoginLogTable();
+$connection->createVideoViewLogTable();
+$connection->createExerciseDownloadLogTable();
+$connection->createTopicTestAnswerLogTable();

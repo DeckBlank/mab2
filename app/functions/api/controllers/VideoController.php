@@ -82,5 +82,14 @@ class VideoController{
         } catch (Exception $e){
             return new WP_Error( 'no_answer_added', __($e->getMessage()), array( 'status' => 404 ) );
         }
-    } 
+    }
+
+    //4. Extras ---------------------------------------//
+    public static function saveViewLog($request){
+        try {
+            return new WP_REST_Response(VideoModel::saveViewLog($request), 200);
+        } catch (Exception $e) {
+            return new WP_Error( 'video_log_failed', __($e->getMessage()), array( 'status' => 404 ) );
+        }
+    }    
 }

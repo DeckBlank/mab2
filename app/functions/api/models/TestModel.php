@@ -47,12 +47,12 @@ class TestModel{
     }
 
     public static function saveTest($request){
-        return DBConnection::getConnection()->query("
-            INSERT INTO wp_user_tests(date_at,user,result) VALUES(
-                '". date("Y-m-d") ."',
-                '". $request['user'] ."',
-                '". $request['result'] ."'
-            )
-        "); 
+         return DBConnection::getConnection()->query("
+             INSERT INTO wp_user_tests(date_at,user,result) VALUES(
+                 '". date("Y-m-d") ."',
+                 '". $request['user'] ."',
+                 '". $request['result'] ."'
+             )
+         ");
     }
 }

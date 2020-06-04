@@ -70,6 +70,8 @@ return [
         
         'package_tippyjs' => get_theme_file_uri('/static/js/package.tippy.js.bundle.js'),
 
+        'package_ssr_window' => get_theme_file_uri('/static/js/package.ssr-window.bundle.js'),
+
         /**
          * Styles
          * */

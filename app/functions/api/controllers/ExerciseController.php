@@ -20,4 +20,12 @@ class ExerciseController{
             return new WP_REST_Response($exercises, 200);
         }    
     }
+
+    public static function saveDownloadLog($request){
+        try {
+            return new WP_REST_Response(ExerciseModel::saveDownloadLog($request), 200);
+        } catch (Exception $e) {
+            return new WP_Error( 'excercise_log_failed', __($e->getMessage()), array( 'status' => 404 ) );
+        }
+    }    
 }

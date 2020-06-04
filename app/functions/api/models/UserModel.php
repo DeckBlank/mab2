@@ -142,49 +142,23 @@ class UserModel{
     }
 
     public static function saveLoginLog($request){
-        $query = DBConnection::getConnection()->query("
-            SELECT
-                *
-            FROM
-                wp_login_logs
-            WHERE
-                user_email = '". $request['user'] ."'
-            
+        $response = DBConnection::getConnection()->query("
+            INSERT INTO 
+                wp_login_logs(user_email, login_count, last_date)
+            VALUES(
+                '". $request['user'] ."',
+                1,
+                '". date("Y-m-d G:i:s") ."'
+            )
+            ON DUPLICATE KEY UPDATE
+                login_count = login_count + 1,
+                last_date = '". date("Y-m-d G:i:s") ."'                    
         ");
 
-        if ($query->num_rows > 0) {
-            $login_counts = ($query->fetch_assoc()['login_count']) + 1;
-            $response = DBConnection::getConnection()->query("
-                UPDATE 
-                    wp_login_logs
-                SET
-                    login_count = '". $login_counts ."',
-                    last_date = '". date("Y-m-d G:i:s") ."'
-                WHERE
-                    user_email = '". $request['user'] ."'
-            ");
-
-            if ($response) {
-                return true;
-            } else {
-                throw new Exception("Log couldn't updated");
-            }
+        if ($response) {
+            return true;
         } else {
-            $response = DBConnection::getConnection()->query("
-                INSERT INTO 
-                    wp_login_logs(user_email, login_count, last_date)
-                VALUES(
-                    '". $request['user'] ."',
-                    '". $login_counts ."',
-                    '". date("Y-m-d G:i:s") ."'
-                )
-            ");
-
-            if ($response) {
-                return true;
-            } else {
-                throw new Exception("Log couldn't init");
-            }
+            throw new Exception("Log couldn't saved");
         }
     }
 }

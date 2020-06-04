@@ -41,11 +41,6 @@ add_action( 'rest_api_init', function () {
         'methods' => 'PUT',
         'callback' => array($userController,'resetPassword')
     ));
-
-    register_rest_route( 'custom/v1', '/user/test', array(
-        'methods' => 'GET',
-        'callback' => array($userController,'getTest')
-    ));
 });
 
 //2. Video ----------------------------------//
@@ -86,6 +81,11 @@ add_action( 'rest_api_init', function () {
         'methods' => 'POST',
         'callback' => array($videoController,'addAnswer'),
     ));     
+
+    register_rest_route( 'custom/v1', '/video/(?P<post_id>\d+)/view', array(
+        'methods' => 'PUT',
+        'callback' => array($videoController,'saveViewLog'),
+    ));
 });
 
 //3. Course ----------------------------------//
@@ -165,7 +165,7 @@ add_action( 'rest_api_init', function () {
     register_rest_route( 'custom/v1', '/topic/(?P<post_id>\d+)/comment/(?P<comment_id>\d+)/answer', array(
         'methods' => 'POST',
         'callback' => array($topicController,'addAnswer'),
-    ));     
+    ));
 });
 
 //5. SessionRequest ----------------------------------//
@@ -231,6 +231,11 @@ add_action( 'rest_api_init', function () {
         'methods' => 'GET',
         'callback' => array($exerciseController,'getAll'),
     ));
+
+    register_rest_route( 'custom/v1', '/exercise/(?P<exercise_id>\d+)/download', array(
+        'methods' => 'PUT',
+        'callback' => array($exerciseController,'saveDownloadLog'),
+    ));    
 });
 
 //10. School ----------------------------------//
