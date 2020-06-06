@@ -22,6 +22,7 @@ const progress = new Vue({
     this.initSectors();
   },
   mounted(){
+    this.global();
     this.getProgresses();
   },
   methods: {

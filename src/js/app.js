@@ -52,11 +52,31 @@ function baseActions(){
       'updateStatusBrowserToggle',
       'hideLoading'
     ]),
-    handleScroll: function(event){
-      if(window.scrollY > 100){
-        this.updateStatusHeaderShadow(true)
-      }else{
-        this.updateStatusHeaderShadow(false)
+    global: function(){
+      this.saveLog();
+    },
+    saveLog: function(){
+      if(!window.sessionStorage.getItem('mab_temp')){
+        let user = (this.logedUser) ? this.logedUser.user_email : 'anonimo';
+
+        fetch(`${this.API}/user/access/log?user=${user}`,{
+            method: 'PUT'
+          })
+          .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              return res.json()
+            }else{
+              throw res
+            }
+          })
+          .then(response => {
+            window.sessionStorage.setItem('mab_temp', JSON.stringify({
+              user_active: true
+            }))
+          })
+          .catch(err => {
+            throw err;
+          })      
       }
     }
   }

@@ -61,6 +61,7 @@ const _404 = new Vue({
     this.initSectors();
   },
   mounted(){
+    this.global();
     this.initTooltips();
     this.getTest();
   },

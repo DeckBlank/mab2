@@ -82,6 +82,16 @@ class UserController{
         
     }
 
+    public function saveAccessLog($request){
+        try {
+            UserModel::saveAccessLog($request);
+
+            return new WP_REST_Response('Log created', 200);
+        } catch (Exception $e) {
+            return new WP_Error( 'user_failed', __($e->getMessage()), array( 'status' => 404 ) );
+        }
+    }
+
     private function sendInstructions($request, $recovery_session, $user_id){
         $username = get_user_by('id', $user_id)->data->user_login;
         $mail = new PHPMailer(true);

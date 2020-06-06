@@ -19,6 +19,7 @@ const forms = new Vue({
     this.type = (new URLSearchParams(window.location.search)).get('type');
   },
   mounted(){
+    this.global();
     this.hideLoading();
   },
   methods: {

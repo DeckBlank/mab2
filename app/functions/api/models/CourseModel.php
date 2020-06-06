@@ -172,4 +172,71 @@ class CourseModel{
 
         return $expired_registrations;        
     }
+
+    public static function saveLog($request, $type){
+        $response = false;
+
+        switch ($type) {
+            case 'topic':
+                $response = DBConnection::getConnection()->query("
+                    INSERT INTO 
+                        wp_user_course(user_email, course_id, topic_views, last_date)
+                    VALUES(
+                        '". $request['user'] ."',
+                        '". $request['course_id'] ."',
+                        1,
+                        '". date("Y-m-d G:i:s") ."'
+                    )
+                    ON DUPLICATE KEY UPDATE
+                        topic_views = topic_views + 1,
+                        last_date = '". date("Y-m-d G:i:s") ."'
+                ");
+                break;
+            
+            case 'material':
+                $response = DBConnection::getConnection()->query("
+                    INSERT INTO
+                        wp_user_course(user_email, course_id, material_downloads, last_date)
+                    VALUES(
+                        '". $request['user'] ."',
+                        '". $request['course_id'] ."',
+                        1,
+                        '". date("Y-m-d G:i:s") ."'
+                    )
+                    ON DUPLICATE KEY UPDATE
+                        material_downloads = material_downloads + 1,
+                        last_date = '". date("Y-m-d G:i:s") ."'
+                ");
+                break;
+            
+            case 'test':
+                $right_answers = json_decode($request['result'])->rights;
+                $wrong_answers = json_decode($request['result'])->wrongs;
+
+                $response = DBConnection::getConnection()->query("
+                    INSERT INTO 
+                        wp_user_course(user_email, course_id, test_count, right_answers, wrong_answers, last_date)
+                    VALUES(
+                        '". $request['user'] ."',
+                        '". $request['course_id'] ."',
+                        1,
+                        '". $right_answers ."',
+                        '". $wrong_answers ."',
+                        '". date("Y-m-d G:i:s") ."'
+                    )
+                    ON DUPLICATE KEY UPDATE
+                        test_count = test_count + 1,
+                        right_answers = right_answers + '". $right_answers ."',
+                        wrong_answers = wrong_answers + '". $wrong_answers ."',
+                        last_date = '". date("Y-m-d G:i:s") ."'
+                ");
+                break;
+        }
+
+        if ($response) {
+            return true;
+        } else {
+            throw new Exception("Course log couldn't saved");
+        }        
+    }
 }

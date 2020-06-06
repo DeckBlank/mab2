@@ -102,4 +102,21 @@ class TopicController{
             return new WP_Error( 'no_test_saved', __('No test saved'), array( 'status' => 404 ) );
         }
     }
+
+    //5. Log ---------------------------------------//
+    public static function saveViewLog($request){
+        try {
+            return new WP_REST_Response(TopicModel::saveViewLog($request), 200);
+        } catch (Exception $e) {
+            return new WP_Error( 'topic_log_failed', __($e->getMessage()), array( 'status' => 404 ) );
+        }
+    }
+ 
+    public static function saveMaterialDownloadLog($request){
+        try {
+            return new WP_REST_Response(TopicModel::saveMaterialDownloadLog($request), 200);
+        } catch (Exception $e) {
+            return new WP_Error( 'topic_log_failed', __($e->getMessage()), array( 'status' => 404 ) );
+        }
+    } 
 }

@@ -85,6 +85,8 @@ const session = new Vue({
     }
   },
   mounted(){
+    this.global();
+    
     this.users.push({
       stream: {
         id: 'publisher',

@@ -26,6 +26,7 @@ const login = new Vue({
     this.initSectors();
   },
   mounted(){
+    this.global();
     this.hideLoading();
   },  
   methods: {

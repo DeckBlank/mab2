@@ -33,6 +33,8 @@ const recovery_password = new Vue({
     this.initSectors();
   },
   mounted(){
+    this.global();
+    
     if(this.stage && this.stage == 2){
       this.getRecoverySession();
     }else{

@@ -86,17 +86,17 @@
       </div>
       <div class="c-exercises grid-x grid-margin-x grid-margin-y margin-bottom-2">
         <div
-          v-for="exercie of exercises" 
-          :key="exercie.id"
+          v-for="exercise of exercises" 
+          :key="exercise.id"
           class="cell medium-4 large-3">
           <a             
-            :href="exercie.file.url"
+            :href="exercise.file.url"
             target="_blank"
             class="c-exercise">
             <figure class="c-exercise__icon margin-bottom-1 text-center">
               <img class="height-100" src="{{theme.link}}/static/images/icons/pdf.png?key=20200419" alt="">
             </figure>
-            <p class="margin-bottom-0 f2 w-medium fs-18 text-uppercase text-center dark">${exercie.title}</p>
+            <p class="margin-bottom-0 f2 w-medium fs-18 text-uppercase text-center dark">${exercise.title}</p>
           </a>
         </div>
       </div>

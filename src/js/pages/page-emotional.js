@@ -41,6 +41,7 @@ const emotional = new Vue({
     this.initSectors();
   },
   mounted(){
+    this.global();
     this.ecualizeFilters();
     this.hideLoading();
   },  

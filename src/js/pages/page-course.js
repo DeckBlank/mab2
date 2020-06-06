@@ -18,6 +18,7 @@ const course = new Vue({
     this.initSectors();
   },  
   mounted: function(){
+    this.global();
     this.isUserAuthOnCourse( this.$refs.course.getAttribute('data-id') )
     this.saveCourseOnMetas()
     this.verifyIsAvaibleCourse()
@@ -97,6 +98,29 @@ const course = new Vue({
       if(shop_cart){
         this.isAvaibleCourse = !shop_cart.filter(course => course == this.$refs.course.getAttribute('data-id'))
       }
-    }
+    },
+    downloadMaterial: function(topic_id, url){
+      event.preventDefault();
+
+      let course_id = this.$refs.course.getAttribute('data-id'),
+        user = (this.logedUser) ? this.logedUser.user_email : 'anonimo';
+
+      fetch(`${this.API}/topic/${topic_id}/material/log?user=${user}&course_id=${course_id}`,{
+          method: 'PUT'
+        })
+        .then(res => { 
+          if (res.status >= 200 && res.status < 300) {
+            return res.json()
+          }else{
+            throw res
+          }
+        })
+        .then(response => {
+          window.open(url, '_blank');
+        })
+        .catch(err => {
+          throw err;
+        })
+    }  
   }
 })

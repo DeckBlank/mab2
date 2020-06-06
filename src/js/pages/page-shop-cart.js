@@ -32,6 +32,9 @@ const shop_cart = new Vue({
   beforeMount(){
     this.initSectors();
   },
+  mounted(){
+    this.global();
+  },
   methods: {
     ...baseActions(),
     listCourses: function(){

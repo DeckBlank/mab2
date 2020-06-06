@@ -16,7 +16,7 @@ class UserModel{
             throw new Exception("Wrong credentials");
         }else{
             try {
-                self::saveLoginLog($request);
+                self::saveAccessLog($request);
 
                 return (object)[
                     "user_login" => $user->data->user_login,
@@ -141,17 +141,19 @@ class UserModel{
         ");
     }
 
-    public static function saveLoginLog($request){
+    public static function saveAccessLog($request){
+        $user = ($request['user'] == 'anonimo') ? 'anonimo-' . $_SERVER['REMOTE_ADDR'] : $request['user'];
+
         $response = DBConnection::getConnection()->query("
             INSERT INTO 
-                wp_login_logs(user_email, login_count, last_date)
+                wp_access_logs(user_email, access_count, last_date)
             VALUES(
                 '". $request['user'] ."',
                 1,
                 '". date("Y-m-d G:i:s") ."'
             )
             ON DUPLICATE KEY UPDATE
-                login_count = login_count + 1,
+                access_count = access_count + 1,
                 last_date = '". date("Y-m-d G:i:s") ."'                    
         ");
 

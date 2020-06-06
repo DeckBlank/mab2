@@ -79,35 +79,49 @@ class DBConnection{
         )");
     }
 
+    public function createUserCourseTable(){
+        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_user_course(
+            user_email VARCHAR(50) NOT NULL,
+            course_id INT NOT NULL,
+            topic_views INT NOT NULL DEFAULT 0,
+            material_downloads INT NOT NULL DEFAULT 0,
+            test_count INT NOT NULL DEFAULT 0,
+            right_answers INT NOT NULL DEFAULT 0,
+            wrong_answers INT NOT NULL DEFAULT 0,
+            last_date DATETIME NOT NULL,
+            PRIMARY KEY (user_email)
+        )");
+    }    
+
     /**
      * ----------------------------------------------------/
      * Logs
      * ----------------------------------------------------/
      */
-    public function createLoginLogTable(){
-        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_login_logs(
+    public function createAccessLogTable(){
+        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_access_logs(
             user_email VARCHAR(50) NOT NULL,
-            login_count INT NOT NULL,
+            access_count INT NOT NULL,
             last_date DATETIME NOT NULL,
             PRIMARY KEY (user_email)
         )");
     }
 
-    public function createVideoViewLogTable(){
-        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_video_views_logs(
+    public function createTopicViewLogTable(){
+        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_topic_views_logs(
             user_email VARCHAR(50) NOT NULL,
-            video_views INT NOT NULL,
-            last_video INT NOT NULL,
+            views INT NOT NULL,
+            last_topic INT NOT NULL,
             last_date DATETIME NOT NULL,
             PRIMARY KEY (user_email)            
         )");
     }
 
-    public function createExerciseDownloadLogTable(){
-        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_exercise_download_logs(
+    public function createTopicMaterialDownloadLogTable(){
+        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_topic_material_download_logs(
             user_email VARCHAR(50) NOT NULL,
-            exercises_download INT NOT NULL,
-            last_exercise INT NOT NULL,
+            downloads INT NOT NULL,
+            last_topic INT NOT NULL,
             last_date DATETIME NOT NULL,
             PRIMARY KEY (user_email)            
         )");
@@ -128,6 +142,13 @@ class DBConnection{
 
         $this::seederTopicTestAnswerLogTable($this->connection);
     }
+
+
+    /**
+     * ----------------------------------------------------/
+     * Seeders
+     * ----------------------------------------------------/
+     */
 
     private function seederTopicTestAnswerLogTable($db_connection){
         $query = $db_connection->query("SELECT * FROM wp_topic_test_answers_logs");
@@ -198,9 +219,10 @@ $connection->createTopicTestScoreTable();
 $connection->createSessionRequestTable();
 $connection->createUserTestTable();
 $connection->createRecoverySessionsTable();
+$connection->createUserCourseTable();
 
 //2. Logs
-$connection->createLoginLogTable();
-$connection->createVideoViewLogTable();
-$connection->createExerciseDownloadLogTable();
+$connection->createAccessLogTable();
+$connection->createTopicViewLogTable();
+$connection->createTopicMaterialDownloadLogTable();
 $connection->createTopicTestAnswerLogTable();

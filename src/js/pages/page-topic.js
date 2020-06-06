@@ -65,11 +65,16 @@ const topic = new Vue({
     this.initSectors();
   },  
   mounted(){
+    this.global();
+    
     this.topicID = this.$refs.topic.getAttribute('data-id');
+    
     this.isUserAuthOnTopic(this.metas.get('course_id'))
     this.getLikesAverage();
     this.getComments();
     this.getQuestions();
+
+    this.saveViewLog(this.metas.get('course_id'));
   },
   methods: {
     ...baseActions(),
@@ -234,8 +239,6 @@ const topic = new Vue({
       }
     },
     isUserAuthOnTopic: function(course_id){
-      let topics = document.querySelectorAll('.c-topic__video')
-
       if(!this.metas.get('course_name') || !this.metas.get('unity') || (this.metas.get('sector') != 'privado' && this.metas.get('sector') != 'publico')){
         window.location = `${this.SITE_URL}/solicitar-cursos`;
       }else{
@@ -261,6 +264,45 @@ const topic = new Vue({
           this.hideLoading();
         }
       }
+    },
+    downloadMaterial: function(url){
+      event.preventDefault();
+
+      let user = (this.logedUser) ? this.logedUser.user_email : 'anonimo';
+
+      fetch(`${this.API}/topic/${this.topicID}/material/log?user=${user}&course_id=${ this.metas.get('course_id') }`,{
+          method: 'PUT'
+        })
+        .then(res => { 
+          if (res.status >= 200 && res.status < 300) {
+            return res.json()
+          }else{
+            throw res
+          }
+        })
+        .then(response => {
+          window.open(url, '_blank');
+        })
+        .catch(err => {
+          throw err;
+        })     
+    },
+    saveViewLog: function(course_id){
+      let user = (this.logedUser) ? this.logedUser.user_email : 'anonimo';
+
+      fetch(`${this.API}/topic/${this.topicID}/view/log?user=${user}&course_id=${course_id}`,{
+          method: 'PUT'
+        })
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            return res.json()
+          }else{
+            throw res
+          }
+        })
+        .catch(err => {
+          throw err;          
+        })
     }
   }
 })

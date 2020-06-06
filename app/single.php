@@ -11,6 +11,7 @@ function __getTopicsSanitize($topics){
     if($topics){
         foreach($topics as $topic){
             array_push($topics_sanitize, (object)[
+                "id" => $topic['topic']->ID,
                 "title" => $topic['topic']->post_title,
                 "link" => get_the_permalink($topic['topic']->ID),
                 "summary" => ( get_field('summary', $topic['topic']->ID) ) ? get_field('summary', $topic['topic']->ID)['url'] : false,

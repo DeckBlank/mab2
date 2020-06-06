@@ -15,6 +15,7 @@ const solicitar_cursos = new Vue({
     this.initSectors();
   },
   mounted(){
+    this.global();
     this.fillForm();
     this.hideLoading();
   },

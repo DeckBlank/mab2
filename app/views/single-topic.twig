@@ -45,7 +45,11 @@
                   <ul class="c-material__list ul-reset position-absolute bg-white br--medium padding-1" :class="{ hidden : !isActiveMaterial}">
                     {% if summary %}
                       <li class="c-material__item">
-                        <a href="{{summary}}" target="_blank" class="c-download f2 fs-18 w-medium flex-container align-middle">
+                        <a 
+                          href="{{summary}}" 
+                          target="_blank" 
+                          class="c-download f2 fs-18 w-medium flex-container align-middle"
+                          @click="downloadMaterial('{{summary}}')">
                           <span class="c-icon margin-right-1"><i class="far fa-file-pdf"></i></span>
                           Resumen
                         </a>                      
@@ -53,7 +57,11 @@
                     {% endif %}
                     {% if map %}
                       <li class="c-material__item">
-                        <a href="{{map}}" target="_blank" class="c-download f2 fs-18 w-medium flex-container align-middle">
+                        <a 
+                          href="{{map}}" 
+                          target="_blank" 
+                          class="c-download f2 fs-18 w-medium flex-container align-middle"
+                          @click="downloadMaterial('{{map}}')">
                           <span class="c-icon margin-right-1"><i class="far fa-file-pdf"></i></span>
                           Mapa mental
                         </a>                      
@@ -61,7 +69,11 @@
                     {% endif %}
                     {% if worksheet %}
                       <li class="c-material__item">
-                        <a href="{{worksheet}}" target="_blank" class="c-download f2 fs-18 w-medium flex-container align-middle">
+                        <a 
+                          href="{{worksheet}}" 
+                          target="_blank" 
+                          class="c-download f2 fs-18 w-medium flex-container align-middle"
+                          @click="downloadMaterial('{{worksheet}}')">
                           <span class="c-icon margin-right-1"><i class="far fa-file-pdf"></i></span>
                           Hoja de trabajo
                         </a>                      
@@ -69,7 +81,11 @@
                     {% endif %}
                     {% if solutions %}
                       <li class="c-material__item">
-                        <a href="{{solutions}}" target="_blank" class="c-download f2 fs-18 w-medium flex-container align-middle">
+                        <a 
+                          href="{{solutions}}" 
+                          target="_blank" 
+                          class="c-download f2 fs-18 w-medium flex-container align-middle"
+                          @click="downloadMaterial('{{solutions}}')">
                           <span class="c-icon margin-right-1"><i class="far fa-file-pdf"></i></span>
                           Solucionario
                         </a>                      

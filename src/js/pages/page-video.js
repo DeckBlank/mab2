@@ -26,6 +26,8 @@ const video = new Vue({
     this.initSectors();
   },  
   mounted(){
+    this.global();
+    
     this.videoID = this.$refs.video.getAttribute('data-id');
 
     this.getLikesAverage()

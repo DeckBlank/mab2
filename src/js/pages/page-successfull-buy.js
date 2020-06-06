@@ -21,6 +21,7 @@ const successfull_buy = new Vue({
     this.initSectors();
   },
   mounted(){
+    this.global();
     this.isOk();
     this.hideLoading();
   },

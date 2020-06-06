@@ -113,6 +113,65 @@ class TopicModel{
         }
     }
 
+    //5. Log ---------------------------------------//
+    public static function saveViewLog($request){
+        $user = ($request['user'] == 'anonimo') ? 'anonimo-' . $_SERVER['REMOTE_ADDR'] : $request['user'];
+
+        $response = DBConnection::getConnection()->query("
+            INSERT INTO 
+                wp_topic_views_logs(user_email, views, last_topic, last_date)
+            VALUES(
+                '". $user  ."',
+                1,
+                '". $request['post_id'] ."',
+                '". date("Y-m-d G:i:s") ."'
+            )
+            ON DUPLICATE KEY UPDATE
+                views = views + 1,
+                last_topic = '". $request['post_id'] ."',
+                last_date = '". date("Y-m-d G:i:s") ."'                    
+        ");
+
+        if ($response) {
+            try {
+                return CourseModel::saveLog($request, 'topic');
+            } catch (Exception $e) {
+                throw new Exception($e->getMessage());
+            }
+        } else {
+            throw new Exception("Log couldn't saved");
+        }              
+    }
+
+    public static function saveMaterialDownloadLog($request){
+        $user = ($request['user'] == 'anonimo') ? 'anonimo-' . $_SERVER['REMOTE_ADDR'] : $request['user'];
+
+        $response = DBConnection::getConnection()->query("
+            INSERT INTO 
+                wp_topic_material_download_logs(user_email, downloads, last_topic, last_date)
+            VALUES(
+                '". $user ."',
+                1,
+                '". $request['post_id'] ."',
+                '". date("Y-m-d G:i:s") ."'
+            )
+            ON DUPLICATE KEY UPDATE
+                downloads = downloads + 1,
+                last_topic = '". $request['post_id'] ."',
+                last_date = '". date("Y-m-d G:i:s") ."'                    
+        ");
+
+        if ($response) {
+            try {
+                return CourseModel::saveLog($request, 'material');
+            } catch (Exception $e) {
+                throw new Exception($e->getMessage());
+            }
+        } else {
+            throw new Exception("Log couldn't saved");
+        }              
+    }
+
     public static function saveTopicTestAnswersLog($request, $operation){
         $right_answers = json_decode($request['result'])->rights;
         $wrong_answers = json_decode($request['result'])->wrongs;
@@ -156,5 +215,5 @@ class TopicModel{
         } else {
             throw new Exception("Log couldn't saved");
         }       
-    }    
+    }
 }

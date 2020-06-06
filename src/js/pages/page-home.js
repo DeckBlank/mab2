@@ -17,5 +17,6 @@ const home = new Vue({
   },
   mounted(){   
     this.hideLoading();
+    this.global();
   },
 })
