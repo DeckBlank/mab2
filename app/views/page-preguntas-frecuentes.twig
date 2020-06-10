@@ -1,0 +1,26 @@
+{% extends '_html.twig' %}
+
+{% block metas %}{% endblock %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--faq bg-pri-alt">
+    <div class="grid-container padding-vertical-3">
+      <div class="grid-x align-center">
+        <div class="cell medium-10 large-8">
+          <section class="c-content c-content--protected bg-white br--medium">
+            <h3 class="fs-40 f1 w-bold black margin-bottom-2">{{post.title}}</h3>
+            {% if post.content %}
+              <div class="c-content margin-bottom-2 f2 fs-18 w-medium black">
+                {{post.content}}
+              </div>
+            {% endif %}
+          </section>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

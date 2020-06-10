@@ -114,6 +114,13 @@
         </ul>
       </div>
 
+      <!-- Modal: Cuestionario de seguimiento -->
+      <questionary-student v-if="logedUser && isEnableQuestionary && logedUser.user_rol == 'student' && !logedUser.user_metas.questionary"></questionary-student>  
+      <questionary-tutor v-else-if="logedUser && isEnableQuestionary && logedUser.user_rol == 'tutor' && !logedUser.user_metas.questionary"></questionary-tutor>  
+      
+      <!-- Modal: Encuesta de satisfacción -->
+      <poll v-if="logedUser && isEnablePoll && !logedUser.user_metas.poll"></poll>
+
       {% block content %}
         {# Content #}
       {% endblock %}

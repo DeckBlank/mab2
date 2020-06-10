@@ -265,12 +265,15 @@ const topic = new Vue({
         }
       }
     },
-    downloadMaterial: function(url){
+    downloadMaterial: function(url, media){
       event.preventDefault();
 
       let user = (this.logedUser) ? this.logedUser.user_email : 'anonimo';
 
-      fetch(`${this.API}/topic/${this.topicID}/material/log?user=${user}&course_id=${ this.metas.get('course_id') }`,{
+      fetch(`${this.API}/topic/${this.topicID}/material/log?
+        user=${user}&
+        course_id=${ this.metas.get('course_id') }&
+        media=${media}`,{
           method: 'PUT'
         })
         .then(res => { 
@@ -284,13 +287,14 @@ const topic = new Vue({
           window.open(url, '_blank');
         })
         .catch(err => {
+          window.open(url, '_blank');
           throw err;
         })     
     },
     saveViewLog: function(course_id){
       let user = (this.logedUser) ? this.logedUser.user_email : 'anonimo';
 
-      fetch(`${this.API}/topic/${this.topicID}/view/log?user=${user}&course_id=${course_id}`,{
+      fetch(`${this.API}/topic/${this.topicID}/video/log?user=${user}&course_id=${course_id}`,{
           method: 'PUT'
         })
         .then(res => {

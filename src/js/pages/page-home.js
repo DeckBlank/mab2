@@ -6,17 +6,17 @@ const home = new Vue({
   ...baseConfig(store),
   data() {
     return {
-      isActiveModal: true
+      
     }
   },
   computed: {
     ...baseState()
   },
-  methods: {
-    ...baseActions()
-  },
   mounted(){   
     this.hideLoading();
     this.global();
   },
+  methods: {
+    ...baseActions()    
+  }
 })

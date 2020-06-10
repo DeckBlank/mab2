@@ -5,7 +5,7 @@ import {store} from '../store'
 
 import tippy from 'tippy.js';
 
-const _404 = new Vue({
+const test = new Vue({
   ...baseConfig(store),
   data() {
     return {

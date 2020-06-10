@@ -24,6 +24,7 @@ const solicitar_cursos = new Vue({
     fillForm: function(){
       if(this.logedUser){
         let fullname = document.querySelector("[name='fullname'"),
+          ocupation = document.querySelector("[name='ocupation'"),
           email = document.querySelector("[name='email'"),
           mobile = document.querySelector("[name='phone'"),
           course = document.querySelector("[name='course'")
@@ -31,6 +32,18 @@ const solicitar_cursos = new Vue({
         fullname.value = this.logedUser.user_auth
         email.value = this.logedUser.user_email
         mobile.value = this.logedUser.user_mobile
+
+        switch(this.logedUser.user_rol){
+          case 'teacher':
+              ocupation.value = 'Profesor'
+            break;
+          case 'student':
+              ocupation.value = 'Alumno'
+            break;
+          case 'tutor':
+              ocupation.value = 'Padre'
+            break;
+        }
 
         let mab_metas = window.localStorage.getItem('mab_metas')
 

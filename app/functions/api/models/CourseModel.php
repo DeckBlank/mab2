@@ -239,4 +239,45 @@ class CourseModel{
             throw new Exception("Course log couldn't saved");
         }        
     }
+
+    public static function getUserCourseLogs($request){
+        if (isset($request['user'])) {
+            $user_course_logs_query = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_user_course
+                WHERE
+                    user_email = '". $request['user'] ."'
+            ");
+        } else {
+            $user_course_logs_query = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_user_course
+                ORDER BY last_date DESC
+                LIMIT ". TopicModel::__getLimit($request) ."
+            ");
+        }
+        $user_course_logs = [];
+
+        if($user_course_logs_query && $user_course_logs_query->num_rows > 0){
+            while($log = $user_course_logs_query->fetch_assoc()){
+                array_push($user_course_logs, (object)[
+                    "user" => get_user_by('email', $log['user_email']),
+                    "user_email" => $log['user_email'],
+                    "course" => TopicModel::__getCourseName($log['course_id']),
+                    "topic_views" => $log['topic_views'],
+                    "material_downloads" => $log['material_downloads'],
+                    "test_count" => $log['test_count'],
+                    "right_answers" => $log['right_answers'],
+                    "wrong_answers" => $log['wrong_answers'],
+                    "last_date" => $log['last_date'],
+                ]);
+            }
+        }
+
+        return $user_course_logs;        
+    }    
 }

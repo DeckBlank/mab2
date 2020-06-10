@@ -79,4 +79,29 @@ if( function_exists('acf_add_options_page') ) {
         'update_button'   => __('Actualizar', 'acf'),
         'updated_message' => __('Cambios Guardados exitosamente', 'acf')
     ]);
+
+    acf_add_options_page([
+        'page_title'      => 'Cuestionario y Encuesta',
+        'menu_title'      => 'Cuestionario y Encuesta',
+        'menu_slug'       => 'options-questions',
+        'redirect'        => true,
+        'icon_url'        => 'dashicons-editor-ol',
+        'position'        => 3
+    ]);
+
+	$pm_sb_questions = acf_add_options_sub_page(array(
+        'parent_slug'	=> 'options-questions',
+		'page_title' 	=> 'Cuestionario de seguimiento',
+		'menu_title'	=> 'Cuestionario de seguimiento',
+        'update_button'   => __('Actualizar', 'acf'),
+        'updated_message' => __('Cambios Guardados exitosamente', 'acf')        
+	));    
+
+	$pm_sb_encuentas = acf_add_options_sub_page(array(
+        'parent_slug'	=> 'options-questions',
+		'page_title' 	=> 'Encuesta de satisfacción',
+		'menu_title'	=> 'Encuesta de satisfacción',
+        'update_button'   => __('Actualizar', 'acf'),
+        'updated_message' => __('Cambios Guardados exitosamente', 'acf')        
+	));    
 }

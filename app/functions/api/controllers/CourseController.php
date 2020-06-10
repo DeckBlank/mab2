@@ -64,4 +64,15 @@ class CourseController{
             include_once __DIR__."/../exports/registration.php";            
         }
     }
+
+    //Logs-----------------------------------------------/
+    public function getUserCourseLogs($request){
+        $user_course_logs = CourseModel::getUserCourseLogs($request);
+
+        if ( empty($user_course_logs) ) {
+            return new WP_Error( 'no_topic_user_course_logs', __('No topic user_course logs'), array( 'status' => 404 ) );
+        } else {
+            return new WP_REST_Response($user_course_logs, 200);
+        }        
+    }
 }

@@ -27,7 +27,11 @@ const course = new Vue({
     ...baseActions(),
     isUserAuthOnCourse: function(course_id){
       if(this.metas.get('sector') != 'privado' && this.metas.get('sector') != 'publico'){
-        window.location = `${this.SITE_URL}/solicitar-cursos`;
+        if (this.logedUser) {                      
+          item.setAttribute('href', `${this.SITE_URL}/solicitar-cursos`)
+        } else {
+          item.setAttribute('href', `${this.SITE_URL}#registro`)                      
+        }
       }else{
         if(this.metas.get('sector') == 'privado'){
           fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}`,{
@@ -49,7 +53,11 @@ const course = new Vue({
               topics.forEach((topic, index) => {
                 if(index != 0){
                   topic.querySelectorAll('.c-topic__item').forEach((item)=> {
-                    item.setAttribute('href', `${this.SITE_URL}/solicitar-cursos`)
+                    if (this.logedUser) {                      
+                      item.setAttribute('href', `${this.SITE_URL}/solicitar-cursos`)
+                    } else {
+                      item.setAttribute('href', `${this.SITE_URL}#registro`)                      
+                    }
                   })                
                 }
               })
@@ -99,13 +107,16 @@ const course = new Vue({
         this.isAvaibleCourse = !shop_cart.filter(course => course == this.$refs.course.getAttribute('data-id'))
       }
     },
-    downloadMaterial: function(topic_id, url){
+    downloadMaterial: function(topic_id, url, media){
       event.preventDefault();
 
       let course_id = this.$refs.course.getAttribute('data-id'),
         user = (this.logedUser) ? this.logedUser.user_email : 'anonimo';
 
-      fetch(`${this.API}/topic/${topic_id}/material/log?user=${user}&course_id=${course_id}`,{
+      fetch(`${this.API}/topic/${topic_id}/material/log?
+        user=${user}&
+        course_id=${course_id}
+        media=${media}`,{
           method: 'PUT'
         })
         .then(res => { 
@@ -119,6 +130,7 @@ const course = new Vue({
           window.open(url, '_blank');
         })
         .catch(err => {
+          window.open(url, '_blank');
           throw err;
         })
     }  

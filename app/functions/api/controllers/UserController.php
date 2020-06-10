@@ -92,6 +92,16 @@ class UserController{
         }
     }
 
+    public function getAccessLog($request){
+        $access_logs = UserModel::getAccessLog($request);
+
+        if ( empty($access_logs) ) {
+            return new WP_Error( 'no_access_logs', __('No access logs'), array( 'status' => 404 ) );
+        } else {
+            return new WP_REST_Response($access_logs, 200);
+        }
+    }
+
     private function sendInstructions($request, $recovery_session, $user_id){
         $username = get_user_by('id', $user_id)->data->user_login;
         $mail = new PHPMailer(true);

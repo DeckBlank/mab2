@@ -19,9 +19,11 @@
     width: 100%;
     justify-content: center;
     margin-bottom: 1rem;
+    flex-wrap: wrap;
 
     .c-contact {
       margin: 0 0.5rem;
+      margin-bottom: 1rem;
     }
 
     .c-contact:first-child {
@@ -34,6 +36,13 @@
 @include breakpoint(medium) {
   .c-footer {
     margin-bottom: 0;
+
+    .c-contacts {
+      .c-contact:nth-child(2) {
+        padding-right: 2rem;
+        border-right: solid 2px $white;
+      }
+    }
   }
 }
 
@@ -49,6 +58,7 @@
     .c-contacts {
       width: auto;
       margin: 0 0.5rem;
+      margin-bottom: 0;
     }
 
     .c-vectors {

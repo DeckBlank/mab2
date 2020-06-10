@@ -4,8 +4,7 @@ import {baseData, baseWatch, baseMethods} from './libs/form'
 import './accept'
 
 Vue.component('form-tutor',{
-  template: /*html*/
-  ` 
+  template: /*html*/` 
   <section class="width-100">
     <form-accept :switcher.sync="isSentForm" :user="email.value" :password="password.value"></form-accept>
     <form class="c-form-box form_box" action="">
@@ -16,6 +15,7 @@ Vue.component('form-tutor',{
           :class="{ valid : name.isValid }"
           type="text" 
           v-model="name.value">
+        <p v-if="!name.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Nombre incorrecto</p>          
       </div>
       <div class="input_container">
         <label for="">Apellido Paterno</label>
@@ -24,6 +24,7 @@ Vue.component('form-tutor',{
           :class="{ valid : lastFatherName.isValid }"
           type="text" 
           v-model="lastFatherName.value">
+        <p v-if="!lastFatherName.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Nombre incorrecto</p>          
       </div>
       <div class="input_container">
         <label for="">Apellido Materno</label>
@@ -32,7 +33,22 @@ Vue.component('form-tutor',{
           :class="{ valid : lastMotherName.isValid }"
           type="text" 
           v-model="lastMotherName.value">
+        <p v-if="!lastMotherName.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Nombre incorrecto</p>          
       </div>
+      <div
+        class="input_container">
+        <label for="">Genero</label>
+        <select 
+          class="c-form-box__select school_type select-reset"
+          :class="{ valid : gender.isValid }"
+          v-model="gender.value"
+          >
+          <option disabled value="" selected>Selecciona una opción</option>
+          <option value="hombre">Hombre</option>
+          <option value="mujer">Mujer</option>                  
+        </select>
+        <p v-if="!gender.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Nombre incorrecto</p>        
+      </div>      
       <div class="input_container">
         <label for="">Email</label>
         <input 
@@ -40,6 +56,7 @@ Vue.component('form-tutor',{
           :class="{ valid : email.isValid }"
           type="email" 
           v-model="email.value">
+        <p v-if="!email.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Email incorrecto</p>            
       </div>
       <div class="input_container">
         <label for="">Crear contraseña</label>
@@ -48,6 +65,7 @@ Vue.component('form-tutor',{
           :class="{ valid : password.isValid }"
           type="password" 
           v-model="password.value">
+        <p v-if="!password.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Contraseña vacia</p>          
       </div>      
       <div class="input_container">
         <label for="">Teléfono</label>
@@ -56,6 +74,7 @@ Vue.component('form-tutor',{
           :class="{ valid : phone.isValid }"
           type="tel" 
           v-model="phone.value">
+        <p v-if="!phone.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Teléfono incorrecto</p>          
       </div>
       <div class="input_container">
         <label for="">Celular</label>
@@ -64,6 +83,7 @@ Vue.component('form-tutor',{
           :class="{ valid : mobile.isValid }"
           type="tel" 
           v-model="mobile.value">
+        <p v-if="!mobile.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Celular incorrecto</p>          
       </div>
       <div class="input_container">
         <label for="">Tipo de colegio</label>
@@ -76,6 +96,7 @@ Vue.component('form-tutor',{
           <option value="privado">Privado</option>
           <option value="publico">Público</option>                  
         </select>
+        <p v-if="!schoolType.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No has seleccionado una opción</p>        
       </div>
       <div 
         v-if="schoolType.value == 'privado' "
@@ -88,6 +109,7 @@ Vue.component('form-tutor',{
           <option disabled value="" selected>Selecciona una opción</option>
           <option v-for="school of schools" :key="school.id" :value="school" >{{school}}</option>
         </select>
+        <p v-if="!school.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No has seleccionado una opción</p>        
       </div>
       <div class="input_container">
         <label for="">Cantidad de hijos</label>
@@ -96,6 +118,7 @@ Vue.component('form-tutor',{
           :class="{ valid : childrenQuantity.isValid }"
           type="number"
           v-model="childrenQuantity.value">
+        <p v-if="!childrenQuantity.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Cantidad de hijos incorrecto</p>          
       </div>
       <div v-for="(child,index) of children" >
         <div class="input_container">
@@ -106,7 +129,7 @@ Vue.component('form-tutor',{
             v-model="children[index].grade">
             <option disabled value="" selected>Selecciona una opción</option>
             <option v-for="_grade of grades" :key="_grade.id" :value="_grade" >{{_grade}}</option>
-          </select>            
+          </select>
         </div>
         <div class="input_container">
           <label for="">Edad hijo {{index + 1}}</label>
@@ -118,7 +141,7 @@ Vue.component('form-tutor',{
         </div>
       </div>
       <div class="input_container">
-        <label for="">Departamento</label>
+        <label for="">Departamento de tu colegio</label>
         <select
           class="c-form-box__select select-reset" 
           :class="{ valid : department.isValid }"
@@ -127,9 +150,10 @@ Vue.component('form-tutor',{
           <option disabled value="" selected>Selecciona una opción</option>
           <option v-for="dep of departamentos" :key="dep.id" :value="dep.nombre_ubigeo" >{{dep.nombre_ubigeo}}</option>                               
         </select>
+        <p v-if="!department.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No has seleccionado una opción</p>        
       </div>
       <div class="input_container">
-        <label for="">Provincia</label>
+        <label for="">Provincia de tu colegio</label>
         <select 
           name="" 
           class="c-form-box__select select-reset" 
@@ -139,9 +163,10 @@ Vue.component('form-tutor',{
           <option disabled value="" selected>Selecciona una opción</option>
           <option v-for="prov of provincias" :key="prov.id" :value="prov.nombre_ubigeo" >{{prov.nombre_ubigeo}}</option>                 
         </select>
+        <p v-if="!province.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No has seleccionado una opción</p>        
       </div>
       <div class="input_container">
-        <label for="">Distrito</label>
+        <label for="">Ciudad</label>
         <select 
           class="c-form-box__select select-reset" 
           :class="{ valid : district.isValid }" 
@@ -149,6 +174,7 @@ Vue.component('form-tutor',{
           <option disabled value="" selected>Selecciona una opción</option>
           <option v-for="dis of distritos" :key="dis.id" :value="dis.nombre_ubigeo" >{{dis.nombre_ubigeo}}</option>                                             
         </select>
+        <p v-if="!district.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No has seleccionado una opción</p>        
       </div>
       <div v-if="isSentFormError" class="margin-bottom-1">
         <p class="white fs-18 f2 w-medium text-center margin-bottom-0">El usuario ya existe</p>
@@ -157,7 +183,7 @@ Vue.component('form-tutor',{
         <button 
           class="c-form-box__sender" 
           type="button" 
-          :disabled="counter.status != counter.limit"
+          :disabled="isSending"
           @click="sendForm">Listo</button>
       </div>
     </form>  
@@ -168,6 +194,9 @@ Vue.component('form-tutor',{
       ...baseData(),
       //School
       grades: [
+        "Bebés",
+        "Inicial 3 años",
+        "Inicial 4 años e Inicial 5 años",        
         "1RO PRIMARIA",
         "2DO PRIMARIA",
         "3RO PRIMARIA",
@@ -181,12 +210,6 @@ Vue.component('form-tutor',{
         "5TO SECUNDARIA",
         "6TO SECUNDARIA"
       ],
-      
-      counter: {
-        status: 0,
-        base: 12,
-        limit: 13
-      },
       childrenQuantity: {
         value: '',
         pattern: '^([0-9]+)$',
@@ -220,43 +243,63 @@ Vue.component('form-tutor',{
   methods: {
     ...baseMethods(),
     sendForm: function(){
-      let form_data = new FormData();
+      this.is_valid_form = this.name.isValid &&
+        this.lastFatherName.isValid &&
+        this.lastMotherName.isValid &&
+        this.gender.isValid &&
+        this.email.isValid &&
+        this.password.isValid &&
+        this.phone.isValid &&
+        this.mobile.isValid &&
+        this.schoolType.isValid &&
+        ((this.schoolType.value == 'privado') ? this.school.isValid : true) &&
+        this.childrenQuantity.isValid &&
+        this.department.isValid &&
+        this.province.isValid &&
+        this.district.isValid;
 
-      form_data.append('type', 'tutor')
-      form_data.append('user_name', `${this.name.value} ${this.lastFatherName.value} ${this.lastMotherName.value}`)
-      form_data.append('first_name', this.name.value)
-      form_data.append('last_name', `${this.lastFatherName.value} ${this.lastMotherName.value}`)
-      form_data.append('email', this.email.value)
-      form_data.append('password', this.password.value)
-      form_data.append('phone', this.phone.value)
-      form_data.append('mobile', this.mobile.value)
-      form_data.append('school_type', this.schoolType.value)
-      form_data.append('ugel', '')
-      form_data.append('children_school', this.school.value)
-      form_data.append('children_quantity', this.childrenQuantity.value)
-      form_data.append('children', JSON.stringify(this.children))
-      form_data.append('location', `${this.department.value}, ${this.province.value}, ${this.district.value}`)
+      if(this.is_valid_form){      
+        let form_data = new FormData();
 
-      fetch(`${this.API}/user`,{
-          method: 'POST',
-          body: form_data
-        })
-        .then(res => {
-          if (res.status >= 200 && res.status < 300) {
-            return res.json()
-          }else{
-            throw res
-          }
-        })
-        .then(response => {
-          this.isSentFormError = false;
-          this.isSentForm = true;
-        })
-        .catch(err => {
-          this.isSentFormError = true;
+        form_data.append('type', 'tutor')
+        form_data.append('user_name', `${this.name.value} ${this.lastFatherName.value} ${this.lastMotherName.value}`)
+        form_data.append('first_name', this.name.value)
+        form_data.append('last_name', `${this.lastFatherName.value} ${this.lastMotherName.value}`)
+        form_data.append('gender', this.gender.value)      
+        form_data.append('email', this.email.value)
+        form_data.append('password', this.password.value)
+        form_data.append('phone', this.phone.value)
+        form_data.append('mobile', this.mobile.value)
+        form_data.append('school_type', this.schoolType.value)
+        form_data.append('ugel', '')
+        form_data.append('children_school', this.school.value)
+        form_data.append('children_quantity', this.childrenQuantity.value)
+        form_data.append('children', JSON.stringify(this.children))
+        form_data.append('location', `${this.department.value}, ${this.province.value}, ${this.district.value}`)
 
-          throw err;          
-        })      
+        this.isSending = true;
+
+        fetch(`${this.API}/user`,{
+            method: 'POST',
+            body: form_data
+          })
+          .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              return res.json()
+            }else{
+              throw res
+            }
+          })
+          .then(response => {
+            this.isSentFormError = false;
+            this.isSentForm = true;
+          })
+          .catch(err => {
+            this.isSentFormError = true;
+
+            throw err;          
+          })
+      }    
     }
   },
 })

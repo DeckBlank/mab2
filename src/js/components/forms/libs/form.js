@@ -9,7 +9,9 @@ function baseData(){
     schools: [],
 
     //Form
+    is_valid_form: true,
     isSentForm: false,
+    isSending: false,
     isSentFormError: false,
     
     //Model
@@ -28,6 +30,10 @@ function baseData(){
       pattern: "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",
       isValid: false
     },
+    gender: {
+      value: '',
+      isValid: false
+    },    
     email: {
       value: '',
       pattern: "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
@@ -81,16 +87,17 @@ function baseWatch(){
     'lastMotherName.value': function(){
       this.lastMotherName.isValid = this.validateText(this.lastMotherName)
     },
+    'gender.value': function(value){
+      this.validateSelect(this.gender)
+    },    
     'email.value': function(){
       this.email.isValid = this.validateText(this.email)
     },
     'password.value': function(value){
       if(value != '' && this.password.isValid == false){
         this.password.isValid = true
-        this.counter.status++;
       }else if(value == '' && this.password.isValid == true){
         this.password.isValid = false
-        this.counter.status--;
       }
     },
     'phone.value': function(){
@@ -103,21 +110,16 @@ function baseWatch(){
       this.validateSelect(this.schoolType) 
 
       if(value == 'privado'){
-        this.counter.limit = this.counter.base + 1;
         this.getSchools(value)
-      }else if(value == 'publico'){
-        this.counter.limit = this.counter.base;
       }
 
       if(this.school && this.school.value != ''){
         this.school.value = ''
-        this.school.isValid = false         
-        this.counter.status--;
+        this.school.isValid = false
 
       }else if(this.childrenSchool && this.childrenSchool.value != ''){
         this.childrenSchool.value = ''
-        this.childrenSchool.isValid = false         
-        this.counter.status--;       
+        this.childrenSchool.isValid = false      
       }      
     },
     'school.value': function(value){
@@ -142,21 +144,14 @@ function baseMethods(){
         input_value = parameter.value.trim()
 
       if(input_pattern.test(input_value)){
-        if(parameter.isValid == null || parameter.isValid == false){
-          this.counter.status++;
-        }
         return true;
       }else{
-        if(parameter.isValid == null || parameter.isValid == true){
-          this.counter.status--;
-        }
         return false
       }
     },
     validateSelect: function(parameter){
       if(parameter.value != '' && parameter.isValid == false){
         parameter.isValid = true
-        this.counter.status++;
       }
     },
     getProvincias: function(option) {

@@ -22,8 +22,13 @@ class UserModel{
                     "user_login" => $user->data->user_login,
                     "user_pass" => $user->data->user_pass,
                     "user_email" => $user->data->user_email,
+                    "user_rol" => $user->roles[0],
                     "user_mobile" => get_field('mobile', 'user_' . $user->data->ID),
-                    "user_sector" => get_field('school_type', 'user_' . $user->data->ID)
+                    "user_sector" => get_field('school_type', 'user_' . $user->data->ID),
+                    "user_metas" => (object)[
+                        "questionary" => BehaviourModel::questionaryCheckout($user->data->user_email),
+                        "poll" => BehaviourModel::pollCheckout($user->data->user_email)
+                    ]
                 ];                
             } catch (Exception $e) {
                 throw new Exception($e->getMessage());
@@ -57,6 +62,7 @@ class UserModel{
 
             switch($request['type']){
                 case 'tutor' :
+                        update_field('gender', $request['gender'], 'user_' . $user_id);
                         update_field('phone', $request['phone'], 'user_' . $user_id);
                         update_field('mobile', $request['mobile'], 'user_' . $user_id);
                         update_field('school_type', $request['school_type'], 'user_' . $user_id);
@@ -79,6 +85,7 @@ class UserModel{
                         update_field('children', $children, 'user_' . $user_id);                    
                     break;
                 case 'student' :
+                        update_field('gender', $request['gender'], 'user_' . $user_id);
                         update_field('age', $request['age'], 'user_' . $user_id);
                         update_field('phone', $request['phone'], 'user_' . $user_id);
                         update_field('mobile', $request['mobile'], 'user_' . $user_id);
@@ -89,6 +96,7 @@ class UserModel{
                         update_field('location', $request['location'], 'user_' . $user_id);               
                     break;
                 case 'teacher' :
+                        update_field('gender', $request['gender'], 'user_' . $user_id);
                         update_field('age', $request['age'], 'user_' . $user_id);
                         update_field('phone', $request['phone'], 'user_' . $user_id);
                         update_field('mobile', $request['mobile'], 'user_' . $user_id);
@@ -162,5 +170,41 @@ class UserModel{
         } else {
             throw new Exception("Log couldn't saved");
         }
+    }
+
+    public static function getAccessLog($request){
+        if (isset($request['user'])) {
+            $access_logs_query = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_access_logs
+                WHERE
+                    user_email = '". $request['user'] ."'
+            ");
+        } else {
+            $access_logs_query = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_access_logs
+                ORDER BY last_date DESC
+                LIMIT ". TopicModel::__getLimit($request) ."
+            ");
+        }
+        $access_logs = [];
+
+        if($access_logs_query && $access_logs_query->num_rows > 0){
+            while($log = $access_logs_query->fetch_assoc()){
+                array_push($access_logs, (object)[
+                    "user" => get_user_by('email', $log['user_email']),
+                    "user_email" => $log['user_email'],
+                    "access_count" => $log['access_count'],
+                    "last_date" => $log['last_date'],
+                ]);
+            }
+        }
+
+        return $access_logs;        
     }
 }

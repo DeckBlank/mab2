@@ -1,5 +1,7 @@
 <?php
 
+use Timber\Timber;
+
 class TopicModel{
     
     public function __construct(){
@@ -79,7 +81,7 @@ class TopicModel{
 
         if($test_scores && $test_scores->num_rows > 0){
             try {
-                self::saveTopicTestAnswersLog($request, 1);
+                self::saveTestLog($request, 1);
 
                 return DBConnection::getConnection()->query(" 
                     UPDATE 
@@ -95,7 +97,7 @@ class TopicModel{
             }
         }else{
             try {
-                self::saveTopicTestAnswersLog($request, 0);
+                self::saveTestLog($request, 0);
 
                 return DBConnection::getConnection()->query("
                     INSERT INTO 
@@ -114,65 +116,77 @@ class TopicModel{
     }
 
     //5. Log ---------------------------------------//
-    public static function saveViewLog($request){
+    public static function saveVideoLog($request){
         $user = ($request['user'] == 'anonimo') ? 'anonimo-' . $_SERVER['REMOTE_ADDR'] : $request['user'];
 
-        $response = DBConnection::getConnection()->query("
-            INSERT INTO 
-                wp_topic_views_logs(user_email, views, last_topic, last_date)
-            VALUES(
-                '". $user  ."',
-                1,
-                '". $request['post_id'] ."',
-                '". date("Y-m-d G:i:s") ."'
-            )
-            ON DUPLICATE KEY UPDATE
-                views = views + 1,
-                last_topic = '". $request['post_id'] ."',
-                last_date = '". date("Y-m-d G:i:s") ."'                    
-        ");
+        try {
+            if(self::__saveUserTopicLog($request, $user, 'video')){
+                $response = DBConnection::getConnection()->query("
+                    INSERT INTO 
+                        wp_topic_video_logs(user_email, views, last_topic, last_date)
+                    VALUES(
+                        '". $user  ."',
+                        1,
+                        '". $request['post_id'] ."',
+                        '". date("Y-m-d G:i:s") ."'
+                    )
+                    ON DUPLICATE KEY UPDATE
+                        views = views + 1,
+                        last_topic = '". $request['post_id'] ."',
+                        last_date = '". date("Y-m-d G:i:s") ."'                    
+                ");
 
-        if ($response) {
-            try {
-                return CourseModel::saveLog($request, 'topic');
-            } catch (Exception $e) {
-                throw new Exception($e->getMessage());
+                if ($response) {
+                    try {
+                        return CourseModel::saveLog($request, 'topic');                
+                    } catch (Exception $e) {
+                        throw new Exception($e->getMessage());
+                    }
+                } else {
+                    throw new Exception("Log couldn't saved");
+                }
             }
-        } else {
-            throw new Exception("Log couldn't saved");
-        }              
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }
     }
 
-    public static function saveMaterialDownloadLog($request){
+    public static function saveMaterialLog($request){
         $user = ($request['user'] == 'anonimo') ? 'anonimo-' . $_SERVER['REMOTE_ADDR'] : $request['user'];
 
-        $response = DBConnection::getConnection()->query("
-            INSERT INTO 
-                wp_topic_material_download_logs(user_email, downloads, last_topic, last_date)
-            VALUES(
-                '". $user ."',
-                1,
-                '". $request['post_id'] ."',
-                '". date("Y-m-d G:i:s") ."'
-            )
-            ON DUPLICATE KEY UPDATE
-                downloads = downloads + 1,
-                last_topic = '". $request['post_id'] ."',
-                last_date = '". date("Y-m-d G:i:s") ."'                    
-        ");
+        try {
+            if(self::__saveUserTopicLog($request, $user, $request['media'])){
+                $response = DBConnection::getConnection()->query("
+                    INSERT INTO 
+                        wp_topic_material_logs(user_email, downloads, last_topic, last_date)
+                    VALUES(
+                        '". $user ."',
+                        1,
+                        '". $request['post_id'] ."',
+                        '". date("Y-m-d G:i:s") ."'
+                    )
+                    ON DUPLICATE KEY UPDATE
+                        downloads = downloads + 1,
+                        last_topic = '". $request['post_id'] ."',
+                        last_date = '". date("Y-m-d G:i:s") ."'                    
+                ");
 
-        if ($response) {
-            try {
-                return CourseModel::saveLog($request, 'material');
-            } catch (Exception $e) {
-                throw new Exception($e->getMessage());
+                if ($response) {
+                    try {
+                        return CourseModel::saveLog($request, 'material');
+                    } catch (Exception $e) {
+                        throw new Exception($e->getMessage());
+                    }
+                } else {
+                    throw new Exception("Log couldn't saved");
+                }
             }
-        } else {
-            throw new Exception("Log couldn't saved");
-        }              
+        }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }             
     }
 
-    public static function saveTopicTestAnswersLog($request, $operation){
+    public static function saveTestLog($request, $operation){
         $right_answers = json_decode($request['result'])->rights;
         $wrong_answers = json_decode($request['result'])->wrongs;
 
@@ -183,7 +197,7 @@ class TopicModel{
 
         $response = DBConnection::getConnection()->query("
             INSERT INTO 
-                wp_topic_test_answers_logs(
+                wp_topic_test_logs(
                     user_email, 
                     right_answers, 
                     wrong_answers, 
@@ -215,5 +229,335 @@ class TopicModel{
         } else {
             throw new Exception("Log couldn't saved");
         }       
+    }
+
+    public static function getVideoLogs($request){
+        if (isset($request['user'])) {
+            $video_logs_query = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_topic_video_logs
+                WHERE
+                    user_email = '". $request['user'] ."'
+            ");
+        } else {
+            $video_logs_query = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_topic_video_logs
+                ORDER BY last_date DESC
+                LIMIT ". self::__getLimit($request) ."
+            ");
+        }
+        $video_logs = [];
+
+        if($video_logs_query && $video_logs_query->num_rows > 0){
+            while($log = $video_logs_query->fetch_assoc()){
+                array_push($video_logs, (object)[
+                    "user" => get_user_by('email', $log['user_email']),
+                    "user_email" => $log['user_email'],
+                    "views" => $log['views'],
+                    "last_topic" => self::__getTopicName($log['last_topic']),
+                    "last_date" => $log['last_date'],
+                ]);
+            }
+        }
+
+        return $video_logs;
+    }
+
+    public static function getMaterialLogs($request){
+        if (isset($request['user'])) {
+            $material_logs_query = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_topic_material_logs
+                WHERE
+                    user_email = '". $request['user'] ."'                
+            ");
+        } else {
+            $material_logs_query = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_topic_material_logs
+                ORDER BY last_date DESC
+                LIMIT ". self::__getLimit($request) ."
+            ");
+        }
+        $material_logs = [];
+
+        if($material_logs_query && $material_logs_query->num_rows > 0){
+            while($log = $material_logs_query->fetch_assoc()){
+                array_push($material_logs, (object)[
+                    "user" => get_user_by('email', $log['user_email']),
+                    "user_email" => $log['user_email'],
+                    "downloads" => $log['downloads'],
+                    "last_topic" => self::__getTopicName($log['last_topic']),
+                    "last_date" => $log['last_date'],
+                ]);
+            }
+        }
+
+        return $material_logs;
+    }
+
+    public static function getTestLogs($request){
+        if (isset($request['user'])) {
+            $test_logs_query = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_topic_test_logs
+                WHERE
+                    user_email = '". $request['user'] ."'
+            ");
+        } else {
+            $test_logs_query = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_topic_test_logs
+                ORDER BY last_date DESC
+                LIMIT ". self::__getLimit($request) ."
+            ");
+        }
+        $test_logs = [];
+
+        if($test_logs_query && $test_logs_query->num_rows > 0){
+            while($log = $test_logs_query->fetch_assoc()){
+                array_push($test_logs, (object)[
+                    "user" => get_user_by('email', $log['user_email']),
+                    "user_email" => $log['user_email'],
+                    "test_count" => $log['test_count'],
+                    "right_answers" => $log['right_answers'],
+                    "wrong_answers" => $log['wrong_answers'],
+                    "last_course" => self::__getCourseName($log['last_course']),
+                    "last_unity" => $log['last_unity'],
+                    "last_topic" => self::__getTopicName($log['last_topic']),
+                    "last_date" => $log['last_date'],
+                ]);
+            }
+        }
+
+        return $test_logs;
+    }
+
+    public static function __saveUserTopicLog($request, $user, $media){
+        $response = false;
+        
+        switch ($media) {
+            case 'video':
+                if(!self::__isFilledUserTopicAt($user, $request['post_id'], 'video')){
+                    $response = DBConnection::getConnection()->query("
+                        INSERT INTO 
+                            wp_user_topic(user_email, topic_id, video_viewed)
+                        VALUES(
+                            '". $user  ."',
+                            '". $request['post_id'] ."',
+                            1
+                        )
+                        ON DUPLICATE KEY UPDATE
+                            video_viewed = 1
+                    ");
+                }
+                break;
+
+            case 'summary':
+                if(!self::__isFilledUserTopicAt($user, $request['post_id'], 'summary')){
+                    $response = DBConnection::getConnection()->query("
+                        INSERT INTO 
+                            wp_user_topic(user_email, topic_id, summary_downloaded)
+                        VALUES(
+                            '". $user  ."',
+                            '". $request['post_id'] ."',
+                            1
+                        )
+                        ON DUPLICATE KEY UPDATE
+                            summary_downloaded = 1
+                    ");
+                }
+                break;
+
+            case 'map':
+                if(!self::__isFilledUserTopicAt($user, $request['post_id'], 'map')){
+                    $response = DBConnection::getConnection()->query("
+                        INSERT INTO 
+                            wp_user_topic(user_email, topic_id, map_downloaded)
+                        VALUES(
+                            '". $user  ."',
+                            '". $request['post_id'] ."',
+                            1
+                        )
+                        ON DUPLICATE KEY UPDATE
+                            map_downloaded = 1
+                    ");
+                }
+                break;
+
+            case 'worksheet':
+                if(!self::__isFilledUserTopicAt($user, $request['post_id'], 'worksheet')){
+                    $response = DBConnection::getConnection()->query("
+                        INSERT INTO 
+                            wp_user_topic(user_email, topic_id, worksheet_downloaded)
+                        VALUES(
+                            '". $user  ."',
+                            '". $request['post_id'] ."',
+                            1
+                        )
+                        ON DUPLICATE KEY UPDATE
+                            worksheet_downloaded = 1
+                    ");
+                }
+                break;
+
+            case 'solutions':
+                if(!self::__isFilledUserTopicAt($user, $request['post_id'], 'solutions')){
+                    $response = DBConnection::getConnection()->query("
+                        INSERT INTO 
+                            wp_user_topic(user_email, topic_id, solutions_downloaded)
+                        VALUES(
+                            '". $user  ."',
+                            '". $request['post_id'] ."',
+                            1
+                        )
+                        ON DUPLICATE KEY UPDATE
+                            solutions_downloaded = 1
+                    ");
+                }
+                break;
+        }
+
+        if ($response) {
+            return true;
+        } else {
+            throw new Exception("User topic log couldn't saved");
+        }        
+    }
+
+    public static function __isFilledUserTopicAt($user, $topic_id, $media){
+        $response = false;
+        
+        switch ($media) {
+            case 'video':
+                $video_query = DBConnection::getConnection()->query("
+                    SELECT
+                        *
+                    FROM
+                        wp_user_topic
+                    WHERE
+                        user_email = '". $user ."' AND 
+                        topic_id = '". $topic_id ."' AND 
+                        video_viewed = 1
+                    
+                ");
+
+                if($video_query && $video_query->num_rows > 0){
+                    $response = true;
+                }
+                break;
+            
+            case 'summary':
+                $summary_query = DBConnection::getConnection()->query("
+                    SELECT
+                        *
+                    FROM
+                        wp_user_topic
+                    WHERE
+                        user_email = '". $user ."' AND 
+                        topic_id = '". $topic_id ."' AND 
+                        summary_downloaded = 1
+                    
+                ");
+
+                if($summary_query && $summary_query->num_rows > 0){
+                    $response = true;
+                }
+                break;
+            
+            case 'map':
+                $map_query = DBConnection::getConnection()->query("
+                    SELECT
+                        *
+                    FROM
+                        wp_user_topic
+                    WHERE
+                        user_email = '". $user ."' AND 
+                        topic_id = '". $topic_id ."' AND 
+                        map_downloaded = 1
+                    
+                ");
+
+                if($map_query && $map_query->num_rows > 0){
+                    $response = true;
+                }
+                break;
+            
+            case 'worksheet':
+                $worksheet_query = DBConnection::getConnection()->query("
+                    SELECT
+                        *
+                    FROM
+                        wp_user_topic
+                    WHERE
+                        user_email = '". $user ."' AND 
+                        topic_id = '". $topic_id ."' AND 
+                        worksheet_downloaded = 1
+                    
+                ");
+
+                if($worksheet_query && $worksheet_query->num_rows > 0){
+                    $response = true;
+                }
+                break;
+            
+            case 'solutions':
+                $solutions_query = DBConnection::getConnection()->query("
+                    SELECT
+                        *
+                    FROM
+                        wp_user_topic
+                    WHERE
+                        user_email = '". $user ."' AND 
+                        topic_id = '". $topic_id ."' AND 
+                        solutions_downloaded = 1
+                    
+                ");
+
+                if($solutions_query && $solutions_query->num_rows > 0)
+                    $response = true;
+                break;
+        }
+        
+        return $response;
+    }
+
+    public static function __getLimit($request){
+        $limit = -1;
+
+        if ( !isset($request['page']) || $request['page'] == 1) {
+            $limit = 5;
+        } else {
+            $limit = (($request['page'] - 1) * 5 ) . "," . (($request['page'] - 1) * 5 + 5 );
+        }
+
+        return $limit;
+    }
+
+    public static function __getCourseName($id){
+        return Timber::get_post([
+            "post_type" => "course",
+            "p" => $id
+        ])->title;
+    }
+
+    public static function __getTopicName($id){
+        return Timber::get_post([
+            "post_type" => "topic",
+            "p" => $id
+        ])->title;
     }
 }

@@ -49,7 +49,7 @@
                           href="{{summary}}" 
                           target="_blank" 
                           class="c-download f2 fs-18 w-medium flex-container align-middle"
-                          @click="downloadMaterial('{{summary}}')">
+                          @click="downloadMaterial('{{summary}}', 'summary')">
                           <span class="c-icon margin-right-1"><i class="far fa-file-pdf"></i></span>
                           Resumen
                         </a>                      
@@ -61,7 +61,7 @@
                           href="{{map}}" 
                           target="_blank" 
                           class="c-download f2 fs-18 w-medium flex-container align-middle"
-                          @click="downloadMaterial('{{map}}')">
+                          @click="downloadMaterial('{{map}}', 'map')">
                           <span class="c-icon margin-right-1"><i class="far fa-file-pdf"></i></span>
                           Mapa mental
                         </a>                      
@@ -73,7 +73,7 @@
                           href="{{worksheet}}" 
                           target="_blank" 
                           class="c-download f2 fs-18 w-medium flex-container align-middle"
-                          @click="downloadMaterial('{{worksheet}}')">
+                          @click="downloadMaterial('{{worksheet}}', 'worksheet')">
                           <span class="c-icon margin-right-1"><i class="far fa-file-pdf"></i></span>
                           Hoja de trabajo
                         </a>                      
@@ -85,7 +85,7 @@
                           href="{{solutions}}" 
                           target="_blank" 
                           class="c-download f2 fs-18 w-medium flex-container align-middle"
-                          @click="downloadMaterial('{{solutions}}')">
+                          @click="downloadMaterial('{{solutions}}', 'solutions')">
                           <span class="c-icon margin-right-1"><i class="far fa-file-pdf"></i></span>
                           Solucionario
                         </a>                      

@@ -46,6 +46,11 @@ add_action( 'rest_api_init', function () {
         'methods' => 'PUT',
         'callback' => array($userController,'saveAccessLog')
     ));
+
+    register_rest_route( 'custom/v1', '/users/access/logs', array(
+        'methods' => 'GET',
+        'callback' => array($userController,'getAccessLog')
+    ));
 });
 
 //2. Video ----------------------------------//
@@ -116,6 +121,11 @@ add_action( 'rest_api_init', function () {
         'methods' => 'GET',
         'callback' => array($courseController,'downloadExpiredRegistrations'),
     ));
+
+    register_rest_route( 'custom/v1', '/courses/user/logs', array(
+        'methods' => 'GET',
+        'callback' => array($courseController,'getUserCourseLogs'),
+    ));
 });
 
 //4. Topic ----------------------------------//
@@ -167,14 +177,29 @@ add_action( 'rest_api_init', function () {
         'callback' => array($topicController,'addAnswer'),
     ));
 
-    register_rest_route( 'custom/v1', '/topic/(?P<post_id>\d+)/view/log', array(
+    register_rest_route( 'custom/v1', '/topic/(?P<post_id>\d+)/Video/log', array(
         'methods' => 'PUT',
-        'callback' => array($topicController,'saveViewLog'),
+        'callback' => array($topicController,'saveVideoLog'),
     ));    
 
     register_rest_route( 'custom/v1', '/topic/(?P<post_id>\d+)/material/log', array(
         'methods' => 'PUT',
-        'callback' => array($topicController,'saveMaterialDownloadLog'),
+        'callback' => array($topicController,'saveMaterialLog'),
+    ));
+
+    register_rest_route( 'custom/v1', '/topics/video/logs', array(
+        'methods' => 'GET',
+        'callback' => array($topicController,'getVideoLogs'),
+    ));
+
+    register_rest_route( 'custom/v1', '/topics/material/logs', array(
+        'methods' => 'GET',
+        'callback' => array($topicController,'getMaterialLogs'),
+    ));
+
+    register_rest_route( 'custom/v1', '/topics/test/logs', array(
+        'methods' => 'GET',
+        'callback' => array($topicController,'getTestLogs'),
     ));
 });
 
@@ -220,7 +245,12 @@ add_action( 'rest_api_init', function () {
     register_rest_route( 'custom/v1', '/test', array(
         'methods' => 'GET',
         'callback' => array($testController,'getTest'),
-    ));    
+    ));
+
+    register_rest_route( 'custom/v1', '/tests', array(
+        'methods' => 'GET',
+        'callback' => array($testController,'getTests'),
+    ));
 
     register_rest_route( 'custom/v1', '/test/questions', array(
         'methods' => 'GET',
@@ -233,7 +263,42 @@ add_action( 'rest_api_init', function () {
     ));    
 });
 
-//9. Exercise ----------------------------------//
+//9. Behaviour ----------------------------------//
+add_action( 'rest_api_init', function () {
+    $behaviourController = new BehaviourController();
+
+    register_rest_route( 'custom/v1', '/behaviour/questionary', array(
+        'methods' => 'GET',
+        'callback' => array($behaviourController,'getQuestionary'),
+    ));
+
+    register_rest_route( 'custom/v1', '/behaviour/questionary/enable', array(
+        'methods' => 'GET',
+        'callback' => array($behaviourController,'checkoutQuestionaryEnable'),
+    ));
+
+    register_rest_route( 'custom/v1', '/behaviour/questionary', array(
+        'methods' => 'POST',
+        'callback' => array($behaviourController,'saveQuestionary'),
+    ));
+
+    register_rest_route( 'custom/v1', '/behaviour/poll', array(
+        'methods' => 'GET',
+        'callback' => array($behaviourController,'getPoll'),
+    ));
+
+    register_rest_route( 'custom/v1', '/behaviour/poll/enable', array(
+        'methods' => 'GET',
+        'callback' => array($behaviourController,'checkoutPollEnable'),
+    ));    
+
+    register_rest_route( 'custom/v1', '/behaviour/poll', array(
+        'methods' => 'POST',
+        'callback' => array($behaviourController,'savePoll'),
+    ));    
+});
+
+//10. Exercise ----------------------------------//
 add_action( 'rest_api_init', function () {
     $exerciseController = new ExerciseController();
 
@@ -243,7 +308,7 @@ add_action( 'rest_api_init', function () {
     ));   
 });
 
-//10. School ----------------------------------//
+//11. School ----------------------------------//
 add_action( 'rest_api_init', function () {
     $schoolController = new SchoolController();
 

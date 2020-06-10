@@ -93,6 +93,41 @@ class DBConnection{
         )");
     }    
 
+    public function createUserTopicTable(){
+        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_user_topic(
+            user_email VARCHAR(50) NOT NULL,
+            topic_id INT NOT NULL,
+            video_viewed INT NOT NULL DEFAULT 0,
+            summary_downloaded INT NOT NULL DEFAULT 0,
+            map_downloaded INT NOT NULL DEFAULT 0,
+            worksheet_downloaded INT NOT NULL DEFAULT 0,
+            solutions_downloaded INT NOT NULL DEFAULT 0,
+            PRIMARY KEY (user_email, topic_id)
+        )");
+    }
+
+    public function createQuestionaryTable(){
+        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_questionaries(
+            id INT NOT NULL AUTO_INCREMENT,
+            date_at DATE NOT NULL, 
+            rol VARCHAR(10) NOT NULL,
+            user_email VARCHAR(50) NOT NULL,
+            result TEXT NOT NULL,
+            PRIMARY KEY (id, user_email)
+        )");
+    }    
+
+    public function createPollTable(){
+        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_polls(
+            id INT NOT NULL AUTO_INCREMENT,
+            date_at DATE NOT NULL, 
+            rol VARCHAR(10) NOT NULL,
+            user_email VARCHAR(50) NOT NULL,
+            result TEXT NOT NULL,
+            PRIMARY KEY (id, user_email)
+        )");
+    }    
+
     /**
      * ----------------------------------------------------/
      * Logs
@@ -107,8 +142,8 @@ class DBConnection{
         )");
     }
 
-    public function createTopicViewLogTable(){
-        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_topic_views_logs(
+    public function createTopicVideoLogTable(){
+        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_topic_video_logs(
             user_email VARCHAR(50) NOT NULL,
             views INT NOT NULL,
             last_topic INT NOT NULL,
@@ -117,8 +152,8 @@ class DBConnection{
         )");
     }
 
-    public function createTopicMaterialDownloadLogTable(){
-        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_topic_material_download_logs(
+    public function createTopicMaterialLogTable(){
+        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_topic_material_logs(
             user_email VARCHAR(50) NOT NULL,
             downloads INT NOT NULL,
             last_topic INT NOT NULL,
@@ -127,8 +162,8 @@ class DBConnection{
         )");
     }
 
-    public function createTopicTestAnswerLogTable(){
-        $response = $this->connection->query("CREATE TABLE IF NOT EXISTS wp_topic_test_answers_logs(
+    public function createTopicTestLogTable(){
+        $response = $this->connection->query("CREATE TABLE IF NOT EXISTS wp_topic_test_logs(
             user_email VARCHAR(50) NOT NULL,
             test_count INT NOT NULL,
             right_answers INT NOT NULL,
@@ -140,7 +175,7 @@ class DBConnection{
             PRIMARY KEY (user_email)            
         )");
 
-        $this::seederTopicTestAnswerLogTable($this->connection);
+        $this::seederTopicTestLogTable($this->connection);
     }
 
 
@@ -150,8 +185,8 @@ class DBConnection{
      * ----------------------------------------------------/
      */
 
-    private function seederTopicTestAnswerLogTable($db_connection){
-        $query = $db_connection->query("SELECT * FROM wp_topic_test_answers_logs");
+    private function seederTopicTestLogTable($db_connection){
+        $query = $db_connection->query("SELECT * FROM wp_topic_test_logs");
 
         if($query->num_rows == 0){
             $users = get_users();
@@ -175,12 +210,12 @@ class DBConnection{
                         $right_answers += json_decode($topic_test_score['score'])->rights;
                         $wrong_answers += json_decode($topic_test_score['score'])->wrongs;
 
-                         $test_count += 1;
+                        $test_count += 1;
                     }
 
                     $db_connection->query("
                         INSERT INTO 
-                            wp_topic_test_answers_logs(
+                            wp_topic_test_logs(
                                 user_email, 
                                 test_count,
                                 right_answers,
@@ -220,9 +255,12 @@ $connection->createSessionRequestTable();
 $connection->createUserTestTable();
 $connection->createRecoverySessionsTable();
 $connection->createUserCourseTable();
+$connection->createUserTopicTable();
+$connection->createQuestionaryTable();
+$connection->createPollTable();
 
 //2. Logs
 $connection->createAccessLogTable();
-$connection->createTopicViewLogTable();
-$connection->createTopicMaterialDownloadLogTable();
-$connection->createTopicTestAnswerLogTable();
+$connection->createTopicVideoLogTable();
+$connection->createTopicMaterialLogTable();
+$connection->createTopicTestLogTable();

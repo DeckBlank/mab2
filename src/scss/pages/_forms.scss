@@ -6,9 +6,37 @@
     }
 
     &__sender {
+      position: relative;
+
       &:disabled {
         opacity: 0.6;
         cursor: no-drop;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: -0.5rem;
+          left: 0;
+          height: 4px;
+          background-color: $primary-color;
+          animation: an-submit-sending 1s infinite alternate;
+        }
+      }
+    }
+
+    &__error {
+      border-left: solid 4px $primary-color;
+      padding-left: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    @keyframes an-submit-sending {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 100%;
       }
     }
   }

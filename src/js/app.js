@@ -4,6 +4,9 @@ import './components/toggle';
 import './components/browser';
 import './components/profile';
 import './components/video';
+import './components/behaviour/questionaries/student';
+import './components/behaviour/questionaries/tutor';
+import './components/behaviour/poll';
 
 Vue.use(Vuex)
 
@@ -36,7 +39,9 @@ function baseState(){
     'isActivePrivGradoMenu',
     'isHeaderWithShadow',
     'isActiveBrowserToggle',
-    'isLoadedPage'
+    'isLoadedPage',
+    'isEnableQuestionary',
+    'isEnablePoll'
   ])
 }
 
@@ -50,10 +55,13 @@ function baseActions(){
       'updateStatusPrivGradoMenu',
       'updateStatusHeaderShadow',
       'updateStatusBrowserToggle',
-      'hideLoading'
+      'hideLoading',
+      'updateMetasBehaviour'
     ]),
     global: function(){
       this.saveLog();
+      this.isEnableQP('questionary');
+      this.isEnableQP('poll');
     },
     saveLog: function(){
       if(!window.sessionStorage.getItem('mab_temp')){
@@ -77,6 +85,31 @@ function baseActions(){
           .catch(err => {
             throw err;
           })      
+      }
+    },
+    isEnableQP: function(type){
+      if(this.logedUser){
+        fetch(`${this.API}/behaviour/${type}/enable`)
+          .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              return res.json()
+            }else{
+              throw res
+            }
+          })
+          .then(response => {
+            this.updateMetasBehaviour({
+              type: type,
+              value: response
+            });
+          })
+          .catch(err => {
+            this.updateMetasBehaviour({
+              type: type,
+              value: false
+            });
+            throw err;
+          })     
       }
     }
   }

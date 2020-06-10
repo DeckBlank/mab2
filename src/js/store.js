@@ -31,7 +31,11 @@ export const store = new Vuex.Store({
     isActiveBrowserToggle: false,
 
     //Page
-    isLoadedPage: false
+    isLoadedPage: false,
+
+    //Questionary + Poll
+    isEnableQuestionary: false,
+    isEnablePoll: false
   },
   mutations: {
     setStatusMenu(state){
@@ -79,6 +83,14 @@ export const store = new Vuex.Store({
     disableLoading(state){
       state.isLoadedPage = true
     },
+
+    setMetasBehaviour(state, behaviour){
+      if (behaviour.type == 'questionary') {
+        state.isEnableQuestionary = behaviour.value
+      } else if(behaviour.type == 'poll') {
+        state.isEnablePoll = behaviour.value
+      }
+    }
   },
   actions: {
     updateStatusMenu: ({commit})=>{
@@ -144,6 +156,10 @@ export const store = new Vuex.Store({
       window.setTimeout(()=>{
         commit('disableLoading')
       }, 1000)    
+    },
+
+    updateMetasBehaviour: ({commit}, behaviour)=>{
+      commit('setMetasBehaviour', {type: behaviour.type, value: behaviour.value})
     }
   }
 })

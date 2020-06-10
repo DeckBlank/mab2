@@ -104,19 +104,49 @@ class TopicController{
     }
 
     //5. Log ---------------------------------------//
-    public static function saveViewLog($request){
+    public static function saveVideoLog($request){
         try {
-            return new WP_REST_Response(TopicModel::saveViewLog($request), 200);
+            return new WP_REST_Response(TopicModel::saveVideoLog($request), 200);
         } catch (Exception $e) {
             return new WP_Error( 'topic_log_failed', __($e->getMessage()), array( 'status' => 404 ) );
         }
     }
  
-    public static function saveMaterialDownloadLog($request){
+    public static function saveMaterialLog($request){
         try {
-            return new WP_REST_Response(TopicModel::saveMaterialDownloadLog($request), 200);
+            return new WP_REST_Response(TopicModel::saveMaterialLog($request), 200);
         } catch (Exception $e) {
             return new WP_Error( 'topic_log_failed', __($e->getMessage()), array( 'status' => 404 ) );
+        }
+    } 
+ 
+    public static function getVideoLogs($request){
+        $view_logs = TopicModel::getVideoLogs($request);
+
+        if ( empty($view_logs) ) {
+            return new WP_Error( 'no_topic_view_logs', __('No topic view logs'), array( 'status' => 404 ) );
+        } else {
+            return new WP_REST_Response($view_logs, 200);
+        }
+    } 
+ 
+    public static function getMaterialLogs($request){
+        $material_logs = TopicModel::getMaterialLogs($request);
+
+        if ( empty($material_logs) ) {
+            return new WP_Error( 'no_topic_material_logs', __('No topic material logs'), array( 'status' => 404 ) );
+        } else {
+            return new WP_REST_Response($material_logs, 200);
+        }
+    } 
+ 
+    public static function getTestLogs($request){
+        $test_logs = TopicModel::getTestLogs($request);
+
+        if ( empty($test_logs) ) {
+            return new WP_Error( 'no_topic_test_logs', __('No topic test logs'), array( 'status' => 404 ) );
+        } else {
+            return new WP_REST_Response($test_logs, 200);
         }
     } 
 }
