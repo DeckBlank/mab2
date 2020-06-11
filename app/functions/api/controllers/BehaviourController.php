@@ -25,6 +25,16 @@ class BehaviourController{
         }
     }
 
+    public function getQuestionaries($request){
+        $questionary = BehaviourModel::getQuestionaries($request);
+
+        if ( empty($questionary) ) {
+            return new WP_Error( 'no_questionary', __('No questionaries found'), array( 'status' => 404 ) );
+        } else {
+            return new WP_REST_Response($questionary, 200);
+        }
+    }
+
     public function checkoutQuestionaryEnable($request){
         $questionary_enable = BehaviourModel::checkoutQuestionaryEnable($request);
 
@@ -56,6 +66,16 @@ class BehaviourController{
             return new WP_REST_Response($poll, 200);
         }
     }
+
+    public function getPolls($request){
+        $polls = BehaviourModel::getPolls($request);
+
+        if ( empty($polls) ) {
+            return new WP_Error( 'no_polls', __('No polls found'), array( 'status' => 404 ) );
+        } else {
+            return new WP_REST_Response($polls, 200);
+        }
+    }    
 
     public function checkoutPollEnable($request){
         $poll_enable = BehaviourModel::checkoutPollEnable($request);

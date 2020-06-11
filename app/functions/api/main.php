@@ -97,6 +97,11 @@ add_action( 'rest_api_init', function () {
 add_action( 'rest_api_init', function () {
     $courseController = new CourseController();
 
+    register_rest_route( 'custom/v1', '/course/categories', array(
+        'methods' => 'GET',
+        'callback' => array($courseController,'getCategories'),
+    ));
+
     register_rest_route( 'custom/v1', '/courses', array(
         'methods' => 'GET',
         'callback' => array($courseController,'getAll'),
@@ -272,6 +277,11 @@ add_action( 'rest_api_init', function () {
         'callback' => array($behaviourController,'getQuestionary'),
     ));
 
+    register_rest_route( 'custom/v1', '/behaviour/questionaries', array(
+        'methods' => 'GET',
+        'callback' => array($behaviourController,'getQuestionaries'),
+    ));
+
     register_rest_route( 'custom/v1', '/behaviour/questionary/enable', array(
         'methods' => 'GET',
         'callback' => array($behaviourController,'checkoutQuestionaryEnable'),
@@ -285,6 +295,11 @@ add_action( 'rest_api_init', function () {
     register_rest_route( 'custom/v1', '/behaviour/poll', array(
         'methods' => 'GET',
         'callback' => array($behaviourController,'getPoll'),
+    ));
+
+    register_rest_route( 'custom/v1', '/behaviour/polls', array(
+        'methods' => 'GET',
+        'callback' => array($behaviourController,'getPolls'),
     ));
 
     register_rest_route( 'custom/v1', '/behaviour/poll/enable', array(

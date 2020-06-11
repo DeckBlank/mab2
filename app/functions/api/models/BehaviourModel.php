@@ -37,6 +37,44 @@ class BehaviourModel{
         }
     }
 
+    public static function getQuestionaries($request){
+        if (isset($request['user'])) {
+            $questionaries_query = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_questionaries
+                WHERE
+                    user_email = '". $request['user'] ."'
+            ");
+        } else {
+            $questionaries_query = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_questionaries
+                ORDER BY date_at DESC
+                LIMIT ". __getLimit($request['page']) ."
+            ");
+        }
+        $questionaries = [];
+
+        if($questionaries_query && $questionaries_query->num_rows > 0){
+            while($questionary = $questionaries_query->fetch_assoc()){
+                array_push($questionaries, (object)[
+                    "id" => $questionary['id'],
+                    "user" => get_user_by('email', $questionary['user_email']),
+                    "user_email" => $questionary['user_email'],
+                    "rol" => $questionary['rol'],
+                    "result" => self::__getFulledResult('questionary', json_decode($questionary['result']), $questionary['rol']),
+                    "date_at" => $questionary['date_at']
+                ]);
+            }
+        }
+
+        return $questionaries;        
+    }
+
     public static function checkoutQuestionaryEnable($request){
         $questionary_enable = get_field('questionary_enable', 'options'); 
         
@@ -80,6 +118,44 @@ class BehaviourModel{
         ];
     }
 
+    public static function getPolls($request){
+        if (isset($request['user'])) {
+            $polls_query = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_polls
+                WHERE
+                    user_email = '". $request['user'] ."'
+            ");
+        } else {
+            $polls_query = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_polls
+                ORDER BY date_at DESC
+                LIMIT ". __getLimit($request['page']) ."
+            ");
+        }
+        $polls = [];
+
+        if($polls_query && $polls_query->num_rows > 0){
+            while($poll = $polls_query->fetch_assoc()){
+                array_push($polls, (object)[
+                    "id" => $poll['id'],
+                    "user" => get_user_by('email', $poll['user_email']),
+                    "user_email" => $poll['user_email'],
+                    "rol" => $poll['rol'],
+                    "result" => self::__getFulledResult('poll', json_decode($poll['result']), $poll['rol']),
+                    "date_at" => $poll['date_at']
+                ]);
+            }
+        }
+
+        return $polls;        
+    }    
+
     public static function checkoutPollEnable($request){
         $poll_enable = get_field('encuesta_enable', 'options'); 
 
@@ -112,5 +188,88 @@ class BehaviourModel{
         }else{
             return false;
         }
-    }    
+    }
+    
+    public static function __getQuestionTitle($type, $key, $rol){
+        switch($type){
+            case 'questionary':
+                if ($rol == 'student') {
+                    $questionary_student = get_field('questionary_student', 'options');
+                    
+                    if (count(explode('Decisiones', $key)) == 2) {
+                        $questions = array_map(
+                            function($question){
+                                return $question['question'];
+                            },
+                            $questionary_student['decisions']
+                        );
+        
+                        foreach($questions as $question){
+                            if($question['key'] == $key){
+                                return $question['value'];
+                            }
+                        }
+                    } else {
+                        $questions = array_map(
+                            function($question){
+                                return $question['question'];
+                            },
+                            $questionary_student['base']
+                        );
+        
+                        foreach($questions as $question){
+                            if($question['key'] == $key){
+                                return $question['value'];
+                            }
+                        }
+                    }
+                } else if($rol == 'tutor') {
+                    $questionary_tutor = get_field('questionary_tutor', 'options');
+        
+                    $questions = array_map(
+                        function($question){
+                            return $question['question'];
+                        },
+                        $questionary_tutor
+                    );
+        
+                    foreach($questions as $question){
+                        if($question['key'] == $key){
+                            return $question['value'];
+                        }
+                    }
+                }                
+                break;
+            case 'poll':
+                $poll_questions = get_field('encuesta_questions', 'options');
+                    
+                $questions = array_map(
+                    function($question){
+                        return $question['question'];
+                    },
+                    $poll_questions
+                );
+
+                foreach($questions as $question){
+                    if($question['key'] == $key){
+                        return $question['value'];
+                    }
+                }        
+                break;
+        }
+    }
+    
+    public static function __getFulledResult($type, $result, $rol){
+        $fulled_result = [];
+
+        foreach($result as $question){
+            array_push($fulled_result, (object)[
+                "key" => $question->key,
+                "title" => self::__getQuestionTitle($type, $question->key, $rol),
+                "value" => $question->value,
+            ]);
+        }
+
+        return $fulled_result;
+    }
 }

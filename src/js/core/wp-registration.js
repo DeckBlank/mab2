@@ -7,6 +7,8 @@ const API = ( window.location.hostname == 'localhost' ) ? 'http://localhost/mab/
  * @exportRegistrations
  * @spinnerLoading
  * @getExpiredRegistrations
+ * @mountNewCourses
+ * @refactCourses
  */
 function exportRegistrations(){
   spinnerLoading(true);
@@ -49,6 +51,33 @@ function getExpiredRegistrations(){
     })
 }
 
+function mountNewCourses(categories, index){
+  let __courses = document.querySelectorAll(`.select2-results__option[role='treeitem']`)
+
+  __courses.forEach((course, index) => {
+    categories[index].categories.forEach(cat => {
+      course.innerHTML += ` - ${cat.name}`
+    });
+  })
+}
+
+function refactCourses(){
+  fetch(`${API}/course/categories`)
+    .then(res => {
+      if (res.status >= 200 && res.status < 300) {
+        return res.json()
+      }else{
+        throw res
+      }
+    })
+    .then(categories => {
+      mountNewCourses(categories)
+    })
+    .catch(err => {
+      throw err
+    })
+}
+
 /**
  * View
  */
@@ -76,4 +105,10 @@ metabox.innerHTML += `
 document.querySelector('#export').onclick = ()=>{
   event.preventDefault(); exportRegistrations();
 }
+
+document.querySelector('[data-name="course"] .acf-input').onclick = ()=>{
+  refactCourses();
+}
+
+
 getExpiredRegistrations()

@@ -1,6 +1,7 @@
 function baseData(){
   return {
     //Geo
+    countries: [],
     departamentos: require('../../../extras/ubigeo/departamentos.json'),
     provincias: [],
     distritos: [],
@@ -58,6 +59,10 @@ function baseData(){
       isValid: false
     },
     school: {
+      value: '',
+      isValid: false
+    },
+    country: {
       value: '',
       isValid: false
     },
@@ -122,16 +127,29 @@ function baseWatch(){
         this.childrenSchool.isValid = false      
       }      
     },
-    'school.value': function(value){
+    'school.value': function(){
       this.validateSelect(this.school)
+    },
+    'country.value': function(value){
+      this.validateSelect(this.country)
+
+      if (value.toLowerCase() != 'peru') {
+        this.department.value = '-'; this.department.isValid = true;
+        this.province.value = '-'; this.province.isValid = true;
+        this.district.value = '-'; this.district.isValid = true;       
+      }else{
+        this.department.value = ''; this.department.isValid = false;
+        this.province.value = ''; this.province.isValid = false;
+        this.district.value = ''; this.district.isValid = false;       
+      }
     },
     'department.value': function(){
       this.validateSelect(this.department)  
     },
-    'province.value': function(value){
+    'province.value': function(){
       this.validateSelect(this.province)  
     },
-    'district.value': function(value){
+    'district.value': function(){
       this.validateSelect(this.district)  
     }
   }
@@ -153,6 +171,22 @@ function baseMethods(){
       if(parameter.value != '' && parameter.isValid == false){
         parameter.isValid = true
       }
+    },
+    getCountries: function(){
+      fetch(`https://restcountries.eu/rest/v2/all`)
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            return res.json()
+          }else{
+            throw res
+          }
+        })
+        .then(countries => {
+          this.countries = countries
+        })
+        .catch(err => {
+          throw err;          
+        })      
     },
     getProvincias: function(option) {
       let provincias = require('../../../extras/ubigeo/provincias.json')

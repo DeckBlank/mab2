@@ -2,7 +2,7 @@
     id="reports-section"
     class="wrap" 
     data-site="<?php echo get_site_url(); ?>">
-    <h2 class="mb-1">Cuestionarios resueltos - Tema</h2>
+    <h2 class="mb-1">Cuestionarios respondidos</h2>
     <div class="mb-1">
     </div>
     <div class="d-flex mb-1">
@@ -14,11 +14,8 @@
             <tr>
                 <th id="columnname" class="manage-column column-columnname" scope="col">Usuario</th>
                 <th id="columnname" class="manage-column column-columnname" scope="col">Email</th>
-                <th id="columnname" class="manage-column column-columnname" scope="col">Cuestionarios</th>
-                <th id="columnname" class="manage-column column-columnname" scope="col">Respuestas correctas</th>
-                <th id="columnname" class="manage-column column-columnname" scope="col">Respuestas incorrectas</th>
-                <th id="columnname" class="manage-column column-columnname" scope="col">Ultimo tema</th>
-                <th id="columnname" class="manage-column column-columnname" scope="col">Ultima actividad</th>
+                <th id="columnname" class="manage-column column-columnname" scope="col">Resultado</th>
+                <th id="columnname" class="manage-column column-columnname" scope="col">Fecha</th>
             </tr>
         </thead>
         <tbody id="results"></tbody>
@@ -37,30 +34,53 @@
     /**
      * @mountResults
      */
-    function mountResults(__logs, reset){
+    function mountResults(__registers, reset){
         let resultsDOM = document.querySelector('#results')
 
         if(reset){
             resultsDOM.innerHTML = '';
         }
 
-        __logs.forEach((log, index)=>{
-            let topic = (log.last_course) ? `${log.last_course} / ${log.last_unity} / ${log.last_topic}` : '';
+        __registers.forEach((reg, index)=>{
+            let result = '';
+
+            reg.result.forEach((q, index) => {
+                result += `
+                    <tr valign="top" class="${ ((index + 1) % 2 == 0) ? 'alternate' : '' }">
+                        <td class="manage-column column-columnname" scoape="col">${q.key}</td>
+                        <td class="manage-column column-columnname" scope="col">${q.title}</td>
+                        <td class="manage-column column-columnname" scope="col">${q.value}</td>
+                    </tr>                
+                `                
+            })
 
             resultsDOM.innerHTML += `
             <tr valign="top" class="${ ((index + 1) % 2 == 0) ? 'alternate' : '' }">
-                <td class="manage-column column-columnname" scoape="col">${ (!log.user) ? log.user_email : log.user.data.user_nicename }</td>
-                <td class="manage-column column-columnname" scope="col">${log.user_email}</td>
-                <td class="manage-column column-columnname" scope="col">${log.test_count}</td>
-                <td class="manage-column column-columnname" scope="col">${log.right_answers}</td>
-                <td class="manage-column column-columnname" scope="col">${log.wrong_answers}</td>
-                <td class="manage-column column-columnname" scope="col">${topic}</td>
-                <td class="manage-column column-columnname" scope="col">${(log.last_date) ? log.last_date : ''}</td>
+                <td class="manage-column column-columnname" scoape="col">${ reg.user.data.user_nicename }</td>
+                <td class="manage-column column-columnname" scope="col">${reg.user_email}</td>
+                <td class="manage-column column-columnname" scope="col">
+                    <button class='button-primary' onclick="showResult(${reg.id})">Ver resultado</button>
+                </td>
+                <td class="manage-column column-columnname" scope="col">${reg.date_at}</td>
+            </tr>
+            <tr id="result-${reg.id}" valign="top" class="result hide">
+                <td colspan="4">
+                    <table class="widefat fixed mb-1" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th id="columnname" class="manage-column column-columnname" scope="col">Clave</th>
+                                <th id="columnname" class="manage-column column-columnname" scope="col">Pregunta</th>
+                                <th id="columnname" class="manage-column column-columnname" scope="col">Respuesta</th>
+                            </tr>
+                        </thead>
+                        <tbody>${result}</tbody>
+                    </table>
+                </td>               
             </tr>
             `
         })
 
-        if(__logs.length == 0 || __logs.length < 5){
+        if(__registers.length == 0 || __registers.length < 5){
             document.querySelector('#load-more').classList.add('hide')
         }
     }
@@ -68,10 +88,11 @@
     /**
      * @getResults()
      * @searchUserResult()
-     * @loadMore
+     * @showResult()
+     * @loadMore()
      */
     function getResults(__page){
-        fetch(`${API}/topics/test/logs?page=${__page}`)
+        fetch(`${API}/behaviour/questionaries?page=${__page}`)
             .then(res => {
                 if (res.status >= 200 && res.status < 300) {
                     return res.json()
@@ -79,8 +100,8 @@
                     throw res
                 }
             })
-            .then(test_logs => {
-                mountResults(test_logs);
+            .then(questionaries => {
+                mountResults(questionaries);
             })
             .catch(err => {
                 throw err;       
@@ -92,7 +113,7 @@
 
         let user = document.querySelector('#user');
 
-        fetch(`${API}/topics/test/logs?user=${user.value}`)
+        fetch(`${API}/behaviour/questionaries?user=${user.value}`)
             .then(res => {
                 if (res.status >= 200 && res.status < 300) {
                     return res.json()
@@ -100,12 +121,24 @@
                     throw res
                 }
             })
-            .then(test_logs => {
-                mountResults(test_logs, true);
+            .then(questionaries => {
+                mountResults(questionaries, true);
             })
             .catch(err => {
                 throw err;       
             })        
+    }
+
+    function showResult(email){
+        let result = document.querySelector(`#result-${email}`)
+
+        console.log(result)
+
+        if(result.classList.contains('hide')){            
+            result.classList.remove('hide')
+        }else{
+            result.classList.add('hide')
+        }
     }
 
     function loadMore(){

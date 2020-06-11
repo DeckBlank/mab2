@@ -132,6 +132,17 @@ Vue.component('form-teacher',{
         <p v-if="!age.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Edad incorrecta</p>          
       </div>
       <div class="input_container">
+        <label for="">País</label>
+        <select
+          class="c-form-box__select select-reset" 
+          :class="{ valid : country.isValid }"
+          v-model="country.value">
+          <option disabled value="" selected>Selecciona una opción</option>
+          <option v-for="coun of countries" :key="coun.id" :value="coun.name" >{{coun.name}}</option>                               
+        </select>
+        <p v-if="!country.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
+      </div>      
+      <div v-if="country.value.toLowerCase() == 'peru'" class="input_container">
         <label for="">Departamento</label>
         <select
           class="c-form-box__select select-reset" 
@@ -143,7 +154,7 @@ Vue.component('form-teacher',{
         </select>
         <p v-if="!department.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>       
       </div>
-      <div class="input_container">
+      <div v-if="country.value.toLowerCase() == 'peru'" class="input_container">
         <label for="">Provincia</label>
         <select 
           name="" 
@@ -156,7 +167,7 @@ Vue.component('form-teacher',{
         </select>
         <p v-if="!province.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
       </div>
-      <div class="input_container">
+      <div v-if="country.value.toLowerCase() == 'peru'" class="input_container">
         <label for="">Distrito</label>
         <select 
           class="c-form-box__select select-reset" 
@@ -211,6 +222,9 @@ Vue.component('form-teacher',{
     'age.value': function(){
       this.age.isValid = this.validateText(this.age)
     }
+  },
+  beforeMount(){
+    this.getCountries();
   },  
   methods: {
     ...baseMethods(),
@@ -227,6 +241,7 @@ Vue.component('form-teacher',{
         ((this.schoolType.value == 'privado') ? this.school.isValid : true) &&
         this.grade.isValid &&
         this.age.isValid &&
+        this.country.isValid &&
         this.department.isValid &&
         this.province.isValid &&
         this.district.isValid;
@@ -248,7 +263,7 @@ Vue.component('form-teacher',{
         form_data.append('school', this.school.value)
         form_data.append('grade', this.grade.value)
         form_data.append('age', this.age.value)
-        form_data.append('location', `${this.department.value}, ${this.province.value}, ${this.district.value}`)
+        form_data.append('location', `${this.country.value}, ${this.department.value}, ${this.province.value}, ${this.district.value}`)
 
         this.isSending = true;
 

@@ -55,6 +55,22 @@ class CourseModel{
         }        
     }
 
+    public static function getCategories($request){
+        $courses = Timber::get_posts([
+            "post_type" => "course",
+            'orderby'   => 'title',
+            'order' => 'ASC'
+        ]);
+
+        return array_map(function($course){
+            return (object)[
+                "course" => $course->title,
+                "course_id" => $course->ID,
+                "categories" => $course->terms
+            ];
+        }, $courses);
+    }
+
     public static function getTopics($course_id){
         $topics = 0;
 

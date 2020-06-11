@@ -11,6 +11,16 @@ class CourseController{
     /**
      * Methods
      */
+    public function getCategories($request){
+        $categories = CourseModel::getCategories($request['course_id']);
+
+        if(empty($categories)){
+            return new WP_Error( 'no_course_categories', __('No course categories found'), array( 'status' => 404 ) );
+        }else{
+            return new WP_REST_Response($categories, 200);
+        }  
+    }
+
     public function getAll($request){
         $courses = CourseModel::getAll($request);
         

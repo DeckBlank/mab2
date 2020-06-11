@@ -2,7 +2,7 @@
     id="reports-section"
     class="wrap" 
     data-site="<?php echo get_site_url(); ?>">
-    <h2 class="mb-1">Cuestionarios resueltos - Tema</h2>
+    <h2 class="mb-1">Cuestionarios resueltos</h2>
     <div class="mb-1">
     </div>
     <div class="d-flex mb-1">
