@@ -89,7 +89,7 @@ class DBConnection{
             right_answers INT NOT NULL DEFAULT 0,
             wrong_answers INT NOT NULL DEFAULT 0,
             last_date DATETIME NOT NULL,
-            PRIMARY KEY (user_email)
+            PRIMARY KEY (user_email, course_id)
         )");
     }    
 
