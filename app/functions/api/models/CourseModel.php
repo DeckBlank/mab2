@@ -153,9 +153,10 @@ class CourseModel{
                     if($course['course']['course']->ID == $request['course_id']){
                         foreach($course['course']['registrations'] as $registration){
                             if(
-                                $registration['registration']['user']['user_email'] == $request['user'] and
+                                ($registration['registration']['user']['user_email'] == $request['user'] and
                                 $registration['registration']['date_finish'] >= date("Y-m-d") and
-                                $registration['registration']['state'] == true ){
+                                $registration['registration']['state'] == true) ||
+                                get_field('price', $course['course']['course']->ID) == 0 ){
                 
                                 return true;
                             }
@@ -273,7 +274,8 @@ class CourseModel{
                 FROM 
                     wp_user_course
                 ORDER BY last_date DESC
-                LIMIT ". TopicModel::__getLimit($request) ."
+                LIMIT ". __getLimit() ."
+                OFFSET ". __getOffset($request['page']) ."
             ");
         }
         $user_course_logs = [];
@@ -283,7 +285,7 @@ class CourseModel{
                 array_push($user_course_logs, (object)[
                     "user" => get_user_by('email', $log['user_email']),
                     "user_email" => $log['user_email'],
-                    "course" => TopicModel::__getCourseName($log['course_id']),
+                    "course" => CourseModel::__getCourseName($log['course_id']),
                     "topic_views" => $log['topic_views'],
                     "material_downloads" => $log['material_downloads'],
                     "test_count" => $log['test_count'],
@@ -295,5 +297,16 @@ class CourseModel{
         }
 
         return $user_course_logs;        
-    }    
+    }
+
+    public static function __getCourseName($id){
+        if ($id) {
+            return Timber::get_post([
+                "post_type" => "course",
+                "p" => $id
+            ])->title;
+        } else {
+            return '';
+        }
+    }
 }

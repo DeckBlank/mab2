@@ -50,7 +50,8 @@ class TestModel{
                 FROM 
                     wp_user_tests
                 ORDER BY date_at DESC
-                LIMIT ". TopicModel::__getLimit($request) ."
+                LIMIT ". __getLimit() ."
+                OFFSET ". __getOffset($request['page']) ."
             ");
         }
         $test_logs = [];

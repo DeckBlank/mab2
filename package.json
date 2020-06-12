@@ -39,7 +39,6 @@
     "webpack-stream": "^5.2.1"
   },
   "dependencies": {
-    "@fancyapps/fancybox": "^3.5.7",
     "@opentok/client": "^2.17.0",
     "apexcharts": "^3.18.1",
     "crypto-js": "^4.0.0",

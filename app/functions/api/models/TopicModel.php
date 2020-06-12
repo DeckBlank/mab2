@@ -97,18 +97,18 @@ class TopicModel{
             }
         }else{
             try {
-                self::saveTestLog($request, 0);
-
-                return DBConnection::getConnection()->query("
-                    INSERT INTO 
-                        wp_topic_test_scores(date_at,user,course_id,topic_id,score) VALUES(
-                            '". date("Y-m-d") ."',
-                            '". $request['user'] ."',
-                            '". $request['course_id'] ."',
-                            '". $request['topic_id'] ."',
-                            '". $request['result'] ."'
-                        )
-                ");
+                if (self::saveTestLog($request, 0)) {
+                    return DBConnection::getConnection()->query("
+                        INSERT INTO 
+                            wp_topic_test_scores(date_at,user,course_id,topic_id,score) VALUES(
+                                '". date("Y-m-d") ."',
+                                '". $request['user'] ."',
+                                '". $request['course_id'] ."',
+                                '". $request['topic_id'] ."',
+                                '". $request['result'] ."'
+                            )
+                    ");
+                }
             } catch (Exception $e) {
                 throw new Exception($e->getMessage());
             }
@@ -201,31 +201,34 @@ class TopicModel{
                     user_email, 
                     right_answers, 
                     wrong_answers, 
-                    last_course, 
+                    test_count,
+                    last_course,
                     last_unity, 
                     last_topic, 
                     last_date
                 )
             VALUES(
                 '". $request['user'] ."',
-                '". $right_answers ."',
-                '". $wrong_answers ."',
+                1,
+                ". $right_answers .",
+                ". $wrong_answers .",
                 '". json_encode($course) ."',
                 '". $request['unity'] ."',
                 '". $request['topic_id'] ."',
                 '". date("Y-m-d G:i:s") ."'
             )
             ON DUPLICATE KEY UPDATE
-                right_answers = right_answers + '". $right_answers ."',
-                wrong_answers = wrong_answers + '". $wrong_answers ."',
+                test_count = test_count + 1,
+                right_answers = right_answers + ". $right_answers .",
+                wrong_answers = wrong_answers + ". $wrong_answers .",
                 last_course = '". json_encode($course) ."',
                 last_unity = '". $request['unity'] ."',
                 last_topic = '". $request['topic_id'] ."',               
-                last_date = '". date("Y-m-d G:i:s") ."'                    
+                last_date = '". date("Y-m-d G:i:s") ."'
         ");
 
         if ($response) {
-            return 1;
+            return true;
         } else {
             throw new Exception("Log couldn't saved");
         }       
@@ -248,7 +251,8 @@ class TopicModel{
                 FROM 
                     wp_topic_video_logs
                 ORDER BY last_date DESC
-                LIMIT ". self::__getLimit($request) ."
+                LIMIT ". __getLimit() ."
+                OFFSET ". __getOffset($request['page']) ."
             ");
         }
         $video_logs = [];
@@ -285,7 +289,8 @@ class TopicModel{
                 FROM 
                     wp_topic_material_logs
                 ORDER BY last_date DESC
-                LIMIT ". self::__getLimit($request) ."
+                LIMIT ". __getLimit() ."
+                OFFSET ". __getOffset($request['page']) ."
             ");
         }
         $material_logs = [];
@@ -322,7 +327,8 @@ class TopicModel{
                 FROM 
                     wp_topic_test_logs
                 ORDER BY last_date DESC
-                LIMIT ". self::__getLimit($request) ."
+                LIMIT ". __getLimit() ."
+                OFFSET ". __getOffset($request['page']) ."
             ");
         }
         $test_logs = [];
@@ -335,7 +341,7 @@ class TopicModel{
                     "test_count" => $log['test_count'],
                     "right_answers" => $log['right_answers'],
                     "wrong_answers" => $log['wrong_answers'],
-                    "last_course" => self::__getCourseName($log['last_course']),
+                    "last_course" => ($log['last_course']) ? CourseModel::__getCourseName(json_decode($log['last_course'])->id) : '',
                     "last_unity" => $log['last_unity'],
                     "last_topic" => self::__getTopicName($log['last_topic']),
                     "last_date" => $log['last_date'],
@@ -533,25 +539,6 @@ class TopicModel{
         }
         
         return $response;
-    }
-
-    public static function __getLimit($request){
-        $limit = -1;
-
-        if ( !isset($request['page']) || $request['page'] == 1) {
-            $limit = 5;
-        } else {
-            $limit = (($request['page'] - 1) * 5 ) . "," . (($request['page'] - 1) * 5 + 5 );
-        }
-
-        return $limit;
-    }
-
-    public static function __getCourseName($id){
-        return Timber::get_post([
-            "post_type" => "course",
-            "p" => $id
-        ])->title;
     }
 
     public static function __getTopicName($id){

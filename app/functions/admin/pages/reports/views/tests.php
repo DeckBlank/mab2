@@ -83,6 +83,7 @@
                 mountResults(test_logs);
             })
             .catch(err => {
+                document.querySelector('#load-more').classList.add('hide')
                 throw err;       
             })        
     }

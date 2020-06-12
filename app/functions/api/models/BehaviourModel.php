@@ -54,7 +54,8 @@ class BehaviourModel{
                 FROM 
                     wp_questionaries
                 ORDER BY date_at DESC
-                LIMIT ". __getLimit($request['page']) ."
+                LIMIT ". __getLimit() ."
+                OFFSET ". __getOffset($request['page']) ."
             ");
         }
         $questionaries = [];
@@ -135,7 +136,8 @@ class BehaviourModel{
                 FROM 
                     wp_polls
                 ORDER BY date_at DESC
-                LIMIT ". __getLimit($request['page']) ."
+                LIMIT ". __getLimit() ."
+                OFFSET ". __getOffset($request['page']) ."
             ");
         }
         $polls = [];

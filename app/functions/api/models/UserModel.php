@@ -189,7 +189,8 @@ class UserModel{
                 FROM 
                     wp_access_logs
                 ORDER BY last_date DESC
-                LIMIT ". TopicModel::__getLimit($request) ."
+                LIMIT ". __getLimit() ."
+                OFFSET ". __getOffset($request['page']) ."
             ");
         }
         $access_logs = [];

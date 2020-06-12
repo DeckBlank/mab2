@@ -1,12 +1,16 @@
 <?php
-function __getLimit($page){
-    $limit = -1;
+function __getOffset($page){
+    $offset = -1;
 
     if ( !isset($page) || $page == 1) {
-        $limit = 5;
+        $offset = 0;
     } else {
-        $limit = (($page - 1) * 5 ) . "," . (($page - 1) * 5 + 5 );
+        $offset = ($page - 1) * 5;
     }
 
-    return $limit;
+    return $offset;
+}
+
+function __getLimit(){
+    return 5;
 }
