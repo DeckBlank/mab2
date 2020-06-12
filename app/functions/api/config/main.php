@@ -88,7 +88,7 @@ class DBConnection{
             test_count INT NOT NULL DEFAULT 0,
             right_answers INT NOT NULL DEFAULT 0,
             wrong_answers INT NOT NULL DEFAULT 0,
-            last_date DATETIME NOT NULL,
+            last_date DATETIME NULL,
             PRIMARY KEY (user_email, course_id)
         )");
     }    
@@ -196,6 +196,7 @@ class DBConnection{
                     $right_answers = 0;
                     $wrong_answers = 0;
                     $test_count = 0;
+                    $course_id = 0;
 
                     $topic_test_scores_query = $db_connection->query("
                         SELECT
@@ -209,12 +210,13 @@ class DBConnection{
                     while($topic_test_score = $topic_test_scores_query->fetch_assoc()){
                         $right_answers += json_decode($topic_test_score['score'])->rights;
                         $wrong_answers += json_decode($topic_test_score['score'])->wrongs;
+                        $course_id = $topic_test_score['course_id'];
 
                         $test_count += 1;
                     }
 
                     if($right_answers > 0 || $wrong_answers > 0){
-                        $db_connection->query("
+                        $response = $db_connection->query("
                             INSERT INTO 
                                 wp_topic_test_logs(
                                     user_email, 
@@ -228,7 +230,25 @@ class DBConnection{
                                 '". $right_answers ."',
                                 '". $wrong_answers ."'
                             )
-                        ");                    
+                        ");
+                        
+                        if($response) {
+                            $db_connection->query("
+                                INSERT INTO 
+                                    wp_user_course(user_email, course_id, test_count, right_answers, wrong_answers)
+                                VALUES(
+                                    '". $user->user_email ."',
+                                    '". $course_id ."',
+                                    '". $test_count ."',
+                                    '". $right_answers ."',
+                                    '". $wrong_answers ."'
+                                )
+                                ON DUPLICATE KEY UPDATE
+                                    test_count = test_count + 1,
+                                    right_answers = right_answers + '". $right_answers ."',
+                                    wrong_answers = wrong_answers + '". $wrong_answers ."'
+                            ");
+                        }
                     }
                 }
             }
