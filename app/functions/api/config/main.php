@@ -213,21 +213,23 @@ class DBConnection{
                         $test_count += 1;
                     }
 
-                    $db_connection->query("
-                        INSERT INTO 
-                            wp_topic_test_logs(
-                                user_email, 
-                                test_count,
-                                right_answers,
-                                wrong_answers
+                    if($right_answers > 0 || $wrong_answers > 0){
+                        $db_connection->query("
+                            INSERT INTO 
+                                wp_topic_test_logs(
+                                    user_email, 
+                                    test_count,
+                                    right_answers,
+                                    wrong_answers
+                                )
+                            VALUES(
+                                '". $user->user_email ."',
+                                '". $test_count ."',
+                                '". $right_answers ."',
+                                '". $wrong_answers ."'
                             )
-                        VALUES(
-                            '". $user->user_email ."',
-                            '". $test_count ."',
-                            '". $right_answers ."',
-                            '". $wrong_answers ."'
-                        )
-                    ");                    
+                        ");                    
+                    }
                 }
             }
         }
