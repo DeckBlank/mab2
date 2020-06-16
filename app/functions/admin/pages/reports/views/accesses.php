@@ -7,7 +7,13 @@
     </div>
     <div class="d-flex mb-1">
         <input class="mr-1" type="text" placeholder="Usuario (email)" id="user">
-        <button id="search" class="button button-primary">Buscar</button>
+        <button id="search" class="button button-primary mr-1">Buscar</button>
+        <a 
+            href="<?php echo get_site_url() . '/wp-json/custom/v1/users/access/logs/download' ?>" 
+            download 
+            class="button button-success">
+            Descargar todo (.xls)
+        </a>
     </div>
     <table class="widefat fixed mb-1" cellspacing="0">
         <thead>
@@ -52,7 +58,7 @@
             `
         })
 
-        if(__logs.length == 0 || __logs.length < 5){
+        if(__logs.length == 0 || __logs.length < 25){
             document.querySelector('#load-more').classList.add('hide')
         }
     }
@@ -115,7 +121,8 @@
      * DOM
      * -----------------------------------------------
      */
-    let search = document.querySelector('#search');
+    let search = document.querySelector('#search'),
+        download = document.querySelector('#download')
 
     search.onclick = ()=>{
         event.preventDefault(); 

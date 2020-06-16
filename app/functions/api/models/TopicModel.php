@@ -234,7 +234,7 @@ class TopicModel{
         }       
     }
 
-    public static function getVideoLogs($request){
+    public static function getVideoLogs($request, $limit = false){
         if (isset($request['user'])) {
             $video_logs_query = DBConnection::getConnection()->query("
                 SELECT 
@@ -245,15 +245,26 @@ class TopicModel{
                     user_email = '". $request['user'] ."'
             ");
         } else {
-            $video_logs_query = DBConnection::getConnection()->query("
-                SELECT 
-                    *
-                FROM 
-                    wp_topic_video_logs
-                ORDER BY last_date DESC
-                LIMIT ". __getLimit() ."
-                OFFSET ". __getOffset($request['page']) ."
-            ");
+            if ($limit == 'all') {
+                $video_logs_query = DBConnection::getConnection()->query("
+                    SELECT 
+                        *
+                    FROM 
+                        wp_topic_video_logs
+                    ORDER BY last_date DESC
+                ");
+            } else {
+                $video_logs_query = DBConnection::getConnection()->query("
+                    SELECT 
+                        *
+                    FROM 
+                        wp_topic_video_logs
+                    ORDER BY last_date DESC
+                    LIMIT ". __getLimit() ."
+                    OFFSET ". __getOffset($request['page']) ."
+                ");
+            }
+            
         }
         $video_logs = [];
 
@@ -272,7 +283,7 @@ class TopicModel{
         return $video_logs;
     }
 
-    public static function getMaterialLogs($request){
+    public static function getMaterialLogs($request, $limit = false){
         if (isset($request['user'])) {
             $material_logs_query = DBConnection::getConnection()->query("
                 SELECT 
@@ -283,15 +294,25 @@ class TopicModel{
                     user_email = '". $request['user'] ."'                
             ");
         } else {
-            $material_logs_query = DBConnection::getConnection()->query("
-                SELECT 
-                    *
-                FROM 
-                    wp_topic_material_logs
-                ORDER BY last_date DESC
-                LIMIT ". __getLimit() ."
-                OFFSET ". __getOffset($request['page']) ."
-            ");
+            if ($limit == 'all') {
+                $material_logs_query = DBConnection::getConnection()->query("
+                    SELECT 
+                        *
+                    FROM 
+                        wp_topic_material_logs
+                    ORDER BY last_date DESC
+                ");
+            } else {
+                $material_logs_query = DBConnection::getConnection()->query("
+                    SELECT 
+                        *
+                    FROM 
+                        wp_topic_material_logs
+                    ORDER BY last_date DESC
+                    LIMIT ". __getLimit() ."
+                    OFFSET ". __getOffset($request['page']) ."
+                ");
+            }
         }
         $material_logs = [];
 
@@ -310,7 +331,7 @@ class TopicModel{
         return $material_logs;
     }
 
-    public static function getTestLogs($request){
+    public static function getTestLogs($request, $limit = false){
         if (isset($request['user'])) {
             $test_logs_query = DBConnection::getConnection()->query("
                 SELECT 
@@ -321,15 +342,25 @@ class TopicModel{
                     user_email = '". $request['user'] ."'
             ");
         } else {
-            $test_logs_query = DBConnection::getConnection()->query("
-                SELECT 
-                    *
-                FROM 
-                    wp_topic_test_logs
-                ORDER BY last_date DESC
-                LIMIT ". __getLimit() ."
-                OFFSET ". __getOffset($request['page']) ."
-            ");
+            if ($limit == 'all') {
+                $test_logs_query = DBConnection::getConnection()->query("
+                    SELECT 
+                        *
+                    FROM 
+                        wp_topic_test_logs
+                    ORDER BY last_date DESC
+                ");
+            } else {
+                $test_logs_query = DBConnection::getConnection()->query("
+                    SELECT 
+                        *
+                    FROM 
+                        wp_topic_test_logs
+                    ORDER BY last_date DESC
+                    LIMIT ". __getLimit() ."
+                    OFFSET ". __getOffset($request['page']) ."
+                ");
+            }
         }
         $test_logs = [];
 

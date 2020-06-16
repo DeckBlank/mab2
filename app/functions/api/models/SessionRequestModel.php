@@ -9,7 +9,7 @@ class SessionRequestModel{
     /**
      * Methods
      */
-     public static function addSessionRequest($request) {
+    public static function addSessionRequest($request) {
         return DBConnection::getConnection()->query("
             INSERT INTO wp_session_requests(date_at,fullname,email,date1,time1,date2,time2,course) VALUES(
                 '". date("Y-m-d") ."',

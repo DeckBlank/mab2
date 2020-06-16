@@ -85,4 +85,20 @@ class CourseController{
             return new WP_REST_Response($user_course_logs, 200);
         }        
     }
+
+    public function downloadUserCourseLogs($request){
+        $user_course_logs = CourseModel::getUserCourseLogs($request, 'all');
+
+        if( empty($user_course_logs) ){                
+            return new WP_Error( 'no_user_course_logs', __('No user couser logs'), array( 'status' => 404 ) );         
+        }else{
+            header('Content-Encoding: UTF-8');
+            header("Content-Type: application/xls; charset=UTF-8");    
+            header("Content-Disposition: attachment; filename=resportes-curso-usuario-mabclick-".date('Y-m-d').".xls"); 
+            echo "\xEF\xBB\xBF";
+
+            //Header
+            include_once __DIR__."/../exports/reports/user-courses.php";
+        }        
+    }
 }

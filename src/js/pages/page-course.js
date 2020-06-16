@@ -8,7 +8,9 @@ const course = new Vue({
     return {
       metas: new URLSearchParams(window.location.search),
       isActiveUnity: false,
-      isAvaibleCourse: true
+      isAvaibleCourse: true,
+      isActiveSignUp: false,
+      accessGranted: false
     }
   },
   computed: {
@@ -44,24 +46,11 @@ const course = new Vue({
                 throw res
               }
             })
-            .then(registration => { 
+            .then(registration => {
+              this.accessGranted = true
               this.hideLoading();
             })
             .catch(err => {
-              let topics = document.querySelectorAll('.c-topic')
-  
-              topics.forEach((topic, index) => {
-                if(index != 0){
-                  topic.querySelectorAll('.c-topic__item').forEach((item)=> {
-                    if (this.logedUser) {                      
-                      item.setAttribute('href', `${this.SITE_URL}/solicitar-cursos`)
-                    } else {
-                      item.setAttribute('href', `${this.SITE_URL}#registro`)                      
-                    }
-                  })                
-                }
-              })
-  
               this.hideLoading();
               throw err;          
             })        
@@ -107,16 +96,53 @@ const course = new Vue({
         this.isAvaibleCourse = !shop_cart.filter(course => course == this.$refs.course.getAttribute('data-id'))
       }
     },
-    downloadMaterial: function(topic_id, url, media){
+    playVideo: function(video, unity){
       event.preventDefault();
 
+      if (this.metas.get('sector') == 'privado') {
+        if(this.accessGranted || unity == 1){
+          window.location = video;
+        }else{
+          if (this.logedUser) {            
+            window.location = `${this.SITE_URL}/solicitar-cursos`;
+          } else {
+            this.isActiveSignUp = true;
+          }
+        }    
+      } else if(this.metas.get('sector') == 'publico') {
+        if(this.logedUser || unity == 1){
+          window.location = video;
+        }else{
+          this.isActiveSignUp = true;
+        }        
+      }
+    },
+    downloadMaterial: function(unity, topic_id, url, media){
+      event.preventDefault();
+
+      if (this.metas.get('sector') == 'privado') {
+        if(this.accessGranted || unity == 1){
+          this.saveMaterialLog(topic_id, url, media)
+        }else{
+          if (this.logedUser) {            
+            window.location = `${this.SITE_URL}/solicitar-cursos`;
+          } else {
+            this.isActiveSignUp = true;
+          }
+        }    
+      } else if(this.metas.get('sector') == 'publico') {
+        if(this.logedUser || unity == 1){
+          this.saveMaterialLog(topic_id, url, media)
+        }else{
+          this.isActiveSignUp = true;
+        }        
+      }
+    },
+    saveMaterialLog: function(topic_id, url, media){
       let course_id = this.$refs.course.getAttribute('data-id'),
         user = (this.logedUser) ? this.logedUser.user_email : 'anonimo';
-
-      fetch(`${this.API}/topic/${topic_id}/material/log?
-        user=${user}&
-        course_id=${course_id}
-        media=${media}`,{
+      
+      fetch(`${this.API}/topic/${topic_id}/material/log?user=${user}&course_id=${course_id}&media=${media}`,{
           method: 'PUT'
         })
         .then(res => { 
@@ -133,6 +159,6 @@ const course = new Vue({
           window.open(url, '_blank');
           throw err;
         })
-    }  
+    }
   }
 })

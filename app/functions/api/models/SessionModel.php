@@ -57,7 +57,9 @@ class SessionModel{
     }
 
     public static function createSession($request){
-        $opentok = new OpenTok("46544742", "0eeea9a2b9023f70ff8942cc4a472f99a16a57f5");
+        $env = require(__DIR__ . '/../../../../env.php');
+        
+        $opentok = new OpenTok($env['API_KEY'], $env['SECRET']);
         $session = $opentok->createSession();
 
         if ($session->getSessionId()) {

@@ -92,8 +92,8 @@ class UserController{
         }
     }
 
-    public function getAccessLog($request){
-        $access_logs = UserModel::getAccessLog($request);
+    public function getAccessLogs($request){
+        $access_logs = UserModel::getAccessLogs($request);
 
         if ( empty($access_logs) ) {
             return new WP_Error( 'no_access_logs', __('No access logs'), array( 'status' => 404 ) );
@@ -110,15 +110,15 @@ class UserController{
             //Server settings
             $mail->SMTPDebug = 0;
             $mail->isSMTP();
-            $mail->Host       = 'innovdevelopers.com';
+            $mail->Host       = 'mail.mabclick.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'no-reply@innovdevelopers.com';
-            $mail->Password   = 'n#r-(]N6yH=5';
+            $mail->Username   = 'no-reply@mabclick.com';
+            $mail->Password   = '-@6]W8u_5qA@';
             $mail->SMTPSecure = 'ssl';
             $mail->Port       = 465;
     
             //Recipients
-            $mail->setFrom('no-reply@innovdevelopers.com', "MABCLICK");
+            $mail->setFrom('no-reply@mabclick.com', "MABCLICK");
             $mail->addAddress($request['user']);
     
             // Content
@@ -173,5 +173,21 @@ class UserController{
         } catch (Exception $e) {
             return new WP_Error( 'Message could not be sent', __($mail->ErrorInfo), array( 'status' => 404 ) );
         }
+    }
+
+    public function downloadAccesLogs($request){
+        $access_logs = UserModel::getAccessLogs($request, 'all');
+
+        if( empty($access_logs) ){                
+            return new WP_Error( 'no_access_logs', __('No access logs'), array( 'status' => 404 ) );         
+        }else{
+            header('Content-Encoding: UTF-8');
+            header("Content-Type: application/xls; charset=UTF-8");    
+            header("Content-Disposition: attachment; filename=resportes-accesos-mabclick-".date('Y-m-d').".xls"); 
+            echo "\xEF\xBB\xBF";
+
+            //Header
+            include_once __DIR__."/../exports/reports/accesses.php";
+        }        
     }
 }

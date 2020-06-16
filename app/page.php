@@ -40,7 +40,7 @@ if(is_page('login')){
 }else if(is_page('carrito')){
     $context['pasarell'] = get_field('sell', 'options')['pasarell'];
 }else if(is_page('recuperar-contrasena')){
-    if ($_GET['stage'] == 2) {
+    if (isset($_GET['stage']) && $_GET['stage'] == 2) {
         $templates = 'auth/password/page-actualizar-contrasena.twig' ;
     } else {
         $templates = 'auth/password/page-recuperar-contrasena.twig' ;

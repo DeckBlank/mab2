@@ -5,12 +5,12 @@ function __getOffset($page){
     if ( !isset($page) || $page == 1) {
         $offset = 0;
     } else {
-        $offset = ($page - 1) * 5;
+        $offset = ($page - 1) * 25;
     }
 
     return $offset;
 }
 
 function __getLimit(){
-    return 5;
+    return 25;
 }

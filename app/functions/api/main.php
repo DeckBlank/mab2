@@ -49,7 +49,12 @@ add_action( 'rest_api_init', function () {
 
     register_rest_route( 'custom/v1', '/users/access/logs', array(
         'methods' => 'GET',
-        'callback' => array($userController,'getAccessLog')
+        'callback' => array($userController,'getAccessLogs')
+    ));
+
+    register_rest_route( 'custom/v1', '/users/access/logs/download', array(
+        'methods' => 'GET',
+        'callback' => array($userController,'downloadAccesLogs')
     ));
 });
 
@@ -131,6 +136,11 @@ add_action( 'rest_api_init', function () {
         'methods' => 'GET',
         'callback' => array($courseController,'getUserCourseLogs'),
     ));
+
+    register_rest_route( 'custom/v1', '/courses/user/logs/download', array(
+        'methods' => 'GET',
+        'callback' => array($courseController,'downloadUserCourseLogs'),
+    ));    
 });
 
 //4. Topic ----------------------------------//
@@ -197,14 +207,29 @@ add_action( 'rest_api_init', function () {
         'callback' => array($topicController,'getVideoLogs'),
     ));
 
+    register_rest_route( 'custom/v1', '/topics/video/logs/download', array(
+        'methods' => 'GET',
+        'callback' => array($topicController,'downloadVideoLogs'),
+    ));
+
     register_rest_route( 'custom/v1', '/topics/material/logs', array(
         'methods' => 'GET',
         'callback' => array($topicController,'getMaterialLogs'),
     ));
 
+    register_rest_route( 'custom/v1', '/topics/material/logs/download', array(
+        'methods' => 'GET',
+        'callback' => array($topicController,'downloadMaterialLogs'),
+    ));
+
     register_rest_route( 'custom/v1', '/topics/test/logs', array(
         'methods' => 'GET',
         'callback' => array($topicController,'getTestLogs'),
+    ));
+
+    register_rest_route( 'custom/v1', '/topics/test/logs/download', array(
+        'methods' => 'GET',
+        'callback' => array($topicController,'downloadTestLogs'),
     ));
 });
 
@@ -257,6 +282,11 @@ add_action( 'rest_api_init', function () {
         'callback' => array($testController,'getTests'),
     ));
 
+    register_rest_route( 'custom/v1', '/tests/download', array(
+        'methods' => 'GET',
+        'callback' => array($testController,'downloadTests'),
+    ));
+
     register_rest_route( 'custom/v1', '/test/questions', array(
         'methods' => 'GET',
         'callback' => array($testController,'getQuestions'),
@@ -282,6 +312,11 @@ add_action( 'rest_api_init', function () {
         'callback' => array($behaviourController,'getQuestionaries'),
     ));
 
+    register_rest_route( 'custom/v1', '/behaviour/questionaries/download', array(
+        'methods' => 'GET',
+        'callback' => array($behaviourController,'downloadQuestionaries'),
+    ));
+
     register_rest_route( 'custom/v1', '/behaviour/questionary/enable', array(
         'methods' => 'GET',
         'callback' => array($behaviourController,'checkoutQuestionaryEnable'),
@@ -300,6 +335,11 @@ add_action( 'rest_api_init', function () {
     register_rest_route( 'custom/v1', '/behaviour/polls', array(
         'methods' => 'GET',
         'callback' => array($behaviourController,'getPolls'),
+    ));
+
+    register_rest_route( 'custom/v1', '/behaviour/polls/download', array(
+        'methods' => 'GET',
+        'callback' => array($behaviourController,'downloadPolls'),
     ));
 
     register_rest_route( 'custom/v1', '/behaviour/poll/enable', array(

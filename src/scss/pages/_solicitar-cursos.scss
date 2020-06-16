@@ -18,6 +18,9 @@
     color: $white;
     font-weight: $medium-font;
     font-family: $font-family-secondary;
+    border-left: solid 4px $primary-color;
+    padding-left: 0.5rem;
+    margin-top: 0.5rem;
   }
 
   .wpcf7-response-output {
@@ -25,7 +28,7 @@
     border: none !important;
     margin: 0 !important;
     color: $white;
-    font-size: $fs-18;
+    font-size: $fs-25;
     font-weight: $medium-font;
     font-family: $font-family-secondary;
   }

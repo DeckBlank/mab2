@@ -8,6 +8,12 @@
     <div class="d-flex mb-1">
         <input class="mr-1" type="text" placeholder="Usuario (email)" id="user">
         <button id="search" class="button button-primary">Buscar</button>
+        <a 
+            href="<?php echo get_site_url() . '/wp-json/custom/v1/topics/video/logs/download' ?>" 
+            download 
+            class="button button-success">
+            Descargar todo (.xls)
+        </a>
     </div>
     <table class="widefat fixed mb-1" cellspacing="0">
         <thead>
@@ -54,7 +60,7 @@
             `
         })
 
-        if(__logs.length == 0 || __logs.length < 5){
+        if(__logs.length == 0 || __logs.length < 25){
             document.querySelector('#load-more').classList.add('hide')
         }
     }

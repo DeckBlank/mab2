@@ -129,7 +129,23 @@ class TopicController{
             return new WP_REST_Response($view_logs, 200);
         }
     } 
- 
+
+    public function downloadVideoLogs($request){
+        $view_logs = TopicModel::getVideoLogs($request, 'all');
+
+        if ( empty($view_logs) ) {
+            return new WP_Error( 'no_topic_view_logs', __('No topic view logs'), array( 'status' => 404 ) );
+        } else {
+            header('Content-Encoding: UTF-8');
+            header("Content-Type: application/xls; charset=UTF-8");
+            header("Content-Disposition: attachment; filename=resportes-videos-vistos-mabclick-".date('Y-m-d').".xls"); 
+            echo "\xEF\xBB\xBF";
+
+            //Header
+            include_once __DIR__."/../exports/reports/videos.php";
+        }       
+    }
+
     public static function getMaterialLogs($request){
         $material_logs = TopicModel::getMaterialLogs($request);
 
@@ -138,8 +154,25 @@ class TopicController{
         } else {
             return new WP_REST_Response($material_logs, 200);
         }
-    } 
- 
+    }
+
+    public function downloadMaterialLogs($request){
+        $material_logs = TopicModel::getMaterialLogs($request, 'all');
+
+
+        if ( empty($material_logs) ) {
+            return new WP_Error( 'no_topic_material_logs', __('No topic material logs'), array( 'status' => 404 ) );
+        } else {
+            header('Content-Encoding: UTF-8');
+            header("Content-Type: application/xls; charset=UTF-8");
+            header("Content-Disposition: attachment; filename=resportes-pdfs-descargados-mabclick-".date('Y-m-d').".xls"); 
+            echo "\xEF\xBB\xBF";
+
+            //Header
+            include_once __DIR__."/../exports/reports/materials.php";
+        }     
+    }    
+
     public static function getTestLogs($request){
         $test_logs = TopicModel::getTestLogs($request);
 
@@ -148,5 +181,22 @@ class TopicController{
         } else {
             return new WP_REST_Response($test_logs, 200);
         }
-    } 
+    }
+
+    public function downloadTestLogs($request){
+        $material_logs = TopicModel::getTestLogs($request, 'all');
+
+
+        if ( empty($material_logs) ) {
+            return new WP_Error( 'no_topic_material_logs', __('No topic material logs'), array( 'status' => 404 ) );
+        } else {
+            header('Content-Encoding: UTF-8');
+            header("Content-Type: application/xls; charset=UTF-8");
+            header("Content-Disposition: attachment; filename=resportes-cuestionarios-resueltos-mabclick-".date('Y-m-d').".xls"); 
+            echo "\xEF\xBB\xBF";
+
+            //Header
+            include_once __DIR__."/../exports/reports/tests.php";
+        }     
+    }    
 }

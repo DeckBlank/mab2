@@ -107,8 +107,7 @@ const progress = new Vue({
           },100)
         })
         .catch(err => {
-          window.location = `${this.SITE_URL}/solicitar-cursos`;
-          
+          this.hideLoading();
           throw err;          
         })      
     }

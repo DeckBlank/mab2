@@ -199,7 +199,8 @@ Vue.component('form-student',{
       grades: [
         "Bebés",
         "Inicial 3 años",
-        "Inicial 4 años e Inicial 5 años",
+        "Inicial 4 años",
+        "Inicial 5 años",
         "1RO PRIMARIA",
         "2DO PRIMARIA",
         "3RO PRIMARIA",
@@ -248,7 +249,6 @@ Vue.component('form-student',{
         this.gender.isValid &&
         this.email.isValid &&
         this.password.isValid &&
-        this.phone.isValid &&
         this.mobile.isValid &&
         this.schoolType.isValid &&
         ((this.schoolType.value == 'privado') ? this.school.isValid : true) &&

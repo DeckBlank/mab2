@@ -31,6 +31,22 @@ class TestController{
         }
     }
 
+    public function downloadTests($request){
+        $tests = TestModel::getTests($request, 'all');
+
+        if ($tests) {
+            header('Content-Encoding: UTF-8');
+            header("Content-Type: application/xls; charset=UTF-8");
+            header("Content-Disposition: attachment; filename=resportes-estilos-aprendizaje-mabclick-".date('Y-m-d').".xls"); 
+            echo "\xEF\xBB\xBF";
+
+            //Header
+            include_once __DIR__."/../exports/reports/learning.php";
+        } else {
+            return new WP_Error( 'no_tests', __('No tests found'), array( 'status' => 404 ) );
+        }  
+    }    
+
     public function getQuestions($request){
         $questions = TestModel::getQuestions($request);
 
@@ -40,7 +56,7 @@ class TestController{
             return new WP_REST_Response($questions, 200);
         }
     } 
-   
+
     public function saveTest($request){
         if (TestModel::saveTest($request)) {
             return new WP_REST_Response('Test saved', 200);

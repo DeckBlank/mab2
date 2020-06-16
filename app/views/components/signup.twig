@@ -1,0 +1,17 @@
+<div class="c-modal position-fixed width-100 height-100" :class="{ opened : isActiveSignUp }">
+  <div class="grid-container height-100">
+    <div class="grid-x align-center-middle height-100">
+      <div class="cell medium-8 large-6">
+        <div class="c-modal__content flex-container align-center-middle">
+          <div class="c-accept bg-white padding-2 br--medium text-center">
+            <p class="f2 fs-18 w-medium black margin-bottom-2">Create una cuenta para continuar</p>
+            <div class="modal_btn_container flex-container align-center">
+              <button @click="isActiveSignUp = false" class="c-button fs-18 w-medium f2 pri-color margin-right-1">Cerrar</button>
+              <a href="{{site.url}}/#registro" class="c-button fs-18 w-medium f2 c-button--secondary">Crear cuenta</a>
+            </div>
+          </div>    
+        </div>
+      </div>      
+    </div>      
+  </div>      
+</div>

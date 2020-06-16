@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+  {% include "components/signup.twig" %}
   <section ref="course" class="c-section c-section--course bg-pri-alt" data-id="{{post.id}}" data-title="{{post.title}}">
     <div class="grid-container padding-top-3 margin-bottom-2">
       <section class="c-content" :class="{ active : isActivePubSectorMenu || isActivePrivSectorMenu }">
@@ -43,9 +44,12 @@
 
                   {% for topic in unity.topics %}                 
                     <li class="c-topic f2 fs-21 dar-gray w-medium">
-                      <a 
-                        :href="'{{topic.link}}?course_id={{post.id}}&course_name={{post.title}}&unity={{unity_id}}&sector=' + metas.get('sector')" 
-                        class="c-topic__item flex-container align-justify align-middle">
+                      <a
+                        class="c-topic__item flex-container align-justify align-middle"
+                        @click="playVideo(
+                          '{{topic.link}}?course_id={{post.id}}&course_name={{post.title}}&unity={{unity_id}}&sector=' + metas.get('sector'),
+                          {{unity_id}}
+                        )">
                         <p class="margin-bottom-0 flex-container dark-gray align-middle">
                           <span class="c-icon margin-right-1 fs-21 pri-color"><i class="far fa-play-circle"></i></span>
                           {{topic.title}}
@@ -57,11 +61,10 @@
                       </a>
 
                       {% if topic.summary %}                      
-                        <a 
-                          href="{{topic.summary}}" 
+                        <a
                           target="_blank" 
                           class="c-topic__item flex-container align-justify align-middle"
-                          @click="downloadMaterial({{topic.id}}, '{{topic.summary}}', 'summary')">
+                          @click="downloadMaterial({{unity_id}}, {{topic.id}}, '{{topic.summary}}', 'summary')">
                           <p class="margin-bottom-0 flex-container align-middle dark-gray">
                             <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
                             Resumen
@@ -73,11 +76,10 @@
                       {% endif %}
                       
                       {% if topic.map %}                      
-                        <a 
-                          href="{{topic.map}}" 
+                        <a
                           target="_blank" 
                           class="c-topic__item flex-container align-justify align-middle"
-                          @click="downloadMaterial({{topic.id}}, '{{topic.map}}', 'map')">
+                          @click="downloadMaterial({{unity_id}}, {{topic.id}}, '{{topic.map}}', 'map')">
                           <p class="margin-bottom-0 flex-container align-middle dark-gray">
                             <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
                             Mapa Mental
@@ -89,11 +91,10 @@
                       {% endif %}
 
                       {% if topic.worksheet %}                      
-                        <a 
-                          href="{{topic.worksheet}}" 
+                        <a
                           target="_blank" 
                           class="c-topic__item flex-container align-justify align-middle"
-                          @click="downloadMaterial({{topic.id}}, '{{topic.worksheet}}', 'worksheet')">
+                          @click="downloadMaterial({{unity_id}}, {{topic.id}}, '{{topic.worksheet}}', 'worksheet')">
                           <p class="margin-bottom-0 flex-container align-middle dark-gray">
                             <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
                             Hoja de trabajo
@@ -105,11 +106,10 @@
                       {% endif %}
 
                       {% if topic.solutions %}                      
-                        <a 
-                          href="{{topic.solutions}}" 
+                        <a
                           target="_blank" 
                           class="c-topic__item flex-container align-justify align-middle"
-                          @click="downloadMaterial({{topic.id}}, '{{topic.solutions}}', 'solutions')">
+                          @click="downloadMaterial({{unity_id}}, {{topic.id}}, '{{topic.solutions}}', 'solutions')">
                           <p class="margin-bottom-0 flex-container align-middle dark-gray">
                             <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
                             Solucionario

@@ -172,7 +172,7 @@ class UserModel{
         }
     }
 
-    public static function getAccessLog($request){
+    public static function getAccessLogs($request, $limit = false){
         if (isset($request['user'])) {
             $access_logs_query = DBConnection::getConnection()->query("
                 SELECT 
@@ -183,15 +183,26 @@ class UserModel{
                     user_email = '". $request['user'] ."'
             ");
         } else {
-            $access_logs_query = DBConnection::getConnection()->query("
-                SELECT 
-                    *
-                FROM 
-                    wp_access_logs
-                ORDER BY last_date DESC
-                LIMIT ". __getLimit() ."
-                OFFSET ". __getOffset($request['page']) ."
-            ");
+            if ($limit == 'all') {
+                $access_logs_query = DBConnection::getConnection()->query("
+                    SELECT 
+                        *
+                    FROM 
+                        wp_access_logs
+                    ORDER BY last_date DESC
+                ");
+            } else {
+                $access_logs_query = DBConnection::getConnection()->query("
+                    SELECT 
+                        *
+                    FROM 
+                        wp_access_logs
+                    ORDER BY last_date DESC
+                    LIMIT ". __getLimit() ."
+                    OFFSET ". __getOffset($request['page']) ."
+                ");
+            }
+            
         }
         $access_logs = [];
 

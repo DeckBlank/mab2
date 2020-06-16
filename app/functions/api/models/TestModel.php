@@ -33,7 +33,7 @@ class TestModel{
         }
     }
 
-    public static function getTests($request){
+    public static function getTests($request, $limit = false){
         if (isset($request['user'])) {
             $test_logs_query = DBConnection::getConnection()->query("
                 SELECT 
@@ -44,15 +44,25 @@ class TestModel{
                     user = '". $request['user'] ."'
             ");
         } else {
-            $test_logs_query = DBConnection::getConnection()->query("
-                SELECT 
-                    *
-                FROM 
-                    wp_user_tests
-                ORDER BY date_at DESC
-                LIMIT ". __getLimit() ."
-                OFFSET ". __getOffset($request['page']) ."
-            ");
+            if ($limit == 'all') {
+                $test_logs_query = DBConnection::getConnection()->query("
+                    SELECT 
+                        *
+                    FROM 
+                        wp_user_tests
+                    ORDER BY date_at DESC
+                ");
+            } else {
+                $test_logs_query = DBConnection::getConnection()->query("
+                    SELECT 
+                        *
+                    FROM 
+                        wp_user_tests
+                    ORDER BY date_at DESC
+                    LIMIT ". __getLimit() ."
+                    OFFSET ". __getOffset($request['page']) ."
+                ");
+            }
         }
         $test_logs = [];
 

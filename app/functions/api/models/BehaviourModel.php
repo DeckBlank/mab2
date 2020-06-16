@@ -37,7 +37,7 @@ class BehaviourModel{
         }
     }
 
-    public static function getQuestionaries($request){
+    public static function getQuestionaries($request, $limit = false){
         if (isset($request['user'])) {
             $questionaries_query = DBConnection::getConnection()->query("
                 SELECT 
@@ -48,15 +48,25 @@ class BehaviourModel{
                     user_email = '". $request['user'] ."'
             ");
         } else {
-            $questionaries_query = DBConnection::getConnection()->query("
-                SELECT 
-                    *
-                FROM 
-                    wp_questionaries
-                ORDER BY date_at DESC
-                LIMIT ". __getLimit() ."
-                OFFSET ". __getOffset($request['page']) ."
-            ");
+            if ($limit == 'all') {
+                $questionaries_query = DBConnection::getConnection()->query("
+                    SELECT 
+                        *
+                    FROM 
+                        wp_questionaries
+                    ORDER BY date_at DESC
+                ");
+            } else {
+                $questionaries_query = DBConnection::getConnection()->query("
+                    SELECT 
+                        *
+                    FROM 
+                        wp_questionaries
+                    ORDER BY date_at DESC
+                    LIMIT ". __getLimit() ."
+                    OFFSET ". __getOffset($request['page']) ."
+                ");
+            }
         }
         $questionaries = [];
 
@@ -119,7 +129,7 @@ class BehaviourModel{
         ];
     }
 
-    public static function getPolls($request){
+    public static function getPolls($request, $limit = false){
         if (isset($request['user'])) {
             $polls_query = DBConnection::getConnection()->query("
                 SELECT 
@@ -130,15 +140,25 @@ class BehaviourModel{
                     user_email = '". $request['user'] ."'
             ");
         } else {
-            $polls_query = DBConnection::getConnection()->query("
-                SELECT 
-                    *
-                FROM 
-                    wp_polls
-                ORDER BY date_at DESC
-                LIMIT ". __getLimit() ."
-                OFFSET ". __getOffset($request['page']) ."
-            ");
+            if ($limit == 'all') {
+                $polls_query = DBConnection::getConnection()->query("
+                    SELECT 
+                        *
+                    FROM 
+                        wp_polls
+                    ORDER BY date_at DESC
+                ");
+            } else {
+                $polls_query = DBConnection::getConnection()->query("
+                    SELECT 
+                        *
+                    FROM 
+                        wp_polls
+                    ORDER BY date_at DESC
+                    LIMIT ". __getLimit() ."
+                    OFFSET ". __getOffset($request['page']) ."
+                ");
+            }
         }
         $polls = [];
 

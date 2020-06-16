@@ -257,7 +257,7 @@ class CourseModel{
         }        
     }
 
-    public static function getUserCourseLogs($request){
+    public static function getUserCourseLogs($request, $limit = false){
         if (isset($request['user'])) {
             $user_course_logs_query = DBConnection::getConnection()->query("
                 SELECT 
@@ -268,15 +268,25 @@ class CourseModel{
                     user_email = '". $request['user'] ."'
             ");
         } else {
-            $user_course_logs_query = DBConnection::getConnection()->query("
-                SELECT 
-                    *
-                FROM 
-                    wp_user_course
-                ORDER BY last_date DESC
-                LIMIT ". __getLimit() ."
-                OFFSET ". __getOffset($request['page']) ."
-            ");
+            if ($limit == 'all') {
+                $user_course_logs_query = DBConnection::getConnection()->query("
+                    SELECT 
+                        *
+                    FROM 
+                        wp_user_course
+                    ORDER BY last_date DESC
+                ");
+            } else {
+                $user_course_logs_query = DBConnection::getConnection()->query("
+                    SELECT 
+                        *
+                    FROM 
+                        wp_user_course
+                    ORDER BY last_date DESC
+                    LIMIT ". __getLimit() ."
+                    OFFSET ". __getOffset($request['page']) ."
+                ");
+            }
         }
         $user_course_logs = [];
 

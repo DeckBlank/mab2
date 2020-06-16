@@ -235,7 +235,6 @@ Vue.component('form-teacher',{
         this.gender.isValid &&
         this.email.isValid &&
         this.password.isValid &&
-        this.phone.isValid &&
         this.mobile.isValid &&
         this.schoolType.isValid &&
         ((this.schoolType.value == 'privado') ? this.school.isValid : true) &&

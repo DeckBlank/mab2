@@ -26,12 +26,28 @@ class BehaviourController{
     }
 
     public function getQuestionaries($request){
-        $questionary = BehaviourModel::getQuestionaries($request);
+        $questionaries = BehaviourModel::getQuestionaries($request);
 
-        if ( empty($questionary) ) {
-            return new WP_Error( 'no_questionary', __('No questionaries found'), array( 'status' => 404 ) );
+        if ( empty($questionaries) ) {
+            return new WP_Error( 'no_questionaries', __('No questionaries found'), array( 'status' => 404 ) );
         } else {
-            return new WP_REST_Response($questionary, 200);
+            return new WP_REST_Response($questionaries, 200);
+        }
+    }
+
+    public function downloadQuestionaries($request){
+        $questionaries = BehaviourModel::getQuestionaries($request, 'all');
+
+        if ( empty($questionaries) ) {
+            return new WP_Error( 'no_questionaries', __('No questionaries found'), array( 'status' => 404 ) );
+        } else {
+            header('Content-Encoding: UTF-8');
+            header("Content-Type: application/xls; charset=UTF-8");
+            header("Content-Disposition: attachment; filename=resportes-cuestionarios-seguimiento-mabclick-".date('Y-m-d').".xls"); 
+            echo "\xEF\xBB\xBF";
+
+            //Header
+            include_once __DIR__."/../exports/reports/questionaries.php";
         }
     }
 
@@ -74,6 +90,23 @@ class BehaviourController{
             return new WP_Error( 'no_polls', __('No polls found'), array( 'status' => 404 ) );
         } else {
             return new WP_REST_Response($polls, 200);
+        }
+    }
+    
+
+    public function downloadPolls($request){
+        $polls = BehaviourModel::getPolls($request, 'all');
+
+        if ( empty($polls) ) {
+            return new WP_Error( 'no_polls', __('No polls found'), array( 'status' => 404 ) );
+        } else {
+            header('Content-Encoding: UTF-8');
+            header("Content-Type: application/xls; charset=UTF-8");
+            header("Content-Disposition: attachment; filename=resportes-encuestas-satisfaccion-mabclick-".date('Y-m-d').".xls"); 
+            echo "\xEF\xBB\xBF";
+
+            //Header
+            include_once __DIR__."/../exports/reports/polls.php";
         }
     }    
 
