@@ -138,7 +138,7 @@ class TopicModel{
 
                 if ($response) {
                     try {
-                        return CourseModel::saveLog($request, 'topic');                
+                        return CourseModel::saveLog($request, 'topic');
                     } catch (Exception $e) {
                         throw new Exception($e->getMessage());
                     }
@@ -187,51 +187,57 @@ class TopicModel{
     }
 
     public static function saveTestLog($request, $operation){
-        $right_answers = json_decode($request['result'])->rights;
-        $wrong_answers = json_decode($request['result'])->wrongs;
-
-        $course = (object)[
-            "id" => $request['course_id'],
-            "security" => $request['course_security'],
-        ];
-
-        $response = DBConnection::getConnection()->query("
-            INSERT INTO 
-                wp_topic_test_logs(
-                    user_email, 
-                    right_answers, 
-                    wrong_answers, 
-                    test_count,
-                    last_course,
-                    last_unity, 
-                    last_topic, 
-                    last_date
-                )
-            VALUES(
-                '". $request['user'] ."',
-                1,
-                ". $right_answers .",
-                ". $wrong_answers .",
-                '". json_encode($course) ."',
-                '". $request['unity'] ."',
-                '". $request['topic_id'] ."',
-                '". date("Y-m-d G:i:s") ."'
-            )
-            ON DUPLICATE KEY UPDATE
-                test_count = test_count + 1,
-                right_answers = right_answers + ". $right_answers .",
-                wrong_answers = wrong_answers + ". $wrong_answers .",
-                last_course = '". json_encode($course) ."',
-                last_unity = '". $request['unity'] ."',
-                last_topic = '". $request['topic_id'] ."',               
-                last_date = '". date("Y-m-d G:i:s") ."'
-        ");
-
-        if ($response) {
-            return true;
-        } else {
-            throw new Exception("Log couldn't saved");
-        }       
+        try {
+            if(CourseModel::saveLog($request, 'test')){
+                $right_answers = json_decode($request['result'])->rights;
+                $wrong_answers = json_decode($request['result'])->wrongs;
+        
+                $course = (object)[
+                    "id" => $request['course_id'],
+                    "security" => $request['course_security'],
+                ];
+        
+                $response = DBConnection::getConnection()->query("
+                    INSERT INTO 
+                        wp_topic_test_logs(
+                            user_email, 
+                            right_answers, 
+                            wrong_answers, 
+                            test_count,
+                            last_course,
+                            last_unity, 
+                            last_topic, 
+                            last_date
+                        )
+                    VALUES(
+                        '". $request['user'] ."',
+                        1,
+                        ". $right_answers .",
+                        ". $wrong_answers .",
+                        '". json_encode($course) ."',
+                        '". $request['unity'] ."',
+                        '". $request['topic_id'] ."',
+                        '". date("Y-m-d G:i:s") ."'
+                    )
+                    ON DUPLICATE KEY UPDATE
+                        test_count = test_count + 1,
+                        right_answers = right_answers + ". $right_answers .",
+                        wrong_answers = wrong_answers + ". $wrong_answers .",
+                        last_course = '". json_encode($course) ."',
+                        last_unity = '". $request['unity'] ."',
+                        last_topic = '". $request['topic_id'] ."',               
+                        last_date = '". date("Y-m-d G:i:s") ."'
+                ");
+        
+                if ($response) {
+                    return true;
+                } else {
+                    throw new Exception("Log couldn't saved");
+                }                 
+            }
+        } catch (Exception $e) {
+            throw new Exception($e->getMessage());
+        }      
     }
 
     public static function getVideoLogs($request, $limit = false){
