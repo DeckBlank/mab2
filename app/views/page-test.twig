@@ -105,16 +105,23 @@
                   </div>
                 </div>
               </div>
-              <div class="flex-container align-middle align-right">
-                <div class="flex-container align-middle" :class="{ enable: isEnableChange, hide: testDone }">                       
+              <div v-if="testResult.list.length > 0" class="flex-container align-middle align-right">
+                <div class="flex-container align-middle" :class="{ enable: isEnableChange, hide: testDone }">
+                  <button 
+                    class="flex-container f2 fs-18 w-medium align-center-middle"
+                    :class="{ 'sec-color' : currentQuestion != 1 }"
+                    @click="changeQuestion('previous')" 
+                    :disabled="currentQuestion == 1">
+                    <span class="c-icon margin-left-1"><i class="far fa-arrow-left"></i></span>
+                  </button>
                   <p class="c-questions__progress margin-bottom-0 fs-18 f2 w-medium dark-gray text-center margin-horizontal-1">
                     <span>${currentQuestion}</span> de <span>${questions.count}</span>
                   </p>
                   <button 
                     class="flex-container f2 fs-18 w-medium align-center-middle"
-                    :class="{ 'sec-color' : isEnableChange }"
+                    :class="{ 'sec-color' : (isEnableChange || testResult.list[currentQuestion - 1].value != '') }"
                     @click="changeQuestion('next')" 
-                    :disabled="!isEnableChange">
+                    :disabled="!isEnableChange && testResult.list[currentQuestion - 1].value==''">
                     Siguiente
                     <span class="c-icon margin-left-1"><i class="far fa-arrow-right"></i></span>
                   </button>                                   

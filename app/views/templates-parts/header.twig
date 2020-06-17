@@ -6,7 +6,7 @@
         {% set sec_pub = primary_menu.items[1] %}
         {% set sec_priv = primary_menu.items[2] %}
         <figure class="c-brand c-brand--normal flex-container align-center-middle">
-          <a class="c-brand__link" href="{{ site.url }}">
+          <a class="c-brand__link" href="{{ site.url }}/emotional">
           </a>
         </figure>
         
@@ -18,7 +18,7 @@
         <li v-if="logedUser.user_sector == 'publico'">
           <div class="c-menu__item">
             <a class="position-relative flex-container align-middle" @click="updateStatusPubSectorMenu">
-              Cursos <span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
+              MAB ACADÉMICO <span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
             </a>
           </div>
         </li> 
@@ -32,7 +32,7 @@
         <li v-if="logedUser.user_sector == 'privado'">
           <div class="c-menu__item">
             <a class="position-relative flex-container align-middle" @click="updateStatusPrivSectorMenu">
-              Cursos <span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
+              MAB ACADÉMICO <span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
             </a>
           </div>
         </li>

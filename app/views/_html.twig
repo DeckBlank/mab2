@@ -29,7 +29,7 @@
       {% endblock %}
       
       <div v-if="sectors[0]" class="c-cursos bg-sec-color position-fixed" :class="{ active : isActivePubSectorMenu }">
-        <h2 v-if="logedUser" class="c-cursos__title margin-bottom-1 w-black white">CURSOS</h2>
+        <h2 v-if="logedUser" class="c-cursos__title margin-bottom-1 w-black white">MAB ACADÉMICO</h2>
         <h2 v-else class="c-cursos__title margin-bottom-1 w-black white">PÚBLICO</h2>
         <ul v-if="logedUser" class="c-cursos__list ul-reset">
           <li v-if="logedUser.user_sector == 'publico'" v-for="grade of sectors[0].children" class="c-cursos__item fs-18 f2">
@@ -72,7 +72,7 @@
       </div>
       
       <div v-if="sectors[1]" class="c-cursos bg-sec-color position-fixed" :class="{ active : isActivePrivSectorMenu }">
-        <h2 v-if="logedUser" class="c-cursos__title margin-bottom-1 w-black white">CURSOS</h2>
+        <h2 v-if="logedUser" class="c-cursos__title margin-bottom-1 w-black white">MAB ACADÉMICO</h2>
         <h2 v-else class="c-cursos__title margin-bottom-1 w-black white">PRIVADO</h2>
         <ul v-if="logedUser" class="c-cursos__list ul-reset">
           <li v-if="logedUser.user_sector == 'privado'" v-for="grade of sectors[1].children" class="c-cursos__item fs-18 f2">

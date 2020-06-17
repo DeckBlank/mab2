@@ -86,16 +86,16 @@
         right: 0;
       }
     }
-
-    .c-questions-toggle {
-      margin-top: 0;
-      width: auto;
-    }
   }
 }
 
 @include breakpoint(large) {
   .c-section--topic {
+    .c-questions-toggle {
+      margin-top: 0;
+      width: auto;
+    }
+
     .c-modal {
       &::after {
         content: '';

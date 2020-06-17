@@ -67,7 +67,7 @@ Vue.component('questionary-student',{
                         </p>
                         <button 
                           class="c-button c-button--secondary w-medium f2 fs-18"
-                          @click="limitQuestion = questionaryStudent.decisions.count; changeQuestion('next', true); currentQuestion = 1; currentMode = 'decisions'">Iniciar</button>
+                          @click="changeQuestion('next', true)">Iniciar</button>
                       </div>
                     </div>
                     <div v-for="(q_, qindex) of questionaryStudent.decisions.list" :key="q_.id" class="swiper-slide">
@@ -101,16 +101,23 @@ Vue.component('questionary-student',{
                     </div>                      
                   </div>
                 </div>
-                <div class="flex-container align-middle align-right">
-                  <div class="flex-container align-middle" :class="{ enable: isEnableChange, hide: questionaryDone }">                       
+                <div v-if="questionaryResult.length > 0" class="flex-container align-middle align-right">
+                  <div class="flex-container align-middle" :class="{ enable: isEnableChange, hide: questionaryDone }">
+                    <button 
+                      class="flex-container f2 fs-18 w-medium align-center-middle"
+                      :class="{ 'sec-color' : currentQuestion != 1 }"
+                      @click="changeQuestion('previous')" 
+                      :disabled="currentQuestion == 1">
+                      <span class="c-icon margin-left-1"><i class="far fa-arrow-left"></i></span>
+                    </button>                 
                     <p class="c-questions__progress margin-bottom-0 fs-18 f2 w-medium dark-gray text-center margin-horizontal-1">
                       <span>{{currentQuestion}}</span> de <span>{{limitQuestion}}</span>
                     </p>
                     <button 
                       class="flex-container f2 fs-18 w-medium align-center-middle"
-                      :class="{ 'sec-color' : isEnableChange }"
+                      :class="{ 'sec-color' : (isEnableChange || ( (currentMode=='base') ? questionaryResult[currentQuestion - 1].value != '' : questionaryResult[questionaryStudent.base.count].value != '')) }"
                       @click="changeQuestion('next')" 
-                      :disabled="!isEnableChange">
+                      :disabled="!isEnableChange && ( (currentMode=='base') ? questionaryResult[currentQuestion - 1].value=='' : questionaryResult[questionaryStudent.base.count].value=='') ">
                       Siguiente
                       <span class="c-icon margin-left-1"><i class="far fa-arrow-right"></i></span>
                     </button>                                   
@@ -170,6 +177,10 @@ Vue.component('questionary-student',{
             if (this.currentMode == 'base') {
               if(this.currentQuestion < this.questionaryStudent.base.count){
                 this.currentQuestion += 1;
+              }else{
+                this.currentQuestion = 1;
+                this.limitQuestion = this.questionaryStudent.decisions.count;
+                this.currentMode = 'decisions'
               }
             } else if(this.currentMode == 'decisions'){
               if(this.currentQuestion < this.questionaryStudent.decisions.count){
@@ -182,7 +193,12 @@ Vue.component('questionary-student',{
             this.saveQuestionary()
           }
         }
-      }
+      }else if(direction == 'previous'){
+        if(this.sliderQuestions.slidePrev()){
+          this.isEnableChange = true
+          this.currentQuestion -= 1;
+        }
+      }      
     },
     enableNext: function(){
       this.isEnableChange = true

@@ -95,7 +95,7 @@
                 </div>
               </div>
               <button v-if="this.logedUser" class="c-questions-toggle c-button f2 fs-18 w-medium c-button--primary flex-container align-center-middle" @click="isOpenedQuestionsModal = true">
-                <p class="margin-bottom-0">Preguntas</p>
+                <p class="margin-bottom-0">Comprueba lo que has aprendido aquí</p>
               </button>
             </div>
             {% if post.content %}
@@ -104,7 +104,7 @@
               </div>
             {% endif %}            
             <a href="{{site.url}}/sesion-virtual" target="_blank" class="c-button c-button--secondary display-block margin-bottom-3 f2 w-medium fs-18 text-center">
-              Para un aprendizaje más personalizado, coordina tu sesión online
+              Para un aprendizaje más personalizado, coordina tu sesión virtual
             </a>            
             <div class="c-comments f2 margin-bottom-2">
               <div class="c-counter flex-container align-middle margin-bottom-2">
@@ -212,6 +212,13 @@
                     </p>
                   </div>
                   <div class="flex-container align-middle" :class="{ enable: isEnableChange, hide: testDone }">                       
+                    <!-- <button 
+                      class="flex-container align-center-middle"
+                      :class="{ 'sec-color' : currentQuestion != 1 }"
+                      @click="changeQuestion('previous')" 
+                      :disabled="currentQuestion == 1">
+                      <span class="c-icon"><i class="far fa-arrow-left"></i></span>
+                    </button> -->
                     <p class="c-questions__progress margin-bottom-0 fs-18 f2 w-medium dark-gray text-center margin-horizontal-1">
                       <span>${currentQuestion}</span> de <span>${questions.length}</span>
                     </p>
@@ -221,8 +228,8 @@
                       @click="changeQuestion('next')" 
                       :disabled="!isEnableChange">
                       <span class="c-icon"><i class="far fa-arrow-right"></i></span>
-                    </button>                                   
-                  </div>
+                    </button>
+                  </div>                                   
                   <button class="c-button c-button--ghost-gray f2 w-medium flex-container align-center-middle br--medium dark" @click="restartTest" :class="{ enable: isEnableChange, hide : !testDone }">
                     <span class="c-icon margin-right-1"><i class="far fa-undo-alt"></i></span>Intentar de nuevo
                   </button>

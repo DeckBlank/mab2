@@ -6,7 +6,10 @@
           <p class="margin-bottom-0 fs-18">{{information.email}}</p>
         </div>
         <div class="c-contact flex-container align-middle white">
-          <p class="margin-bottom-0 fs-18">{{information.phone}}</p>
+          <a href="https://api.whatsapp.com/send?phone=51{{information.phone|replace({' ': ''})}}" target="_blank" class="fs-18">
+            <span class="c-icon mr-1"><i class="fab fa-whatsapp"></i></span>
+            {{information.phone}}
+          </a>
         </div>
         {# <div class="c-contact flex-container align-middle white">
           <a href="{{site.url}}/preguntas-frecuentes" class="fs-18"><span class="c-icon mr-05"><i class="far fa-question"></i></span> Preguntas frecuentes</a>

@@ -135,6 +135,11 @@ const topic = new Vue({
             this.addNewTestScore()
           }
         }
+      }else if(direction == 'previous'){
+        if(this.swiper.slidePrev()){
+          this.isEnableChange = true
+          this.currentQuestion -= 1;
+        }
       }
     },
     verifyOptionSelected: function(qindex){

@@ -99,6 +99,11 @@ const test = new Vue({
           this.testDone = true
           this.saveTest();
         }
+      }else if(direction == 'previous'){
+        if(this.sliderQuestions.slidePrev()){
+          this.isEnableChange = true
+          this.currentQuestion -= 1;
+        }
       }
     },
     enableNext: function(){

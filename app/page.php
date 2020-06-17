@@ -46,6 +46,10 @@ if(is_page('login')){
         $templates = 'auth/password/page-recuperar-contrasena.twig' ;
     }
     
+}else if(is_page('formularios')){
+    if (!isset($_GET['type']) || !in_array($_GET['type'], ['profesor', 'estudiante', 'tutor'])) {
+        header('Location:' . $context['site']->url);
+    }
 }
 
 Timber::render( $templates, $context );
