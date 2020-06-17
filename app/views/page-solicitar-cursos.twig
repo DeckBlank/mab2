@@ -6,7 +6,6 @@
 
 {% block content %}
 
-  {% set form = post.get_field('form') %}
   {% set title = post.get_field('title') %}
 
   <section class="c-section c-section--solicitar-cursos bg-success">
@@ -16,7 +15,54 @@
           <section class="c-content c-content--protected position-relative bg-sec-color br--medium">
             <h1 class="fs-50 w-bold warning text-center margin-bottom-1">{{title}}</h1>
             <p class="white f2 text-center w-medium fs-21 margin-bottom-2 warning">¡Déjanos tus datos y te contactaremos para que puedas seguir navegando!</p>
-            {{function('do_shortcode', form)}}
+            <div class="c-form">
+              <label class="margin-bottom-2">
+                  <p class="mb-05 gray-gray f2 fs-25 w-bold white">NOMBRES Y APELLIDOS:</p>
+                  <input v-model="form.fullname.value" type="text" name="fullname" class="c-form__input input-reset">
+              </label>
+              <label class="margin-bottom-2">
+                <p class="mb-05 gray-gray f2 fs-25 w-bold white">OCUPACIÓN:</p>
+                <select  v-model="form.ocupation.value" name="ocupation" class="c-form__select input-reset">
+                  <option value="" disabled selected>Seleccione una opción</option>
+                  <option value="Profesor">Profesor</option>
+                  <option value="Padre">Padre</option>
+                  <option value="Alumno">Alumno</option>
+                </select>
+              </label>
+              <label class="margin-bottom-2">
+                  <p class="mb-05 gray-gray f2 fs-25 w-bold white">CORREO:</p>
+                  <input v-model="form.email.value" type="email" name="email" class="c-form__input input-reset">
+              </label> 
+              <label class="margin-bottom-2">
+                  <p class="mb-05 gray-gray f2 fs-25 w-bold white">CELULAR:</p>
+                  <input v-model="form.mobile.value" type="tel" name="phone" class="c-form__input input-reset">
+              </label>
+              <label class="margin-bottom-2">
+                <p class="mb-05 gray-gray f2 fs-25 w-bold white">CURSO DE INTERÉS:</p>
+                <select v-model="form.course.value" name="course" class="c-form__select input-reset">
+                  <option value="" disabled selected>Seleccione una opción</option>
+                  <option value="Castellano">Castellano</option>
+                  <option value="Ciencia y tecnología">Ciencia y tecnología</option>
+                  <option value="Economía / economics">Economía / economics</option>
+                  <option value="Física / Physics">Física / Physics</option>
+                  <option value="Geografía / Geography">Geografía / Geography</option>
+                  <option value="Historia del perú">Historia del perú</option>
+                  <option value="Matemáticas">Matemáticas</option>
+                  <option value="Matemáticas / Mathematics">Matemáticas / Mathematics</option>
+                  <option value="Química / Chemistry">Química / Chemistry</option>
+                  <option value="Otros">Otros</option>
+                  <option value="Todos">Todos</option>
+                </select>
+              </label>
+              <div class="text-center">
+                <button 
+                  @click="sendRequest"
+                  :disabled="isLoading"
+                  class="c-button c-button--primary padding-vertical-1 f2 w-bold button-reset width-100">
+                  ENVIAR DATOS
+                </button>
+              </div>
+            </div>            
           </section>
         </div>
       </div>

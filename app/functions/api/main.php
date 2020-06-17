@@ -141,6 +141,11 @@ add_action( 'rest_api_init', function () {
         'methods' => 'GET',
         'callback' => array($courseController,'downloadUserCourseLogs'),
     ));    
+
+    register_rest_route( 'custom/v1', '/course/request', array(
+        'methods' => 'POST',
+        'callback' => array($courseController,'sendCourseRequest'),
+    ));    
 });
 
 //4. Topic ----------------------------------//

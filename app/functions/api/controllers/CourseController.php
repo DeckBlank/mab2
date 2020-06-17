@@ -1,5 +1,8 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
 require(__DIR__ . '/../models/CourseModel.php');
 
 class CourseController{
@@ -38,6 +41,90 @@ class CourseController{
             return new WP_Error( 'no_progess', __("No progess found"), array( 'status' => 404 ) );
         }else{
             return new WP_REST_Response($progess, 200);
+        }
+    }
+
+    public function sendCourseRequest($request){
+        $mail = new PHPMailer(true);
+
+        try {
+            //Server settings
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host       = 'mail.mabclick.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'no-reply@mabclick.com';
+            $mail->Password   = '-@6]W8u_5qA@';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port       = 465;
+    
+            //Recipients
+            $mail->setFrom('no-reply@mabclick.com', "MABCLICK");
+            $mail->addAddress(get_field('email', 'options'));
+    
+            // Content
+            $body = '
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #DE0D46; padding: 3rem 0">
+                    <tr>
+                        <td width="100%" align="center">
+                        <table width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+                            <tr>
+                            <td width="600" align="center">
+                                <div style="background: white; width: 70%; min-width: 310px;">
+                                    <header style="background: #FF3334; padding: 1rem; color: #fff;">
+                                        <h2 style="text-align: center;">MAB</h2>
+                                    </header>
+
+                                    <div style="padding: 1rem;">
+                                        <h1 style="font-size: 25px; color: #222;">MAB - Solicitar Cursos</h1>
+
+                                        <table style="width: 100%; padding-left: 1.5rem">          
+                                            <tbody style="width: 100%">
+                                                <tr>
+                                                    <td style="padding: 10px 0; width: 30%; font-weight: bold; color: #222; font-weight:bold">Nombres y apellidos: </td>
+                                                    <td style="padding: 10px 0; color: #575757;">'. $request["fullname"] .'</td>     
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 10px 0; width: 30%; font-weight: bold; color: #222; font-weight:bold">Ocupación: </td>
+                                                    <td style="padding: 10px 0; color: #575757;">'. $request["ocupation"] .'</td>     
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 10px 0; width: 30%; font-weight: bold; color: #222; font-weight:bold">Correo: </td>
+                                                    <td style="padding: 10px 0; color: #575757;">'. $request["email"] .'</td>     
+                                                </tr> 
+                                                <tr>
+                                                    <td style="padding: 10px 0; width: 30%; font-weight: bold; color: #222; font-weight:bold">Celular: </td>
+                                                    <td style="padding: 10px 0; color: #575757;">'. $request["mobile"] .'</td>     
+                                                </tr> 
+                                                <tr>
+                                                    <td style="padding: 10px 0; width: 30%; font-weight: bold; color: #222; font-weight:bold">Curso de interés: </td>
+                                                    <td style="padding: 10px 0; color: #575757;">'. $request["course"] .'</td>     
+                                                </tr> 
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <footer style="text-align: center; background: #FF3334; padding: 1rem; color: white;">
+                                        All rights reserved | MAB
+                                    </footer>
+                                </div>
+                            </td>
+                            </tr>
+                        </table>
+                        </td>
+                    </tr>
+                </table>
+            ';
+
+            $mail->isHTML(true); 
+            $mail->Subject = "Solicitud de curso - MABCLICK";
+            $mail->MsgHTML($body);
+    
+            $mail->send();
+    
+            return new WP_REST_Response('Message has been send', 200);
+        } catch (Exception $e) {
+            return new WP_Error( 'Message could not be sent', __($mail->ErrorInfo), array( 'status' => 404 ) );
         }
     }
 

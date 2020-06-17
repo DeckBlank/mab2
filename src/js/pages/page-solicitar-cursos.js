@@ -6,6 +6,24 @@ const solicitar_cursos = new Vue({
   ...baseConfig(store),
   data() {
     return {
+      isLoading: false,
+      form: {
+        fullname: {
+          value: ''
+        },
+        ocupation: {
+          value: ''
+        },
+        email: {
+          value: ''
+        },
+        mobile: {
+          value: ''
+        },
+        course: {
+          value: ''
+        },
+      },
     }
   },
   computed: {
@@ -23,34 +41,53 @@ const solicitar_cursos = new Vue({
     ...baseActions(),
     fillForm: function(){
       if(this.logedUser){
-        let fullname = document.querySelector("[name='fullname'"),
-          ocupation = document.querySelector("[name='ocupation'"),
-          email = document.querySelector("[name='email'"),
-          mobile = document.querySelector("[name='phone'"),
-          course = document.querySelector("[name='course'")
-  
-        fullname.value = this.logedUser.user_auth
-        email.value = this.logedUser.user_email
-        mobile.value = this.logedUser.user_mobile
+        this.form.fullname.value = this.logedUser.user_auth
+        this.form.email.value = this.logedUser.user_email
+        this.form.mobile.value = this.logedUser.user_mobile
 
         switch(this.logedUser.user_rol){
           case 'teacher':
-              ocupation.value = 'Profesor'
+            this.form.ocupation.value = 'Profesor'
             break;
           case 'student':
-              ocupation.value = 'Alumno'
+            this.form.ocupation.value = 'Alumno'
             break;
           case 'tutor':
-              ocupation.value = 'Padre'
+            this.form.ocupation.value = 'Padre'
             break;
         }
 
         let mab_metas = window.localStorage.getItem('mab_metas')
 
         if(mab_metas){
-          course.value = JSON.parse(mab_metas).course
+          this.form.course.value = JSON.parse(mab_metas).course
         }        
       }
+    },
+    sendRequest: function(){
+      let form_data = new FormData()
+
+      Object.keys(this.form).forEach(key => {
+        form_data.append(key, this.form[key].value)
+      })
+
+      this.isLoading = true;
+
+      fetch(`${this.API}/course/request`,{
+          method: 'POST',
+          body: form_data
+        })
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            this.isLoading = false
+          }else{
+            throw res
+          }
+        })
+        .catch(err => {
+          this.isLoading = false      
+          throw err;          
+        })      
     }
   }
 })
