@@ -7,6 +7,7 @@ const solicitar_cursos = new Vue({
   data() {
     return {
       isLoading: false,
+      isSentForm: false,
       form: {
         fullname: {
           value: ''
@@ -79,7 +80,7 @@ const solicitar_cursos = new Vue({
         })
         .then(res => {
           if (res.status >= 200 && res.status < 300) {
-            this.isLoading = false
+            this.isLoading = false; this.isSentForm = true;
           }else{
             throw res
           }
