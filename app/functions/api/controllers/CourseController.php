@@ -117,7 +117,7 @@ class CourseController{
             ';
 
             $mail->isHTML(true); 
-            $mail->Subject = "Solicitud de curso - MABCLICK";
+            $mail->Subject = "Solicitud de curso";
             $mail->MsgHTML($body);
     
             $mail->send();

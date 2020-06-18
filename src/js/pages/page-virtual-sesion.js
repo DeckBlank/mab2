@@ -22,14 +22,15 @@ const virtual_sesion = new Vue({
       isSentSessionRequest: false,
       sessionRequest: {
         counter: 0,
+        sender: 'ENVIAR SOLICITUD',
         fullname: {
           value: '',
-          pattern: '^([a-zA-Z ]+)$',
+          pattern: "^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$",
           isValid: false
         },
         email: {
           value: '',
-          pattern: "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
+          pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
           isValid: false
         },
         date1: {
@@ -110,6 +111,7 @@ const virtual_sesion = new Vue({
   },
   mounted(){
     this.global();
+    this.sessionRequestFill();
     this.hideLoading();
   },
   updated(){
@@ -143,6 +145,8 @@ const virtual_sesion = new Vue({
       session_request_form.append('time2', this.sessionRequest.time2.value)
       session_request_form.append('course', this.sessionRequest.course.value)
 
+      this.sessionRequest.sender = 'ENVIANDO...'
+
       if(this.sessionRequest.resources.value.length > 0){
         this.sessionRequest.resources.value.forEach(el => {
           session_request_form.append('resources[]', el.file)
@@ -162,10 +166,17 @@ const virtual_sesion = new Vue({
         })
         .then(request_session => {
           this.isSentSessionRequest = true;
+          this.sessionRequest.sender = 'ENVIAR SOLICITUD'
         })
         .catch(err => {
-          throw err;          
+          this.sessionRequest.sender = 'ENVIAR SOLICITUD'; throw err;     
         })
+    },
+    sessionRequestFill: function(){
+      if(this.logedUser){
+        this.sessionRequest.fullname.value = this.logedUser.user_auth
+        this.sessionRequest.email.value = this.logedUser.user_email
+      }
     },
     validateText: function(parameter){
       let input_pattern = new RegExp( parameter.pattern ),

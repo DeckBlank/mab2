@@ -79,9 +79,9 @@
                         <img src="{{theme.link}}/static/images/vectors/virtual-session/arrow.png" alt="">
                       </figure>
                     </div>
-                    <h2 class="f2 w-bold fs-35 white margin-bottom-2">Genial, nos comunicaremos contigo para confirmar</h2>
+                    <h2 class="f2 w-bold fs-35 white margin-bottom-2">Genial, nos comunicaremos contigo para confirmar tu sesión virtual.</h2>
                     <p class="f2 fs-18 white margin-bottom-0">
-                      Te estaremos enviando todos los detalles a tu correo con información de pago y ID. 
+                      Te estaremos enviando la confirmación de tu solicitud a tu correo y nos comunicaremos contigo vía Whatsapp para confirmar la clase y enviarte el ID. 
                     </p>
                   </div>
                 </div>
@@ -227,9 +227,9 @@
                     <button 
                       class="c-button c-button--ghost-white padding-horizontal-2 f2 fs-18 w-medium br--medium width-100"
                       @click="sendSessionRequest"
-                      :disabled="sessionRequest.counter != 7"
+                      :disabled="sessionRequest.counter != 7 || sessionRequest.sender == 'ENVIANDO...'"
                       >
-                      ENVIAR SOLICITUD
+                      ${sessionRequest.sender}
                     </button>
                   </div>              
                 </div>

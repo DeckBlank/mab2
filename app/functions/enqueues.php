@@ -1,6 +1,6 @@
 <?php
 
-$assets_version = '1592430809658';
+$assets_version = '1592460143278';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -178,7 +178,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);
         
-    }elseif (is_page('sesion-virtual')){
+    }elseif (is_page_template('templates/template-sesion-virtual.php')){
         register_assets('package', [
             'handle'    => 'pandawp/package/corejs',
             'src'       => $config['resources']['package_corejs'],

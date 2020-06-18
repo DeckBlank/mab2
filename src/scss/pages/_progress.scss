@@ -1,3 +1,5 @@
 .c-section--progress {
-  height: 100vh;
+  &.full {
+    height: 100vh;
+  }
 }

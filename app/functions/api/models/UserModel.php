@@ -19,7 +19,13 @@ class UserModel{
                 self::saveAccessLog($request);
 
                 return (object)[
-                    "user_login" => $user->data->user_login,
+                    "user_login" => sprintf(
+                        '%s %s', 
+                        get_user_meta( $user->data->ID, 'first_name', true ),
+                        get_user_meta( $user->data->ID, 'last_name', true )
+                    ),
+                    "user_firstname" => get_user_meta( $user->data->ID, 'first_name', true ),
+                    "user_lastname" => get_user_meta( $user->data->ID, 'last_name', true ),
                     "user_pass" => $user->data->user_pass,
                     "user_email" => $user->data->user_email,
                     "user_rol" => $user->roles[0],

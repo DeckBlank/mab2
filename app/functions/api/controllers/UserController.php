@@ -60,7 +60,11 @@ class UserController{
     
     public function createUser($request){
         if(UserModel::createUser($request)){
-            return new WP_REST_Response('User created', 200);
+            if ($this::sendNotification($request)) {
+                return new WP_REST_Response('User created', 200);
+            } else {
+                return new WP_Error( 'no_sent_notification', __('No sent notification'), array( 'status' => 404 ) );
+            }
         }else{
             return new WP_Error( 'no_user_created', __('No user created'), array( 'status' => 404 ) );
         }
@@ -172,6 +176,77 @@ class UserController{
             return new WP_REST_Response('Message has been send', 200);
         } catch (Exception $e) {
             return new WP_Error( 'Message could not be sent', __($mail->ErrorInfo), array( 'status' => 404 ) );
+        }
+    }
+
+    private function sendNotification($request){
+        $mail = new PHPMailer(true);
+    
+        try {
+            //Server settings
+            $mail->CharSet = 'UTF-8';
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host       = 'mail.mabclick.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'no-reply@mabclick.com';
+            $mail->Password   = '-@6]W8u_5qA@';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port       = 465;
+    
+            //Recipients
+            $mail->setFrom('no-reply@mabclick.com', "MABCLICK");
+            $mail->addAddress($request['email']);
+    
+            // Content
+            $body = '
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #DE0D46; padding: 3rem 0;">
+                    <tr>
+                    <td width="100%" align="center" style="padding: 0 1rem">
+                        <table width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td width="600" align="center">
+                            <div style="background: #0166D0; color: white; width: 100%; max-width: 640px;">
+                                <header style="background: white; padding: 1rem;">
+                                    <img src="https://mabclick.com/wp-content/themes/mab-theme/app/static/images/logo.png" style="width: 80px;">
+                                </header>
+    
+                                <div style="padding: 1rem;">
+                                    <h1 style="margin-bottom: 3rem; color: white; font-size: 18px; font-weight: 700; font-family: Verdana, serif;">
+                                        Hola, '. $request["first_name"] .' '. $request["last_name"] .'
+                                    </h1>
+                                    <div style="text-align: center; margin-bottom: 2rem;">
+                                        <p style="font-family: Verdana, serif; margin-bottom: 3rem; color: white">
+                                            Te damos la bienvenida a MABCLICK 🤩. Desde hoy eres parte de nuestra comunidad de estudiantes, profesores y padres/tutores.<br><br>
+                                            Para iniciar sesión lo puedes hacer desde aquí:                                        
+                                        </p>
+                                        <p style="font-family: Verdana, serif; margin-bottom: 3rem">
+                                            <a href="'. get_site_url() .'/login" style="text-decoration: none; padding: 1rem; color: white; background: #DE0D46">INICIAR SESIÓN</a>
+                                        </p>                                  
+                                    </div>
+                                </div>
+
+                                <footer style="text-align: center; font-size: 12px; font-family: Verdana, serif; padding: 1rem; color: #0166D0; background: white;">
+                                    All rights reserved - MABLICK
+                                </footer>         
+                            </div>
+                            </td>
+                        </tr>
+                        </table>
+                    </td>
+                    </tr>
+                </table>           
+            ';
+    
+            $mail->isHTML(true); 
+            $mail->Subject = "Cuenta creada exitosamente ❤️";
+            $mail->MsgHTML($body);
+    
+            $mail->send();
+    
+            return true;
+        } catch (Exception $e) {
+            return false;
         }
     }
 
