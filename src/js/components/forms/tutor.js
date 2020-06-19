@@ -9,7 +9,7 @@ Vue.component('form-tutor',{
     <form-accept :switcher.sync="isSentForm" :user="email.value" :password="password.value"></form-accept>
     <form class="c-form-box form_box" action="">
       <div class="input_container">
-        <label for="">Nombre Completo</label>
+        <label for="">Nombres</label>
         <input 
           class="c-form-box__input input-reset" 
           :class="{ valid : name.isValid }"
@@ -50,7 +50,7 @@ Vue.component('form-tutor',{
         <p v-if="!gender.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Nombre incorrecto</p>        
       </div>      
       <div class="input_container">
-        <label for="">Email</label>
+        <label for="">Correo electrónico</label>
         <input 
           class="c-form-box__input input-reset"
           :class="{ valid : email.isValid }"
@@ -66,15 +66,53 @@ Vue.component('form-tutor',{
           type="password" 
           v-model="password.value">
         <p v-if="!password.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Contraseña vacia</p>          
-      </div>      
+      </div>
       <div class="input_container">
-        <label for="">Teléfono</label>
-        <input 
-          class="c-form-box__input input-reset"
-          :class="{ valid : phone.isValid }"
-          type="tel" 
-          v-model="phone.value">
-        <p v-if="!phone.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Teléfono incorrecto</p>          
+        <label for="">País de residencia</label>
+        <select
+          class="c-form-box__select select-reset" 
+          :class="{ valid : country.isValid }"
+          v-model="country.value">
+          <option disabled value="" selected>Selecciona una opción</option>
+          <option v-for="coun of countries" :key="coun.id" :value="coun.name" >{{coun.name}}</option>                               
+        </select>
+        <p v-if="!country.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
+      </div>      
+      <div v-if="country.value.toLowerCase() == 'peru'" class="input_container">
+        <label for="">Departamento</label>
+        <select
+          class="c-form-box__select select-reset" 
+          :class="{ valid : department.isValid }"
+          v-model="department.value"
+          @change="getProvincias">
+          <option disabled value="" selected>Selecciona una opción</option>
+          <option v-for="dep of departamentos" :key="dep.id" :value="dep.nombre_ubigeo" >{{dep.nombre_ubigeo}}</option>                               
+        </select>
+        <p v-if="!department.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No has seleccionado una opción</p>        
+      </div>
+      <div v-if="country.value.toLowerCase() == 'peru'" class="input_container">
+        <label for="">Provincia</label>
+        <select 
+          name="" 
+          class="c-form-box__select select-reset" 
+          :class="{ valid : province.isValid }"
+          v-model="province.value"
+          @change="getDistritos">
+          <option disabled value="" selected>Selecciona una opción</option>
+          <option v-for="prov of provincias" :key="prov.id" :value="prov.nombre_ubigeo" >{{prov.nombre_ubigeo}}</option>                 
+        </select>
+        <p v-if="!province.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No has seleccionado una opción</p>        
+      </div>
+      <div v-if="country.value.toLowerCase() == 'peru'" class="input_container">
+        <label for="">Distrito</label>
+        <select 
+          class="c-form-box__select select-reset" 
+          :class="{ valid : district.isValid }" 
+          v-model="district.value">
+          <option disabled value="" selected>Selecciona una opción</option>
+          <option v-for="dis of distritos" :key="dis.id" :value="dis.nombre_ubigeo" >{{dis.nombre_ubigeo}}</option>                                             
+        </select>
+        <p v-if="!district.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No has seleccionado una opción</p>        
       </div>
       <div class="input_container">
         <label for="">Celular</label>
@@ -94,7 +132,7 @@ Vue.component('form-tutor',{
           >
           <option disabled value="" selected>Selecciona una opción</option>
           <option value="privado">Privado</option>
-          <option value="publico">Público</option>                  
+          <option value="publico">Público (curriculo nacional)</option>                  
         </select>
         <p v-if="!schoolType.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No has seleccionado una opción</p>        
       </div>
@@ -139,53 +177,6 @@ Vue.component('form-tutor',{
             type="number"
             v-model="children[index].age">
         </div>
-      </div>
-      <div class="input_container">
-        <label for="">País de tu colegio</label>
-        <select
-          class="c-form-box__select select-reset" 
-          :class="{ valid : country.isValid }"
-          v-model="country.value">
-          <option disabled value="" selected>Selecciona una opción</option>
-          <option v-for="coun of countries" :key="coun.id" :value="coun.name" >{{coun.name}}</option>                               
-        </select>
-        <p v-if="!country.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
-      </div>      
-      <div v-if="country.value.toLowerCase() == 'peru'" class="input_container">
-        <label for="">Departamento de tu colegio</label>
-        <select
-          class="c-form-box__select select-reset" 
-          :class="{ valid : department.isValid }"
-          v-model="department.value"
-          @change="getProvincias">
-          <option disabled value="" selected>Selecciona una opción</option>
-          <option v-for="dep of departamentos" :key="dep.id" :value="dep.nombre_ubigeo" >{{dep.nombre_ubigeo}}</option>                               
-        </select>
-        <p v-if="!department.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No has seleccionado una opción</p>        
-      </div>
-      <div v-if="country.value.toLowerCase() == 'peru'" class="input_container">
-        <label for="">Provincia de tu colegio</label>
-        <select 
-          name="" 
-          class="c-form-box__select select-reset" 
-          :class="{ valid : province.isValid }"
-          v-model="province.value"
-          @change="getDistritos">
-          <option disabled value="" selected>Selecciona una opción</option>
-          <option v-for="prov of provincias" :key="prov.id" :value="prov.nombre_ubigeo" >{{prov.nombre_ubigeo}}</option>                 
-        </select>
-        <p v-if="!province.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No has seleccionado una opción</p>        
-      </div>
-      <div v-if="country.value.toLowerCase() == 'peru'" class="input_container">
-        <label for="">Ciudad</label>
-        <select 
-          class="c-form-box__select select-reset" 
-          :class="{ valid : district.isValid }" 
-          v-model="district.value">
-          <option disabled value="" selected>Selecciona una opción</option>
-          <option v-for="dis of distritos" :key="dis.id" :value="dis.nombre_ubigeo" >{{dis.nombre_ubigeo}}</option>                                             
-        </select>
-        <p v-if="!district.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No has seleccionado una opción</p>        
       </div>
       <div v-if="isSentFormError" class="margin-bottom-1">
         <p class="white fs-18 f2 w-medium text-center margin-bottom-0">El usuario ya existe</p>

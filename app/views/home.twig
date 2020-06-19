@@ -81,7 +81,7 @@
           En MAB buscamos revolucionar la educación hacia una más emocional y humana, que forme mejores personas, para así construir una mejor sociedad.
         </div>
         <div class="block_rigth">
-         Con MAB CLICK podrás potenciar tus conocimientos adaptándonos a tu estilo de aprendizaje, manteniendo un balance académico y emocional.
+        Con MAB CLICK podrás potenciar tus conocimientos adaptándonos a tu estilo de aprendizaje, manteniendo un balance académico y emocional.
           <br>
           <br> Encontrarás videos de desarrollo personal y habilidades para la vida, así como videos educativos y herramientas para reforzar tu aprendizaje en toda la etapa escolar.
           <br>
@@ -173,7 +173,11 @@
     <footer class="footer">
       <div class="section_content">
         <div class="footer_left">
-          {{information.email}} <span>|</span> {{information.phone}}
+          {{information.email}} <span>|</span>
+          <a href="https://api.whatsapp.com/send?phone=51{{information.phone|replace({' ': ''})}}" target="_blank" class="fs-18">
+            <i class="fab fa-whatsapp"></i>
+            {{information.phone}}
+          </a>          
         </div>
         <ul class="footer_list">
           <li>

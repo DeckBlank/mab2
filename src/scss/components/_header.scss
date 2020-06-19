@@ -9,6 +9,10 @@
   top: 0;
 
   .c-user {
+    &__name {
+      display: none;
+    }
+
     &__profile {
       width: 35px;
       height: 35px;
@@ -413,6 +417,11 @@
       @include flex;
 
       align-items: center;
+
+      &__name {
+        display: block;
+        text-transform: capitalize;
+      }
 
       &__menu {
         top: calc(35px + 3.5rem);

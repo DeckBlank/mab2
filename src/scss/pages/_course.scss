@@ -28,14 +28,9 @@
       }
     }
 
-    &__checkbox:checked ~ .c-unity__topics {
+    &__checkbox:checked ~ .c-unity__content > .c-unity__topics {
       margin-top: 1rem;
       max-height: 4000px;
-
-      .c-unity__title {
-        opacity: 1;
-        visibility: visible;
-      }
 
       .c-topic {
         opacity: 1;
@@ -44,12 +39,9 @@
     }
 
     &__title {
-      opacity: 0;
-      visibility: hidden;
-
       @include transition(0.3s);
 
-      h3 {
+      span {
         margin-bottom: -1rem;
       }
 
@@ -58,11 +50,13 @@
       }
     }
 
+    &__content {
+      @include triangle(left, top, 6rem, -80px, 50px, 20px, 50px);
+    }
+
     &__topics {
       max-height: 0;
-      margin-top: 0;
 
-      @include triangle(left, top, 6rem, -80px, 50px, 20px, 50px);
       @include transition(0.4s);
     }
   }
@@ -85,6 +79,10 @@
 
       &:hover {
         background-color: $light-gray;
+      }
+
+      &--viewed a {
+        color: $secondary-color;
       }
     }
   }

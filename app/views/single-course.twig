@@ -36,93 +36,107 @@
                   </p>
                   <span class="c-icon display-block white fs-21"><i class="far fa-chevron-down"></i></span>
                 </label>
-                <ul class="c-unity__topics position-relative ul-reset bg-white br--medium padding-1">
-                  <li class="c-unity__title margin-bottom-1">
-                    <h3 class="fs-25 f2 dark-gray w-bold">{{unity.title}}</h3>
+                <div class="c-unity__content position-relative bg-white br--medium padding-1">
+                  <h3 class="c-unity__title">
+                    <span class="display-block fs-25 f2 dark-gray w-bold">{{unity.title}}</span>
                     <p class="margin-bottom-0 padding-left-2 fs-25 w-black">.....</p>
-                  </li>
+                  </h3>
+                  <ul class="c-unity__topics ul-reset">
+                    {% for topic in unity.topics %}
+                      <ul class="c-topic ul-reset f2 fs-21 dar-gray w-medium">
+                        <li class="c-topic__item">
+                          <a
+                            class="c-topic__link flex-container align-justify align-middle"
+                            @click="playVideo(
+                              '{{topic.video.link}}?course_id={{post.id}}&course_name={{post.title}}&unity={{unity_id}}&sector=' + metas.get('sector'),
+                              {{unity_id}}
+                            )">
+                            <!-- <p class="margin-bottom-0 flex-container sec-color align-middle">
+                              <span class="c-icon margin-right-1 fs-21 sec-color"><i class="far fa-play-circle"></i></span>
+                              {{topic.title}}
+                            </p> -->
+                            <p class="margin-bottom-0 flex-container {% if topic.video.state %} sec-color {% else %} dark-gray {% endif %} align-middle">
+                              <span class="c-icon margin-right-1 fs-21 {% if topic.video.state %} sec-color {% else %} pri-color {% endif %}"><i class="far fa-play-circle"></i></span>
+                              {{topic.title}}
+                            </p>
+                            <!-- <p class="gray-gray margin-bottom-0">
+                              <span class="c-icon margin-right-1"><i class="far fa-clock"></i></span>
+                              4:00
+                            </p> -->
+                          </a>
+                        </li>
 
-                  {% for topic in unity.topics %}                 
-                    <li class="c-topic f2 fs-21 dar-gray w-medium">
-                      <a
-                        class="c-topic__item flex-container align-justify align-middle"
-                        @click="playVideo(
-                          '{{topic.link}}?course_id={{post.id}}&course_name={{post.title}}&unity={{unity_id}}&sector=' + metas.get('sector'),
-                          {{unity_id}}
-                        )">
-                        <p class="margin-bottom-0 flex-container dark-gray align-middle">
-                          <span class="c-icon margin-right-1 fs-21 pri-color"><i class="far fa-play-circle"></i></span>
-                          {{topic.title}}
-                        </p>
-                        <!-- <p class="gray-gray margin-bottom-0">
-                          <span class="c-icon margin-right-1"><i class="far fa-clock"></i></span>
-                          4:00
-                        </p> -->
-                      </a>
-
-                      {% if topic.summary %}                      
-                        <a
-                          target="_blank" 
-                          class="c-topic__item flex-container align-justify align-middle"
-                          @click="downloadMaterial({{unity_id}}, {{topic.id}}, '{{topic.summary}}', 'summary')">
-                          <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                            <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                            Resumen
-                          </p>
-                          <p class="gray-gray margin-bottom-0">
-                            <span class="c-icon"><i class="far fa-download"></i></span>
-                          </p>
-                        </a>
-                      {% endif %}
-                      
-                      {% if topic.map %}                      
-                        <a
-                          target="_blank" 
-                          class="c-topic__item flex-container align-justify align-middle"
-                          @click="downloadMaterial({{unity_id}}, {{topic.id}}, '{{topic.map}}', 'map')">
-                          <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                            <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                            Mapa Mental
-                          </p>
-                          <p class="gray-gray margin-bottom-0">
-                            <span class="c-icon"><i class="far fa-download"></i></span>
-                          </p>
-                        </a>
-                      {% endif %}
-
-                      {% if topic.worksheet %}                      
-                        <a
-                          target="_blank" 
-                          class="c-topic__item flex-container align-justify align-middle"
-                          @click="downloadMaterial({{unity_id}}, {{topic.id}}, '{{topic.worksheet}}', 'worksheet')">
-                          <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                            <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                            Hoja de trabajo
-                          </p>
-                          <p class="gray-gray margin-bottom-0">
-                            <span class="c-icon"><i class="far fa-download"></i></span>
-                          </p>
-                        </a>
-                      {% endif %}
-
-                      {% if topic.solutions %}                      
-                        <a
-                          target="_blank" 
-                          class="c-topic__item flex-container align-justify align-middle"
-                          @click="downloadMaterial({{unity_id}}, {{topic.id}}, '{{topic.solutions}}', 'solutions')">
-                          <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                            <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                            Solucionario
-                          </p>
-                          <p class="gray-gray margin-bottom-0">
-                            <span class="c-icon"><i class="far fa-download"></i></span>
-                          </p>
-                        </a>
-                      {% endif %}
-
-                    </li>
-                  {% endfor %}
-                </ul>
+                        {% if topic.summary %}
+                          <li class="c-topic__item">                 
+                            <a
+                              target="_blank" 
+                              class="c-topic__link flex-container align-justify align-middle"
+                              @click="downloadMaterial({{unity_id}}, {{topic.id}}, '{{topic.summary}}', 'summary')">
+                              <p class="margin-bottom-0 flex-container align-middle dark-gray">
+                                <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
+                                Resumen
+                              </p>
+                              <p class="gray-gray margin-bottom-0">
+                                <span class="c-icon"><i class="far fa-download"></i></span>
+                              </p>
+                            </a>
+                          </li>
+                        {% endif %}
+                        
+                        {% if topic.map %}
+                          <li class="c-topic__item">                            
+                            <a
+                              target="_blank" 
+                              class="c-topic__link flex-container align-justify align-middle"
+                              @click="downloadMaterial({{unity_id}}, {{topic.id}}, '{{topic.map}}', 'map')">
+                              <p class="margin-bottom-0 flex-container align-middle dark-gray">
+                                <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
+                                Mapa Mental
+                              </p>
+                              <p class="gray-gray margin-bottom-0">
+                                <span class="c-icon"><i class="far fa-download"></i></span>
+                              </p>
+                            </a>
+                          </li>                    
+                        {% endif %}
+  
+                        {% if topic.worksheet %}                      
+                          <li class="c-topic__item">
+                            <a
+                              target="_blank" 
+                              class="c-topic__link flex-container align-justify align-middle"
+                              @click="downloadMaterial({{unity_id}}, {{topic.id}}, '{{topic.worksheet}}', 'worksheet')">
+                              <p class="margin-bottom-0 flex-container align-middle dark-gray">
+                                <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
+                                Hoja de trabajo
+                              </p>
+                              <p class="gray-gray margin-bottom-0">
+                                <span class="c-icon"><i class="far fa-download"></i></span>
+                              </p>
+                            </a>
+                          </li>
+                        {% endif %}
+  
+                        {% if topic.solutions %}
+                          <li class="c-topic__item">                            
+                            <a
+                              target="_blank" 
+                              class="c-topic__link flex-container align-justify align-middle"
+                              @click="downloadMaterial({{unity_id}}, {{topic.id}}, '{{topic.solutions}}', 'solutions')">
+                              <p class="margin-bottom-0 flex-container align-middle dark-gray">
+                                <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
+                                Solucionario
+                              </p>
+                              <p class="gray-gray margin-bottom-0">
+                                <span class="c-icon"><i class="far fa-download"></i></span>
+                              </p>
+                            </a>
+                          </li>                    
+                        {% endif %}                        
+                      </ul>
+                    {% endfor %}
+                  </ul>
+                </div>
               </li>
           {% endfor %}
         </ul>

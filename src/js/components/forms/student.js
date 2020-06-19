@@ -79,14 +79,26 @@ Vue.component('form-student',{
       <div class="input_container">
         <label for="">País de residencia</label>
         <select
+          id="countries"
           class="c-form-box__select select-reset" 
           :class="{ valid : country.isValid }"
           v-model="country.value">
           <option disabled value="" selected>Selecciona una opción</option>
-          <option v-for="coun of countries" :key="coun.id" :value="coun.name" >{{coun.name}}</option>                               
+          <option v-for="coun of countries" :key="coun.id" :id="coun.objectId" :value="coun.name" >{{coun.name}}</option>                               
         </select>
         <p v-if="!country.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
       </div>      
+      <div v-if="false" class="input_container">
+        <label for="">Ciudades</label>
+        <select
+          class="c-form-box__select select-reset" 
+          :class="{ valid : city.isValid }"
+          v-model="city.value">
+          <option disabled value="" selected>Selecciona una opción</option>
+          <option v-for="city of cities" :key="city.id" :value="city.Subdivision_Name" >{{city.Subdivision_Name}}</option>                               
+        </select>
+        <p v-if="!city.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
+      </div>
       <div v-if="country.value.toLowerCase() == 'peru'" class="input_container">
         <label for="">Departamento</label>
         <select
@@ -142,7 +154,7 @@ Vue.component('form-student',{
           >
           <option disabled value="" selected>Selecciona una opción</option>
           <option value="privado">Privado</option>
-          <option value="publico">Público</option>                  
+          <option value="publico">Público (Curriculo nacional)</option>                  
         </select>
         <p v-if="!schoolType.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>
       </div>
@@ -230,7 +242,6 @@ Vue.component('form-student',{
   },
   beforeMount(){
     this.getCountries();
-    this.getCities();
   },
   methods: {
     ...baseMethods(),
@@ -294,26 +305,6 @@ Vue.component('form-student',{
           })      
       }
 
-    },
-    getCities: function()   {
-      (async () => {
-        const where = encodeURIComponent(JSON.stringify({
-          "country": {
-            "$exists": true
-          }
-        }));
-        const response = await fetch(
-          `https://parseapi.back4app.com/classes/Continentscountriescities_Country?limit=10`,
-          {
-            headers: {
-              'X-Parse-Application-Id': 'GCR90x4gnhDrwNHZaR64Nq9nnjLpoeiY7mlnIESs', // This is your app's application id
-              'X-Parse-REST-API-Key': 'JlHYio9m9RXVbKLJhmaOEBn7pFmZZtO3V8pxdib5', // This is your app's REST API key
-            }
-          }
-        );
-        const data = await response.json(); // Here you have the data that you need
-        console.log(data);
-      })();      
     }
   },  
 });

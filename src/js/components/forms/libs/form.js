@@ -2,6 +2,7 @@ function baseData(){
   return {
     //Geo
     countries: [],
+    cities: [],
     departamentos: require('../../../extras/ubigeo/departamentos.json'),
     provincias: [],
     distritos: [],
@@ -63,6 +64,10 @@ function baseData(){
       isValid: false
     },
     country: {
+      value: '',
+      isValid: false
+    },
+    city: {
       value: '',
       isValid: false
     },
@@ -173,7 +178,12 @@ function baseMethods(){
       }
     },
     getCountries: function(){
-      fetch(`https://restcountries.eu/rest/v2/all`)
+      fetch(`https://parseapi.back4app.com/classes/Continentscountriescities_Country?limit=1000`, {
+          headers: {
+            'X-Parse-Application-Id': 'GCR90x4gnhDrwNHZaR64Nq9nnjLpoeiY7mlnIESs',
+            'X-Parse-REST-API-Key': 'JlHYio9m9RXVbKLJhmaOEBn7pFmZZtO3V8pxdib5',  
+          }
+        })
         .then(res => {
           if (res.status >= 200 && res.status < 300) {
             return res.json()
@@ -182,11 +192,44 @@ function baseMethods(){
           }
         })
         .then(countries => {
-          this.countries = countries
+          this.countries = countries.results
         })
         .catch(err => {
           throw err;          
         })      
+    },
+    getCities: function(){
+      let selectedIndex = document.querySelector('#countries').selectedIndex,
+        countryId = document.querySelectorAll('#countries option')[selectedIndex].getAttribute('id')
+
+      const where = encodeURIComponent(JSON.stringify({
+        "country": {
+          "__type": "Pointer",
+          "className": "Continentscountriescities_Country",
+          "objectId": countryId
+        }
+      }));
+
+      fetch(`https://parseapi.back4app.com/classes/Continentscountriescities_Subdivisions_States_Provinces?limit=1000&where=${where}`, {
+          headers: {
+            'X-Parse-Application-Id': 'GCR90x4gnhDrwNHZaR64Nq9nnjLpoeiY7mlnIESs',
+            'X-Parse-REST-API-Key': 'JlHYio9m9RXVbKLJhmaOEBn7pFmZZtO3V8pxdib5'
+          }
+        })
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            return res.json()
+          }else{
+            throw res
+          }
+        })
+        .then(cities => {
+          console.log(cities.results)
+          this.cities = cities.results
+        })
+        .catch(err => {
+          throw err;          
+        })
     },
     getProvincias: function(option) {
       let provincias = require('../../../extras/ubigeo/provincias.json')

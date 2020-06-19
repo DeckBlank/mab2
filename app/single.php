@@ -8,12 +8,15 @@ use Timber\Timber;
 function __getTopicsSanitize($topics){
     $topics_sanitize = [];
 
-    if($topics){
+    if($topics){        
         foreach($topics as $topic){
             array_push($topics_sanitize, (object)[
                 "id" => $topic['topic']->ID,
                 "title" => $topic['topic']->post_title,
-                "link" => get_the_permalink($topic['topic']->ID),
+                "video" => (object)[
+                    "state" => 0,
+                    "link" => get_the_permalink($topic['topic']->ID)
+                ],
                 "summary" => ( get_field('summary', $topic['topic']->ID) ) ? get_field('summary', $topic['topic']->ID)['url'] : false,
                 "map" => ( get_field('map', $topic['topic']->ID) ) ? get_field('map', $topic['topic']->ID)['url'] : false,
                 "worksheet" => ( get_field('worksheet', $topic['topic']->ID) ) ? get_field('worksheet', $topic['topic']->ID)['url'] : false,

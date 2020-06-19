@@ -9,7 +9,7 @@ Vue.component('form-teacher',{
     <form-accept :switcher.sync="isSentForm" :user="email.value" :password="password.value"></form-accept>
     <form class="c-form-box form_box" action="">
       <div class="input_container">
-        <label for="">Nombre Completo</label>
+        <label for="">Nombres</label>
         <input 
           class="c-form-box__input input-reset" 
           :class="{ valid : name.isValid }"
@@ -48,9 +48,18 @@ Vue.component('form-teacher',{
           <option value="mujer">Mujer</option>                  
         </select>
         <p v-if="!gender.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
-      </div>      
+      </div>
       <div class="input_container">
-        <label for="">Email</label>
+        <label for="">Edad</label>
+        <input 
+          class="c-form-box__input input-reset" 
+          :class="{ valid : age.isValid }"
+          type="number"
+          v-model="age.value">
+        <p v-if="!age.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Edad incorrecta</p>          
+      </div>           
+      <div class="input_container">
+        <label for="">Correo electrónico</label>
         <input 
           class="c-form-box__input input-reset"
           :class="{ valid : email.isValid }"
@@ -66,70 +75,6 @@ Vue.component('form-teacher',{
           type="password" 
           v-model="password.value">
         <p v-if="!password.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Contraseña vacía</p>          
-      </div>      
-      <div class="input_container">
-        <label for="">Teléfono</label>
-        <input 
-          class="c-form-box__input input-reset"
-          :class="{ valid : phone.isValid }"
-          type="tel" 
-          v-model="phone.value">
-        <p v-if="!phone.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Teléfono incorrecto</p>          
-      </div>
-      <div class="input_container">
-        <label for="">Celular</label>
-        <input 
-          class="c-form-box__input input-reset"
-          :class="{ valid : mobile.isValid }"
-          type="tel" 
-          v-model="mobile.value">
-        <p v-if="!mobile.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Celular incorrecto</p>          
-      </div>
-      <div class="input_container">
-        <label for="">Tipo de colegio</label>
-        <select 
-          class="c-form-box__select school_type select-reset"
-          :class="{ valid : schoolType.isValid }"
-          v-model="schoolType.value"
-          >
-          <option disabled value="" selected>Selecciona una opción</option>
-          <option value="privado">Privado</option>
-          <option value="publico">Público</option>                  
-        </select>
-        <p v-if="!schoolType.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
-      </div>
-      <div 
-        v-if="schoolType.value == 'privado' "
-        class="input_container">
-        <label for="">Colegio de trabajo</label>
-        <select 
-          class="c-form-box__select select-reset"
-          :class="{ valid : school.isValid }"
-          v-model="school.value">
-          <option disabled value="" selected>Selecciona una opción</option>
-          <option v-for="school of schools" :key="school.id" :value="school" >{{school}}</option>
-        </select>
-        <p v-if="!school.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>       
-      </div>
-      <div class="input_container">
-        <label for="">Nivel en el que enseño</label>
-        <select 
-          class="c-form-box__select select-reset"
-          :class="{ valid : grade.isValid }"
-          v-model="grade.value">
-          <option disabled value="" selected>Selecciona una opción</option>
-          <option v-for="_grade of grades" :key="_grade.id" :value="_grade" >{{_grade}}</option>
-        </select>
-        <p v-if="!grade.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
-      </div>
-      <div class="input_container">
-        <label for="">Edad</label>
-        <input 
-          class="c-form-box__input input-reset" 
-          :class="{ valid : age.isValid }"
-          type="number"
-          v-model="age.value">
-        <p v-if="!age.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Edad incorrecta</p>          
       </div>
       <div class="input_container">
         <label for="">País</label>
@@ -177,6 +122,52 @@ Vue.component('form-teacher',{
           <option v-for="dis of distritos" :key="dis.id" :value="dis.nombre_ubigeo" >{{dis.nombre_ubigeo}}</option>                                             
         </select>
         <p v-if="!district.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
+      </div>
+      <div class="input_container">
+        <label for="">Celular</label>
+        <input 
+          class="c-form-box__input input-reset"
+          :class="{ valid : mobile.isValid }"
+          type="tel" 
+          v-model="mobile.value">
+        <p v-if="!mobile.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Celular incorrecto</p>          
+      </div>
+      <div class="input_container">
+        <label for="">Tipo de colegio</label>
+        <select 
+          class="c-form-box__select school_type select-reset"
+          :class="{ valid : schoolType.isValid }"
+          v-model="schoolType.value"
+          >
+          <option disabled value="" selected>Selecciona una opción</option>
+          <option value="privado">Privado</option>
+          <option value="publico">Público (Curriculo nacional)</option>                  
+        </select>
+        <p v-if="!schoolType.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
+      </div>
+      <div 
+        v-if="schoolType.value == 'privado' "
+        class="input_container">
+        <label for="">Colegio de trabajo</label>
+        <select 
+          class="c-form-box__select select-reset"
+          :class="{ valid : school.isValid }"
+          v-model="school.value">
+          <option disabled value="" selected>Selecciona una opción</option>
+          <option v-for="school of schools" :key="school.id" :value="school" >{{school}}</option>
+        </select>
+        <p v-if="!school.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>       
+      </div>
+      <div class="input_container">
+        <label for="">Nivel en el que enseño</label>
+        <select 
+          class="c-form-box__select select-reset"
+          :class="{ valid : grade.isValid }"
+          v-model="grade.value">
+          <option disabled value="" selected>Selecciona una opción</option>
+          <option v-for="_grade of grades" :key="_grade.id" :value="_grade" >{{_grade}}</option>
+        </select>
+        <p v-if="!grade.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
       </div>
       <div v-if="isSentFormError" class="margin-bottom-1">
         <p class="white fs-18 f2 w-medium text-center margin-bottom-0">El usuario ya existe</p>
