@@ -14,7 +14,7 @@ const topic = new Vue({
       topicID: null,
 
       //Likes
-      likesAverage: 0,
+      likes: 0,
 
       //Comments
       comments: {
@@ -70,7 +70,7 @@ const topic = new Vue({
     this.topicID = this.$refs.topic.getAttribute('data-id');
     
     this.isUserAuthOnTopic(this.metas.get('course_id'))
-    this.getLikesAverage();
+    this.getLikes();
     this.getComments();
     this.getQuestions();
 
@@ -78,7 +78,7 @@ const topic = new Vue({
   },
   methods: {
     ...baseActions(),
-    getLikesAverage: function(){
+    getLikes: function(){
       fetch(`${this.API}/topic/${this.topicID}/likes`,{
           method: 'GET'
         })
@@ -89,8 +89,8 @@ const topic = new Vue({
             throw res
           }
         })
-        .then(average => {
-          this.likesAverage = parseFloat(average[0]);
+        .then(likes => {
+          this.likes = parseInt(likes[0]);
         })
         .catch(err => {    
           throw err;          
@@ -134,11 +134,6 @@ const topic = new Vue({
             this.testDone = true
             this.addNewTestScore()
           }
-        }
-      }else if(direction == 'previous'){
-        if(this.swiper.slidePrev()){
-          this.isEnableChange = true
-          this.currentQuestion -= 1;
         }
       }
     },

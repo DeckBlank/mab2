@@ -43,7 +43,8 @@ function baseData(){
     },
     password: {
       value: '',
-      isValid: false
+      isValid: false,
+      visible: false
     },
     phone: {
       value: '',
@@ -138,15 +139,25 @@ function baseWatch(){
     'country.value': function(value){
       this.validateSelect(this.country)
 
+      // this.getCallingCode(value);
+
       if (value.toLowerCase() != 'peru') {
+        this.getCities();
+
         this.department.value = '-'; this.department.isValid = true;
         this.province.value = '-'; this.province.isValid = true;
-        this.district.value = '-'; this.district.isValid = true;       
+        this.district.value = '-'; this.district.isValid = true;
       }else{
+        this.city.value = ''
+        this.cities = []
+
         this.department.value = ''; this.department.isValid = false;
         this.province.value = ''; this.province.isValid = false;
         this.district.value = ''; this.district.isValid = false;       
       }
+    },
+    'city.value': function(){
+      this.validateSelect(this.city)
     },
     'department.value': function(){
       this.validateSelect(this.department)  
@@ -177,13 +188,8 @@ function baseMethods(){
         parameter.isValid = true
       }
     },
-    getCountries: function(){
-      fetch(`https://parseapi.back4app.com/classes/Continentscountriescities_Country?limit=1000`, {
-          headers: {
-            'X-Parse-Application-Id': 'GCR90x4gnhDrwNHZaR64Nq9nnjLpoeiY7mlnIESs',
-            'X-Parse-REST-API-Key': 'JlHYio9m9RXVbKLJhmaOEBn7pFmZZtO3V8pxdib5',  
-          }
-        })
+    getCallingCode: function(country){
+      fetch(`https://restcountries.eu/rest/v2/name/${country.toLowerCase()}`)
         .then(res => {
           if (res.status >= 200 && res.status < 300) {
             return res.json()
@@ -191,8 +197,24 @@ function baseMethods(){
             throw res
           }
         })
-        .then(countries => {
-          this.countries = countries.results
+        .then(code => {
+          // console.log(code)
+        })
+        .catch(err => {
+          throw err;          
+        })      
+    },
+    getCountries: function(){
+      fetch(`http://api.geonames.org/countryInfoJSON?username=california`)
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            return res.json()
+          }else{
+            throw res
+          }
+        })
+        .then(geonames => {
+          this.countries = geonames.geonames
         })
         .catch(err => {
           throw err;          
@@ -202,20 +224,10 @@ function baseMethods(){
       let selectedIndex = document.querySelector('#countries').selectedIndex,
         countryId = document.querySelectorAll('#countries option')[selectedIndex].getAttribute('id')
 
-      const where = encodeURIComponent(JSON.stringify({
-        "country": {
-          "__type": "Pointer",
-          "className": "Continentscountriescities_Country",
-          "objectId": countryId
-        }
-      }));
+      this.city.value = ''
+      this.cities = []
 
-      fetch(`https://parseapi.back4app.com/classes/Continentscountriescities_Subdivisions_States_Provinces?limit=1000&where=${where}`, {
-          headers: {
-            'X-Parse-Application-Id': 'GCR90x4gnhDrwNHZaR64Nq9nnjLpoeiY7mlnIESs',
-            'X-Parse-REST-API-Key': 'JlHYio9m9RXVbKLJhmaOEBn7pFmZZtO3V8pxdib5'
-          }
-        })
+      fetch(`http://api.geonames.org/childrenJSON?geonameId=${countryId}&username=california`)
         .then(res => {
           if (res.status >= 200 && res.status < 300) {
             return res.json()
@@ -224,8 +236,7 @@ function baseMethods(){
           }
         })
         .then(cities => {
-          console.log(cities.results)
-          this.cities = cities.results
+          this.cities = cities.geonames
         })
         .catch(err => {
           throw err;          

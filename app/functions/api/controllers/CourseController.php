@@ -34,6 +34,16 @@ class CourseController{
         }  
     }
 
+    public function getUnities($request){
+        $unities = CourseModel::getUnities($request);
+        
+        if($unities){
+            return new WP_REST_Response($unities, 200);
+        }else{
+            return new WP_Error( 'no_unities', __('No unities found'), array( 'status' => 404 ) );
+        }  
+    }
+
     public function getProgress($request){
         $progess = CourseModel::getProgress($request);
 

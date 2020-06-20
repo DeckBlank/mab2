@@ -26,6 +26,106 @@
           {{post.content}}
         </div>
         <ul class="ul-reset">
+          <li v-for="(unity, u_index) of unities" class="c-unity margin-bottom-1 br--medium">
+            <input :id="'unity-' + u_index" type="checkbox" class="hide c-unity__checkbox" checked>           
+            <label :for="'unity-' + u_index" class="c-unity__toggle align-justify width-100">
+              <p class="text-left margin-bottom-0 margin-right-1 w-bold fs-25 white">
+                Unidad ${u_index + 1}:
+              </p>
+              <span class="c-icon display-block white fs-21"><i class="far fa-chevron-down"></i></span>
+            </label>
+            <div class="c-unity__content position-relative bg-white br--medium padding-1">
+              <h3 class="c-unity__title">
+                <span class="display-block fs-25 f2 dark-gray w-bold">${unity.title}</span>
+                <p class="margin-bottom-0 padding-left-2 fs-25 w-black">.....</p>
+              </h3>
+              <ul class="c-unity__topics ul-reset">
+                <ul v-for="topic of unity.topics" class="c-topic ul-reset f2 fs-21 dar-gray w-medium">
+                  <li class="c-topic__item">
+                    <a
+                      class="c-topic__link flex-container align-justify align-middle"
+                      @click="playVideo(
+                        topic.video.link + '?course_id={{post.id}}&course_name={{post.title}}&unity=' + (u_index + 1) + '&sector=' + metas.get('sector'),
+                        u_index
+                      )">
+                      <p v-if="topic.video.state" class="margin-bottom-0 flex-container sec-color align-middle">
+                        <span class="c-icon margin-right-1 fs-21 sec-color"><i class="far fa-play-circle"></i></span>
+                        ${topic.title}
+                      </p>
+                      <p v-else class="margin-bottom-0 flex-container dark-gray align-middle">
+                        <span class="c-icon margin-right-1 fs-21 pri-color"><i class="far fa-play-circle"></i></span>
+                        ${topic.title}
+                      </p>
+                      <!-- <p class="gray-gray margin-bottom-0">
+                        <span class="c-icon margin-right-1"><i class="far fa-clock"></i></span>
+                        4:00
+                      </p> -->
+                    </a>
+                  </li>
+
+                  <li v-if="topic.summary" class="c-topic__item">                 
+                    <a
+                      target="_blank" 
+                      class="c-topic__link flex-container align-justify align-middle"
+                      @click="downloadMaterial(u_index + 1, topic.id, topic.summary, 'summary')">
+                      <p class="margin-bottom-0 flex-container align-middle dark-gray">
+                        <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
+                        Resumen
+                      </p>
+                      <p class="gray-gray margin-bottom-0">
+                        <span class="c-icon"><i class="far fa-download"></i></span>
+                      </p>
+                    </a>
+                  </li>
+
+                  <li v-if="topic.map" class="c-topic__item">                 
+                    <a
+                      target="_blank" 
+                      class="c-topic__link flex-container align-justify align-middle"
+                      @click="downloadMaterial(u_index + 1, topic.id, topic.map, 'map')">
+                      <p class="margin-bottom-0 flex-container align-middle dark-gray">
+                        <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
+                        Mapa Mental
+                      </p>
+                      <p class="gray-gray margin-bottom-0">
+                        <span class="c-icon"><i class="far fa-download"></i></span>
+                      </p>
+                    </a>
+                  </li>
+
+                  <li v-if="topic.worksheet" class="c-topic__item">                 
+                    <a
+                      target="_blank" 
+                      class="c-topic__link flex-container align-justify align-middle"
+                      @click="downloadMaterial(u_index + 1, topic.id, topic.worksheet, 'worksheet')">
+                      <p class="margin-bottom-0 flex-container align-middle dark-gray">
+                        <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
+                        Hoja de trabajo
+                      </p>
+                      <p class="gray-gray margin-bottom-0">
+                        <span class="c-icon"><i class="far fa-download"></i></span>
+                      </p>
+                    </a>
+                  </li>
+
+                  <li v-if="topic.solutions" class="c-topic__item">                 
+                    <a
+                      target="_blank" 
+                      class="c-topic__link flex-container align-justify align-middle"
+                      @click="downloadMaterial(u_index + 1, topic.id, topic.solutions, 'solutions')">
+                      <p class="margin-bottom-0 flex-container align-middle dark-gray">
+                        <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
+                        Solucionario
+                      </p>
+                      <p class="gray-gray margin-bottom-0">
+                        <span class="c-icon"><i class="far fa-download"></i></span>
+                      </p>
+                    </a>
+                  </li>                        
+                </ul>
+              </ul>
+            </div>
+          </li>
           {% for unity in unities %}
             {% set unity_id = loop.index %}
               <li class="c-unity margin-bottom-1 br--medium">

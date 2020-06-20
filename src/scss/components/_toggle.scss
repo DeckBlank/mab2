@@ -2,16 +2,17 @@
   bottom: 1rem;
   right: 1rem;
   z-index: 1000;
-  background: $dark;
+  background: $secondary-color;
 
   @include b-radious(10px);
 
-  width: 50px;
-  height: 50px;
+  &__content {
+    height: 50px;
+  }
 
   .c-icons-container {
     height: 50px;
-    width: 50px;
+    width: 28px;
     top: 0;
     left: 0;
 
@@ -20,7 +21,7 @@
     }
 
     .c-icon {
-      width: 50px;
+      width: 28px;
       height: 50px;
       font-size: 1.2rem;
       color: $white;
@@ -32,10 +33,8 @@
     background: $primary-color;
   }
 
-  &--active {
-    .c-icons {
-      transform: translateY(-50px);
-    }
+  > input:checked + .c-toggle__content .c-icons {
+    transform: translateY(-50px);
   }
 }
 

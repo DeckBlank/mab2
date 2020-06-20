@@ -3,30 +3,75 @@
 use Timber\Timber;
 
 /**
- * Lib
+ * Libs
  */
-function __getTopicsSanitize($topics){
-    $topics_sanitize = [];
 
-    if($topics){        
-        foreach($topics as $topic){
-            array_push($topics_sanitize, (object)[
-                "id" => $topic['topic']->ID,
-                "title" => $topic['topic']->post_title,
-                "video" => (object)[
-                    "state" => 0,
-                    "link" => get_the_permalink($topic['topic']->ID)
-                ],
-                "summary" => ( get_field('summary', $topic['topic']->ID) ) ? get_field('summary', $topic['topic']->ID)['url'] : false,
-                "map" => ( get_field('map', $topic['topic']->ID) ) ? get_field('map', $topic['topic']->ID)['url'] : false,
-                "worksheet" => ( get_field('worksheet', $topic['topic']->ID) ) ? get_field('worksheet', $topic['topic']->ID)['url'] : false,
-                "solutions" => ( get_field('solutions', $topic['topic']->ID) ) ? get_field('solutions', $topic['topic']->ID)['url'] : false
-            ]);
+function __getTopicOnNavigation($course_id, $unity_id, $topic_id, $direction){
+    $course = Timber::get_post([
+        "post_type" => "course",
+        "p" => $course_id
+    ]);
+
+    $unities = get_field('unities', $course_id);
+    $topics = $unities[$unity_id - 1]['topics'];
+
+    for ($i=0; $i < count($topics); $i++) { 
+        $_topic = $topics[$i]['topic'];
+
+        if($_topic->ID == $topic_id){
+            if ($direction == 'next') {
+                if( isset($topics[$i + 1]['topic']) ){
+                    return sprintf(
+                        '%s?course_id=%s&course_name=%s&unity=%s&sector=%s',
+                        get_the_permalink($topics[$i + 1]['topic']->ID),
+                        $course_id,
+                        $course->title,
+                        $unity_id,
+                        $_GET['sector']
+                    );                    
+
+                }else if( isset($unities[$unity_id]['topics'][0]['topic']) ){
+                    return sprintf(
+                        '%s?course_id=%s&course_name=%s&unity=%s&sector=%s',
+                        get_the_permalink($unities[$unity_id]['topics'][0]['topic']->ID),
+                        $course_id,
+                        $course->title,
+                        $unity_id + 1,
+                        $_GET['sector']
+                    );
+
+                }else {
+                    return null;
+                }
+            } else {
+                if( isset($topics[$i - 1]['topic']) ){
+                    return sprintf(
+                        '%s?course_id=%s&course_name=%s&unity=%s&sector=%s',
+                        get_the_permalink($topics[$i - 1]['topic']->ID),
+                        $course_id,
+                        $course->title,
+                        $unity_id,
+                        $_GET['sector']
+                    );                    
+                    
+                }else if( isset($unities[$unity_id - 2]['topics'][0]['topic']) ){
+                    return sprintf(
+                        '%s?course_id=%s&course_name=%s&unity=%s&sector=%s',
+                        get_the_permalink($unities[$unity_id - 2]['topics'][0]['topic']->ID),
+                        $course_id,
+                        $course->title,
+                        $unity_id - 1,
+                        $_GET['sector']
+                    );
+
+                }else {
+                    return null;
+                }
+            }
         }
     }
-
-    return $topics_sanitize;
 }
+
 
 $context         = Timber::get_context();
 $context['post'] = Timber::get_post();
@@ -39,26 +84,20 @@ if($post->post_type == "video"){
     ];
 
 }else if($post->post_type == "course"){
-    $context['unities'] = [];
-
-    if(get_field('unities', $post->ID)){
-        foreach( get_field('unities', $post->ID) as $unity){
-            array_push($context['unities'],(object)[
-                "title" => $unity['title'],
-                "topics" => __getTopicsSanitize( $unity['topics'] )
-            ]);
-        }
-    }
-
     $context['price'] = 100;
     $context['discount'] = 0;
     $context['g_discount'] = 50;
 
 }else if($post->post_type == "topic"){
-    $context['author'] = (object)[
+    /*$context['author'] = (object)[
         "first_name" =>  $context['post']->author->first_name,
         "last_name" =>  $context['post']->author->last_name,
         "avatar" => get_field('picture', 'user_'. $context['post']->author->ID )
+    ];*/
+
+    $context['navigation'] = (object)[
+        "previous" => __getTopicOnNavigation($_GET['course_id'], $_GET['unity'], $post->ID, 'previous'),
+        "next" => __getTopicOnNavigation($_GET['course_id'], $_GET['unity'], $post->ID, 'next')
     ];
 
     $context['source'] = get_field('source', $post->ID);

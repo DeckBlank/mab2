@@ -67,26 +67,40 @@ Vue.component('form-teacher',{
           v-model="email.value">
         <p v-if="!email.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Email incorrecto</p>          
       </div>
-      <div class="input_container">
+      <div class="input_container position-relative">
+        <span v-if="!password.visible" @click="password.visible = !password.visible" class="c-form-box__toggle position-absolute">Mostrar</span>
+        <span v-else @click="password.visible = !password.visible" class="c-form-box__toggle position-absolute">Ocultar</span>
         <label for="">Crear contraseña</label>
         <input 
-          class="c-form-box__input input-reset"
+          class="c-form-box__input c-form-box__input--password input-reset"
           :class="{ valid : password.isValid }"
-          type="password" 
+          :type="(password.visible) ? 'text' : 'password'" 
           v-model="password.value">
-        <p v-if="!password.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Contraseña vacía</p>          
+        <p v-if="!password.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Contraseña vacía</p>           
       </div>
       <div class="input_container">
-        <label for="">País</label>
+        <label for="">País de residencia</label>
         <select
+          id="countries"
           class="c-form-box__select select-reset" 
           :class="{ valid : country.isValid }"
           v-model="country.value">
           <option disabled value="" selected>Selecciona una opción</option>
-          <option v-for="coun of countries" :key="coun.id" :value="coun.name" >{{coun.name}}</option>                               
+          <option v-for="coun of countries" :key="coun.id" :id="coun.geonameId" :value="coun.countryName" >{{coun.countryName}}</option>                               
         </select>
         <p v-if="!country.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
-      </div>      
+      </div>
+      <div v-if="country.value.toLowerCase() != 'peru'" class="input_container">
+        <label for="">Ciudad</label>
+        <select
+          class="c-form-box__select select-reset" 
+          :class="{ valid : city.isValid }"
+          v-model="city.value">
+          <option disabled value="" selected>Selecciona una opción</option>
+          <option v-for="city of cities" :key="city.id" :value="city.name" >{{city.name}}</option>                               
+        </select>
+        <p v-if="!city.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
+      </div>           
       <div v-if="country.value.toLowerCase() == 'peru'" class="input_container">
         <label for="">Departamento</label>
         <select
@@ -232,6 +246,7 @@ Vue.component('form-teacher',{
         this.grade.isValid &&
         this.age.isValid &&
         this.country.isValid &&
+        ((this.country.value.toLowerCase() != 'peru') ? this.city.isValid : true) &&
         this.department.isValid &&
         this.province.isValid &&
         this.district.isValid;
@@ -253,7 +268,12 @@ Vue.component('form-teacher',{
         form_data.append('school', this.school.value)
         form_data.append('grade', this.grade.value)
         form_data.append('age', this.age.value)
-        form_data.append('location', `${this.country.value}, ${this.department.value}, ${this.province.value}, ${this.district.value}`)
+
+        if (this.country.value.toLowerCase() == 'peru') {
+          form_data.append('location', `${this.country.value}, ${this.department.value}, ${this.province.value}, ${this.district.value}`)          
+        } else {
+          form_data.append('location', `${this.country.value}, ${this.city.value}`)      
+        }
 
         this.isSending = true;
 
@@ -274,6 +294,7 @@ Vue.component('form-teacher',{
           })
           .catch(err => {
             this.isSentFormError = true;
+            this.isSending = false;
 
             throw err;          
           })

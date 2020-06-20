@@ -10,7 +10,9 @@ const course = new Vue({
       isActiveUnity: false,
       isAvaibleCourse: true,
       isActiveSignUp: false,
-      accessGranted: false
+      accessGranted: false,
+
+      unities: []
     }
   },
   computed: {
@@ -24,9 +26,26 @@ const course = new Vue({
     this.isUserAuthOnCourse( this.$refs.course.getAttribute('data-id') )
     this.saveCourseOnMetas()
     this.verifyIsAvaibleCourse()
+    this.getUnities( this.$refs.course.getAttribute('data-id') );
   },
   methods: {
     ...baseActions(),
+    getUnities: function(course_id){
+      fetch(`${this.API}/course/${course_id}/unities?user=${this.logedUser.user_email}`)
+        .then(res => { 
+          if (res.status >= 200 && res.status < 300) {
+            return res.json()
+          }else{
+            throw res
+          }
+        })
+        .then(unities => {
+          this.unities = unities;
+        })
+        .catch(err => {
+          throw err;
+        })      
+    },
     isUserAuthOnCourse: function(course_id){
       if(this.metas.get('sector') != 'privado' && this.metas.get('sector') != 'publico'){
         if (this.logedUser) {                      

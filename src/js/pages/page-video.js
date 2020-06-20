@@ -10,7 +10,7 @@ const video = new Vue({
   data() {
     return {
       videoID: null,
-      likesAverage: 0,
+      likes: 0,
       comments: {
         number: 0,
         list: []
@@ -30,13 +30,13 @@ const video = new Vue({
     
     this.videoID = this.$refs.video.getAttribute('data-id');
 
-    this.getLikesAverage()
+    this.getLikes()
     this.getComments()
     this.hideLoading();
   },
   methods: {
     ...baseActions(),
-    getLikesAverage: function(){
+    getLikes: function(){
       fetch(`${this.API}/video/${this.videoID}/likes`,{
           method: 'GET'
         })
@@ -47,8 +47,8 @@ const video = new Vue({
             throw res
           }
         })
-        .then(average => {
-          this.likesAverage = parseFloat(average[0]);
+        .then(likes => {
+          this.likes = parseInt(likes[0]);
         })
         .catch(err => {    
           throw err;          

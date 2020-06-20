@@ -1,0 +1,15 @@
+.c-navigation {
+  border-bottom: solid 2px $medium-gray;
+
+  p {
+    display: none;
+  }
+}
+
+@include breakpoint(medium) {
+  .c-navigation {
+    p {
+      display: block;
+    }
+  }
+}

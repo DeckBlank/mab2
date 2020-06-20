@@ -107,6 +107,11 @@ add_action( 'rest_api_init', function () {
         'callback' => array($courseController,'getCategories'),
     ));
 
+    register_rest_route( 'custom/v1', '/course/(?P<course_id>\d+)/unities', array(
+        'methods' => 'GET',
+        'callback' => array($courseController,'getUnities'),
+    ));
+
     register_rest_route( 'custom/v1', '/courses', array(
         'methods' => 'GET',
         'callback' => array($courseController,'getAll'),

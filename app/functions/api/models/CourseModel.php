@@ -55,6 +55,21 @@ class CourseModel{
         }        
     }
 
+    public static function getUnities($request){
+        $unities = [];
+
+        if(get_field('unities', $request['course_id'])){
+            foreach( get_field('unities', $request['course_id']) as $unity){
+                array_push($unities,(object)[
+                    "title" => $unity['title'],
+                    "topics" => self::__getTopicsSanitize($unity['topics'], $request['user'])
+                ]);
+            }
+        }        
+
+        return $unities;
+    }
+
     public static function getCategories($request){
         $courses = Timber::get_posts([
             "post_type" => "course",
@@ -309,6 +324,20 @@ class CourseModel{
         return $user_course_logs;        
     }
 
+    public static function __isViewedTopic($topic, $user){
+        $response = DBConnection::getConnection()->query("
+            SELECT
+                *
+            FROM
+                wp_user_topic
+            WHERE
+                user_email = '". $user ."' and
+                topic_id = ". $topic ."
+        ");
+
+        return ($response && $response->fetch_assoc()['video_viewed']) ? 1 : 0;
+    }
+
     public static function __getCourseName($id){
         if ($id) {
             return Timber::get_post([
@@ -319,4 +348,27 @@ class CourseModel{
             return '';
         }
     }
+
+    public static function __getTopicsSanitize($topics, $user){
+        $topics_sanitize = [];
+    
+        if($topics){        
+            foreach($topics as $topic){
+                array_push($topics_sanitize, (object)[
+                    "id" => $topic['topic']->ID,
+                    "title" => $topic['topic']->post_title,
+                    "video" => (object)[
+                        "state" => self::__isViewedTopic($topic['topic']->ID, $user),
+                        "link" => get_the_permalink($topic['topic']->ID)
+                    ],
+                    "summary" => ( get_field('summary', $topic['topic']->ID) ) ? get_field('summary', $topic['topic']->ID)['url'] : false,
+                    "map" => ( get_field('map', $topic['topic']->ID) ) ? get_field('map', $topic['topic']->ID)['url'] : false,
+                    "worksheet" => ( get_field('worksheet', $topic['topic']->ID) ) ? get_field('worksheet', $topic['topic']->ID)['url'] : false,
+                    "solutions" => ( get_field('solutions', $topic['topic']->ID) ) ? get_field('solutions', $topic['topic']->ID)['url'] : false
+                ]);
+            }
+        }
+    
+        return $topics_sanitize;
+    }    
 }

@@ -30,6 +30,15 @@
       margin-top: 0.5rem;
     }
 
+    &__toggle {
+      bottom: 0.5rem;
+      right: 1rem;
+      z-index: 100;
+      color: $dark;
+      display: block;
+      cursor: pointer;
+    }
+
     @keyframes an-submit-sending {
       from {
         width: 0;
