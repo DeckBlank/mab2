@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 
 Vue.component('likes',{
   template: /*html*/`
-    <div class="c-likes f2 position-relative" :class="[{ done : isLiked }, { active : isActiveLikes}]">
+    <div class="c-likes f2 position-relative" :class="{ done : isLiked }">
       <button 
         class="c-likes__toggle flex-container align-middle" 
         @click="addNewLike(5)"
