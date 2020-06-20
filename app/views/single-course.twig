@@ -46,7 +46,7 @@
                       class="c-topic__link flex-container align-justify align-middle"
                       @click="playVideo(
                         topic.video.link + '?course_id={{post.id}}&course_name={{post.title}}&unity=' + (u_index + 1) + '&sector=' + metas.get('sector'),
-                        u_index
+                        u_index + 1
                       )">
                       <p v-if="topic.video.state" class="margin-bottom-0 flex-container sec-color align-middle">
                         <span class="c-icon margin-right-1 fs-21 sec-color"><i class="far fa-play-circle"></i></span>

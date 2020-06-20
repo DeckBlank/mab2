@@ -40,7 +40,8 @@ const course = new Vue({
           }
         })
         .then(unities => {
-          this.unities = unities;
+          this.unities = unities;          
+          this.hideLoading();
         })
         .catch(err => {
           throw err;
@@ -67,14 +68,10 @@ const course = new Vue({
             })
             .then(registration => {
               this.accessGranted = true
-              this.hideLoading();
             })
             .catch(err => {
-              this.hideLoading();
               throw err;          
             })        
-        }else {
-          this.hideLoading();
         }
       }
     },
