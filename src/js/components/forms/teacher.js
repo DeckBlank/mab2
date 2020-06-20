@@ -86,11 +86,11 @@ Vue.component('form-teacher',{
           :class="{ valid : country.isValid }"
           v-model="country.value">
           <option disabled value="" selected>Selecciona una opción</option>
-          <option v-for="coun of countries" :key="coun.id" :id="coun.geonameId" :value="coun.countryName" >{{coun.countryName}}</option>                               
+          <option v-for="coun of countries" :key="coun.id" :id="coun.geonameId" :value="coun.name" >{{coun.name}}</option>                               
         </select>
         <p v-if="!country.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
       </div>
-      <div v-if="country.value.toLowerCase() != 'peru'" class="input_container">
+      <div v-if="false" class="input_container">
         <label for="">Ciudad</label>
         <select
           class="c-form-box__select select-reset" 
@@ -246,7 +246,7 @@ Vue.component('form-teacher',{
         this.grade.isValid &&
         this.age.isValid &&
         this.country.isValid &&
-        ((this.country.value.toLowerCase() != 'peru') ? this.city.isValid : true) &&
+        // ((this.country.value.toLowerCase() != 'peru') ? this.city.isValid : true) &&
         this.department.isValid &&
         this.province.isValid &&
         this.district.isValid;
@@ -268,12 +268,13 @@ Vue.component('form-teacher',{
         form_data.append('school', this.school.value)
         form_data.append('grade', this.grade.value)
         form_data.append('age', this.age.value)
+        form_data.append('location', `${this.country.value}, ${this.department.value}, ${this.province.value}, ${this.district.value}`)          
 
-        if (this.country.value.toLowerCase() == 'peru') {
-          form_data.append('location', `${this.country.value}, ${this.department.value}, ${this.province.value}, ${this.district.value}`)          
-        } else {
-          form_data.append('location', `${this.country.value}, ${this.city.value}`)      
-        }
+        // if (this.country.value.toLowerCase() == 'peru') {
+        //   form_data.append('location', `${this.country.value}, ${this.department.value}, ${this.province.value}, ${this.district.value}`)          
+        // } else {
+        //   form_data.append('location', `${this.country.value}, ${this.city.value}`)      
+        // }
 
         this.isSending = true;
 

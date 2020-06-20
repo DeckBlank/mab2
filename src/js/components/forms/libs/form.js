@@ -142,7 +142,7 @@ function baseWatch(){
       // this.getCallingCode(value);
 
       if (value.toLowerCase() != 'peru') {
-        this.getCities();
+        // this.getCities();
 
         this.department.value = '-'; this.department.isValid = true;
         this.province.value = '-'; this.province.isValid = true;
@@ -205,7 +205,7 @@ function baseMethods(){
         })      
     },
     getCountries: function(){
-      fetch(`http://api.geonames.org/countryInfoJSON?username=california`)
+      fetch(`https://restcountries.eu/rest/v2/all`)
         .then(res => {
           if (res.status >= 200 && res.status < 300) {
             return res.json()
@@ -213,8 +213,8 @@ function baseMethods(){
             throw res
           }
         })
-        .then(geonames => {
-          this.countries = geonames.geonames
+        .then(countries => {
+          this.countries = countries
         })
         .catch(err => {
           throw err;          
