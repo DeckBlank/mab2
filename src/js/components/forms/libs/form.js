@@ -2,7 +2,6 @@ function baseData(){
   return {
     //Geo
     countries: [],
-    cities: [],
     departamentos: require('../../../extras/ubigeo/departamentos.json'),
     provincias: [],
     distritos: [],
@@ -51,6 +50,9 @@ function baseData(){
       pattern: '^([0-9]+)$',
       isValid: false
     },
+    callingCode: {
+      value: '',
+    },
     mobile: {
       value: '',
       pattern: '^[0-9]{9}$',
@@ -65,10 +67,6 @@ function baseData(){
       isValid: false
     },
     country: {
-      value: '',
-      isValid: false
-    },
-    city: {
       value: '',
       isValid: false
     },
@@ -138,19 +136,13 @@ function baseWatch(){
     },
     'country.value': function(value){
       this.validateSelect(this.country)
-
-      // this.getCallingCode(value);
+      this.getCallingCode();
 
       if (value.toLowerCase() != 'peru') {
-        // this.getCities();
-
         this.department.value = '-'; this.department.isValid = true;
         this.province.value = '-'; this.province.isValid = true;
         this.district.value = '-'; this.district.isValid = true;
       }else{
-        this.city.value = ''
-        this.cities = []
-
         this.department.value = ''; this.department.isValid = false;
         this.province.value = ''; this.province.isValid = false;
         this.district.value = ''; this.district.isValid = false;       
@@ -188,21 +180,11 @@ function baseMethods(){
         parameter.isValid = true
       }
     },
-    getCallingCode: function(country){
-      fetch(`https://restcountries.eu/rest/v2/name/${country.toLowerCase()}`)
-        .then(res => {
-          if (res.status >= 200 && res.status < 300) {
-            return res.json()
-          }else{
-            throw res
-          }
-        })
-        .then(code => {
-          // console.log(code)
-        })
-        .catch(err => {
-          throw err;          
-        })      
+    getCallingCode: function(){
+      let selectedIndex = document.querySelector('#countries').selectedIndex,
+        callingCode = document.querySelectorAll('#countries option')[selectedIndex].getAttribute('code')
+
+      this.callingCode.value = callingCode
     },
     getCountries: function(){
       fetch(`https://restcountries.eu/rest/v2/all`)
@@ -219,28 +201,6 @@ function baseMethods(){
         .catch(err => {
           throw err;          
         })      
-    },
-    getCities: function(){
-      let selectedIndex = document.querySelector('#countries').selectedIndex,
-        countryId = document.querySelectorAll('#countries option')[selectedIndex].getAttribute('id')
-
-      this.city.value = ''
-      this.cities = []
-
-      fetch(`http://api.geonames.org/childrenJSON?geonameId=${countryId}&username=california`)
-        .then(res => {
-          if (res.status >= 200 && res.status < 300) {
-            return res.json()
-          }else{
-            throw res
-          }
-        })
-        .then(cities => {
-          this.cities = cities.geonames
-        })
-        .catch(err => {
-          throw err;          
-        })
     },
     getProvincias: function(option) {
       let provincias = require('../../../extras/ubigeo/provincias.json')

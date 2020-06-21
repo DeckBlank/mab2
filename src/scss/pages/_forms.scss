@@ -39,6 +39,12 @@
       cursor: pointer;
     }
 
+    .input_container {
+      .c-form-box__input:nth-child(1) {
+        width: 35%;
+      }
+    }
+
     @keyframes an-submit-sending {
       from {
         width: 0;
@@ -46,6 +52,30 @@
 
       to {
         width: 100%;
+      }
+    }
+  }
+}
+
+@include breakpoint(medium) {
+  .c-section--forms {
+    .c-form-box {
+      .input_container {
+        .c-form-box__input:nth-child(1) {
+          width: 20%;
+        }
+      }
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-section--forms {
+    .c-form-box {
+      .input_container {
+        .c-form-box__input:nth-child(1) {
+          width: 15%;
+        }
       }
     }
   }

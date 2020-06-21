@@ -64,6 +64,27 @@
             "step": ""
         },
         {
+            "key": "field_5eeece06d24f9",
+            "label": "Código de celular",
+            "name": "calling_code",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
+        },
+        {
             "key": "field_5e925173c416d",
             "label": "Tipo de colegio",
             "name": "school_type",
@@ -273,5 +294,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1591514205
+    "modified": 1592708621
 }

@@ -70,6 +70,7 @@ class UserModel{
                 case 'tutor' :
                         update_field('gender', $request['gender'], 'user_' . $user_id);
                         update_field('phone', $request['phone'], 'user_' . $user_id);
+                        update_field('calling_code', $request['calling_code'], 'user_' . $user_id);
                         update_field('mobile', $request['mobile'], 'user_' . $user_id);
                         update_field('school_type', $request['school_type'], 'user_' . $user_id);
                         update_field('ugel', $request['ugel'], 'user_' . $user_id);
@@ -94,6 +95,7 @@ class UserModel{
                         update_field('gender', $request['gender'], 'user_' . $user_id);
                         update_field('age', $request['age'], 'user_' . $user_id);
                         update_field('phone', $request['phone'], 'user_' . $user_id);
+                        update_field('calling_code', $request['calling_code'], 'user_' . $user_id);
                         update_field('mobile', $request['mobile'], 'user_' . $user_id);
                         update_field('school_type', $request['school_type'], 'user_' . $user_id);
                         update_field('ugel', $request['ugel'], 'user_' . $user_id);
@@ -105,6 +107,7 @@ class UserModel{
                         update_field('gender', $request['gender'], 'user_' . $user_id);
                         update_field('age', $request['age'], 'user_' . $user_id);
                         update_field('phone', $request['phone'], 'user_' . $user_id);
+                        update_field('calling_code', $request['calling_code'], 'user_' . $user_id);
                         update_field('mobile', $request['mobile'], 'user_' . $user_id);
                         update_field('school_type', $request['school_type'], 'user_' . $user_id);
                         update_field('ugel', $request['ugel'], 'user_' . $user_id);

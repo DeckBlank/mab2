@@ -58,15 +58,17 @@ Vue.component('form-tutor',{
           v-model="email.value">
         <p v-if="!email.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Email incorrecto</p>            
       </div>
-      <div class="input_container position-relative">
-        <span v-if="!password.visible" @click="password.visible = !password.visible" class="c-form-box__toggle position-absolute">Mostrar</span>
-        <span v-else @click="password.visible = !password.visible" class="c-form-box__toggle position-absolute">Ocultar</span>
+      <div class="input_container">
         <label for="">Crear contraseña</label>
-        <input 
-          class="c-form-box__input c-form-box__input--password input-reset"
-          :class="{ valid : password.isValid }"
-          :type="(password.visible) ? 'text' : 'password'" 
-          v-model="password.value">
+        <div class="position-relative">
+          <span v-if="!password.visible" @click="password.visible = !password.visible" class="c-form-box__toggle position-absolute">Mostrar</span>
+          <span v-else @click="password.visible = !password.visible" class="c-form-box__toggle position-absolute">Ocultar</span>
+          <input 
+            class="c-form-box__input c-form-box__input--password input-reset"
+            :class="{ valid : password.isValid }"
+            :type="(password.visible) ? 'text' : 'password'" 
+            v-model="password.value">
+        </div>
         <p v-if="!password.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Contraseña vacía</p>           
       </div>
       <div class="input_container">
@@ -77,20 +79,9 @@ Vue.component('form-tutor',{
           :class="{ valid : country.isValid }"
           v-model="country.value">
           <option disabled value="" selected>Selecciona una opción</option>
-          <option v-for="coun of countries" :key="coun.id" :id="coun.geonameId" :value="coun.name" >{{coun.name}}</option>                               
+          <option v-for="coun of countries" :key="coun.id" :code="coun.callingCodes[0]" :value="coun.name" >{{coun.name}}</option>                               
         </select>
         <p v-if="!country.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
-      </div>      
-      <div v-if="false" class="input_container">
-        <label for="">Ciudad</label>
-        <select
-          class="c-form-box__select select-reset" 
-          :class="{ valid : city.isValid }"
-          v-model="city.value">
-          <option disabled value="" selected>Selecciona una opción</option>
-          <option v-for="city of cities" :key="city.id" :value="city.name" >{{city.name}}</option>                               
-        </select>
-        <p v-if="!city.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
       </div>      
       <div v-if="country.value.toLowerCase() == 'peru'" class="input_container">
         <label for="">Departamento</label>
@@ -130,11 +121,16 @@ Vue.component('form-tutor',{
       </div>
       <div class="input_container">
         <label for="">Celular</label>
-        <input 
-          class="c-form-box__input input-reset"
-          :class="{ valid : mobile.isValid }"
-          type="tel" 
-          v-model="mobile.value">
+        <div class="flex-container">
+          <div class="c-form-box__input bg-warning dark flex-container align-middle padding-horizontal-1 margin-right-1">
+            + {{callingCode.value}}
+          </div>
+          <input 
+            class="c-form-box__input input-reset"
+            :class="{ valid : mobile.isValid }"
+            type="tel" 
+            v-model="mobile.value">
+        </div>
         <p v-if="!mobile.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Celular incorrecto</p>          
       </div>
       <div class="input_container">
@@ -195,12 +191,14 @@ Vue.component('form-tutor',{
       <div v-if="isSentFormError" class="margin-bottom-1">
         <p class="white fs-18 f2 w-medium text-center margin-bottom-0">El usuario ya existe</p>
       </div>
-      <div class="btn_container">
+      <div class="btn_container margin-bottom-1">
         <button 
           class="c-form-box__sender" 
-          type="button" 
           :disabled="isSending"
+          type="button"
           @click="sendForm">Listo</button>
+      </div>
+      <p v-if="!is_valid_form" class="w-medium fs-21 white f2 text-center">Uno o más campos no han sido llenados correctamente, ¡Revisalos!</p>
       </div>
     </form>  
   </section>
@@ -274,7 +272,6 @@ Vue.component('form-tutor',{
         ((this.schoolType.value == 'privado') ? this.school.isValid : true) &&
         this.childrenQuantity.isValid &&
         this.country.isValid &&
-        // ((this.country.value.toLowerCase() != 'peru') ? this.city.isValid : true) &&
         this.department.isValid &&
         this.province.isValid &&
         this.district.isValid;
@@ -291,18 +288,13 @@ Vue.component('form-tutor',{
         form_data.append('password', this.password.value)
         form_data.append('phone', this.phone.value)
         form_data.append('mobile', this.mobile.value)
+        form_data.append('calling_code', this.callingCode.value)
         form_data.append('school_type', this.schoolType.value)
         form_data.append('ugel', '')
         form_data.append('children_school', this.school.value)
         form_data.append('children_quantity', this.childrenQuantity.value)
         form_data.append('children', JSON.stringify(this.children))
         form_data.append('location', `${this.country.value}, ${this.department.value}, ${this.province.value}, ${this.district.value}`)          
-
-        // if (this.country.value.toLowerCase() == 'peru') {
-        //   form_data.append('location', `${this.country.value}, ${this.department.value}, ${this.province.value}, ${this.district.value}`)          
-        // } else {
-        //   form_data.append('location', `${this.country.value}, ${this.city.value}`)      
-        // }
         
         this.isSending = true;
 

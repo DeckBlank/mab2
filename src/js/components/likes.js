@@ -17,7 +17,7 @@ Vue.component('likes',{
   props: {
     count: Number,
     target: Object
-  },  
+  },
   data() {
     return {
       isLiked: false
