@@ -87,7 +87,16 @@ class ReportsOptionPage {
                 'manage_options',
                 'polls',
                 array( $this, 'create_admin_polls_page' )
-            );            
+            );
+
+            add_submenu_page(
+                'reports',
+                'Matriculas',
+                'Matriculas',
+                'manage_options',
+                'enrollments',
+                array( $this, 'create_admin_enrollments_page' )
+            );
         }
     }
 
@@ -129,6 +138,11 @@ class ReportsOptionPage {
     public function create_admin_polls_page() {
         include_once __DIR__.'/assets/enqueue.php';        
         include_once __DIR__.'/views/polls.php';
+    }
+    
+    public function create_admin_enrollments_page() {
+        include_once __DIR__.'/assets/enqueue.php';        
+        include_once __DIR__.'/views/enrollments.php';
     }
 }
 

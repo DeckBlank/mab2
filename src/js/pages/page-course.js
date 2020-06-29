@@ -49,11 +49,7 @@ const course = new Vue({
     },
     isUserAuthOnCourse: function(course_id){
       if(this.metas.get('sector') != 'privado' && this.metas.get('sector') != 'publico'){
-        if (this.logedUser) {                      
-          item.setAttribute('href', `${this.SITE_URL}/solicitar-cursos`)
-        } else {
-          item.setAttribute('href', `${this.SITE_URL}#registro`)                      
-        }
+        window.location = `${this.SITE_URL}/emotional`
       }else{
         if(this.metas.get('sector') == 'privado'){
           fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}`,{
@@ -88,6 +84,7 @@ const course = new Vue({
           id: course_id,
           title: course_title,
           link: course_link,
+          sector: this.metas.get('sector')
         }]))
       }else{
         shop_cart = JSON.parse(shop_cart);
@@ -95,6 +92,7 @@ const course = new Vue({
           id: course_id,
           title: course_title,
           link: course_link,
+          sector: this.metas.get('sector')
         })
 
         window.localStorage.setItem('mab_shop_cart', JSON.stringify(shop_cart))
@@ -109,14 +107,16 @@ const course = new Vue({
         shop_cart = JSON.parse(shop_cart);
 
       if(shop_cart){
-        this.isAvaibleCourse = !shop_cart.filter(course => course == this.$refs.course.getAttribute('data-id'))
+        let courses = shop_cart.filter(course => course.id == this.$refs.course.getAttribute('data-id'))
+
+        this.isAvaibleCourse = (courses.length > 0) ? false : true;
       }
     },
-    playVideo: function(video, unity){
+    playVideo: function(video, unity, topic){
       event.preventDefault();
 
       if (this.metas.get('sector') == 'privado') {
-        if(this.accessGranted || unity == 1){
+        if(this.accessGranted || (unity == 1 && topic == 1)){
           window.location = video;
         }else{
           if (this.logedUser) {            
@@ -126,18 +126,18 @@ const course = new Vue({
           }
         }    
       } else if(this.metas.get('sector') == 'publico') {
-        if(this.logedUser || unity == 1){
+        if(this.logedUser || (unity == 1 && topic == 1)){
           window.location = video;
         }else{
           this.isActiveSignUp = true;
         }        
       }
     },
-    downloadMaterial: function(unity, topic_id, url, media){
+    downloadMaterial: function(unity, topic, topic_id, url, media){
       event.preventDefault();
 
       if (this.metas.get('sector') == 'privado') {
-        if(this.accessGranted || unity == 1){
+        if(this.accessGranted || (unity == 1 && topic == 1)){
           this.saveMaterialLog(topic_id, url, media)
         }else{
           if (this.logedUser) {            
@@ -147,7 +147,7 @@ const course = new Vue({
           }
         }    
       } else if(this.metas.get('sector') == 'publico') {
-        if(this.logedUser || unity == 1){
+        if(this.logedUser || (unity == 1 && topic == 1)){
           this.saveMaterialLog(topic_id, url, media)
         }else{
           this.isActiveSignUp = true;

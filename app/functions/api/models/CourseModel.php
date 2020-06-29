@@ -26,6 +26,8 @@ class CourseModel{
 
             return get_posts($course_args);
         } else if (isset($request['ids'])){
+            $env = require(__DIR__ . '/../../../../env.php');
+
             $course_args = [
                 "post_type" => "course",
                 "posts_per_page" => -1,
@@ -37,6 +39,7 @@ class CourseModel{
 
             for ($i=0; $i < count($courses) ; $i++) {
                 array_push($courses_array, (object)[
+                    "id" => $courses[$i]->ID,
                     "title" => $courses[$i]->post_title,
                     "unities" => get_field('unities', $courses[$i]->ID),
                     "price" =>  floatval( $sell['course_price'] ),
@@ -49,7 +52,11 @@ class CourseModel{
                     "global" => floatval( $sell['global_discount'] ),
                     "individual" => floatval( $sell['individual_discount'] )
                 ],
-                "pasarell" => $sell['pasarell'],
+                "pasarell" => (object)[
+                    "api_key" => $env['PU_API_KEY'],
+                    "merchan_id" => $env['PU_MERCHAND_ID'],
+                    "account_id" => $env['PU_ACCOUNT_ID']
+                ],
                 "list" => $courses_array
             ];
         }        
@@ -179,6 +186,22 @@ class CourseModel{
                     }
                 }
             }
+
+            $courses_enrollment = DBConnection::getConnection()->query("
+                SELECT
+                    *
+                FROM
+                    wp_user_course_enrollment
+                WHERE
+                    state = 1 AND
+                    user_email = '". $request['user'] ."' AND
+                    course_id = '". $request['course_id'] ."' AND
+                    date_end >= '". date('Y-m-d G:i:s') ."'
+            ");
+
+            if($courses_enrollment->num_rows > 0){
+                return true;
+            }            
         }
 
         return false;
@@ -324,6 +347,156 @@ class CourseModel{
         return $user_course_logs;        
     }
 
+    public static function saveBuyRequest($request){
+        $courses = explode(',', $request['ids']);
+        $response = false;
+
+        foreach($courses as $course){
+            $response = DBConnection::getConnection()->query("
+                INSERT INTO 
+                    wp_user_course_buy(date_at, reference_code, user_email, course_id, state)
+                VALUES(
+                    '". date("Y-m-d G:i:s") ."',
+                    '". $request['reference_code'] ."',
+                    '". $request['user'] ."',
+                    '". $course ."',
+                    'PENDING'
+                )
+            ");
+
+            if(!$response){
+                break;
+            }
+        }
+
+        return $response;
+    }
+
+    public static function updateBuyRequest($request, $buy_requests){
+        DBConnection::getConnection()->query("
+            UPDATE
+                wp_user_course_buy
+            SET
+                state = 'APPROVED',
+                date_at = '". date("Y-m-d G:i:s") ."'
+            WHERE
+                user_email = '". $request['user'] ."' AND
+                reference_code = '". $request['reference_code'] ."'
+        ");
+
+        return self::__saveEnrollment($buy_requests, $request['user']);
+    }  
+
+    public static function getBuyRequests($request){
+        $buy_requests = DBConnection::getConnection()->query("
+            SELECT
+                *
+            FROM
+                wp_user_course_buy
+            WHERE
+                user_email = '". $request['user'] ."' AND
+                reference_code = '". $request['reference_code'] ."' AND
+                state = 'PENDING'
+        ");
+        $buy_requests_array = [];
+        
+        if($buy_requests && $buy_requests->num_rows > 0){
+            while($buy_request = $buy_requests->fetch_assoc()){
+                array_push($buy_requests_array, $buy_request);
+            }
+
+            return $buy_requests_array;
+        }else {
+            return false;
+        }
+    }
+
+    public static function getEnrollments($request, $type = false){
+        if (isset($request['user'])) {
+            $enrollments = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_user_course_enrollment
+                WHERE
+                    user_email = '". $request['user'] ."'
+                ORDER BY last_date DESC                    
+            ");
+        } else {
+            $enrollments = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_user_course_enrollment
+                ORDER BY last_date DESC
+                LIMIT ". __getLimit() ."
+                OFFSET ". __getOffset($request['page']) ."
+            ");
+        }
+
+        if ($type == 'expired') {
+            $enrollments = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_user_course_enrollment
+                WHERE
+                    date_end < '". date('Y-m-d G:i:s') ."'
+                ORDER BY last_date DESC 
+            ");
+        }
+
+        $enrollments_array = [];
+        
+        if($enrollments && $enrollments->num_rows > 0){
+            while($enrollment = $enrollments->fetch_assoc()){
+                array_push($enrollments_array, (object)[
+                    "user" => get_user_by('email', $enrollment['user_email']),
+                    "user_email" => $enrollment['user_email'],
+                    "course" => CourseModel::__getCourseName($enrollment['course_id']),
+                    "state" => ($enrollment['state'] == 1) ? 'Habilitado' : 'Bloqueado',
+                    "date_at" => $enrollment['date_at'],
+                    "date_end" => $enrollment['date_end'],
+                    "last_date" => $enrollment['last_date']
+                ]);            
+            }
+        }
+
+        return $enrollments_array;
+    }
+    
+    public static function __saveEnrollment($buy_requests, $user_email){
+        $response = false;
+        $date_end = date('Y-m-d G:i:s', strtotime(date("Y-m-d", mktime()) . " + 365 day"));
+        $courses = array_map(function($buy_request){
+            return $buy_request['course_id'];
+        }, $buy_requests);
+
+        foreach($courses as $course){
+            $response = DBConnection::getConnection()->query("
+                INSERT INTO 
+                    wp_user_course_enrollment(user_email, course_id, date_at, date_end, last_date, state)
+                VALUES(
+                    '". $user_email ."',
+                    '". $course ."',
+                    '". date("Y-m-d G:i:s") ."',
+                    '". $date_end ."',
+                    '". date("Y-m-d G:i:s") ."',
+                    1
+                )
+                ON DUPLICATE KEY UPDATE
+                    date_end = '". $date_end ."',
+                    last_date = '". date("Y-m-d G:i:s") ."'
+            ");
+
+            if(!$response){
+                break;
+            }
+        }
+
+        return $response;
+    }
+
     public static function __isViewedTopic($topic, $user){
         $response = DBConnection::getConnection()->query("
             SELECT
@@ -370,5 +543,5 @@ class CourseModel{
         }
     
         return $topics_sanitize;
-    }    
+    }
 }

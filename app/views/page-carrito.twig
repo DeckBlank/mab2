@@ -27,9 +27,9 @@
             <div v-if="courses.list" class="grid-x grid-margin-x grid-margin-y margin-bottom-2">
               <div class="cell large-6">
                 <ul class="c-courses ul-reset">
-                  <li class="c-course" v-for="course of courses.list" :key="course.id">
+                  <li class="c-course" v-for="(course, index) of courses.list" :key="course.id">
                     <h3 class="c-course__title dark fs-30 f2 w-black margin-bottom-2">
-                      <span class="display-block">Course:</span>
+                      <span class="display-block">Curso:</span>
                       <p class="margin-bottom-0">${course.title}</p>
                     </h3>
                     <div class="f2 dark fs-25 w-medium margin-bottom-1">
@@ -38,14 +38,19 @@
                         <li class="c-course__unity" v-for="unity of course.unities" :key="unity.id">${unity.title}</li>
                       </ul>
                     </div>
-                    <div class="fs-25 f2 flex-container">
+                    <div class="fs-25 f2 flex-container margin-bottom-1">
                       <p class="c-course__price pri-color margin-bottom-0 w-black margin-right-1">
-                        S/${(course.price - course.price*course.discount/100) - (course.price - course.price*course.discount/100)*courses.discount.global/100}
+                        S/${course.price - course._discount}
                       </p>
                       <p v-if="courses.discount.global > 0" class="c-course__old-price margin-bottom-0 w-sbold">
                         S/${course.price}
                       </p>
                     </div>
+                    <button 
+                      class="c-button c-button--primary fs-18 w-medium f2" 
+                      @click="removeCourseFromShopCart(course.id, course.price, course._discount, index)">
+                      Remover
+                    </button>
                   </li>
                 </ul>
               </div>
@@ -75,10 +80,10 @@
                       <p class="margin-bottom-0 pri-color w-black text-right">S/${amount}</p>
                     </div>                                                 
                   </div>
-                  <form v-if="courses.list" action="https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/" method="POST" class="text-center">
+                  <form v-if="courses.list" ref="summary_form" action="{{pasarell.action}}" method="POST" class="text-center">
                     <input name="merchantId"    type="hidden"  value="{{pasarell.merchan_id}}">
                     <input name="accountId"     type="hidden"  value="{{pasarell.account_id}}">
-                    <input name="description"   type="hidden"  :value="'Compra de cursos: ' + [...(courses.list.map(course => course.title))].join(', ')"  >
+                    <input name="description"   type="hidden"  :value="'Compra de ' + [...(courses.list.map(course => course.title))].join(', ')"  >
                     <input name="referenceCode" type="hidden"  :value="referenceCode" >
                     <input name="amount"        type="hidden"  :value="amount"   >
                     <input name="tax"           type="hidden"  value="0"  >
@@ -86,11 +91,11 @@
                     <input name="currency"      type="hidden"  value="PEN" >
                     <input name="signature"     type="hidden"  :value="signature"  >
                     <input name="test"          type="hidden"  value="1" >
-                    <!-- <input name="buyerEmail"    type="hidden"  :value="logedUser.user_email" > -->
-                    <input name="buyerEmail"    type="hidden"  value="cvalera.id@gmail.com" >
-                    <input name="responseUrl"    type="hidden"  value="{{site.url}}/carrito" >
-                    <input name="confirmationUrl"    type="hidden"  value="{{site.url}}/compra-existosa" >
-                    <input type="submit" class="c-button c-button--secondary button-reset fs-21" value="COMPRAR AHORA">
+                    <input name="buyerEmail"    type="hidden"  :value="logedUser.user_email" >
+                    <input name="responseUrl"    type="hidden"  value="{{site.url}}/compra-exitosa" >
+                    <!-- <input name="confirmationUrl"    type="hidden"  value="{{site.url}}/compra-exitosa" > -->
+                    <input name="confirmationUrl"    type="hidden"  value="{{site.url}}/wp-content/themes/mab/app/php/ConfirmPayment.php" >
+                    <input type="submit" class="c-button c-button--secondary button-reset fs-21" @click="buyCourses()" value="COMPRAR AHORA">
                   </form>
                 </div>
               </div>

@@ -172,6 +172,60 @@ class CourseController{
         }
     }
 
+    public function saveBuyRequest($request){
+        if (CourseModel::saveBuyRequest($request)) {
+            return new WP_REST_Response('Courses buy request saved', 200);
+        } else {
+            return new WP_Error( 'no_saved_buy_courses_request', __("No courses buy request saved"), array( 'status' => 404 ) );
+        }
+        
+    }
+
+    public function checkoutBuyRequests($request){
+        $buy_requests = CourseModel::getBuyRequests($request);
+
+        if ($buy_requests) {
+            if (CourseModel::updateBuyRequest($request, $buy_requests)) {
+                return new WP_REST_Response('Courses granted', 200);
+            } else {
+                return new WP_Error( 'no_saved_courses_granted', __("No courses granted saved"), array( 'status' => 404 ) );
+            }
+            
+        } else {
+            return new WP_Error( 'no_saved_buy_courses_request', __("No courses buy request saved"), array( 'status' => 404 ) );
+        }
+    }
+
+    public function getEnrollments($request){
+        $enrollments = CourseModel::getEnrollments($request);
+
+        if ($enrollments) {
+            return new WP_REST_Response((object)[
+                "data" => $enrollments,
+                "expired" => count(CourseModel::getEnrollments($request, 'expired'))
+            ], 200);
+        } else {
+            return new WP_Error( 'no_enrollments_found', __("No enrollments found"), array( 'status' => 404 ) );
+        }
+        
+    }
+
+    public function downloadExpiredEnrollments($request){
+        $expired_enrollments = CourseModel::getEnrollments($request, 'expired');
+
+        if( empty($expired_enrollments) ){                
+            return new WP_Error( 'no_expired_enrollments', __('No expired enrollments'), array( 'status' => 404 ) );         
+        }else{
+            header('Content-Encoding: UTF-8');
+            header("Content-Type: application/xls; charset=UTF-8");    
+            header("Content-Disposition: attachment; filename=resportes-matriculas-expiradas-mabclick-".date('Y-m-d').".xls"); 
+            echo "\xEF\xBB\xBF";
+
+            //Header
+            include_once __DIR__."/../exports/reports/enrollments.php";
+        }        
+    }    
+
     //Logs-----------------------------------------------/
     public function getUserCourseLogs($request){
         $user_course_logs = CourseModel::getUserCourseLogs($request);

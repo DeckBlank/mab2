@@ -15,7 +15,7 @@
             </h1>
             <p class="fs-25 f2 w-medium margin-bottom-2">Ya puedes revisar tus cursos</p>
             <div class="flex-container flex-dir-column align-center-middle margin-bottom-1">
-              <a v-for="course of courses" :key="course.id" :href="course.link" class="c-button c-button--secondary margin-bottom-1 fs-21">${course.title}</a>
+              <a v-for="course of courses" :key="course.id" :href="course.link + '?sector=' + course.sector" class="c-button c-button--secondary margin-bottom-1 fs-21">${course.title}</a>
             </div>
             <figure>
               <img src="{{theme.link}}/static/images/vectors/login/hearts.png" alt="">

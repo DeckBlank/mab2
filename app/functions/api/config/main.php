@@ -1,6 +1,6 @@
 <?php 
 
-class DBConnection{        
+class DBConnection{
     public $connection;
 
     public function __construct(){
@@ -92,6 +92,30 @@ class DBConnection{
             PRIMARY KEY (user_email, course_id)
         )");
     }    
+
+    public function createUserCourseBuyTable(){
+        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_user_course_buy(
+            id INT NOT NULL AUTO_INCREMENT,
+            date_at DATETIME NOT NULL,
+            reference_code VARCHAR(100) NOT NULL,
+            user_email VARCHAR(100) NOT NULL,
+            course_id INT NOT NULL,
+            state VARCHAR(50) NOT NULL,
+            PRIMARY KEY (id, reference_code)
+        )");
+    } 
+
+    public function createUserCourseEnrrollmentTable(){
+        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_user_course_enrollment(
+            user_email VARCHAR(100) NOT NULL,
+            course_id INT NOT NULL,
+            date_at DATETIME NOT NULL,
+            date_end DATETIME NULL,
+            last_date DATETIME NULL,
+            state INT NOT NULL,
+            PRIMARY KEY (user_email, course_id)
+        )");
+    }
 
     public function createUserTopicTable(){
         $this->connection->query("CREATE TABLE IF NOT EXISTS wp_user_topic(
@@ -277,6 +301,8 @@ $connection->createSessionRequestTable();
 $connection->createUserTestTable();
 $connection->createRecoverySessionsTable();
 $connection->createUserCourseTable();
+$connection->createUserCourseBuyTable();
+$connection->createUserCourseEnrrollmentTable();
 $connection->createUserTopicTable();
 $connection->createQuestionaryTable();
 $connection->createPollTable();

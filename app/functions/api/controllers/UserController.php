@@ -208,7 +208,7 @@ class UserController{
                             <td width="600" align="center">
                             <div style="background: #0166D0; color: white; width: 100%; max-width: 640px;">
                                 <header style="background: white; padding: 1rem;">
-                                    <img src="https://mabclick.com/wp-content/themes/mab-theme/app/static/images/logo.png" style="width: 80px;">
+                                    <img src="https://mabclick.com/wp-content/themes/mab-theme/app/static/images/logo.png" style="width: 100px;">
                                 </header>
     
                                 <div style="padding: 1rem;">
@@ -227,7 +227,7 @@ class UserController{
                                 </div>
 
                                 <footer style="text-align: center; font-size: 12px; font-family: Verdana, serif; padding: 1rem; color: #0166D0; background: white;">
-                                    All rights reserved - MABLICK
+                                    All rights reserved - MABCLICK
                                 </footer>         
                             </div>
                             </td>

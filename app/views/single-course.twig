@@ -14,12 +14,12 @@
             <div class="cell medium-auto">
               <p class="f1 w-bold white margin-bottom-0">{{post.title}}</p>              
             </div>
-            <!-- <div class="cell small-8 medium-4 large-2">
+            <div v-if="logedUser && !accessGranted" class="cell small-8 medium-4 large-2">
               <button
                 :disabled="!isAvaibleCourse" 
                 class="fs-21 c-button c-button--secondary width-100 display-block text-center"
                 @click="addCourseToShopCart({{post.id}}, '{{post.title}}', '{{post.link}}')">Comprar curso</button>
-            </div> -->
+            </div>
           </div>
         </h1>
         <div class="margin-bottom-1 f2 fs-18 white w-medium padding-left-1">
@@ -40,13 +40,14 @@
                 <p class="margin-bottom-0 padding-left-2 fs-25 w-black">.....</p>
               </h3>
               <ul class="c-unity__topics ul-reset">
-                <ul v-for="topic of unity.topics" class="c-topic ul-reset f2 fs-21 dar-gray w-medium">
+                <ul v-for="(topic, t_index) of unity.topics" class="c-topic ul-reset f2 fs-21 dar-gray w-medium">
                   <li class="c-topic__item">
                     <a
                       class="c-topic__link flex-container align-justify align-middle"
                       @click="playVideo(
                         topic.video.link + '?course_id={{post.id}}&course_name={{post.title}}&unity=' + (u_index + 1) + '&sector=' + metas.get('sector'),
-                        u_index + 1
+                        u_index + 1,
+                        t_index + 1
                       )">
                       <p v-if="topic.video.state" class="margin-bottom-0 flex-container sec-color align-middle">
                         <span class="c-icon margin-right-1 fs-21 sec-color"><i class="far fa-play-circle"></i></span>
@@ -63,11 +64,11 @@
                     </a>
                   </li>
 
-                  <li v-if="topic.summary" class="c-topic__item">                 
+                  <li v-if="topic.summary" class="c-topic__item">
                     <a
                       target="_blank" 
                       class="c-topic__link flex-container align-justify align-middle"
-                      @click="downloadMaterial(u_index + 1, topic.id, topic.summary, 'summary')">
+                      @click="downloadMaterial(u_index + 1, t_index + 1, topic.id, topic.summary, 'summary')">
                       <p class="margin-bottom-0 flex-container align-middle dark-gray">
                         <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
                         Resumen
@@ -78,11 +79,11 @@
                     </a>
                   </li>
 
-                  <li v-if="topic.map" class="c-topic__item">                 
+                  <li v-if="topic.map" class="c-topic__item">
                     <a
                       target="_blank" 
                       class="c-topic__link flex-container align-justify align-middle"
-                      @click="downloadMaterial(u_index + 1, topic.id, topic.map, 'map')">
+                      @click="downloadMaterial(u_index + 1, t_index + 1, topic.id, topic.map, 'map')">
                       <p class="margin-bottom-0 flex-container align-middle dark-gray">
                         <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
                         Mapa Mental
@@ -93,11 +94,11 @@
                     </a>
                   </li>
 
-                  <li v-if="topic.worksheet" class="c-topic__item">                 
+                  <li v-if="topic.worksheet" class="c-topic__item">
                     <a
                       target="_blank" 
                       class="c-topic__link flex-container align-justify align-middle"
-                      @click="downloadMaterial(u_index + 1, topic.id, topic.worksheet, 'worksheet')">
+                      @click="downloadMaterial(u_index + 1, t_index + 1, topic.id, topic.worksheet, 'worksheet')">
                       <p class="margin-bottom-0 flex-container align-middle dark-gray">
                         <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
                         Hoja de trabajo
@@ -108,11 +109,11 @@
                     </a>
                   </li>
 
-                  <li v-if="topic.solutions" class="c-topic__item">                 
+                  <li v-if="topic.solutions" class="c-topic__item">
                     <a
                       target="_blank" 
                       class="c-topic__link flex-container align-justify align-middle"
-                      @click="downloadMaterial(u_index + 1, topic.id, topic.solutions, 'solutions')">
+                      @click="downloadMaterial(u_index + 1, t_index + 1, topic.id, topic.solutions, 'solutions')">
                       <p class="margin-bottom-0 flex-container align-middle dark-gray">
                         <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
                         Solucionario

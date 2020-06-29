@@ -35,7 +35,13 @@ if(is_page('login')){
     $context['banner'] = get_field('banner', $post->ID);
 
 }else if(is_page('carrito')){
-    $context['pasarell'] = get_field('sell', 'options')['pasarell'];
+    $env = require(__DIR__ . '/../env.php');
+
+    $context['pasarell'] = (object)[
+        "action" => $env['PU_ACTION'],
+        "merchan_id" => $env['PU_MERCHAND_ID'],
+        "account_id" => $env['PU_ACCOUNT_ID']
+    ];
 }else if(is_page('recuperar-contrasena')){
     if (isset($_GET['stage']) && $_GET['stage'] == 2) {
         $templates = 'auth/password/page-actualizar-contrasena.twig' ;

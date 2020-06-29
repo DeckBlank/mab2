@@ -151,6 +151,26 @@ add_action( 'rest_api_init', function () {
         'methods' => 'POST',
         'callback' => array($courseController,'sendCourseRequest'),
     ));    
+
+    register_rest_route( 'custom/v1', '/courses/buy/log', array(
+        'methods' => 'POST',
+        'callback' => array($courseController,'saveBuyRequest'),
+    ));
+
+    register_rest_route( 'custom/v1', '/courses/buy/checkout', array(
+        'methods' => 'GET',
+        'callback' => array($courseController,'checkoutBuyRequests'),
+    ));
+
+    register_rest_route( 'custom/v1', '/courses/enrollments', array(
+        'methods' => 'GET',
+        'callback' => array($courseController,'getEnrollments'),
+    ));
+
+    register_rest_route( 'custom/v1', '/courses/enrollments/expired/download', array(
+        'methods' => 'GET',
+        'callback' => array($courseController,'downloadExpiredEnrollments'),
+    ));
 });
 
 //4. Topic ----------------------------------//
