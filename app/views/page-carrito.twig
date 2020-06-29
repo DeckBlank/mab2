@@ -93,8 +93,8 @@
                     <input name="test"          type="hidden"  value="1" >
                     <input name="buyerEmail"    type="hidden"  :value="logedUser.user_email" >
                     <input name="responseUrl"    type="hidden"  value="{{site.url}}/compra-exitosa" >
-                    <input name="confirmationUrl"    type="hidden"  value="http://shipping.mabclick.com/{{pasarell.enviroment}}/confirm.php" >
-                    <input type="submit" class="c-button c-button--secondary button-reset fs-21" @click="buyCourses()" value="COMPRAR AHORA">
+                    <input name="confirmationUrl"    type="hidden"  value="http://shipping.mabclick.com/{{pasarell.enviroment}}_confirm.php" >
+                    <input type="submit" class="c-button c-button--secondary button-reset fs-21" @click="buyCourses()" value="COMPRAR AHORA" >
                   </form>
                 </div>
               </div>
