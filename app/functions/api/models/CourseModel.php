@@ -12,9 +12,6 @@ class CourseModel{
      * Methods
      */
     public static function getAll($request){
-        $ids = explode(',', $request['ids']);
-        $sell = get_field('sell', 'options');
-
         if (isset($request['query'])) {
             $course_args = [
                 "post_type" => "course",
@@ -26,6 +23,8 @@ class CourseModel{
 
             return get_posts($course_args);
         } else if (isset($request['ids'])){
+            $ids = explode(',', $request['ids']);
+            $sell = get_field('sell', 'options');
             $env = require(__DIR__ . '/../../../../env.php');
 
             $course_args = [
@@ -38,11 +37,13 @@ class CourseModel{
             $courses_array = [];
 
             for ($i=0; $i < count($courses) ; $i++) {
+                $price_seetings = get_field('price_settings', $courses[$i]->ID);
+
                 array_push($courses_array, (object)[
                     "id" => $courses[$i]->ID,
                     "title" => $courses[$i]->post_title,
                     "unities" => get_field('unities', $courses[$i]->ID),
-                    "price" =>  floatval( $sell['course_price'] ),
+                    "price" =>  ($price_seetings == 'global') ? floatval( $sell['course_price'] ) : floatval( get_field('price', $courses[$i]->ID) ),
                     "discount" => ($courses[$i]->ID == $ids[0]) ? 0 : floatval( $sell['individual_discount'] )
                 ]);
             }
@@ -165,42 +166,45 @@ class CourseModel{
     
     public static function registrationCheckout($request){
         $courses = get_field('courses', 'options');
-        $first_unity =  get_field('unities',$request['course_id'])[0];
+        $first_unity =  get_field('unities', $request['course_id'])[0];
 
         if( $first_unity['topics'][0]['topic']->ID == $request['topic'] ){
             return true;
         }else{
-            if (!empty($courses)){
-                foreach($courses as $course){
-                    if($course['course']['course']->ID == $request['course_id']){
-                        foreach($course['course']['registrations'] as $registration){
-                            if(
-                                ($registration['registration']['user']['user_email'] == $request['user'] and
-                                $registration['registration']['date_finish'] >= date("Y-m-d") and
-                                $registration['registration']['state'] == true) ||
-                                get_field('price', $course['course']['course']->ID) == 0 ){
-                
-                                return true;
+            if ((get_field('price', $request['course_id']) == 0 and get_field('price_settings', $request['course_id']) == 'individual')) {
+                return true;
+            } else {
+                if (!empty($courses)){
+                    foreach($courses as $course){
+                        if($course['course']['course']->ID == $request['course_id']){
+                            foreach($course['course']['registrations'] as $registration){
+                                if(
+                                    ($registration['registration']['user']['user_email'] == $request['user'] and
+                                    $registration['registration']['date_finish'] >= date("Y-m-d") and
+                                    $registration['registration']['state'] == true)){
+                    
+                                    return true;
+                                }
                             }
                         }
                     }
                 }
-            }
-
-            $courses_enrollment = DBConnection::getConnection()->query("
-                SELECT
-                    *
-                FROM
-                    wp_user_course_enrollment
-                WHERE
-                    state = 1 AND
-                    user_email = '". $request['user'] ."' AND
-                    course_id = '". $request['course_id'] ."' AND
-                    date_end >= '". date('Y-m-d G:i:s') ."'
-            ");
-
-            if($courses_enrollment->num_rows > 0){
-                return true;
+    
+                $courses_enrollment = DBConnection::getConnection()->query("
+                    SELECT
+                        *
+                    FROM
+                        wp_user_course_enrollment
+                    WHERE
+                        state = 1 AND
+                        user_email = '". $request['user'] ."' AND
+                        course_id = '". $request['course_id'] ."' AND
+                        date_end >= '". date('Y-m-d G:i:s') ."'
+                ");
+    
+                if($courses_enrollment->num_rows > 0){
+                    return true;
+                }            
             }            
         }
 

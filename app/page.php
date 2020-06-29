@@ -6,7 +6,7 @@ if (!isset($paged) || !$paged){
     $paged = 1;
 }
 
-$context         = Timber::get_context();
+$context = Timber::get_context();
 $context['post'] = Timber::get_post();
 
 $templates = [
@@ -38,6 +38,7 @@ if(is_page('login')){
     $env = require(__DIR__ . '/../env.php');
 
     $context['pasarell'] = (object)[
+        "enviroment" => $env['ENV'],
         "action" => $env['PU_ACTION'],
         "merchan_id" => $env['PU_MERCHAND_ID'],
         "account_id" => $env['PU_ACCOUNT_ID']

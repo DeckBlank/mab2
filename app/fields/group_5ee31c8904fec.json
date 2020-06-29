@@ -22,6 +22,30 @@
             "min": "",
             "max": "",
             "step": ""
+        },
+        {
+            "key": "field_5efa0663abd13",
+            "label": "Configuración",
+            "name": "price_settings",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "global": "Global",
+                "individual": "Individual"
+            },
+            "allow_null": 1,
+            "other_choice": 0,
+            "default_value": "global",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
         }
     ],
     "location": [
@@ -41,5 +65,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1591942389
+    "modified": 1593444713
 }

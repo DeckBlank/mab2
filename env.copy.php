@@ -1,6 +1,11 @@
 <?php
   return [
     /**
+     * Project
+     */
+    'ENV'=> 'dev',
+
+    /**
      * Database
      */
     'DB_HOST' => 'localhost',
