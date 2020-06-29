@@ -94,7 +94,7 @@
                     <input name="buyerEmail"    type="hidden"  :value="logedUser.user_email" >
                     <input name="responseUrl"    type="hidden"  value="{{site.url}}/compra-exitosa" >
                     <!-- <input name="confirmationUrl"    type="hidden"  value="{{site.url}}/compra-exitosa" > -->
-                    <input name="confirmationUrl"    type="hidden"  value="{{site.url}}/wp-content/themes/mab/app/php/ConfirmPayment.php" >
+                    <input name="confirmationUrl"    type="hidden"  value="http://shipping.mabclick.com/ConfirmPayment.php" >
                     <input type="submit" class="c-button c-button--secondary button-reset fs-21" @click="buyCourses()" value="COMPRAR AHORA">
                   </form>
                 </div>

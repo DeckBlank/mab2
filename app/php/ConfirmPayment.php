@@ -7,7 +7,7 @@
 $env = require(__DIR__ . '/../../env.php');
 $connection = new mysqli(
     $env['DB_HOST'], 
-    $env['DB_USER'], 
+    $env['DB_USER'],
     $env['DB_PASSWORD'], 
     $env['DB_NAME']);
 
