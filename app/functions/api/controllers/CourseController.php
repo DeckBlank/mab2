@@ -182,17 +182,12 @@ class CourseController{
     }
 
     public function checkoutBuyRequests($request){
-        $buy_requests = CourseModel::getBuyRequests($request);
+        $buy_requests = CourseModel::getBuyRequests($request, 'APPROVED');
 
         if ($buy_requests) {
-            if (CourseModel::updateBuyRequest($request, $buy_requests)) {
-                return new WP_REST_Response('Courses granted', 200);
-            } else {
-                return new WP_Error( 'no_saved_courses_granted', __("No courses granted saved"), array( 'status' => 404 ) );
-            }
-            
+            return new WP_REST_Response('Courses granted', 200);
         } else {
-            return new WP_Error( 'no_saved_buy_courses_request', __("No courses buy request saved"), array( 'status' => 404 ) );
+            return new WP_Error( 'no_saved_courses_granted', __("No courses granted saved"), array( 'status' => 404 ) );
         }
     }
 
@@ -224,7 +219,7 @@ class CourseController{
             //Header
             include_once __DIR__."/../exports/reports/enrollments.php";
         }        
-    }    
+    }
 
     //Logs-----------------------------------------------/
     public function getUserCourseLogs($request){

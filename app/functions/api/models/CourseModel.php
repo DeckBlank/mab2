@@ -376,22 +376,7 @@ class CourseModel{
         return $response;
     }
 
-    public static function updateBuyRequest($request, $buy_requests){
-        DBConnection::getConnection()->query("
-            UPDATE
-                wp_user_course_buy
-            SET
-                state = 'APPROVED',
-                date_at = '". date("Y-m-d G:i:s") ."'
-            WHERE
-                user_email = '". $request['user'] ."' AND
-                reference_code = '". $request['reference_code'] ."'
-        ");
-
-        return self::__saveEnrollment($buy_requests, $request['user']);
-    }  
-
-    public static function getBuyRequests($request){
+    public static function getBuyRequests($request, $state = 'PENDING'){
         $buy_requests = DBConnection::getConnection()->query("
             SELECT
                 *
@@ -400,7 +385,7 @@ class CourseModel{
             WHERE
                 user_email = '". $request['user'] ."' AND
                 reference_code = '". $request['reference_code'] ."' AND
-                state = 'PENDING'
+                state = '". $state ."'
         ");
         $buy_requests_array = [];
         
