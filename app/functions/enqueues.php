@@ -1,6 +1,6 @@
 <?php
 
-$assets_version = '1593629143784';
+$assets_version = '1593629227428';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
