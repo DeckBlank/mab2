@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 import {baseConfig, baseState, baseActions} from '../app'
+import {addCourseToShopCart} from '../libs/shop-cart'
 import {store} from '../store'
 import '../components/likes';
 import '../components/editor';
@@ -240,7 +241,7 @@ const topic = new Vue({
     },
     isUserAuthOnTopic: function(course_id){
       if(!this.metas.get('course_name') || !this.metas.get('unity') || (this.metas.get('sector') != 'privado' && this.metas.get('sector') != 'publico')){
-        window.location = `${this.SITE_URL}/solicitar-cursos`;
+        window.location = `${this.SITE_URL}/emotional`;
       }else{
         if(this.metas.get('sector') == "privado"){
           fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}&topic=${this.topicID}`,{
@@ -257,8 +258,14 @@ const topic = new Vue({
               this.hideLoading();
             })
             .catch(err => {
-              window.location = `${this.SITE_URL}/solicitar-cursos`;
-              throw err;          
+              addCourseToShopCart(
+                course_id,
+                this.metas.get('course_name'),
+                `${this.SITE_URL}/curso/${this.metas.get('course_name')}`,
+                this.SITE_URL,
+                this.metas
+              );
+              throw err;
             })        
         }else{
           this.hideLoading();

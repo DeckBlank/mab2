@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import {baseConfig, baseState, baseActions} from '../app'
+import {addCourseToShopCart} from '../libs/shop-cart'
 import {store} from '../store'
 
 const course = new Vue({
@@ -76,31 +77,8 @@ const course = new Vue({
         course: this.$refs.course.getAttribute('data-title')
       }))
     },
-    addCourseToShopCart: function(course_id, course_title, course_link){
-      let shop_cart = window.localStorage.getItem('mab_shop_cart')
-
-      if(!shop_cart){
-        window.localStorage.setItem('mab_shop_cart', JSON.stringify([{
-          id: course_id,
-          title: course_title,
-          link: course_link,
-          sector: this.metas.get('sector')
-        }]))
-      }else{
-        shop_cart = JSON.parse(shop_cart);
-        shop_cart.push({
-          id: course_id,
-          title: course_title,
-          link: course_link,
-          sector: this.metas.get('sector')
-        })
-
-        window.localStorage.setItem('mab_shop_cart', JSON.stringify(shop_cart))
-      }
-
-      window.setTimeout(()=>{
-        window.location = `${this.SITE_URL}/carrito`
-      },100)
+    addCourse: function(course_id, course_title, course_link){
+      addCourseToShopCart(course_id, course_title, course_link, this.SITE_URL, this.metas)
     },
     verifyIsAvaibleCourse: function(){
       let shop_cart = window.localStorage.getItem('mab_shop_cart');
@@ -120,7 +98,13 @@ const course = new Vue({
           window.location = video;
         }else{
           if (this.logedUser) {            
-            window.location = `${this.SITE_URL}/solicitar-cursos`;
+            addCourseToShopCart(
+              this.$refs.course.getAttribute('data-id'),
+              this.$refs.course.getAttribute('data-title'),
+              this.$refs.course.getAttribute('data-link'),
+              this.SITE_URL,
+              this.metas
+            );
           } else {
             this.isActiveSignUp = true;
           }
@@ -141,7 +125,13 @@ const course = new Vue({
           this.saveMaterialLog(topic_id, url, media)
         }else{
           if (this.logedUser) {            
-            window.location = `${this.SITE_URL}/solicitar-cursos`;
+            addCourseToShopCart(
+              this.$refs.course.getAttribute('data-id'),
+              this.$refs.course.getAttribute('data-title'),
+              this.$refs.course.getAttribute('data-link'),
+              this.SITE_URL,
+              this.metas
+            );
           } else {
             this.isActiveSignUp = true;
           }

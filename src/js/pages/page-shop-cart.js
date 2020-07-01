@@ -118,7 +118,7 @@ const shop_cart = new Vue({
           throw err;
         })
     },
-    removeCourseFromShopCart: function(course_id, price, discount, index)    {
+    removeCourseFromShopCart: function(course_id, price, discount, index){
       let shop_cart = window.localStorage.getItem('mab_shop_cart');
       
       /**

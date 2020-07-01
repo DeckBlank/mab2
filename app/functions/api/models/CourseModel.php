@@ -37,14 +37,14 @@ class CourseModel{
             $courses_array = [];
 
             for ($i=0; $i < count($courses) ; $i++) {
-                $price_seetings = get_field('price_settings', $courses[$i]->ID);
+                $price_settings = get_field('price_settings', $courses[$i]->ID);
 
                 array_push($courses_array, (object)[
                     "id" => $courses[$i]->ID,
                     "title" => $courses[$i]->post_title,
                     "unities" => get_field('unities', $courses[$i]->ID),
-                    "price" =>  ($price_seetings == 'global') ? floatval( $sell['course_price'] ) : floatval( get_field('price', $courses[$i]->ID) ),
-                    "discount" => ($courses[$i]->ID == $ids[0]) ? 0 : floatval( $sell['individual_discount'] )
+                    "price" =>  ($price_settings == 'global') ? floatval( $sell['course_price'] ) : floatval( get_field('price', $courses[$i]->ID) ),
+                    "discount" => ($i == 0) ? 0 : floatval( $sell['individual_discount'] )
                 ]);
             }
 
