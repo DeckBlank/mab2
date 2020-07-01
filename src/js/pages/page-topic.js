@@ -258,14 +258,14 @@ const topic = new Vue({
               this.hideLoading();
             })
             .catch(err => {
-              // addCourseToShopCart(
-              //   course_id,
-              //   this.metas.get('course_name'),
-              //   `${this.SITE_URL}/curso/${this.metas.get('course_name')}`,
-              //   this.SITE_URL,
-              //   this.metas
-              // );
-              window.location = `${this.SITE_URL}/solicitar-cursos`;
+              addCourseToShopCart(
+                course_id,
+                this.metas.get('course_name'),
+                `${this.SITE_URL}/curso/${this.metas.get('course_name')}`,
+                this.SITE_URL,
+                this.metas
+              );
+              // window.location = `${this.SITE_URL}/solicitar-cursos`;
               throw err;
             })        
         }else{

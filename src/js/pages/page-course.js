@@ -98,14 +98,14 @@ const course = new Vue({
           window.location = video;
         }else{
           if (this.logedUser) {            
-            // addCourseToShopCart(
-            //   this.$refs.course.getAttribute('data-id'),
-            //   this.$refs.course.getAttribute('data-title'),
-            //   this.$refs.course.getAttribute('data-link'),
-            //   this.SITE_URL,
-            //   this.metas
-            // );
-            window.location = `${this.SITE_URL}/solicitar-cursos`;
+            addCourseToShopCart(
+              this.$refs.course.getAttribute('data-id'),
+              this.$refs.course.getAttribute('data-title'),
+              this.$refs.course.getAttribute('data-link'),
+              this.SITE_URL,
+              this.metas
+            );
+            // window.location = `${this.SITE_URL}/solicitar-cursos`;
           } else {
             this.isActiveSignUp = true;
           }
@@ -126,14 +126,14 @@ const course = new Vue({
           this.saveMaterialLog(topic_id, url, media)
         }else{
           if (this.logedUser) {            
-            // addCourseToShopCart(
-            //   this.$refs.course.getAttribute('data-id'),
-            //   this.$refs.course.getAttribute('data-title'),
-            //   this.$refs.course.getAttribute('data-link'),
-            //   this.SITE_URL,
-            //   this.metas
-            // );
-            window.location = `${this.SITE_URL}/solicitar-cursos`;
+            addCourseToShopCart(
+              this.$refs.course.getAttribute('data-id'),
+              this.$refs.course.getAttribute('data-title'),
+              this.$refs.course.getAttribute('data-link'),
+              this.SITE_URL,
+              this.metas
+            );
+            // window.location = `${this.SITE_URL}/solicitar-cursos`;
           } else {
             this.isActiveSignUp = true;
           }
