@@ -86,11 +86,11 @@
                     <input name="description"   type="hidden"  :value="'Compra de ' + [...(courses.list.map(course => course.title))].join(', ')"  >
                     <input name="referenceCode" type="hidden"  :value="referenceCode" >
                     <input name="amount"        type="hidden"  :value="amount"   >
-                    <input name="tax"           type="hidden"  value="0"  >
+                    <input name="tax"           type="hidden"  value="0" >
                     <input name="taxReturnBase" type="hidden"  value="0" >
                     <input name="currency"      type="hidden"  value="PEN" >
                     <input name="signature"     type="hidden"  :value="signature"  >
-                    <input name="test"          type="hidden"  value="1" >
+                    <input name="test"          type="hidden"  value="{% if pasarell.enviroment == 'dev' %}1{% else %}0{% endif %}" >
                     <input name="buyerEmail"    type="hidden"  :value="logedUser.user_email" >
                     <input name="responseUrl"    type="hidden"  value="{{site.url}}/compra-exitosa" >
                     <input name="confirmationUrl"    type="hidden"  value="http://shipping.mabclick.com/{{pasarell.enviroment}}_confirm.php" >
