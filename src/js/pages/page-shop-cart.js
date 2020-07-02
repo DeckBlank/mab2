@@ -133,7 +133,7 @@ const shop_cart = new Vue({
        * 2. Update Courses List + Prices
        */
       if(index == 0 && this.courses.list.length > 1){
-        this.courses.list[1]._discount = this.courses.list[0]._discount;
+        this.courses.list[1]._discount = this.courses.list[1].price*this.courses.discount.global/100;
         this.courses.list = this.courses.list.filter(course => course.id != course_id);
       }else{
         this.courses.list = this.courses.list.filter(course => course.id != course_id);
