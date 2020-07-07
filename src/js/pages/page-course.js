@@ -28,6 +28,7 @@ const course = new Vue({
     this.saveCourseOnMetas()
     this.verifyIsAvaibleCourse()
     this.getUnities( this.$refs.course.getAttribute('data-id') );
+    console.log(this.logedUser)
   },
   methods: {
     ...baseActions(),

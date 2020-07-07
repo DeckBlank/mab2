@@ -19,7 +19,7 @@
             <div class="cell medium-auto">
               <p class="f1 w-bold white margin-bottom-0">{{post.title}}</p>              
             </div>
-            <div v-if="logedUser && !accessGranted" class="cell small-8 medium-4 large-2">
+            <div v-if="logedUser && logedUser.user_sector == 'privado' && !accessGranted" class="cell small-8 medium-4 large-2">
               <button
                 :disabled="!isAvaibleCourse" 
                 class="fs-21 c-button c-button--secondary width-100 display-block text-center"

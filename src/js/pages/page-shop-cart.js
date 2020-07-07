@@ -75,6 +75,8 @@ const shop_cart = new Vue({
             this.courses = courses
   
             courses.list.forEach((course, index) => {
+              course.price = course.price.toFixed(2);
+
               let discount = course.price*course.discount/100 + (course.price - course.price*course.discount/100)*courses.discount.global/100;
 
               this.total += course.price
