@@ -22,7 +22,7 @@ const shop_cart = new Vue({
     ...baseState(),
     amount: {
       get: function(){
-        return this.total - this.total_discount;
+        return (this.total - this.total_discount).toFixed(2);
       }
     }  
   },
@@ -34,13 +34,14 @@ const shop_cart = new Vue({
       }else {
         if(this.courses.list.length > 1){
           this.total_discount = this.courses.list.map(course => course._discount).reduce((a, b) => a + b)
-  
         }else {
           this.total_discount = this.courses.list[0]._discount;
         }
 
+        this.total_discount = this.total_discount.toFixed(2);
+
         this.signature = md5(`${this.courses.pasarell.api_key}~${this.courses.pasarell.merchan_id}~${this.referenceCode}~${this.total - this.total_discount}~PEN`);
-      } 
+      }
     }
   },
   created(){
@@ -75,8 +76,6 @@ const shop_cart = new Vue({
             this.courses = courses
   
             courses.list.forEach((course, index) => {
-              course.price = course.price.toFixed(2);
-
               let discount = course.price*course.discount/100 + (course.price - course.price*course.discount/100)*courses.discount.global/100;
 
               this.total += course.price
