@@ -14,6 +14,33 @@ class UserController{
     /**
      * Methods
      */
+    public function getAll($request){
+        $users = UserModel::getAll($request);
+
+        if (empty($users)) {
+            return new WP_Error( 'users_not_found', __('Users not found'), array( 'status' => 404 ) );
+        } else {
+            return new WP_REST_Response($users, 200);
+        }
+        
+    }
+
+    public function downloadUsers($request){
+        $users = UserModel::getAll($request);
+
+        if( empty($users) ){
+            return new WP_Error( 'users_not_found', __('Users not found'), array( 'status' => 404 ) );         
+        }else{
+            header('Content-Encoding: UTF-8');
+            header("Content-Type: application/xls; charset=UTF-8");    
+            header("Content-Disposition: attachment; filename=resportes-usuarios-mabclick-".date('Y-m-d').".xls"); 
+            echo "\xEF\xBB\xBF";
+
+            //Header
+            include_once __DIR__."/../exports/reports/users/". $request['role'] ."s.php";
+        }        
+    }
+
     public function auth($request){
         if( isset($request['user']) and isset($request['password']) ){
             try {

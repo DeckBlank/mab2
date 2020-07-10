@@ -17,6 +17,16 @@ include_once __DIR__ . "/config/requires.php";
 add_action( 'rest_api_init', function () {
     $userController = new UserController();
 
+    register_rest_route( 'custom/v1', '/users', array(
+        'methods' => 'GET',
+        'callback' => array($userController,'getAll')
+    ));
+
+    register_rest_route( 'custom/v1', '/users/download', array(
+        'methods' => 'GET',
+        'callback' => array($userController,'downloadUsers')
+    ));
+
     register_rest_route( 'custom/v1', '/user/auth', array(
         'methods' => 'GET',
         'callback' => array($userController,'auth')

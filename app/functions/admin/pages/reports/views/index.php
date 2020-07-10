@@ -15,6 +15,27 @@
             Descargar todo (.xls)
         </a>
     </div>
+    <div class="d-flex mb-1">
+        <h3 class="mb-1">Descargar usuarios:</h3>
+        <a  
+            href="<?php echo get_site_url() . '/wp-json/custom/v1/users/download?role=student' ?>" 
+            download 
+            class="button button-success">
+            Estudiantes (.xls)
+        </a>
+        <a  
+            href="<?php echo get_site_url() . '/wp-json/custom/v1/users/download?role=teacher' ?>" 
+            download 
+            class="button button-success">
+            Profesores (.xls)
+        </a>
+        <a  
+            href="<?php echo get_site_url() . '/wp-json/custom/v1/users/download?role=tutor' ?>" 
+            download 
+            class="button button-success">
+            Tutores/padres (.xls)
+        </a>
+    </div>
     <!-- <p>Total de accesos: <strong id="total_access">123</strong> veces</p> -->
     <table class="widefat fixed mb-1" cellspacing="0">
         <thead>

@@ -9,6 +9,64 @@ class UserModel{
     /**
      * Methods
      */
+    public static function getAll($request){
+        $users = get_users([
+            "role__in" => ['student', 'tutor', 'teacher']
+        ]);
+        $users_array = [];
+
+        foreach($users as $user){
+            switch ($request['role']) {
+                case 'student':
+                case 'teacher':
+                    array_push($users_array,
+                        (object)[
+                            "role" => ($request['role'] == 'student') ? 'Estudiante' : 'Profesor',
+                            "firstname" => get_user_meta($user->ID)['first_name'][0],
+                            "lastname" => get_user_meta($user->ID)['last_name'][0],
+                            "email" => $user->data->user_email,
+                            "age" => get_field('age', 'user_' . $user->ID),
+                            "gender" => get_field('gender', 'user_' . $user->ID),
+                            "phone" => get_field('phone', 'user_' . $user->ID),
+                            "mobile" => get_field('mobile', 'user_' . $user->ID),
+                            "calling_code" => get_field('calling_code', 'user_' . $user->ID),
+                            "school_type" => get_field('school_type', 'user_' . $user->ID),
+                            "school" => get_field('school', 'user_' . $user->ID),
+                            "grade" => get_field('grade', 'user_' . $user->ID),
+                            "location" => get_field('location', 'user_' . $user->ID),
+                        ]                    
+                    );
+                    break;
+
+                case 'tutor':
+                    array_push($users_array,
+                        (object)[
+                            "role" => 'Tutor/Padre',
+                            "firstname" => get_user_meta($user->ID)['first_name'][0],
+                            "lastname" => get_user_meta($user->ID)['last_name'][0],
+                            "email" => $user->data->user_email,
+                            "age" => get_field('age', 'user_' . $user->ID),
+                            "gender" => get_field('gender', 'user_' . $user->ID),
+                            "phone" => get_field('phone', 'user_' . $user->ID),
+                            "mobile" => get_field('mobile', 'user_' . $user->ID),
+                            "calling_code" => get_field('calling_code', 'user_' . $user->ID),
+                            "school_type" => get_field('school_type', 'user_' . $user->ID),
+                            "children_school" => get_field('children_school', 'user_' . $user->ID),
+                            "children_quantity" => get_field('children_quantity', 'user_' . $user->ID),
+                            "children" => get_field('children', 'user_' . $user->ID),
+                            "location" => get_field('location', 'user_' . $user->ID),
+                        ]                    
+                    );
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        return $users_array;
+    }
+
     public static function auth($request){
         $user = wp_authenticate( $request['user'], $request['password'] );
 
