@@ -11,7 +11,7 @@ class UserModel{
      */
     public static function getAll($request){
         $users = get_users([
-            "role__in" => ['student', 'tutor', 'teacher']
+            "role__in" => [$request['role']]
         ]);
         $users_array = [];
 
