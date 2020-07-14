@@ -22,7 +22,7 @@
 
           <li v-if="logedUser.user_sector == 'publico'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_pub.class %} activate {% endif %}">              
             <label for="sector-pub" class="c-menu__item flex-container align-justify align-middle padding-1">
-              <a class="position-relative">MAB ACADÉMICO</a>
+              <a class="position-relative">CURSOS</a>
               <span class="c-icon"><i class="far fa-chevron-down"></i></span>
             </label>              
             <input id="sector-pub" type="checkbox" class="hide">
@@ -80,7 +80,7 @@
 
           <li v-if="logedUser.user_sector == 'privado'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_priv.class %} activate {% endif %}">              
             <label for="sector-priv" class="c-menu__item flex-container align-justify align-middle padding-1">
-              <a class="position-relative">MAB ACADÉMICO</a>
+              <a class="position-relative">CURSOS</a>
               <span class="c-icon"><i class="far fa-chevron-down"></i></span>
             </label>              
             <input id="sector-priv" type="checkbox" class="hide">
