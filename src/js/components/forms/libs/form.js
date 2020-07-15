@@ -55,7 +55,7 @@ function baseData(){
     },
     mobile: {
       value: '',
-      pattern: '^[0-9]{9}$',
+      pattern: '^([0-9]+)$',
       isValid: false
     },
     schoolType: {

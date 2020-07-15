@@ -19,7 +19,7 @@
               <p class="margin-bottom-0 warning fs-18">{{phrase.author}}</p>
             </div>
             <p class="error-message margin-bottom-1 f2 fs-21 w-medium white text-center" :class="{ showed : isShowedErrorMessage }">${errorMessage}</p>
-            <div class="c-form margin-bottom-3 width-100">
+            <div class="c-form margin-bottom-2 width-100">
               <div class="margin-bottom-1">
                 <label>
                   <p class="mb-05 f2 fs-25 w-bold white">CORREO ELECTRÓNICO</p>
@@ -39,8 +39,8 @@
                 INGRESAR 
               </button>
             </div>
-            <a href="{{site.url}}/solicitar-cursos" class="c-button c-button--ghost-white margin-bottom-2 w-medium f2 display-block width-100 text-center">
-              SOLICITAR CURSOS
+            <a href="{{site.url}}/#registro" class="c-button c-button--ghost-white margin-bottom-2 w-medium f2 display-block width-100 text-center">
+              CREAR CUENTA
             </a>
             <ul class="flex-container align-center-middle ul-reset">
               {% for item in social_menu.items %}                

@@ -39,7 +39,8 @@
                 <span></span>
               {% endif %}
             </div>         
-            <div class="c-actions flex-container align-justify margin-bottom-1">
+            <!-- <div class="c-actions flex-container align-justify margin-bottom-1"> -->
+            <div class="c-actions flex-container align-justify margin-bottom-3">
               <div class="flex-container align-middle">
                 <div class="margin-right-2">
                   <Likes :count.sync="likes" :target="{ id : {{post.id}}, type: 'topic' }"></Likes>
@@ -108,13 +109,14 @@
               </button>
             </div>
             {% if post.content %}
-              <div class="margin-bottom-2 f2 fs-18 w-medium black">
+              <div class="margin-bottom-3 f2 fs-18 w-medium black">
+              <!-- <div class="margin-bottom-2 f2 fs-18 w-medium black"> -->
                 {{post.content}}
               </div>
-            {% endif %}            
-            <a href="{{site.url}}/sesion-virtual" target="_blank" class="c-button c-button--secondary display-block margin-bottom-3 f2 w-medium fs-18 text-center">
+            {% endif %}
+            <!-- <a href="{{site.url}}/sesion-virtual" target="_blank" class="c-button c-button--secondary display-block margin-bottom-3 f2 w-medium fs-18 text-center">
               Para un aprendizaje más personalizado, coordina tu sesión virtual
-            </a>            
+            </a>             -->
             <div class="c-comments f2 margin-bottom-2">
               <div class="c-counter flex-container align-middle margin-bottom-2">
                 <span class="c-counter__icon"><i class="far fa-comment-lines fs-21"></i></span>
