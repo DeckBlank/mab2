@@ -12,6 +12,7 @@ const topic = new Vue({
   data() {
     return {
       metas: new URLSearchParams(window.location.search),
+      course_link: '',
       topicID: null,
 
       //Likes
@@ -69,6 +70,7 @@ const topic = new Vue({
     this.global();
     
     this.topicID = this.$refs.topic.getAttribute('data-id');
+    this.course_link = `${this.SITE_URL}/curso/${this.metas.get('course_slug')}?sector=${this.metas.get('sector')}`;
     
     this.isUserAuthOnTopic(this.metas.get('course_id'))
     this.getLikes();
@@ -240,7 +242,7 @@ const topic = new Vue({
       }
     },
     isUserAuthOnTopic: function(course_id){
-      if(!this.metas.get('course_name') || !this.metas.get('unity') || (this.metas.get('sector') != 'privado' && this.metas.get('sector') != 'publico')){
+      if(!this.metas.get('course_name') || !this.metas.get('course_slug') || !this.metas.get('unity') || (this.metas.get('sector') != 'privado' && this.metas.get('sector') != 'publico')){
         window.location = `${this.SITE_URL}/emotional`;
       }else{
         if(this.metas.get('sector') == "privado"){

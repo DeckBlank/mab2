@@ -52,6 +52,16 @@ add_action( 'rest_api_init', function () {
         'callback' => array($userController,'resetPassword')
     ));
 
+    register_rest_route( 'custom/v1', '/user/enrollments', array(
+        'methods' => 'GET',
+        'callback' => array($userController,'getEnrollments'),
+    ));
+
+    register_rest_route( 'custom/v1', '/user/enrollments', array(
+        'methods' => 'POST',
+        'callback' => array($userController,'saveEnrollments'),
+    ));
+
     register_rest_route( 'custom/v1', '/user/access/log', array(
         'methods' => 'PUT',
         'callback' => array($userController,'saveAccessLog')

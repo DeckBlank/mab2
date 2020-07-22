@@ -20,9 +20,9 @@ return [
          * */
         'fontawesome' => [
             'cdn' => [
-                'base' => 'https://pandora-space-america.nyc3.digitaloceanspaces.com/statics/icons/5.6.3/js/fontawesome.min.js',
-                'style' => 'https://pandora-space-america.nyc3.digitaloceanspaces.com/statics/icons/5.6.3/js/regular.min.js',
-                'brands' => 'https://pandora-space-america.nyc3.digitaloceanspaces.com/statics/icons/5.6.3/js/brands.min.js'
+                'base' => get_theme_file_uri('/static/fonts/fontawesome/main.min.js'),
+                'style' => get_theme_file_uri('/static/fonts/fontawesome/regular.min.js'),
+                'brands' => get_theme_file_uri('/static/fonts/fontawesome/brands.min.js')
             ]
         ],
 

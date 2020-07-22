@@ -12,6 +12,9 @@
           <h2 class="c-course w-bold white">${metas.get('course_name')}</h2>
           <h2 class="c-unity fs-30 f2 w-bold white margin-bottom-2">UNIDAD ${metas.get('unity')}:</h2>
           <section class="c-content c-content--protected position-relative br--medium bg-white">
+            <a :href="course_link" class="c-button c-button--primary fs-18 w-medium f2 display-inline-block margin-bottom-1">
+              <span class="c-icon margin-right-1"><i class="far fa-arrow-left"></i></span> Volver al curso
+            </a>
             <h1 class="c-title fs-40 f1 w-bold dark-gray margin-bottom-2">
               <p>
                 {{post.title}}
@@ -39,8 +42,7 @@
                 <span></span>
               {% endif %}
             </div>         
-            <!-- <div class="c-actions flex-container align-justify margin-bottom-1"> -->
-            <div class="c-actions flex-container align-justify margin-bottom-3">
+            <div class="c-actions flex-container align-justify margin-bottom-1">
               <div class="flex-container align-middle">
                 <div class="margin-right-2">
                   <Likes :count.sync="likes" :target="{ id : {{post.id}}, type: 'topic' }"></Likes>
@@ -109,14 +111,13 @@
               </button>
             </div>
             {% if post.content %}
-              <div class="margin-bottom-3 f2 fs-18 w-medium black">
-              <!-- <div class="margin-bottom-2 f2 fs-18 w-medium black"> -->
+              <div class="margin-bottom-2 f2 fs-18 w-medium black">
                 {{post.content}}
               </div>
             {% endif %}
-            <!-- <a href="{{site.url}}/sesion-virtual" target="_blank" class="c-button c-button--secondary display-block margin-bottom-3 f2 w-medium fs-18 text-center">
+            <a href="https://api.whatsapp.com/send?phone=51{{information.phone|replace({' ': ''})}}" target="_blank" class="c-button c-button--secondary display-block margin-bottom-3 f2 w-medium fs-18 text-center">
               Para un aprendizaje más personalizado, coordina tu sesión virtual
-            </a>             -->
+            </a>
             <div class="c-comments f2 margin-bottom-2">
               <div class="c-counter flex-container align-middle margin-bottom-2">
                 <span class="c-counter__icon"><i class="far fa-comment-lines fs-21"></i></span>

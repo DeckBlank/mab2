@@ -97,7 +97,7 @@ class UserController{
         }
     }
 
-    public function resetPassword($request){        
+    public function resetPassword($request){
         if (isset($request['new_pass'])) {
             $recovery_session = UserModel::getRecoverySession($request);
 
@@ -111,6 +111,25 @@ class UserController{
             return new WP_Error( 'no_password_setted', __('No password setted'), array( 'status' => 404 ) );
         }
         
+    }
+
+    public function getEnrollments($request){
+        $enrollments = UserModel::getEnrollments($request);
+
+        if ($enrollments) {
+            return new WP_REST_Response($enrollments, 200);
+        } else {
+            return new WP_Error( 'no_enrollments_found', __("No enrollments found"), array( 'status' => 404 ) );
+        }
+        
+    }    
+
+    public function saveEnrollments($request){
+        if (UserModel::saveEnrollments($request)) {
+            return new WP_REST_Response('Enrollments saved', 200);
+        } else {
+            return new WP_Error( 'no_enrollments_found', __("No enrollments found"), array( 'status' => 404 ) );
+        }
     }
 
     public function saveAccessLog($request){

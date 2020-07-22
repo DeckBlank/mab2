@@ -35,7 +35,7 @@ const emotional = new Vue({
       this.filter = category;
       this.getVideosByCategory(category)
     }else{
-      this.getVideos()
+      this.getExcercies()
     }
 
     this.initSectors();

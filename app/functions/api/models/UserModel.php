@@ -1,5 +1,7 @@
 <?php
 
+use Timber\Timber;
+
 class UserModel{
     
     public function __construct(){
@@ -216,6 +218,62 @@ class UserModel{
         ");
     }
 
+    public static function getEnrollments($request){
+        if (isset($request['user'])) {
+            $courses = Timber::get_posts([
+                "post_type" => "course",
+                "posts_per_page" => 25,
+                "paged" => $request['page'],
+            ]);
+        }
+
+        $enrollments_array = [];
+        
+        if(!empty($courses)){
+            foreach($courses as $course){
+                array_push($enrollments_array, (object)[
+                    "course" => $course->title,
+                    "course_id" => $course->ID,
+                    "categories" => $course->terms,
+                    "state" => self::__checkCourseOnEnrollments($request, $course->ID, 'state'),
+                    "date_at" => self::__checkCourseOnEnrollments($request, $course->ID, 'date_at'),
+                    "date_end" => self::__checkCourseOnEnrollments($request, $course->ID, 'date_end')
+                ]);                
+            }
+        }
+
+        return $enrollments_array;
+    }
+
+    public static function saveEnrollments($request){
+        $response = false;
+        $date_end = date('Y-m-d G:i:s', strtotime('+1 year'));
+
+        foreach(json_decode($request['courses']) as $course){
+            $response = DBConnection::getConnection()->query("
+                INSERT INTO 
+                    wp_user_course_enrollment(user_email, course_id, date_at, date_end, last_date, state)
+                VALUES(
+                    '". $request['user'] ."',
+                    '". $course ."',
+                    '". date("Y-m-d G:i:s") ."',
+                    '". $date_end ."',
+                    '". date("Y-m-d G:i:s") ."',
+                    1
+                )
+                ON DUPLICATE KEY UPDATE
+                    date_end = '". $date_end ."',
+                    last_date = '". date("Y-m-d G:i:s") ."'
+            ");
+
+            if(!$response){
+                break;
+            }
+        }
+
+        return $response;
+    }    
+
     public static function saveAccessLog($request){
         $user = ($request['user'] == 'anonimo') ? 'anonimo-' . $_SERVER['REMOTE_ADDR'] : $request['user'];
 
@@ -285,5 +343,42 @@ class UserModel{
         }
 
         return $access_logs;        
+    }
+
+    public static function __checkCourseOnEnrollments($request, $course_id, $field){
+        $enrollments = DBConnection::getConnection()->query("
+            SELECT 
+                *
+            FROM 
+                wp_user_course_enrollment
+            WHERE
+                user_email = '". $request['user'] ."' and 
+                course_id = '". $course_id ."'
+            ORDER BY last_date DESC
+        ");
+
+        if($enrollments->num_rows > 0){
+            switch ($field) {
+                case 'state':
+                        return ($enrollments->fetch_assoc()['state'] == 1) ? 'Habilitado' : 'Bloqueado'; 
+                    break;
+                case 'date_at':
+                        return $enrollments->fetch_assoc()['date_at']; 
+                    break;
+                case 'date_end':
+                        return $enrollments->fetch_assoc()['date_end']; 
+                    break;
+            }
+        }else {
+            return null;
+        }
+        // while($enrollment = $enrollments->fetch_assoc()){
+        //     array_push($enrollments_array, (object)[
+        //         "course" => CourseModel::__getCourseName($enrollment['course_id']),
+        //         "state" => ($enrollment['state'] == 1) ? 'Habilitado' : 'Bloqueado',
+        //         "date_at" => $enrollment['date_at'],
+        //         "date_end" => $enrollment['date_end']
+        //     ]);            
+        // }
     }
 }

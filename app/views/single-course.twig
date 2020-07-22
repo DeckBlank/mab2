@@ -50,7 +50,7 @@
                     <a
                       class="c-topic__link flex-container align-justify align-middle"
                       @click="playVideo(
-                        topic.video.link + '?course_id={{post.id}}&course_name={{post.title}}&unity=' + (u_index + 1) + '&sector=' + metas.get('sector'),
+                        topic.video.link + '?course_id={{post.id}}&course_name={{post.title}}&course_slug={{post.slug}}&unity=' + (u_index + 1) + '&sector=' + metas.get('sector'),
                         u_index + 1,
                         t_index + 1
                       )">
