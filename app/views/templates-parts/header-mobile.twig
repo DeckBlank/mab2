@@ -28,28 +28,41 @@
             <input id="sector-pub" type="checkbox" class="hide">
 
             <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-              {% for child in sec_pub.children %}
-                <label for="grado-{{sec_pub.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
-                  <a class="position-relative">{{child.name|replace({'Priv': '', 'Pub': ''})}}</a>
+              {% for level in sec_pub.children %}
+                <label for="priv-level-{{sec_pub.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                  <a class="position-relative">{{level.name|replace({'Priv': '', 'Pub': ''})}}</a>
 
-                  {% if child.children %}
+                  {% if level.children %}
                     <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
                   {% endif %}                      
                 </label>
-                <input id="grado-{{sec_pub.slug}}-{{loop.index}}" type="checkbox" class="hide">
+                <input id="pub-level-{{sec_pub.slug}}-{{loop.index}}" type="checkbox" class="hide">
 
                 <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-                  {% for _child in child.children %}
-                    <div class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
-                      <a href="{{_child.link}}?sector=publico" class="position-relative">{{_child.name}}</a>
-                    </div>                 
-                  {% endfor %}
+                  {% for grade in level.children %}
+                    <label for="pub-grado-{{level.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                      <a class="position-relative">{{grade.name|replace({'Priv': '', 'Pub': ''})}}</a>
+
+                      {% if grade.children %}
+                        <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
+                      {% endif %}                      
+                    </label>
+                    <input id="pub-grado-{{level.slug}}-{{loop.index}}" type="checkbox" class="hide">
+
+                    <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                      {% for course in grade.children %}
+                        <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                          <a href="{{course.link}}?sector=publico" class="position-relative">{{course.name}}</a>
+                        </div>                 
+                      {% endfor %}
+                    </ul>                
+                  {% endfor %}                  
                 </ul>                
               {% endfor %}
             </ul>
           </li>
 
-          <li v-else-if="logedUser.user_sector != 'privado'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_pub.class %} activate {% endif %}">              
+          <li v-else-if="logedUser.user_sector != 'privados'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_pub.class %} activate {% endif %}">              
             <label for="sector-pub" class="c-menu__item flex-container align-justify align-middle padding-1">
               <a class="position-relative">{{ sec_pub.name }}</a>
               <span class="c-icon"><i class="far fa-chevron-down"></i></span>
@@ -57,22 +70,35 @@
             <input id="sector-pub" type="checkbox" class="hide">
 
             <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-              {% for child in sec_pub.children %}
-                <label for="grado-{{sec_pub.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
-                  <a class="position-relative">{{child.name|replace({'Priv': '', 'Pub': ''})}}</a>
+              {% for level in sec_pub.children %}
+                <label for="pub-level-{{sec_pub.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                  <a class="position-relative">{{level.name|replace({'Priv': '', 'Pub': ''})}}</a>
 
-                  {% if child.children %}
+                  {% if level.children %}
                     <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
                   {% endif %}                      
                 </label>
-                <input id="grado-{{sec_pub.slug}}-{{loop.index}}" type="checkbox" class="hide">
+                <input id="pub-level-{{sec_pub.slug}}-{{loop.index}}" type="checkbox" class="hide">
 
                 <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-                  {% for _child in child.children %}
-                    <div class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
-                      <a href="{{_child.link}}?sector=publico" class="position-relative">{{_child.name}}</a>
-                    </div>                 
-                  {% endfor %}
+                  {% for grade in level.children %}
+                    <label for="pub-grado-{{level.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                      <a class="position-relative">{{grade.name|replace({'Priv': '', 'Pub': ''})}}</a>
+
+                      {% if grade.children %}
+                        <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
+                      {% endif %}                      
+                    </label>
+                    <input id="pub-grado-{{level.slug}}-{{loop.index}}" type="checkbox" class="hide">
+
+                    <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                      {% for course in grade.children %}
+                        <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                          <a href="{{course.link}}?sector=publico" class="position-relative">{{course.name}}</a>
+                        </div>                 
+                      {% endfor %}
+                    </ul>                
+                  {% endfor %}                  
                 </ul>                
               {% endfor %}
             </ul>
@@ -86,22 +112,35 @@
             <input id="sector-priv" type="checkbox" class="hide">
 
             <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-              {% for child in sec_priv.children %}
-                <label for="grado-{{sec_priv.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
-                  <a class="position-relative">{{child.name|replace({'Priv': '', 'Pub': ''})}}</a>
+              {% for level in sec_priv.children %}
+                <label for="priv-level-{{sec_priv.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                  <a class="position-relative">{{level.name|replace({'Priv': '', 'Pub': ''})}}</a>
 
-                  {% if child.children %}
+                  {% if level.children %}
                     <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
                   {% endif %}                      
                 </label>
-                <input id="grado-{{sec_priv.slug}}-{{loop.index}}" type="checkbox" class="hide">
+                <input id="priv-level-{{sec_priv.slug}}-{{loop.index}}" type="checkbox" class="hide">
 
                 <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-                  {% for _child in child.children %}
-                    <div class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
-                      <a href="{{_child.link}}?sector=privado" class="position-relative">{{_child.name}}</a>
-                    </div>                 
-                  {% endfor %}
+                  {% for grade in level.children %}
+                    <label for="priv-grado-{{level.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                      <a class="position-relative">{{grade.name|replace({'Priv': '', 'Pub': ''})}}</a>
+
+                      {% if grade.children %}
+                        <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
+                      {% endif %}                      
+                    </label>
+                    <input id="priv-grado-{{level.slug}}-{{loop.index}}" type="checkbox" class="hide">
+
+                    <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                      {% for course in grade.children %}
+                        <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                          <a href="{{course.link}}?sector=publico" class="position-relative">{{course.name}}</a>
+                        </div>                 
+                      {% endfor %}
+                    </ul>                
+                  {% endfor %}                  
                 </ul>                
               {% endfor %}
             </ul>
@@ -115,22 +154,35 @@
             <input id="sector-priv" type="checkbox" class="hide">
 
             <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-              {% for child in sec_priv.children %}
-                <label for="grado-{{sec_priv.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
-                  <a class="position-relative">{{child.name|replace({'Priv': '', 'Pub': ''})}}</a>
+              {% for level in sec_priv.children %}
+                <label for="priv-level-{{sec_priv.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                  <a class="position-relative">{{level.name|replace({'Priv': '', 'Pub': ''})}}</a>
 
-                  {% if child.children %}
+                  {% if level.children %}
                     <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
                   {% endif %}                      
                 </label>
-                <input id="grado-{{sec_priv.slug}}-{{loop.index}}" type="checkbox" class="hide">
+                <input id="priv-level-{{sec_priv.slug}}-{{loop.index}}" type="checkbox" class="hide">
 
                 <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-                  {% for _child in child.children %}
-                    <div class="c-submenu__item flex-container align-justify align-middle padding-1" :class="{ active : true }">
-                      <a href="{{_child.link}}?sector=privado" class="position-relative">{{_child.name}}</a>
-                    </div>                 
-                  {% endfor %}
+                  {% for grade in level.children %}
+                    <label for="priv-grado-{{level.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                      <a class="position-relative">{{grade.name|replace({'Priv': '', 'Pub': ''})}}</a>
+
+                      {% if grade.children %}
+                        <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
+                      {% endif %}                      
+                    </label>
+                    <input id="priv-grado-{{level.slug}}-{{loop.index}}" type="checkbox" class="hide">
+
+                    <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                      {% for course in grade.children %}
+                        <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                          <a href="{{course.link}}?sector=publico" class="position-relative">{{course.name}}</a>
+                        </div>                 
+                      {% endfor %}
+                    </ul>                
+                  {% endfor %}                  
                 </ul>                
               {% endfor %}
             </ul>
@@ -146,6 +198,3 @@
     </nav>
   </div>
 </header>
-  
-  
-  

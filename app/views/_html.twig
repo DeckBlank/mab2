@@ -27,92 +27,12 @@
       {% block hero %}
         {# Content #}
       {% endblock %}
-      
-      <div v-if="sectors[0]" class="c-cursos bg-sec-color position-fixed" :class="{ active : isActivePubSectorMenu }">
-        <h2 v-if="logedUser" class="c-cursos__title margin-bottom-1 w-black white">MAB ACADÉMICO</h2>
-        <h2 v-else class="c-cursos__title margin-bottom-1 w-black white">PÚBLICO</h2>
-        <ul v-if="logedUser" class="c-cursos__list ul-reset">
-          <li v-if="logedUser.user_sector == 'publico'" v-for="grade of sectors[0].children" class="c-cursos__item fs-18 f2">
-            <a class="display-block" @click="defineGrade({type: 'pub', name: grade.name})">${grade.name.replace('Pub','')}</a>
-          </li>
-        </ul>
-        <ul v-else class="c-cursos__list ul-reset">
-          <li v-for="grade of sectors[0].children" class="c-cursos__item fs-18 f2">
-            <a class="display-block" @click="defineGrade({type: 'pub', name: grade.name})">${grade.name.replace('Pub','')}</a>
-          </li>
-        </ul>
-      </div>
 
-      <div v-if="pubGrade" class="c-cursos bg-sec-color position-fixed" :class="{ active : isActivePubGradoMenu }">
-        <h2 class="c-cursos__title c-cursos__title--grade margin-bottom-1 w-black white">${pubGrade.name.replace('Pub','')}</h2>
-        <ul v-if="logedUser" class="c-cursos__list ul-reset">
-          <li class="c-cursos__item fs-18 f2">
-            <a class="flex-container align-middle" @click="updateStatusPubGradoMenu">
-              <span class="c-icon margin-right-1"><i class="far fa-arrow-left"></i></span>
-              Volver
-            </a>
-          </li>
+      <sector v-if="!logedUser" type="public" name="publico"></sector>
+      <sector v-if="!logedUser" type="private" name="privado"></sector>
 
-          <li v-if="logedUser.user_sector == 'publico'" v-for="course of pubGrade.children" class="c-cursos__item fs-18 f2">
-            <a :href="course.url + '?sector=publico'" class="display-block">${course.name}</a>
-          </li>
-        </ul>
-        <ul v-else class="c-cursos__list ul-reset">
-          <li class="c-cursos__item fs-18 f2">
-            <a class="flex-container align-middle" @click="updateStatusPubGradoMenu">
-              <span class="c-icon margin-right-1"><i class="far fa-arrow-left"></i></span>
-              Volver
-            </a>
-          </li>
-
-          <li v-for="course of pubGrade.children" class="c-cursos__item fs-18 f2">
-            <a :href="course.url + '?sector=publico'" class="display-block">${course.name}</a>
-          </li>
-        </ul>
-      </div>
-      
-      <div v-if="sectors[1]" class="c-cursos bg-sec-color position-fixed" :class="{ active : isActivePrivSectorMenu }">
-        <h2 v-if="logedUser" class="c-cursos__title margin-bottom-1 w-black white">MAB ACADÉMICO</h2>
-        <h2 v-else class="c-cursos__title margin-bottom-1 w-black white">PRIVADO</h2>
-        <ul v-if="logedUser" class="c-cursos__list ul-reset">
-          <li v-if="logedUser.user_sector == 'privado'" v-for="grade of sectors[1].children" class="c-cursos__item fs-18 f2">
-            <a class="display-block" @click="defineGrade({type: 'priv', name: grade.name})">${grade.name.replace('Priv','')}</a>
-          </li>
-        </ul>
-        <ul v-else class="c-cursos__list ul-reset">
-          <li v-for="grade of sectors[1].children" class="c-cursos__item fs-18 f2">
-            <a class="display-block" @click="defineGrade({type: 'priv', name: grade.name})">${grade.name.replace('Priv','')}</a>
-          </li>
-        </ul>
-      </div>
-
-      <div v-if="privGrade" class="c-cursos bg-sec-color position-fixed" :class="{ active : isActivePrivGradoMenu }">
-        <h2 class="c-cursos__title c-cursos__title--grade margin-bottom-1 w-black white">${privGrade.name.replace('Priv','')}</h2>
-        <ul v-if="logedUser" class="c-cursos__list ul-reset">
-          <li class="c-cursos__item fs-18 f2">
-            <a class="flex-container align-middle" @click="updateStatusPrivGradoMenu">
-              <span class="c-icon margin-right-1"><i class="far fa-arrow-left"></i></span>
-              Volver
-            </a>
-          </li>
-
-          <li v-if="logedUser.user_sector = 'privado'" v-for="course of privGrade.children" class="c-cursos__item fs-18 f2">
-            <a :href="course.url + '?sector=privado'" class="display-block">${course.name}</a>
-          </li>
-        </ul>
-        <ul v-else class="c-cursos__list ul-reset">
-          <li class="c-cursos__item fs-18 f2">
-            <a class="flex-container align-middle" @click="updateStatusPrivGradoMenu">
-              <span class="c-icon margin-right-1"><i class="far fa-arrow-left"></i></span>
-              Volver
-            </a>
-          </li>
-
-          <li v-for="course of privGrade.children" class="c-cursos__item fs-18 f2">
-            <a :href="course.url + '?sector=privado'" class="display-block">${course.name}</a>
-          </li>
-        </ul>
-      </div>
+      <sector v-if="logedUser && logedUser.user_sector == 'publico'" type="public" name="publico"></sector>
+      <sector v-else-if="logedUser && logedUser.user_sector == 'privado'" type="private" name="privado"></sector>
 
       <!-- Modal: Cuestionario de seguimiento -->
       <questionary-student v-if="logedUser && isEnableQuestionary && logedUser.user_rol == 'student' && !logedUser.user_metas.questionary"></questionary-student>  

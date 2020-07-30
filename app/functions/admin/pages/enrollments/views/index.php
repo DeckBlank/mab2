@@ -13,6 +13,7 @@
         <h3 class="mb-1">Acciones</h3>
         <div class="d-flex">
             <button id="save" class="button button-primary mr-1">Matricular</button>
+            <button id="delete" class="button button-trash">Desmatricular</button>
         </div>
     </div>
     <!-- <p>Total de accesos: <strong id="total_access">123</strong> veces</p> -->
@@ -51,11 +52,17 @@
             resultsDOM.innerHTML = '';
         }
 
+        console.log(__enrollments)
+
         __enrollments.forEach((enrollment, index)=>{
             resultsDOM.innerHTML += `
             <tr valign="top" class="${ ((index + 1) % 2 == 0) ? 'alternate' : '' }">
-                <td class="manage-column column-columnname" scoape="col"><input class="cb-course" type="checkbox"></input></td>
-                <td class="manage-column column-columnname" scoape="col">${enrollment.course}</td>
+                <td class="manage-column column-columnname" scoape="col"><input data-course="${enrollment.course_id}" class="cb-course" type="checkbox"></input></td>
+                <td class="manage-column column-columnname" scoape="col">
+                    ${enrollment.course} / 
+                    ${(enrollment.categories[1]) ? enrollment.categories[1].name : ''} /
+                    ${(enrollment.categories[0]) ? enrollment.categories[0].name : ''} 
+                </td>
                 <td class="manage-column column-columnname" scope="col">${enrollment.state}</td>
                 <td class="manage-column column-columnname" scope="col">${enrollment.date_at}</td>
                 <td class="manage-column column-columnname" scope="col">${enrollment.date_end}</td>
@@ -79,6 +86,7 @@
     /**
      * @getResults()
      * @saveEnrollments()
+     * @deleteEnrollments()
      * @searchUserResult()
      * @loadMore
      */
@@ -107,7 +115,7 @@
             form_data = new FormData();
 
         form_data.append('user', user.value)
-        form_data.append('courses', JSON.stringify(enrollments.map((enroll)=> enroll.course_id )) )
+        form_data.append('courses', JSON.stringify([...document.querySelectorAll('.cb-course:checked')].map(course => course.getAttribute('data-course'))) )
 
         fetch(`${API}/user/enrollments`, {
                 method: 'POST',
@@ -116,6 +124,31 @@
             .then(res => {
                 if (res.status >= 200 && res.status < 300) {
                     alert('Matriculas registradas')
+                }else{
+                    throw res
+                }
+            })
+            .catch(err => {
+                throw err;
+            })
+    }
+
+    function deleteEnrollments(){
+        let user = document.querySelector('#user')
+
+        fetch(`${API}/user/enrollments`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    user: user.value,
+                    courses: [...document.querySelectorAll('.cb-course:checked')].map(course => course.getAttribute('data-course'))
+                })
+            })
+            .then(res => {
+                if (res.status >= 200 && res.status < 300) {
+                    alert('Matriculas eliminadas')
                 }else{
                     throw res
                 }
@@ -158,7 +191,8 @@
     let search = document.querySelector('#search'),
         download = document.querySelector('#download'),
         mark_all = document.querySelector('#mark-all'),
-        save = document.querySelector('#save')
+        save = document.querySelector('#save'),
+        __delete = document.querySelector('#delete')
 
     search.onclick = ()=>{
         event.preventDefault(); 
@@ -173,5 +207,10 @@
     save.onclick = ()=>{
         event.preventDefault(); 
         saveEnrollments();
+    }
+
+    __delete.onclick = ()=>{
+        event.preventDefault(); 
+        deleteEnrollments();
     }
 </script>

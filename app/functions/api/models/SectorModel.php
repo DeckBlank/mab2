@@ -11,8 +11,9 @@ class SectorModel{
     /**
      * Methods
      */
-    public static function getAll(){
-        $sectors = new \Timber\Menu( 'primary-menu' );        
-        return [$sectors->items[1], $sectors->items[2]] ;
+    public static function getAll($request){
+        $sectors = new \Timber\Menu( 'primary-menu' );
+
+        return ($request['type'] == 'public') ? $sectors->items[1] : $sectors->items[2];
     }
 }

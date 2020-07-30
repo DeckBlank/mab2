@@ -62,6 +62,11 @@ add_action( 'rest_api_init', function () {
         'callback' => array($userController,'saveEnrollments'),
     ));
 
+    register_rest_route( 'custom/v1', '/user/enrollments', array(
+        'methods' => 'DELETE',
+        'callback' => array($userController,'deleteEnrollments'),
+    ));
+
     register_rest_route( 'custom/v1', '/user/access/log', array(
         'methods' => 'PUT',
         'callback' => array($userController,'saveAccessLog')

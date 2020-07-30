@@ -37,8 +37,6 @@ const emotional = new Vue({
     }else{
       this.getExcercies()
     }
-
-    this.initSectors();
   },
   mounted(){
     this.global();

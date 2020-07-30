@@ -63,9 +63,6 @@ const topic = new Vue({
       return this.$refs.slider_questions.$swiper
     }     
   },
-  beforeMount(){
-    this.initSectors();
-  },  
   mounted(){
     this.global();
     

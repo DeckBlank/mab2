@@ -1,3 +1,16 @@
+.c-sector {
+  top: 0;
+  left: 0;
+  padding-top: calc(80px);
+  width: 18rem;
+  height: 100%;
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+
+  @include transition(0.3s);
+}
+
 .c-cursos {
   top: 0;
   left: 0;
@@ -7,7 +20,7 @@
   z-index: 100;
   visibility: hidden;
   opacity: 0;
-  transform: translateX(-10px);
+  transform: translateX(-15px);
   background-image: url('../images/vectors/courses/plant.png');
   background-position: center calc(100% + 1rem);
   background-size: 100px;
@@ -56,6 +69,7 @@
 }
 
 @include breakpoint(large) {
+  .c-sector.active,
   .c-cursos.active {
     visibility: visible;
     opacity: 1;

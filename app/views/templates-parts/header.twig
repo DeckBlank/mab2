@@ -17,28 +17,28 @@
         </li>
         <li v-if="logedUser.user_sector == 'publico'">
           <div class="c-menu__item">
-            <a class="position-relative flex-container align-middle" @click="updateStatusPubSectorMenu">
+            <a class="position-relative flex-container align-middle" @click="updateStatusSectorMenu('public')">
               CURSOS <span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
             </a>
           </div>
         </li> 
         <li v-else-if="logedUser.user_sector != 'privado'">
           <div class="c-menu__item">
-            <a class="position-relative flex-container align-middle" @click="updateStatusPubSectorMenu">
+            <a class="position-relative flex-container align-middle" @click="updateStatusSectorMenu('public')">
               {{ sec_pub.name }}<span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
             </a>
           </div>
-        </li> 
+        </li>
         <li v-if="logedUser.user_sector == 'privado'">
           <div class="c-menu__item">
-            <a class="position-relative flex-container align-middle" @click="updateStatusPrivSectorMenu">
+            <a class="position-relative flex-container align-middle" @click="updateStatusSectorMenu('private')">
               CURSOS <span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
             </a>
           </div>
         </li>
         <li v-else-if="logedUser.user_sector != 'publico'" >
           <div class="c-menu__item">
-            <a class="position-relative flex-container align-middle" @click="updateStatusPrivSectorMenu">
+            <a class="position-relative flex-container align-middle" @click="updateStatusSectorMenu('private')">
               {{ sec_priv.name }}<span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
             </a>
           </div>

@@ -22,9 +22,6 @@ const login = new Vue({
       window.location = `${this.SITE_URL}/emotional`;
     }
   },
-  beforeMount(){
-    this.initSectors();
-  },
   mounted(){
     this.global();
     this.hideLoading();

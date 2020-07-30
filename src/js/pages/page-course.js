@@ -19,16 +19,12 @@ const course = new Vue({
   computed: {
     ...baseState()
   },
-  beforeMount(){
-    this.initSectors();
-  },  
   mounted: function(){
     this.global();
     this.isUserAuthOnCourse( this.$refs.course.getAttribute('data-id') )
     this.saveCourseOnMetas()
     this.verifyIsAvaibleCourse()
     this.getUnities( this.$refs.course.getAttribute('data-id') );
-    console.log(this.logedUser)
   },
   methods: {
     ...baseActions(),

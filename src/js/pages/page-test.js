@@ -57,9 +57,6 @@ const test = new Vue({
       window.location = `${this.SITE_URL}/login`;
     }
   },
-  beforeMount(){
-    this.initSectors();
-  },
   mounted(){
     this.global();
     this.initTooltips();

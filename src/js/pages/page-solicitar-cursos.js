@@ -29,9 +29,6 @@ const solicitar_cursos = new Vue({
   },
   computed: {
     ...baseState()
-  }, 
-  beforeMount(){
-    this.initSectors();
   },
   mounted(){
     this.global();

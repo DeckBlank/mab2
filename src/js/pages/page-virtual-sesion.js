@@ -106,9 +106,6 @@ const virtual_sesion = new Vue({
       }
     }
   },
-  beforeMount(){
-    this.initSectors();
-  },
   mounted(){
     this.global();
     this.sessionRequestFill();

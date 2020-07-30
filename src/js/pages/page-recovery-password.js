@@ -29,9 +29,6 @@ const recovery_password = new Vue({
       window.location = `${this.SITE_URL}/login`;
     }
   },
-  beforeMount(){
-    this.initSectors();
-  },
   mounted(){
     this.global();
     

@@ -128,7 +128,15 @@ class UserController{
         if (UserModel::saveEnrollments($request)) {
             return new WP_REST_Response('Enrollments saved', 200);
         } else {
-            return new WP_Error( 'no_enrollments_found', __("No enrollments found"), array( 'status' => 404 ) );
+            return new WP_Error( 'no_enrollments_saved', __("No enrollments saved"), array( 'status' => 404 ) );
+        }
+    }
+
+    public function deleteEnrollments($request){
+        if (UserModel::deleteEnrollments($request)) {
+            return new WP_REST_Response('Enrollments deleted', 200);
+        } else {
+            return new WP_Error( 'no_enrollments_deleted', __("No enrollments deleted"), array( 'status' => 404 ) );
         }
     }
 

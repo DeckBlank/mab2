@@ -52,7 +52,6 @@ const shop_cart = new Vue({
     }
   },
   mounted(){
-    this.initSectors();
     this.global();
   },
   methods: {

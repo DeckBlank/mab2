@@ -274,6 +274,27 @@ class UserModel{
         return $response;
     }    
 
+    public static function deleteEnrollments($request){
+        $response = false;
+
+        foreach($request['courses'] as $course){
+            $response = DBConnection::getConnection()->query("
+                DELETE FROM 
+                    wp_user_course_enrollment
+                WHERE
+                    user_email = '". $request['user'] ."' and
+                    course_id = '". $course ."'
+            ");
+
+            if(!$response){
+                break;
+            }
+        }
+
+        // return $request['courses'];
+        return $response;
+    }    
+
     public static function saveAccessLog($request){
         $user = ($request['user'] == 'anonimo') ? 'anonimo-' . $_SERVER['REMOTE_ADDR'] : $request['user'];
 

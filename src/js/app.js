@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import './components/sector';
 import './components/toggle';
 import './components/browser';
 import './components/profile';
@@ -30,13 +31,7 @@ function baseState(){
     'SITE_URL', 
     'logedUser',
     'isActiveMenu',
-    'sectors',
-    'pubGrade',
-    'privGrade',
-    'isActivePubSectorMenu', 
-    'isActivePrivSectorMenu',
-    'isActivePubGradoMenu',
-    'isActivePrivGradoMenu',
+    'sectorMenu',
     'isHeaderWithShadow',
     'isActiveBrowserToggle',
     'isLoadedPage',
@@ -47,12 +42,7 @@ function baseState(){
 
 function baseActions(){
   return {...Vuex.mapActions([
-      'initSectors',
-      'defineGrade',
-      'updateStatusPubSectorMenu', 
-      'updateStatusPrivSectorMenu',
-      'updateStatusPubGradoMenu',
-      'updateStatusPrivGradoMenu',
+      'updateStatusSectorMenu',
       'updateStatusHeaderShadow',
       'updateStatusBrowserToggle',
       'hideLoading',

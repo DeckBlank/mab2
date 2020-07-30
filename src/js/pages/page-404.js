@@ -11,9 +11,6 @@ const _404 = new Vue({
   computed: {
     ...baseState()
   },
-  beforeMount(){
-    this.initSectors();
-  },
   mounted(){
     this.global();
     this.hideLoading();
