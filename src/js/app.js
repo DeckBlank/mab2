@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import './components/sector';
 import './components/toggle';
 import './components/browser';
 import './components/profile';
@@ -31,7 +30,13 @@ function baseState(){
     'SITE_URL', 
     'logedUser',
     'isActiveMenu',
-    'sectorMenu',
+    'sectors',
+    'pubGrade',
+    'privGrade',
+    'isActivePubSectorMenu', 
+    'isActivePrivSectorMenu',
+    'isActivePubGradoMenu',
+    'isActivePrivGradoMenu',
     'isHeaderWithShadow',
     'isActiveBrowserToggle',
     'isLoadedPage',
@@ -42,13 +47,19 @@ function baseState(){
 
 function baseActions(){
   return {...Vuex.mapActions([
-      'updateStatusSectorMenu',
+      'initSectors',
+      'defineGrade',
+      'updateStatusPubSectorMenu', 
+      'updateStatusPrivSectorMenu',
+      'updateStatusPubGradoMenu',
+      'updateStatusPrivGradoMenu',
       'updateStatusHeaderShadow',
       'updateStatusBrowserToggle',
       'hideLoading',
       'updateMetasBehaviour'
     ]),
     global: function(){
+      this.initSectors();
       this.saveLog();
       this.isEnableQP('questionary');
       this.isEnableQP('poll');

@@ -14,6 +14,6 @@ class SectorModel{
     public static function getAll($request){
         $sectors = new \Timber\Menu( 'primary-menu' );
 
-        return ($request['type'] == 'public') ? $sectors->items[1] : $sectors->items[2];
+        return [$sectors->items[1], $sectors->items[2]];
     }
 }
