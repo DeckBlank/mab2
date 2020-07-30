@@ -5,7 +5,7 @@
 
 {% block content %}
   <section class="c-section c-section--home">
-    <section class="init">
+    <section style="display:none" class="init">
       <div class="init_line">
         Accede a todo nuestro contenido online. Comienza a aprender con MAB desde cualquier lugar.
       </div>
@@ -36,23 +36,66 @@
         </div>
       </div>
     </section>
+
+    <section class="section-init">
+      <div class="section-init__header">
+        <div class="section-init__header__icon">
+          <img loading="lazy" src="{{theme.link}}/static/images/landing/new_dsg/logo_mab_rojo.png" alt="">
+        </div>
+
+        <a href="https://mabclick.com/login/" class="section-init__header__btn" href="">
+          <span>Ingresa aquí y</span> <br>
+          <span>#AprendeDistinto</span>
+        </a>
+      </div>
+      <div class="section-init__center">
+
+      <div class="section-init__center__regadera">
+         <img loading="lazy" src="{{theme.link}}/static/images/landing/new_dsg/regadera.png" alt="">
+      </div>
+      <div class="section-init__center__flor">
+         <img loading="lazy" src="{{theme.link}}/static/images/landing/new_dsg/flor.png" alt="">
+      </div>
+        <figure class="section-init__figureCenter">
+          <img loading="lazy" src="{{theme.link}}/static/images/landing/new_dsg/mab_click.png" alt="">
+        </figure>
+        <figure class="mab_pantalla_figure position-relative">
+          <img loading="lazy" class="" src="{{theme.link}}/static/images/landing/new_dsg/laptop.png" alt="">
+          <div class="mab_pantalla_figure_base">
+            <iframe src="https://player.vimeo.com/video/409810897?color=de0d46&title=0&byline=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="fullscreen" allowfullscreen></iframe>
+          </div>
+        </figure>
+        
+        <div class="section-init_textbottom">
+          Prepárate para una experiencia distinta de aprendizaje integral. <br>
+        Bienvenidos a nuestra plataforma académica, emocional y creativa para profesores, alumnos y papas
+        </div>
+      </div>
+    </section>
+
+
     <section id="registro" class="mab_linkForm">
       <div class="section_content">
         <ul class="black_list mab_linkForm_list">
-          <li class="li_blank">
+          <li style="display:none" class="li_blank">
             ¿Ya tienes una cuenta?
-            
           </li>
-          <li>
+          <li style="display:none">
             <a href="{{site.url}}/login" >Ingresa aquí</a>
             <span></span>
           </li>
         </ul>        
-        <h2 class="title">
+        <h2 style="display:none" class="title">
           ¡Bienvenidos!
         </h2>
         <h3 class="subtitle">
         </h3>
+        <div class="mab_linkForm_top">
+          ¿No tienes cuenta?
+        </div>
+         <div class="mab_linkForm_newtitle">
+          Regístrate:
+        </div>
         <ul class="mab_linkForm_list">
           <li>
             <a href="{{site.url}}/formularios?type=profesor" >Profesor</a>
@@ -73,28 +116,14 @@
         </ul>
       </div>
     </section>
-    <section class="mab_resume">
-      <div class="section_content">            
-        <div class="block">
-          En MAB buscamos revolucionar la educación hacia una más emocional y humana, que forme mejores personas, para así construir una mejor sociedad.
-        </div>
-        <div class="block_rigth">
-        Con MAB CLICK podrás potenciar tus conocimientos adaptándonos a tu estilo de aprendizaje, manteniendo un balance académico y emocional.
-          <br>
-          <br> Encontrarás videos de desarrollo personal y habilidades para la vida, así como videos educativos y herramientas para reforzar tu aprendizaje en toda la etapa escolar.
-          <br>
-          <br> Todos aprendemos distinto por lo que hemos creado distintas opciones que se adapten a tu estilo.
-        </div>
-        <img loading="lazy" class="mab_resume_img" src="{{theme.link}}/static/images/landing/chica_corner.png" alt="">
-      </div>
-    </section>
+
     <section class="mab_balance">
       <div class="section_content">
         <h2 class="title">
           BALANCE <br> ACADÉMICO Y EMOCIONAL
         </h2>
         <figure class="mab_balance_figure">
-          <img loading="lazy" src="{{theme.link}}/static/images/landing/mapa.png" alt="">
+          <img loading="lazy" src="{{theme.link}}/static/images/landing/new_dsg/mapa.png" alt="">
         </figure>
       </div>
     </section>
@@ -131,15 +160,81 @@
         </div>
       </div>
     </section>
-
     <section class="mab_boxes_img">
       <div class="section_content">
-      <img loading="lazy" class="mab_boxes_img_desktop" src="{{theme.link}}/static/images/landing/blue_map_desktop.png?key=20200407" alt="">
-      <img loading="lazy" class="mab_boxes_img_mobile" src="{{theme.link}}/static/images/landing/blue_map_mobile.png?key=20200407" alt="">      
+      <img loading="lazy" class="mab_boxes_img_desktop" src="{{theme.link}}/static/images/landing/new_dsg/blue_map_desktop.png?key=20200407" alt="">
+      <img loading="lazy" class="mab_boxes_img_mobile" src="{{theme.link}}/static/images/landing/new_dsg/blue_map_mobile.png?key=20200407" alt="">      
       </div>
     </section>
 
-    <section class="mab_pantalla">
+    <section class="mab_resume">
+      <div class="section_content">            
+        <div class="block">
+          En MAB buscamos revolucionar la educación hacia una más emocional y humana, que forme mejores personas, para así construir una mejor sociedad.
+        </div>
+        <div class="block_rigth">
+        Con MAB CLICK podrás potenciar tus conocimientos adaptándonos a tu estilo de aprendizaje, manteniendo un balance académico y emocional.
+          <br>
+          <br> Encontrarás videos de desarrollo personal y habilidades para la vida, así como videos educativos y herramientas para reforzar tu aprendizaje en toda la etapa escolar.
+          <br>
+          <br> Todos aprendemos distinto por lo que hemos creado distintas opciones que se adapten a tu estilo.
+        </div>
+        <img loading="lazy" class="mab_resume_img" src="{{theme.link}}/static/images/landing/chica_corner.png" alt="">
+      </div>
+    </section>
+
+    <section class="section-sponsors">
+      <ul class="section-sponsors__list">
+        <li>
+          <a >
+            <img loading="lazy" src="{{theme.link}}/static/images/landing/new_dsg/sixseconds.png">
+          </a>
+        </li>
+        <li>
+          <a  >
+            <img loading="lazy" src="{{theme.link}}/static/images/landing/new_dsg/drel.png">
+          </a>
+        </li>
+        <li>
+          <a >
+            <img loading="lazy" src="{{theme.link}}/static/images/landing/new_dsg/l.png">
+          </a>
+        </li>
+                <li>
+          <a  >
+            <img loading="lazy" src="{{theme.link}}/static/images/landing/new_dsg/claridad.png">
+          </a>
+        </li>
+                <li>
+          <a  >
+            <img loading="lazy" src="{{theme.link}}/static/images/landing/new_dsg/juguete_pendiente.png">
+          </a>
+        </li>
+                <li>
+          <a  >
+            <img loading="lazy" src="{{theme.link}}/static/images/landing/new_dsg/menta_days.png">
+          </a>
+        </li>
+                <li>
+          <a  >
+            <img loading="lazy" src="{{theme.link}}/static/images/landing/new_dsg/mami_linda.png">
+          </a>
+        </li>
+                <li>
+          <a  >
+            <img loading="lazy" src="{{theme.link}}/static/images/landing/new_dsg/claribel.png">
+          </a>
+        </li>
+
+        <li>
+          <a  >
+            <img loading="lazy" src="{{theme.link}}/static/images/landing/new_dsg/standford.png">
+          </a>
+        </li>
+      </ul>
+    </section>
+
+    <section style="display:none" class="mab_pantalla">
       <figure class="mab_pantalla_figure position-relative">
         <img loading="lazy" class="" src="{{theme.link}}/static/images/landing/pantalla.png" alt="">
         <div class="mab_pantalla_figure_base">
@@ -179,7 +274,15 @@
           <span>-</span>
           <span class="fs-18 white">
             902705461
-          </span>        
+          </span> 
+          <span class="desktop_guion">-</span>
+          <br class="mobile_br">   
+          <span class="fs-18 white">
+            902705461
+          </span> - 
+          <span class="fs-18 white">
+            902705461
+          </span>       
         </div>
         <ul class="footer_list">
           <li>
