@@ -59,11 +59,23 @@ export const store = new Vuex.Store({
     },
 
     setMetasBehaviour(state, behaviour){
+      let mabTemp = window.sessionStorage.getItem('mab_temp'); mabTemp = JSON.parse(mabTemp)
+
       if (behaviour.type == 'questionary') {
         state.isEnableQuestionary = behaviour.value
       } else if(behaviour.type == 'poll') {
         state.isEnablePoll = behaviour.value
       }
+
+      mabTemp = {
+        ...mabTemp,
+        behaviour: {
+          ...mabTemp.behaviour,
+          [behaviour.type]: behaviour.value
+        }
+      }
+
+      window.sessionStorage.setItem('mab_temp', JSON.stringify(mabTemp))
     }
   },
   actions: {

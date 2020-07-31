@@ -94,7 +94,7 @@ class ReportsOptionPage {
                 'Matriculas',
                 'Matriculas',
                 'manage_options',
-                'enrollments',
+                'enrollments_report',
                 array( $this, 'create_admin_enrollments_page' )
             );
         }

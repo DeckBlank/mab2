@@ -72,9 +72,11 @@ const topic = new Vue({
     this.isUserAuthOnTopic(this.metas.get('course_id'))
     this.getLikes();
     this.getComments();
-    this.getQuestions();
-
-    this.saveViewLog(this.metas.get('course_id'));
+    
+    if(this.logedUser){
+      this.getQuestions();
+      this.saveViewLog(this.metas.get('course_id'));
+    }
   },
   methods: {
     ...baseActions(),
@@ -243,30 +245,32 @@ const topic = new Vue({
         window.location = `${this.SITE_URL}/emotional`;
       }else{
         if(this.metas.get('sector') == "privado"){
-          fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}&topic=${this.topicID}`,{
-              method: 'GET'
-            })
-            .then(res => {
-              if (res.status >= 200 && res.status < 300) {
-                return res.json()
-              }else{
-                throw res
-              }
-            })
-            .then(registration => {
-              this.hideLoading();
-            })
-            .catch(err => {
-              addCourseToShopCart(
-                course_id,
-                this.metas.get('course_name'),
-                `${this.SITE_URL}/curso/${this.metas.get('course_name')}`,
-                this.SITE_URL,
-                this.metas
-              );
-              // window.location = `${this.SITE_URL}/solicitar-cursos`;
-              throw err;
-            })        
+          if(this.logedUser){
+            fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}&topic=${this.topicID}`,{
+                method: 'GET'
+              })
+              .then(res => {
+                if (res.status >= 200 && res.status < 300) {
+                  return res.json()
+                }else{
+                  throw res
+                }
+              })
+              .then(registration => {
+                this.hideLoading();
+              })
+              .catch(err => {
+                addCourseToShopCart(
+                  course_id,
+                  this.metas.get('course_name'),
+                  `${this.SITE_URL}/curso/${this.metas.get('course_name')}`,
+                  this.SITE_URL,
+                  this.metas
+                );
+                // window.location = `${this.SITE_URL}/solicitar-cursos`;
+                throw err;
+              })        
+          }
         }else{
           this.hideLoading();
         }

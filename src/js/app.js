@@ -78,7 +78,10 @@ function baseActions(){
       }
     },
     isEnableQP: function(type){
-      if(this.logedUser){
+      let mabTemp = window.sessionStorage.getItem('mab_temp'); mabTemp = JSON.parse(mabTemp)
+      let isEnableQP__ = (this.logedUser && mabTemp && !mabTemp.behaviour) ? true : (mabTemp && mabTemp.behaviour[type])
+
+      if(isEnableQP__){
         fetch(`${this.API}/behaviour/${type}/enable`)
           .then(res => {
             if (res.status >= 200 && res.status < 300) {
@@ -99,7 +102,7 @@ function baseActions(){
               value: false
             });
             throw err;
-          })     
+          })
       }
     }
   }

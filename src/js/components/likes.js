@@ -27,7 +27,7 @@ Vue.component('likes',{
     ...Vuex.mapState(['API', 'SITE_URL', 'logedUser'])
   },
   beforeMount() {
-    this.isUserLiked()
+    if(this.logedUser) this.isUserLiked()
   },
   methods: {
     addNewLike: function(level){
