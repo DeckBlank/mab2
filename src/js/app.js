@@ -79,7 +79,7 @@ function baseActions(){
     },
     isEnableQP: function(type){
       let mabTemp = window.sessionStorage.getItem('mab_temp'); mabTemp = JSON.parse(mabTemp)
-      let isEnableQP__ = (this.logedUser && mabTemp && !mabTemp.behaviour) ? true : (mabTemp && mabTemp.behaviour[type])
+      let isEnableQP__ = (this.logedUser && mabTemp && !mabTemp.behaviour) ? true : (this.logedUser && mabTemp && mabTemp.behaviour[type])
 
       if(isEnableQP__){
         fetch(`${this.API}/behaviour/${type}/enable`)
