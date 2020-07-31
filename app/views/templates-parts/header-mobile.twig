@@ -62,7 +62,7 @@
             </ul>
           </li>
 
-          <li v-else-if="logedUser.user_sector != 'privados'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_pub.class %} activate {% endif %}">              
+          <li v-else-if="logedUser.user_sector != 'privado'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_pub.class %} activate {% endif %}">              
             <label for="sector-pub" class="c-menu__item flex-container align-justify align-middle padding-1">
               <a class="position-relative">{{ sec_pub.name }}</a>
               <span class="c-icon"><i class="far fa-chevron-down"></i></span>
