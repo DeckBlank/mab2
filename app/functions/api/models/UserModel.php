@@ -70,7 +70,11 @@ class UserModel{
     }
 
     public static function auth($request){
-        $user = wp_authenticate( $request['user'], $request['password'] );
+        $user = wp_signon([
+            'user_login'    => $request['user'],
+            'user_password' => $request['password'],
+            'remember'      => true
+        ]);
 
         if( is_wp_error($user) ){
             throw new Exception("Wrong credentials");

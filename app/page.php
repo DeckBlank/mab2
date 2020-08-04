@@ -15,8 +15,12 @@ $templates = [
 ];
 
 if(is_page('login')){
-    $context['title'] = get_field('title', $post->ID);
-    $context['phrase'] = get_field('phrase', $post->ID);
+    if (is_user_logged_in()) {
+        header('Location:' . $context['site']->url . '/emotional');        
+    } else {
+        $context['title'] = get_field('title', $post->ID);
+        $context['phrase'] = get_field('phrase', $post->ID);
+    }
 
 }else if(is_page('emotional')){
     $context['video_categories'] = Timber::get_terms([
@@ -35,14 +39,19 @@ if(is_page('login')){
     $context['banner'] = get_field('banner', $post->ID);
 
 }else if(is_page('carrito')){
-    $env = require(__DIR__ . '/../env.php');
+    if (is_user_logged_in()) {
+        $env = require(__DIR__ . '/../env.php');
+    
+        $context['pasarell'] = (object)[
+            "enviroment" => $env['ENV'],
+            "action" => $env['PU_ACTION'],
+            "merchan_id" => $env['PU_MERCHAND_ID'],
+            "account_id" => $env['PU_ACCOUNT_ID']
+        ];
+    } else {
+        header('Location:' . $context['site']->url . '/emotional');
+    }
 
-    $context['pasarell'] = (object)[
-        "enviroment" => $env['ENV'],
-        "action" => $env['PU_ACTION'],
-        "merchan_id" => $env['PU_MERCHAND_ID'],
-        "account_id" => $env['PU_ACCOUNT_ID']
-    ];
 }else if(is_page('recuperar-contrasena')){
     if (isset($_GET['stage']) && $_GET['stage'] == 2) {
         $templates = 'auth/password/page-actualizar-contrasena.twig' ;

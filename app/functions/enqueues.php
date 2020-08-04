@@ -1,6 +1,6 @@
 <?php
 
-$assets_version = '1596519014731';
+$assets_version = '1596522310645';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -26,7 +26,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         'deps'      => [ ],
         'ver'       => $assets_version,
         'in_footer' => true
-    ]);    
+    ]);
 
     register_assets('package', [
         'handle'    => 'pandawp/package/setimmediate',
@@ -124,14 +124,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
 
     /**
      * --------------------------------------------------------------------------
-     * Register google maps script
-     * --------------------------------------------------------------------------
-     *
-     */
-    /* GMaps here */
-
-    /**
-     * --------------------------------------------------------------------------
      * Register Scripts with conditionals
      * --------------------------------------------------------------------------
      *
@@ -176,7 +168,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]);
-        
     }elseif (is_page_template('templates/template-sesion-virtual.php')){
         register_assets('package', [
             'handle'    => 'pandawp/package/corejs',
@@ -497,6 +488,17 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);
     }
+
+    /**
+     * --------------------------------------------------------------------------
+     * Enviroment variables
+     * --------------------------------------------------------------------------
+     *
+     */
+
+    wp_localize_script( 'pandawp/package/vue', 'mab', [
+        "user" => 34,
+    ]);      
 });
 
 add_action('admin_enqueue_scripts', function ($hook) use ($config, $assets_version) {
