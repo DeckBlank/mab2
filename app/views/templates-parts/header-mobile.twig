@@ -29,7 +29,7 @@
 
             <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
               {% for level in sec_pub.children %}
-                <label for="priv-level-{{sec_pub.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                <label for="pub-level-{{sec_pub.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
                   <a class="position-relative">{{level.name|replace({'Priv': '', 'Pub': ''})}}</a>
 
                   {% if level.children %}
