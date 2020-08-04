@@ -50,10 +50,6 @@
       }
     }
 
-    &__content {
-      @include triangle(left, top, 6rem, -80px, 50px, 20px, 50px);
-    }
-
     &__topics {
       max-height: 0;
 

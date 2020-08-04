@@ -2,6 +2,10 @@ import Vue from 'vue'
 import {baseConfig, baseState, baseActions} from '../app'
 import {store} from '../store'
 
+import '../components/behaviour/questionaries/student';
+import '../components/behaviour/questionaries/tutor';
+import '../components/behaviour/poll';
+
 const emotional = new Vue({
   ...baseConfig(store),
   data() {
@@ -42,6 +46,12 @@ const emotional = new Vue({
     this.global();
     this.ecualizeFilters();
     this.hideLoading();
+
+    this.isEnableQP('poll');
+
+    if(this.logedUser && this.logedUser.user_sector == 'publico'){
+      this.isEnableQP('questionary');
+    }
   },  
   methods: {
     ...baseActions(),
@@ -149,6 +159,34 @@ const emotional = new Vue({
                   
           throw err;
         })      
-    }
+    },
+    isEnableQP: function(type){
+      let mabTemp = window.sessionStorage.getItem('mab_temp'); mabTemp = JSON.parse(mabTemp)
+      let isEnableQP__ = (this.logedUser && mabTemp && !mabTemp.behaviour) ? true : (this.logedUser && mabTemp && mabTemp.behaviour[type])
+
+      if(isEnableQP__){
+        fetch(`${this.API}/behaviour/${type}/enable?user=${this.logedUser.user_email}`)
+          .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              return res.json()
+            }else{
+              throw res
+            }
+          })
+          .then(response => {
+            this.updateMetasBehaviour({
+              type: type,
+              value: response
+            });
+          })
+          .catch(err => {
+            this.updateMetasBehaviour({
+              type: type,
+              value: false
+            });
+            throw err;
+          })
+      }
+    },    
   }
 })

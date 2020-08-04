@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 import {baseConfig, baseState, baseActions} from '../app'
 import {addCourseToShopCart} from '../libs/shop-cart'
 import {store} from '../store'
+
 import '../components/likes';
 import '../components/editor';
 import '../components/thread/comment';
@@ -270,6 +271,8 @@ const topic = new Vue({
                 // window.location = `${this.SITE_URL}/solicitar-cursos`;
                 throw err;
               })        
+          }else{
+            this.hideLoading();
           }
         }else{
           this.hideLoading();

@@ -179,9 +179,18 @@ class BehaviourModel{
     }    
 
     public static function checkoutPollEnable($request){
-        $poll_enable = get_field('encuesta_enable', 'options'); 
+        $poll_enable = get_field('encuesta_enable', 'options');
+        $access_logs = DBConnection::getConnection()->query("
+            SELECT 
+                *
+            FROM 
+                wp_access_logs
+            WHERE
+                user_email = '". $request['user'] ."' AND
+                access_count >= 2
+        ");
 
-        return $poll_enable;
+        return $poll_enable && ($access_logs->num_rows > 0);
     }
 
     public static function savePoll($request){

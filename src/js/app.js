@@ -5,9 +5,6 @@ import './components/toggle';
 import './components/browser';
 import './components/profile';
 import './components/video';
-import './components/behaviour/questionaries/student';
-import './components/behaviour/questionaries/tutor';
-import './components/behaviour/poll';
 
 Vue.use(Vuex)
 
@@ -50,8 +47,6 @@ function baseActions(){
     ]),
     global: function(){
       this.saveLog();
-      this.isEnableQP('questionary');
-      this.isEnableQP('poll');
     },
     saveLog: function(){
       if(!window.sessionStorage.getItem('mab_temp')){
@@ -77,34 +72,6 @@ function baseActions(){
           })      
       }
     },
-    isEnableQP: function(type){
-      let mabTemp = window.sessionStorage.getItem('mab_temp'); mabTemp = JSON.parse(mabTemp)
-      let isEnableQP__ = (this.logedUser && mabTemp && !mabTemp.behaviour) ? true : (this.logedUser && mabTemp && mabTemp.behaviour[type])
-
-      if(isEnableQP__){
-        fetch(`${this.API}/behaviour/${type}/enable`)
-          .then(res => {
-            if (res.status >= 200 && res.status < 300) {
-              return res.json()
-            }else{
-              throw res
-            }
-          })
-          .then(response => {
-            this.updateMetasBehaviour({
-              type: type,
-              value: response
-            });
-          })
-          .catch(err => {
-            this.updateMetasBehaviour({
-              type: type,
-              value: false
-            });
-            throw err;
-          })
-      }
-    }
   }
 }
 

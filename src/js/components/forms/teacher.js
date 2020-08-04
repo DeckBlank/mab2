@@ -151,7 +151,7 @@ Vue.component('form-teacher',{
           >
           <option disabled value="" selected>Selecciona una opción</option>
           <option value="privado">Privado</option>
-          <option value="publico">Público (Curriculo nacional)</option>                  
+          <option value="publico">Público / Curriculo nacional</option>                  
         </select>
         <p v-if="!schoolType.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
       </div>
