@@ -106,6 +106,10 @@ class UserModel{
         }
     }
 
+    public static function logout($request){
+        wp_logout(); return true;
+    }
+
     public static function checkout($request){
         return email_exists($request['user']);
     }

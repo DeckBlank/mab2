@@ -32,6 +32,11 @@ add_action( 'rest_api_init', function () {
         'callback' => array($userController,'auth')
     ));
 
+    register_rest_route( 'custom/v1', '/user/logout', array(
+        'methods' => 'GET',
+        'callback' => array($userController,'logout')
+    ));
+
     register_rest_route( 'custom/v1', '/user/recovery_session', array(
         'methods' => 'GET',
         'callback' => array($userController,'getRecoverySession')

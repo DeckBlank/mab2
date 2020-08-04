@@ -29,12 +29,25 @@ Vue.component('profile',{
     }
   },
   computed: {
-    ...Vuex.mapState(['SITE_URL', 'logedUser'])
+    ...Vuex.mapState(['API', 'SITE_URL', 'logedUser'])
   },
   methods: {
     logout: function(){
-      window.localStorage.removeItem('mab_loged_user')
-      window.location = `${this.SITE_URL}/emotional`
+      event.preventDefault()
+
+      fetch(`${this.API}/user/logout/`)
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            window.localStorage.removeItem('mab_loged_user')
+            window.location = `${this.SITE_URL}/emotional`
+
+          }else{
+            throw res
+          }
+        })
+        .catch(err => {
+          throw err;
+        })       
     }
   }
 })

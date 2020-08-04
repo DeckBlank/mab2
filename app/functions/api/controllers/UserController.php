@@ -52,7 +52,15 @@ class UserController{
             return new WP_Error( 'no_user_credentials', __('No user credentials'), array( 'status' => 404 ) );
         }
     }
-    
+
+    public function logout($request){
+        if( UserModel::logout($request) ){
+            return new WP_REST_Response('Logout successfull!', 200);
+        }else{
+            return new WP_Error( 'no_user_logout', __('No user logout'), array( 'status' => 404 ) );
+        }
+    }
+
     public function createRecoverySession($request){
         if( isset($request['user']) ){
             $user_id = UserModel::checkout($request);
