@@ -1,6 +1,7 @@
 <table style="border: solid 1px #0266D0;">
     <tr>
         <th style="background: #0266D0; color: white;">Autor</th>
+        <th style="background: #0266D0; color: white;">Email</th>
         <th style="background: #0266D0; color: white;">Comentario</th>
         <th style="background: #0266D0; color: white;">Respuestas</th>
         <th style="background: #0266D0; color: white;">Tema</th>
@@ -16,6 +17,7 @@
         ?>
             <tr>
                 <td style="background: <?php echo $bg; ?>;"><?php echo $comment->author ?></td>
+                <td style="background: <?php echo $bg; ?>;"><?php echo $comment->author_email ?></td>
                 <td style="background: <?php echo $bg; ?>;"><?php echo $comment->body ?></td>
                 <td style="background: <?php echo $bg; ?>;">
                     <table style="border: solid 1px #DE0D46;">
