@@ -1,5 +1,9 @@
 <?php
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use Timber\Timber;
+
 require(__DIR__ . '/../models/TopicModel.php');
 
 class TopicController{
@@ -56,6 +60,33 @@ class TopicController{
     }
 
     //3. Comments ---------------------------------------//
+    public function getAllComments($request){
+        $comments = TopicModel::getAllComments($request);
+
+        if (empty($comments)) {
+            return new WP_Error( 'no_comments', __('Not comments found'), array( 'status' => 404 ) );
+        } else {
+            return new WP_REST_Response($comments, 200);
+        }
+        
+    }
+
+    public function downloadAllComments($request){
+        $comments = TopicModel::getAllComments($request);
+
+        if ( empty($comments) ) {
+            return new WP_Error( 'no_comments', __('Not comments found'), array( 'status' => 404 ) );
+        } else {
+            header('Content-Encoding: UTF-8');
+            header("Content-Type: application/xls; charset=UTF-8");
+            header("Content-Disposition: attachment; filename=comentarios-mabclick-".date('Y-m-d').".xls"); 
+            echo "\xEF\xBB\xBF";
+
+            //Header
+            include_once __DIR__."/../exports/reports/comments/topic.php";
+        }       
+    }    
+
     public function getComments($request){
         if(isset($request['paged'])){
             try {
@@ -68,9 +99,17 @@ class TopicController{
         }
     }
 
-    public function addComment($request){        
+    public function addComment($request){
         try {
-            return new WP_REST_Response(TopicModel::addComment($request), 200);
+            $comment_result = TopicModel::addComment($request);
+            $topic =  Timber::get_post([
+                "post_type" => "topic",
+                "p" => $request['post_id']
+            ]);
+
+            if ($comment_result && $this::__sendCommentNotification($request, $topic)) {
+                return new WP_REST_Response($comment_result, 200);
+            }
         } catch (Exception $e){
             return new WP_Error( 'no_comment_added', __($e->getMessage()), array( 'status' => 404 ) );
         }
@@ -78,7 +117,15 @@ class TopicController{
     
     public function addAnswer($request){
         try {
-            return new WP_REST_Response(TopicModel::addAnswer($request), 200);
+            $answer_result = TopicModel::addAnswer($request);
+            $topic =  Timber::get_post([
+                "post_type" => "topic",
+                "p" => $request['post_id']
+            ]);
+
+            if ($answer_result && $this::__sendAnswerNotification($request, $topic)) {
+                return new WP_REST_Response($answer_result, 200);
+            }
         } catch (Exception $e){
             return new WP_Error( 'no_answer_added', __($e->getMessage()), array( 'status' => 404 ) );
         }
@@ -111,7 +158,7 @@ class TopicController{
             return new WP_Error( 'topic_log_failed', __($e->getMessage()), array( 'status' => 404 ) );
         }
     }
- 
+
     public static function saveMaterialLog($request){
         try {
             return new WP_REST_Response(TopicModel::saveMaterialLog($request), 200);
@@ -119,7 +166,7 @@ class TopicController{
             return new WP_Error( 'topic_log_failed', __($e->getMessage()), array( 'status' => 404 ) );
         }
     } 
- 
+
     public static function getVideoLogs($request){
         $view_logs = TopicModel::getVideoLogs($request);
 
@@ -138,7 +185,7 @@ class TopicController{
         } else {
             header('Content-Encoding: UTF-8');
             header("Content-Type: application/xls; charset=UTF-8");
-            header("Content-Disposition: attachment; filename=resportes-videos-vistos-mabclick-".date('Y-m-d').".xls"); 
+            header("Content-Disposition: attachment; filename=reportes-videos-vistos-mabclick-".date('Y-m-d').".xls"); 
             echo "\xEF\xBB\xBF";
 
             //Header
@@ -165,7 +212,7 @@ class TopicController{
         } else {
             header('Content-Encoding: UTF-8');
             header("Content-Type: application/xls; charset=UTF-8");
-            header("Content-Disposition: attachment; filename=resportes-pdfs-descargados-mabclick-".date('Y-m-d').".xls"); 
+            header("Content-Disposition: attachment; filename=reportes-pdfs-descargados-mabclick-".date('Y-m-d').".xls"); 
             echo "\xEF\xBB\xBF";
 
             //Header
@@ -192,11 +239,188 @@ class TopicController{
         } else {
             header('Content-Encoding: UTF-8');
             header("Content-Type: application/xls; charset=UTF-8");
-            header("Content-Disposition: attachment; filename=resportes-cuestionarios-resueltos-mabclick-".date('Y-m-d').".xls"); 
+            header("Content-Disposition: attachment; filename=reportes-cuestionarios-resueltos-mabclick-".date('Y-m-d').".xls"); 
             echo "\xEF\xBB\xBF";
 
             //Header
             include_once __DIR__."/../exports/reports/tests.php";
         }     
+    }
+    
+    public function __sendCommentNotification($request, $topic){
+        $mail = new PHPMailer(true);
+        $admins = array_map(function($admin){return $admin->data->user_email;}, get_users(['role' => 'administrator']));
+
+        try {
+            //Server settings
+            $mail->CharSet = 'UTF-8';
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host       = 'mail.mabclick.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'no-reply@mabclick.com';
+            $mail->Password   = '-@6]W8u_5qA@';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port       = 465;
+
+            //Recipients
+            $mail->setFrom('no-reply@mabclick.com', "MABCLICK");
+            $mail->addAddress($request['user_email']);
+
+            foreach($admins as $admin){
+                $mail->addAddress($admin);
+            }
+    
+            // Content
+            $body = '
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #DE0D46; padding: 3rem 0;">
+                    <tr>
+                    <td width="100%" align="center" style="padding: 0 1rem">
+                        <table width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td width="600" align="center">
+                            <div style="background: #0166D0; color: white; width: 100%; max-width: 640px;">
+                                <header style="background: white; padding: 1rem;">
+                                    <img src="https://mabclick.com/wp-content/themes/mab-theme/app/static/images/logo.png" style="width: 100px;">
+                                </header>
+    
+                                <div style="padding: 1rem;">
+                                    <h1 style="font-size: 25px; color: white;">¡Nuevo comentario!</h1>
+
+                                    <table style="width: 100%; padding-left: 1.5rem">          
+                                        <tbody style="width: 100%">
+                                            <tr>
+                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Autor: </td>
+                                                <td style="padding: 10px 0; color: white;">'. $request["user"] .'</td>     
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Contenido: </td>
+                                                <td style="padding: 10px 0; color: white;">'. $request["content"] .'</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Tema: </td>
+                                                <td style="padding: 10px 0; color: white;">'. $topic->post_title .'</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+    
+                                <footer style="text-align: center; font-size: 12px; font-family: Verdana, serif; padding: 1rem; color: #0166D0; background: white;">
+                                    All rights reserved - MABCLICK
+                                </footer>         
+                            </div>
+                            </td>
+                        </tr>
+                        </table>
+                    </td>
+                    </tr>
+                </table>           
+            ';
+    
+            $mail->isHTML(true); 
+            $mail->Subject = "Nuevo comentario";
+            $mail->MsgHTML($body);
+    
+            $mail->send();
+    
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }    
+    
+    public function __sendAnswerNotification($request, $topic){
+        $mail = new PHPMailer(true);
+        $admins = array_map(function($admin){return $admin->data->user_email;}, get_users(['role' => 'administrator']));
+        $comment = get_comments([
+            "comment__in" => [$request['comment_id']]
+        ]);
+
+        try {
+            //Server settings
+            $mail->CharSet = 'UTF-8';
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host       = 'mail.mabclick.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'no-reply@mabclick.com';
+            $mail->Password   = '-@6]W8u_5qA@';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port       = 465;
+
+            //Recipients
+            $mail->setFrom('no-reply@mabclick.com', "MABCLICK");
+            $mail->addAddress($request['user_email']);
+
+            if($comment[0]->comment_author_email)
+                $mail->addAddress($comment[0]->comment_author_email);
+
+            foreach($admins as $admin){
+                $mail->addAddress($admin);
+            }
+    
+            // Content
+            $body = '
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #DE0D46; padding: 3rem 0;">
+                    <tr>
+                    <td width="100%" align="center" style="padding: 0 1rem">
+                        <table width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td width="600" align="center">
+                            <div style="background: #0166D0; color: white; width: 100%; max-width: 640px;">
+                                <header style="background: white; padding: 1rem;">
+                                    <img src="https://mabclick.com/wp-content/themes/mab-theme/app/static/images/logo.png" style="width: 100px;">
+                                </header>
+    
+                                <div style="padding: 1rem;">
+                                    <h1 style="font-size: 25px; color: white;">Nueva respuesta en : '. $topic->post_title .'</h1>
+
+                                    <table style="width: 100%; padding-left: 1.5rem">          
+                                        <tbody style="width: 100%">
+                                            <tr>
+                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Comentario: </td>
+                                                <td style="padding: 10px 0; color: white;">
+                                                    <p><b>'. $comment[0]->comment_author .'</b>:</p>                                                    
+                                                    "'. $comment[0]->comment_content .'"
+                                                </td>     
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Autor: </td>
+                                                <td style="padding: 10px 0; color: white;">'. $request["user"] .'</td>     
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Respuesta: </td>
+                                                <td style="padding: 10px 0; color: white;">'. $request["content"] .'</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Tema: </td>
+                                                <td style="padding: 10px 0; color: white;">'. $topic->post_title .'</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+    
+                                <footer style="text-align: center; font-size: 12px; font-family: Verdana, serif; padding: 1rem; color: #0166D0; background: white;">
+                                    All rights reserved - MABCLICK
+                                </footer>         
+                            </div>
+                            </td>
+                        </tr>
+                        </table>
+                    </td>
+                    </tr>
+                </table>           
+            ';
+    
+            $mail->isHTML(true); 
+            $mail->Subject = "Nueva respuesta";
+            $mail->MsgHTML($body);
+    
+            $mail->send();
+    
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
     }    
 }

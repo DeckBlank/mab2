@@ -40,11 +40,33 @@ class TopicModel{
     }
 
     //3. Comments ---------------------------------------//
+    public static function getAllComments($request){
+        return array_map(function($comment){
+            $post_type = get_post_type($comment->comment_post_ID);
+
+            if ($comment->comment_parent == 0) {
+                return (object)[
+                    "id" => $comment->comment_ID,
+                    "post" => Timber::get_post([
+                        "post_type" => $post_type,
+                        "p" => $comment->comment_post_ID
+                    ]),
+                    "parent" => $comment->comment_parent,
+                    "body" => $comment->comment_content,
+                    "author" => $comment->comment_author,
+                    "author_email" => (isset($comment->comment_author_email)) ? $comment->comment_author_email : '',
+                    "date" => $comment->comment_date,
+                    "answers" => get_comments(["parent" => $comment->comment_ID]),
+                ];
+            }
+        }, get_comments());
+    }
+
     public static function getComments($request){
         return __getComments($request);
     }
 
-    public static function addComment($request){
+    public static function addComment($request){        
         return __addComment($request);
     }
     

@@ -79,8 +79,15 @@ Vue.component('editor',{
       }
     },
     addNewComment: function(){
-      fetch(`${this.API}/${this.post.type}/${this.target.id}/comment?user=${this.logedUser.user_auth}&content=${this.textContent}`,{
-          method: 'POST'
+      let form_data = new FormData();
+
+      form_data.append('user', this.logedUser.user_auth)
+      form_data.append('user_email', this.logedUser.user_email)
+      form_data.append('content', this.textContent)
+
+      fetch(`${this.API}/${this.post.type}/${this.target.id}/comment`,{
+          method: 'POST',
+          body: form_data,
         })
         .then(res => {
           if (res.status >= 200 && res.status < 300) {
@@ -97,8 +104,15 @@ Vue.component('editor',{
         })      
     },
     addNewAnswer: function(){
-      fetch(`${this.API}/${this.post.type}/${this.post.id}/comment/${this.target.id}/answer?user=${this.logedUser.user_auth}&content=${this.textContent}`,{
-          method: 'POST'
+      let form_data = new FormData();
+
+      form_data.append('user', this.logedUser.user_auth)
+      form_data.append('user_email', this.logedUser.user_email)
+      form_data.append('content', this.textContent)
+
+      fetch(`${this.API}/${this.post.type}/${this.post.id}/comment/${this.target.id}/answer`,{
+          method: 'POST',
+          body: form_data,
         })
         .then(res => {
           if (res.status >= 200 && res.status < 300) {

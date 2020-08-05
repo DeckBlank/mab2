@@ -40,6 +40,7 @@ function __getComments($request){
 function __addComment($request){
     $result = wp_insert_comment([
         "comment_author" => $request['user'],
+        "comment_author_email" => $request['user_email'],
         "comment_content" => $request['content'],
         "comment_post_ID" => $request['post_id']
     ]);
@@ -57,6 +58,7 @@ function __addComment($request){
 function __addAnswer($request){
     $result = wp_insert_comment([
         "comment_author" => $request['user'],
+        "comment_author_email" => $request['user_email'],
         "comment_content" => $request['content'],
         "comment_parent" => $request['comment_id']
     ]);

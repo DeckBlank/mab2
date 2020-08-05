@@ -1,6 +1,8 @@
 <?php
 
-$assets_version = '1596523290536';
+include_once __DIR__ . '/api/libs/enviroment.php';
+
+$assets_version = '1596614250981';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -495,10 +497,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
      * --------------------------------------------------------------------------
      *
      */
-
-    wp_localize_script( 'pandawp/package/vue', 'mab', [
-        "user" => 34,
-    ]);      
+    setEnviromentVariables();
 });
 
 add_action('admin_enqueue_scripts', function ($hook) use ($config, $assets_version) {

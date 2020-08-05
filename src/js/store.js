@@ -11,7 +11,7 @@ export const store = new Vuex.Store({
     THEME_URL: `${document.getElementById('app').getAttribute('data-theme')}`,
 
     //User
-    logedUser: (window.localStorage.getItem('mab_loged_user')) ? JSON.parse(window.localStorage.getItem('mab_loged_user')) : false,
+    logedUser: (typeof mab !== 'undefined') ? mab : false,
 
     //Session
     activedSession: (window.localStorage.getItem('mab_session')) ? JSON.parse(window.localStorage.getItem('mab_session')) : false,

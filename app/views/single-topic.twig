@@ -103,7 +103,7 @@
                   </ul>
                 </div>
               </div>
-              <button v-if="this.logedUser" class="c-questions-toggle c-button f2 fs-18 w-medium c-button--primary flex-container align-center-middle" @click="isOpenedQuestionsModal = true">
+              <button v-if="this.logedUser && questions.length > 0" class="c-questions-toggle c-button f2 fs-18 w-medium c-button--primary flex-container align-center-middle" @click="isOpenedQuestionsModal = true">
                 <p class="margin-bottom-0">Comprueba lo que has aprendido aquí</p>
               </button>
             </div>
