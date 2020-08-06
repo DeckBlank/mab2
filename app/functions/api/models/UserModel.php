@@ -237,7 +237,7 @@ class UserModel{
 
         $enrollments_array = [];
         
-        if(!empty($courses)){
+        if(!empty($courses) && email_exists($request['user'])){
             foreach($courses as $course){
                 array_push($enrollments_array, (object)[
                     "course" => $course->title,

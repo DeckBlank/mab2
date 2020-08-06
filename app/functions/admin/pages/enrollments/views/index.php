@@ -52,8 +52,6 @@
             resultsDOM.innerHTML = '';
         }
 
-        console.log(__enrollments)
-
         __enrollments.forEach((enrollment, index)=>{
             resultsDOM.innerHTML += `
             <tr valign="top" class="${ ((index + 1) % 2 == 0) ? 'alternate' : '' }">
@@ -105,8 +103,7 @@
                 enrollments = __enrollments; mountResults(__enrollments);
             })
             .catch(err => {
-                document.querySelector('#load-more').classList.add('hide')
-                throw err;       
+                document.querySelector('#load-more').classList.add('hide')     
             })
     }
 
@@ -175,6 +172,8 @@
                 enrollments = __enrollments; mountResults(__enrollments, true);
             })
             .catch(err => {
+                alert('El usuario no existe');
+
                 throw err;       
             })
     }
