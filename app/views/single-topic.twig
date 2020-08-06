@@ -161,7 +161,7 @@
                 <swiper ref="slider_questions" class="c-questions__list margin-bottom-1" :options="swiperOptions">                
                   <swiper-slide v-for="(q_, qindex) of questions" :key="q_.id">
                     <h3 class="fs-21 f2 dark-gray w-bold  margin-bottom-2">${q_.question.title}</h3>                  
-                    <ul class="c-question f2 w-medium ul-reset overflow-hidden">
+                    <ul class="c-question f2 w-medium ul-reset">
                       <li 
                         class="c-question__item dark" 
                         v-for="(o_, oindex) of q_.question.options" :key="o_.id">
@@ -183,7 +183,8 @@
                             <span class="display-block rounded position-relative"></span>
                           </div>
                           <p class="margin-bottom-0">                      
-                            ${o_.option}
+                            <span class="display-block">${o_.option}</span>
+                            <img v-if="o_.option_image" :src="o_.option_image.url" alt="" class="margin-top-1">
                           </p>
                         </label>
                       </li>
