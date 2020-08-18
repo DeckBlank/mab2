@@ -39,6 +39,8 @@
     }
 
     &__title {
+      margin-bottom: 2rem;
+
       @include transition(0.3s);
 
       span {
@@ -47,6 +49,7 @@
 
       p {
         letter-spacing: 0.6rem;
+        display: none;
       }
     }
 
@@ -81,6 +84,12 @@
         color: $secondary-color;
       }
     }
+
+    &__link {
+      &--video {
+        margin-bottom: 2rem;
+      }
+    }
   }
 }
 
@@ -100,6 +109,24 @@
 
     .c-content.active {
       padding-left: 18rem;
+    }
+
+    .c-unity {
+      &__title {
+        margin-bottom: 0;
+
+        p {
+          display: block;
+        }
+      }
+    }
+
+    .c-topic {
+      &__link {
+        &--video {
+          margin-bottom: 0;
+        }
+      }
     }
   }
 }

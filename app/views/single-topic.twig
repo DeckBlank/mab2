@@ -160,7 +160,10 @@
                 <h2 class="c-questions__title f1 text-uppercase dark-gray fs-25 w-bold margin-bottom-2 text-center fs-60">{{post.title}}</h2>
                 <swiper ref="slider_questions" class="c-questions__list margin-bottom-1" :options="swiperOptions">                
                   <swiper-slide v-for="(q_, qindex) of questions" :key="q_.id">
-                    <h3 class="fs-21 f2 dark-gray w-bold  margin-bottom-2">${q_.question.title}</h3>                  
+                    <h3 class="fs-21 f2 dark-gray w-bold  margin-bottom-2">${q_.question.title}</h3>
+                    <figure v-if="q_.question.image" class="margin-bottom-1">
+                      <img :src="q_.question.image.url" alt="">
+                    </figure>
                     <ul class="c-question f2 w-medium ul-reset">
                       <li 
                         class="c-question__item dark" 

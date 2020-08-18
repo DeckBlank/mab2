@@ -46,6 +46,7 @@ const topic = new Vue({
         allowTouchMove: false,
         speed: 500,
         loop: false,
+        autoHeight: true,
         preventClicks: false,
         preventClicksPropagation: false
       }

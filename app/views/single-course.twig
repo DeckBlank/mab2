@@ -40,14 +40,15 @@
               <span class="c-icon display-block white fs-21"><i class="far fa-chevron-down"></i></span>
             </label>
             <div class="c-unity__content position-relative bg-white br--medium padding-1">
-              <h3 class="c-unity__title margin-bottom-2">
+              <h3 class="c-unity__title">
                 <span class="display-block fs-25 f2 dark-gray w-bold">${unity.title}</span>
+                <p class="margin-bottom-0 padding-left-2 fs-25 w-black">.....</p>
               </h3>
               <ul class="c-unity__topics ul-reset">
                 <ul v-for="(topic, t_index) of unity.topics" class="c-topic ul-reset f2 fs-21 dar-gray w-medium">
                   <li class="c-topic__item">
                     <a
-                      class="c-topic__link flex-container align-justify align-middle"
+                      class="c-topic__link c-topic__link--video flex-container align-justify align-middle"
                       @click="playVideo(
                         topic.video.link + '?course_id={{post.id}}&course_name={{post.title}}&course_slug={{post.slug}}&unity=' + (u_index + 1) + '&sector=' + metas.get('sector'),
                         u_index + 1,
