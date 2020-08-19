@@ -940,7 +940,7 @@ flex-direction: column;
   }
   .section-sponsors__list{
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
     list-style: none;
