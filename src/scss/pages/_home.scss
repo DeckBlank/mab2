@@ -940,7 +940,7 @@ flex-direction: column;
   }
   .section-sponsors__list{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     list-style: none;
@@ -951,6 +951,11 @@ flex-direction: column;
   .section-sponsors__list li{
     width:25%;
     margin-bottom: 50px;
+  }
+
+  .section-sponsors__list li:last-child {
+    width: 36%;
+    margin-left: 80px;
   }
 
   .section-sponsors__list li a{
@@ -1334,6 +1339,10 @@ flex-direction: column;
 
 @media (max-width:768px){
   .c-section--home {
+    .section-sponsors__list li:last-child{
+      width: 100%;
+      margin-left: 0px;
+    }
     .mobile_br{
       display: initial;
     }
