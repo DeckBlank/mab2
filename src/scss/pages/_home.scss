@@ -185,7 +185,7 @@
   .block{
     width: 100%;
     margin-bottom: 50px;
-    font-size: 25px;
+    font-size: 26px;
     position: relative;
     z-index: 5;
     margin-left: 150px;
@@ -213,7 +213,7 @@
     min-height: 300px;
     font-family: $font-family-secondary;
     font-weight: $black-font;
-    font-size: 25px;
+    font-size: 26px;
     text-align:right;
   }
 
@@ -1056,8 +1056,12 @@ flex-direction: column;
       margin-left: 150px;
     }
 
+    .section-init_textbottom {
+      font-size: 22px
+    }
+
     .block_rigth, .block, .mab_boxes_item{
-      font-size: 20px;
+      font-size: 22px;
     }
     .mab_contact_social li a{
       font-size: 50px;
@@ -1369,14 +1373,22 @@ flex-direction: column;
       width: 95%;
     }
     .section-init_textbottom{
-      font-size: 15px;
+      font-size: 18px;
     }
+
     .mab_linkForm_top{
       font-size: 20px;
     }
     .block_rigth{
-      text-align: center;
+      text-align: left;
+      font-size: 18px;
     }
+
+    .block {
+      font-size: 18px;
+      margin-bottom: 30px;
+    }
+
     .section-sponsors__list li{
       width: 80%;
     }
