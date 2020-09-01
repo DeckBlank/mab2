@@ -112,7 +112,7 @@
                 {{post.content}}
               </div>
             {% endif %}
-            <a href="https://api.whatsapp.com/send?phone=51{{information.phone|replace({' ': ''})}}" target="_blank" class="c-button c-button--secondary display-block margin-bottom-3 f2 w-medium fs-18 text-center">
+            <a v-if="logedUser.user_sector == 'privado'" href="https://api.whatsapp.com/send?phone=51{{information.phone|replace({' ': ''})}}" target="_blank" class="c-button c-button--secondary display-block margin-bottom-3 f2 w-medium fs-18 text-center">
               Para un aprendizaje más personalizado, coordina tu sesión virtual
             </a>
             <div class="c-comments f2 margin-bottom-2">

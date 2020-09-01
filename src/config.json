@@ -16,7 +16,6 @@
     "styles": "src/scss/**/*.scss",
     "js": "src/js/**/*.js",
     "images": "**/*.{jpg,jpeg,png,svg,ico}",
-    "php": "**/*.php",
     "twig": "**/*.twig"
   },
   "proxy": "localhost/mab",
