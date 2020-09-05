@@ -41,7 +41,7 @@ class TestController{
             echo "\xEF\xBB\xBF";
 
             //Header
-            include_once __DIR__."/../exports/reports/learning.php";
+            include_once __DIR__."/../exports/reports/tests/learning.php";
         } else {
             return new WP_Error( 'no_tests', __('No tests found'), array( 'status' => 404 ) );
         }  
@@ -64,4 +64,48 @@ class TestController{
             return new WP_Error( 'no_test_saved', __('No test saved'), array( 'status' => 404 ) );
         }        
     }    
+
+    public function saveBehaviourTest($request){
+        if (TestModel::saveBehaviourTest($request)) {
+            return new WP_REST_Response('Test saved', 200);
+        } else {
+            return new WP_Error( 'no_test_saved', __('No test saved'), array( 'status' => 404 ) );
+        }        
+    } 
+
+    public function getBehaviourTest($request){
+        $test = TestModel::getBehaviourTest($request);
+
+        if ($test) {
+            return new WP_REST_Response($test['result'], 200);
+        } else {
+            return new WP_Error( 'no_test', __('No test found'), array( 'status' => 404 ) );
+        }
+    }
+
+    public function getBehaviourTests($request){
+        $tests = TestModel::getBehaviourTests($request);
+
+        if ($tests) {
+            return new WP_REST_Response($tests, 200);
+        } else {
+            return new WP_Error( 'no_tests', __('No tests found'), array( 'status' => 404 ) );
+        }
+    }
+
+    public function downloadBehaviourTests($request){
+        $tests = TestModel::getBehaviourTests($request, 'all');
+
+        if ($tests) {
+            header('Content-Encoding: UTF-8');
+            header("Content-Type: application/xls; charset=UTF-8");
+            header("Content-Disposition: attachment; filename=resportes-estilos-personalidad-mabclick-".date('Y-m-d').".xls"); 
+            echo "\xEF\xBB\xBF";
+
+            //Header
+            include_once __DIR__."/../exports/reports/tests/behaviour.php";
+        } else {
+            return new WP_Error( 'no_tests', __('No tests found'), array( 'status' => 404 ) );
+        }  
+    }
 }

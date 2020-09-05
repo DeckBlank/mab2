@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Swiper from 'swiper'
-import {baseConfig, baseState, baseActions} from '../app'
-import {store} from '../store'
+import {baseConfig, baseState, baseActions} from '../../app'
+import {store} from '../../store'
 
 import tippy from 'tippy.js';
 
@@ -41,9 +41,7 @@ const test = new Vue({
         list: []
       },
       testResult: {
-        visual: 0,   
-        auditive: 0,
-        kinesthetic: 0,        
+        style: {},
         list: []
       },
       sliderQuestions: null    

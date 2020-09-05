@@ -1,0 +1,84 @@
+[
+  {
+    "id": 0,
+    "title": "EL PACIFICADOR",
+    "features": [
+      "Son niñ@s más orientados a la tranquilidad y la armonía.",
+      "Suelen tomar un rol más pasivo que los demás niños y a ser más cuidados y reflexivos.",
+      "Pueden ser considerados y afectuosos con los demás aunque no sean los que den el primer paso para formar una amistad.",
+      "Tienden a mostrar un ánimo estable y ecuánime que los hace parecer amigables, pero también suelen ser percibidos como tímidos.",
+      "Suelen ser pacíficos, respetuosos, gentiles y no confrontacionales.",
+      "Son práctivos, perseverantes, calmados y pensativos.",
+      "No se ofenden fácilmente, no suelen juzgar, pueden asumir la culpa aunque no sea de ellos.",
+      "Son patriotas, serenos, modestos y aguantan la presión.",
+      "En sus relaciones interpersonales necesitan paz, armonía, respeto, apreciación y motivación."
+    ],
+    "improvents": [
+      "Pueden ser lentos, indecisos e indiferentes con falta de ambición y tendencia a la flojera.",
+      "Suelen ser pasivos, y tienden a estar de acuerdo para evitar el conflicto.",
+      "Evaden el liderazgo y la presión."
+    ]
+  },
+  {
+    "id": 1,
+    "title": "EL PENSADOR",
+    "features": [
+      "Son niñ@s analíticos, perfeccionistas, idealistas y profundos pensadores.",
+      "Suelen ser reflexivos y discretos, sensibles, sacrificados, tranquilos y confiables.",
+      "Son decididos, ordenados, introvertidos y dedicados.",
+      "Tienden a ponerse sensibles frente a las injusticias.",
+      "Aprecian el silencio y la soledad, y tienen una vida interior fuerte, noble y cautelosa.",
+      "En sus relaciones interpersonales suelen ser sensibles, contenedores pero también suelen necesitar su espacio."
+    ],
+    "improvents": [
+      "Pueden ser lentos, malhumorados, melancólicos y desanimarse rápidamente.",
+      "Pueden ser temerosos, y tender hacia la depresión.",
+      "Les es más difícil que a otros hacer amigos.",
+      "Tienen tendencia a la pasividad, al resentimiento y suele faltarles confianza en sí mismos.",
+      "Suelen ser indecisos, críticos y suspicaces de otros.",
+      "Tienden a meterse en problemas fácilmente."
+    ]
+  },
+  {
+    "id": 2,
+    "title": "EL HACEDOR",
+    "features": [
+      "Son niñ@s más orientados hacía la acción.",
+      "Suelen mostrar más cualidades de liderazgo que los demás.",
+      "Tienden a ser niños más activos, que parecen ser apasionados o ambiciosos en sus actividades.",
+      "Por momentos pueden mostrarse más enfocados y confiados en una tarea, pero también se frustran más rápido y llegan a parecer inflexibles o impacientes.",
+      "Suelen ser niñ@s más prácticos, que prefieren información concreta y tangible.",
+      "En sus relaciones interpersonales exigen lealtad y reconocimiento a sus logros."
+    ],
+    "improvents": [
+      "En cuanto a su liderazgo pueden llegar a parecer agresivos o impulsivos.",
+      "Pueden llegar a ser muy dominantes y poco empáticos.",
+      "Pueden ser tercos, temerarios y atrevidos.",
+      "Pueden llegar a irritarse fácilmente y ser impacientes con otros.",
+      "Les puede resultar difícil disculparse o admitir errores.",
+      "En sus relaciones interpersonales suelen querer tener el control."
+    ]
+  },
+  {
+    "id": 3,
+    "title": "EL VOCERO",
+    "features": [
+      "Son niñ@s más sociables, orientados hacia las personas y a relacionarse con ellas.",
+      "Suelen ser más habladores o carismáticos, y tienden a formar amistades más rápido que otros niños.",
+      "Pueden mostrarse más animados y optimistas la mayor parte del tiempo.",
+      "Pueden ser más seguros de sí mismos y mostrar más cualidades de liderazgo.",
+      "Sus niveles de ánimo y sociabilidad pueden hacer que se distraiga o que parezca desvergonzado.",
+      "Aprenden rápidamente, siempre les interesan las cosas nuevas; son creativos.",
+      "Son divertidos, inteligentes y no se resienten rápidamente; suelen perdonar y olvidar.",
+      "En sus relaciones interpersonales son atentos, afectuosos y divertidos."
+    ],
+    "improvents": [
+      "Pueden ser superficiales, desorganizados, enfocados solo en lo que los demás pueden pensar.",
+      "Suelen ser caprichosos y tener una tendencia hacia lo externo",
+      "Sucumben fácilmente a los halagos.",
+      "No piensan mucho las cosas y saltan rápidamente a conclusiones, pueden tomar decisiones precipitadamente.",
+      "Sus intereses pueden desvanecer rápidamente.",
+      "Pueden burlarse de los demás para llamar la atención."
+    ]
+  }
+]

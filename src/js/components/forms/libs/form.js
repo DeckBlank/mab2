@@ -8,6 +8,7 @@ function baseData(){
 
     //Schools
     schools: [],
+    ongSchools: [],
 
     //Form
     is_valid_form: true,
@@ -118,7 +119,7 @@ function baseWatch(){
     'schoolType.value': function(value){
       this.validateSelect(this.schoolType) 
 
-      if(value == 'privado'){
+      if(value == 'privado' || value == 'ongs'){
         this.getSchools(value)
       }
 
@@ -212,10 +213,30 @@ function baseMethods(){
       this.distritos = distritos[this.provincias[option.target.selectedIndex - 1].id_ubigeo]
     },
     getSchools: function(type, ugel){
-      if(type == 'privado'){
-        this.schools = require('../../../extras/schools/privates.json')
+      if (type == 'privado') {
+        this.schools = require('../../../extras/schools/privates.json');
+      } else {
+        this.schools = this.ongSchools;
       }
-    } 
+    },
+    getOngSchools: function(){
+      fetch(`${this.API}/schools?type=ong`,{
+          method: 'GET'
+        })
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            return res.json();
+          }else{
+            throw res
+          }
+        })
+        .then(schools => {
+          this.ongSchools = schools.map(sc => sc.school);
+        })          
+        .catch(err => {
+          throw err;          
+        })
+    },
   }
 }
 

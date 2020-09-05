@@ -25,16 +25,22 @@
     flex-grow: 1;
     overflow-y: auto;
   }
-}
 
-.c-modal.opened {
-  visibility: visible;
-  opacity: 1;
+  &--auto {
+    .c-modal__content {
+      height: auto;
+    }
+  }
 
-  .c-modal__content {
+  &.opened {
     visibility: visible;
     opacity: 1;
-    transform: translateY(0);
+
+    .c-modal__content {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 

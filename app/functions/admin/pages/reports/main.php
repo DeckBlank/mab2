@@ -73,6 +73,15 @@ class ReportsOptionPage {
 
             add_submenu_page(
                 'reports',
+                'Estilos de personalidad',
+                'Estilos de personalidad',
+                'manage_options',
+                'behaviour',
+                array( $this, 'create_admin_behaviour_page' )
+            );
+
+            add_submenu_page(
+                'reports',
                 'Cuestionarios de seguimiento',
                 'Cuestionarios de seguimiento',
                 'manage_options',
@@ -127,7 +136,12 @@ class ReportsOptionPage {
 
     public function create_admin_learning_page() {
         include_once __DIR__.'/assets/enqueue.php';        
-        include_once __DIR__.'/views/learning.php';
+        include_once __DIR__.'/views/tests/learning.php';
+    }
+    
+    public function create_admin_behaviour_page() {
+        include_once __DIR__.'/assets/enqueue.php';        
+        include_once __DIR__.'/views/tests/behaviour.php';
     }
     
     public function create_admin_questionaries_page() {

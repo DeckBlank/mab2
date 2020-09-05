@@ -1,0 +1,430 @@
+{
+  "ENFJ": {
+    "id": "ENFJ",
+    "title": "ENFJ",
+    "subtitle": "extraversión, intuición, sentimiento, juicio",
+    "vector": "4",
+    "features": [
+      "Entusiastas, optimistas, vitales, se esmeran en ayudar a los demás de forma muy comprensiva. Conscientes de las necesidades de los otros, sobre todo en el aspecto social. Altruistas y educadores visionarios.",
+      "Necesitan de un entorno armónico en el que puedan esmerarse por hacer algo por los demás. Muy conversadores. Prefieren tener los días llenos de muchas actividades que puedan compartir con mucha gente. Versátiles.",
+      "Viven persiguiendo sus objetivos, sus visiones filantrópicas, desde muy temprano, de manera responsable y tenaz. Acaban convirtiéndose en miembros admirados de la comunidad.",
+      "Tienden a recargarse de responsabilidades alrededor de las necesidades de los demás y a olvidarse de las propias. Se sienten orgullosos y fuertes dando, reconociéndose necesarios para los demás, y bastante incómodos cuando se trata de recibir, de pedir ayuda.",
+      "En lo académico suelen ser excelentes alumnos porque se esmeran en agradar al profesor. Gustan de asignaturas que valoren la cooperación entre los estudiantes, los trabajos de grupo, y que versen sobre humanidades.",
+      "A la hora de trabajar siguen prefiriendo los equipos, que fácilmente lideran. Son organizados, no pierden de vista los planes pactados, pero además los sazonan con sus visiones renovadoras.",
+      "Se mueven en ambientes ordenados.",
+      "Entre sus ocupaciones favoritas pueden estar: política, magisterio, carrera clerical, consejería, terapia, periodismo, tesorería.",
+      "No disponen de mucho tiempo de ocio porque no renuncian a ninguna responsabilidad ni a ningún reclamo solidario, sea en el trabajo, con la familia o entre los amigos.",
+      "En el amor son muy románticos e idealistas; poéticos. Si se enamoran se comprometen profundamente, y una de las cosas que más les duele es que su compañero falte a ese compromiso. <br><b>Ejemplos:</b> Abraham Lincoln, Abraham Maslow, Sean Connery, Gene Hackman, Mikhael Gorbachev."
+    ],
+    "improvents": [
+      "Tratan de agradar a demasiada gente y puede que acaben sin realmente gratificar suficientemente a nadie",
+      "Su idealismo puede cegarles la visión de los hechos reales y la valoración objetiva de las gentes y cosas con las que se comprometen.",
+      "Su conflicto entre idealismo y materialismo puede hacerles caer en unilaterales posturas románticas muy poco prácticas.",
+      "Barren demasiados conflictos debajo de la alfombra. La compulsiva necesidad de un entorno armónico y pacífico les hace perder la oportunidad de aprender de la discusión.",
+      "A veces prestan demasiada atención al trato relacional y demasiado poca a la tarea en sí y al objetivo que tienen entre manos."
+    ]    
+  },
+  "ENTP": {
+    "id": "ENTP",
+    "title": "ENTP",
+    "subtitle": "extraversión, intuición, pensamiento, percepción",
+    "vector": "3",
+    "features": [
+      "Tienen una mente rápida, hábil y sofisticada, ingeniosa, y les gusta demostrar a los demás que así es en efecto, en cualquier oportunidad. Divertidos, espontáneos y llenos de sentido del humor y de la broma. No soportan la rutina y necesitan retos y problemas nuevos a resolver, que les insten a hacerlo de una manera creativa y única.",
+      "Confían en el destino, y como cuando éste es adverso lo toman como un positivo reto, es por ello un tipo básicamente optimista que no se arredra ante ningún revés. “No hay mal que por bien no venga”.",
+      "Se impacienta mucho con la gente que es más lenta de mente que él.",
+      "Desde niños andan cuestionándose las verdades vitales y buscando maneras nuevas y mejores de hacer cualquier cosa. Lo diferente les es inspirador por principio.",
+      "Tienen mucha facilidad para convencer a los otros de participar en sus atrayentes proyectos, y en la madurez son personas capaces de inspirar a otras en sus vocaciones, de “hacer hombres”.",
+      "Son ávidos de conocimiento y no descansan de estudiar, aunque nunca elegirán sus temas de interés por seguridad ni por estabilidad, ni se sienten cómodos bajo ninguna tutoría o cátedra que no consideren que es brillante. Son muy competitivos ellos mismos y sólo respetan una autoridad cuando ésta es competente en su campo.",
+      "Prefieren elegir carreras llenas de posibilidades nuevas y de futuro tan prometedor como incierto, y estudiar las materias teóricas y conceptuales (pero con posibilidades de aplicación) más que las metodológicas y prácticas. Independientes e individualistas en sus horarios, plazos y métodos de aprendizaje.",
+      "Como sus objetivos a la hora de elegir carrera son flexibles, a cambios de dirección de último momento, su trayectoria a menudo es discontinua, en líneas quebradas. Su trayectoria estudiantil y laboral puede parecer indecisa, aunque en realidad no lo es.",
+      "Necesitan vocaciones y ocupaciones versátiles, muy flexibles de plazos y horarios, donde se dé permiso a su independencia, su arbitrio y su necesidad de auto responsabilidad hacia sus innovadores métodos y proyectos personales.",
+      "Necesitan un entorno laboral lleno de gente independiente y creativa y auto responsable de sus áreas. Como dirigentes alientan a los demás en su propia competencia y son capaces de inspirar profundamente a los otros con sus brillantes ideas de conjunto. Les gusta ser populares y admirados en sus cargos.",
+      "Su medio natural es la crisis.",
+      "Su ambiente no es convencionalmente ordenado ni estructurado aunque sigue una lógica interna que a menudo sólo conocen ellos.",
+      "Son a menudo inventores, promotores, programadores, analistas de sistemas, artistas de vanguardia, periodistas de guerra, jugadores de bolsa, psicoterapeutas y médicos de tendencia alternativa, relaciones públicas, comerciales, etc.",
+      "Aman el ocio y los ratos libres y les gusta abordar esos momentos sin compromisos previos ni ninguna actividad planificada.",
+      "Se suelen enamorar a primera vista y por un golpe de casualidad o sexto sentido. Suele ser muy competitivo con la pareja también. <br><b>Ejemplos:</b> Alejandro Magno, Walt Disney, Edison, Lewis Carrol, Hitchcock."
+    ],
+    "improvents": [
+      "A veces por su necesidad de brillo y competitividad crean modelos y defienden trabajos que son un tanto apresurados, más por su arrogancia que por la validez real de éstos.",
+      "Confían plenamente en su intuición y sus inspiraciones inmediatas, y eso les hace presentarse ante los demás con visiones e “ideas perfectas” que en realidad aún no se han afinado lo suficiente y con las que pretenden convencer a los demás obstinadamente.",
+      "Su incapacidad para abordar plazos realistas y comprometidos hasta el final es el motivo de muchas deficiencias de éxito en la vida. El aspecto pasional emocional los puede encadenar a adicciones severas o a alguna relación destructiva."
+    ]    
+  },
+  "ENTJ": {
+    "id": "ENTJ",
+    "title": "ENTJ",
+    "subtitle": "extraversión, intuición, pensamiento, juicio",
+    "vector": "2",
+    "features": [
+      "Excelentes planificadores, organizadores y logistas que trabajan con ahínco por hacer realidad sus proyectos. Necesitan estar al mando.",
+      "Desde pequeños viven poniéndose metas, ya sea en los deportes, los estudios o incluso los juegos. Son perseverantes y se esfuerzan lo necesario para afrontar proyectos a largo plazo. Muy responsables de sí mismos, también saben hacerse cargo de los demás. Es probable que desde pequeños sean líderes tanto en la escuela como en las tantas actividades extraescolares en las que gustan participar.",
+      "Buscan el puesto de mando de frente, con franqueza.",
+      "Afrontan las tareas con una prolija planificación y son muy conscientes de plazos y agendas. Como se mueven bien comprometiéndose a plazo largo, no es raro que elijan una carrera y una meta en la adolescencia y que sigan ese mismo plan por años hasta culminarlo en la madurez.",
+      "Se embarcan en los estudios con la visión clara de que son un escalón necesario en su proyecto global de vida, y se interesan mucho por la planificación de los exámenes, los programas de estudio y todo lo referente a la estructuración y el método. Prefieren un entorno académico ordenado y previsible.",
+      "Son excelentes en momentos de crisis, pues son resolutivos cuando nadie más lo es capaz de ser. Toman las riendas, aplican toda su estrategia y competitividad.",
+      "Necesitan rodearse de colaboradores eficientes y auto responsables de sus tareas.",
+      "Ocupaciones populares: administrador, gerente, ejecutivo, político, consultor, abogado, banquero, empresario, comercial.",
+      "Como ya apuntamos, no entienden qué significa entretenerse en tiempo libre. Estar sin hacer nada les es repulsivo. Para ellos el tiempo debe estar ocupado y estar empleado en un fin constructivo.",
+      "Puede ser el típico padre que empuje a sus hijos hacia una vocación que a él le quedó pendiente, esperando de ellos que en el futuro alcancen esa meta que él no consiguió.",
+      "En el amor son menos espontáneos y arrebatados. Intentan que la pasión no les desborde y que la pareja quede incluida entre las mejoras y complementos del plan general vital.",
+      "Cuando el pacto de pareja no funciona, cuando siente que ésta ya no es un valor rentable, se va sin más problema de la relación. Pero si es él el desdeñado, puede que se sienta frustrado y fracasado a unos niveles tan profundos que le sorprendan incluso a él mismo. <br><b>Ejemplos:</b> Margaret Thatcher, Bill Gates, Bernard Shaw, Napoleón, Carl Sagan."
+    ],
+    "improvents": [
+      "En su testarudez por la consecución de sus planes y sus metas pueden llegar a ser dictatoriales y muy desconsiderados con los demás.",
+      "Generalmente no sienten demasiada empatía hacia los débiles, incluidos quizás hasta sus hijos.",
+      "No tienen buen perder, y por ello tardan mucho en aceptar que un plan les ha fracasado.",
+      "Puede que se propongan perseguir sueños utópicos, desperdiciando quizás así toda la vida en un proyecto.",
+      "No soportan las críticas y en momentos de estrés pueden atacar furiosamente a quien ponga en entredicho su capacidad."
+    ]    
+  },
+  "ENFP": {
+    "id": "ENFP",
+    "title": "ENFP",
+    "subtitle": "extraversión, intuición, sentimiento, percepción",
+    "vector": "1",
+    "features": [
+      "Promotores de cambio, de innovación. Viven persiguiendo el futuro.",
+      "No les gusta estar a solas.",
+      "Son muy cálidos, encantadores, acogedores y especialmente dotados de sentido del humor y divertidos. Comprensivos, empáticos, serviciales y animadores natos.",
+      "Necesitan desenvolverse en contextos flexibles y muy abiertos donde quepa su espontaneidad.",
+      "Pueden adoptar una postura intelectual, seria y rigurosa, con respecto a cualquier asunto, y de repente quebrar esa actitud con un arrebato cómico, divertido, infantil y salvaje.",
+      "Desde pequeños son muy curiosos, se interesan por todo alrededor y siempre están poniendo en práctica su imaginación.",
+      "Son muy susceptibles a las opiniones de sus íntimos.",
+      "Como siempre están abiertos a muchas posibilidades, les cuesta mucho decidirse por una carrera académica larga, un trabajo estable o un lugar de vida donde echar raíces, y si lo hacen demasiado pronto, lo normal es que se cansen y lo abandonen todo para probar una posibilidad diferente.",
+      "Las asignaturas versátiles, investigadoras, llenas de alternativas de aprendizaje y de calificación abierta son las que más le interesan. Sin embargo, es fácil que aún con este entusiasmo les falte la constancia y el compromiso necesario con la rutina para acabar el trabajo completo.",
+      "Necesitan trabajar en algo que exija variedad, novedad y desafío, en lo que no estén solamente por el dinero, y donde el entorno sea amistoso y lleno de gente entusiasta con lo que hace.",
+      "No son ordenados, pero saben entenderse con su caos y hacer de él materia prima para lo espontáneo y creativo.",
+      "Entre sus ocupaciones favoritas están: periodista, actor, maestro, médico, asistente social, relaciones públicas, sociólogo, antropólogo.",
+      "Su estado vital normal es el de estar enamorado, es decir, entusiasmado y apasionado por los ideales que le interesan, así que este mismo apasionamiento se extiende y ensalza cada vez que conoce a alguien que le toca en el corazón, y se siente muy cómodo en ese estado.",
+      "Rompen cuando los fallos de la relación le resultan demasiado evidentes o, si se aburren de una situación cerrada y agotada y necesitan saltar a otra. <br><b>Ejemplos:</b> Franz Joseph Haydn, Mark Twain, Robin Williams."
+    ],
+    "improvents": [
+      "Pueden ahogarse en un mar de intuiciones, donde no son capaces de establecer prioridades.",
+      "A menudo fallan en su responsabilidad de cumplimentar las tareas, dilapidando energía que finalmente no acaba logrando ningún fin.",
+      "Es incapaz de ser realista, teniendo imaginación idealista y previsión optimista.",
+      "En estado de estrés se vuelve fácilmente hipocondríaco con cualquier síntoma corporal, que sobrevalora."
+    ]    
+  },
+  "ESFJ": {
+    "id": "ESFJ",
+    "title": "ESFJ",
+    "subtitle": "EXTRAVERSIÓN, SENSACIÓN, sentimiento, juicio",
+    "vector": "4",
+    "features": [
+      "Amantes de las celebraciones, los festejos y las reuniones cálidas, sobre todo si son dentro de un marco tradicional y colectivo. Les encanta que sus emociones sean reconocidas por el público y convertirse en el centro de atención. El sentido de sus vidas gira en torno al servicio y la ayuda al prójimo de su interés, intentando crear siempre para la gente que aman un entorno armonioso. Profundamente empáticos, necesitan ser necesitados y son muy orgullosos de dar, a menudo creyendo que jamás van a agotarse en la entrega.",
+      "Su entorno favorito es un medio estructurado y convencionalmente seguro donde prime el valor de la simpatía y la compasión.",
+      "Finos receptores de los estados anímicos del prójimo, incluso mejor que los suyos propios, impulsivamente se adaptan a ellos entregando en la relación lo que sea necesario para agradar.",
+      "Atentos vigilantes y protectores de los otros, jamás bajan la guardia ante posibles peligros de los que siempre están prestos a defender a las personas que aman.",
+      "Excelentes padres y madres en el hogar, gente con la que se puede contar para cumplimentar compromisos en el resto de áreas vitales también.",
+      "Uno de sus mayores miedos es el abandono, ya desde pequeños buscan agradar a los mayores para sentirse aceptados y acompañados y con la seguridad de que hacen lo correcto.",
+      "Se sienten muy cómodos en toda relación familiar, académica o laboral donde la gente se porta de manera cálida, amistosa y delicada. De hecho, buscan siempre convertir todas las relaciones, incluso las académicas o laborales en relaciones lo más íntimas y cálidas posible de amistad.",
+      "Necesitan reglas seguras y claras provenientes de la autoridad.",
+      "Sus amigos acuden a ellos con sus problemas por su gran capacidad de escucha, atención y acompañamiento.",
+      "Prefieren seguir en lo vocacional caminos ya abiertos y seguros convencionalmente, y sobre todo si en su entorno y en su grupo fraternal son los valorados y escogidos popularmente. Sus vidas suelen tener un trazado tradicional.",
+      "Para aprender necesitan del cariño de los profesores y de un plan de estudios bien estructurado que explicite con claridad a qué atenerse, qué se exige y qué se entrega como objetivo final. Trabajan muy bien en equipo y suelen ser dóciles con las tareas escolares. Prefieren las asignaturas humanísticas y prácticas y mucho menos las teóricas y abstractas.",
+      "En el trabajo son prolijos, ordenados y enfocados más a los valores humanos que a la producción. Su rendimiento aumenta cuanto más claros son los objetivos y la planificación.",
+      "La improvisación creativa no es su fuerte, pero sí lo es hacerse cargo de problemas y organizar a la gente allí donde otros no se atreven, si están en un cargo de autoridad.",
+      "Se sienten bien en ocupaciones como maestros, enfermeros, secretarios, médicos de cabecera, terapeutas, selectores de personal, etc.",
+      "En el amor son cálidos, comprometidos, leales, entregados y detallistas, y tendentes siempre a agradar al otro, como es su estilo preferencial para cualquier forma de relación. Son guardianes del compromiso establecido a veces más allá de lo conveniente, y pueden llegar a serle leales al matrimonio como institución más tiempo que al cónyuge. <br><b><br><b>Ejemplos:</b></b> Helena de Troya, María Magdalena. Ficción: el personaje Nora de “Casa de Muñecas” de Ibsen, Scarlett O ́Hara en “Lo que el viento se llevó”."
+    ],
+    "improvents": [
+      "Su aversión a los conflictos tiende a barrer los problemas debajo de la alfombra, usando el mecanismo de la represión.",
+      "Es el tipo que más capacidad de compasión tiene por los demás y por eso puede perder mucha introspección necesaria para escuchar sus propios sentimientos.",
+      "Los “debe” tradicionales, familiares, sociales, pueden formar un cúmulo de prejuicios exigentes y autoritarios que son sobrecargados a sus íntimos en algunos casos, creando caracteres tozudamente faltos de perspectivas y de precisamente, falta de empatía para las actitudes menos convencionales y especiales del prójimo."
+    ]    
+  },
+  "ESFP": {
+    "id": "ESFP",
+    "title": "ESFP",
+    "subtitle": "EXTRAVERSIÓN, SENSACIÓN, sentimiento, percepción",
+    "vector": "1",
+    "features": [
+      "Siempre pendientes de lo novedoso, de lo más actual, de lo más chic y lo más fashion, su preocupación es la gente y son excelentes contadores de historias y anécdotas sobre la gente. Divertidos, personas de fiesta, perfectos anfitriones preocupados por entretenerse ellos y entretener a los demás. Ayudan al prójimo, son generosos y abiertos con los otros, con una conciencia que casi dice que es mejor en cualquier caso dar que recibir. Quieren caer simpáticos y gustan de llamar la atención en los grupos.",
+      "Se deleitan en las sensaciones y percepciones del presente, y son capaces en ese ámbito del aquí y ahora de descubrir detalles que a otros tipos les pasan desapercibidos.",
+      "Gozan de excelente buen humor, y es difícil que se depriman pues casi cualquier cosa les entusiasma. Suelen cometer locuras adolescentes, y aman armar ruidos y organizar festejos con cualquier excusa.",
+      "Son gente muy preocupada por el bienestar de los otros a través de su sentimiento introvertido y es normal que formen parte de organizaciones de ayuda humanitaria. Les gusta expresar sus sentimientos, ya sea de palabra o con regalos, que seleccionan con fineza personal.",
+      "Su sitio se encuentra cara al público, animando a todos con su sonrisa y enseñando a los demás a no tomarse nada demasiado en serio. Bromistas natos, gustan animar todas las celebraciones con una nota de humor.",
+      "Tienen una curiosa facilidad para entenderse con personas de todas edades, no importa la edad que ellos mismos tengan. Gustan de hacer amigo a cualquier persona que se van topando; no pasan tiempo a solas.",
+      "En sus proyectos tienen en cuenta el lado práctico, los resultados tangibles, pero aún más la armonía entre las personas implicadas en ellos. Como todo Perceptivo, se adapta a cualquier sorpresa y cambio de plan.",
+      "Prefieren las asignaturas prácticas y aprender en grupo, siendo muy importante para ellos la calidad y calidez humana del profesor, tanto como el valor de la asignatura. Se disgustan en las discusiones intelectuales y se impacientan con los conceptos teóricos. Se distraen con el entorno y no son concentrados. Son mucho más prácticos que teóricos, pueden preferir abandonar estudios para trabajar directamente.",
+      "Se desenvuelven a sus anchas en trabajos donde puedan expresar todas sus cualidades de entusiasmo, espíritu de cooperación y de unión en equipo. Se sienten muy bien motivando a los demás en sus puestos de trabajo como embajadores del buen ánimo y disposición.",
+      "Les es muy importante el entorno físico también de su lugar laboral así que se preocupan mucho de su decoración y ornamento.",
+      "Gustan de trabajos prácticos y preferentemente de cara al público: jardinería, hostelería, azafata, artista de variedades, teatro, enfermería, medicina, etc.",
+      "Para el ocio prefieren ir a fiestas, al cine con amigos, espectáculos, hacer manualidades o practicar deporte, el jardín, la cocina. Gustan de leer artículos actuales, más que libros pesados, y comentar lo que leen con el entorno.",
+      "Cuando no se sienten cómodos en una relación, con su aversión a los conflictos, cortan con rapidez. No se arriesgan demasiado porque como todos los Sentimentales, temen profundamente el rechazo.",
+      "Cuando se rompe la relación, prefieren mantener amistad con el ex y refugiarse en los amigos para no prestar demasiada atención a los sentimientos dolorosos. <br><b>Ejemplos:</b> San Marcos apóstol, Elvis Presley, Pablo Picasso, Bill Clinton."
+    ],
+    "improvents": [
+      "Buena parte de las carencias de este tipo vienen de su posible excesiva extraversión, con una exagerada y demasiado dispersa vida social.",
+      "También un optimismo demasiado subjetivo y parcial les puede incapacitar para abordar la realidad de los hechos y entender su lógica profunda. La verdad no es siempre agradable ni placentera, y también hay que saber aceptarla como tal.",
+      "La carencia de facilidad teórica y sistemática les hace perderse en datos empíricos y prácticos y ser incapaces de apreciar el punto de vista general y más amplio.",
+      "El estricto aquí y ahora, les incapacita para actuar con una mínima planificación y previsión."
+    ]    
+  },
+  "ESTJ": {
+    "id": "ESTJ",
+    "title": "ESTJ",
+    "subtitle": "EXTRAVERSIÓN, SENSACIÓN, PENSAMIENTO, juicio",
+    "vector": "2",
+    "features": [
+      "Es una persona activa y hacendosa, planificadora, responsable y aplicada. Su mente es organizada y calculadora, previsora, y se basa en premisas sensatas y tradicionales. Valora los resultados obtenidos y le gusta plantearse metas productivas. Usa el análisis y la lógica para afrontar todos los aspectos de sus vidas.",
+      "Se sienten a gusto en entornos estructurados, lógicos y prácticos. Son obedientes a las reglas, e incluso pueden llegar a ser rutinarios.",
+      "Aman las celebraciones tradicionales, como los cumpleaños y fiestas, y disfrutan de reconocimiento social.",
+      "Tiene cualidad de líder y ocupa esa posición frecuentemente.",
+      "Para entenderse con los demás necesitan que éstos sean claros y suficientemente prolijos en sus declaraciones.",
+      "Asumen responsabilidades desde muy pequeños, y también desde muy pronto comienzan a preparar su plan vital, enfocando su carrera y su meta de vida. Sus metas prácticas, ordenadas y realistas, las siguen con tenacidad desde el principio hasta el final, y cambian con mucha dificultad de camino y recorrido.",
+      "Son personas de agenda, horarios, compromiso, constancia y confiabilidad. Excelentes trabajadores, suelen serle fieles a la empresa toda la vida, a su comunidad, o su Iglesia. Por ello son siempre miembros admirados y necesarios en su entorno social Prefieren tener una agenda repleta de actividades que quedarse demasiado rato a solas con ellos mismos.",
+      "Les gusta estudiar asignaturas prácticas y realistas, y su intelecto se encuentra cómodo con aprendizajes técnicos, nunca demasiado teóricos. Son muchísimos más hábiles con los hechos y datos que con los conceptos generales. Estudiar de memoria les gusta. Necesitan un plan de estudios confiable y seguro, sin sorpresas y con métodos y metas claras.",
+      "Como líderes, posición que ocupan a menudo, velan más por el cumplimiento de las tareas pendientes y la productividad que de las personas y el buen ambiente laboral, por su preferencia pragmático-intelectual. Son directos y claros en las órdenes, intentando dejar poco hueco a la imaginación y lo espontáneo del empleado.",
+      "Entre las ocupaciones favoritas tenemos: funcionarios, agentes de seguros, jueces, gerentes, militares, profesores técnicos, etc.",
+      "En el amor dan y exigen constancia, compromiso y lealtad. Ofrecen a su pareja seguridad económica, estabilidad práctica, y aunque enamorados pueden ser muy espontáneos y divertidos, a veces se les echa en falta un poco de sentimentalismo romántico en sus relaciones. Se preocupan más por la familia como empresa que por los problemas personales de su esposa o hijos. No aceptan bien las rupturas, porque ellos siempre consideran que si hay buena base, merece la pena seguir luchando para superar las malas rachas con tenacidad. Si a pesar de todo la ruptura se produce en contra de su voluntad, prefieren reprimir sus sentimientos y volcarse en la vida práctica para seguir adelante. <br><b>Ejemplos:</b> John D. Rockefeller, Colin Powell, Isabel I de Inglaterra."
+    ],
+    "improvents": [
+      "Son testarudos en sus planificaciones y se empeñan en seguir adelante con sus métodos. A menudo toman decisiones rígidas demasiado apresuradamente, por su estilo rápido y directo, que luego no son capaces de revocar.",
+      "Son personas de principios tan sólidos, que esa misma virtud, se les convierte a menudo en condena y prisión.",
+      "Son poco hábiles en las relaciones con los demás, a menudo muy impersonales, y crean mal ambiente en su entorno cuando sólo están pendientes de las técnicas y resultados y no del agrado sentimental de sus compañeros o empleados. Reprime tanto los sentimientos en pos del deber, que cuando estalla una chispa emocional, puede que se inflame entero."
+    ]    
+  },
+  "ESTP": {
+    "id": "ESTP",
+    "title": "ESTP",
+    "subtitle": "EXTRAVERSIÓN, SENSACIÓN, PENSAMIENTO, percepción",
+    "vector": "3",
+    "features": [
+      "Es una persona de tipo pragmático, realista y muy tendente a la acción. Gusta de solucionar cosas ingeniosamente de manera improvisada, buscando siempre las salidas más cómodas y placenteras para los problemas.",
+      "Les gusta estar donde hay acción y participar de ella. Les gusta hacerse notar y estar en el centro del grupo como ganador y fuerte. Son competitivos y la debilidad les parece especialmente detestable.",
+      "No les gustan las ataduras ni los compromisos responsables, y prefieren tener siempre libertad para moverse a su antojo.",
+      "Son personas cargadas de energía que practican deportes duros a menudo y siempre en compañía de un grupo nutrido de amigos.",
+      "No gustan del colegio, especialmente en las asignaturas teóricas. Prefieren cumplir con lo mínimo necesario en lo que no les agrada para guardar todo el tiempo y energía que puedan y ponerla a disposición de sus preferencias o pasatiempos preferidos.",
+      "El trabajo remunerado les gratifica, pues es una actividad práctica directamente redituada, especialmente si les deja tiempo para sus diversiones y deportes y les paga lo suficiente para enriquecer éstos. Puede ser un tipo materialista.",
+      "No suelen tener planes de futuro ni universitario ni profesional, y alcanzan estas posiciones de madurez casi de casualidad, a menudo por seguir a su grupo de amigos o apoyos fortuitos meramente. Esto no tiene por qué significar falta de carácter, sencillamente es un tipo perceptivo, y abierto a la contingencia y lo fortuito, el fluir vital casual.",
+      "Prefieren los trabajos con cierto toque de reto (físico, intelectual, financiero), que le den la capacidad de destacar y que produzcan los dividendos más altos por el mínimo esfuerzo. Son mansos con las reglas del juego pero les gusta llegados a un punto usar su creatividad, que les nace del intelecto introvertido.",
+      "Como jefes son especialistas en aplicar soluciones inmediatas, en solventar problemas de manera práctica y no les importa mucho saltarse para ello quizás algunos reglamentos teóricos. Organizará su entorno siempre de manera que lo útil esté por encima de lo conceptualmente correcto.",
+      "No son especialmente ordenados.",
+      "Preferencias laborales: mecánicos, policías, bomberos, artesanos, pero con un sesgo más mercantilista: vendedor, investigador de mercado, etc.",
+      "Eligen como pareja a alguien con quien puedan realizar una unión práctica y con capacidad de divertirse con ellos. Aman los placeres de la vida y el amor debe convertirse en una fuente más de ellos.",
+      "Los sentimientos son su lado débil, precisamente porque son muy fuertes y asertivos, hasta agresivos, en las relaciones, y eso puede acabar repeliendo al cónyuge.",
+      "Aceptan los finales con practicidad y rápidamente intentan reorganizar su vida. <br><b>Ejemplos:</b> Ernest Hemingway, Jacob (hermano de Esaú), Simón Pedro apóstol, Jack Nicholson, Winston Churchill, Madonna."
+    ],
+    "improvents": [
+      "La necesidad de riesgo e improvisación puede llevarles a despreciar las actividades necesarias rutinarias, las cuales también abandonan si un problema excitante les reclama la atención.",
+      "El materialismo a veces los superficializa mucho, y les hace incapaces de apreciar otros valores en los demás y en ellos mismos.",
+      "Su falta de tacto y su talante agresivo y competitivo en las relaciones también es una fuente de constantes decepciones y problemas."
+    ]    
+  },
+  "INFJ": {
+    "id": "INFJ",
+    "title": "INFJ",
+    "subtitle": "intraversión, intuición, sentimiento, juicio",
+    "vector": "4",
+    "features": [
+      "Fuertemente idealistas, viven enfocados en el futuro cumplimiento de sus sueños. Están volcados en la comprensión de sí mismos y de los mecanismos de funcionamiento de la psique humana en general.",
+      "Son compasivos, sentimentales, y prefieren ejercer su influencia sin alborotos.",
+      "Gustan que sus acciones y trabajos hablen por ellos, y que sean reflejo de su honestidad.",
+      "Necesitan soledad y concentración a menudo en sus ideales e inspiraciones, aunque también sentir pertenencia a un grupo.",
+      "Odian la violencia. Siempre abogan por el entorno relacional armonioso.",
+      "Son desconfiados, y su aguda perspicacia psíquica les hace conocer muy pronto toda segunda intención con la que se les arrimen los otros.",
+      "Se encuentran muy a gusto desarrollando sus cualidades intelectuales, en las cuales no desprecian ni lo teórico ni lo complejo.",
+      "Son perseverantes, y nunca olvidan “su misión”, aunque temporalmente se tengan que dedicar a trabajar en otros asuntos.",
+      "Suelen ser buenos estudiantes, se interesan por lo que dice el profesor. Cumplen bien con las tareas, y prefieren las asignaturas de investigación.",
+      "Eligen pronto su carrera y se dedican a ella, así como diligentemente se enfocan en su futuro estilo de vivir, en todas las vertientes.",
+      "No son especialmente ordenados en lo externo, pero pulcros y bien compartimentados en lo interno. Necesitan tener en orden sus ideas y prioridades internas, y luego ordenan lo de afuera.",
+      "No es difícil que por su confiabilidad, perseverancia, entrega y arrebato idealista lleguen a posiciones de liderazgo.",
+      "Entre sus ocupaciones más frecuentes están las de pastor espiritual, asesor educativo, profesor de lengua, psicólogo, asistente social, bibliotecario, articulista, escritor, etc.",
+      "Prefieren una relación profunda a muchas superficiales. No son muy expresivos de la intensidad de sus sentimientos por el otro, que a menudo perciben aún mejor a solas.",
+      "Se sienten muy responsables de la relación, y cuando se rompe, pueden retrotraerse a su mundo interior donde sobre analizan los motivos del fracaso. <br><b>Ejemplos:</b> Goethe, Martin Luther King, Gandhi, Shirley McClain."
+    ],
+    "improvents": [
+      "La tenacidad y perseverancia de sus ideales puede convertirse en testarudez y darse de narices con la realidad de los hechos.",
+      "Su desconfianza y su miedo a la traición a veces los aísla de otras personas y recursos que les son necesarios en la consecución de sus metas.",
+      "Su necesidad de llevarse bien con los demás y de paz a veces hace que se llene de ira reprimida por no expresar sus críticas y sus propios puntos de vista."
+    ]    
+  },
+  "INFP": {
+    "id": "INFP",
+    "title": "INFP",
+    "subtitle": "intraversión, intuición, sentimiento, percepción",
+    "vector": "1",
+    "features": [
+      "Gente de valores profundos y que lucha por sus ideales, aunque de manera apacible.",
+      "Trabajan tenaz y tranquilamente por lo que les interesa, relacionándose con los demás con buen sentido del humor.",
+      "No les interesan los conflictos, incorrecciones, fallas mundanas y cotidianas a resolver.",
+      "Optimistas, sienten que siempre ganará la parte luminosa de la Humanidad si nos empeñamos todos seriamente en ello. Ven bondad esencial y se compadecen de cualquier persona, animal o cosa por antipática que sea.",
+      "Desde pequeños tienen su mundo de fantasía que para ellos es tan real como lo más tangible.",
+      "Se pierden en sus ensoñaciones, sus pensamientos y sus libros. Suelen desarrollar dotes para la escritura. Su estilo es poético, artístico.",
+      "Reservados y tímidos, gustan de resolver sus problemas a solas sin importunar a los demás.",
+      "Autosuficientes, prefieren no pedir ayuda. Tienen un carácter independiente y de valores propios y seguros desde muy pronto.",
+      "A pesar de su independencia, no se desligan de sus familias demasiado y retornan de vez en vez al entorno hogareño.",
+      "No se rinden fácilmente, aunque con su carácter están abiertos a modificar el rumbo y seguir las corazonadas aunque éstas cambien de objetivo visible.",
+      "Pasan mucho tiempo hasta encontrar, después de muchos intentos, su trabajo y su compañero óptimo, porque son muy idealistas y perfeccionistas en esos ideales.",
+      "Estudian y trabajan mejor en ambientes flexibles, y gustan de ir siempre más allá de la ley y los deberes hasta aportar creatividad y novedad a las tareas.",
+      "Básicamente, les gusta hacerlo todo a su estilo.",
+      "Necesitan darle un sentido superior a su trabajo que no sea el mero sueldo. Son muy perfeccionistas y les resulta muy difícil terminar un proyecto.",
+      "La posición de líderes les disgusta, y si tienen que dirigir, lo hacen de manera sutil, persistente, teniendo en cuenta los objetivos tanto como la influencia en los demás.",
+      "No son ordenados más que en casos excepcionales y en trabajos que necesitan una buena organización para cumplir los objetivos óptimos. En general son despistados.",
+      "Entre sus ocupaciones favoritas están: profesor de bellas artes, escritor, sociólogo, educador religioso, asistente social, psicólogo, lingüista, abogado.",
+      "En sus hobbies son tan perfeccionistas como en todo lo demás, y no es raro que una afición sea la prolongación de su trabajo, o viceversa.",
+      "El amor es de profundo compromiso, al que tardan bastante en llegar porque también aquí buscan afanosamente que sus ideales se hagan realidad.",
+      "Cuando la relación se rompe, se deprimen pero no suelen comentarlo con los demás. <br><b><br><b>Ejemplos:</b></b> Homero, Virgilio, (Jesús de Nazareth), San Juan, San Lucas, Shakespeare, Longfellow, Carl Rogers, Isabel Briggs Myers. Ficción: E.T."
+    ],
+    "improvents": [
+      "Pueden absorberse y obcecarse tanto en sus sueños que pierdan de vista la objetividad, los puntos de vista de los demás y la realidad.",
+      "A menudo su misticismo les juega malas pasadas, restándoles practicidad y pragmatismo.",
+      "Como otros tipos sentimentales, pueden extraviarse de sí mismos ante su incapacidad de decir no.",
+      "Por su perfeccionismo y su carácter intuitivo-perceptivo, que le hace cambiar a menudo de proyecto ideal, suelen tardar mucho en madurar y terminar sus obras esenciales, en poner sus recursos internos en acción y producir resultados visibles."
+    ]    
+  },
+  "ISFJ": {
+    "id": "ISFJ",
+    "title": "ISFJ",
+    "subtitle": "introversión, SENSACIÓN, sentimiento, juicio",
+    "vector": "1",
+    "features": [
+      "Con gran capacidad de compasión y con tendencia a ayudar a los otros, están siempre conectados con el último grito de la moda y son por eso modernos vividores en el aquí y ahora riguroso, pero reservados, amables y a menudo modestos.",
+      "Su foco de servicio suele atender a causas sociales y a los grupos desfavorecidos, incluso destaca su compasión por los animales.",
+      "Les gustan los deportes y las bellas artes; los hombres pueden ser muy competitivos, aunque generalmente no es un tipo al que le guste destacar. Saben disfrutar de los momentos bellos de la vida.",
+      "Las normas y las convenciones estrictas le desagradan y prefieren libertad para elegir sus movimientos vitales. Tienen un código de valores propio, individual.",
+      "Su estilo de entrega y vida es día a día, sobre todo en situaciones de alerta y estrés.",
+      "Son muy poco tolerantes con las disensiones y las discusiones, y tienden a intentar mediar en las peleas de su entorno, en el papel de árbitro pacificador.",
+      "Se relacionan bien con los demás y son simpáticos miembros queridos dentro de un grupo.",
+      "Disfrutan una gran conciencia corporal, conocen bien su cuerpo, sus límites y sus posibilidades.",
+      "La familia, los amigos, las relaciones, son focos prioritarios de su interés.",
+      "No es raro que abandonen pronto los estudios, pero mientras permanecen prefieren asignaturas prácticas, de contenido realista y que sirvan para conocer a la gente y prestar servicio de los demás.",
+      "Buscan puestos de trabajo donde se valore la asistencia práctica humana rápida y se relajan en un ambiente de compañerismo armónico.",
+      "No son especialmente organizados ni ordenados, pero si tienen que serlo, entonces lo arreglan todo con el gusto y la gracia de una composición musical.",
+      "Encajan bien como músico, asistente social, enfermero, técnico de mantenimiento, técnico informático, fisioterapeuta, deportista, masajista, médico, compositor, etc.",
+      "Valoran mucho el tiempo libre y se dedican en él a los goces del momento. Las manualidades, la cocina, la pintura, la música, el deporte, son aficiones favoritas.",
+      "No son muy críticos con la pareja a quien aman, y a menudo ingenuamente se enamoran profundamente del mismo amor sin poder ver los defectos de la pareja.",
+      "No tienen reparos como perceptivos que son a cambiar de trabajo, ciudad o país para encontrarse con la persona que aman.",
+      "Cuando la pareja se desarma, suelen sentirse más culpables y analizar más sus propios errores que los de su ex compañero, y tardan un cierto tiempo en volver a recuperar las ganas y la confianza para volver a empezar. <br><b>Ejemplos:</b> Mozart, Spielberg, Michael Jackson, Paul McCartney."
+    ],
+    "improvents": [
+      "Su capacidad de entrega y servicio puede traicionarles y hacerles agotar todas sus fuerzas y recursos.",
+      "En su peor talante, pueden justificar con su moralidad individual actos de engaño y traición, falsedad a la que también apoya la necesidad de divertir y servir a los otros pasando por encima de la autenticidad de sus propias necesidades a menudo."
+    ]    
+  },
+  "INTP": {
+    "id": "INTP",
+    "title": "INTP",
+    "subtitle": "intraversión, intuición, pensamiento, percepción",
+    "vector": "3",
+    "features": [
+      "Son gente volcada en sus reflexiones sobre los por qué, los por qué no y sobre todo los para qué de las cosas. Piensan rápido, con claridad, y en los temas que les preocupan su concentración es intensa.",
+      "Matemático filosóficos por esencia, siendo su preocupación lo abstracto y conceptual, son buenos artífices lingüistas, pues el lenguaje es la herramienta principal del pensamiento.",
+      "Desde pequeños gozan más de sus pensamientos e imaginaciones que de la compañía de la gente. Sienten aversión natural a la moda y a los gustos colectivos, se interesan por las fábulas, lo misterioso, lo paranormal.",
+      "Cuentan con la capacidad intensa de dedicar todo el tiempo y el esfuerzo posible a la investigación de un tema. Todo es realizado siempre por sí mismo, sin referencia a ninguna autoridad, y tener que dar explicaciones de sus actos les hastía profundamente.",
+      "Prefieren las asignaturas creativas, teóricas, y que les den opción a aglutinar ideas desde todos los ángulos hasta formar sistemas conceptuales propios.",
+      "Se interesan por vocaciones que exijan proyecciones complejas de sistemas generales e idealizaciones abstractas novedosas. Prefieren planificar a llevar a la práctica las cosas.",
+      "Siempre están rodeados de cierto desorden, y suelen tener excelentes ideas sobre organización del mundo, que no llevan a la práctica en sus vidas.",
+      "No es raro que les guste ocuparse de cosas tales como la biología (taxonomía), química, física, ingeniería, informática, psicología, abogacía y la escritura y la filosofía.",
+      "No existe distinción entre el mundo laboral, y el entretenimiento. Adora estar solo, leer, pensar y ver la televisión. Es normal que encuentre todo eso más divertido que la compañía humana.",
+      "Tienen un sentido del humor basado en el manejo de las palabras muy peculiar.",
+      "Los sentimientos y el mundo de la pareja son el flanco más débil de este tipo. Su función sentimental indiferenciada les hace amar o no amar con esa cualidad de todo o nada que tiene la emoción primitiva. <br><b>Ejemplos:</b> Sócrates, Descartes, Newton, Marie Curie, Jung."
+    ],
+    "improvents": [
+      "A menudo se centran más en la inconsistencia y los defectos de las otras personas, que en sus aspectos positivos, y sus juicios y críticas los alejan de los otros y a los otros de ellos.",
+      "Abundando en este conflicto, tienen muchos problemas relacionales porque suelen hacer críticas y comentarios impersonales.",
+      "Necesitan aprender el arte de la charla trivial, donde el énfasis esta puesto en la relación en sí y no en el intercambio intelectual.",
+      "Su perfeccionismo y autocrítica a veces les sume en profundas depresiones e inseguridades a pesar del éxito de sus trabajos.",
+      "En situaciones de estrés se dan a la gula, el exceso, en todo lo sensorial.",
+      "Sus emociones los traicionan muy a menudo."
+    ]    
+  },
+  "INTJ": {
+    "id": "INTJ",
+    "title": "INTJ",
+    "subtitle": "intraversión, intuición, pensamiento, juicio",
+    "vector": "2",
+    "features": [
+      "Dan la impresión de tener mucha confianza y seguridad en ellos mismos. Aunque para muchas áreas de su vida, especialmente las sentimentales, esto es justo al revés.",
+      "Su inspiración es lo novedoso, las posibilidades aún no desarrolladas y la fe en ellas independientemente de la opinión de los demás. Son creadores y constructores de sistemas.",
+      "Desde pequeños confían en su intuición y su pensamiento para establecer su conjunto de valores y creencias. Discuten y defienden con lógica sus posturas.",
+      "Como adolescentes pasan mucho tiempo enfrascados en libros y lo normal es que sean punteros como estudiantes. Desde pronto enfocan su energía en una carrera que instigue sus aspiraciones mentales y mantienen durante toda la vida su afán de seguir aprendiendo que ningún título obtenido le satisface ni concluye.",
+      "Les interesan las materias teóricas y abstractas que tengan que ver con principios universales. Excelentes autodidactas.",
+      "Generalmente las normas sociales y convencionales al estilo de la burocracia les impacientan.",
+      "Son planificadores y viven trazándose metas y proyectos a conseguir, que eclipsan el interés por todo lo demás en sus vidas.",
+      "No suelen consultar a nadie. Son muy críticos con ellos mismos y no son buenos ni recibiendo ni otorgando alabanzas, aunque sepan reconocer el aporte de los demás y lo respeten mucho cuando es brillante.",
+      "Cuando ocupan posiciones directivas, la tarea se impone a las relaciones interpersonales.",
+      "Entre sus preferencias laborales están la de analista de sistemas, programador de software, científico, ingeniero, juez, catedrático, y en general toda ocupación que se preocupe del desarrollo futuro.",
+      "En el ocio y los entretenimientos suelen ser tan disciplinados y aplicados como en el trabajo.",
+      "En la pareja es donde tienen su punto débil. Carecen de tacto y sociabilidad. No expresan sus sentimientos. Cuando se rompe la pareja se muestran hacia fuera impasibles e inexpresivos, mientras buscan la manera más lógica y sensata de salir del dolor. Pueden tardar mucho en recuperarse, y critican duramente a la pareja mientras se liberan del recuerdo. <br><b>Ejemplos:</b> César Augusto, Aníbal Barca, Jane Austen, C. S. Lewis, Eisenhower. Ficción: Gandalf (El señor de los Anillos), Rosencrantz y Guildenstern (Hamlet), Mr. Darcy (Orgullo y Prejuicio)."
+    ],
+    "improvents": [
+      "La persecución obsesiva de su utopía de futuro puede sacarlos de la realidad.",
+      "Pueden creer que su modo de vivir impersonal es el preferido también por los demás, y así ser muy secos en el trato con los otros, lo que conlleva aislamiento.",
+      "En situaciones de estrés pueden obsesionarse con detalles menudos."
+    ]    
+  },
+  "ISFP": {
+    "id": "ISFP",
+    "title": "ISFP",
+    "subtitle": "introversión, SENSACIÓN, pensamiento, juicio",
+    "vector": "4",
+    "features": [
+      "Es un tipo reservado, serio, responsable, trabajador, a menudo conservador y de mucho sentido común. Ordenado y estructurado, no habla hasta que no ha acumulado datos sensoriales, experimentales, suficientes, y está seguro de lo que va a decir.",
+      "Como introvertidos, pueden llegar a sentirse incómodos con las visitas y la gente nueva, y prefieren su “manojito” de amigos de siempre. Prefieren callarse y observar, y pueden dar la impresión de ser fríos y distantes por eso. La demostración afectiva no es su fuerte.",
+      "Se sienten sumamente cómodos en situaciones tradicionales y con reglas fijas, en las cuales tienden siempre a cumplir con su deber, con lo que se espera de ellos. Prefieren terminar las tareas necesarias antes de divertirse, y jamás dejarían una carrera o un proyecto a medio terminar.",
+      "No les gusta depender de otros, se esfuerzan por estudiar carreras que les vayan a proporcionar lo antes posible buenos trabajos. Adoran los rumbos fijos.",
+      "Ahorradores, responsables, metódicos, prolijos y realistas, se sienten felices en un entorno donde las cosas son como “deben ser”.",
+      "Aprenden paso a paso, lenta y estructuradamente, desconfiando de todo aprendizaje fácil, rápido o “demasiado divertido”. En general no confían en un método o un producto hasta que no ha sido probado y demostrado muchas veces. No mezclan el estudio con la diversión nunca y saben perfectamente en qué van a aplicar lo que están aprendiendo.",
+      "Son muy ordenados y saben manejarse con muchos datos concretos, pues todo lo tiene perfectamente archivado.",
+      "Aprecian la jerarquía y la autoridad tradicional, y cuando ellos ocupan puestos de jefatura, valoran por sobre todo los resultados prácticos, los hechos, la productividad, la eficacia, bastante por encima de la calidez de las relaciones y la armonía laboral.",
+      "Sus preferencias vocacionales se orientan hacia empleos donde prime el manejo y la valoración directa de hechos: contable, auditor, profesor de álgebra, oficial de policía, ingeniero mecánico, secretario, vendedor, hombre de negocios, etc.",
+      "En cuanto a lo amoroso: se casarán cuando estén listos para ello, cuando el proyecto práctico sea viable y cómodo para los dos, y no abandonarán el compromiso matrimonial por ningún capricho. Sus formas de demostrar compromiso y amor no son románticas, sino prácticas: traer dinero suficiente a casa, mantener el hogar limpio y ordenado, arreglar las averías puntualmente.",
+      "No suelen hablar con los amigos de sus problemas sentimentales, y sólo cuando ya no encuentran ninguna mínima razón para seguir es cuando aceptan la ruptura. <br><b>Ejemplos:</b> Tomás Apóstol, George Bush, Isabel II de Inglaterra."
+    ],
+    "improvents": [
+      "Este tipo puede llegar a obsesionarse por los detalles y lo cuantitativo. Puede llegar a valorar lo realizado sólo en pro de resultados económicos, dejando al margen el logro o la calidad humana y creativa.",
+      "Su falta de expresividad emocional puede llegar a ser un obstáculo entre él y los demás, incluida la familia, creando un muro de hielo a su alrededor.",
+      "Puede perderse en la letra pequeña muy a menudo, olvidando el sentido general de lo que está haciendo o está pasando a su alrededor."
+    ]    
+  },
+  "ISTJ": {
+    "id": "ISTJ",
+    "title": "ISTJ",
+    "subtitle": "introversión, SENSACIÓN, pensamiento, juicio",
+    "vector": "2",
+    "features": [
+      "Es un tipo reservado, serio, responsable, trabajador, a menudo conservador y de mucho sentido común. Ordenado y estructurado, no habla hasta que no ha acumulado datos sensoriales, experimentales, suficientes, y está seguro de lo que va a decir.",
+      "Como introvertidos, pueden llegar a sentirse incómodos con las visitas y la gente nueva, y prefieren su “manojito” de amigos de siempre. Prefieren callarse y observar, y pueden dar la impresión de ser fríos y distantes por eso. La demostración afectiva no es su fuerte.",
+      "Se sienten sumamente cómodos en situaciones tradicionales y con reglas fijas, en las cuales tienden siempre a cumplir con su deber, con lo que se espera de ellos. Prefieren terminar las tareas necesarias antes de divertirse, y jamás dejarían una carrera o un proyecto a medio terminar.",
+      "No les gusta depender de otros, se esfuerzan por estudiar carreras que les vayan a proporcionar lo antes posible buenos trabajos. Adoran los rumbos fijos.",
+      "Ahorradores, responsables, metódicos, prolijos y realistas, se sienten felices en un entorno donde las cosas son como “deben ser”.",
+      "Aprenden paso a paso, lenta y estructuradamente, desconfiando de todo aprendizaje fácil, rápido o “demasiado divertido”. En general no confían en un método o un producto hasta que no ha sido probado y demostrado muchas veces. No mezclan el estudio con la diversión nunca y saben perfectamente en qué van a aplicar lo que están aprendiendo.",
+      "Son muy ordenados y saben manejarse con muchos datos concretos, pues todo lo tiene perfectamente archivado.",
+      "Aprecian la jerarquía y la autoridad tradicional, y cuando ellos ocupan puestos de jefatura, valoran por sobre todo los resultados prácticos, los hechos, la productividad, la eficacia, bastante por encima de la calidez de las relaciones y la armonía laboral.",
+      "Sus preferencias vocacionales se orientan hacia empleos donde prime el manejo y la valoración directa de hechos: contable, auditor, profesor de álgebra, oficial de policía, ingeniero mecánico, secretario, vendedor, hombre de negocios, etc.",
+      "En cuanto a lo amoroso: se casarán cuando estén listos para ello, cuando el proyecto práctico sea viable y cómodo para los dos, y no abandonarán el compromiso matrimonial por ningún capricho. Sus formas de demostrar compromiso y amor no son románticas, sino prácticas: traer dinero suficiente a casa, mantener el hogar limpio y ordenado, arreglar las averías puntualmente.",
+      "No suelen hablar con los amigos de sus problemas sentimentales, y sólo cuando ya no encuentran ninguna mínima razón para seguir es cuando aceptan la ruptura. <br><b>Ejemplos:</b> Tomás Apóstol, George Bush, Isabel II de Inglaterra."
+    ],
+    "improvents": [
+      "Este tipo puede llegar a obsesionarse por los detalles y lo cuantitativo. Puede llegar a valorar lo realizado sólo en pro de resultados económicos, dejando al margen el logro o la calidad humana y creativa.",
+      "Su falta de expresividad emocional puede llegar a ser un obstáculo entre él y los demás, incluida la familia, creando un muro de hielo a su alrededor.",
+      "Puede perderse en la letra pequeña muy a menudo, olvidando el sentido general de lo que está haciendo o está pasando a su alrededor."
+    ]    
+  },
+  "ISTP": {
+    "id": "ISTP",
+    "title": "ISTP",
+    "subtitle": "introversión, SENSACIÓN, pensamiento, percepción",
+    "vector": "3",
+    "features": [
+      "Son realistas y muy desenvueltos en situaciones que requieren una actuación práctica y lógica inmediata.",
+      "Típicamente de pequeño desarma sus juguetes para ver cómo funcionan, pieza a pieza, y reúne toda la información que puede sobre los temas que le interesan. Coleccionista nato, no suele olvidarse de ninguno de los detalles de la información adquirida.",
+      "No se siente cómodo en estructuras cerradas, necesita espacio para su mundo de juegos y hobbies, que es donde se siente en casa. Por eso muchos acaban adoptando un trabajo que esté íntimamente relacionado con su afición favorita, que además les suele durar toda la vida.",
+      "No es hablador, aunque tiene un fino sentido del humor. Comparte con un pequeño grupo de amigos que suele tener las mismas inclinaciones que él.",
+      "Orientado a la acción práctica, es a menudo amigo de deportes de riesgo que le suban la adrenalina y que corporicen sus emociones. También como observador gusta de ser espectador de competiciones deportivas.",
+      "Están abiertos al acontecer y no gustan de hacer planes de futuro exhaustivos. Le encantan “los atajos”, y en el trabajo prefieren solucionar problemas a su estilo personal saliendo del paso, pero no estableciendo rutinas de solución organizada para nada.",
+      "Prefieren estudiar solos, solucionando los problemas sobre bases lógicas, a su propio ritmo y plazo. Su aprendizaje no depende de sus profesores, ni de la relación que tenga con ellos, sino de que la materia en sí les resulte aplicable a sus aficiones o no. Prefieren estudiar según sus criterios de importancia y efectividad, que no según los impuestos por la autoridad.",
+      "Gustan de trabajos con matiz técnico, con aplicación práctica inmediata. Ocupaciones típicas pueden ser las de instrumentista, fontanero, albañil, mecánico, granjero, y si incluyen un poco de riesgo, mejor, como policía o bombero.",
+      "En posiciones de autoridad es tan flexible con los subordinados como le gusta que sean con él, y dirige dando ejemplo, ni criticando ni retando a los demás.",
+      "En el amor es más realista que sentimental, suele expresar sus sentimientos en abundantes detalles pero no en palabras. Prefieren una pareja con la que compartir sus aficiones y su tiempo de ocio, o que al menos les deje libertad de hacerlo. Se adapta bien a los finales de relación, aunque se resisten a ello mientras no recopilen todas las evidencias de ruptura suficientes. <br><b>Ejemplos:</b> Woody Allen, Frank Zappa, Clint Eastwood. Ficción: MacGuiver."
+    ],
+    "improvents": [
+      "Este tipo puede ser excesivamente descuidado en su trabajo, cuando intenta por todos los medios zanjarlo lo antes posible para tener tiempo para sus hobbies. Puede carecer de una mínima disciplina y estrategia para dejar cumplimentadas sus responsabilidades.",
+      "También puede ser tan poco comunicativo que produzca la sensación de insensible, o incluso puede volverse hiriente cuando deja salir sus críticas."
+    ]    
+  }
+}

@@ -46,7 +46,7 @@ Vue.component('form-student',{
       </div>      
       <div
         class="input_container">
-        <label for="">Género</label>
+        <label for="">Sexo</label>
         <select 
           class="c-form-box__select school_type select-reset"
           :class="{ valid : gender.isValid }"

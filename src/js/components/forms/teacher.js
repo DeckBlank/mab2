@@ -37,7 +37,7 @@ Vue.component('form-teacher',{
       </div>
       <div
         class="input_container">
-        <label for="">Género</label>
+        <label for="">Sexo</label>
         <select 
           class="c-form-box__select school_type select-reset"
           :class="{ valid : gender.isValid }"
@@ -143,7 +143,7 @@ Vue.component('form-teacher',{
         <p v-if="!mobile.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Celular incorrecto</p>          
       </div>
       <div class="input_container">
-        <label for="">Tipo de colegio</label>
+        <label for="">Tipo de institución</label>
         <select 
           class="c-form-box__select school_type select-reset"
           :class="{ valid : schoolType.isValid }"
@@ -152,11 +152,12 @@ Vue.component('form-teacher',{
           <option disabled value="" selected>Selecciona una opción</option>
           <option value="privado">Privado</option>
           <option value="publico">Público / Curriculo nacional</option>                  
+          <option value="ongs">ONGs/Alianzas</option>                  
         </select>
         <p v-if="!schoolType.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
       </div>
       <div 
-        v-if="schoolType.value == 'privado' "
+        v-if="schoolType.value == 'privado' || schoolType.value == 'ongs'"
         class="input_container">
         <label for="">Colegio de trabajo</label>
         <select 
@@ -228,6 +229,7 @@ Vue.component('form-teacher',{
   },
   beforeMount(){
     this.getCountries();
+    this.getOngSchools();
   },  
   methods: {
     ...baseMethods(),

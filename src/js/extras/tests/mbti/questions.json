@@ -1,0 +1,785 @@
+[
+  {
+    "id": 1,
+    "title": "Eres... ",
+    "options": [
+      {"title": "fácil de llegar a conocer.", "credit": 1},
+      {"title": "difícil de llegar a conocer.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 2,
+    "title": "Para hacer un trabajo, prefieres...",
+    "options": [
+      {"title": "empezar pronto para terminar con tiempo de sobra.", "credit": 1},
+      {"title": "sentir la presión con la que se trabaja en el último momento.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 3,
+    "title": "Puedes...",
+    "options": [
+      {"title": "hablar fácilmente con casi cualquier persona tanto como tengas que hacerlo.", "credit": 1},
+      {"title": "tener mucho que decir sólo a ciertas personas o bajo ciertas condiciones.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 4,
+    "title": "Preferirías que te consideren…",
+    "options": [
+      {"title": "una persona práctica.", "credit": 1},
+      {"title": "una persona ingeniosa.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 5,
+    "title": "Si tuvieras que recaudar fondos en tu vecindario para alguna labor social, en la interacción con los demás serías… ",
+    "options": [
+      {"title": "breve y eficiente.", "credit": 1},
+      {"title": "sociable y amistoso.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 6,
+    "title": "Sueles ser…",
+    "options": [
+      {"title": "amigo de “mezclarse con todo el mundo”.", "credit": 1},
+      {"title": "más bien tranquilo y reservado.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 7,
+    "title": "Cuando un suceso imprevisto te obliga a dejar tu plan del día, tú… ",
+    "options": [
+      {"title": "te molestas por el cambio de planes.", "credit": 1},
+      {"title": "te adecuas a los nuevos planes con gusto.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 8,
+    "title": "Cuando lees por gusto, te gusta… ",
+    "options": [
+      {"title": "un estilo de expresión raro y original.", "credit": 1},
+      {"title": "que el escritor diga las cosas exactamente como las piensa.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 9,
+    "title": "¿Qué consideras mayor cumplido que te digan? Que eres… ",
+    "options": [
+      {"title": "una persona sensible.", "credit": 1},
+      {"title": "una persona siempre razonable.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 10,
+    "title": "Tiendes a mantener…",
+    "options": [
+      {"title": "una amistad profunda con muy pocas personas.", "credit": 1},
+      {"title": "un círculo amplio de amistades con muchas personas distintas.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 11,
+    "title": "¿Qué es más frecuente en tu caso?",
+    "options": [
+      {"title": "que tus sentimientos se impongan sobre tu razonamiento.", "credit": 1},
+      {"title": "que tu razonamiento se imponga sobre tus sentimientos.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 12,
+    "title": "Eres capaz de mantener indefinidamente una conversación…",
+    "options": [
+      {"title": "sólo con las personas que comparten tus intereses.", "credit": 1},
+      {"title": "con casi cualquier persona.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 13,
+    "title": "El hecho de seguir un programa… ",
+    "options": [
+      {"title": "te resulta atractivo.", "credit": 1},
+      {"title": "te entorpece.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 14,
+    "title": "Cuando comienzas un gran proyecto previsto para una semana… ",
+    "options": [
+      {"title": "te tomas tiempo para hacer una lista de las cosas importantes que hay que hacer y el orden de hacerlas.", "credit": 1},
+      {"title": "te lanzas a ello.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 15,
+    "title": "Al hablar con tus amigos… ",
+    "options": [
+      {"title": "les comentas asuntos personales en confianza.", "credit": 1},
+      {"title": "casi nunca dices algo que no desea que sea repetido.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 16,
+    "title": "Si fueras profesor, darías…",
+    "options": [
+      {"title": "cursos sobre cosas basadas en hechos.", "credit": 1},
+      {"title": "cursos que implicasen aspectos teóricos.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 17,
+    "title": "¿Qué actitud sería más habitual en ti?, la de…",
+    "options": [
+      {"title": "elogiar.", "credit": 1},
+      {"title": "culpar.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 18,
+    "title": "Sueles…",
+    "options": [
+      {"title": "expresar abiertamente tus sentimientos.", "credit": 1},
+      {"title": "guardar tus sentimientos para ti mismo.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 19,
+    "title": "Cuando te acuerda con suficiente anticipación que harás algo en un momento determinado, te parece…",
+    "options": [
+      {"title": "bien poder seguir tu plan de acuerdo con ello.", "credit": 1},
+      {"title": "un poco desagradable sentirte comprometida/o.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 20,
+    "title": "Te llevas mejor, por lo general, con…",
+    "options": [
+      {"title": "las personas imaginativas.", "credit": 1},
+      {"title": "las personas realistas.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 21,
+    "title": "¿Cuál crees que es un defecto peor? Ser… ",
+    "options": [
+      {"title": "poco comprensivo.", "credit": 1},
+      {"title": "irrazonable.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 22,
+    "title": "Cuando te ves observado por desconocidos…",
+    "options": [
+      {"title": "te sientes incómodo.", "credit": 1},
+      {"title": "no te importa en absoluto.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 23,
+    "title": "Si tuvieras que tomar una determinada medida ¿cuál de estas dos razones te parece más atractiva?",
+    "options": [
+      {"title": "hacer algo porque la gente desea mucho que lo haga.", "credit": 1},
+      {"title": "hacer algo porque es lo más lógico que puedo hacer.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 24,
+    "title": "Es un hábito mío:",
+    "options": [
+      {"title": "no confiar en nadie, o como máximo en una sola persona.", "credit": 1},
+      {"title": "tener una serie de amigos en los que confiar.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 25,
+    "title": "Prefieres…",
+    "options": [
+      {"title": "fijar fechas, fiestas, etc. con mucha anticipación.", "credit": 1},
+      {"title": "sentirte libre de hacer lo que te parezca más agradable cuando llegue el momento.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 26,
+    "title": "Crees que…",
+    "options": [
+      {"title": "preferirías dejar las cosas para la última hora.", "credit": 1},
+      {"title": "te sacaría de quicio dejar las cosas para última hora.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 27,
+    "title": "Crees que…",
+    "options": [
+      {"title": "todas las personas que te agradan saben que es así.", "credit": 1},
+      {"title": "has admirado a algunas personas durante mucho tiempo sin que estas lo sepan.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 28,
+    "title": "Al realizar algo que muchas otras personas hacen, te atrae más… ",
+    "options": [
+      {"title": "hacerlo en la manera convencional.", "credit": 1},
+      {"title": "inventar su propio método.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 29,
+    "title": "Crees que en una persona es peor…",
+    "options": [
+      {"title": "ser muy sentimental.", "credit": 1},
+      {"title": "no ser nada sentimental.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 30,
+    "title": "Cuando estás en un grupo de personas, preferirías…",
+    "options": [
+      {"title": "participar en la discusión del grupo.", "credit": 1},
+      {"title": "hablar con una sola persona por separado.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 31,
+    "title": "Cree que seguir una rutina diaria es… ",
+    "options": [
+      {"title": "una forma cómoda de hacer las cosas.", "credit": 1},
+      {"title": "difícil, incluso cuando sea necesario.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 32,
+    "title": "En tu estilo de vida, prefieres ser…",
+    "options": [
+      {"title": "original.", "credit": 1},
+      {"title": "convencional.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 33,
+    "title": "Te parece un peor defecto…",
+    "options": [
+      {"title": "mostrarse excesivamente cariñoso.", "credit": 1},
+      {"title": "no demostrar bastante cariño.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 34,
+    "title": "Entre tus amigos, eres…",
+    "options": [
+      {"title": "uno de los últimos en enterarse de lo que sucede.", "credit": 1},
+      {"title": "una fuente de información de todos.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 35,
+    "title": "Sueles… ",
+    "options": [
+      {"title": "dar más valor al sentimiento que a la lógica.", "credit": 1},
+      {"title": "dar más valor a la lógica que al sentimiento.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 36,
+    "title": "En las reuniones sociales…",
+    "options": [
+      {"title": "intentas arrinconar a alguien con quien te gusta hablar.", "credit": 1},
+      {"title": "te mezclas en el grupo.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 37,
+    "title": "Cuando tienes que hacer un trabajo especial, te gusta… ",
+    "options": [
+      {"title": "organizarlo detenidamente antes de empezarlo.", "credit": 1},
+      {"title": "averiguar lo que es necesario a medida que lo vas haciendo.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 38,
+    "title": "Sería mejor para ti si…",
+    "options": [
+      {"title": "tener una rutina.", "credit": 1},
+      {"title": "tener varias opciones.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 39,
+    "title": "En las fiestas…",
+    "options": [
+      {"title": "te aburres a veces.", "credit": 1},
+      {"title": "te diviertes siempre.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 40,
+    "title": "En tu vida hogareña, cuando llegas al final de alguna tarea…",
+    "options": [
+      {"title": "tienes claro lo que tienes que hacer luego y estás preparado para emprenderlo.", "credit": 1},
+      {"title": "te sientes contento relajándote hasta que se te ocurra lo que vas a hacer después.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 41,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Afirmación.", "credit": 1},
+      {"title": "Concepto.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 42,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Convincente.", "credit": 1},
+      {"title": "Conmovedor.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 43,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Hablar.", "credit": 1},
+      {"title": "Escribir.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 44,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Puntual.", "credit": 1},
+      {"title": "Sin apuro.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 45,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Construir.", "credit": 1},
+      {"title": "Inventar.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 46,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Aprobar.", "credit": 1},
+      {"title": "Preguntar.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 47,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Concreto.", "credit": 1},
+      {"title": "Abstracto.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 48,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Beneficios.", "credit": 1},
+      {"title": "Favores.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 49,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Tranquilo.", "credit": 1},
+      {"title": "Divertido.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 50,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Ordenado.", "credit": 1},
+      {"title": "Arreglado.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 51,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Literal.", "credit": 1},
+      {"title": "Simbólico", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 52,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Analizar.", "credit": 1},
+      {"title": "Lamentarse.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 53,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Producción.", "credit": 1},
+      {"title": "Diseño.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 54,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Blando.", "credit": 1},
+      {"title": "Duro.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 55,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Reservado.", "credit": 1},
+      {"title": "Tradicional.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 56,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Estructurado.", "credit": 1},
+      {"title": "Despreocupado.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 57,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Signo.", "credit": 1},
+      {"title": "Símbolo.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 58,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Serio.", "credit": 1},
+      {"title": "Cariñoso.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 59,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Aceptar.", "credit": 1},
+      {"title": "Cambiar.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 60,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Quién.", "credit": 1},
+      {"title": "Qué.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 61,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Programado.", "credit": 1},
+      {"title": "Improvisado.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 62,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Conocido.", "credit": 1},
+      {"title": "Desconocido.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 63,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Desconfiado.", "credit": 1},
+      {"title": "Confiado.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 64,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Hecho.", "credit": 1},
+      {"title": "Idea.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 65,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Suave.", "credit": 1},
+      {"title": "Firme.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 66,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Base.", "credit": 1},
+      {"title": "Columna.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 67,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Justicia.", "credit": 1},
+      {"title": "Perdón.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 68,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Teoría.", "credit": 1},
+      {"title": "Experiencia.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 69,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "No crítico.", "credit": 1},
+      {"title": "Crítico.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 70,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Pensamiento.", "credit": 1},
+      {"title": "Sentimiento.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 71,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Líquido.", "credit": 1},
+      {"title": "Sólido.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 72,
+    "title": "¿Qué palabra te atrae más? Piensa bien el significado de cada palabra y no cómo suena cuando la dices.",
+    "options": [
+      {"title": "Solidaridad.", "credit": 1},
+      {"title": "Prevención.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 73,
+    "title": "Es un mayor elogio decir que alguien tiene…",
+    "options": [
+      {"title": "visión.", "credit": 1},
+      {"title": "sentido común.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 74,
+    "title": "Tienes más cuidado con…",
+    "options": [
+      {"title": "los sentimientos de las personas.", "credit": 1},
+      {"title": "los derechos de las personas.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 75,
+    "title": "Cuando estás en una fiesta, te gusta…",
+    "options": [
+      {"title": "contribuir a poner en marcha la acción.", "credit": 1},
+      {"title": "dejar que los otros se diviertan a su modo.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 76,
+    "title": "Prefieres por lo general…",
+    "options": [
+      {"title": "organizar tus compromisos sociales con cierta anticipación.", "credit": 1},
+      {"title": "sentirte libre de hacer las cosas de improviso.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 77,
+    "title": "Cuando estás con un grupo de buenos amigos…",
+    "options": [
+      {"title": "tiendes a sobrepasar a los demás hablando.", "credit": 1},
+      {"title": "hablas menos que los demás.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 78,
+    "title": "Estás naturalmente…",
+    "options": [
+      {"title": "más interesado por las personas que por las cosas.", "credit": 1},
+      {"title": "más interesado por las cosas y en cómo funcionan, que por las relaciones humanas.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 79,
+    "title": "En un grupo grande, es más frecuente que…",
+    "options": [
+      {"title": "presentes a los demás.", "credit": 1},
+      {"title": "te presenten a ti.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 80,
+    "title": "Cuando vas a un lugar para pasar el día, prefieres…",
+    "options": [
+      {"title": "planear lo que vas a hacer y cuándo.", "credit": 1},
+      {"title": "simplemente ir.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 81,
+    "title": "Prefiere pensar sobre un asunto…",
+    "options": [
+      {"title": "hablando de ello con alguien.", "credit": 1},
+      {"title": "considerándolo tú solo.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 82,
+    "title": "Las personas desconocidas con las cuales entras en contacto, saben lo que te interesa",
+    "options": [
+      {"title": "inmediatamente.", "credit": 1},
+      {"title": "sólo después de conocerte muy bien.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 83,
+    "title": "En caso de tareas rutinarias, prefieres…",
+    "options": [
+      {"title": "realizarlas al comienzo del día.", "credit": 1},
+      {"title": "trabajar en ellas en los intervalos de un proyecto más interesante.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 84,
+    "title": "Es más frecuente que digas…",
+    "options": [
+      {"title": "más de lo que piensas.", "credit": 1},
+      {"title": "menos de lo que piensas.", "credit": 2}
+    ],
+    "answer": 2
+  },
+  {
+    "id": 85,
+    "title": "Prefieres…",
+    "options": [
+      {"title": "sentir satisfacción haciendo un trabajo antes de que realmente deba ser hecho.", "credit": 1},
+      {"title": "disfrutar de la velocidad y eficiencia que adquieres justo antes de una fecha tope.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 86,
+    "title": "Conocer nuevas personas, te parece… ",
+    "options": [
+      {"title": "agradable o al menos fácil.", "credit": 1},
+      {"title": "algo que te exige un verdadero esfuerzo.", "credit": 2}
+    ],
+    "answer": 1
+  },
+  {
+    "id": 87,
+    "title": "Cuando piensas que debes hacer una sugerencia en una reunión…",
+    "options": [
+      {"title": "te levantas y la haces de una forma natural.", "credit": 1},
+      {"title": "dudas al hacerla.", "credit": 2}
+    ],
+    "answer": 1
+  }
+]

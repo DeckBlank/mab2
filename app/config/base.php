@@ -96,6 +96,8 @@ return [
 
         'page_test' => get_theme_file_uri('/static/js/page-test.bundle.js'),
 
+        'page_test_behaviour' => get_theme_file_uri('/static/js/page-test-behaviour.bundle.js'),
+
         'page_progress' => get_theme_file_uri('/static/js/page-progress.bundle.js'),
 
         'page_shop_cart' => get_theme_file_uri('/static/js/page-shop-cart.bundle.js'),

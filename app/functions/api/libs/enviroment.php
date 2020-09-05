@@ -12,6 +12,7 @@ function setEnviromentVariables() {
             "user_lastname" => get_user_meta( $current_user->ID, 'last_name', true ),
             "user_mobile" => get_field('mobile', 'user_' . $current_user->ID),
             "user_rol" => $current_user->roles[0],
+            "user_grade" => get_field('grade', 'user_' . $current_user->ID),
             "user_sector" => get_field('school_type', 'user_' . $current_user->ID),
             "user_metas" => (object)[
                 "questionary" => BehaviourModel::questionaryCheckout($current_user->data->user_email),

@@ -366,6 +366,26 @@ add_action( 'rest_api_init', function () {
         'methods' => 'POST',
         'callback' => array($testController,'saveTest'),
     ));    
+
+    register_rest_route( 'custom/v1', '/test/behaviour', array(
+        'methods' => 'POST',
+        'callback' => array($testController,'saveBehaviourTest'),
+    ));    
+
+    register_rest_route( 'custom/v1', '/test/behaviour', array(
+        'methods' => 'GET',
+        'callback' => array($testController,'getBehaviourTest'),
+    ));    
+
+    register_rest_route( 'custom/v1', '/tests/behaviour', array(
+        'methods' => 'GET',
+        'callback' => array($testController,'getBehaviourTests'),
+    ));    
+
+    register_rest_route( 'custom/v1', '/tests/behaviour/download', array(
+        'methods' => 'GET',
+        'callback' => array($testController,'downloadBehaviourTests'),
+    ));    
 });
 
 //9. Behaviour ----------------------------------//
@@ -439,11 +459,6 @@ add_action( 'rest_api_init', function () {
 
     register_rest_route( 'custom/v1', '/schools', array(
         'methods' => 'GET',
-        'callback' => array($schoolController,'getSchoolsByUGEL'),
-    ));
-
-    register_rest_route( 'custom/v1', '/schools/ugels', array(
-        'methods' => 'GET',
-        'callback' => array($schoolController,'getUGELS'),
+        'callback' => array($schoolController,'getSchoolsBySector'),
     ));
 });

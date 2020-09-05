@@ -9,6 +9,10 @@ class SchoolModel{
     /**
      * Methods
      */
+    public static function getSchoolsBySector($request){
+        return get_field('ongs', 'options');
+    }
+
     public static function getSchoolsByUGEL($request){
         $contents = file_get_contents(__DIR__ . '/../assets/schools.json');
 

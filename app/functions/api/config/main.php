@@ -70,6 +70,16 @@ class DBConnection{
         )");
     }
 
+    public function createUserBehaviourTestTable(){
+        $this->connection->query("CREATE TABLE IF NOT EXISTS wp_user_behaviour_tests(
+            id INT NOT NULL AUTO_INCREMENT,
+            date_at DATE NOT NULL, 
+            user VARCHAR(100) NOT NULL,
+            result VARCHAR(100) NOT NULL,
+            PRIMARY KEY (id)
+        )");
+    }
+
     public function createRecoverySessionsTable(){
         $this->connection->query("CREATE TABLE IF NOT EXISTS wp_recovery_sessions(
             id VARCHAR(100) NOT NULL,
@@ -299,6 +309,7 @@ $connection->createTopicScoreTable();
 $connection->createTopicTestScoreTable();
 $connection->createSessionRequestTable();
 $connection->createUserTestTable();
+$connection->createUserBehaviourTestTable();
 $connection->createRecoverySessionsTable();
 $connection->createUserCourseTable();
 $connection->createUserCourseBuyTable();

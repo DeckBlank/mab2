@@ -11,6 +11,16 @@ class SchoolController{
     /**
      * Methods
      */
+    public function getSchoolsBySector($request){
+        $schools = SchoolModel::getSchoolsBySector($request);
+
+        if ( empty($schools) ) {
+            return new WP_Error( 'no_schools', __('No schools found'), array( 'status' => 404 ) );
+        } else {
+            return new WP_REST_Response($schools, 200);
+        }        
+    }
+
     public function getSchoolsByUGEL($request){
         $schools = SchoolModel::getSchoolsByUGEL($request);
 

@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1598941265391';
+$assets_version = '1599287412081';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -290,6 +290,55 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         register_assets('script', [
             'handle'    => 'pandawp/js/page/test',
             'src'       => $config['resources']['page_test'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+
+    }elseif (is_page_template('templates/template-test-behaviour.php')){
+        register_assets('package', [
+            'handle'    => 'pandawp/package/swiper',
+            'src'       => $config['resources']['package_swiper'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+
+        register_assets('package', [
+            'handle'    => 'pandawp/package/dom7',
+            'src'       => $config['resources']['package_dom7'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);                
+    
+        register_assets('package', [
+            'handle'    => 'pandawp/package/popperjs',
+            'src'       => $config['resources']['package_popperjs'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+
+        register_assets('package', [
+            'handle'    => 'pandawp/package/tippyjs',
+            'src'       => $config['resources']['package_tippyjs'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+    
+        register_assets('package', [
+            'handle'    => 'pandawp/package/ssrwindow',
+            'src'       => $config['resources']['package_ssr_window'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]); 
+                
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/test-behaviour',
+            'src'       => $config['resources']['page_test_behaviour'],
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true

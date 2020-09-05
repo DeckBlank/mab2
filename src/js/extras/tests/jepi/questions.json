@@ -1,0 +1,422 @@
+[
+  {
+    "id": 1,
+    "title": "¿Te gusta que haya mucho ruido y alboroto alrededor tuyo?",
+    "dimention": "I" ,
+    "options": [],
+    "answer": 0
+  },
+  {
+    "id": 2,
+    "title": "¿Necesitas a menudo amigos o compañeros buenos, comprensivos, que te den ánimo o valor?",
+    "dimention": "N" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 3,
+    "title": "¿Casi siempre tienes una contestación o respuesta rápidamente (al toque) cuando la gente te conversa?",
+    "dimention": "E" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 4,
+    "title": "¿Algunas veces te pones malhumorado, de mal genio?",
+    "dimention": "L" ,
+    "options": [],
+    "answer": 0
+  },
+  {
+    "id": 5,
+    "title": "¿Eres triste?",
+    "dimention": "EE" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 6,
+    "title": "¿Prefieres estar solo, en vez de  estar acompañado de otros niños?",
+    "dimention": "I" ,
+    "options": [],
+    "answer": 0
+  },
+  {
+    "id": 7,
+    "title": "¿Pasan ideas por tu cabeza que no te dejen dormir?",
+    "dimention": "N" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 8,
+    "title": "¿Siempre haces inmediatamente conforma lo que te dicen o mandan?",
+    "dimention": "L" ,
+    "options": [],
+    "answer": 0
+  },
+  {
+    "id": 9,
+    "title": "¿Te gustan las bromas pesadas?",
+    "dimention": "E" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 10,
+    "title": "¿A veces te sientes infeliz, triste sin que haya ninguna razón especial?",
+    "dimention": "EE" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 11,
+    "title": "¿Eres vivaz y alegre?",
+    "dimention": "I" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 12,
+    "title": "¿Alguna vez has desobedecido cierta regla de la escuela?",
+    "dimention": "L" ,
+    "options": [],
+    "answer": 0
+  },
+  {
+    "id": 13,
+    "title": "¿Te aburren o fastidian muchas cosas?",
+    "dimention": "N" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 14,
+    "title": "¿Te gusta hacer las cosas rápidamente?",
+    "dimention": "E" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 15,
+    "title": "¿Te preocupas por cosas terribles o feas que pudieran sucederte?",
+    "dimention": "EE" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 16,
+    "title": "¿Siempre puedes callar todo secreto que sabes?",
+    "dimention": "L" ,
+    "options": [],
+    "answer": 0
+  },
+  {
+    "id": 17,
+    "title": "¿Puedes hacer que una fiesta, paseo o jugo sean alegres?",
+    "dimention": "I" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 18,
+    "title": "¿Sientes golpes en tu corazón?",
+    "dimention": "N" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 19,
+    "title": "¿Cuándo conoces nuevos amigos, generalmente tu empiezas la conversación?",
+    "dimention": "E" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 20,
+    "title": "¿Has dicho alguna vez alguna mentira?",
+    "dimention": "L" ,
+    "options": [],
+    "answer": 0
+  },
+  {
+    "id": 21,
+    "title": "¿Te sientes fácilmente herido o apenado cuando la gente encuentra un defecto en ti o una falla en el         trabajo que haces?",
+    "dimention": "EE" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 22,
+    "title": "¿Te gusta “cochinear” (hacer bromas) y contar historias graciosas a tus amigos?",
+    "dimention": "I" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 23,
+    "title": "¿A menudo te sientes cansado sin razón?",
+    "dimention": "N" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 24,
+    "title": "¿Siempre terminas tus tareas antes de ir a jugar?",
+    "dimention": "L" ,
+    "options": [],
+    "answer": 0
+  },
+  {
+    "id": 25,
+    "title": "¿Estas generalmente alegre o contento?",
+    "dimention": "E" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 26,
+    "title": "¿Te sientes dolido ante ciertas cosas?",
+    "dimention": "EE" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 27,
+    "title": "¿Te gusta juntarte con otros chicos?",
+    "dimention": "I" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 28,
+    "title": "¿Dices tus oraciones todas las noches?",
+    "dimention": "L" ,
+    "options": [],
+    "answer": 0
+  },
+  {
+    "id": 29,
+    "title": "¿Tienes mareos?",
+    "dimention": "N" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 30,
+    "title": "¿Te gusta hacerles travesuras y jugarretas a otros?",
+    "dimention": "E" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 31,
+    "title": "¿Te sientes a menudo harto, hastiado?",
+    "dimention": "EE" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 32,
+    "title": "¿Algunas veces alardeas (fanfarroneas) o “tiras pana” un poco?",
+    "dimention": "L" ,
+    "options": [],
+    "answer": 0
+  },
+  {
+    "id": 33,
+    "title": "¿Estas generalmente tranquilo y callado cuando estas con otros niños?",
+    "dimention": "I" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 34,
+    "title": "¿Algunas veces te pones tan inquieto que no puedes estar sentado en una silla mucho rato?",
+    "dimention": "N" ,
+    "options": [],
+    "answer": 0
+  },
+  {
+    "id": 35,
+    "title": "¿A menudo decides hacer las cosas de repente, sin pensarlo?",
+    "dimention": "E" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 36,
+    "title": "¿Estas siempre callado en la clase, aun cuando  el profesor(a) esta fuera del salón?",
+    "dimention": "L" ,
+    "options": [],
+    "answer": 0
+  },
+  {
+    "id": 37,
+    "title": "¿Tienes muchas pesadillas que te asustan?",
+    "dimention": "EE" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 38,
+    "title": "¿Puedes generalmente participar y disfrutar de un paseo alegre?",
+    "dimention": "I" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 39,
+    "title": "¿Tus sentimientos son fácilmente heridos?",
+    "dimention": "N" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 40,
+    "title": "¿Alguna vez has dicho algo malo, feo u ofensivo acerca de una persona o compañero",
+    "dimention": "L" ,
+    "options": [],
+    "answer": 0
+  },
+  {
+    "id": 41,
+    "title": "¿Considerarías que eres feliz, suertudo y (lechero)?",
+    "dimention": "E" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 42,
+    "title": "¿Si es que sientes que has aparecido como un tonto o has hecho el ridículo, te quedas preocupado?",
+    "dimention": "EE" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 43,
+    "title": "¿Te gustan a menudo los juegos bruscos, desordenados, brincar, revolcarte?",
+    "dimention": "I" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 44,
+    "title": "¿Siempre comes todo lo que te dan en la comida?",
+    "dimention": "L" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 45,
+    "title": "¿Te es muy difícil de aceptar que te digan (NO), te nieguen algo o no te dejen hacer algo?",
+    "dimention": "N" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 46,
+    "title": "¿Te gusta salir a la calle bastante?",
+    "dimention": "E" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 47,
+    "title": "¿Sientes algunas veces que la vida no vale la pena vivirla?",
+    "dimention": "EE" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 48,
+    "title": "¿Has sido alguna vez insolente con tus padres?",
+    "dimention": "L" ,
+    "options": [],
+    "answer": 0
+  },
+  {
+    "id": 49,
+    "title": "¿Las personas piensan que tú eres alegre y “vivo”?",
+    "dimention": "I" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 50,
+    "title": "¿A menudo te distraes o piensas en otras cosas cuando estás haciendo trabajo o tarea?",
+    "dimention": "N" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 51,
+    "title": "¿Prefieres más estar sentado y mirar, que jugar y bailar en las fiestas?",
+    "dimention": "E" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 52,
+    "title": "¿A menudo has perdido el sueño por tus preocupaciones?",
+    "dimention": "EE" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 53,
+    "title": "¿Generalmente te sientes seguro de que puedes hacer las cosas que tienes que hacer?",
+    "dimention": "I" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 54,
+    "title": "¿A menudo te sientes solo?",
+    "dimention": "N" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 55,
+    "title": "¿Te sientes tímido de hablar cuando conoces a una nueva persona?",
+    "dimention": "E" ,
+    "options": [],
+    "answer": 0
+  },
+  {
+    "id": 56,
+    "title": "¿A menudo te decides a hacer algo cuando ya es muy tarde?",
+    "dimention": "EE" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 57,
+    "title": "¿Cuándo los chicos(as) te gritan, tú les gritas también?",
+    "dimention": "I" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 58,
+    "title": "¿Algunas veces te sientes muy alegre y otros momentos tristes sin alguna razón especial?",
+    "dimention": "N" ,
+    "options": [],
+    "answer": 1
+  },
+  {
+    "id": 59,
+    "title": "¿Encuentras difícil disfrutar y divertirte en una fiesta, paseo juego alegre?",
+    "dimention": "E" ,
+    "options": [],
+    "answer": 0
+  },
+  {
+    "id": 60,
+    "title": "¿A menudo te metes en problemas o líos por hacer las cosas sin pensar primero?",
+    "dimention": "EE" ,
+    "options": [],
+    "answer": 1
+  }
+]

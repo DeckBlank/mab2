@@ -8,7 +8,7 @@
     "js": [
       "src/js/core/wp-session.js",
       "src/js/core/wp-registration.js",
-      "src/js/pages/*.js"
+      "src/js/pages/**/*.js"
     ]
   },
   "publicPath": "app/static",
