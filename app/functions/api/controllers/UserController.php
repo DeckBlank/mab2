@@ -104,6 +104,83 @@ class UserController{
             return new WP_Error( 'no_user_created', __('No user created'), array( 'status' => 404 ) );
         }
     }
+    
+    public function sendTeacherData($request){
+        $mail = new PHPMailer(true);
+        $admins = array_map(function($admin){return $admin->data->user_email;}, get_users(['role' => 'administrator']));
+    
+        try {
+            //Server settings
+            $mail->CharSet = 'UTF-8';
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host       = 'mail.mabclick.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'no-reply@mabclick.com';
+            $mail->Password   = '-@6]W8u_5qA@';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port       = 465;
+    
+            //Recipients
+            $mail->setFrom('no-reply@mabclick.com', "MABCLICK");
+
+            foreach($admins as $admin){
+                $mail->addAddress($admin);
+            }
+    
+            // Content
+            $body = '
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #DE0D46; padding: 3rem 0;">
+                    <tr>
+                    <td width="100%" align="center" style="padding: 0 1rem">
+                        <table width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td width="600" align="center">
+                            <div style="background: white; width: 100%; max-width: 640px;">
+                                <header style="padding: 1rem;">
+                                    <img src="https://mabclick.com/wp-content/themes/mab-theme/app/static/images/logo.png" style="width: 100px;">
+                                </header>
+    
+                                <div style="padding: 1rem;">
+                                    <h1 style="font-size: 25px;">¡Nuevo docente!</h1>
+
+                                    <table style="width: 100%; padding-left: 1.5rem">          
+                                        <tbody style="width: 100%">
+                                            <tr>
+                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; font-weight:bold">Email: </td>
+                                                <td style="padding: 10px 0;">'. $request["email"] .'</td>     
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; font-weight:bold">Teléfono: </td>
+                                                <td style="padding: 10px 0;">'. $request["phone"] .'</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+    
+                                <footer style="text-align: center; font-size: 12px; font-family: Verdana, serif; padding: 1rem; color: white; background: #0166D0;">
+                                    All rights reserved - MABCLICK
+                                </footer>         
+                            </div>
+                            </td>
+                        </tr>
+                        </table>
+                    </td>
+                    </tr>
+                </table>                      
+            ';
+    
+            $mail->isHTML(true); 
+            $mail->Subject = "Nuevo docente";
+            $mail->MsgHTML($body);
+    
+            $mail->send();
+    
+            return new WP_REST_Response('User created', 200);
+        } catch (Exception $e) {
+            return new WP_Error( 'no_sent_teacher', __($mail->ErrorInfo), array( 'status' => 404 ) );
+        }
+    }
 
     public function resetPassword($request){
         if (isset($request['new_pass'])) {

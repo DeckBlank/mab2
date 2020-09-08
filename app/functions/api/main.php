@@ -52,6 +52,11 @@ add_action( 'rest_api_init', function () {
         'callback' => array($userController,'createUser')
     ));
 
+    register_rest_route( 'custom/v1', '/user/teacher/network', array(
+        'methods' => 'POST',
+        'callback' => array($userController,'sendTeacherData')
+    ));
+
     register_rest_route( 'custom/v1', '/user/password', array(
         'methods' => 'PUT',
         'callback' => array($userController,'resetPassword')

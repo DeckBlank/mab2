@@ -159,7 +159,7 @@ Vue.component('form-teacher',{
       <div 
         v-if="schoolType.value == 'privado' || schoolType.value == 'ongs'"
         class="input_container">
-        <label for="">Colegio de trabajo</label>
+        <label for="">Institución de trabajo</label>
         <select 
           class="c-form-box__select select-reset"
           :class="{ valid : school.isValid }"

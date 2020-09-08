@@ -49,6 +49,25 @@ const topic = new Vue({
         autoHeight: true,
         preventClicks: false,
         preventClicksPropagation: false
+      },
+
+      //Teacher
+      isOpenedTeacherModal: false,
+      isSentFormTeacher: false,
+      teacher: {
+        valid: true,
+        sent: false,
+        sending: false,
+        email: {
+          value: '',
+          pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
+          isValid: false
+        },
+        phone: {
+          value: '',
+          pattern: '^([0-9]+)$',
+          isValid: false
+        },
       }
     }
   },
@@ -64,6 +83,14 @@ const topic = new Vue({
     swiper() {
       return this.$refs.slider_questions.$swiper
     }     
+  },
+  watch: {
+    'teacher.email.value': function(){
+      this.teacher.email.isValid = this.validateText(this.teacher.email)
+    },
+    'teacher.phone.value': function(){
+      this.teacher.phone.isValid = this.validateText(this.teacher.phone)
+    },
   },
   mounted(){
     this.global();
@@ -322,6 +349,53 @@ const topic = new Vue({
         .catch(err => {
           throw err;          
         })
+    },
+    validateText: function(parameter){
+      let input_pattern = new RegExp( parameter.pattern ),
+        input_value = parameter.value.trim()
+
+      if(input_pattern.test(input_value)){
+        return true;
+      }else{
+        return false
+      }
+    },
+    sendTeacher: function() {
+      event.preventDefault();
+
+      this.teacher.valid = this.teacher.email.isValid &&
+        this.teacher.phone.isValid
+
+      if(this.teacher.valid){
+        let formData = new FormData();
+  
+        formData.append('email', this.teacher.email.value)
+        formData.append('phone', this.teacher.phone.value)
+
+        this.teacher.sending = true;
+  
+        fetch(`${this.API}/user/teacher/network`,{
+            method: 'POST',
+            body: formData
+          })
+          .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              return res.json()
+            }else{
+              throw res
+            }
+          })
+          .then(response => {
+            this.teacher.sending      = false;
+            this.teacher.sent         = true;
+            this.isOpenedTeacherModal = false;
+          })
+          .catch(err => {
+            this.teacher.sending = false;
+
+            throw err;          
+          })      
+      }
     }
   }
 })

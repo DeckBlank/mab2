@@ -59,6 +59,8 @@
 
 @include breakpoint(large) {
   .c-section--test {
+    min-height: 100vh;
+
     .c-content {
       @include triangle(left, bottom, -70px, 3rem, 70px, 20px, 70px);
     }

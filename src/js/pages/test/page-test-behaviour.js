@@ -28,11 +28,6 @@ const test = new Vue({
       return (this.getUserType() == 'primary') ? 'JEPI' : 'MBTI';
     },    
   },
-  watch: {
-    'currentQuestion': function(){
-      this.saveTest();
-    }
-  },
   created(){
     if(!this.logedUser && this.logedUser.user_sector != 'privado'){
       window.location = `${this.SITE_URL}/login`;
@@ -54,7 +49,6 @@ const test = new Vue({
             this.currentQuestion += 1;
           }
         }else{
-          this.testDone = true;
           this.saveTest();
         }
       }else if(direction == 'previous'){
@@ -188,7 +182,7 @@ const test = new Vue({
           })
           .then(res => {
             if (res.status >= 200 && res.status < 300) {
-              return res.json()
+              this.testDone = true;
             }else{
               throw res
             }
@@ -199,15 +193,19 @@ const test = new Vue({
       }
     },
     resetTest: function() {
+      this.sliderQuestions.slideTo(0);
       this.questions.list = this.questions.list.map(q => {
         return {
           ...q,
           answer: '',
         };
       });
-      this.isValidTest = true;
-      this.testDone = false;
-      this.sliderQuestions.slideTo(0);
+      this.testDone         = false;
+      this.currentQuestion  = 1;
+
+      window.setTimeout(()=>{
+        this.isValidTest = true;
+      }, 1000)
     },
     calculateBehaviour: function() {
       if (this.getUserType() == 'primary') {

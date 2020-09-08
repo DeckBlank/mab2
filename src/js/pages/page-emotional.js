@@ -161,11 +161,10 @@ const emotional = new Vue({
         })      
     },
     isEnableQP: function(type){
-      let mabTemp = window.sessionStorage.getItem('mab_temp'); mabTemp = JSON.parse(mabTemp)
-      let isEnableQP__ = (this.logedUser && mabTemp && !mabTemp.behaviour) ? true : (this.logedUser && mabTemp && mabTemp.behaviour[type])
+      let isEnableQP__ = isEnableQP__ = (this.logedUser && !this.logedUser.user_metas[type]) ? true : false;
 
       if(isEnableQP__){
-        fetch(`${this.API}/behaviour/${type}/enable?user=${this.logedUser.user_email}`)
+        fetch(`${this.API}/behaviour/${type}/enable?user=${this.logedUser.user_email}&sector=${this.logedUser.user_sector}`)
           .then(res => {
             if (res.status >= 200 && res.status < 300) {
               return res.json()
