@@ -143,6 +143,7 @@ class DBConnection{
     public function createQuestionaryTable(){
         $this->connection->query("CREATE TABLE IF NOT EXISTS wp_questionaries(
             id INT NOT NULL AUTO_INCREMENT,
+            season INT NOT NULL,
             date_at DATE NOT NULL, 
             rol VARCHAR(10) NOT NULL,
             user_email VARCHAR(50) NOT NULL,

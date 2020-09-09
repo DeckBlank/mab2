@@ -8,6 +8,7 @@ const test = new Vue({
   ...baseConfig(store),
   data() {
     return {
+      isEnableTest: true,
       isEnableChange: false,
       isValidTest: true,
       currentQuestion: 1,
@@ -26,7 +27,10 @@ const test = new Vue({
     ...mapState(['THEME_URL']),
     testType: function() {
       return (this.getUserType() == 'primary') ? 'JEPI' : 'MBTI';
-    },    
+    },
+    home: function() {
+      return `${this.SITE_URL}/emotional/`;
+    }
   },
   created(){
     if(!this.logedUser && this.logedUser.user_sector != 'privado'){
@@ -37,6 +41,7 @@ const test = new Vue({
     this.global();
     this.hideLoading();
     this.getTest();
+    this.checkoutEnableTest();
   },
   methods: {
     ...baseActions(),
@@ -192,20 +197,12 @@ const test = new Vue({
           })
       }
     },
-    resetTest: function() {
-      this.sliderQuestions.slideTo(0);
-      this.questions.list = this.questions.list.map(q => {
-        return {
-          ...q,
-          answer: '',
-        };
-      });
-      this.testDone         = false;
-      this.currentQuestion  = 1;
+    blockTest: function() {
+      window.localStorage.setItem('mab_temp', JSON.stringify({
+        behaviour_timer: new Date().getTime() / 1000
+      }))
 
-      window.setTimeout(()=>{
-        this.isValidTest = true;
-      }, 1000)
+      window.location = `${this.SITE_URL}/emotional/`;
     },
     calculateBehaviour: function() {
       if (this.getUserType() == 'primary') {
@@ -272,5 +269,12 @@ const test = new Vue({
 
       return (dimesionL.reduce((q1, q2) => q1 + q2, 0) <= 4) ? true : false;
     },
+    checkoutEnableTest: function() {
+      let current = new Date().getTime() / 1000;
+      let mab_temp = window.localStorage.getItem('mab_temp');
+      mab_temp = JSON.parse(mab_temp)
+
+      this.isEnableTest = ((mab_temp.behaviour_timer + 15*60) <= current) ? true : false;
+    }
   }
 })

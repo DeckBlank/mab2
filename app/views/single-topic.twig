@@ -113,6 +113,7 @@
               </div>
             {% endif %}
             <button
+              v-if="logedUser.user_role == 'teacher'"
               class="c-button c-button--secondary display-block width-100 margin-bottom-3 f2 w-medium fs-18 text-center"
               :class="(logedUser.user_sector == 'privado') ? 'margin-bottom-2' : 'margin-bottom-3'"
               @click="isOpenedTeacherModal = true">

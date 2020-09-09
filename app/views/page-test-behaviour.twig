@@ -111,14 +111,36 @@
           <div class="cell medium-10 large-8">
             <div class="c-modal__content br--medium position-relative flex-container flex-dir-column bg-sec-color">             
               <div class="c-modal__body padding-left-1 flex-container position-relative flex-dir-column height-100 text-center">
-                <h2 class="fs-30 f2 warning w-black pri-color margin-bottom-1">Tu test fue anulado</h2>
-                <p class="margin-bottom-2 w-medium fs-18 f2 white">Parece que fuiste sincero con tus respuestas, intentalo de nuevo</p>
-                <button @click="resetTest" class="c-button c-button--primary fs-18 w-medium f2">Intentar de nuevo</button>
+                <h2 class="fs-30 f2 warning w-black pri-color margin-bottom-1">Oops...</h2>
+                <p class="margin-bottom-1 w-medium fs-18 f2 white">
+                  Puede ser que te faltó un poco de concentración para responder las preguntas o quizás quisiste dar una muy buena impresión
+                </p>
+                <p class="margin-bottom-2 w-medium fs-18 f2 white">
+                  Te recomendamos que vuelvas a intentarlo en 15 minutos
+                </p>
+                <button @click="blockTest" class="c-button c-button--primary fs-18 w-medium f2">Intentarlo más tarde</button>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>    
+    </section>
+    <section class="c-modal c-modal--auto position-fixed width-100 height-100" :class="{ opened : !isEnableTest }">
+      <div class="grid-container height-100">
+        <div class="grid-x align-center-middle height-100">
+          <div class="cell medium-10 large-8">
+            <div class="c-modal__content br--medium position-relative flex-container flex-dir-column bg-sec-color">             
+              <div class="c-modal__body padding-left-1 flex-container position-relative flex-dir-column height-100 text-center">
+                <h2 class="fs-30 f2 warning w-black pri-color margin-bottom-1">Debes esperar un poco</h2>
+                <p class="margin-bottom-2 w-medium fs-18 f2 white">
+                  Vuelve en 15 minutos.
+                </p>
+                <a :href="home" class="c-button c-button--primary fs-18 w-medium f2 display-block width-100">Salir</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </section>
 {% endblock %}

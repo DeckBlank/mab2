@@ -44,7 +44,7 @@ Vue.component('questionary-tutor',{
                             type="radio" 
                             class="hide"
                             v-model="questionaryResult[qindex].value"
-                            @change="enableNext"
+                            @change="enableNext(qindex)"
                           >
                           <label 
                             :for="'option-base-' + qindex + oindex" 
@@ -146,8 +146,9 @@ Vue.component('questionary-tutor',{
         }
       }
     },
-    enableNext: function(){
-      this.isEnableChange = true
+    enableNext: function(questionIndex){
+      if(this.questionaryResult[questionIndex].value != '')
+        this.isEnableChange = true
     },
     getQuestionary: function(){
       fetch(`${this.API}/behaviour/questionary?rol=tutor`,{

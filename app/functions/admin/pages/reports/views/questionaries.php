@@ -18,6 +18,7 @@
     <table class="widefat fixed mb-1" cellspacing="0">
         <thead>
             <tr>
+                <th id="columnname" class="manage-column column-columnname" scope="col">Temporada</th>
                 <th id="columnname" class="manage-column column-columnname" scope="col">Usuario</th>
                 <th id="columnname" class="manage-column column-columnname" scope="col">Email</th>
                 <th id="columnname" class="manage-column column-columnname" scope="col">Resultado</th>
@@ -62,6 +63,7 @@
 
             resultsDOM.innerHTML += `
             <tr valign="top" class="${ ((index + 1) % 2 == 0) ? 'alternate' : '' }">
+                <td class="manage-column column-columnname" scoape="col">${ reg.season }</td>
                 <td class="manage-column column-columnname" scoape="col">${ reg.user.data.user_nicename }</td>
                 <td class="manage-column column-columnname" scope="col">${reg.user_email}</td>
                 <td class="manage-column column-columnname" scope="col">

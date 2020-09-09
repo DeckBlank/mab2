@@ -8,6 +8,7 @@
     "js": [
       "src/js/core/wp-session.js",
       "src/js/core/wp-registration.js",
+      "src/js/core/wp-questionaries.js",
       "src/js/pages/**/*.js"
     ]
   },

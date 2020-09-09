@@ -44,7 +44,7 @@ Vue.component('questionary-student',{
                             type="radio" 
                             class="hide"
                             v-model="questionaryResult[qindex].value"
-                            @change="enableNext"
+                            @change="enableNext(qindex)"
                           >
                           <label 
                             :for="'option-base-' + qindex + oindex" 
@@ -200,8 +200,9 @@ Vue.component('questionary-student',{
         }
       }      
     },
-    enableNext: function(){
-      this.isEnableChange = true
+    enableNext: function(questionIndex){
+      if(this.questionaryResult[questionIndex].value != '')
+        this.isEnableChange = true
     },
     getQuestionary: function(){
       fetch(`${this.API}/behaviour/questionary?rol=student`,{
@@ -256,9 +257,10 @@ Vue.component('questionary-student',{
               value: ''
             })
             this.questionaryStudent.decisions.options.push([
-              "Totalmente cierto",
-              "Un tanto cierto",
-              "No es cierto"
+              "Siempre",
+              "Usualmente",
+              "A veces",
+              "Nunca"
             ])
           })
 

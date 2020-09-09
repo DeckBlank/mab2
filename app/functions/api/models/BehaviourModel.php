@@ -74,6 +74,7 @@ class BehaviourModel{
             while($questionary = $questionaries_query->fetch_assoc()){
                 array_push($questionaries, (object)[
                     "id" => $questionary['id'],
+                    "season" => $questionary['season'],
                     "user" => get_user_by('email', $questionary['user_email']),
                     "user_email" => $questionary['user_email'],
                     "rol" => $questionary['rol'],
@@ -102,9 +103,12 @@ class BehaviourModel{
     }
 
     public static function saveQuestionary($request){
+        $questionary_season = get_field('questionary_season', 'options'); 
+
         return DBConnection::getConnection()->query("
-            INSERT INTO wp_questionaries(date_at,user_email,rol,result) VALUES(
+            INSERT INTO wp_questionaries(date_at,season,user_email,rol,result) VALUES(
                 '". date("Y-m-d") ."',
+                '". $questionary_season ."',
                 '". $request['user_email'] ."',
                 '". $request['rol'] ."',
                 '". $request['result'] ."'
@@ -113,13 +117,15 @@ class BehaviourModel{
     }
 
     public static function questionaryCheckout($user){
+        $questionary_season = get_field('questionary_season', 'options'); 
         $questionary_done_query = DBConnection::getConnection()->query("
             SELECT
                 *
             FROM
                 wp_questionaries
             WHERE
-                user_email = '". $user ."'
+                user_email = '". $user ."' AND
+                season = ". $questionary_season ."
         ");
 
         if($questionary_done_query && $questionary_done_query->num_rows){

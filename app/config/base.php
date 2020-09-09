@@ -121,6 +121,8 @@ return [
         //WP
         'wp_session' => get_theme_file_uri('/static/js/wp-session.bundle.js'),
 
-        'wp_registration' => get_theme_file_uri('/static/js/wp-registration.bundle.js')
+        'wp_registration' => get_theme_file_uri('/static/js/wp-registration.bundle.js'),
+
+        'wp_questionaries' => get_theme_file_uri('/static/js/wp-questionaries.bundle.js')
     ]
 ];

@@ -50,7 +50,7 @@
   },
   {
     "id": 8,
-    "title": "¿Siempre haces inmediatamente conforma lo que te dicen o mandan?",
+    "title": "¿Siempre haces inmediatamente conforme a lo que te dicen o mandan?",
     "dimention": "L" ,
     "options": [],
     "answer": -1
@@ -113,7 +113,7 @@
   },
   {
     "id": 17,
-    "title": "¿Puedes hacer que una fiesta, paseo o jugo sean alegres?",
+    "title": "¿Puedes hacer que una fiesta, paseo o juego sean alegres?",
     "dimention": "I" ,
     "options": [],
     "answer": -1
@@ -127,7 +127,7 @@
   },
   {
     "id": 19,
-    "title": "¿Cuándo conoces nuevos amigos, generalmente tu empiezas la conversación?",
+    "title": "¿Cuando conoces nuevos amigos, generalmente tu empiezas la conversación?",
     "dimention": "E" ,
     "options": [],
     "answer": -1
@@ -246,7 +246,7 @@
   },
   {
     "id": 36,
-    "title": "¿Estas siempre callado en la clase, aun cuando  el profesor(a) esta fuera del salón?",
+    "title": "¿Estas siempre callado en la clase, aún cuando  el profesor(a) esta fuera del salón?",
     "dimention": "L" ,
     "options": [],
     "answer": -1
@@ -274,7 +274,7 @@
   },
   {
     "id": 40,
-    "title": "¿Alguna vez has dicho algo malo, feo u ofensivo acerca de una persona o compañero",
+    "title": "¿Alguna vez has dicho algo malo, feo u ofensivo acerca de una persona o compañero?",
     "dimention": "L" ,
     "options": [],
     "answer": -1

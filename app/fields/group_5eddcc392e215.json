@@ -22,6 +22,25 @@
             "ui_off_text": "Deshabilitado"
         },
         {
+            "key": "field_5f585a1949db3",
+            "label": "Temporada",
+            "name": "questionary_season",
+            "type": "text",
+            "instructions": "No editar manualmente (se actualiza al habilitar el cuestionario nuevamente)",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_5eddda2d66226",
             "label": "Alumno",
             "name": "",
@@ -453,5 +472,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1591772313
+    "modified": 1599627713
 }

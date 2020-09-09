@@ -34,7 +34,7 @@ Vue.component('poll',{
                             type="radio" 
                             class="hide"
                             v-model="pollResult[qindex].value"
-                            @change="enableNext"
+                            @change="enableNext(qindex)"
                           >
                           <label 
                             :for="'option-' + qindex + oindex" 
@@ -128,8 +128,9 @@ Vue.component('poll',{
         }
       }
     },
-    enableNext: function(){
-      this.isEnableChange = true
+    enableNext: function(questionIndex){
+      if(this.pollResult[questionIndex].value != '')
+        this.isEnableChange = true
     },
     getPoll: function(){
       fetch(`${this.API}/behaviour/poll`,{

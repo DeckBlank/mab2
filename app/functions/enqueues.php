@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1599547008599';
+$assets_version = '1599631946984';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -565,13 +565,25 @@ add_action('admin_enqueue_scripts', function ($hook) use ($config, $assets_versi
 add_action( 'admin_head', function() use ($config, $assets_version) {
     $current = get_current_screen();
 
-    if($current->base == 'toplevel_page_options-inscriptions' ){
-        register_assets('script', [
-            'handle'    => 'pandawp/wp/registration',
-            'src'       =>  $config['resources']['wp_registration'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);        
+    switch ($current->base) {
+        case 'toplevel_page_options-inscriptions':
+            register_assets('script', [
+                'handle'    => 'pandawp/wp/registration',
+                'src'       =>  $config['resources']['wp_registration'],
+                'deps'      => [ ],
+                'ver'       => $assets_version,
+                'in_footer' => true
+            ]); 
+            break;
+
+        case 'toplevel_page_acf-options-cuestionario-de-seguimiento':
+            register_assets('script', [
+                'handle'    => 'pandawp/wp/questionaries',
+                'src'       =>  $config['resources']['wp_questionaries'],
+                'deps'      => [ ],
+                'ver'       => $assets_version,
+                'in_footer' => true
+            ]); 
+            break;
     }
 });
