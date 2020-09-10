@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1599631946984';
+$assets_version = '1599708389442';
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -547,7 +547,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
      *
      */
     setEnviromentVariables();
-});
+}, 100);
 
 add_action('admin_enqueue_scripts', function ($hook) use ($config, $assets_version) {
     if ('post.php' !== $hook) {
