@@ -1,16 +1,7 @@
 function saveUserLoginSession(user){
   window.localStorage.removeItem('mab_loged_user')
 
-  window.localStorage.setItem('mab_loged_user',JSON.stringify({
-    user_auth: user.user_login,
-    user_firstname: user.user_firstname,
-    user_lastname: user.user_lastname,
-    user_email: user.user_email,
-    user_mobile: user.user_mobile,
-    user_sector: user.user_sector,
-    user_rol: user.user_rol,
-    user_metas: user.user_metas
-  }))
+  window.localStorage.setItem('mab_loged_user',JSON.stringify(user))
 }
 
 function updateUserLoginSession(field, value){
@@ -40,4 +31,12 @@ function updateUserLoginSession(field, value){
   }
 }
 
-export {saveUserLoginSession, updateUserLoginSession}
+function getUserLoged() {
+  if (typeof mab !== 'undefined') {
+    return (mab) ? mab : false;
+  } else {
+    return (window.localStorage.getItem('mab_loged_user')) ? window.localStorage.getItem('mab_loged_user') : false;
+  }
+}
+
+export {saveUserLoginSession, updateUserLoginSession, getUserLoged}

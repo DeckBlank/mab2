@@ -80,26 +80,23 @@ class UserModel{
             throw new Exception("Wrong credentials");
         }else{
             try {
-                self::saveAccessLog($request);
-
-                return (object)[
-                    "user_login" => sprintf(
-                        '%s %s', 
-                        get_user_meta( $user->data->ID, 'first_name', true ),
-                        get_user_meta( $user->data->ID, 'last_name', true )
-                    ),
-                    "user_firstname" => get_user_meta( $user->data->ID, 'first_name', true ),
-                    "user_lastname" => get_user_meta( $user->data->ID, 'last_name', true ),
-                    "user_pass" => $user->data->user_pass,
-                    "user_email" => $user->data->user_email,
-                    "user_rol" => $user->roles[0],
-                    "user_mobile" => get_field('mobile', 'user_' . $user->data->ID),
-                    "user_sector" => get_field('school_type', 'user_' . $user->data->ID),
-                    "user_metas" => (object)[
-                        "questionary" => BehaviourModel::questionaryCheckout($user->data->user_email),
-                        "poll" => BehaviourModel::pollCheckout($user->data->user_email)
-                    ]
-                ];                
+                if(self::saveAccessLog($request)){
+                    return (object)[
+                        "user_auth" => $user->data->display_name,
+                        "user_email" => $user->data->user_email,
+                        "user_firstname" => get_user_meta( $user->data->ID, 'first_name', true ),
+                        "user_lastname" => get_user_meta( $user->data->ID, 'last_name', true ),
+                        "user_pass" => $user->data->user_pass,
+                        "user_mobile" => get_field('mobile', 'user_' . $user->data->ID),
+                        "user_rol" => $user->roles[0],
+                        "user_grade" => get_field('grade', 'user_' . $user->ID),
+                        "user_sector" => get_field('school_type', 'user_' . $user->data->ID),
+                        "user_metas" => (object)[
+                            "questionary" => BehaviourModel::questionaryCheckout($user->data->user_email),
+                            "poll" => BehaviourModel::pollCheckout($user->data->user_email)
+                        ]
+                    ];
+                }
             } catch (Exception $e) {
                 throw new Exception($e->getMessage());
             }
