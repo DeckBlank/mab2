@@ -83,7 +83,7 @@ Vue.component('questionary-student',{
                             type="radio" 
                             class="hide"
                             v-model="questionaryResult[questionaryStudent.base.count + qindex].value"
-                            @change="enableNext"
+                            @change="enableNext(qindex)"
                           >
                           <label 
                             :for="'option-decision-' + qindex + oindex" 
