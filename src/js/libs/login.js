@@ -33,9 +33,10 @@ function updateUserLoginSession(field, value){
 
 function getUserLoged() {
   if (typeof mab !== 'undefined') {
-    return (mab) ? mab : false;
+    return mab;
   } else {
-    return (window.localStorage.getItem('mab_loged_user')) ? window.localStorage.getItem('mab_loged_user') : false;
+    return false;
+    // return (window.localStorage.getItem('mab_loged_user')) ? window.localStorage.getItem('mab_loged_user') : false;
   }
 }
 

@@ -4,7 +4,7 @@ function setEnviromentVariables() {
     if(is_user_logged_in()){
         $current_user = wp_get_current_user();
 
-        wp_localize_script( 'pandawp/package/vue', 'mab', [
+        wp_localize_script( 'pandawp/js/script/main', 'mab', [
             "user_auth" => $current_user->data->display_name,
             "user_email" => $current_user->data->user_email,
             "user_firstname" => get_user_meta( $current_user->ID, 'first_name', true ),

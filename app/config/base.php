@@ -80,6 +80,7 @@ return [
         /**
          * Scripts
          * */
+        'script_main' => get_theme_file_uri('/static/js/main.bundle.js'),
 
         //Pages
         'page_home' => get_theme_file_uri('/static/js/page-home.bundle.js'),

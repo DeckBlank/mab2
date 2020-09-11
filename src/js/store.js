@@ -1,6 +1,5 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
-import {getUserLoged} from './libs/login'
 
 Vue.use(Vuex)
 
@@ -12,7 +11,7 @@ export const store = new Vuex.Store({
     THEME_URL: `${document.getElementById('app').getAttribute('data-theme')}`,
 
     //User
-    logedUser: getUserLoged(),
+    logedUser: (typeof mab !== 'undefined') ? mab : false,
 
     //Session
     activedSession: (window.localStorage.getItem('mab_session')) ? JSON.parse(window.localStorage.getItem('mab_session')) : false,
