@@ -35,8 +35,7 @@ function getUserLoged() {
   if (typeof mab !== 'undefined') {
     return mab;
   } else {
-    return false;
-    // return (window.localStorage.getItem('mab_loged_user')) ? window.localStorage.getItem('mab_loged_user') : false;
+    return (window.localStorage.getItem('mab_loged_user')) ? window.localStorage.getItem('mab_loged_user') : false;
   }
 }
 
