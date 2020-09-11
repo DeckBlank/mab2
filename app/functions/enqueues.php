@@ -15,6 +15,22 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         'in_footer' => true
     ];
 
+    register_assets('script', [
+        'handle'    => 'pandawp/js/script/main',
+        'src'       => $config['resources']['script_main'],
+        'deps'      => [ ],
+        'ver'       => $assets_version,
+        'in_footer' => true
+    ]);
+
+    /**
+     * --------------------------------------------------------------------------
+     * Enviroment variables
+     * --------------------------------------------------------------------------
+     *
+     */
+    setEnviromentVariables();
+
     /**
      * --------------------------------------------------------------------------
      * Register Scripts
@@ -130,14 +146,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
      * --------------------------------------------------------------------------
      *
      */
-    register_assets('script', [
-        'handle'    => 'pandawp/js/script/main',
-        'src'       => $config['resources']['script_main'],
-        'deps'      => [ ],
-        'ver'       => $assets_version,
-        'in_footer' => true
-    ]);
-
     if ( is_front_page() ) {        
         register_assets('script', [
             'handle'    => 'pandawp/js/page/home',
@@ -547,14 +555,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);
     }
-
-    /**
-     * --------------------------------------------------------------------------
-     * Enviroment variables
-     * --------------------------------------------------------------------------
-     *
-     */
-    setEnviromentVariables();
 }, 100);
 
 add_action('admin_enqueue_scripts', function ($hook) use ($config, $assets_version) {
