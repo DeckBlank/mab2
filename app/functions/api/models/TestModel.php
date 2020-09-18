@@ -68,9 +68,12 @@ class TestModel{
 
         if($test_logs_query && $test_logs_query->num_rows > 0){
             while($log = $test_logs_query->fetch_assoc()){
+                $user = get_user_by('email', $log['user']);
+
                 array_push($test_logs, (object)[
-                    "user" => get_user_by('email', $log['user']),
+                    "user" => $user,
                     "user_email" => $log['user'],
+                    "user_metas" => __getUserDataById($user),
                     "result" => $log['result'],
                     "date_at" => $log['date_at']
                 ]);
@@ -170,9 +173,12 @@ class TestModel{
 
         if($test_logs_query && $test_logs_query->num_rows > 0){
             while($log = $test_logs_query->fetch_assoc()){
+                $user = get_user_by('email', $log['user']);
+
                 array_push($test_logs, (object)[
-                    "user" => get_user_by('email', $log['user']),
+                    "user" => $user,
                     "user_email" => $log['user'],
+                    "user_metas" => __getUserDataById($user),
                     "result" => $log['result'],
                     "date_at" => $log['date_at']
                 ]);

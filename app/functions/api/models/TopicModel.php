@@ -298,9 +298,12 @@ class TopicModel{
 
         if($video_logs_query && $video_logs_query->num_rows > 0){
             while($log = $video_logs_query->fetch_assoc()){
+                $user = get_user_by('email', $log['user_email']);
+                
                 array_push($video_logs, (object)[
-                    "user" => get_user_by('email', $log['user_email']),
+                    "user" => $user,
                     "user_email" => $log['user_email'],
+                    "user_metas" => __getUserDataById($user),
                     "views" => $log['views'],
                     "last_topic" => self::__getTopicName($log['last_topic']),
                     "last_date" => $log['last_date'],
@@ -346,9 +349,12 @@ class TopicModel{
 
         if($material_logs_query && $material_logs_query->num_rows > 0){
             while($log = $material_logs_query->fetch_assoc()){
+                $user = get_user_by('email', $log['user_email']);
+
                 array_push($material_logs, (object)[
-                    "user" => get_user_by('email', $log['user_email']),
+                    "user" => $user,
                     "user_email" => $log['user_email'],
+                    "user_metas" => __getUserDataById($user),
                     "downloads" => $log['downloads'],
                     "last_topic" => self::__getTopicName($log['last_topic']),
                     "last_date" => $log['last_date'],
@@ -394,9 +400,12 @@ class TopicModel{
 
         if($test_logs_query && $test_logs_query->num_rows > 0){
             while($log = $test_logs_query->fetch_assoc()){
+                $user = get_user_by('email', $log['user_email']);
+
                 array_push($test_logs, (object)[
-                    "user" => get_user_by('email', $log['user_email']),
+                    "user" => $user,
                     "user_email" => $log['user_email'],
+                    "user_metas" => __getUserDataById($user),
                     "test_count" => $log['test_count'],
                     "right_answers" => $log['right_answers'],
                     "wrong_answers" => $log['wrong_answers'],

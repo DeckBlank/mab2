@@ -334,9 +334,12 @@ class CourseModel{
 
         if($user_course_logs_query && $user_course_logs_query->num_rows > 0){
             while($log = $user_course_logs_query->fetch_assoc()){
+                $user = get_user_by('email', $log['user_email']);
+
                 array_push($user_course_logs, (object)[
-                    "user" => get_user_by('email', $log['user_email']),
+                    "user" => $user,
                     "user_email" => $log['user_email'],
+                    "user_metas" => __getUserDataById($user),
                     "course" => CourseModel::__getCourseName($log['course_id']),
                     "topic_views" => $log['topic_views'],
                     "material_downloads" => $log['material_downloads'],

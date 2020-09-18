@@ -359,9 +359,12 @@ class UserModel{
 
         if($access_logs_query && $access_logs_query->num_rows > 0){
             while($log = $access_logs_query->fetch_assoc()){
+                $user = get_user_by('email', $log['user_email']);
+
                 array_push($access_logs, (object)[
-                    "user" => get_user_by('email', $log['user_email']),
+                    "user" => $user,
                     "user_email" => $log['user_email'],
+                    "user_metas" => __getUserDataById($user),
                     "access_count" => $log['access_count'],
                     "last_date" => $log['last_date'],
                 ]);

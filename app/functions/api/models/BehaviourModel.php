@@ -72,11 +72,14 @@ class BehaviourModel{
 
         if($questionaries_query && $questionaries_query->num_rows > 0){
             while($questionary = $questionaries_query->fetch_assoc()){
+                $user = get_user_by('email', $questionary['user_email']);
+
                 array_push($questionaries, (object)[
                     "id" => $questionary['id'],
                     "season" => $questionary['season'],
                     "user" => get_user_by('email', $questionary['user_email']),
                     "user_email" => $questionary['user_email'],
+                    "user_metas" => __getUserDataById($user),
                     "rol" => $questionary['rol'],
                     "result" => self::__getFulledResult('questionary', json_decode($questionary['result']), $questionary['rol']),
                     "date_at" => $questionary['date_at']
@@ -179,10 +182,13 @@ class BehaviourModel{
 
         if($polls_query && $polls_query->num_rows > 0){
             while($poll = $polls_query->fetch_assoc()){
+                $user = get_user_by('email', $poll['user_email']);
+
                 array_push($polls, (object)[
                     "id" => $poll['id'],
                     "user" => get_user_by('email', $poll['user_email']),
                     "user_email" => $poll['user_email'],
+                    "user_metas" => __getUserDataById($user),
                     "rol" => $poll['rol'],
                     "result" => self::__getFulledResult('poll', json_decode($poll['result']), $poll['rol']),
                     "date_at" => $poll['date_at']
