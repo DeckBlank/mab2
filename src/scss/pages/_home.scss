@@ -953,9 +953,9 @@ flex-direction: column;
     margin-bottom: 50px;
   }
 
-  .section-sponsors__list li:last-child {
+  .section-sponsors__list li:nth-child(10) {
     width: 36%;
-    margin-left: 80px;
+    // margin-left: 80px;
   }
 
   .section-sponsors__list li a{
@@ -972,6 +972,9 @@ flex-direction: column;
   }
   .desktop_guion{
     display: inline;
+  }
+  .section-sponsors li.pad-sides {
+    padding: 0 20px
   }
 }
 
@@ -1414,6 +1417,15 @@ flex-direction: column;
       // height: 150px;
       width:auto;
     }
+
+    .section-sponsors li:nth-child(10) {
+      width: 100%;
+    }    
+
+    .section-sponsors li.pad-sides {
+      padding: 0 
+    }
+
     .section-init__figureCenter img{
       width: 80%;
       min-width: auto;
