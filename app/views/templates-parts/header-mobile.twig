@@ -9,16 +9,9 @@
       </div>
       <div class="c-nav__right width-100">
         <ul class="c-menu flex-container flex-dir-column ul-reset">
-          {% set emotional = primary_menu.items[0] %}
-          {% set sec_pub = primary_menu.items[1] %}
-          {% set sec_priv = primary_menu.items[2] %}
-          {% set sesion = primary_menu.items[3] %}
-
-          <li class="flex-container flex-dir-column {% if 'current-menu-item' in emotional.class %} activate {% endif %}">
-            <div class="c-menu__item flex-container align-justify padding-1">
-              <a href="{{ emotional.link }}" class="position-relative">{{ emotional.name }}</a>
-            </div>
-          </li>
+          {% set sec_pub = primary_menu.items[0] %}
+          {% set sec_priv = primary_menu.items[1] %}
+          {% set sesion = primary_menu.items[2] %}
 
           <li v-if="logedUser.user_sector == 'publico'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_pub.class %} activate {% endif %}">              
             <label for="sector-pub" class="c-menu__item flex-container align-justify align-middle padding-1">
@@ -136,7 +129,7 @@
                     <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
                       {% for course in grade.children %}
                         <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                          <a href="{{course.link}}?sector=publico" class="position-relative">{{course.name}}</a>
+                          <a href="{{course.link}}?sector=privado" class="position-relative">{{course.name}}</a>
                         </div>                 
                       {% endfor %}
                     </ul>                
@@ -178,7 +171,7 @@
                     <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
                       {% for course in grade.children %}
                         <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                          <a href="{{course.link}}?sector=publico" class="position-relative">{{course.name}}</a>
+                          <a href="{{course.link}}?sector=privado" class="position-relative">{{course.name}}</a>
                         </div>                 
                       {% endfor %}
                     </ul>                

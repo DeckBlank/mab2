@@ -2,19 +2,13 @@
   <nav class="c-nav width-100">
     <div class="c-nav__left padding-horizontal-1 position-relative height-100 flex-container align-left align-middle margin-right-1">
       <ul class="c-menu flex-container ul-reset" :class="{logged : logedUser}">
-        {% set home = primary_menu.items[0] %}
-        {% set sec_pub = primary_menu.items[1] %}
-        {% set sec_priv = primary_menu.items[2] %}
+        {% set sec_pub = primary_menu.items[0] %}
+        {% set sec_priv = primary_menu.items[1] %}
         <figure class="c-brand c-brand--normal flex-container align-center-middle">
           <a class="c-brand__link" href="{{ site.url }}/emotional">
           </a>
         </figure>
-        
-        <li>
-          <div class="c-menu__item">
-            <a href="{{ home.link }}" class="position-relative">{{ home.name }}</a>
-          </div>
-        </li>
+
         <li v-if="logedUser.user_sector == 'publico'">
           <div class="c-menu__item">
             <a class="position-relative flex-container align-middle" @click="updateStatusSectorMenu('public')">

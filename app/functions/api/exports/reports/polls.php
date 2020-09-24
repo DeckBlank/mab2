@@ -1,3 +1,10 @@
+<?php
+    $columns = (object)[
+        "count" => count($polls[0]->result),
+        "list"  => array_map(function($res){return $res->key;}, $polls[0]->result)
+    ];
+?>
+
 <table style="border: solid 1px #0266D0;">
     <tr>
         <th style="background: #0266D0; color: white;">Nombres</th>
@@ -9,7 +16,18 @@
         <th style="background: #0266D0; color: white;">Ubicación</th>
         <th style="background: #0266D0; color: white;">Colegio</th>
         <th style="background: #0266D0; color: white;">Email</th>
-        <th style="background: #0266D0; color: white;">Resultado</th>
+        <th style="background: #0266D0; color: white;">
+            <table>
+                <tr>
+                    <td style="background: #0266D0; color: white; text-align: center;" colspan="<?php echo $columns->count; ?>">Satisfaccion general con la plataforma</td>
+                </tr>
+                <tr>
+                    <?php foreach($columns->list as $column) { ?>
+                        <td style="background: #0266D0; color: white; text-align: center;"><?php echo $column; ?></td>
+                    <?php } ?>
+                </tr>
+            </table>        
+        </th>
         <th style="background: #0266D0; color: white;">Fecha</th>
     </tr>
     <tbody>
@@ -34,28 +52,19 @@
                 <td style="background: <?php echo $bg; ?>;"><?php echo $poll->user_metas->school ?></td>
                 <td style="background: <?php echo $bg; ?>;"><?php echo $poll->user_email ?></td>
                 <td style="background: <?php echo $bg; ?>;">
-                    <?php                                
-                        $r_index = 0;
-                        foreach($poll->result as $question){
-                            $r_bg = ( $r_index % 2 == 0 ) ? '#FFD1D1' : 'white';                                
-                    ?>
-                        <table style="border: solid 1px #DE0D46;">
-                            <tbody>
-                                <tr>
-                                    <td style="background: #DE0D46; color: white;">Clave</td>
-                                    <td style="background: <?php echo $r_bg; ?>;"><?php echo $question->key ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="background: #DE0D46; color: white;">Pregunta</td>
-                                    <td style="background: <?php echo $r_bg; ?>;"><?php echo $question->title ?></td>
-                                </tr>
-                                <tr>
-                                    <td style="background: #DE0D46; color: white;">Respuesta</td>
+                    <table style="border: solid 1px #DE0D46;">
+                        <tbody>
+                            <tr>
+                                <?php                                
+                                    $r_index = 0;
+                                    foreach($poll->result as $question){
+                                        $r_bg = ( $r_index % 2 == 0 ) ? '#FFD1D1' : 'white';                                
+                                ?>
                                     <td style="background: <?php echo $r_bg; ?>;"><?php echo $question->value ?></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    <?php $r_index++; } ?>
+                                <?php $r_index++; } ?>
+                            </tr>
+                        </tbody>
+                    </table>
                 </td>
                 <td style="background: <?php echo $bg; ?>;"><?php echo $poll->date_at ?></td>
             </tr>

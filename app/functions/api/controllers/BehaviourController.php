@@ -3,7 +3,6 @@
 require(__DIR__ . '/../models/BehaviourModel.php');
 
 class BehaviourController{
-
     public function __construct(){
 
     }
@@ -11,6 +10,27 @@ class BehaviourController{
     /**
      * Methods
      */
+    private function getColumns($role) {
+        $questionary    = BehaviourModel::getQuestionary(["rol" => $role]);
+        $columns        = (object)[
+            "count" => 0,
+            "list"  => []
+        ];
+
+        if ($role == 'student') {
+            $columns->list  = array_merge($columns->list, $questionary->base->list);
+            $columns->list  = array_merge($columns->list, $questionary->decisions->list);
+            $columns->count = $questionary->base->count + $questionary->decisions->count;
+        } else {
+            $columns->list  = $questionary->base->list;
+            $columns->count = $questionary->base->count;
+        }
+
+        $columns->list  = array_map(function($column){return $column['question']['key'];}, $columns->list);
+
+        return $columns;
+    }
+
     public function getQuestionary($request){
         $questionary = BehaviourModel::getQuestionary($request);
 
@@ -36,7 +56,9 @@ class BehaviourController{
     }
 
     public function downloadQuestionaries($request){
-        $questionaries = BehaviourModel::getQuestionaries($request, 'all');
+        $questionaries  = BehaviourModel::getQuestionaries($request, 'all');
+        $tutorColumns   = $this::getColumns('tutor');
+        $studentColumns = $this::getColumns('student');
 
         if ( empty($questionaries) ) {
             return new WP_Error( 'no_questionaries', __('No questionaries found'), array( 'status' => 404 ) );
@@ -126,5 +148,5 @@ class BehaviourController{
         } else {
             return new WP_Error( 'no_poll_saved', __('No poll saved'), array( 'status' => 404 ) );
         }
-    }    
+    }
 }
