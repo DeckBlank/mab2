@@ -36,7 +36,11 @@ if(is_page('login')){
             )
         )
     ]);
-    $context['banner'] = get_field('banner', $post->ID);
+    if (is_user_logged_in()) {
+        $context['banner'] = 'https://vimeo.com/460748832';
+    } else {
+        $context['banner'] = get_field('banner', $post->ID);
+    }    
 
 }else if(is_page('carrito')){
     if (is_user_logged_in()) {
