@@ -25,7 +25,7 @@
         <form-student v-if="type == 'estudiante'"></form-student>
         <form-teacher v-else-if="type == 'profesor'"></form-teacher>
         <form-tutor v-else-if="type == 'tutor'"></form-tutor>
-        <form-student v-else></form-student>
+        <form-foreign v-else-if="type == 'foreign'"></form-foreign>
       </div>
     </section>   
     </div>

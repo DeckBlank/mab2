@@ -33,7 +33,7 @@ const test = new Vue({
     }
   },
   created(){
-    if(!this.logedUser && this.logedUser.user_sector != 'privado'){
+    if((!this.logedUser && this.logedUser.user_sector != 'privado') || this.logedUser.user_sector != 'foreign'){
       window.location = `${this.SITE_URL}/login`;
     }
   },

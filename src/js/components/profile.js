@@ -14,10 +14,10 @@ Vue.component('profile',{
         <li class="c-user__option w-bold">
           <a :href="SITE_URL + '/test'" class="display-block">Mi test de estilos de aprendizaje</a>
         </li>
-        <li class="c-user__option w-bold">
+        <li v-if="logedUser.user_rol != 'foreign'" class="c-user__option w-bold">
           <a :href="SITE_URL + '/test-personalidad'" class="display-block">Mi test de personalidad</a>
         </li>
-        <li v-if="logedUser.user_sector == 'privado'" class="c-user__option w-bold">
+        <li v-if="logedUser.user_sector == 'privado' || logedUser.user_rol == 'foreign'" class="c-user__option w-bold">
           <a :href="SITE_URL + '/progreso'" class="display-block">Mi progreso</a>
         </li>
         <li class="c-user__option c-user__option--logout w-medium">

@@ -64,7 +64,7 @@ if(is_page('login')){
     }
     
 }else if(is_page('formularios')){
-    if (!isset($_GET['type']) || !in_array($_GET['type'], ['profesor', 'estudiante', 'tutor'])) {
+    if (!isset($_GET['type']) || !in_array($_GET['type'], ['profesor', 'estudiante', 'tutor', 'foreign'])) {
         header('Location:' . $context['site']->url);
     }
 }

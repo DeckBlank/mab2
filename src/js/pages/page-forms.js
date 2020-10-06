@@ -4,6 +4,7 @@ import {store} from '../store'
 import '../components/forms/student'
 import '../components/forms/teacher'
 import '../components/forms/tutor'
+import '../components/forms/foreign'
 
 const forms = new Vue({
   ...baseConfig(store),

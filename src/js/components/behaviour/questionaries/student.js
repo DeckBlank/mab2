@@ -24,7 +24,7 @@ Vue.component('questionary-student',{
                     <div class="swiper-slide">
                       <div class="text-center">
                         <p class="fs-18 f2 w-medium text-center">
-                          A continuación, encontraras unas preguntas para conocerte un poco más. En esta parte no hay respuestas correctas o incorrectas, ¡no tiene nota! Apreciamos mucho la honestidad. Por favor, lee las frases siguientes y marca el nivel de acuerdo o desacuerdo que tienes con cada una de ellas.
+                          A continuación, encontrarás unas preguntas para conocerte un poco más. En esta parte no hay respuestas correctas o incorrectas, ¡no tiene nota! Apreciamos mucho la honestidad. Por favor, lee las frases siguientes y marca el nivel de acuerdo o desacuerdo que tienes con cada una de ellas.
                         </p>
                         <button 
                           class="c-button c-button--secondary w-medium f2 fs-18"
