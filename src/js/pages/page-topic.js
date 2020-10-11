@@ -95,8 +95,9 @@ const topic = new Vue({
   mounted(){
     this.global();
     
-    this.topicID = this.$refs.topic.getAttribute('data-id');
-    this.course_link = `${this.SITE_URL}/curso/${this.metas.get('course_slug')}?sector=${this.metas.get('sector')}`;
+    this.topicID      = this.$refs.topic.getAttribute('data-id');
+    this.area         = this.$refs.topic.getAttribute('data-area');
+    this.course_link  = `${this.SITE_URL}/curso/${this.metas.get('course_slug')}?sector=${this.metas.get('sector')}`;
     
     this.isUserAuthOnTopic(this.metas.get('course_id'))
     this.getLikes();
@@ -271,39 +272,39 @@ const topic = new Vue({
     },
     isUserAuthOnTopic: function(course_id){
       if(!this.metas.get('course_name') || !this.metas.get('course_slug') || !this.metas.get('unity') || (this.metas.get('sector') != 'privado' && this.metas.get('sector') != 'publico')){
-        window.location = `${this.SITE_URL}/emotional`;
+        window.location = `${this.course_link}`;
       }else{
-        if(this.metas.get('sector') == "privado"){
-          if(this.logedUser){
-            fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}&topic=${this.topicID}`,{
-                method: 'GET'
-              })
-              .then(res => {
-                if (res.status >= 200 && res.status < 300) {
-                  return res.json()
-                }else{
-                  throw res
-                }
-              })
-              .then(registration => {
-                this.hideLoading();
-              })
-              .catch(err => {
-                addCourseToShopCart(
-                  course_id,
-                  this.metas.get('course_name'),
-                  `${this.SITE_URL}/curso/${this.metas.get('course_name')}`,
-                  this.SITE_URL,
-                  this.metas
-                );
-                // window.location = `${this.SITE_URL}/solicitar-cursos`;
-                throw err;
-              })        
-          }else{
+        if (['creative', 'emotional'].includes(this.area)) {
+          this.hideLoading();
+        } else if(this.logedUser && this.logedUser.user_rol != 'foreign') {
+          if (this.metas.get('sector') == "privado") {
+            fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}&topic=${this.topicID}`)
+            .then(res => {
+              if (res.status >= 200 && res.status < 300) {
+                return res.json()
+              }else{
+                throw res
+              }
+            })
+            .then(registration => {
+              this.hideLoading();
+            })
+            .catch(err => {
+              addCourseToShopCart(
+                course_id,
+                this.metas.get('course_name'),
+                `${this.SITE_URL}/curso/${this.metas.get('course_name')}`,
+                this.SITE_URL,
+                this.metas
+              );
+
+              throw err;
+            })
+          } else if (this.metas.get('sector') == "publico") {
             this.hideLoading();
           }
-        }else{
-          this.hideLoading();
+        } else {
+          window.location = `${this.course_link}`;
         }
       }
     },

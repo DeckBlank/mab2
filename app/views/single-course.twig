@@ -11,6 +11,7 @@
     class="c-section c-section--course bg-pri-alt"
     data-id="{{post.id}}"
     data-link="{{post.link}}"
+    data-area="{{area}}"
     data-title="{{post.title}}">
     <div class="grid-container padding-top-3 margin-bottom-2">
       <section class="c-content" :class="{ active : sectorMenu.public || sectorMenu.private }">
@@ -19,7 +20,7 @@
             <div class="cell medium-auto">
               <p class="f1 w-medium white margin-bottom-0">{{post.title}}</p>              
             </div>
-            <div v-if="logedUser && (logedUser.user_sector == 'privado' || logedUser.user_rol == 'foreign') && !accessGranted" class="cell small-8 medium-4 large-2">
+            <div v-if="logedUser && logedUser.user_sector == 'privado' && !accessGranted" class="cell small-8 medium-4 large-2">
               <button
                 :disabled="!isAvaibleCourse" 
                 class="fs-21 c-button c-button--secondary width-100 display-block text-center"

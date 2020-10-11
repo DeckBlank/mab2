@@ -91,18 +91,15 @@ if($post->post_type == "video"){
     $context['price'] = 100;
     $context['discount'] = 0;
     $context['g_discount'] = 50;
+    $context['area'] = get_field('area', $post->ID);
 
 }else if($post->post_type == "topic"){
-    /*$context['author'] = (object)[
-        "first_name" =>  $context['post']->author->first_name,
-        "last_name" =>  $context['post']->author->last_name,
-        "avatar" => get_field('picture', 'user_'. $context['post']->author->ID )
-    ];*/
-
     $context['navigation'] = (object)[
         "previous" => __getTopicOnNavigation($_GET['course_id'], $_GET['unity'], $post->ID, 'previous'),
         "next" => __getTopicOnNavigation($_GET['course_id'], $_GET['unity'], $post->ID, 'next')
     ];
+
+    $context['area'] = get_field('area', $_GET['course_id']);
 
     $context['source'] = get_field('source', $post->ID);
     $context['summary'] = ( get_field('summary', $post->ID) ) ? get_field('summary', $post->ID)['url'] : false;

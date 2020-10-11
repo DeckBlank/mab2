@@ -68,6 +68,79 @@
   }
 }
 
+.c-dropdown {
+  &__title {
+    display: flex !important;
+    font-size: $fs-18;
+    font-weight: $medium-font;
+    margin: 0 !important;
+    padding: 0.5rem 1.5rem;
+    color: $black;
+    background-color: $warning-color;
+    width: 100%;
+
+    @include transition;
+
+    .c-icon {
+      display: block;
+
+      @include transition;
+    }
+
+    &:hover {
+      background-color: $warning-alt;
+    }
+  }
+
+  &__list {
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+
+    @include transition;
+
+    li {
+      padding-left: 1rem;
+    }
+
+    a {
+      display: block;
+      padding: 0.5rem 1rem;
+      text-transform: uppercase;
+      color: $white;      
+      position: relative;
+      z-index: 5;
+
+      &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        content: '';
+        width: 0;
+        height: 100%;
+        background-color: $primary-color;
+  
+        @include transition(0.3s);
+      }
+
+      &:hover::after {
+        width: 100%;
+      }
+    }
+  }
+
+  input:checked + .c-dropdown__title > .c-icon {
+    transform: rotate(-180deg);
+  }
+
+  input:checked ~ .c-dropdown__list {
+    max-height: 1000px;
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
 @include breakpoint(large) {
   .c-sector.active,
   .c-cursos.active {

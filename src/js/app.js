@@ -29,6 +29,7 @@ function baseState(){
     'logedUser',
     'isActiveMenu',
     'sectorMenu',
+    'sectorMenuData',
     'isHeaderWithShadow',
     'isActiveBrowserToggle',
     'isLoadedPage',
@@ -43,10 +44,13 @@ function baseActions(){
       'updateStatusHeaderShadow',
       'updateStatusBrowserToggle',
       'hideLoading',
-      'updateMetasBehaviour'
+      'updateMetasBehaviour',
+      'updateSectorMenuData',
     ]),
     global: function(){
       this.saveLog();
+      this.getSector('public', 'publico');
+      this.getSector('private', 'privado');
     },
     saveLog: function(){
       if(!window.sessionStorage.getItem('mab_temp')){
@@ -72,6 +76,25 @@ function baseActions(){
           })      
       }
     },
+    getSector: function(type, name){
+      fetch(`${this.API}/sectors?type=${name}`)
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            return res.json()
+          }else{
+            throw res
+          }
+        })
+        .then(sector => {
+          this.updateSectorMenuData({
+            type: type,
+            data: sector
+          });
+        })
+        .catch(err => {
+          throw err;
+        })      
+    },    
   }
 }
 

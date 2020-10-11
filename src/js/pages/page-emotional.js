@@ -19,7 +19,8 @@ const emotional = new Vue({
     this.global();
     this.hideLoading();
 
-    this.isEnableQP('poll');
+    if(this.logedUser && ['publico', 'privado'].includes(this.logedUser.user_sector))
+      this.isEnableQP('poll');
 
     if(this.logedUser && this.logedUser.user_sector == 'publico'){
       this.isEnableQP('questionary');

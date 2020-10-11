@@ -2,8 +2,6 @@
   <nav class="c-nav width-100">
     <div class="c-nav__left padding-horizontal-1 position-relative height-100 flex-container align-left align-middle margin-right-1">
       <ul class="c-menu flex-container ul-reset" :class="{logged : logedUser}">
-        {% set sec_pub = primary_menu.items[0] %}
-        {% set sec_priv = primary_menu.items[1] %}
         <figure class="c-brand c-brand--normal flex-container align-center-middle">
           <a class="c-brand__link" href="{{ site.url }}/emotional">
           </a>
@@ -19,7 +17,7 @@
         <li v-else-if="logedUser.user_sector != 'privado'">
           <div class="c-menu__item">
             <a class="position-relative flex-container align-middle" @click="updateStatusSectorMenu('public')">
-              {{ sec_pub.name }}<span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
+              SECTOR PÚBLICO <span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
             </a>
           </div>
         </li>
@@ -33,7 +31,7 @@
         <li v-else-if="logedUser.user_sector != 'publico'" >
           <div class="c-menu__item">
             <a class="position-relative flex-container align-middle" @click="updateStatusSectorMenu('private')">
-              {{ sec_priv.name }}<span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
+              SECTOR PRIVADO <span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
             </a>
           </div>
         </li>
@@ -53,7 +51,7 @@
       <button class="c-search-toggle margin-right-1 white fs-25" @click="updateStatusBrowserToggle">
         <span><i class="far fa-search"></i></span>
       </button>
-      <a v-if="logedUser.user_sector == 'privado' || logedUser.user_rol == 'foreign'" href="{{site.url}}/carrito" class="c-link--white margin-right-1 fs-25">
+      <a v-if="logedUser.user_sector == 'privado'" href="{{site.url}}/carrito" class="c-link--white margin-right-1 fs-25">
         <span><i class="far fa-shopping-cart"></i></span>
       </a>
       <profile v-if="logedUser"></profile>

@@ -5,7 +5,11 @@
 {% endblock %}
 
 {% block content %}
-  <section ref="topic" data-id="{{post.id}}" class="c-section c-section--topic bg-pri-alt">
+  <section
+    ref="topic"
+    data-id="{{post.id}}"
+    data-area="{{area}}"
+    class="c-section c-section--topic bg-pri-alt">
     <div class="grid-container padding-vertical-3">
       <div class="grid-x align-center">
         <div class="cell medium-10 large-8">

@@ -9,175 +9,333 @@
       </div>
       <div class="c-nav__right width-100">
         <ul class="c-menu flex-container flex-dir-column ul-reset">
-          {% set sec_pub = primary_menu.items[0] %}
-          {% set sec_priv = primary_menu.items[1] %}
-          {% set sesion = primary_menu.items[2] %}
+          {% set sesion = primary_menu.items[1] %}
 
-          <li v-if="logedUser.user_sector == 'publico'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_pub.class %} activate {% endif %}">              
+          <li v-if="logedUser.user_sector == 'publico'" class="flex-container flex-dir-column">
             <label for="sector-pub" class="c-menu__item flex-container align-justify align-middle padding-1">
               <a class="position-relative">CURSOS</a>
               <span class="c-icon"><i class="far fa-chevron-down"></i></span>
             </label>              
             <input id="sector-pub" type="checkbox" class="hide">
 
-            <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-              {% for level in sec_pub.children %}
-                <label for="pub-level-{{sec_pub.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                  <a class="position-relative">{{level.name|replace({'Priv': '', 'Pub': ''})}}</a>
-
-                  {% if level.children %}
-                    <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
-                  {% endif %}                      
+            <ul v-if="sectorMenuData.public" class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+              <li v-for="level of sectorMenuData.public.levels">
+                <label :for="'pub-level-' + level.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                  <a class="position-relative">${level.name}</a>
+  
+                  <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
                 </label>
-                <input id="pub-level-{{sec_pub.slug}}-{{loop.index}}" type="checkbox" class="hide">
-
+                <input :id="'pub-level-' + level.id" type="checkbox" class="hide">
+  
                 <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-                  {% for grade in level.children %}
-                    <label for="pub-grado-{{level.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                      <a class="position-relative">{{grade.name|replace({'Priv': '', 'Pub': ''})}}</a>
-
-                      {% if grade.children %}
-                        <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
-                      {% endif %}                      
+                  <li v-for="grade of level.grades">
+                    <label :for="'pub-grade-' + grade.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                      <a class="position-relative">${grade.name}</a>
+  
+                      <span class="c-icon white"><i class="far fa-chevron-down"></i></span>                 
                     </label>
-                    <input id="pub-grado-{{level.slug}}-{{loop.index}}" type="checkbox" class="hide">
+                    <input :id="'pub-grade-' + grade.id" type="checkbox" class="hide">
+  
+                    <ul v-if="!grade.courses.isAreas" class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                      <div v-for="course of grade.courses.courses" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1">
+                        <a :href="'{{site.url}}/curso/' + course.slug + '?sector=publico'" class="position-relative">${course.name}</a>               
+                      </div>
+                    </ul>
+                    <ul v-else class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                      <li>
+                        <label :for="'pub-area-academic-' + grade.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                          <a class="position-relative">${grade.courses.areas.academic.name}</a>
+      
+                          <span class="c-icon white"><i class="far fa-chevron-down"></i></span>                 
+                        </label>
+                        <input :id="'pub-area-academic-' + grade.id" type="checkbox" class="hide">
+      
+                        <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                          <div v-for="course of grade.courses.areas.academic.courses" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                            <a :href="'{{site.url}}/curso/' + course.slug + '?sector=publico'" class="position-relative">${course.name}</a>
+                          </div>
+                        </ul>
+                      </li>
 
-                    <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-                      {% for course in grade.children %}
-                        <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                          <a href="{{course.link}}?sector=publico" class="position-relative">{{course.name}}</a>
-                        </div>                 
-                      {% endfor %}
-                    </ul>                
-                  {% endfor %}                  
-                </ul>                
-              {% endfor %}
+                      <li>
+                        <label :for="'pub-area-emotional-' + grade.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                          <a class="position-relative">${grade.courses.areas.emotional.name}</a>
+      
+                          <span class="c-icon white"><i class="far fa-chevron-down"></i></span>                 
+                        </label>
+                        <input :id="'pub-area-emotional-' + grade.id" type="checkbox" class="hide">
+      
+                        <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                          <div v-for="course of grade.courses.areas.emotional.courses" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                            <a :href="'{{site.url}}/curso/' + course.slug + '?sector=publico'" class="position-relative">${course.name}</a>
+                          </div>
+                        </ul>
+                      </li>
+
+                      <li>
+                        <label :for="'pub-area-creative-' + grade.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                          <a class="position-relative">${grade.courses.areas.creative.name}</a>
+      
+                          <span class="c-icon white"><i class="far fa-chevron-down"></i></span>                 
+                        </label>
+                        <input :id="'pub-area-creative-' + grade.id" type="checkbox" class="hide">
+      
+                        <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                          <div v-for="course of grade.courses.areas.creative.courses" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                            <a :href="'{{site.url}}/curso/' + course.slug + '?sector=publico'" class="position-relative">${course.name}</a>
+                          </div>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>                
+                </ul>
+              </li>
             </ul>
           </li>
 
-          <li v-else-if="logedUser.user_sector != 'privado'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_pub.class %} activate {% endif %}">              
+          <li v-else-if="logedUser.user_sector != 'privado'" class="flex-container flex-dir-column">
             <label for="sector-pub" class="c-menu__item flex-container align-justify align-middle padding-1">
-              <a class="position-relative">{{ sec_pub.name }}</a>
+              <a class="position-relative">SECTOR PÚBLICO</a>
               <span class="c-icon"><i class="far fa-chevron-down"></i></span>
             </label>              
             <input id="sector-pub" type="checkbox" class="hide">
 
-            <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-              {% for level in sec_pub.children %}
-                <label for="pub-level-{{sec_pub.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                  <a class="position-relative">{{level.name|replace({'Priv': '', 'Pub': ''})}}</a>
-
-                  {% if level.children %}
-                    <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
-                  {% endif %}                      
+            <ul v-if="sectorMenuData.public" class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+              <li v-for="level of sectorMenuData.public.levels">
+                <label :for="'pub-level-' + level.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                  <a class="position-relative">${level.name}</a>
+  
+                  <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
                 </label>
-                <input id="pub-level-{{sec_pub.slug}}-{{loop.index}}" type="checkbox" class="hide">
-
+                <input :id="'pub-level-' + level.id" type="checkbox" class="hide">
+  
                 <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-                  {% for grade in level.children %}
-                    <label for="pub-grado-{{level.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                      <a class="position-relative">{{grade.name|replace({'Priv': '', 'Pub': ''})}}</a>
-
-                      {% if grade.children %}
-                        <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
-                      {% endif %}                      
+                  <li v-for="grade of level.grades">
+                    <label :for="'pub-grade-' + grade.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                      <a class="position-relative">${grade.name}</a>
+  
+                      <span class="c-icon white"><i class="far fa-chevron-down"></i></span>                 
                     </label>
-                    <input id="pub-grado-{{level.slug}}-{{loop.index}}" type="checkbox" class="hide">
+                    <input :id="'pub-grade-' + grade.id" type="checkbox" class="hide">
+  
+                    <ul v-if="!grade.courses.isAreas" class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                      <div v-for="course of grade.courses.courses" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1">
+                        <a :href="'{{site.url}}/curso/' + course.slug + '?sector=publico'" class="position-relative">${course.name}</a>               
+                      </div>
+                    </ul>
+                    <ul v-else class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                      <li>
+                        <label :for="'pub-area-academic-' + grade.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                          <a class="position-relative">${grade.courses.areas.academic.name}</a>
+      
+                          <span class="c-icon white"><i class="far fa-chevron-down"></i></span>                 
+                        </label>
+                        <input :id="'pub-area-academic-' + grade.id" type="checkbox" class="hide">
+      
+                        <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                          <div v-for="course of grade.courses.areas.academic.courses" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                            <a :href="'{{site.url}}/curso/' + course.slug + '?sector=publico'" class="position-relative">${course.name}</a>
+                          </div>
+                        </ul>
+                      </li>
 
-                    <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-                      {% for course in grade.children %}
-                        <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                          <a href="{{course.link}}?sector=publico" class="position-relative">{{course.name}}</a>
-                        </div>                 
-                      {% endfor %}
-                    </ul>                
-                  {% endfor %}                  
-                </ul>                
-              {% endfor %}
+                      <li>
+                        <label :for="'pub-area-emotional-' + grade.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                          <a class="position-relative">${grade.courses.areas.emotional.name}</a>
+      
+                          <span class="c-icon white"><i class="far fa-chevron-down"></i></span>                 
+                        </label>
+                        <input :id="'pub-area-emotional-' + grade.id" type="checkbox" class="hide">
+      
+                        <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                          <div v-for="course of grade.courses.areas.emotional.courses" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                            <a :href="'{{site.url}}/curso/' + course.slug + '?sector=publico'" class="position-relative">${course.name}</a>
+                          </div>
+                        </ul>
+                      </li>
+
+                      <li>
+                        <label :for="'pub-area-creative-' + grade.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                          <a class="position-relative">${grade.courses.areas.creative.name}</a>
+      
+                          <span class="c-icon white"><i class="far fa-chevron-down"></i></span>                 
+                        </label>
+                        <input :id="'pub-area-creative-' + grade.id" type="checkbox" class="hide">
+      
+                        <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                          <div v-for="course of grade.courses.areas.creative.courses" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                            <a :href="'{{site.url}}/curso/' + course.slug + '?sector=publico'" class="position-relative">${course.name}</a>
+                          </div>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>                
+                </ul>
+              </li>
             </ul>
           </li>
 
-          <li v-if="logedUser.user_sector == 'privado'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_priv.class %} activate {% endif %}">              
+          <li v-if="logedUser.user_sector == 'privado'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_priv.class %} activate {% endif %}">
             <label for="sector-priv" class="c-menu__item flex-container align-justify align-middle padding-1">
               <a class="position-relative">CURSOS</a>
               <span class="c-icon"><i class="far fa-chevron-down"></i></span>
             </label>              
             <input id="sector-priv" type="checkbox" class="hide">
 
-            <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-              {% for level in sec_priv.children %}
-                <label for="priv-level-{{sec_priv.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                  <a class="position-relative">{{level.name|replace({'Priv': '', 'Pub': ''})}}</a>
-
-                  {% if level.children %}
-                    <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
-                  {% endif %}                      
+            <ul v-if="sectorMenuData.private" class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+              <li v-for="level of sectorMenuData.private.levels">
+                <label :for="'priv-level-' + level.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                  <a class="position-relative">${level.name}</a>
+  
+                  <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
                 </label>
-                <input id="priv-level-{{sec_priv.slug}}-{{loop.index}}" type="checkbox" class="hide">
-
+                <input :id="'priv-level-' + level.id" type="checkbox" class="hide">
+  
                 <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-                  {% for grade in level.children %}
-                    <label for="priv-grado-{{level.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                      <a class="position-relative">{{grade.name|replace({'Priv': '', 'Pub': ''})}}</a>
-
-                      {% if grade.children %}
-                        <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
-                      {% endif %}                      
+                  <li v-for="grade of level.grades">
+                    <label :for="'priv-grade-' + grade.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                      <a class="position-relative">${grade.name}</a>
+  
+                      <span class="c-icon white"><i class="far fa-chevron-down"></i></span>                 
                     </label>
-                    <input id="priv-grado-{{level.slug}}-{{loop.index}}" type="checkbox" class="hide">
+                    <input :id="'priv-grade-' + grade.id" type="checkbox" class="hide">
+  
+                    <ul v-if="!grade.courses.isAreas" class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                      <div v-for="course of grade.courses.courses" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1">
+                        <a :href="'{{site.url}}/curso/' + course.slug + '?sector=privado'" class="position-relative">${course.name}</a>               
+                      </div>
+                    </ul>
+                    <ul v-else class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                      <li>
+                        <label :for="'priv-area-academic-' + grade.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                          <a class="position-relative">${grade.courses.areas.academic.name}</a>
+      
+                          <span class="c-icon white"><i class="far fa-chevron-down"></i></span>                 
+                        </label>
+                        <input :id="'priv-area-academic-' + grade.id" type="checkbox" class="hide">
+      
+                        <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                          <div v-for="course of grade.courses.areas.academic.courses" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                            <a :href="'{{site.url}}/curso/' + course.slug + '?sector=privado'" class="position-relative">${course.name}</a>
+                          </div>
+                        </ul>
+                      </li>
 
-                    <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-                      {% for course in grade.children %}
-                        <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                          <a href="{{course.link}}?sector=privado" class="position-relative">{{course.name}}</a>
-                        </div>                 
-                      {% endfor %}
-                    </ul>                
-                  {% endfor %}                  
-                </ul>                
-              {% endfor %}
+                      <li>
+                        <label :for="'priv-area-emotional-' + grade.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                          <a class="position-relative">${grade.courses.areas.emotional.name}</a>
+      
+                          <span class="c-icon white"><i class="far fa-chevron-down"></i></span>                 
+                        </label>
+                        <input :id="'priv-area-emotional-' + grade.id" type="checkbox" class="hide">
+      
+                        <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                          <div v-for="course of grade.courses.areas.emotional.courses" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                            <a :href="'{{site.url}}/curso/' + course.slug + '?sector=privado'" class="position-relative">${course.name}</a>
+                          </div>
+                        </ul>
+                      </li>
+
+                      <li>
+                        <label :for="'priv-area-creative-' + grade.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                          <a class="position-relative">${grade.courses.areas.creative.name}</a>
+      
+                          <span class="c-icon white"><i class="far fa-chevron-down"></i></span>                 
+                        </label>
+                        <input :id="'priv-area-creative-' + grade.id" type="checkbox" class="hide">
+      
+                        <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                          <div v-for="course of grade.courses.areas.creative.courses" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                            <a :href="'{{site.url}}/curso/' + course.slug + '?sector=privado'" class="position-relative">${course.name}</a>
+                          </div>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>                
+                </ul>
+              </li>
             </ul>
           </li>
 
-          <li v-else-if="logedUser.user_sector != 'publico'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_priv.class %} activate {% endif %}">              
+          <li v-else-if="logedUser.user_sector != 'publico'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_priv.class %} activate {% endif %}">
             <label for="sector-priv" class="c-menu__item flex-container align-justify align-middle padding-1">
-              <a class="position-relative">{{ sec_priv.name }}</a>
+              <a class="position-relative">SECTOR PRIVADO</a>
               <span class="c-icon"><i class="far fa-chevron-down"></i></span>
             </label>              
             <input id="sector-priv" type="checkbox" class="hide">
 
-            <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-              {% for level in sec_priv.children %}
-                <label for="priv-level-{{sec_priv.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                  <a class="position-relative">{{level.name|replace({'Priv': '', 'Pub': ''})}}</a>
-
-                  {% if level.children %}
-                    <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
-                  {% endif %}                      
+            <ul v-if="sectorMenuData.private" class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+              <li v-for="level of sectorMenuData.private.levels">
+                <label :for="'priv-level-' + level.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                  <a class="position-relative">${level.name}</a>
+  
+                  <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
                 </label>
-                <input id="priv-level-{{sec_priv.slug}}-{{loop.index}}" type="checkbox" class="hide">
-
+                <input :id="'priv-level-' + level.id" type="checkbox" class="hide">
+  
                 <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-                  {% for grade in level.children %}
-                    <label for="priv-grado-{{level.slug}}-{{loop.index}}" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                      <a class="position-relative">{{grade.name|replace({'Priv': '', 'Pub': ''})}}</a>
-
-                      {% if grade.children %}
-                        <span class="c-icon white"><i class="far fa-chevron-down"></i></span>
-                      {% endif %}                      
+                  <li v-for="grade of level.grades">
+                    <label :for="'priv-grade-' + grade.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                      <a class="position-relative">${grade.name}</a>
+  
+                      <span class="c-icon white"><i class="far fa-chevron-down"></i></span>                 
                     </label>
-                    <input id="priv-grado-{{level.slug}}-{{loop.index}}" type="checkbox" class="hide">
+                    <input :id="'priv-grade-' + grade.id" type="checkbox" class="hide">
+  
+                    <ul v-if="!grade.courses.isAreas" class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                      <div v-for="course of grade.courses.courses" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1">
+                        <a :href="'{{site.url}}/curso/' + course.slug + '?sector=privado'" class="position-relative">${course.name}</a>               
+                      </div>
+                    </ul>
+                    <ul v-else class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                      <li>
+                        <label :for="'priv-area-academic-' + grade.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                          <a class="position-relative">${grade.courses.areas.academic.name}</a>
+      
+                          <span class="c-icon white"><i class="far fa-chevron-down"></i></span>                 
+                        </label>
+                        <input :id="'priv-area-academic-' + grade.id" type="checkbox" class="hide">
+      
+                        <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                          <div v-for="course of grade.courses.areas.academic.courses" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                            <a :href="'{{site.url}}/curso/' + course.slug + '?sector=privado'" class="position-relative">${course.name}</a>
+                          </div>
+                        </ul>
+                      </li>
 
-                    <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
-                      {% for course in grade.children %}
-                        <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                          <a href="{{course.link}}?sector=privado" class="position-relative">{{course.name}}</a>
-                        </div>                 
-                      {% endfor %}
-                    </ul>                
-                  {% endfor %}                  
-                </ul>                
-              {% endfor %}
+                      <li>
+                        <label :for="'priv-area-emotional-' + grade.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                          <a class="position-relative">${grade.courses.areas.emotional.name}</a>
+      
+                          <span class="c-icon white"><i class="far fa-chevron-down"></i></span>                 
+                        </label>
+                        <input :id="'priv-area-emotional-' + grade.id" type="checkbox" class="hide">
+      
+                        <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                          <div v-for="course of grade.courses.areas.emotional.courses" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                            <a :href="'{{site.url}}/curso/' + course.slug + '?sector=privado'" class="position-relative">${course.name}</a>
+                          </div>
+                        </ul>
+                      </li>
+
+                      <li>
+                        <label :for="'priv-area-creative-' + grade.id" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                          <a class="position-relative">${grade.courses.areas.creative.name}</a>
+      
+                          <span class="c-icon white"><i class="far fa-chevron-down"></i></span>                 
+                        </label>
+                        <input :id="'priv-area-creative-' + grade.id" type="checkbox" class="hide">
+      
+                        <ul class="c-submenu ul-reset bg-pri-color width-100 overflow-hidden">
+                          <div v-for="course of grade.courses.areas.creative.courses" class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                            <a :href="'{{site.url}}/curso/' + course.slug + '?sector=privado'" class="position-relative">${course.name}</a>
+                          </div>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>                
+                </ul>
+              </li>
             </ul>
           </li>
 

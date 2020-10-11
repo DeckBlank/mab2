@@ -22,6 +22,10 @@ export const store = new Vuex.Store({
       private: false,
       public: false,
     },
+    sectorMenuData: {
+      public: null,
+      private: null,
+    },
     isActiveMenu: false,
     isHeaderWithShadow: false,
 
@@ -45,6 +49,10 @@ export const store = new Vuex.Store({
 
       if(sector == 'public') state.sectorMenu.private = false;
       if(sector == 'private') state.sectorMenu.public = false;
+    },
+
+    setSectorMenuData(state, sector){
+      state.sectorMenuData[sector.type] = sector.data
     },
 
     setStatusHeaderShadow(state, status){
@@ -74,6 +82,10 @@ export const store = new Vuex.Store({
 
     updateStatusSectorMenu: function({commit}, sector){
       commit('setSectorMenu', sector);
+    },
+
+    updateSectorMenuData: function({commit}, sector){
+      commit('setSectorMenuData', sector);
     },
 
     updateStatusHeaderShadow: ({commit}, status)=>{
