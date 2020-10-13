@@ -107,7 +107,7 @@
       display: block;
       padding: 0.5rem 1rem;
       text-transform: uppercase;
-      color: $white;      
+      color: $white;
       position: relative;
       z-index: 5;
 
@@ -120,7 +120,7 @@
         width: 0;
         height: 100%;
         background-color: $primary-color;
-  
+
         @include transition(0.3s);
       }
 

@@ -45,14 +45,14 @@ Vue.component('sector',{
         </ul>
         <ul v-else class="c-cursos__list ul-reset">
           <li class="c-cursos__item fs-18 f2">
-            <a class="flex-container align-middle" @click="step = 1">
+            <a class="flex-container align-middle" @click="goBackGrade()">
               <span class="c-icon margin-right-1"><i class="far fa-arrow-left"></i></span>
               Volver
             </a>
           </li>
 
           <li class="c-dropdown fs-18 f2">
-            <input id="area-academic" type="checkbox" class="hide"></input>
+            <input v-model="selectedArea" id="area-academic" type="radio" value="academic" class="hide"></input>
             <label class="c-dropdown__title text-uppercase align-justify align-mddle" for="area-academic">
               {{selected.grade.data.areas.academic.name}}
               <span class="c-icon">
@@ -67,7 +67,7 @@ Vue.component('sector',{
           </li>
 
           <li class="c-dropdown fs-18 f2">
-            <input id="area-emotional" type="checkbox" class="hide"></input>
+            <input v-model="selectedArea" id="area-emotional" type="radio" value="emotional" class="hide"></input>
             <label class="c-dropdown__title text-uppercase align-justify align-mddle" for="area-emotional">
               {{selected.grade.data.areas.emotional.name}}
               <span class="c-icon">
@@ -82,7 +82,7 @@ Vue.component('sector',{
           </li>
 
           <li class="c-dropdown fs-18 f2">
-            <input id="area-creative" type="checkbox" class="hide"></input>
+            <input v-model="selectedArea" id="area-creative" type="radio" value="creative" class="hide"></input>
             <label class="c-dropdown__title text-uppercase align-justify align-mddle" for="area-creative">
               {{selected.grade.data.areas.creative.name}}
               <span class="c-icon">
@@ -104,6 +104,7 @@ Vue.component('sector',{
       step: 0,
       active: false,
       levels: [],
+      selectedArea: 1,
       selected: {
         level: {
           id: '',
@@ -153,6 +154,10 @@ Vue.component('sector',{
 
       this.selected.grade.name = grade.name;
       this.selected.grade.data = this.selected.level.data.filter((_grade)=> _grade.id == grade.id)[0].courses;
+    },
+    goBackGrade: function() {
+      this.step = 1;
+      this.selected.grade.data = [];
     },
   }
 })
