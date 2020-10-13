@@ -40,14 +40,14 @@ class SectorModel{
             array_push($grades, [
                 "name" => $grade->name,
                 "id" => intval($grade->object_id),
-                "courses" => self::__getCoursesByGrade($grade)
+                "courses" => self::__getCoursesByGrade($grade, strtolower($level->name))
             ]);
         }
 
         return $grades;
     }
 
-    public static function __getCoursesByGrade($grade) {
+    public static function __getCoursesByGrade($grade, $level) {
         $courses = [];
 
         foreach($grade->children as $course) {
@@ -61,32 +61,39 @@ class SectorModel{
 
         $areas = array_map(function($course){return $course['area'];}, $courses);
 
-        if ( count( array_filter($areas, function($area){return in_array($area, ['creative', 'emotional', 'academic']);}) ) == count($areas)) {
-            $data = (object)[
-                'emotional' => [
-                    'name' => 'Emocional/Bienestar',
-                    'courses' => array_filter($courses, function($course){return $course['area'] == 'emotional';})
-                ],
-                'creative' => [
-                    'name' => 'Creativo',
-                    'courses' => array_filter($courses, function($course){return $course['area'] == 'creative';})
-                ],
-                'academic' => [
-                    'name' => 'Académico',
-                    'courses' => array_filter($courses, function($course){return $course['area'] == 'academic';})
-                ]
-            ];
-
-            return (object)[
-                'isAreas' => true,
-                'areas' => $data
-            ];
-
+        if ($level != 'adultos') {
+            if ( count( array_filter($areas, function($area){return in_array($area, ['creative', 'emotional', 'academic']);}) ) == count($areas)) {
+                $data = (object)[
+                    'emotional' => [
+                        'name' => 'Emocional/Bienestar',
+                        'courses' => array_filter($courses, function($course){return $course['area'] == 'emotional';})
+                    ],
+                    'creative' => [
+                        'name' => 'Creativo',
+                        'courses' => array_filter($courses, function($course){return $course['area'] == 'creative';})
+                    ],
+                    'academic' => [
+                        'name' => 'Académico',
+                        'courses' => array_filter($courses, function($course){return $course['area'] == 'academic';})
+                    ]
+                ];
+    
+                return (object)[
+                    'isAreas' => true,
+                    'areas' => $data
+                ];
+    
+            } else {
+                return (object)[
+                    'isAreas' => false,
+                    'courses' => $courses
+                ];        
+            }
         } else {
             return (object)[
                 'isAreas' => false,
                 'courses' => $courses
-            ];        
+            ]; 
         }
     }
 }
