@@ -61,37 +61,32 @@ class SectorModel{
 
         $areas = array_map(function($course){return $course['area'];}, $courses);
 
-        // if ( count( array_filter($areas, function($area){return in_array($area, ['creative', 'emotional', 'academic']);}) ) == count($areas)) {
-        //     $data = (object)[
-        //         'emotional' => [
-        //             'name' => 'Emocional/Bienestar',
-        //             'courses' => array_filter($courses, function($course){return $course['area'] == 'emotional';})
-        //         ],
-        //         'creative' => [
-        //             'name' => 'Creativo',
-        //             'courses' => array_filter($courses, function($course){return $course['area'] == 'creative';})
-        //         ],
-        //         'academic' => [
-        //             'name' => 'Académico',
-        //             'courses' => array_filter($courses, function($course){return $course['area'] == 'academic';})
-        //         ]
-        //     ];
+        if ( count( array_filter($areas, function($area){return in_array($area, ['creative', 'emotional', 'academic']);}) ) == count($areas)) {
+            $data = (object)[
+                'emotional' => [
+                    'name' => 'Emocional/Bienestar',
+                    'courses' => array_filter($courses, function($course){return $course['area'] == 'emotional';})
+                ],
+                'creative' => [
+                    'name' => 'Creativo',
+                    'courses' => array_filter($courses, function($course){return $course['area'] == 'creative';})
+                ],
+                'academic' => [
+                    'name' => 'Académico',
+                    'courses' => array_filter($courses, function($course){return $course['area'] == 'academic';})
+                ]
+            ];
 
-        //     return (object)[
-        //         'isAreas' => true,
-        //         'areas' => $data
-        //     ];
+            return (object)[
+                'isAreas' => true,
+                'areas' => $data
+            ];
 
-        // } else {
-        //     return (object)[
-        //         'isAreas' => false,
-        //         'courses' => $courses
-        //     ];        
-        // }
-
-        return (object)[
-            'isAreas' => false,
-            'courses' => $courses
-        ];        
+        } else {
+            return (object)[
+                'isAreas' => false,
+                'courses' => $courses
+            ];        
+        }
     }
 }

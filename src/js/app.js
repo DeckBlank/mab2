@@ -77,7 +77,7 @@ function baseActions(){
       }
     },
     getSector: function(type, name){
-      fetch(`${this.API}/sectors?type=${name}`)
+      fetch(`${this.API}/sectors?type=${type}`)
         .then(res => {
           if (res.status >= 200 && res.status < 300) {
             return res.json()
