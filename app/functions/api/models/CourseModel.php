@@ -60,7 +60,14 @@ class CourseModel{
                 ],
                 "list" => $courses_array
             ];
-        }        
+        } else {
+            $courses = get_posts([
+                "post_type" => "course",
+                "posts_per_page" => -1,
+            ]);
+
+            return $courses;
+        } 
     }
 
     public static function getUnities($request){
@@ -300,7 +307,27 @@ class CourseModel{
     }
 
     public static function getUserCourseLogs($request, $limit = false){
-        if (isset($request['user'])) {
+        if (isset($request['user']) && isset($request['course_id'])) {
+            $user_course_logs_query = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_user_course
+                WHERE
+                    user_email = '". $request['user'] ."' AND
+                    course_id = ". $request['course_id'] ."
+
+            ");
+        } elseif (isset($request['course_id'])) {
+            $user_course_logs_query = DBConnection::getConnection()->query("
+                SELECT 
+                    *
+                FROM 
+                    wp_user_course
+                WHERE
+                    course_id = ". $request['course_id'] ."
+            ");
+        } elseif (isset($request['user'])) {
             $user_course_logs_query = DBConnection::getConnection()->query("
                 SELECT 
                     *
@@ -330,6 +357,7 @@ class CourseModel{
                 ");
             }
         }
+
         $user_course_logs = [];
 
         if($user_course_logs_query && $user_course_logs_query->num_rows > 0){

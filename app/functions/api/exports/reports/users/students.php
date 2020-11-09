@@ -12,6 +12,7 @@
         <th style="background: #0266D0; color: white;">Colegio de estudios</th>
         <th style="background: #0266D0; color: white;">Grado escolar</th>
         <th style="background: #0266D0; color: white;">Ubicación</th>
+        <th style="background: #0266D0; color: white;">Fecha de registro (creación)</th>
     </tr>
     <tbody>
         <?php 
@@ -33,6 +34,7 @@
                 <td style="background: <?php echo $bg; ?>;"><?php echo $user->school ?></td>
                 <td style="background: <?php echo $bg; ?>;"><?php echo $user->grade ?></td>
                 <td style="background: <?php echo $bg; ?>;"><?php echo $user->location ?></td>
+                <td style="background: <?php echo $bg; ?>;"><?php echo $user->created ?></td>
             </tr>
         <?php $index++; } ?>
     </tbody>

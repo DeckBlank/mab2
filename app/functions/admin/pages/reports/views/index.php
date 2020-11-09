@@ -6,12 +6,16 @@
     <div class="mb-1">
     </div>
     <div class="d-flex mb-1">
+        <select class="mr-1" id="courses">
+            <option value="-1" selected>Todos</option>
+        </select>
         <input class="mr-1" type="text" placeholder="Usuario (email)" id="user">
         <button id="search" class="button button-primary mr-1">Buscar</button>
         <a  
             href="<?php echo get_site_url() . '/wp-json/custom/v1/courses/user/logs/download' ?>" 
             download 
-            class="button button-success">
+            class="button button-success"
+            id="download">
             Descargar todo (.xls)
         </a>
     </div>
@@ -45,7 +49,6 @@
             Descargar (.xls)
         </a>
     </div>
-    <!-- <p>Total de accesos: <strong id="total_access">123</strong> veces</p> -->
     <table class="widefat fixed mb-1" cellspacing="0">
         <thead>
             <tr>
@@ -75,7 +78,7 @@
     /**
      * @mountResults
      */
-    function mountResults(__logs, reset){
+    function mountResults(__logs, reset) {
         let resultsDOM = document.querySelector('#results')
 
         if(reset){
@@ -105,8 +108,21 @@
         }
     }
 
+    function mountCourses(courses) {
+        let coursesDOM = document.querySelector('#courses')
+
+        courses.forEach((course, index)=>{
+            coursesDOM.innerHTML += `
+                <option value="${course.ID}">
+                    ${course.post_title} - (${course.post_name})
+                </option>
+            `
+        })
+    }
+
     /**
      * @getResults()
+     * @getCourses()
      * @searchUserResult()
      * @loadMore
      */
@@ -128,12 +144,8 @@
             })        
     }
 
-    function searchUserResult(){
-        event.preventDefault();
-
-        let user = document.querySelector('#user');
-
-        fetch(`${API}/courses/user/logs?user=${user.value}`)
+    function getCourses(){
+        fetch(`${API}/courses/`)
             .then(res => {
                 if (res.status >= 200 && res.status < 300) {
                     return res.json()
@@ -141,12 +153,52 @@
                     throw res
                 }
             })
-            .then(course_user_logs => {
-                mountResults(course_user_logs, true);
+            .then(courses => {
+                mountCourses(courses);
             })
             .catch(err => {
                 throw err;       
             })        
+    }
+
+    function searchUserResult(){
+        event.preventDefault();
+
+        let download    = document.querySelector('#download');
+        let user        = document.querySelector('#user');
+        let courses     = document.querySelector('#courses');
+        let request     = '';
+
+        if (user.value != '') {
+            request = (courses.value == -1)
+                ? `?user=${user.value}`
+                : `?user=${user.value}&course_id=${courses.value}`;
+        } else if (courses.value != -1) {
+            request = `?course_id=${courses.value}`;
+        } else {
+            window.location.reload();
+        }
+
+        if (request) {
+            fetch(`${API}/courses/user/logs${request}`)
+                .then(res => {
+                    if (res.status >= 200 && res.status < 300) {
+                        return res.json()
+                    }else{
+                        throw res
+                    }
+                })
+                .then(course_user_logs => {
+                    mountResults(course_user_logs, true);
+
+                    download.href = `${API}/courses/user/logs/download${request}`;
+                })
+                .catch(err => {
+                    alert('No hay registros para este curso o usuario');
+
+                    throw err;       
+                })        
+        }
     }
 
     function loadMore(){
@@ -157,17 +209,22 @@
      * Main
      */
     getResults(page);
+    getCourses();
 
     /**
      * -----------------------------------------------
      * DOM
      * -----------------------------------------------
      */
-    let search = document.querySelector('#search'),
-        download = document.querySelector('#download')
+    let search      = document.querySelector('#search');
+    let courses     = document.querySelector('#courses');
 
-    search.onclick = ()=>{
+    search.onclick = () => {
         event.preventDefault(); 
         searchUserResult();
     }
+
+    // courses.onchange = () => {
+
+    // }
 </script>

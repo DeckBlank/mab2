@@ -13,6 +13,7 @@
         <th style="background: #0266D0; color: white;">Cantidad de hijos</th>
         <th style="background: #0266D0; color: white;">Hijos</th>
         <th style="background: #0266D0; color: white;">Ubicación</th>
+        <th style="background: #0266D0; color: white;">Fecha de registro (creación)</th>
     </tr>
     <tbody>
         <?php 
@@ -57,6 +58,7 @@
                     <?php } ?>
                 </td>
                 <td style="background: <?php echo $bg; ?>;"><?php echo $user->location ?></td>
+                <td style="background: <?php echo $bg; ?>;"><?php echo $user->created ?></td>
             </tr>
         <?php $index++; } ?>
     </tbody>

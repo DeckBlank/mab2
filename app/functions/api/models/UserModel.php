@@ -23,6 +23,7 @@ class UserModel{
                 case 'teacher':
                     array_push($users_array,
                         (object)[
+                            "created" => get_userdata($user->ID)->user_registered,
                             "role" => ($request['role'] == 'student') ? 'Estudiante' : 'Profesor',
                             "firstname" => get_user_meta($user->ID)['first_name'][0],
                             "lastname" => get_user_meta($user->ID)['last_name'][0],
@@ -43,6 +44,7 @@ class UserModel{
                 case 'tutor':
                     array_push($users_array,
                         (object)[
+                            "created" => get_userdata($user->ID)->user_registered,
                             "role" => 'Tutor/Padre',
                             "firstname" => get_user_meta($user->ID)['first_name'][0],
                             "lastname" => get_user_meta($user->ID)['last_name'][0],
