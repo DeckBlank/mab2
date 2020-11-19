@@ -157,7 +157,7 @@ Vue.component('form-teacher',{
         <p v-if="!schoolType.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>        
       </div>
       <div 
-        v-if="schoolType.value == 'privado' || schoolType.value == 'ongs'"
+        v-if="schoolType.value == 'privado'"
         class="input_container">
         <label for="">Institución de trabajo</label>
         <select 

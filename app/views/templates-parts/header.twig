@@ -7,7 +7,7 @@
           </a>
         </figure>
 
-        <li v-if="logedUser.user_sector == 'publico'">
+        <li v-if="logedUser.user_sector == 'publico' || logedUser.user_sector == 'ongs'">
           <div class="c-menu__item">
             <a class="position-relative flex-container align-middle" @click="updateStatusSectorMenu('public')">
               CURSOS <span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>
@@ -28,7 +28,7 @@
             </a>
           </div>
         </li>
-        <li v-else-if="logedUser.user_sector != 'publico'" >
+        <li v-else-if="logedUser.user_sector != 'publico' && logedUser.user_sector != 'ongs'" >
           <div class="c-menu__item">
             <a class="position-relative flex-container align-middle" @click="updateStatusSectorMenu('private')">
               SECTOR PRIVADO <span class="c-icon margin-left-1"><i class="far fa-chevron-down"></i></span>

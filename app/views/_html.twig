@@ -31,7 +31,7 @@
       <sector v-if="!logedUser || logedUser.user_rol == 'foreign'" type="public" name="publico"></sector>
       <sector v-if="!logedUser || logedUser.user_rol == 'foreign'" type="private" name="privado"></sector>
 
-      <sector v-if="logedUser && logedUser.user_sector == 'publico'" type="public" name="publico"></sector>
+      <sector v-if="logedUser && (logedUser.user_sector == 'publico' || logedUser.user_sector == 'ongs')" type="public" name="publico"></sector>
       <sector v-else-if="logedUser && logedUser.user_sector == 'privado'" type="private" name="privado"></sector>
 
       {% block content %}

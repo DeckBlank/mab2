@@ -9,9 +9,9 @@
       </div>
       <div class="c-nav__right width-100">
         <ul class="c-menu flex-container flex-dir-column ul-reset">
-          {% set sesion = primary_menu.items[1] %}
+          {% set sesion = primary_menu.items[2] %}
 
-          <li v-if="logedUser.user_sector == 'publico'" class="flex-container flex-dir-column">
+          <li v-if="logedUser.user_sector == 'publico' || logedUser.user_sector == 'ongs'" class="flex-container flex-dir-column">
             <label for="sector-pub" class="c-menu__item flex-container align-justify align-middle padding-1">
               <a class="position-relative">CURSOS</a>
               <span class="c-icon"><i class="far fa-chevron-down"></i></span>
@@ -257,7 +257,7 @@
             </ul>
           </li>
 
-          <li v-else-if="logedUser.user_sector != 'publico'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_priv.class %} activate {% endif %}">
+          <li v-else-if="logedUser.user_sector != 'publico' && logedUser.user_sector != 'ongs'" class="flex-container flex-dir-column {% if 'current-menu-item' in sec_priv.class %} activate {% endif %}">
             <label for="sector-priv" class="c-menu__item flex-container align-justify align-middle padding-1">
               <a class="position-relative">SECTOR PRIVADO</a>
               <span class="c-icon"><i class="far fa-chevron-down"></i></span>

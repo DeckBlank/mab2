@@ -62,7 +62,10 @@ class SectorModel{
         $areas = array_map(function($course){return $course['area'];}, $courses);
 
         if ($level != 'adultos') {
-            if ( count( array_filter($areas, function($area){return in_array($area, ['creative', 'emotional', 'academic']);}) ) == count($areas)) {
+            if (
+                count( array_filter($areas, function($area){return in_array($area, ['creative', 'emotional', 'academic']);}) ) == count($areas) &&
+                strtolower($grade->name) != 'ib'
+            ) {
                 $data = (object)[
                     'emotional' => [
                         'name' => 'Emocional/Bienestar',

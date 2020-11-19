@@ -7,7 +7,7 @@ Vue.component('sector',{
       <div 
         class="c-cursos bg-sec-color position-absolute" :class="{ 'active' : (step == 0 && active) }">
         <h2 v-if="logedUser" class="c-cursos__title margin-bottom-1 w-black white">MAB ACADÉMICO</h2>
-        <h2 v-else class="c-cursos__title margin-bottom-1 w-black white">{{ (type == 'public') ? 'PÚBLICO' : 'PRIVADO'}}</h2>
+        <h2 v-else class="c-cursos__title margin-bottom-1 w-black white">{{ (type == 'public' || type == 'ongs') ? 'PÚBLICO' : 'PRIVADO'}}</h2>
         <ul class="c-cursos__list ul-reset">
           <li  v-for="level of levels" class="c-cursos__item fs-18 f2">
             <a class="display-block" @click="getGrades(level)">{{ level.name }}</a>
@@ -136,11 +136,18 @@ Vue.component('sector',{
         this.levels = (this.sectorMenuData[this.type]) ? this.sectorMenuData[this.type].levels : [];
       },
       deep: true
-    }
+    },
+    'active': function(value) {
+      if (value == true) {
+        document.querySelector('#app').classList.add('c-overmoon');
+      } else {
+        document.querySelector('#app').classList.remove('c-overmoon');
+      }
+    },
   },
   methods: {
     getCourseLink: function(course) {
-      return `${this.SITE_URL}/curso/${course.slug}?sector=${((this.type == 'public') ? 'publico' : 'privado')}`;
+      return `${this.SITE_URL}/curso/${course.slug}?sector=${((this.type == 'public' || type == 'ongs') ? 'publico' : 'privado')}`;
     },
     getGrades: function(level){
       this.step = 1;
