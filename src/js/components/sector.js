@@ -147,7 +147,7 @@ Vue.component('sector',{
   },
   methods: {
     getCourseLink: function(course) {
-      return `${this.SITE_URL}/curso/${course.slug}?sector=${((this.type == 'public' || type == 'ongs') ? 'publico' : 'privado')}`;
+      return `${this.SITE_URL}/curso/${course.slug}?sector=${((this.type == 'public' || this.type == 'ongs') ? 'publico' : 'privado')}`;
     },
     getGrades: function(level){
       this.step = 1;
