@@ -221,6 +221,16 @@ class CourseController{
         }        
     }
 
+    public function export($request) {
+        $courses = CourseModel::getAllSanitize($request);
+        
+        if(empty($courses)){
+            return new WP_Error( 'no_courses', __('No courses found'), array( 'status' => 404 ) );
+        }else{
+            return new WP_REST_Response($courses, 200);
+        }
+    }
+
     //Logs-----------------------------------------------/
     public function getUserCourseLogs($request){
         $user_course_logs = CourseModel::getUserCourseLogs($request);

@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1605796040722';
+$assets_version = '1606454964394';
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -592,6 +592,30 @@ add_action( 'admin_head', function() use ($config, $assets_version) {
                 'ver'       => $assets_version,
                 'in_footer' => true
             ]); 
+            break;
+
+        case 'edit':
+            if($current->id == 'edit-course') {
+                register_assets('package', [
+                    'handle'    => 'pandawp/package/babel',
+                    'src'       => $config['resources']['package_babel'],
+                    'deps'      => [ ],
+                    'ver'       => $assets_version,
+                    'in_footer' => true
+                ]);
+
+                register_assets('script', [
+                    'handle'    => 'pandawp/wp/courses',
+                    'src'       =>  $config['resources']['wp_courses'],
+                    'deps'      => [ ],
+                    'ver'       => $assets_version,
+                    'in_footer' => true
+                ]);
+
+                wp_localize_script( 'pandawp/wp/courses', 'mab', [
+                    "site" => get_site_url()
+                ]);
+            }
             break;
     }
 });

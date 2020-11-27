@@ -156,7 +156,7 @@ class UserModel{
                             ]);
                         }                
 
-                        update_field('children', $children, 'user_' . $user_id);                    
+                        update_field('children', $children, 'user_' . $user_id);
                     break;
                 case 'student' :
                         update_field('gender', $request['gender'], 'user_' . $user_id);

@@ -206,6 +206,11 @@ add_action( 'rest_api_init', function () {
         'methods' => 'GET',
         'callback' => array($courseController,'downloadExpiredEnrollments'),
     ));
+
+    register_rest_route( 'custom/v1', '/courses/export', array(
+        'methods' => 'GET',
+        'callback' => array($courseController,'export'),
+    ));
 });
 
 //4. Topic ----------------------------------//

@@ -70,14 +70,48 @@ class CourseModel{
         } 
     }
 
-    public static function getUnities($request){
+    public static function getAllSanitize($request) {
+        $courses = [];
+        
+        if (isset($request['ids'])) {
+            $ids = explode(',', $request['ids']);
+
+            $courses = Timber::get_posts([
+                "post_type"         => "course",
+                "posts_per_page"    => -1,
+                "post__in"          => $ids,
+                "orderby"           => "post__in"
+            ]);
+        } else {
+            $courses = Timber::get_posts([
+                "post_type"         => "course",
+                "posts_per_page"    => 20,
+                "paged"             => $request['page']
+            ]);
+        }
+
+        $coursesArray = [];
+
+        foreach($courses as $course) {
+            array_push($coursesArray, [
+                "id"            => $course->ID,
+                "title"         => $course->title,
+                "categories"    => $course->terms(),
+                "unities"       => self::getUnities(['course_id' => $course->ID, 'user' => 'admin'], 'deep')
+            ]);
+        }
+
+        return $coursesArray;
+    }
+
+    public static function getUnities($request, $mode = 'surface'){
         $unities = [];
 
         if(get_field('unities', $request['course_id'])){
             foreach( get_field('unities', $request['course_id']) as $unity){
                 array_push($unities,(object)[
                     "title" => $unity['title'],
-                    "topics" => self::__getTopicsSanitize($unity['topics'], $request['user'])
+                    "topics" => self::__getTopicsSanitize($unity['topics'], $request['user'], $mode)
                 ]);
             }
         }        
@@ -542,23 +576,32 @@ class CourseModel{
         }
     }
 
-    public static function __getTopicsSanitize($topics, $user){
+    public static function __getTopicsSanitize($topics, $user, $mode){
         $topics_sanitize = [];
     
         if($topics){        
             foreach($topics as $topic){
-                array_push($topics_sanitize, (object)[
-                    "id" => $topic['topic']->ID,
+                $tempTopic = [
+                    "id"    => $topic['topic']->ID,
                     "title" => $topic['topic']->post_title,
                     "video" => (object)[
                         "state" => self::__isViewedTopic($topic['topic']->ID, $user),
-                        "link" => get_the_permalink($topic['topic']->ID)
+                        "link"  => get_the_permalink($topic['topic']->ID)
                     ],
-                    "summary" => ( get_field('summary', $topic['topic']->ID) ) ? get_field('summary', $topic['topic']->ID)['url'] : false,
-                    "map" => ( get_field('map', $topic['topic']->ID) ) ? get_field('map', $topic['topic']->ID)['url'] : false,
+                    "summary"   => ( get_field('summary', $topic['topic']->ID) ) ? get_field('summary', $topic['topic']->ID)['url'] : false,
+                    "map"       => ( get_field('map', $topic['topic']->ID) ) ? get_field('map', $topic['topic']->ID)['url'] : false,
                     "worksheet" => ( get_field('worksheet', $topic['topic']->ID) ) ? get_field('worksheet', $topic['topic']->ID)['url'] : false,
                     "solutions" => ( get_field('solutions', $topic['topic']->ID) ) ? get_field('solutions', $topic['topic']->ID)['url'] : false
-                ]);
+                ];
+
+                if ($mode == 'deep') {
+                    $tempTopic = array_merge($tempTopic, [
+                        'video_source'  => get_field('source', $topic['topic']->ID),
+                        'questions'     => get_field('questions', $topic['topic']->ID)
+                    ]);
+                }
+
+                array_push($topics_sanitize, $tempTopic);
             }
         }
     
