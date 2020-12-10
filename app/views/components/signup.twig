@@ -14,12 +14,15 @@
             </div>
             <div v-else class="margin-bottom-2">
               <p class="f2 fs-18 w-medium black">
-                ¡Hola! Estás dentro de perfil de visitante, desde aquí solo tienes acceso al contenido de emocional y creativo. Para poder ver más contenido, <strong>créate una cuenta profesor, estudiante o padre.</strong> 🤩
+                ¡Hola! Estás dentro de perfil de visitante, desde aquí solo tienes acceso al contenido de emocional y creativo. Para poder ver más contenido,
+                <strong>actualiza tu cuenta a una como profesor, estudiante o padre.</strong> 🤩
               </p>              
             </div>
             <div class="modal_btn_container flex-container align-center">
               <button @click="isActiveSignUp = false" class="c-button fs-18 w-medium f2 pri-color margin-right-1">Cerrar</button>
-              <a href="{{site.url}}/#registro" class="c-button fs-18 w-medium f2 c-button--secondary">Crear cuenta</a>
+              <a href="{{site.url}}/#registro" class="c-button fs-18 w-medium f2 c-button--secondary">
+                ${ (!logedUser) ? 'Crear cuenta' : 'Actualizar cuenta' }
+              </a>
             </div>
           </div>    
         </div>

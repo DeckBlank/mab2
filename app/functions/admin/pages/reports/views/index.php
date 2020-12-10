@@ -79,7 +79,8 @@
      * @mountResults
      */
     function mountResults(__logs, reset) {
-        let resultsDOM = document.querySelector('#results')
+        let resultsDOM  = document.querySelector('#results');
+        let courses     = document.querySelector('#courses');
 
         if(reset){
             resultsDOM.innerHTML = '';
@@ -103,7 +104,7 @@
             `
         })
 
-        if(__logs.length == 0 || __logs.length < 25){
+        if(__logs.length == 0 || __logs.length < 25 || courses.value != '-1'){
             document.querySelector('#load-more').classList.add('hide')
         }
     }
