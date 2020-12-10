@@ -114,6 +114,7 @@ class UserModel{
     }
 
     public static function createUser($request){
+        get_user_by( 'email', 'user@example.com' );
         if( !email_exists($request['email']) ){
             $username = $request['user_name'];
 
@@ -186,6 +187,69 @@ class UserModel{
     
             return true;
         }else{
+            return false;
+        }
+    }
+
+    public static function updateUser($request){
+        $user = new WP_User( get_user_by( 'email', $request['email'] )->ID );
+
+        $user->remove_role('foreign'); $user->add_role($request['type']);
+
+        if ($user) {
+            switch($request['type']){
+                case 'tutor' :
+                        update_field('gender', $request['gender'], 'user_' . $user->ID);
+                        update_field('phone', $request['phone'], 'user_' . $user->ID);
+                        update_field('calling_code', $request['calling_code'], 'user_' . $user->ID);
+                        update_field('mobile', $request['mobile'], 'user_' . $user->ID);
+                        update_field('school_type', $request['school_type'], 'user_' . $user->ID);
+                        update_field('ugel', $request['ugel'], 'user_' . $user->ID);
+                        update_field('children_school', $request['children_school'], 'user_' . $user->ID);
+                        update_field('children_quantity', $request['children_quantity'], 'user_' . $user->ID);
+                        update_field('location', $request['location'], 'user_' . $user->ID);
+
+                        $children = [];
+
+                        foreach(json_decode($request['children']) as $child){
+                            array_push($children, [
+                                "child" => [
+                                    "age" => $child->{'age'},
+                                    "grade" => $child->{'grade'}
+                                ]
+                            ]);
+                        }                
+
+                        update_field('children', $children, 'user_' . $user->ID);
+                    break;
+                case 'student' :
+                        update_field('gender', $request['gender'], 'user_' . $user->ID);
+                        update_field('age', $request['age'], 'user_' . $user->ID);
+                        update_field('phone', $request['phone'], 'user_' . $user->ID);
+                        update_field('calling_code', $request['calling_code'], 'user_' . $user->ID);
+                        update_field('mobile', $request['mobile'], 'user_' . $user->ID);
+                        update_field('school_type', $request['school_type'], 'user_' . $user->ID);
+                        update_field('ugel', $request['ugel'], 'user_' . $user->ID);
+                        update_field('school', $request['school'], 'user_' . $user->ID);
+                        update_field('grade', $request['grade'], 'user_' . $user->ID);
+                        update_field('location', $request['location'], 'user_' . $user->ID);               
+                    break;
+                case 'teacher' :
+                        update_field('gender', $request['gender'], 'user_' . $user->ID);
+                        update_field('age', $request['age'], 'user_' . $user->ID);
+                        update_field('phone', $request['phone'], 'user_' . $user->ID);
+                        update_field('calling_code', $request['calling_code'], 'user_' . $user->ID);
+                        update_field('mobile', $request['mobile'], 'user_' . $user->ID);
+                        update_field('school_type', $request['school_type'], 'user_' . $user->ID);
+                        update_field('ugel', $request['ugel'], 'user_' . $user->ID);
+                        update_field('school', $request['school'], 'user_' . $user->ID);
+                        update_field('grade', $request['grade'], 'user_' . $user->ID);
+                        update_field('location', $request['location'], 'user_' . $user->ID);               
+                    break;
+            }
+
+            return true;
+        } else {
             return false;
         }
     }

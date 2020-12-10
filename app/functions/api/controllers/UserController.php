@@ -92,7 +92,7 @@ class UserController{
             return new WP_Error( 'recovery_session_not_exists', __('No exists recovery session'), array( 'status' => 404 ) );
         }        
     }
-    
+
     public function createUser($request){
         if(UserModel::createUser($request)){
             if ($this::sendNotification($request)) {
@@ -102,6 +102,14 @@ class UserController{
             }
         }else{
             return new WP_Error( 'no_user_created', __('No user created'), array( 'status' => 404 ) );
+        }
+    }
+
+    public function updateUser($request){
+        if(UserModel::updateUser($request)){
+            return new WP_REST_Response('User updated', 200);
+        }else{
+            return new WP_Error( 'no_user_updated', __('No user updated'), array( 'status' => 404 ) );
         }
     }
     

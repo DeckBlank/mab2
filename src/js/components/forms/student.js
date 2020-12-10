@@ -8,7 +8,7 @@ Vue.component('form-student',{
   <section class="width-100">
     <form-accept :switcher.sync="isSentForm" :user="email.value" :password="password.value"></form-accept>
     <form class="c-form-box form_box" action="">
-      <div class="input_container">
+      <div v-if="!isForeign" class="input_container">
         <label for="">Nombres</label>
         <input 
           class="c-form-box__input input-reset" 
@@ -17,7 +17,7 @@ Vue.component('form-student',{
           v-model="name.value">
         <p v-if="!name.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Nombre incorrecto</p>
       </div>
-      <div class="input_container">
+      <div v-if="!isForeign" class="input_container">
         <label for="">Apellido Paterno</label>
         <input 
           class="c-form-box__input input-reset"
@@ -26,7 +26,7 @@ Vue.component('form-student',{
           v-model="lastFatherName.value">
         <p v-if="!lastFatherName.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Apellido incorrecto</p>          
       </div>
-      <div class="input_container">
+      <div v-if="!isForeign" class="input_container">
         <label for="">Apellido Materno</label>
         <input 
           class="c-form-box__input input-reset"
@@ -58,7 +58,7 @@ Vue.component('form-student',{
         </select>
         <p v-if="!gender.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">No ha seleccionado una opción</p>                         
       </div>      
-      <div class="input_container">
+      <div v-if="!isForeign" class="input_container">
         <label for="">Correo electrónico</label>
         <input 
           class="c-form-box__input input-reset"
@@ -67,7 +67,7 @@ Vue.component('form-student',{
           v-model="email.value">
         <p v-if="!email.isValid && !is_valid_form" class="c-form-box__error margin-bottom-0 fs-18 f2 w-medium white">Email incorrecto</p>           
       </div>
-      <div class="input_container">
+      <div v-if="!isForeign" class="input_container">
         <label for="">Crear contraseña</label>
         <div class="position-relative">
           <span v-if="!password.visible" @click="password.visible = !password.visible" class="c-form-box__toggle position-absolute">Mostrar</span>
@@ -185,6 +185,13 @@ Vue.component('form-student',{
       </div>      
       <div class="btn_container margin-bottom-1">
         <button 
+          v-if="isForeign"
+          class="c-form-box__sender" 
+          :disabled="isSending"
+          type="button"
+          @click="updateProfile">Actualizar</button>
+        <button
+          v-else
           class="c-form-box__sender" 
           :disabled="isSending"
           type="button"
@@ -228,7 +235,10 @@ Vue.component('form-student',{
     }
   },  
   computed: {
-    ...Vuex.mapState(['API'])
+    ...Vuex.mapState(['API', 'SITE_URL', 'logedUser']),
+    isForeign: function() {
+      return (this.logedUser && this.logedUser.user_rol == 'foreign') ? true : false;
+    },
   },
   watch: {
     ...baseWatch(),
@@ -241,6 +251,8 @@ Vue.component('form-student',{
   },
   beforeMount(){
     this.getCountries();
+
+    if(this.logedUser && this.logedUser.user_rol != 'foreign') window.location.href = this.SITE_URL;
   },
   methods: {
     ...baseMethods(),
@@ -305,7 +317,59 @@ Vue.component('form-student',{
             throw err;          
           })      
       }
+    },
+    updateProfile: function() {
+      this.is_valid_form = this.gender.isValid &&
+        this.mobile.isValid &&
+        this.schoolType.isValid &&
+        ((this.schoolType.value == 'privado') ? this.school.isValid : true) &&
+        this.grade.isValid &&
+        this.age.isValid &&
+        this.country.isValid &&
+        this.department.isValid &&
+        this.province.isValid &&
+        this.district.isValid;
 
-    }
+      if(this.is_valid_form){
+        this.isSending = true;
+
+        fetch(`${this.API}/user`,{
+            method: 'PUT',
+            headers: {
+              'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify({
+              type: 'student',
+              email: this.logedUser.user_email,
+              gender: this.gender.value,
+              phone: this.phone.value,
+              calling_code: this.callingCode.value,
+              mobile: this.mobile.value,
+              school_type: this.schoolType.value,
+              ugel: '',
+              school: this.school.value,
+              grade: this.grade.value,
+              age: this.age.value,
+              location: `${this.country.value}, ${this.department.value}, ${this.province.value}, ${this.district.value}`,
+            }),
+          })
+          .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              return res.json()
+            }else{
+              throw res
+            }
+          })
+          .then(response => {
+            window.location.href = `${this.SITE_URL}/emotional`;
+          })
+          .catch(err => {
+            this.isSentFormError = true;
+            this.isSending = false;
+
+            throw err;          
+          })      
+      }
+    },
   },  
 });

@@ -67,11 +67,10 @@
         
         <div class="section-init_textbottom">
           Prepárate para una experiencia distinta de aprendizaje integral. <br>
-        Bienvenidos a nuestra plataforma académica, emocional y creativa para docentes, estudiantes y papás.
+          Bienvenidos a nuestra plataforma académica, emocional y creativa para docentes, estudiantes y papás.
         </div>
       </div>
     </section>
-
 
     <section id="registro" class="mab_linkForm">
       <div class="section_content">
@@ -90,10 +89,10 @@
         <h3 class="subtitle">
         </h3>
         <div class="mab_linkForm_top">
-          ¿No tienes cuenta?
+          ${ (logedUser && logedUser.user_rol == 'foreign') ? '¡Actualiza tu cuenta!' : '¿No tienes cuenta?' }
         </div>
         <div class="mab_linkForm_newtitle">
-          Regístrate:
+          ${ (logedUser && logedUser.user_rol == 'foreign') ? 'Como:' : 'Regístrate:' }
         </div>
         <ul class="mab_linkForm_list">
           <li>
@@ -108,7 +107,7 @@
             <a href="{{site.url}}/formularios?type=tutor">Padre/Tutor</a>
             <span></span>    
           </li>
-          <li>
+          <li v-if="!logedUser || (logedUser && logedUser.user_rol != 'foreign')">
             <a href="{{site.url}}/formularios?type=foreign">Visitante</a>
             <span></span>    
           </li>
