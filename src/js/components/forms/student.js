@@ -251,8 +251,6 @@ Vue.component('form-student',{
   },
   beforeMount(){
     this.getCountries();
-
-    if(this.logedUser && this.logedUser.user_rol != 'foreign') window.location.href = this.SITE_URL;
   },
   methods: {
     ...baseMethods(),
