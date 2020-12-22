@@ -44,14 +44,13 @@ const shop_cart = new Vue({
       }
     }
   },
-  created(){
+  mounted(){
     if (this.logedUser) {
       this.listCourses();
     } else {
       window.location = `${this.SITE_URL}/login`
     }
-  },
-  mounted(){
+
     this.global();
   },
   methods: {
@@ -85,7 +84,9 @@ const shop_cart = new Vue({
             this.hideLoading();
           })
           .catch(err => {
+            window.localStorage.removeItem('mab_shop_cart');
             window.location = `${this.SITE_URL}/emotional`
+
             throw err;
           })
       }else{
