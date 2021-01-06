@@ -33,8 +33,10 @@ const test = new Vue({
     }
   },
   created(){
-    if((!this.logedUser && this.logedUser.user_sector != 'privado') || this.logedUser.user_sector != 'foreign'){
+    if(!this.logedUser){
       window.location = `${this.SITE_URL}/login`;
+    } else if (this.logedUser.user_rol == 'foreign') {
+      window.location = `${this.SITE_URL}/emotional`;
     }
   },
   mounted(){
@@ -274,7 +276,9 @@ const test = new Vue({
       let mab_temp = window.localStorage.getItem('mab_temp');
       mab_temp = JSON.parse(mab_temp)
 
-      this.isEnableTest = ((mab_temp.behaviour_timer + 15*60) <= current) ? true : false;
+      if (mab_temp) {
+        this.isEnableTest = ((mab_temp.behaviour_timer + 15*60) <= current) ? true : false;
+      }
     }
   }
 })

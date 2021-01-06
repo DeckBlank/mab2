@@ -22,8 +22,18 @@
             <h1 class="c-title fs-40 f1 w-medium dark-gray margin-bottom-2">
               {{post.title}}
             </h1>
-            <div class="c-player margin-bottom-1">
-              <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/{{source|split('/')[3]}}?color=de0d46&title=0&byline=0&autoplay=1" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe></div></div>
+            {% if source_type and source_type == 'ebook' %}
+              <figure class="margin-bottom-1">
+                <img class="width-100 of--contain" src="{{source_banner['url']}}" alt="">
+              </figure>
+              <a href="{{source}}" target="_blank" class="c-button c-button--secondary display-block w-100 text-center margin-bottom-2">Leer libro</a>
+            {% else %}
+              <div class="c-player margin-bottom-1">
+                <div style="padding:56.25% 0 0 0;position:relative;">
+                  <iframe src="https://player.vimeo.com/video/{{source|split('/')[3]}}?color=de0d46&title=0&byline=0&autoplay=1" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                </div>
+              </div>
+            {% endif %}
             <div v-if="logedUser" class="c-navigation flex-container align-justify margin-bottom-1 padding-bottom-1">
               {% if navigation.previous %}
                 <a href="{{navigation.previous}}" class="c-button c-button--primary flex-container">

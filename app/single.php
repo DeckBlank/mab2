@@ -76,7 +76,6 @@ function __getTopicOnNavigation($course_id, $unity_id, $topic_id, $direction){
     }
 }
 
-
 $context         = Timber::get_context();
 $context['post'] = Timber::get_post();
 
@@ -101,11 +100,13 @@ if($post->post_type == "video"){
 
     $context['area'] = get_field('area', $_GET['course_id']);
 
-    $context['source'] = get_field('source', $post->ID);
-    $context['summary'] = ( get_field('summary', $post->ID) ) ? get_field('summary', $post->ID)['url'] : false;
-    $context['map'] = ( get_field('map', $post->ID) ) ? get_field('map', $post->ID)['url'] : false;
-    $context['worksheet'] = ( get_field('worksheet', $post->ID) ) ? get_field('worksheet', $post->ID)['url'] : false;
-    $context['solutions'] = ( get_field('solutions', $post->ID) ) ? get_field('solutions', $post->ID)['url'] : false;
+    $context['source']          = get_field('source', $post->ID);
+    $context['source_type']     = get_field('source_type', $post->ID);
+    $context['source_banner']   = ($context['source_type'] == 'ebook') ? get_field('source_banner', $post->ID) : '';
+    $context['summary']         = ( get_field('summary', $post->ID) ) ? get_field('summary', $post->ID)['url'] : false;
+    $context['map']             = ( get_field('map', $post->ID) ) ? get_field('map', $post->ID)['url'] : false;
+    $context['worksheet']       = ( get_field('worksheet', $post->ID) ) ? get_field('worksheet', $post->ID)['url'] : false;
+    $context['solutions']       = ( get_field('solutions', $post->ID) ) ? get_field('solutions', $post->ID)['url'] : false;
 }
 
 $templates = [
