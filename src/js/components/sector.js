@@ -6,7 +6,7 @@ Vue.component('sector',{
     <div class="c-sector position-fixed" :class="{ 'active' : active }">
       <div 
         class="c-cursos bg-sec-color position-absolute" :class="{ 'active' : (step == 0 && active) }">
-        <h2 v-if="logedUser" class="c-cursos__title margin-bottom-1 w-black white">MAB ACADÉMICO</h2>
+        <h2 v-if="logedUser" class="c-cursos__title margin-bottom-1 w-black white">CURSOS</h2>
         <h2 v-else class="c-cursos__title margin-bottom-1 w-black white">{{ (type == 'public' || type == 'ongs') ? 'PÚBLICO' : 'PRIVADO'}}</h2>
         <ul class="c-cursos__list ul-reset">
           <li  v-for="level of levels" class="c-cursos__item fs-18 f2">
