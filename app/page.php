@@ -37,7 +37,7 @@ if(is_page('login')){
         )
     ]);
     if (is_user_logged_in()) {
-        $context['banner'] = 'https://vimeo.com/460748832';
+        $context['banner'] = 'https://vimeo.com/455512200/98e00c23c5';
     } else {
         $context['banner'] = get_field('banner', $post->ID);
     }    
