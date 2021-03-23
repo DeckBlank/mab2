@@ -53,7 +53,7 @@
             <tr valign="top" class="${ ((index + 1) % 2 == 0) ? 'alternate' : '' }">
                 <td class="manage-column column-columnname" scope="col">${ (!log.user) ? log.user_email : log.user.data.user_nicename }</td>
                 <td class="manage-column column-columnname" scope="col">${log.user_email}</td>
-                <td class="manage-column column-columnname" scope="col">${log.user_metas.location}</td>
+                <td class="manage-column column-columnname" scope="col">${ (log.user_metas) ? log.user_metas.location : '-' }</td>
                 <td class="manage-column column-columnname" scope="col">${log.access_count}</td>
                 <td class="manage-column column-columnname" scope="col">${log.last_date}</td>
             </tr>
