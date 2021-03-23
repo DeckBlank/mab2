@@ -20,6 +20,7 @@
             <tr>
                 <th id="columnname" class="manage-column column-columnname" scope="col">Usuario</th>
                 <th id="columnname" class="manage-column column-columnname" scope="col">Email</th>
+                <th id="columnname" class="manage-column column-columnname" scope="col">Country</th>
                 <th id="columnname" class="manage-column column-columnname" scope="col">Accesos</th>
                 <th id="columnname" class="manage-column column-columnname" scope="col">Ultima vez</th>
             </tr>
@@ -52,6 +53,7 @@
             <tr valign="top" class="${ ((index + 1) % 2 == 0) ? 'alternate' : '' }">
                 <td class="manage-column column-columnname" scope="col">${ (!log.user) ? log.user_email : log.user.data.user_nicename }</td>
                 <td class="manage-column column-columnname" scope="col">${log.user_email}</td>
+                <td class="manage-column column-columnname" scope="col">${log.location}</td>
                 <td class="manage-column column-columnname" scope="col">${log.access_count}</td>
                 <td class="manage-column column-columnname" scope="col">${log.last_date}</td>
             </tr>

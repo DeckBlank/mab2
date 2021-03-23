@@ -467,13 +467,5 @@ class UserModel{
         }else {
             return null;
         }
-        // while($enrollment = $enrollments->fetch_assoc()){
-        //     array_push($enrollments_array, (object)[
-        //         "course" => CourseModel::__getCourseName($enrollment['course_id']),
-        //         "state" => ($enrollment['state'] == 1) ? 'Habilitado' : 'Bloqueado',
-        //         "date_at" => $enrollment['date_at'],
-        //         "date_end" => $enrollment['date_end']
-        //     ]);            
-        // }
     }
 }
