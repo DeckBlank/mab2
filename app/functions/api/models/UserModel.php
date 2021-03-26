@@ -406,7 +406,7 @@ class UserModel{
                         *
                     FROM 
                         wp_access_logs
-                    ORDER BY last_date DESC
+                    ORDER BY access_count DESC
                 ");
             } else {
                 $access_logs_query = DBConnection::getConnection()->query("
@@ -414,7 +414,7 @@ class UserModel{
                         *
                     FROM 
                         wp_access_logs
-                    ORDER BY last_date DESC
+                    ORDER BY access_count DESC
                     LIMIT ". __getLimit() ."
                     OFFSET ". __getOffset($request['page']) ."
                 ");
