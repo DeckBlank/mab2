@@ -81,6 +81,7 @@ return [
         'page_course'               => get_theme_file_uri('/static/js/page-course.bundle.js'),
         'page_topic'                => get_theme_file_uri('/static/js/page-topic.bundle.js'),
         'page_session'              => get_theme_file_uri('/static/js/page-session.bundle.js'),
+        'page_access'              => get_theme_file_uri('/static/js/page-access.bundle.js'),
 
         //WP
         'wp_session'        => get_theme_file_uri('/static/js/wp-session.bundle.js'),

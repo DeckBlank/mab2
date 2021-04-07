@@ -1,0 +1,188 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--access">
+    
+      <div class="c-register-layout">
+        <div class="grid-x height-100">
+          <div class="cell large-5">
+            <transition name="fade" mode="out-in">
+              <div v-if="view == 1" key="step1" class="c-register-layout__figure height-100">
+                <figure class="c-image-figcaption position-relative height-100 width-100">
+                  <img loading="lazy" class="c-image-figcaption__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
+                  <figcaption class="c-image-figcaption__figcaption width-100 height-100 position-absolute flex-container">
+                    <div style="background: linear-gradient(red, transparent 75%);" class="c-image-figcaption__top width-100  flex-container padding-3 padding-top-2">
+                      <div class="c-corner-logo">
+                        <img loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
+                      </div>
+                      <div class="c-corner-text text-rigth">
+                        Macarena Arribas <br>
+                        Fundadora de MAB
+                      </div>
+                    </div>
+                    <div style="background: linear-gradient(to top, red, transparent 75%);" class="c-image-figcaption__bottom width-100 padding-3">
+                      <!-- <h2 class="c-image-figcaption__title">
+                        mucho más que una <br>
+                        <span>plataforma</span> de cursos
+                      </h2> -->
+                      <h3 class="c-image-figcaption__subtitle">
+                        ¡ya casi estás listo/a
+                          para <span>comenzar</span> a
+                          aprender distinto!
+                      </h3>
+                      <p class="c-image-figcaption__text">
+                        conoce todos <span> nuestros proyectos</span> y
+                        servicios que tenemos para ti primero
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </div>
+              <div v-if="view == 2" key="step2" class="c-register-layout__figure height-100">
+                <figure class="c-image-figcaption position-relative height-100 width-100">
+                  <img loading="lazy" class="c-image-figcaption__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
+                  <figcaption class="c-image-figcaption__figcaption width-100 height-100 position-absolute flex-container">
+                    <div style="background: linear-gradient(green, transparent 75%);" class="c-image-figcaption__top width-100 flex-container padding-3 padding-top-2">
+                      <div class="c-corner-logo">
+                        <img loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
+                      </div>
+                      <div class="c-corner-text text-rigth">
+                        Macarena Arribas <br>
+                        Fundadora de MAB
+                      </div>
+                    </div>
+                    <div style="background: linear-gradient(to top, green, transparent 75%);" class="c-image-figcaption__bottom width-100 padding-3">
+                      <!-- <h2 class="c-image-figcaption__title">
+                        mucho más que una <br>
+                        <span>plataforma</span> de cursos
+                      </h2> -->
+                      <h3 class="c-image-figcaption__subtitle">
+                        ¡ya casi estás listo/a
+                          para <span>comenzar</span> a
+                          aprender distinto!
+                      </h3>
+                      <p class="c-image-figcaption__text">
+                        conoce todos <span> nuestros proyectos</span> y
+                        servicios que tenemos para ti segundo
+                      </p>
+                    </div>
+                  </figcaption>
+                </figure>
+              </div>
+              <div v-if="view == 3" key="step3" class="c-image-slider height-100">
+                <div class="swiper-container height-100">
+                  <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                      <figure class="c-image-figcaption position-relative height-100 width-100">
+                        <img loading="lazy" class="c-image-figcaption__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
+                        <figcaption class="c-image-figcaption__figcaption width-100 height-100 position-absolute flex-container">
+                          <div style="background: linear-gradient(blue, transparent 75%);" class="c-image-figcaption__top width-100  flex-container padding-3 padding-top-2">
+                            <div class="c-corner-logo">
+                            </div>
+                            <div class="c-corner-text text-rigth">
+                              Macarena Arribas <br>
+                              Fundadora de MAB
+                            </div>
+                          </div>
+                          <div style="background: linear-gradient(to top, blue, transparent 75%);" class="c-image-figcaption__bottom width-100 padding-3">
+                            <!-- <h2 class="c-image-figcaption__title">
+                              mucho más que una <br>
+                              <span>plataforma</span> de cursos
+                            </h2> -->
+                            <h3 class="c-image-figcaption__subtitle">
+                              ¡ya casi estás listo/a
+                                para <span>comenzar</span> a
+                                aprender distinto!
+                            </h3>
+                            <p class="c-image-figcaption__text">
+                              conoce todos <span> nuestros proyectos</span> y
+                              servicios que tenemos para ti terc slider1
+                            </p>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    </div>
+                    <div class="swiper-slide">
+                      <figure class="c-image-figcaption position-relative height-100 width-100">
+                        <img loading="lazy" class="c-image-figcaption__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
+                        <figcaption class="c-image-figcaption__figcaption width-100 height-100 position-absolute flex-container">
+                          <div style="background: linear-gradient(red, transparent 75%);" class="c-image-figcaption__top width-100  flex-container padding-3 padding-top-2">
+                            <div class="c-corner-logo">
+                              <img loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
+                            </div>
+                            <div class="c-corner-text text-rigth">
+                              Macarena Arribas <br>
+                              Fundadora de MAB
+                            </div>
+                          </div>
+                          <div style="background: linear-gradient(to top, red, transparent 75%);" class="c-image-figcaption__bottom width-100 padding-3">
+                            <!-- <h2 class="c-image-figcaption__title">
+                              mucho más que una <br>
+                              <span>plataforma</span> de cursos
+                            </h2> -->
+                            <h3 class="c-image-figcaption__subtitle">
+                              ¡ya casi estás listo/a
+                                para <span>comenzar</span> a
+                                aprender distinto!
+                            </h3>
+                            <p class="c-image-figcaption__text">
+                              conoce todos <span> nuestros proyectos</span> y
+                              servicios que tenemos para ti terc slider2
+                            </p>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    </div>
+                    <div class="swiper-slide">
+                      <figure class="c-image-figcaption position-relative height-100 width-100">
+                        <img loading="lazy" class="c-image-figcaption__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
+                        <figcaption class="c-image-figcaption__figcaption width-100 height-100 position-absolute flex-container">
+                          <div style="background: linear-gradient(green, transparent 75%);" class="c-image-figcaption__top width-100  flex-container padding-3 padding-top-2">
+                            <div class="c-corner-logo">
+                              <img loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
+                            </div>
+                            <div class="c-corner-text text-rigth">
+                              Macarena Arribas <br>
+                              Fundadora de MAB
+                            </div>
+                          </div>
+                          <div style="background: linear-gradient(to top,green, transparent 75%);" class="c-image-figcaption__bottom width-100 padding-3">
+                            <!-- <h2 class="c-image-figcaption__title">
+                              mucho más que una <br>
+                              <span>plataforma</span> de cursos
+                            </h2> -->
+                            <h3 class="c-image-figcaption__subtitle">
+                              ¡ya casi estás listo/a
+                                para <span>comenzar</span> a
+                                aprender distinto!
+                            </h3>
+                            <p class="c-image-figcaption__text">
+                              conoce todos <span> nuestros proyectos</span> y
+                              servicios que tenemos para ti terc slider3
+                            </p>
+                          </div>
+                        </figcaption>
+                      </figure>
+                    </div>
+                  </div>
+                  <div class="swiper-pagination"></div>
+                </div>
+              </div>
+            </transition>
+          </div>
+          <div class="cell large-7">
+            <div class="c-register-layout__content height-100">
+              <div class="text-center padding-3">
+                <button class="c-button" @click="prev()">anterior</button>
+                <button class="c-button" @click="next()">siguiente</button>
+              </div>
+            </div>  
+          </div>
+        </div> 
+      </div>
+  </section>
+{% endblock %}
