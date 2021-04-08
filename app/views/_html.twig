@@ -45,6 +45,32 @@
       {% endblock %}      
     </main>
 
+    <button onclick="signIn()">Google</button>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+
     {{ function('wp_footer') }}
+
+    <script>
+      function signIn() {
+        gapi.load('auth2', function() {
+          const auth2 = gapi.auth2.init({
+            client_id: '999086702146-87q1a9kleriolc0ro8g7ob1qvp3k09d3.apps.googleusercontent.com',
+            fetch_basic_profile: true,
+            scope: 'profile',
+          })
+
+          auth2.signIn().then(user => {
+            const profile = user.getBasicProfile()
+
+            console.log('Full Name: ' + profile.getName());
+            console.log('Given Name: ' + profile.getGivenName());
+            console.log('Family Name: ' + profile.getFamilyName());
+          }, (err) => {
+            console.log(err);
+          })
+        })
+      }
+    </script>
   </body>
 </html>
