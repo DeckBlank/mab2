@@ -24,3 +24,7 @@ require_once(__DIR__."/../controllers/TestController.php");
 require_once(__DIR__."/../controllers/BehaviourController.php");
 require_once(__DIR__."/../controllers/ExerciseController.php");
 require_once(__DIR__."/../controllers/SchoolController.php");
+
+require_once(__DIR__ . "/../controllers/AuthController.php");
+
+new AuthController();

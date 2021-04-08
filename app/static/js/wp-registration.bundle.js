@@ -104,7 +104,7 @@ eval("/**\r\n * Global\r\n */\nvar API = window.location.hostname == 'localhost'
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__(/*! C:\\laragon\\www\\mab\\wp-content\\themes\\mab-theme\\src\\js\\core\\wp-registration.js */\"./src/js/core/wp-registration.js\");\n\n\n//# sourceURL=webpack:///multi_./src/js/core/wp-registration.js?");
+eval("module.exports = __webpack_require__(/*! C:\\laragon\\www\\mab\\wp-content\\themes\\mab\\src\\js\\core\\wp-registration.js */\"./src/js/core/wp-registration.js\");\n\n\n//# sourceURL=webpack:///multi_./src/js/core/wp-registration.js?");
 
 /***/ })
 
