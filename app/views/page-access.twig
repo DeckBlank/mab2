@@ -1,104 +1,91 @@
 {% extends '_html.twig' %}
 
 {% block hero %}
-  {% include 'templates-parts/hero.twig' %}
+  {# {% include 'templates-parts/hero.twig' %} #}
 {% endblock %}
 
 {% block content %}
   <section class="c-section c-section--access">
-    
-      <div class="c-register-layout">
+      <div class="c-split-layout">
         <div class="grid-x height-100">
           <div class="cell large-5">
             <transition name="fade" mode="out-in">
-              <div v-if="view == 1" key="step1" class="c-register-layout__figure height-100">
-                <figure class="c-image-figcaption position-relative height-100 width-100">
-                  <img loading="lazy" class="c-image-figcaption__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                  <figcaption class="c-image-figcaption__figcaption width-100 height-100 position-absolute flex-container">
-                    <div style="background: linear-gradient(red, transparent 75%);" class="c-image-figcaption__top width-100  flex-container padding-3 padding-top-2">
+              <div v-if="view == 1" key="step1" class="c-split-layout__figure height-100">
+                <figure class="c-cover-gradient c-cover-gradient--secondary position-relative height-100 width-100">
+                  <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
+                  <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
+                    <div class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
                       <div class="c-corner-logo">
-                        <img loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
+                        <img v-if="false" loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
+                      </div>
+                      <div class="c-corner-text text-rigth f2 w-bold">
+                        Macarena Arribas <br>
+                        Fundadora de MAB
+                      </div>
+                    </div>
+                    <div class="c-cover-gradient__bottom width-100 padding-3">
+                      <h2 class="c-cover-gradient__title">
+                        <span>¡Hola!</span>
+                      </h2>
+                      <h3 class="c-cover-gradient__subtitle">
+                        Qué gusto verte por <br> aquí de nuevo
+                      </h3>
+                    </div>
+                  </figcaption>
+                </figure>
+              </div>
+              <div v-if="view == 2" key="step2" class="c-split-layout__figure height-100">
+                <figure class="c-cover-gradient c-cover-gradient--secondary position-relative height-100 width-100">
+                  <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
+                  <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
+                    <div class="c-cover-gradient__top width-100 flex-container padding-3 padding-top-2">
+                      <div class="c-corner-logo">
+                        <img v-if="false" loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
                       </div>
                       <div class="c-corner-text text-rigth">
                         Macarena Arribas <br>
                         Fundadora de MAB
                       </div>
                     </div>
-                    <div style="background: linear-gradient(to top, red, transparent 75%);" class="c-image-figcaption__bottom width-100 padding-3">
-                      <!-- <h2 class="c-image-figcaption__title">
-                        mucho más que una <br>
-                        <span>plataforma</span> de cursos
-                      </h2> -->
-                      <h3 class="c-image-figcaption__subtitle">
-                        ¡ya casi estás listo/a
-                          para <span>comenzar</span> a
-                          aprender distinto!
+                    <div class="c-cover-gradient__bottom width-100 padding-3">
+                      <h3 class="c-cover-gradient__subtitle">
+                        <span>¡Hola,</span><br>
+                          <span>soy Maca!</span>
                       </h3>
-                      <p class="c-image-figcaption__text">
-                        conoce todos <span> nuestros proyectos</span> y
-                        servicios que tenemos para ti primero
+                      <p class="c-cover-gradient__text">
+                        ¿Estás listo para<br>
+                        girar la educación?
                       </p>
                     </div>
                   </figcaption>
                 </figure>
               </div>
-              <div v-if="view == 2" key="step2" class="c-register-layout__figure height-100">
-                <figure class="c-image-figcaption position-relative height-100 width-100">
-                  <img loading="lazy" class="c-image-figcaption__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                  <figcaption class="c-image-figcaption__figcaption width-100 height-100 position-absolute flex-container">
-                    <div style="background: linear-gradient(green, transparent 75%);" class="c-image-figcaption__top width-100 flex-container padding-3 padding-top-2">
-                      <div class="c-corner-logo">
-                        <img loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
-                      </div>
-                      <div class="c-corner-text text-rigth">
-                        Macarena Arribas <br>
-                        Fundadora de MAB
-                      </div>
-                    </div>
-                    <div style="background: linear-gradient(to top, green, transparent 75%);" class="c-image-figcaption__bottom width-100 padding-3">
-                      <!-- <h2 class="c-image-figcaption__title">
-                        mucho más que una <br>
-                        <span>plataforma</span> de cursos
-                      </h2> -->
-                      <h3 class="c-image-figcaption__subtitle">
-                        ¡ya casi estás listo/a
-                          para <span>comenzar</span> a
-                          aprender distinto!
-                      </h3>
-                      <p class="c-image-figcaption__text">
-                        conoce todos <span> nuestros proyectos</span> y
-                        servicios que tenemos para ti segundo
-                      </p>
-                    </div>
-                  </figcaption>
-                </figure>
-              </div>
-              <div v-if="view == 3" key="step3" class="c-image-slider height-100">
+              <div v-if="view == 3" key="step3" class="c-image-slider height-100 ">
                 <div class="swiper-container height-100">
                   <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                      <figure class="c-image-figcaption position-relative height-100 width-100">
-                        <img loading="lazy" class="c-image-figcaption__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                        <figcaption class="c-image-figcaption__figcaption width-100 height-100 position-absolute flex-container">
-                          <div style="background: linear-gradient(blue, transparent 75%);" class="c-image-figcaption__top width-100  flex-container padding-3 padding-top-2">
+                      <figure class="c-cover-gradient position-relative height-100 width-100">
+                        <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
+                        <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
+                          <div style="background: linear-gradient(blue, transparent 75%);" class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
                             <div class="c-corner-logo">
                             </div>
-                            <div class="c-corner-text text-rigth">
+                            <div class="c-corner-text text-rigth f1 w-bold">
                               Macarena Arribas <br>
                               Fundadora de MAB
                             </div>
                           </div>
-                          <div style="background: linear-gradient(to top, blue, transparent 75%);" class="c-image-figcaption__bottom width-100 padding-3">
-                            <!-- <h2 class="c-image-figcaption__title">
+                          <div style="background: linear-gradient(to top, blue, transparent 75%);" class="c-cover-gradient__bottom width-100 padding-3">
+                            <!-- <h2 class="c-cover-gradient__title">
                               mucho más que una <br>
                               <span>plataforma</span> de cursos
                             </h2> -->
-                            <h3 class="c-image-figcaption__subtitle">
+                            <h3 class="c-cover-gradient__subtitle">
                               ¡ya casi estás listo/a
                                 para <span>comenzar</span> a
                                 aprender distinto!
                             </h3>
-                            <p class="c-image-figcaption__text">
+                            <p class="c-cover-gradient__text">
                               conoce todos <span> nuestros proyectos</span> y
                               servicios que tenemos para ti terc slider1
                             </p>
@@ -107,10 +94,10 @@
                       </figure>
                     </div>
                     <div class="swiper-slide">
-                      <figure class="c-image-figcaption position-relative height-100 width-100">
-                        <img loading="lazy" class="c-image-figcaption__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                        <figcaption class="c-image-figcaption__figcaption width-100 height-100 position-absolute flex-container">
-                          <div style="background: linear-gradient(red, transparent 75%);" class="c-image-figcaption__top width-100  flex-container padding-3 padding-top-2">
+                      <figure class="c-cover-gradient position-relative height-100 width-100">
+                        <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
+                        <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
+                          <div style="background: linear-gradient(red, transparent 75%);" class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
                             <div class="c-corner-logo">
                               <img loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
                             </div>
@@ -119,17 +106,17 @@
                               Fundadora de MAB
                             </div>
                           </div>
-                          <div style="background: linear-gradient(to top, red, transparent 75%);" class="c-image-figcaption__bottom width-100 padding-3">
-                            <!-- <h2 class="c-image-figcaption__title">
+                          <div style="background: linear-gradient(to top, red, transparent 75%);" class="c-cover-gradient__bottom width-100 padding-3">
+                            <!-- <h2 class="c-cover-gradient__title">
                               mucho más que una <br>
                               <span>plataforma</span> de cursos
                             </h2> -->
-                            <h3 class="c-image-figcaption__subtitle">
+                            <h3 class="c-cover-gradient__subtitle">
                               ¡ya casi estás listo/a
                                 para <span>comenzar</span> a
                                 aprender distinto!
                             </h3>
-                            <p class="c-image-figcaption__text">
+                            <p class="c-cover-gradient__text">
                               conoce todos <span> nuestros proyectos</span> y
                               servicios que tenemos para ti terc slider2
                             </p>
@@ -138,10 +125,10 @@
                       </figure>
                     </div>
                     <div class="swiper-slide">
-                      <figure class="c-image-figcaption position-relative height-100 width-100">
-                        <img loading="lazy" class="c-image-figcaption__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                        <figcaption class="c-image-figcaption__figcaption width-100 height-100 position-absolute flex-container">
-                          <div style="background: linear-gradient(green, transparent 75%);" class="c-image-figcaption__top width-100  flex-container padding-3 padding-top-2">
+                      <figure class="c-cover-gradient position-relative height-100 width-100">
+                        <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
+                        <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
+                          <div style="background: linear-gradient(green, transparent 75%);" class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
                             <div class="c-corner-logo">
                               <img loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
                             </div>
@@ -150,17 +137,17 @@
                               Fundadora de MAB
                             </div>
                           </div>
-                          <div style="background: linear-gradient(to top,green, transparent 75%);" class="c-image-figcaption__bottom width-100 padding-3">
-                            <!-- <h2 class="c-image-figcaption__title">
+                          <div style="background: linear-gradient(to top,green, transparent 75%);" class="c-cover-gradient__bottom width-100 padding-3">
+                            <!-- <h2 class="c-cover-gradient__title">
                               mucho más que una <br>
                               <span>plataforma</span> de cursos
                             </h2> -->
-                            <h3 class="c-image-figcaption__subtitle">
+                            <h3 class="c-cover-gradient__subtitle">
                               ¡ya casi estás listo/a
                                 para <span>comenzar</span> a
                                 aprender distinto!
                             </h3>
-                            <p class="c-image-figcaption__text">
+                            <p class="c-cover-gradient__text">
                               conoce todos <span> nuestros proyectos</span> y
                               servicios que tenemos para ti terc slider3
                             </p>
@@ -175,14 +162,116 @@
             </transition>
           </div>
           <div class="cell large-7">
-            <div class="c-register-layout__content height-100">
-              <div class="text-center padding-3">
-                <button class="c-button" @click="prev()">anterior</button>
-                <button class="c-button" @click="next()">siguiente</button>
-              </div>
+            <div class="c-split-layout__content">
+              <transition>
+                <div v-if="view == 1">
+                  <div class="c-split-layout-content c-split-layout-content--secondary">
+                    <div class="width-100">
+                      <div class="text-center padding-3 width-100">
+                        <div class="grid-x">
+                          <div class="cell large-3"></div>
+                          <div class="cell large-6">
+                            <h1 class="c-split-layout-content__title margin-bottom-2 white">
+                              <span class="warning">inicia sesión</span><br>
+                              y continúa creciendo con nosotros
+                            </h1>
+                            <button @click="authWithFacebook" class="c-btn-input-social width-100">
+                              <img loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
+                              <span class="f2">Continuar con facebook</span>
+                            </button>
+                            <button @click="authWithGoogle" class="c-btn-input-social width-100">
+                              <img loading="lazy" src="{{theme.link}}/static/images/google-icon.png" alt="">
+                              <span class="f2">Continuar con Google</span>
+                            </button>
+                            <form class="c-form-new text-left margin-top-2" action="">
+                              <div class="input-container margin-bottom-1">
+                                <label class="text-uppercase w-bold f2 white" for="">Correo</label>
+                                <input class="f2" type="text">
+                                <p class="c-input-error margin-bottom-0 fs-18 f2 w-medium white">
+                                  error
+                                </p>
+                              </div>
+                              <div class="input-container margin-bottom-1">
+                                <label class="text-uppercase w-bold f2 white" for="">Contraseña</label>
+                                <input class="f2" type="text">
+                                <p class="c-input-error margin-bottom-0 fs-18 f2 w-medium white ">
+                                  error
+                                </p>
+                              </div>
+                              <button class="c-button c-button--warning width-100 f2 margin-top-1">Ingresar</button>
+                            </form>
+                            <div class="c-label-login warning f2 margin-top-1">
+                              ¿Aún no tienes cuenta? <a href="" class="w-bold warning">Registrate</a>
+                            </div>
+                          </div>
+                        </div>
+      
+      
+                        {# <button class="c-button" @click="prev()">anterior</button>
+                        <button class="c-button" @click="next()">siguiente</button> #}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div v-if="view == 2">
+                  <div class="c-split-layout-content c-split-layout-content--secondary">
+                    <div class="width-100">
+                      <div class="text-center padding-3 width-100">
+                        <div class="grid-x">
+                          <div class="cell large-3"></div>
+                          <div class="cell large-6">
+                            <h1 class="c-split-layout-content__title margin-bottom-2 white">
+                              <span class="warning">inicia sesión</span><br>
+                              y continúa creciendo con nosotros
+                            </h1>
+                            <button class="c-btn-input-social width-100">
+                              <img loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
+                              <span class="f2">Continuar con facebook</span>
+                            </button>
+                            <button class="c-btn-input-social width-100">
+                              <img loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
+                              <span class="f2">Continuar con facebook</span>
+                            </button>
+                            <form class="c-form-new text-left margin-top-2" action="">
+                              <div class="input-container margin-bottom-1">
+                                <label class="text-uppercase w-bold f2 white" for="">Correo</label>
+                                <input class="f2" type="text">
+                                <p class="c-input-error margin-bottom-0 fs-18 f2 w-medium white">
+                                  error
+                                </p>
+                              </div>
+                              <div class="input-container margin-bottom-1">
+                                <label class="text-uppercase w-bold f2 white" for="">Contraseña</label>
+                                <input class="f2" type="text">
+                                <p class="c-input-error margin-bottom-0 fs-18 f2 w-medium white ">
+                                  error
+                                </p>
+                              </div>
+                              <button class="c-button c-button--warning width-100 f2 margin-top-1">Ingresar</button>
+                              <div class="c-terminos text-center">
+                                <input type="radio"><a href="" class="f2 warning">Acepto los términos y Condiciones</a>
+                              </div>
+                            </form>
+                            <div class="c-label-login warning f2 margin-top-1">
+                              ¿Ya tienes una cuenta? <a href="" class="w-bold warning">Inicia Sesión</a>
+                            </div>
+                          </div>
+                        </div>
+      
+      
+                        {# <button class="c-button" @click="prev()">anterior</button>
+                        <button class="c-button" @click="next()">siguiente</button> #}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </transition>
             </div>  
           </div>
         </div> 
       </div>
   </section>
+{% endblock %}
+
+{% block footer %}
 {% endblock %}

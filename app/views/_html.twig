@@ -45,32 +45,29 @@
       {% endblock %}      
     </main>
 
-    <button onclick="signIn()">Google</button>
-
     <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '482615179540101',
+          cookie     : true,
+          xfbml      : true,
+          version    : 'v2.11'
+        });
+          
+        FB.AppEvents.logPageView();   
+          
+      };
+
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
 
     {{ function('wp_footer') }}
-
-    <script>
-      function signIn() {
-        gapi.load('auth2', function() {
-          const auth2 = gapi.auth2.init({
-            client_id: '999086702146-87q1a9kleriolc0ro8g7ob1qvp3k09d3.apps.googleusercontent.com',
-            fetch_basic_profile: true,
-            scope: 'profile',
-          })
-
-          auth2.signIn().then(user => {
-            const profile = user.getBasicProfile()
-
-            console.log('Full Name: ' + profile.getName());
-            console.log('Given Name: ' + profile.getGivenName());
-            console.log('Family Name: ' + profile.getFamilyName());
-          }, (err) => {
-            console.log(err);
-          })
-        })
-      }
-    </script>
   </body>
 </html>

@@ -118,4 +118,11 @@
     opacity: 0.5;
     cursor: no-drop;
   }
+
+  &--warning {
+    background: $warning-color;
+    color: $secondary-color;
+
+    @include b-radious(10px);
+  }
 }
