@@ -6,6 +6,8 @@
   }
 
   .c-split-layout-content {
+    min-height: 100vh;
+
     &--primary {
       background: $primary-color;
     }
@@ -26,57 +28,26 @@
       font-size: $fs-30;
     }
 
-    .c-btn-input-social {
-      background: $white;
-      padding: 0.3rem 1rem;
-      margin-bottom: 1rem;
-      border-radius: 10px;
+    &__round-card {
+      flex-direction: column;
+      border-radius: 20px;
+      margin: 0 auto 1rem;
+      padding: 2rem 1rem;
+      cursor: pointer;
 
-      img {
-        width: 30px;
+      h3 {
+        font-size: $fs-30;
+      }
+
+      p {
+        font-size: $fs-16;
       }
     }
 
-    .c-form-new {
-      .input-container {
-        label {
-          margin-bottom: 0.5rem;
-          font-size: $fs-18;
-        }
-
-        input {
-          background: $white;
-          padding: 0.3rem 1rem;
-          margin-bottom: 0;
-          border-radius: 10px;
-          $font-family: "DINRoundPro", sans-serif !important;
-        }
-
-        .c-input-error {
-          border-left: solid 4px #de0d46;
-          padding-left: 0.5rem;
-          margin-top: 0.5rem;
-          display: none;
-        }
-      }
-
-      .c-terminos {
-        margin-top: 1.5rem;
-
-        a {
-          text-decoration: underline;
-          padding-left: 10px;
-
-          &:hover {
-            color: $warning-color;
-          }
-        }
-      }
-
-      .c-button {
-        font-size: $fs-18;
-        font-weight: 800;
-      }
+    &__round-box {
+      border-radius: 10px;
+      font-size: $fs-16;
+      padding: 1.5rem 2rem;
     }
   }
 }
@@ -89,23 +60,28 @@
 
     .c-split-layout-content {
       height: 100vh;
-      overflow-y: scroll;
+      overflow-y: auto;
+      display: flex;
+      align-items: center;
 
       &__title {
         font-size: 45px;
       }
-    }
-  }
-}
 
-@media (min-width: 1600px) {
-  .c-split-layout {
-    .c-split-layout-content {
-      height: 100vh;
-      overflow-y: auto;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      &__round-card {
+        padding: 2rem;
+
+        h3 {
+          font-size: $fs-40;
+        }
+      }
+
+      &__round-box {
+        font-size: $fs-18;
+        height: 160px;
+        margin-left: 2rem;
+        padding: 1.5rem 4rem 1.5rem 2rem;
+      }
     }
   }
 }

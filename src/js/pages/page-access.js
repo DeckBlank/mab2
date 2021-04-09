@@ -7,7 +7,7 @@ const access = new Vue({
   ...baseConfig(store),
   data() {
     return {
-      view: 1
+      view: 2
     }
   },
   computed: {

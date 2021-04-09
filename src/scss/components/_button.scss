@@ -125,4 +125,41 @@
 
     @include b-radious(10px);
   }
+
+  &--warning-alert {
+    background: $warning-color;
+    color: $alert-color;
+
+    @include b-radious(10px);
+  }
+
+  &--warning-success {
+    background: $warning-color;
+    color: $success-color;
+
+    @include b-radious(10px);
+  }
+
+  &--warning-primary {
+    background: $warning-color;
+    color: $primary-color;
+
+    @include b-radious(10px);
+  }
+
+  &--arrow {
+    font-size: $fs-18;
+    font-family: $font-family-secondary;
+  }
+}
+
+.c-btn-input-social {
+  background: $white;
+  padding: 0.3rem 1rem;
+  margin-bottom: 1rem;
+  border-radius: 10px;
+
+  img {
+    width: 30px;
+  }
 }
