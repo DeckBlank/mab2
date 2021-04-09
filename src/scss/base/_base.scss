@@ -78,3 +78,16 @@ body {
     filter: blur(0) grayscale(0);
   }
 }
+
+.column-between {
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.opacity-0 {
+  opacity: 0;
+}

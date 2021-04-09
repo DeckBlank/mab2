@@ -67,7 +67,7 @@
                       <figure class="c-cover-gradient position-relative height-100 width-100">
                         <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
                         <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                          <div style="background: linear-gradient(blue, transparent 75%);" class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
+                          <div class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
                             <div class="c-corner-logo">
                             </div>
                             <div class="c-corner-text text-rigth f1 w-bold">
@@ -75,7 +75,7 @@
                               Fundadora de MAB
                             </div>
                           </div>
-                          <div style="background: linear-gradient(to top, blue, transparent 75%);" class="c-cover-gradient__bottom width-100 padding-3">
+                          <div class="c-cover-gradient__bottom width-100 padding-3">
                             <!-- <h2 class="c-cover-gradient__title">
                               mucho más que una <br>
                               <span>plataforma</span> de cursos
@@ -234,17 +234,307 @@
                               <span class="f2">Continuar con facebook</span>
                             </button>
                             <form class="c-form-new text-left margin-top-2" action="">
-                              <div class="input-container margin-bottom-1">
+                              <div class="c-form-new__input-container margin-bottom-1">
                                 <label class="text-uppercase w-bold f2 white" for="">Correo</label>
                                 <input class="f2" type="text">
-                                <p class="c-input-error margin-bottom-0 fs-18 f2 w-medium white">
+                                <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
                                   error
                                 </p>
                               </div>
-                              <div class="input-container margin-bottom-1">
+                              <div class="c-form-new__input-container margin-bottom-1">
                                 <label class="text-uppercase w-bold f2 white" for="">Contraseña</label>
                                 <input class="f2" type="text">
-                                <p class="c-input-error margin-bottom-0 fs-18 f2 w-medium white ">
+                                <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
+                                  error
+                                </p>
+                              </div>
+                              <button class="button c-button--warning width-100 f2 margin-top-1">Ingresar</button>
+                              <div class="c-form-new__terminos text-center">
+                                <input type="radio"><a href="" class="f2 warning">Acepto los términos y Condiciones</a>
+                              </div>
+                            </form>
+                            <div class="c-label-login warning f2 margin-top-1">
+                              ¿Ya tienes una cuenta? <a href="" class="w-bold warning">Inicia Sesión</a>
+                            </div>
+                          </div>
+                        </div>
+      
+      
+                        {# <button class="c-button" @click="prev()">anterior</button>
+                        <button class="c-button" @click="next()">siguiente</button> #}
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="false" class="c-split-layout-content column-between c-split-layout-content--alert">
+                    <div></div>
+                    <div class="width-100">
+                      <div class="text-center padding-3 width-100">
+                        <div class="grid-x">
+                          <div class="cell large-1">
+                          </div>
+                          <div class="cell large-10">
+                            <h2 class="c-split-layout-content__title margin-bottom-2 white">
+                              <span class="warning">¿a qué sector educativo</span><br>
+                              <span class="warning">perteneces?</span>     
+                            </h2>
+                            <div class="grid-x grid-margin-x">
+                              <div class="cell large-6">
+                                <div class="c-split-layout-content__round-card text-center f2  bg-white black flex-container align-center-middle white">
+                                  <h3 class="f2 margin-0 w-xbold">Público</h3>
+                                  <p class="margin-0">Colegios estatales</p>
+                                </div>
+                              </div>
+                              <div class="cell large-6">
+                                <div class="c-split-layout-content__round-card text-center f2 bg-white black flex-container align-center-middle white">
+                                  <h3 class="f2 margin-0 w-xbold">Privado</h3>
+                                  <p class="margin-0">Colegios particulares</p>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="width-100 padding-3">
+                      <div class="grid-x">
+                        <div class="cell medium-1 large-1"></div>
+                        <div class="cell small-6 medium-5 large-5 text-left">
+                          <button class="c-button c-button--warning-alert c-button--arrow w-xbold " @click="prev()"> < Anterior</button>
+                        </div>
+                        <div class="cell small-6 medium-5 large-5 text-right">
+                          <button class="c-button c-button--warning-alert c-button--arrow w-xbold " @click="next()">Siguiente ></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="false" class="c-split-layout-content column-between c-split-layout-content--primary">
+                    <div></div>
+                    <div class="width-100">
+                      <div class="text-center padding-3 width-100">
+                        <div class="grid-x">
+                          <div class="cell large-1">
+                          </div>
+                          <div class="cell large-10">
+                            <h2 class="c-split-layout-content__title margin-bottom-1 white margin-top-3">
+                              <span class="warning">¡Queremos conocerte mejor!</span>     
+                            </h2>
+                            <h3 class="c-split-layout-content__subtitle margin-bottom-2 white">
+                              completa los siguientes datos     
+                            </h3>
+                            <form class="c-form-new text-left margin-top-2" action="">
+                              <div class="grid-x grid-margin-x align-center">
+                                <div class="cell large-6">
+                                  <div class="c-form-new__input-container margin-bottom-1">
+                                    <label class="text-uppercase w-bold f2 white" for="">Nombres</label>
+                                    <input class="f2" type="text">
+                                    <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                                      error
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="cell large-6">
+                                  <div class="c-form-new__input-container margin-bottom-1">
+                                    <label class="text-uppercase w-bold f2 white" for="">Apellido Paterno</label>
+                                    <input class="f2" type="text">
+                                    <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                                      error
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="cell large-6">
+                                  <div class="c-form-new__input-container margin-bottom-1">
+                                    <label class="text-uppercase w-bold f2 white" for="">Apellido Materno</label>
+                                    <input class="f2" type="text">
+                                    <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                                      error
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="cell large-6">
+                                  <div class="c-form-new__input-container margin-bottom-1">
+                                    <label class="text-uppercase w-bold f2 white" for="">Fecha de Nacimiento</label>
+                                    <input class="f2" type="date">
+                                    <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                                      error
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="cell large-6">
+                                  <div class="c-form-new__input-container margin-bottom-1">
+                                    <label class="text-uppercase w-bold f2 white" for="">País</label>
+                                    <select class="f2" name="" id="">
+                                      <option value="">Elige un opción</option>
+                                    </select>
+                                    <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                                      error
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="cell large-6">
+                                  <div class="c-form-new__input-container margin-bottom-1">
+                                    <label class="text-uppercase w-bold f2 white" for="">Ciudad</label>
+                                    <select class="f2" name="" id="">
+                                      <option value="">Elige un opción</option>
+                                    </select>
+                                    <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                                      error
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="cell large-6">
+                                  <div class="c-form-new__input-container margin-bottom-1">
+                                    <label class="text-uppercase w-bold f2 white" for="">Ciudad</label>
+                                    <select class="f2" name="" id="">
+                                      <option value="">Elige un opción</option>
+                                    </select>
+                                    <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                                      error
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="width-100 padding-3">
+                      <div class="grid-x">
+                        <div class="cell medium-1 large-1"></div>
+                        <div class="cell small-6 medium-5 large-5 text-left">
+                          <button class="c-button c-button--warning-primary c-button--arrow w-xbold " @click="prev()"> < Anterior</button>
+                        </div>
+                        <div class="cell small-6 medium-5 large-5 text-right">
+                          <button class="c-button c-button--warning-primary c-button--arrow w-xbold " @click="next()">Siguiente ></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="false" class="c-split-layout-content column-between c-split-layout-content--success">
+                    <div></div>
+                    <div class="width-100">
+                      <div class="text-center padding-3 width-100">
+                        <div class="grid-x">
+                          <div class="cell large-1">
+                          </div>
+                          <div class="cell large-10">
+                            <h2 class="c-split-layout-content__title margin-bottom-2 white margin-top-3">
+                              Buscamos adaptarnos a <br>
+                              <span class="warning">tus necesidades</span>     
+                            </h2>
+                            <h4 class="white margin-bottom-2 text-left">Actualmente, soy...</h4>
+                            <div class="grid-x grid-margin-y grid-margin-x align-center">
+                              <div class="cell large-6">
+                                <div class="c-split-layout-content__round-box text-left position-relative f2  bg-white black flex-container align-center-middle white ">
+                                  <span>
+                                    <strong>Un padre / una madre / apoderad@</strong> que busca la mejor educación para su familia
+                                  </span>
+                                  <div class="c-corner-card-image position-absolute">
+                                    <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/fb-icon.png" alt="">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="cell large-6">
+                                <div class="c-split-layout-content__round-box text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1">
+                                  <span>
+                                    <strong>Un maestro / una
+                                      maestra</strong> que busca
+                                      hacer un cambio por
+                                      la sociedad
+                                  </span>
+                                  <div class="c-corner-card-image position-absolute">
+                                    <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/fb-icon.png" alt="">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="cell large-6">
+                                <div class="c-split-layout-content__round-box text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1">
+                                  <span>
+                                    <strong>Un/a estudiante</strong>
+                                      que busca superarse
+                                      tanto a nivel académico
+                                      como personal
+                                  </span>
+                                  <div class="c-corner-card-image position-absolute">
+                                    <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/fb-icon.png" alt="">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="cell large-6">
+                                <div class="c-split-layout-content__round-box text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1">
+                                  <span>
+                                    <strong>Un/a internauta
+                                      apasionado/a</strong> por la
+                                      educación
+                                  </span>
+                                  <div class="c-corner-card-image position-absolute">
+                                    <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/fb-icon.png" alt="">
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="cell large-6">
+                                <div class="c-split-layout-content__round-box text-left position-relative f2  bg-warning black flex-container align-center-middle white margin-bottom-1">
+                                  <span>
+                                    <strong>Parte del programa
+                                      “De Tambo a Tambo”</strong>
+                                      en zonas rurales del país
+                                  </span>
+                                  <div class="c-corner-card-image position-absolute">
+                                    <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/fb-icon.png" alt="">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="width-100 padding-3">
+                      <div class="grid-x">
+                        <div class="cell medium-1 large-1"></div>
+                        <div class="cell small-6 medium-5 large-5 text-left">
+                          <button class="c-button c-button--warning-success c-button--arrow w-xbold " @click="prev()"> < Anterior</button>
+                        </div>
+                        <div class="cell small-6 medium-5 large-5 text-right">
+                          <button class="c-button c-button--warning-success c-button--arrow w-xbold " @click="next()">Siguiente ></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div v-if="view == 3">
+                  <div class="c-split-layout-content c-split-layout-content--secondary">
+                    <div class="width-100">
+                      <div class="text-center padding-3 width-100">
+                        <div class="grid-x">
+                          <div class="cell large-3"></div>
+                          <div class="cell large-6">
+                            <h1 class="c-split-layout-content__title margin-bottom-2 white">
+                              <span class="warning">inicia sesión</span><br>
+                              y continúa creciendo con nosotros
+                            </h1>
+                            <button class="c-btn-input-social width-100">
+                              <img loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
+                              <span class="f2">Continuar con facebook</span>
+                            </button>
+                            <button class="c-btn-input-social width-100">
+                              <img loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
+                              <span class="f2">Continuar con facebook</span>
+                            </button>
+                            <form class="c-form-new text-left margin-top-2" action="">
+                              <div class="c-form-new__input-container margin-bottom-1">
+                                <label class="text-uppercase w-bold f2 white" for="">Correo</label>
+                                <input class="f2" type="text">
+                                <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                                  error
+                                </p>
+                              </div>
+                              <div class="c-form-new__input-container margin-bottom-1">
+                                <label class="text-uppercase w-bold f2 white" for="">Contraseña</label>
+                                <input class="f2" type="text">
+                                <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
                                   error
                                 </p>
                               </div>

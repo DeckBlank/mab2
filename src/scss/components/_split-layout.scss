@@ -6,6 +6,8 @@
   }
 
   .c-split-layout-content {
+    min-height: 100vh;
+
     &--primary {
       background: $primary-color;
     }
@@ -25,6 +27,28 @@
     &__title {
       font-size: $fs-30;
     }
+
+    &__round-card {
+      flex-direction: column;
+      border-radius: 20px;
+      margin: 0 auto 1rem;
+      padding: 2rem 1rem;
+      cursor: pointer;
+
+      h3 {
+        font-size: $fs-30;
+      }
+
+      p {
+        font-size: $fs-16;
+      }
+    }
+
+    &__round-box {
+      border-radius: 10px;
+      font-size: $fs-16;
+      padding: 1.5rem 2rem;
+    }
   }
 }
 
@@ -42,6 +66,21 @@
 
       &__title {
         font-size: 45px;
+      }
+
+      &__round-card {
+        padding: 2rem;
+
+        h3 {
+          font-size: $fs-40;
+        }
+      }
+
+      &__round-box {
+        font-size: $fs-18;
+        height: 160px;
+        margin-left: 2rem;
+        padding: 1.5rem 4rem 1.5rem 2rem;
       }
     }
   }
