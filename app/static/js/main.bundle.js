@@ -104,7 +104,7 @@ eval("\n\n//# sourceURL=webpack:///./src/js/main.js?");
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__(/*! C:\\laragon\\www\\mab\\wp-content\\themes\\mab-theme\\src\\js\\main.js */\"./src/js/main.js\");\n\n\n//# sourceURL=webpack:///multi_./src/js/main.js?");
+eval("module.exports = __webpack_require__(/*! C:\\laragon\\www\\mab\\wp-content\\themes\\mab\\src\\js\\main.js */\"./src/js/main.js\");\n\n\n//# sourceURL=webpack:///multi_./src/js/main.js?");
 
 /***/ })
 

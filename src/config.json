@@ -18,7 +18,7 @@
     "images": "**/*.{jpg,jpeg,png,svg,ico}",
     "twig": "**/*.twig"
   },
-  "proxy": "localhost/mab",
+  "proxy": "mab.site",
   "ignoreFoldersDevelopment": [
     "src/**/*",
     "!src/config.json",
