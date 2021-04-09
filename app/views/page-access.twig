@@ -35,14 +35,14 @@
                 </figure>
               </div>
               <div v-if="view == 2" key="step2" class="c-split-layout__figure height-100">
-                <figure class="c-cover-gradient c-cover-gradient--secondary position-relative height-100 width-100">
+                <figure v-if="false"  class="c-cover-gradient c-cover-gradient--secondary position-relative height-100 width-100">
                   <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
                   <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
                     <div class="c-cover-gradient__top width-100 flex-container padding-3 padding-top-2">
                       <div class="c-corner-logo">
                         <img v-if="false" loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
                       </div>
-                      <div class="c-corner-text text-rigth">
+                      <div class="c-corner-text text-rigth f2 w-xbold">
                         Macarena Arribas <br>
                         Fundadora de MAB
                       </div>
@@ -56,6 +56,65 @@
                         ¿Estás listo para<br>
                         girar la educación?
                       </p>
+                    </div>
+                  </figcaption>
+                </figure>
+                <figure v-if="false" class="c-cover-gradient c-cover-gradient--alert position-relative height-100 width-100">
+                  <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
+                  <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
+                    <div class="c-cover-gradient__top width-100 flex-container padding-3 padding-top-2">
+                      <div class="c-corner-logo">
+                        <img loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
+                      </div>
+                      <div class="c-corner-text text-rigth f2 w-xbold">
+                      </div>
+                    </div>
+                    <div class="c-cover-gradient__bottom width-100 padding-3">
+                      <h3 class="c-cover-gradient__subtitle text-right">
+                        ganadora de los <br>
+                        <span>globant awards 2020</span> <br>
+                        categoría <span>game changer</span> 
+                      </h3>
+                    </div>
+                  </figcaption>
+                </figure>
+                <figure v-if="false" class="c-cover-gradient c-cover-gradient--primary position-relative height-100 width-100">
+                  <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
+                  <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
+                    <div class="c-cover-gradient__top width-100 flex-container padding-3 padding-top-2">
+                      <div class="c-corner-logo">
+                        <img v-if="false" loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
+                      </div>
+                      <div class="c-corner-text text-rigth f2 w-xbold">
+                        Viviana de Ferrari <br>
+                        Amor Propio
+                      </div>
+                    </div>
+                    <div class="c-cover-gradient__bottom width-100 padding-3">
+                      <h3 class="c-cover-gradient__subtitle">
+                        aprende con <span>especialistas</span> <br>
+                        reconocidos a nivel <br>
+                        <span>nacional e internacional</span>
+                      </h3>
+                    </div>
+                  </figcaption>
+                </figure>
+                <figure  class="c-cover-gradient c-cover-gradient--success position-relative height-100 width-100">
+                  <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
+                  <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
+                    <div class="c-cover-gradient__top width-100 flex-container padding-3 padding-top-2">
+                      <div class="c-corner-logo">
+                        <img v-if="false" loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
+                      </div>
+                      <div class="c-corner-text text-rigth">
+                      </div>
+                    </div>
+                    <div class="c-cover-gradient__bottom width-100 padding-3">
+                      <h3 class="c-cover-gradient__subtitle">
+                        tutores que <br>
+                        han <span> pasado por </span><br>
+                        <span>lo mismo </span> que tú
+                      </h3>
                     </div>
                   </figcaption>
                 </figure>
@@ -162,16 +221,14 @@
             </transition>
           </div>
           <div class="cell large-7">
-            <!-- quitar c-split-layout__content -->
             <div class="c-split-layout__content">
               <transition>
                 <div v-if="view == 1">
                   <div class="c-split-layout-content c-split-layout-content--secondary">
                     <div class="width-100">
                       <div class="text-center padding-3 width-100">
-                        <div class="grid-x">
-                          <div class="cell large-3"></div>
-                          <div class="cell large-6">
+                        <div class="grid-x align-center">
+                          <div class="cell large-7">
                             <h1 class="c-split-layout-content__title margin-bottom-2 white">
                               <span class="warning">inicia sesión</span><br>
                               y continúa creciendo con nosotros
@@ -206,24 +263,19 @@
                             </div>
                           </div>
                         </div>
-      
-      
-                        {# <button class="c-button" @click="prev()">anterior</button>
-                        <button class="c-button" @click="next()">siguiente</button> #}
                       </div>
                     </div>
                   </div>
                 </div>
                 <div v-if="view == 2">
-                  <div class="c-split-layout-content c-split-layout-content--secondary">
+                  <div v-if="false" class="c-split-layout-content c-split-layout-content--secondary">
                     <div class="width-100">
                       <div class="text-center padding-3 width-100">
-                        <div class="grid-x">
-                          <div class="cell large-3"></div>
+                        <div class="grid-x align-center">
                           <div class="cell large-6">
-                            <h1 class="c-split-layout-content__title margin-bottom-2 white">
-                              <span class="warning">inicia sesión</span><br>
-                              y continúa creciendo con nosotros
+                            <h1 class="c-split-layout-content__title margin-bottom-3 white">
+                              <span class="small-title">Conviértete en un/una</span>
+                              <div class="warning big-title">#MABLover</div> 
                             </h1>
                             <button class="c-btn-input-social width-100">
                               <img loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
@@ -254,14 +306,10 @@
                               </div>
                             </form>
                             <div class="c-label-login warning f2 margin-top-1">
-                              ¿Ya tienes una cuenta? <a href="" class="w-bold warning">Inicia Sesión</a>
+                              ¿Ya tienes una cuenta? <a href="" class="c-link--warning w-bold warning ">Inicia Sesión</a>
                             </div>
                           </div>
                         </div>
-      
-      
-                        {# <button class="c-button" @click="prev()">anterior</button>
-                        <button class="c-button" @click="next()">siguiente</button> #}
                       </div>
                     </div>
                   </div>
@@ -269,23 +317,23 @@
                     <div></div>
                     <div class="width-100">
                       <div class="text-center padding-3 width-100">
-                        <div class="grid-x">
-                          <div class="cell large-1">
-                          </div>
+                        <div class="grid-x align-center">
                           <div class="cell large-10">
-                            <h2 class="c-split-layout-content__title margin-bottom-2 white">
-                              <span class="warning">¿a qué sector educativo</span><br>
-                              <span class="warning">perteneces?</span>     
-                            </h2>
-                            <div class="grid-x grid-margin-x">
+                            <div class="grid-x grid-margin-x align-center">
+                              <div class="cell large-10">
+                                <h2 class="c-split-layout-content__title margin-bottom-2 white">
+                                  <span class="warning">¿a qué sector educativo</span>
+                                  <span class="warning">perteneces?</span>     
+                                </h2>
+                              </div>
                               <div class="cell large-6">
-                                <div class="c-split-layout-content__round-card text-center f2  bg-white black flex-container align-center-middle white">
+                                <div class="c-check-card text-center f2  bg-white black flex-container align-center-middle white">
                                   <h3 class="f2 margin-0 w-xbold">Público</h3>
                                   <p class="margin-0">Colegios estatales</p>
                                 </div>
                               </div>
                               <div class="cell large-6">
-                                <div class="c-split-layout-content__round-card text-center f2 bg-white black flex-container align-center-middle white">
+                                <div class="c-check-card text-center f2 bg-white black flex-container align-center-middle white">
                                   <h3 class="f2 margin-0 w-xbold">Privado</h3>
                                   <p class="margin-0">Colegios particulares</p>
                                 </div>
@@ -297,8 +345,7 @@
                       </div>
                     </div>
                     <div class="width-100 padding-3">
-                      <div class="grid-x">
-                        <div class="cell medium-1 large-1"></div>
+                      <div class="grid-x align-center">
                         <div class="cell small-6 medium-5 large-5 text-left">
                           <button class="c-button c-button--warning-alert c-button--arrow w-xbold " @click="prev()"> < Anterior</button>
                         </div>
@@ -312,9 +359,7 @@
                     <div></div>
                     <div class="width-100">
                       <div class="text-center padding-3 width-100">
-                        <div class="grid-x">
-                          <div class="cell large-1">
-                          </div>
+                        <div class="grid-x align-center">
                           <div class="cell large-10">
                             <h2 class="c-split-layout-content__title margin-bottom-1 white margin-top-3">
                               <span class="warning">¡Queremos conocerte mejor!</span>     
@@ -326,7 +371,7 @@
                               <div class="grid-x grid-margin-x align-center">
                                 <div class="cell large-6">
                                   <div class="c-form-new__input-container margin-bottom-1">
-                                    <label class="text-uppercase w-bold f2 white" for="">Nombres</label>
+                                    <label class="w-bold f2 white" for="">Nombres</label>
                                     <input class="f2" type="text">
                                     <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
                                       error
@@ -335,7 +380,7 @@
                                 </div>
                                 <div class="cell large-6">
                                   <div class="c-form-new__input-container margin-bottom-1">
-                                    <label class="text-uppercase w-bold f2 white" for="">Apellido Paterno</label>
+                                    <label class="w-bold f2 white" for="">Apellido Paterno</label>
                                     <input class="f2" type="text">
                                     <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
                                       error
@@ -344,7 +389,7 @@
                                 </div>
                                 <div class="cell large-6">
                                   <div class="c-form-new__input-container margin-bottom-1">
-                                    <label class="text-uppercase w-bold f2 white" for="">Apellido Materno</label>
+                                    <label class="w-bold f2 white" for="">Apellido Materno</label>
                                     <input class="f2" type="text">
                                     <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
                                       error
@@ -353,7 +398,7 @@
                                 </div>
                                 <div class="cell large-6">
                                   <div class="c-form-new__input-container margin-bottom-1">
-                                    <label class="text-uppercase w-bold f2 white" for="">Fecha de Nacimiento</label>
+                                    <label class="w-bold f2 white" for="">Fecha de Nacimiento</label>
                                     <input class="f2" type="date">
                                     <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
                                       error
@@ -362,7 +407,7 @@
                                 </div>
                                 <div class="cell large-6">
                                   <div class="c-form-new__input-container margin-bottom-1">
-                                    <label class="text-uppercase w-bold f2 white" for="">País</label>
+                                    <label class="w-bold f2 white" for="">País</label>
                                     <select class="f2" name="" id="">
                                       <option value="">Elige un opción</option>
                                     </select>
@@ -373,7 +418,7 @@
                                 </div>
                                 <div class="cell large-6">
                                   <div class="c-form-new__input-container margin-bottom-1">
-                                    <label class="text-uppercase w-bold f2 white" for="">Ciudad</label>
+                                    <label class="w-bold f2 white" for="">Ciudad</label>
                                     <select class="f2" name="" id="">
                                       <option value="">Elige un opción</option>
                                     </select>
@@ -384,10 +429,8 @@
                                 </div>
                                 <div class="cell large-6">
                                   <div class="c-form-new__input-container margin-bottom-1">
-                                    <label class="text-uppercase w-bold f2 white" for="">Ciudad</label>
-                                    <select class="f2" name="" id="">
-                                      <option value="">Elige un opción</option>
-                                    </select>
+                                    <label class="w-bold f2 white" for="">Número de teléfono</label>
+                                    <input class="f2" type="tel">
                                     <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
                                       error
                                     </p>
@@ -400,8 +443,7 @@
                       </div>
                     </div>
                     <div class="width-100 padding-3">
-                      <div class="grid-x">
-                        <div class="cell medium-1 large-1"></div>
+                      <div class="grid-x align-center">
                         <div class="cell small-6 medium-5 large-5 text-left">
                           <button class="c-button c-button--warning-primary c-button--arrow w-xbold " @click="prev()"> < Anterior</button>
                         </div>
@@ -411,21 +453,23 @@
                       </div>
                     </div>
                   </div>
-                  <div v-if="false" class="c-split-layout-content column-between c-split-layout-content--success">
+                  <div  class="c-split-layout-content column-between c-split-layout-content--success">
                     <div></div>
                     <div class="width-100">
                       <div class="text-center padding-3 width-100">
-                        <div class="grid-x">
-                          <div class="cell large-1">
-                          </div>
+                        <div class="grid-x align-center">
                           <div class="cell large-10">
-                            <h2 class="c-split-layout-content__title margin-bottom-2 white margin-top-3">
-                              Buscamos adaptarnos a <br>
-                              <span class="warning">tus necesidades</span>     
-                            </h2>
+                            <div class="grid-x align-center">
+                              <div class="cell large-8">
+                                <h2 class="c-split-layout-content__title margin-bottom-2 white margin-top-3">
+                                  Buscamos adaptarnos a
+                                  <span class="warning">tus necesidades</span> 
+                                </h2>
+                              </div>
+                            </div>
                             <h4 class="white margin-bottom-2 text-left">Actualmente, soy...</h4>
                             <div class="grid-x grid-margin-y grid-margin-x align-center">
-                              <div class="cell large-6">
+                              <div class="cell medium-6 large-6 align-self-stretch">
                                 <div class="c-split-layout-content__round-box text-left position-relative f2  bg-white black flex-container align-center-middle white ">
                                   <span>
                                     <strong>Un padre / una madre / apoderad@</strong> que busca la mejor educación para su familia
@@ -435,7 +479,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="cell large-6">
+                              <div class="cell medium-6 large-6 align-self-stretch">
                                 <div class="c-split-layout-content__round-box text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1">
                                   <span>
                                     <strong>Un maestro / una
@@ -448,7 +492,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="cell large-6">
+                              <div class="cell medium-6 large-6 align-self-stretch">
                                 <div class="c-split-layout-content__round-box text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1">
                                   <span>
                                     <strong>Un/a estudiante</strong>
@@ -461,7 +505,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="cell large-6">
+                              <div class="cell medium-6 large-6 align-self-stretch">
                                 <div class="c-split-layout-content__round-box text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1">
                                   <span>
                                     <strong>Un/a internauta
@@ -473,7 +517,7 @@
                                   </div>
                                 </div>
                               </div>
-                              <div class="cell large-6">
+                              <div class="cell medium-6 large-6 align-self-stretch">
                                 <div class="c-split-layout-content__round-box text-left position-relative f2  bg-warning black flex-container align-center-middle white margin-bottom-1">
                                   <span>
                                     <strong>Parte del programa
@@ -491,8 +535,7 @@
                       </div>
                     </div>
                     <div class="width-100 padding-3">
-                      <div class="grid-x">
-                        <div class="cell medium-1 large-1"></div>
+                      <div class="grid-x align-center">
                         <div class="cell small-6 medium-5 large-5 text-left">
                           <button class="c-button c-button--warning-success c-button--arrow w-xbold " @click="prev()"> < Anterior</button>
                         </div>
@@ -502,7 +545,6 @@
                       </div>
                     </div>
                   </div>
-
                 </div>
                 <div v-if="view == 3">
                   <div class="c-split-layout-content c-split-layout-content--secondary">

@@ -28,7 +28,16 @@
       font-size: $fs-30;
     }
 
-    &__round-card {
+    .small-title {
+      font-size: $fs-25;
+    }
+
+    .big-title {
+      font-size: $fs-50;
+      line-height: 35px;
+    }
+
+    .c-check-card {
       flex-direction: column;
       border-radius: 20px;
       margin: 0 auto 1rem;
@@ -64,11 +73,20 @@
       display: flex;
       align-items: center;
 
+      .small-title {
+        font-size: $fs-30;
+      }
+
+      .big-title {
+        font-size: 70px;
+        line-height: 40px;
+      }
+
       &__title {
         font-size: 45px;
       }
 
-      &__round-card {
+      .c-check-card {
         padding: 2rem;
 
         h3 {
@@ -78,9 +96,9 @@
 
       &__round-box {
         font-size: $fs-18;
-        height: 160px;
         margin-left: 2rem;
         padding: 1.5rem 4rem 1.5rem 2rem;
+        height: 100%;
       }
     }
   }
