@@ -68,7 +68,7 @@ $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #de0d46,
+  primary: #cc0033,
   secondary: #0166d0,
   success: #090,
   warning: #fbee23,
@@ -85,7 +85,8 @@ $dark: #000;
 $white: #fff;
 
 //Basic Color Alters
-$primary-alt: #ff3334;
+$primary-alt: #ff3333;
+$primary-dark: #810f0f;
 
 $secondary-lightest: #d2e7ff;
 $secondary-light: #5ec5ea;
@@ -97,8 +98,6 @@ $secondary-gray: #787d99;
 $secondary-dark: #1c32a6;
 
 $warning-alt: #f1c500;
-
-$alert-dark: #a71005;
 
 //Font Weights
 $light-font: 300;
