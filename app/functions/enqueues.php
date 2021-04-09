@@ -2,10 +2,11 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1617866439930';
+$assets_version = '1617940248120';
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
+    $enviroment = [];
 
     $fa = [
         'handle'    => 'pandawp/fontawesome/base',
@@ -22,14 +23,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         'ver'       => $assets_version,
         'in_footer' => true
     ]);
-
-    /**
-     * --------------------------------------------------------------------------
-     * Enviroment variables
-     * --------------------------------------------------------------------------
-     *
-     */
-    setEnviromentVariables();
 
     /**
      * --------------------------------------------------------------------------
@@ -554,7 +547,15 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]);
-    }elseif (is_page('access')){ 
+    }elseif (is_page('access')){
+        $enviroment = array_merge(
+            $enviroment,
+            [
+                'google_id'     => ENV['GOOGLE_ID'],
+                'facebook_id'   => ENV['FACEBOOK_ID'],
+            ]
+        );
+
         register_assets('package', [
             'handle'    => 'pandawp/package/swiper',
             'src'       => $config['resources']['package_swiper'],
@@ -562,7 +563,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]);
-    
+
         register_assets('package', [
             'handle'    => 'pandawp/package/dom7',
             'src'       => $config['resources']['package_dom7'],
@@ -570,23 +571,32 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]);
-    
+
         register_assets('package', [
             'handle'    => 'pandawp/package/ssrwindow',
             'src'       => $config['resources']['package_ssr_window'],
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
-        ]);              
+        ]);
+
         register_assets('script', [
             'handle'    => 'pandawp/js/page/access',
             'src'       => $config['resources']['page_access'],
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
-        ]);        
-
+        ]);
     }
+
+
+    /**
+     * --------------------------------------------------------------------------
+     * Enviroment variables
+     * --------------------------------------------------------------------------
+     *
+     */
+    setEnviromentVariables($enviroment);
 }, 100);
 
 add_action('admin_enqueue_scripts', function ($hook) use ($config, $assets_version) {

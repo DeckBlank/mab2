@@ -3,7 +3,7 @@ import {baseConfig, baseState, baseActions} from '../app'
 import {store} from '../store'
 import Swiper from 'swiper'
 
-const access = new Vue({
+new Vue({
   ...baseConfig(store),
   data() {
     return {
@@ -36,6 +36,8 @@ const access = new Vue({
   mounted(){
     this.global();
     this.hideLoading();
+
+    this.initFacebook();
   },
   methods: {
     ...baseActions(),
@@ -49,10 +51,30 @@ const access = new Vue({
         this.view = this.view - 1
       }
     },
+    initFacebook: function() {
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId   : mab.facebook_id,
+          cookie  : true,
+          xfbml   : true,
+          version : 'v2.11'
+        });
+
+        FB.AppEvents.logPageView();   
+      };
+
+      (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    },
     authWithGoogle: function() {
       gapi.load('auth2', function() {
         const auth2 = gapi.auth2.init({
-          client_id: '999086702146-87q1a9kleriolc0ro8g7ob1qvp3k09d3.apps.googleusercontent.com',
+          client_id: mab.google_id,
           fetch_basic_profile: true,
           scope: 'profile',
         })
@@ -60,8 +82,8 @@ const access = new Vue({
         auth2.signIn().then(user => {
           const profile = user.getBasicProfile()
 
-          console.log('Full Name: ' + profile.getName());
-          console.log('Given Name: ' + profile.getGivenName());
+          console.log('Full Name: '   + profile.getName());
+          console.log('Given Name: '  + profile.getGivenName());
           console.log('Family Name: ' + profile.getFamilyName());
         }, (err) => {
           console.log(err);
@@ -73,13 +95,13 @@ const access = new Vue({
         if (response.status == 'connected') {
           const token = response.authResponse.accessToken;
 
-          this.authWithFB('login', token);
+          this.handleFacebookAuth('login', token);
         } else if(response.status == 'authorization_expired') {
           FB.login((response) => {
             if (response.authResponse) {
               const token = response.authResponse.accessToken;
 
-              this.authWithFB('login', token);
+              this.handleFacebookAuth('login', token);
             } else {
               // this.auth.isLoading     = false;
               // this.auth.error.active  = true;
@@ -88,7 +110,7 @@ const access = new Vue({
         } else {
           FB.login((response) => {
             if (response.authResponse) {
-              this.authWithFB('login', response.authResponse.accessToken);
+              this.handleFacebookAuth('login', response.authResponse.accessToken);
             } else {
               // this.auth.isLoading     = false;
               // this.auth.error.active  = true;
@@ -98,7 +120,7 @@ const access = new Vue({
         }
       });
     },
-    authWithFB: function(type, token) {
+    handleFacebookAuth: function(type, token) {
       console.log(type)
       console.log(token)
     },

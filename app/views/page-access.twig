@@ -1,8 +1,6 @@
 {% extends '_html.twig' %}
 
-{% block hero %}
-  {# {% include 'templates-parts/hero.twig' %} #}
-{% endblock %}
+{% block hero %} {% endblock %}
 
 {% block content %}
   <section class="c-section c-section--access">
@@ -273,5 +271,8 @@
   </section>
 {% endblock %}
 
-{% block footer %}
+{% block scripts %}
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
 {% endblock %}
+
+{% block footer %} {% endblock %}
