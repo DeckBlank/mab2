@@ -24,6 +24,10 @@
       background: $alert-color;
     }
 
+    &--warning {
+      background: $warning-color;
+    }
+
     &__title {
       font-size: $fs-30;
     }

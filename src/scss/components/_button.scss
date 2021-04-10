@@ -147,6 +147,23 @@
     @include b-radious(10px);
   }
 
+  &--black-warning {
+    background: $black;
+    color: $warning-color;
+
+    @include b-radious(10px);
+  }
+
+  &--warning-black {
+    background: $warning-color;
+    color: $black;
+    font-family: $font-family-secondary;
+    font-size: $fs-21;
+    line-height: 24px;
+
+    @include b-radious(20px);
+  }
+
   &--arrow {
     font-size: $fs-18;
     font-family: $font-family-secondary;
