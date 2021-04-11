@@ -7,7 +7,7 @@ new Vue({
   ...baseConfig(store),
   data() {
     return {
-      view: 1
+      view: 2
     }
   },
   computed: {
@@ -15,7 +15,7 @@ new Vue({
   },
   watch: {
     'view': function() {
-      if(this.view == 3) {
+      if(this.view == 2) {
         setTimeout(function() {
           new Swiper('.swiper-container', {
             autoplay: {

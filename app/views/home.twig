@@ -1,353 +1,76 @@
 {% extends '_html.twig' %}
 
 {% block hero %}
+  {% include 'templates-parts/hero.twig' %}
 {% endblock %}
 
 {% block content %}
   <section class="c-section c-section--home">
-    <section style="display:none" class="init">
-      <div class="init_line">
-        Accede a todo nuestro contenido online. Comienza a aprender con MAB desde cualquier lugar.
-      </div>
-      <div class="init_corner">
-        <button class="init_corner_btn">¡HOLA!</button>
-        <div class="init_corner_btn_container d-none">
-          <a href="" target="_blank">Sector Público</a>
-          <a href="" target="_blank">Sector Privado</a>
-        </div>
-      </div>
-      <div class="init_logo">
-        <img loading="lazy" src="{{theme.link}}/static/images/landing/mab_icon.png" alt="">
-      </div>
-      <div class="init_mabClick">
-      <div class="init_element_left">
-          <img loading="lazy" src="{{theme.link}}/static/images/landing/init_element.png" alt="">
-
-          <span class="init_hashtag_mobile">#AprendeDistinto</span>
-        </div>
-        <span class="init_mabClick_text">
-          MAB<br> CLICK
-          <img loading="lazy" class="init_mabClick_corner" src="{{theme.link}}/static/images/landing/corner_white.png" alt="">
-          <span class="init_hashtag_desktop">#AprendeDistinto</span>
-        </span>
-        <div class="init_brazo">
-          <img loading="lazy" src="{{theme.link}}/static/images/landing/mano.png" alt="">
-        </div>
-      </div>
-    </section>
-
-    <section class="section-init">
-      <div class="section-init__header">
-        <div class="section-init__header__icon">
-          <img src="{{theme.link}}/static/images/landing/new_dsg/logo_mab_rojo.png" alt="">
-        </div>
-
-        <a href="{{site.url}}/login/" class="section-init__header__btn" href="">
-          <span>Ingresa aquí y</span> <br>
-          <span>#AprendeDistinto</span>
-        </a>
-      </div>
-      <div class="section-init__center">
-
-      <div class="section-init__center__regadera">
-        <img src="{{theme.link}}/static/images/landing/new_dsg/regadera.png" alt="">
-      </div>
-      <div class="section-init__center__flor">
-        <img src="{{theme.link}}/static/images/landing/new_dsg/flor.png" alt="">
-      </div>
-        <figure class="section-init__figureCenter">
-          <img src="{{theme.link}}/static/images/landing/new_dsg/mab_click.png" alt="">
-        </figure>
-        <figure class="mab_pantalla_figure position-relative">
-          <img loading="lazy" class="" src="{{theme.link}}/static/images/landing/new_dsg/laptop.png" alt="">
-          <div class="mab_pantalla_figure_base">
-            <iframe src="https://player.vimeo.com/video/452695560?color=de0d46&title=0&byline=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="fullscreen" allowfullscreen></iframe>
+    <div class="c-banner bg-pri-color">
+      <div class="grid-container">
+        <div class="grid-x grid-margin-x grid-margin-y align-bottom">
+          <div class="cell large-4">
+            <div class="padding-vertical-3">
+              <img class="c-banner__logo of--contain margin-bottom-2" src="{{ theme.link }}/static/images/logo-white.png" alt="">
+              <h1 class="c-banner__title warning fs-40">
+                <span>Educación que te hace </span><br>
+                <span class="white fs-60">CRECER</span>
+              </h1>
+              <p class="white f2 fs-18"> Somos una comunidad de personas que creemos en una educación integral para todos y para todas, donde hay un balance académico, emocional y creativo. </p>
+              <p class="white f2 fs-21 w-bold margin-bottom-0">Macarena Arribas</p>
+              <p class="white f2 fs-16">Fundadora de MAB</p>
+              <a href="" class="c-link c-link--warning f2 w-bold fs-18">Ver más</a>
+            </div>
           </div>
-        </figure>
-        
-        <div class="section-init_textbottom">
-          Prepárate para una experiencia distinta de aprendizaje integral. <br>
-          Bienvenidos a nuestra plataforma académica, emocional y creativa para docentes, estudiantes y papás.
-        </div>
-      </div>
-    </section>
-
-    <section id="registro" class="mab_linkForm">
-      <div class="section_content">
-        <ul class="black_list mab_linkForm_list">
-          <li style="display:none" class="li_blank">
-            ¿Ya tienes una cuenta?
-          </li>
-          <li style="display:none">
-            <a href="{{site.url}}/login" >Ingresa aquí</a>
-            <span></span>
-          </li>
-        </ul>        
-        <h2 style="display:none" class="title">
-          ¡Bienvenidos!
-        </h2>
-        <h3 class="subtitle">
-        </h3>
-        <div class="mab_linkForm_top">
-          ${ (logedUser && logedUser.user_rol == 'foreign') ? '¡Actualiza tu cuenta!' : '¿No tienes cuenta?' }
-        </div>
-        <div class="mab_linkForm_newtitle">
-          ${ (logedUser && logedUser.user_rol == 'foreign') ? 'Como:' : 'Regístrate:' }
-        </div>
-        <ul class="mab_linkForm_list">
-          <li>
-            <a href="{{site.url}}/formularios?type=profesor" >Docente</a>
-            <span></span>
-          </li>
-          <li>
-            <a href="{{site.url}}/formularios?type=estudiante">Estudiante</a>
-            <span></span> 
-          </li>
-          <li>
-            <a href="{{site.url}}/formularios?type=tutor">Padre/Tutor</a>
-            <span></span>    
-          </li>
-          <li v-if="!logedUser || (logedUser && logedUser.user_rol != 'foreign')">
-            <a href="{{site.url}}/formularios?type=foreign">Visitante</a>
-            <span></span>    
-          </li>
-        </ul>
-      </div>
-    </section>
-
-    <section style="display: none" class="mab_balance">
-      <div class="section_content">
-        <h2 class="title">
-          BALANCE ACADÉMICO, EMOCIONAL y CREATIVO
-        </h2>
-        <figure class="mab_balance_figure">
-          <img loading="lazy" src="{{theme.link}}/static/images/landing/new_dsg/mapa.png" alt="">
-        </figure>
-      </div>
-    </section>
-    <section style="display: none" class="mab_boxes">
-      <div class="mab_boxes_item">
-        <div class="box_content">
-          Trabajamos con el sector privado y con el sector público, adaptándonos a sus áreas curriculares.
-        </div>
-      </div>
-      <div class="mab_boxes_item">
-        <div class="box_content">
-          Todos los estudiantes pasan por una evaluación de estilos de aprendizaje.
-        </div>
-      </div>
-      <div class="mab_boxes_item">
-        <div class="box_content">
-          Cada curso se trabaja con diferentes materiales que se adaptan a los distintos estilos de aprendizaje.
-        </div>
-      </div>
-      <div class="mab_boxes_item">
-        <div class="box_content">
-          El sistema lanzará estadísticas de avance en cada curso.
-        </div>
-      </div>
-      <div class="mab_boxes_item">
-        <div class="box_content">
-          Invitamos a estudiantes, docentes, padres, porque entendemos que la educación nos involucra a todos.
-        </div>
-      </div>
-      <div class="mab_boxes_item">
-        <div class="box_content">
-          Explicaciones
-          <br> a TU medida
-        </div>
-      </div>
-    </section>
-    <section style="display: none" class="mab_boxes_img">
-      <div class="section_content">
-      <img loading="lazy" class="mab_boxes_img_desktop" src="{{theme.link}}/static/images/landing/new_dsg/blue_map_desktop.png?key=20200407" alt="">
-      {# <img loading="lazy" class="mab_boxes_img_desktop" src="{{theme.link}}/static/images/landing/blue_map_desktop.jpg" alt="">       #}
-      <img loading="lazy" class="mab_boxes_img_mobile" src="{{theme.link}}/static/images/landing/new_dsg/blue_map_mobile.png?key=20200407" alt="">      
-      </div>
-    </section>
-
-    <section class="mab_resume">
-      <div class="section_content">            
-        <div class="block">
-          En MAB buscamos revolucionar la educación hacia una más emocional y humana, que forme mejores personas, para así construir una mejor sociedad.
-        </div>
-        <div class="block_rigth">
-        Con MAB CLICK podrás potenciar tus conocimientos adaptándonos a tu estilo de aprendizaje, manteniendo un balance académico y emocional.
-          <br>
-          <br> Encontrarás videos de desarrollo personal y habilidades para la vida, así como videos educativos y herramientas para reforzar tu aprendizaje en toda la etapa escolar.
-          <br>
-          <br> Todos aprendemos distinto por lo que hemos creado distintas opciones que se adapten a tu estilo.
-        </div>
-        <img loading="lazy" class="mab_resume_img" src="{{theme.link}}/static/images/landing/chica_corner.png" alt="">
-      </div>
-    </section>
-
-    <section class="section-sponsors">
-      <ul class="section-sponsors__list">
-        <li>
-          <a>
-            <img src="{{theme.link}}/static/images/landing/new_dsg/tambo.png">          
-          </a>
-        </li>
-        <li>
-          <a  >
-            <img src="{{theme.link}}/static/images/landing/new_dsg/l.png">            
-          </a>
-        </li>
-        <li>
-          <a >
-            <img src="{{theme.link}}/static/images/landing/new_dsg/aruma.png">
-          </a>
-        </li>
-        <li>
-          <a >
-            <img src="{{theme.link}}/static/images/landing/new_dsg/drel.png">                      
-          </a>
-        </li>
-        <li class="small">
-          <a>
-            <img src="{{theme.link}}/static/images/landing/new_dsg/claridad.png">            
-          </a>
-        </li>
-        <li class="small">
-          <a  >
-            <img src="{{theme.link}}/static/images/landing/new_dsg/finlandia.png">            
-          </a>
-        </li>
-        <li class="small">
-          <a >
-            <img src="{{theme.link}}/static/images/landing/new_dsg/sixseconds.png">            
-          </a>
-        </li>
-        <li>
-          <a >
-            <img src="{{theme.link}}/static/images/landing/new_dsg/juguete_pendiente.png">
-          </a>
-        </li>
-
-        <li>
-          <a  >
-            <img src="{{theme.link}}/static/images/landing/new_dsg/menta_days.png">            
-          </a>
-        </li>
-        <li class="">
-          <a  >
-            <img src="{{theme.link}}/static/images/landing/new_dsg/mami_linda.png">          
-          </a>
-        </li>
-        <li class="">
-          <a >
-            <img src="{{theme.link}}/static/images/landing/new_dsg/claribel.png">            
-          </a>
-        </li>
-        <li class="pad-sides-l big">
-          <a>
-            <img src="{{theme.link}}/static/images/landing/new_dsg/armando.png">          
-          </a>
-        </li>
-        <li class="pad-sides-r">
-          <a>
-            <img src="{{theme.link}}/static/images/landing/new_dsg/standford.png">                      
-          </a>
-        </li>
-      </ul>
-    </section>
-
-    <section style="display:none" class="mab_pantalla">
-      <figure class="mab_pantalla_figure position-relative">
-        <img loading="lazy" class="" src="{{theme.link}}/static/images/landing/pantalla.png" alt="">
-        <div class="mab_pantalla_figure_base">
-          <iframe src="https://player.vimeo.com/video/409810897?color=de0d46&title=0&byline=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="fullscreen" allowfullscreen></iframe>
-        </div>
-      </figure>
-    </section>
-    <section class="mab_contact">
-      <div class="section_content">
-        <div class="mab_contact_info">
-          <div class="mab_contact_item">
-            Únete a  nuestra <br> comunidad
-          </div>
-          <ul class="mab_contact_social">
-            {% for item in social_menu.items %}              
-              <li>
-                <a href="{{item.link}}" target="_blank"> 
-                  <i class="fab fa-{{item.slug}}"></i>
-                </a>
-              <li>
-            {% endfor %}
-          </ul>
-        </div>
-        <div class="mab_contact_figure">
-          <img loading="lazy" src="{{theme.link}}/static/images/landing/ojo.png" alt="">          
-        </div>
-      </div>
-    </section>
-    <footer class="footer">
-      <div class="section_content">
-        <div class="footer_left">
-          {{information.email}} <span>|</span>
-           <a href="https://api.whatsapp.com/send?phone=51{{information.phone|replace({' ': ''})}}" target="_blank" class="fs-18">
-            <i class="fab fa-whatsapp"></i>
-            902 705 461
-          </a>
-          <span>-</span>
-          <a href="https://api.whatsapp.com/send?phone=51{{information.phone|replace({' ': ''})}}" target="_blank" class="fs-18">
-            <i class="fab fa-whatsapp"></i>
-            {{information.phone}}
-          </a>
-          <span style="display:none">-</span>
-           <a style="display:none" href="https://api.whatsapp.com/send?phone=51{{information.phone|replace({' ': ''})}}" target="_blank" class="fs-18">
-            <i class="fab fa-whatsapp"></i>
-            924 389 429
-          </a>
-      
-        </div>
-        <ul class="footer_list">
-          <li>
-            <img loading="lazy" src="{{theme.link}}/static/images/landing/footer_img/footer_1.png?key=20200406" alt="">
-          </li>
-          <li>
-            <img loading="lazy" src="{{theme.link}}/static/images/landing/footer_img/footer_2.png?key=20200406" alt="">                
-          </li>
-          <li>
-            <img loading="lazy" src="{{theme.link}}/static/images/landing/footer_img/footer_3.png?key=20200406" alt="">                        
-          </li>
-          <li>
-            <img loading="lazy" src="{{theme.link}}/static/images/landing/footer_img/footer_4.png?key=20200406" alt="">
-          </li>
-          <li>
-            <img loading="lazy" src="{{theme.link}}/static/images/landing/footer_img/footer_5.png?key=20200406" alt="">
-          </li>
-          <li>
-            <img loading="lazy" src="{{theme.link}}/static/images/landing/footer_img/footer_6.png?key=20200406" alt="">
-          </li>
-        </ul>
-      </div>
-    </footer>
-
-    <!-- <section class="c-modal discount position-fixed width-100 height-100 padding-vertical-2" :class="{ opened : isActiveModal }">
-      <div class="grid-container height-100">
-        <div class="grid-x align-center-middle height-100">
-          <div class="cell medium-10 large-9">
-            <div class="c-modal__content position-relative flex-container flex-dir-column questions br--medium bg-white">
-              <div class="flex-container align-right margin-bottom-1">
-                <button class="white" @click="isActiveModal = false">
-                  <span class="c-icon fs-30"><i class="far fa-times"></i></span>
-                </button>
-              </div>
-              <section class="c-modal__body padding-vertical-1 padding-right-1">
-                <a href="{{site.url}}/solicitar-cursos"> 
-                  <img loading="lazy" class="modal_img_desktop" src="{{theme.link}}/static/images/landing/modal_descuento_desktop.png?key=111" alt="" >
-                  <img loading="lazy" class="modal_img_mobile" src="{{theme.link}}/static/images/landing/modal_descuento_mobile.png?key=112" alt="" >                            
-                </a>
-              </section>
+          <div class="cell large-8">
+            <div class="position-relative flex-container align-center">
+              <img class="of--contain" src="{{ theme.link }}/static/images/home/banner.png" alt="">
+              <img class="c-banner__heart position-absolute of--contain" src="{{ theme.link }}/static/images/home/heart.png" alt="">
             </div>
           </div>
         </div>
       </div>
-    </section>  -->
+    </div>
+    <div class="c-player bg-sec-color">
+      <div class="grid-container padding-vertical-3">
+        <div class="grid-x grid-margin-x grid-margin-y align-middle">
+          <div class="cell large-4">
+            <figure class="text-center">
+              <img class="c-player__logo of--contain" src="{{ theme.link }}/static/images/home/mab.png" alt="">
+            </figure>
+          </div>
+          <div class="cell large-8">
+            <div class="flex-container">
+              <figure class="position-relative text-center">
+                <img src="{{ theme.link }}/static/images/home/laptop.png" alt="">
+                <iframe class="c-player__video position-absolute" src="https://player.vimeo.com/video/452695560?color=de0d46&title=0&byline=0" width="640" height="360" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-metodology bg-pri-alt overflow-hidden">
+      <div class="grid-container padding-vertical-3">
+        <h2 class="c-metodology__title margin-bottom-2">
+          <p class="white fs-30 margin-bottom-0">Por qué nuestra</p>
+          <p class="warning fs-50">Metodología funciona</p>
+        </h2>
+        <div class="grid-x align-center">
+          <div class="cell medium-10 large-8">
+            <div class="c-advantages position-relative">
+              <div class="grid-x grid-margin-x grid-margin-y">
+                <div v-for="item of advantages" :key="item.id" class="cell medium-6 large-4 align-self-stretch">
+                  <div class="c-card-advantage bg-pri-alt br--large padding-2 text-center height-100">
+                    <img class="c-card-advantage__vector of--contain margin-bottom-1" :src="'{{ theme.link }}/static/images/home/vectors/' + item.vector + '.png'" alt="">
+                    <p class="margin-bottom-0 white fs-21">${ item.title }</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
-{% endblock %}
-
-{% block footer %}
 {% endblock %}

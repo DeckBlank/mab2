@@ -1,0 +1,15 @@
+.c-corner-card-image {
+  width: 70px;
+  right: -25px;
+  bottom: -25px;
+
+  img {
+    border-radius: 50%;
+  }
+}
+
+@include breakpoint(large) {
+  .c-corner-card-image {
+    width: 100px;
+  }
+}

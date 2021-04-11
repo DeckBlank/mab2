@@ -1,0 +1,20 @@
+.c-hover-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.c-hover-circle:hover {
+  background: $warning-color;
+}
+
+@include breakpoint(large) {
+  .c-hover-circle {
+    width: 150px;
+    height: 150px;
+    font-size: $fs-25;
+    line-height: 28px;
+  }
+}
