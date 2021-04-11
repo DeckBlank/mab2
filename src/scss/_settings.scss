@@ -68,7 +68,7 @@ $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #cc0033,
+  primary: #c03,
   secondary: #0166d0,
   success: #090,
   warning: #fbee23,
@@ -85,7 +85,7 @@ $dark: #000;
 $white: #fff;
 
 //Basic Color Alters
-$primary-alt: #ff3333;
+$primary-alt: #f33;
 $primary-dark: #810f0f;
 
 $secondary-lightest: #d2e7ff;
@@ -236,6 +236,7 @@ $fs-21: 21px;
 $fs-18: 18px;
 $fs-16: 16px;
 $fs-14: 14px;
+$fs-12: 12px;
 
 // 5. Typography Helpers
 // ---------------------
