@@ -1,4 +1,4 @@
-.c-hover-circle {
+.c-mab-subcategory {
   width: 120px;
   height: 120px;
   border-radius: 50%;
@@ -6,12 +6,12 @@
   cursor: pointer;
 }
 
-.c-hover-circle:hover {
+.c-mab-subcategory:hover {
   background: $warning-color;
 }
 
 @include breakpoint(large) {
-  .c-hover-circle {
+  .c-mab-subcategory {
     width: 150px;
     height: 150px;
     font-size: $fs-25;

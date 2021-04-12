@@ -116,3 +116,17 @@ body {
     border-radius: 20px;
   }
 }
+
+.mab-shadow {
+  box-shadow: 1px 1px 15px $shadow;
+}
+
+.desktop {
+  display: none;
+}
+
+@include breakpoint(large) {
+  .desktop {
+    display: block;
+  }
+}
