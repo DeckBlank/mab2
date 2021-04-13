@@ -221,7 +221,6 @@
                     </div>
                   </div>
                 </div>
-<<<<<<< HEAD
                 <div v-else-if="view == 'register'" key="r-register" class="c-split-layout-content c-split-layout-content--secondary">
                   <div class="width-100">
                     <div class="text-center padding-3 width-100">
@@ -253,50 +252,8 @@
                               <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
                                 error
                               </p>
-=======
-                <div v-if="view ==  2">
-                  <div v-if="false" class="c-split-layout-content c-split-layout-content--secondary">
-                    <div class="width-100">
-                      <div class="text-center padding-3 width-100">
-                        <div class="grid-x align-center">
-                          <div class="cell large-6">
-                            <h1 class="c-split-layout-content__title margin-bottom-3 white">
-                              <span class="small-title">Conviértete en un/una</span>
-                              <div class="warning big-title">#MABLover</div> 
-                            </h1>
-                            <button class="c-btn-input-social width-100">
-                              <img loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                              <span class="f2">Continuar con facebook</span>
-                            </button>
-                            <button class="c-btn-input-social width-100">
-                              <img loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                              <span class="f2">Continuar con facebook</span>
-                            </button>
-                            <form class="c-form-new text-left margin-top-2" action="">
-                              <div class="c-form-new__input-container margin-bottom-1">
-                                <label class="w-bold f2 white" for="">Correo</label>
-                                <input class="f2" type="text">
-                                <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                                  error
-                                </p>
-                              </div>
-                              <div class="c-form-new__input-container margin-bottom-1">
-                                <label class="w-bold f2 white" for="">Contraseña</label>
-                                <input class="f2" type="text">
-                                <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
-                                  error
-                                </p>
-                              </div>
-                              <button class="button c-button--warning width-100 f2 margin-top-1">Ingresar</button>
-                              <div class="c-form-new__terminos text-center">
-                                <input type="radio"><a href="" class="f2 warning">Acepto los términos y Condiciones</a>
-                              </div>
-                            </form>
-                            <div class="c-label-login warning f2 margin-top-1">
-                              ¿Ya tienes una cuenta? <a href="" class="c-link--warning w-bold warning ">Inicia Sesión</a>
->>>>>>> 78ae8ed40cb4439334feede9de0003f4f993b33f
                             </div>
-                            <button class="c-button c-button--warning width-100 f2 margin-top-1">Registrarse</button>
+                            <button @click="view = 'step-1'" class="c-button c-button--warning width-100 f2 margin-top-1">Registrarse</button>
                             <div class="c-form-new__terminos text-center">
                               <input type="radio"><a href="" class="f2 warning">Acepto los términos y Condiciones</a>
                             </div>
