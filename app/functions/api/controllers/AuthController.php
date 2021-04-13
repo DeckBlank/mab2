@@ -5,32 +5,34 @@ use PHPMailer\PHPMailer\Exception;
 
 class AuthController {
     public function __construct() {
-        register_rest_route( 'custom/v1', '/auth/login', array(
-            'methods' => 'GET',
-            'callback' => array($this, 'login'),
-            'permission_callback' => function ($request) {
-                // return ($request['_wpnonce']) ? true : false;
-                return true;
-            }
-        ));
-
-        register_rest_route( 'custom/v1', '/auth/register', array(
-            'methods' => 'POST',
-            'callback' => array($this, 'register'),
-            'permission_callback' => function ($request) {
-                // return ($request['_wpnonce']) ? true : false;
-                return true;
-            }
-        ));
-
-        register_rest_route( 'custom/v1', '/auth/social', array(
-            'methods' => 'POST',
-            'callback' => array($this, 'social'),
-            'permission_callback' => function ($request) {
-                // return ($request['_wpnonce']) ? true : false;
-                return true;
-            }
-        ));
+        add_action( 'rest_api_init', function () {
+            register_rest_route( 'custom/v1', '/auth/login', array(
+                'methods' => 'GET',
+                'callback' => array($this, 'login'),
+                'permission_callback' => function ($request) {
+                    // return ($request['_wpnonce']) ? true : false;
+                    return true;
+                }
+            ));
+    
+            register_rest_route( 'custom/v1', '/auth/register', array(
+                'methods' => 'POST',
+                'callback' => array($this, 'register'),
+                'permission_callback' => function ($request) {
+                    // return ($request['_wpnonce']) ? true : false;
+                    return true;
+                }
+            ));
+    
+            register_rest_route( 'custom/v1', '/auth/social', array(
+                'methods' => 'POST',
+                'callback' => array($this, 'social'),
+                'permission_callback' => function ($request) {
+                    // return ($request['_wpnonce']) ? true : false;
+                    return true;
+                }
+            ));
+        });
     }
 
     public function login($request) {
