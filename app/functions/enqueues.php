@@ -2,11 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-<<<<<<< HEAD
-$assets_version = '1618336668916';
-=======
 $assets_version = '1618326788930';
->>>>>>> 78ae8ed40cb4439334feede9de0003f4f993b33f
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
