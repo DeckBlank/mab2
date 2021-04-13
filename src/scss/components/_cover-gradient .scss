@@ -1,0 +1,121 @@
+.c-cover-gradient {
+  &__image {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &__figcaption {
+    background: rgba($color: $black, $alpha: 0.5);
+    top: 0;
+    left: 0;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__top {
+    align-items: flex-start;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background: lineart-gradient(red, transparent);
+  }
+
+  &__bottom {
+    box-sizing: border-box;
+  }
+
+  .c-corner-logo {
+    height: 60px;
+  }
+
+  .c-corner-text {
+    color: $white;
+    font-size: $fs-16;
+  }
+
+  &__title {
+    color: $warning-color;
+  }
+
+  &__subtitle {
+    color: $white;
+  }
+
+  &__text {
+    max-width: 90%;
+    color: $white;
+  }
+
+  span {
+    color: $warning-color;
+  }
+
+  &--primary {
+    .c-cover-gradient__top {
+      background: linear-gradient($primary-color, transparent 75%);
+    }
+
+    .c-cover-gradient__bottom {
+      background: linear-gradient(to top, $primary-color, transparent 75%);
+    }
+  }
+
+  &--secondary {
+    .c-cover-gradient__top {
+      background: linear-gradient($secondary-color, transparent 75%);
+    }
+
+    .c-cover-gradient__bottom {
+      background: linear-gradient(to top, $secondary-color, transparent 75%);
+    }
+  }
+
+  &--success {
+    .c-cover-gradient__top {
+      background: linear-gradient($success-color, transparent 75%);
+    }
+
+    .c-cover-gradient__bottom {
+      background: linear-gradient(to top, $success-color, transparent 75%);
+    }
+  }
+
+  &--alert {
+    .c-cover-gradient__top {
+      background: linear-gradient($alert-color, transparent 75%);
+    }
+
+    .c-cover-gradient__bottom {
+      background: linear-gradient(to top, $alert-color, transparent 75%);
+    }
+  }
+
+  &--warning {
+    .c-cover-gradient__top {
+      background: linear-gradient($warning-color, transparent 75%);
+    }
+
+    .c-cover-gradient__bottom {
+      background: linear-gradient(to top, $warning-color, transparent 75%);
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-cover-gradient {
+    &__title {
+      font-size: 55px;
+      line-height: 55px;
+    }
+
+    &__subtitle {
+      font-size: 45px;
+      line-height: 45px;
+    }
+
+    &__text {
+      font-size: $fs-30;
+      line-height: 32px;
+    }
+  }
+}

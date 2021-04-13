@@ -52,8 +52,81 @@ body {
       color: $white;
     }
   }
+
+  &--warning {
+    color: $warning-color;
+
+    &:hover,
+    &:focus {
+      color: $warning-color;
+    }
+  }
 }
 
 .c-overmoon {
   z-index: 99999999999;
+}
+
+.fade {
+  &-enter-active,
+  &-leave-active {
+    transition: opacity 0.3s;
+  }
+
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
+}
+
+.v-lazy-image {
+  filter: blur(20px) grayscale(100%);
+  transition: filter 0.7s;
+
+  &-loaded {
+    filter: blur(0) grayscale(0);
+  }
+}
+
+.column-between {
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.of {
+  &--cover {
+    object-fit: cover;
+  }
+
+  &--contain {
+    object-fit: contain;
+  }
+}
+
+.br {
+  &--large {
+    border-radius: 20px;
+  }
+}
+
+.mab-shadow {
+  box-shadow: 1px 1px 15px $shadow;
+}
+
+.desktop {
+  display: none;
+}
+
+@include breakpoint(large) {
+  .desktop {
+    display: block;
+  }
 }

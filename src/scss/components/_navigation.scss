@@ -6,6 +6,15 @@
   }
 }
 
+.c-bullet-steps {
+  &__bullets span {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+}
+
 @include breakpoint(medium) {
   .c-navigation {
     p {

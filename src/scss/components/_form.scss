@@ -30,3 +30,69 @@
     cursor: pointer;
   }
 }
+
+.c-form-new {
+  &__input-container {
+    label {
+      margin-bottom: 0.5rem;
+      font-size: $fs-18;
+    }
+
+    input,
+    select,
+    .c-fake-input {
+      background: $white;
+      padding: 0.3rem 1rem;
+      margin-bottom: 0;
+      border-radius: 10px;
+      font-family: $font-family-secondary !important;
+      text-align: center;
+      text-align-last: center;
+    }
+
+    .c-fake-input {
+      padding: 0.5rem 0;
+
+      &__prefix {
+        display: inline-block;
+        width: 55px;
+        padding: 0 0.5rem 0 1rem;
+        border-right: 1px solid $gray;
+      }
+
+      input {
+        border: none;
+        box-shadow: none;
+        padding: 0 1rem;
+        height: auto;
+        text-align: left;
+        text-align-last: left;
+      }
+    }
+  }
+
+  &__error {
+    border-left: solid 4px #de0d46;
+    padding-left: 0.5rem;
+    margin-top: 0.5rem;
+    display: none;
+  }
+
+  &__terminos {
+    margin-top: 1.5rem;
+
+    a {
+      text-decoration: underline;
+      padding-left: 10px;
+
+      &:hover {
+        color: $warning-color;
+      }
+    }
+  }
+
+  .c-button {
+    font-size: $fs-18;
+    font-weight: 800;
+  }
+}

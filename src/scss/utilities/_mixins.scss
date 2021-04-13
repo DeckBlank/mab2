@@ -11,11 +11,15 @@
 //Shadow
 @mixin box-shadow($align: right, $color: rgba($black, 0.45), $x: 10px, $y: 10px, $size: 20px) {
   @if $align == left {
-    box-shadow: $color $x -$y $size; /* New */
+    box-shadow: $color $x -$y $size;
+  }
+
+  @if $align == center {
+    box-shadow: $color 0 0 $size;
   }
 
   @else {
-    box-shadow: $color $x $y $size; /* New */
+    box-shadow: $color $x $y $size;
   }
 }
 
