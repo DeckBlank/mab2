@@ -7,7 +7,85 @@ new Vue({
   ...baseConfig(store),
   data() {
     return {
-      view: 2
+      metas: new URLSearchParams(window.location.search),
+      view: 'login',
+      gallery: {
+        login: {
+          img: 'access/auth/login.png',
+          title: '<span>¡Hola!</span><br><p>Qué gusto verte por aquí de nuevo</p>',
+          author: {
+            name: 'Macarena Arribas',
+            job: 'Fundadora de MAB'
+          },
+        },
+        register: {
+          img: 'access/auth/login.png',
+          title: '<span>¡Hola, soy Maca!</span><p>¿Estás listo para girar la educación?</p>',
+          author: {
+            name: 'Macarena Arribas',
+            job: 'Fundadora de MAB'
+          },
+        },
+        steps: [
+          {
+            img: 'access/steps/0.png',
+            sticker: 'access/sticker.png',
+            title: '<p>ganadora de los <span>globant awards 2020</span> categoría <span>game changer</span></p>',
+          },
+          {
+            img: 'access/steps/1.png',
+            author: {
+              name: 'Viviana de Ferrari',
+              job: 'Amor Propio'
+            },
+            title: '<p>aprende con <span>especialistas</span> reconocidos a nivel <span>nacional e internacional</span></p>',
+          },
+          {
+            img: 'access/steps/2.png',
+            title: '<p>tutores que han <span>pasado por lo mismo</span> que tú</p>',
+          },
+          {
+            img: 'access/steps/3.png',
+            title: '<p>¡ya casi estás listo/a para comenzar a aprender distinto!</p>',
+          }
+        ],
+        slider: [
+          {
+            img: 'access/slider/1.png',
+            author: {
+              name: 'Proyecto “De Tambo a Tambo”',
+            },
+            title: '<span>mucho más que una plataforma de cursos</span> <p>conoce todos nuestros proyectos y servicios que tenemos para ti</p>',
+          },
+          {
+            img: 'access/slider/2.png',
+            author: {
+              name: 'Tutorías personalizadas',
+            },
+            title: '<span>mucho más que una plataforma de cursos</span> <p>conoce todos nuestros proyectos y servicios que tenemos para ti</p>',
+          },
+          {
+            img: 'access/slider/3.png',
+            author: {
+              name: 'Talleres, programa Kids',
+            },
+            title: '<span>mucho más que una plataforma de cursos</span> <p>conoce todos nuestros proyectos y servicios que tenemos para ti</p>',
+          },
+        ]
+      },
+
+      user: {
+        try: false,
+        email: {
+          value: '',
+          pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
+          isValid: false
+        },
+        password: {
+          value: '',
+          isValid: false,
+        }
+      }
     }
   },
   computed: {
@@ -15,41 +93,66 @@ new Vue({
   },
   watch: {
     'view': function() {
-      if(this.view == 2) {
-        setTimeout(function() {
-          new Swiper('.swiper-container', {
+      if(this.view == 'step-4') {
+        setTimeout(() => {
+          new Swiper('#slider-mab', {
             autoplay: {
               delay: 3000,
             },
             pagination: {
               el: '.c-image-slider .swiper-pagination',
             },
-            navigation: {
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev',
-            },
           });
         },1000)
       }
+    },
+
+    'user.email.value' : function() {
+      this.user.email.isValid = this.validateText(this.user.email);
+    },
+    'user.password.value' : function() {
+      this.user.password.isValid = (this.user.password.value.length && this.user.password.value.length >= 5) ? true : false;
     }
   },
   mounted(){
     this.global();
     this.hideLoading();
 
+    if (this.metas.get('auth') && this.metas.get('auth') == 'register')
+      this.view = 'register';
+
     this.initFacebook();
   },
   methods: {
     ...baseActions(),
-    next: function () {
-      if(this.view != 3) {
-        this.view = this.view + 1
+    validateText: function(parameter) {
+      let pattern = new RegExp( parameter.pattern );
+      let value   = parameter.value.trim()
+
+      if(pattern.test(value)){
+        return true;
+      }else{
+        return false
       }
     },
-    prev: function () {
-      if(this.view != 1) {
-        this.view = this.view - 1
+    isWrongField: function(field) {
+      return this.user.try && !this.user[field].isValid;
+    },
+    nextStep: function (step) {
+      this.view = `step-${ step }`;
+    },
+    prevStep: function (step) {
+      if (step == -1) {
+        window.location.href = `${ this.SITE_URL }/access?auth=register`;
+      } else {
+        this.view = `step-${ step }`;
       }
+    },
+    login: function(e) {
+      e.preventDefault();
+      
+      this.user.try = true;
+      console.log(333);
     },
     initFacebook: function() {
       window.fbAsyncInit = function() {
