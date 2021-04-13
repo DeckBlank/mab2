@@ -15,7 +15,7 @@ const access = new Vue({
   },
   watch: {
     'view': function() {
-      if(this.view == 3) {
+      if(this.view == 2) {
         setTimeout(function() {
           new Swiper('.swiper-container', {
             autoplay: {

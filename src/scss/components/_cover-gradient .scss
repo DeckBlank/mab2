@@ -89,6 +89,16 @@
       background: linear-gradient(to top, $alert-color, transparent 75%);
     }
   }
+
+  &--warning {
+    .c-cover-gradient__top {
+      background: linear-gradient($warning-color, transparent 75%);
+    }
+
+    .c-cover-gradient__bottom {
+      background: linear-gradient(to top, $warning-color, transparent 75%);
+    }
+  }
 }
 
 @include breakpoint(large) {

@@ -39,12 +39,35 @@
     }
 
     input,
-    select {
+    select,
+    .c-fake-input {
       background: $white;
       padding: 0.3rem 1rem;
       margin-bottom: 0;
       border-radius: 10px;
       font-family: $font-family-secondary !important;
+      text-align: center;
+      text-align-last: center;
+    }
+
+    .c-fake-input {
+      padding: 0.5rem 0;
+
+      &__prefix {
+        display: inline-block;
+        width: 55px;
+        padding: 0 0.5rem 0 1rem;
+        border-right: 1px solid $gray;
+      }
+
+      input {
+        border: none;
+        box-shadow: none;
+        padding: 0 1rem;
+        height: auto;
+        text-align: left;
+        text-align-last: left;
+      }
     }
   }
 
