@@ -164,6 +164,18 @@
     @include b-radious(20px);
   }
 
+  &--success {
+    background: $success-color;
+    color: $white;
+
+    @include b-radious(10px);
+  }
+
+  &--small {
+    padding: 0.3rem 1.5rem;
+    font-size: $fs-14 !important;
+  }
+
   &--arrow {
     font-size: $fs-18;
     font-family: $font-family-secondary;

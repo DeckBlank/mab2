@@ -116,7 +116,7 @@
                     </div>
                   </figcaption>
                 </figure>
-                <figure  v-if="false" class="c-cover-gradient c-cover-gradient--warning position-relative height-100 width-100">
+                <figure v-if="false" class="c-cover-gradient c-cover-gradient--warning position-relative height-100 width-100">
                   <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
                   <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
                     <div class="c-cover-gradient__top width-100 flex-container padding-3 padding-top-2">
@@ -527,7 +527,9 @@
                                 <div class="cell large-6">
                                   <div class="c-form-new__input-container margin-bottom-1">
                                     <label class="w-bold f2 white" for="">Número de teléfono</label>
-                                    <input class="f2" type="tel">
+                                    <div class="c-fake-input c-fake-input--tel flex-container align-middle">
+                                      <span class="c-fake-input__prefix">+51</span><input type="tel">
+                                    </div>
                                     <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
                                       error
                                     </p>
@@ -541,10 +543,23 @@
                     </div>
                     <div class="width-100 padding-3">
                       <div class="grid-x align-center">
-                        <div class="cell small-6 medium-5 large-5 text-left">
+                        <div class="cell small-6 medium-3 large-3 text-left">
                           <button class="c-button c-button--warning-primary c-button--arrow w-xbold " @click="prev()"> < Anterior</button>
                         </div>
-                        <div class="cell small-6 medium-5 large-5 text-right">
+                        <div class="cell medium-4 large-4 desktop">
+                          <div class="c-bullet-steps text-center">
+                            <div class="c-bullet-steps__bullets">
+                              <span class="bg-warning"></span>
+                              <span class="bg-white"></span>
+                              <span class="bg-white"></span>
+                              <span class="bg-white"></span>
+                            </div>
+                            <div class="c-bullet-steps__text f2 fs-21 white">
+                              Paso 1 de 4
+                            </div>
+                          </div>
+                        </div>
+                        <div class="cell small-6 medium-3 large-3 text-right">
                           <button class="c-button c-button--warning-primary c-button--arrow w-xbold " @click="next()">Siguiente ></button>
                         </div>
                       </div>
@@ -567,7 +582,7 @@
                             <h4 class="white margin-bottom-2 text-left">Actualmente, soy...</h4>
                             <div class="grid-x grid-margin-y grid-margin-x align-center">
                               <div class="cell medium-6 large-6 align-self-stretch">
-                                <div class="c-split-layout-content__round-box text-left position-relative f2  bg-white black flex-container align-center-middle white ">
+                                <div class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white ">
                                   <span>
                                     <strong>Un padre / una madre / apoderad@</strong> que busca la mejor educación para su familia
                                   </span>
@@ -577,7 +592,7 @@
                                 </div>
                               </div>
                               <div class="cell medium-6 large-6 align-self-stretch">
-                                <div class="c-split-layout-content__round-box text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1">
+                                <div class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1">
                                   <span>
                                     <strong>Un maestro / una
                                       maestra</strong> que busca
@@ -590,7 +605,7 @@
                                 </div>
                               </div>
                               <div class="cell medium-6 large-6 align-self-stretch">
-                                <div class="c-split-layout-content__round-box text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1">
+                                <div class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1">
                                   <span>
                                     <strong>Un/a estudiante</strong>
                                       que busca superarse
@@ -603,7 +618,7 @@
                                 </div>
                               </div>
                               <div class="cell medium-6 large-6 align-self-stretch">
-                                <div class="c-split-layout-content__round-box text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1">
+                                <div class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1">
                                   <span>
                                     <strong>Un/a internauta
                                       apasionado/a</strong> por la
@@ -615,7 +630,7 @@
                                 </div>
                               </div>
                               <div class="cell medium-6 large-6 align-self-stretch">
-                                <div class="c-split-layout-content__round-box text-left position-relative f2  bg-warning black flex-container align-center-middle white margin-bottom-1">
+                                <div class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-warning black flex-container align-center-middle white margin-bottom-1">
                                   <span>
                                     <strong>Parte del programa
                                       “De Tambo a Tambo”</strong>
@@ -633,10 +648,23 @@
                     </div>
                     <div class="width-100 padding-3">
                       <div class="grid-x align-center">
-                        <div class="cell small-6 medium-5 large-5 text-left">
+                        <div class="cell small-6 medium-3 large-3 text-left">
                           <button class="c-button c-button--warning-success c-button--arrow w-xbold " @click="prev()"> < Anterior</button>
                         </div>
-                        <div class="cell small-6 medium-5 large-5 text-right">
+                        <div class="cell medium-4 large-4 desktop">
+                          <div class="c-bullet-steps text-center">
+                            <div class="c-bullet-steps__bullets">
+                              <span class="bg-white"></span>
+                              <span class="bg-warning"></span>
+                              <span class="bg-white"></span>
+                              <span class="bg-white"></span>
+                            </div>
+                            <div class="c-bullet-steps__text f2 fs-21 white">
+                              Paso 2 de 4
+                            </div>
+                          </div>
+                        </div>
+                        <div class="cell small-6 medium-3 large-3 text-right">
                           <button class="c-button c-button--warning-success c-button--arrow w-xbold " @click="next()">Siguiente ></button>
                         </div>
                       </div>
@@ -658,60 +686,72 @@
                             <h4 class="white margin-bottom-2 f2 w-xbold black">Elige al menos 3 categorías</h4>
                             <div class="grid-x grid-margin-y grid-margin-x align-center">
                               <div class="cell small-6 medium-3 large-3">
-                                <figure class="c-image-bottom-title position-relative">
-                                  <img class="c-image-bottom-title__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  <figcaption class="c-image-bottom-title__shade position-absolute width-100 height-100 white text-center flex-container">
-                                    <div class="c-image-bottom-title__text flex-container align-center-middle width-100">
+                                <figure class="c-mab-category mab-shadow c-mab-category--secondary active position-relative">
+                                  <img class="c-mab-category__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
+                                  <div class="c-mab-category__gradient position-absolute width-100 height-100">
+                                  </div>
+                                  <figcaption class="c-mab-category__shade position-absolute width-100 height-100 white text-center flex-container">
+                                    <div class="c-mab-category__text flex-container align-center-middle width-100">
                                       Habilidades para la vida
                                     </div>
                                   </figcaption>
                                 </figure>
                               </div>
                               <div class="cell small-6 medium-3 large-3">
-                                <figure class="c-image-bottom-title position-relative">
-                                  <img class="c-image-bottom-title__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  <figcaption class="c-image-bottom-title__shade position-absolute width-100 height-100 white text-center flex-container">
-                                    <div class="c-image-bottom-title__text flex-container align-center-middle width-100">
+                                <figure class="c-mab-category mab-shadow c-mab-category--alert position-relative">
+                                  <img class="c-mab-category__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
+                                  <div class="c-mab-category__gradient position-absolute width-100 height-100">
+                                  </div>
+                                  <figcaption class="c-mab-category__shade position-absolute width-100 height-100 white text-center flex-container">
+                                    <div class="c-mab-category__text flex-container align-center-middle width-100">
                                       Habilidades
                                     </div>
                                   </figcaption>
                                 </figure>
                               </div>
                               <div class="cell small-6 medium-3 large-3">
-                                <figure class="c-image-bottom-title position-relative">
-                                  <img class="c-image-bottom-title__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  <figcaption class="c-image-bottom-title__shade position-absolute width-100 height-100 white text-center flex-container">
-                                    <div class="c-image-bottom-title__text flex-container align-center-middle width-100">
+                                <figure class="c-mab-category mab-shadow c-mab-category--warning-alt position-relative">
+                                  <img class="c-mab-category__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
+                                  <div class="c-mab-category__gradient position-absolute width-100 height-100">
+                                  </div>
+                                  <figcaption class="c-mab-category__shade position-absolute width-100 height-100 white text-center flex-container">
+                                    <div class="c-mab-category__text flex-container align-center-middle width-100">
                                       Habilidades
                                     </div>
                                   </figcaption>
                                 </figure>
                               </div>
                               <div class="cell small-6 medium-3 large-3">
-                                <figure class="c-image-bottom-title position-relative">
-                                  <img class="c-image-bottom-title__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  <figcaption class="c-image-bottom-title__shade position-absolute width-100 height-100 white text-center flex-container">
-                                    <div class="c-image-bottom-title__text flex-container align-center-middle width-100">
+                                <figure class="c-mab-category mab-shadow c-mab-category--success position-relative">
+                                  <img class="c-mab-category__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
+                                  <div class="c-mab-category__gradient position-absolute width-100 height-100">
+                                  </div>
+                                  <figcaption class="c-mab-category__shade position-absolute width-100 height-100 white text-center flex-container">
+                                    <div class="c-mab-category__text flex-container align-center-middle width-100">
                                       Habilidades
                                     </div>
                                   </figcaption>
                                 </figure>
                               </div>
                               <div class="cell small-6 medium-3 large-3">
-                                <figure class="c-image-bottom-title position-relative">
-                                  <img class="c-image-bottom-title__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  <figcaption class="c-image-bottom-title__shade position-absolute width-100 height-100 white text-center flex-container">
-                                    <div class="c-image-bottom-title__text flex-container align-center-middle width-100">
-                                      Habilidades
+                                <figure class="c-mab-category mab-shadow c-mab-category--secondary position-relative">
+                                  <img class="c-mab-category__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
+                                  <div class="c-mab-category__gradient position-absolute width-100 height-100">
+                                  </div>
+                                  <figcaption class="c-mab-category__shade position-absolute width-100 height-100 white text-center flex-container">
+                                    <div class="c-mab-category__text flex-container align-center-middle width-100">
+                                      Habilidades para la vida
                                     </div>
                                   </figcaption>
                                 </figure>
                               </div>
                               <div class="cell small-6 medium-3 large-3">
-                                <figure class="c-image-bottom-title position-relative">
-                                  <img class="c-image-bottom-title__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  <figcaption class="c-image-bottom-title__shade position-absolute width-100 height-100 white text-center flex-container">
-                                    <div class="c-image-bottom-title__text flex-container align-center-middle width-100">
+                                <figure class="c-mab-category mab-shadow c-mab-category--alert position-relative">
+                                  <img class="c-mab-category__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
+                                  <div class="c-mab-category__gradient position-absolute width-100 height-100">
+                                  </div>
+                                  <figcaption class="c-mab-category__shade position-absolute width-100 height-100 white text-center flex-container">
+                                    <div class="c-mab-category__text flex-container align-center-middle width-100">
                                       Habilidades
                                     </div>
                                   </figcaption>
@@ -724,10 +764,23 @@
                     </div>
                     <div class="width-100 padding-3">
                       <div class="grid-x align-center">
-                        <div class="cell small-6 medium-5 large-5 text-left">
+                        <div class="cell small-6 medium-3 large-3 text-left">
                           <button class="c-button c-button--black-warning c-button--arrow w-xbold " @click="prev()"> < Anterior</button>
                         </div>
-                        <div class="cell small-6 medium-5 large-5 text-right">
+                        <div class="cell medium-4 large-4 desktop">
+                          <div class="c-bullet-steps text-center">
+                            <div class="c-bullet-steps__bullets">
+                              <span class="bg-white"></span>
+                              <span class="bg-white"></span>
+                              <span class="bg-black"></span>
+                              <span class="bg-white"></span>
+                            </div>
+                            <div class="c-bullet-steps__text f2 fs-21 black">
+                              Paso 3 de 4
+                            </div>
+                          </div>
+                        </div>
+                        <div class="cell small-6 medium-3 large-3 text-right">
                           <button class="c-button c-button--black-warning c-button--arrow w-xbold " @click="next()">Siguiente ></button>
                         </div>
                       </div>
@@ -746,45 +799,45 @@
                                 </h2>
                               </div>
                             </div>
-                            <h4 class="white margin-bottom-2 f2 w-xbold white">Elige al menos 3 categorías</h4>
+                            <h4 class="white margin-bottom-2 f2 w-xbold white">Elige al menos 3 subcategorías</h4>
                             <div class="grid-x grid-margin-y grid-margin-x align-center">
                               <div class="cell small-6 medium-3 large-3">
-                                <div class="c-hover-circle bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
+                                <div class="c-mab-subcategory mab-shadow bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
                                   Actitud y cáncer
                                 </div>
                               </div>
                               <div class="cell small-6 medium-3 large-3">
-                                <div class="c-hover-circle bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
+                                <div class="c-mab-subcategory mab-shadow bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
                                   Actitud y cáncer
                                 </div>
                               </div>
                               <div class="cell small-6 medium-3 large-3">
-                                <div class="c-hover-circle bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
+                                <div class="c-mab-subcategory mab-shadow bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
                                   Actitud y cáncer
                                 </div>
                               </div>
                               <div class="cell small-6 medium-3 large-3">
-                                <div class="c-hover-circle bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
+                                <div class="c-mab-subcategory mab-shadow bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
                                   Actitud y cáncer
                                 </div>
                               </div>
                               <div class="cell small-6 medium-3 large-3">
-                                <div class="c-hover-circle bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
+                                <div class="c-mab-subcategory mab-shadow bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
                                   Coaching ontológico
                                 </div>
                               </div>
                               <div class="cell small-6 medium-3 large-3">
-                                <div class="c-hover-circle bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
+                                <div class="c-mab-subcategory mab-shadow bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
                                   Autismo
                                 </div>
                               </div>
                               <div class="cell small-6 medium-3 large-3">
-                                <div class="c-hover-circle bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
+                                <div class="c-mab-subcategory mab-shadow bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
                                   Actitud y cáncer
                                 </div>
                               </div>
                               <div class="cell small-6 medium-3 large-3">
-                                <div class="c-hover-circle bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
+                                <div class="c-mab-subcategory mab-shadow bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
                                   Yoga para ser feliz
                                 </div>
                               </div>
@@ -792,6 +845,17 @@
                             <div class="margin-top-3">
                               <button class="c-button c-button--warning-black w-xbold margin-bottom-2 padding-left-2 padding-right-2">¡Comienza a <br> aprender distinto!</button>
                               <div class="warning f2 w-xbold fs-18">< Volver</div>
+                              <div class="c-bullet-steps text-center margin-top-1">
+                                <div class="c-bullet-steps__bullets">
+                                  <span class="bg-white"></span>
+                                  <span class="bg-white"></span>
+                                  <span class="bg-white"></span>
+                                  <span class="bg-warning"></span>
+                                </div>
+                                <div class="c-bullet-steps__text f2 fs-21 white">
+                                  Paso 4 de 4
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -877,6 +941,16 @@
                           <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
                             error
                           </p>
+                        </div>
+                        <div class="width-100 margin-top-2">
+                          <div class="grid-x grid-margin-x grid-margin-y align-center">
+                            <div class="cell small-6 medium-4 large-4 text-left">
+                              <button class="c-button c-button--success c-button--arrow c-button--small width-100" @click="prev()">Volver</button>
+                            </div>
+                            <div class="cell small-6 medium-4 large-4 text-right">
+                              <button class="c-button c-button--success c-button--arrow c-button--small width-100" @click="next()">Continuar</button>
+                            </div>
+                          </div>
                         </div>
                       </form>
                   </div>
