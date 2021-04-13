@@ -1,0 +1,28 @@
+.c-slider {
+  &__pagination {
+    position: static;
+    display: flex;
+    justify-content: center;
+
+    .swiper-pagination-bullet {
+      background-color: $warning-color;
+      width: 13px !important;
+      height: 13px !important;
+      position: relative;
+      opacity: 1;
+      margin: 0 0.5rem !important;
+      outline: none;
+      display: block;
+      border-radius: 5000px;
+      cursor: pointer;
+
+      @include transition(0.5s);
+
+      &.swiper-pagination-bullet-active {
+        visibility: visible;
+        opacity: 1;
+        box-shadow: $warning-color 0 0 0 5px;
+      }
+    }
+  }
+}
