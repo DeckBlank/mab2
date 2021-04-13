@@ -1,0 +1,78 @@
+.c-course-card {
+  &__figure {
+    height: 180px;
+
+    img {
+      object-position: center;
+    }
+  }
+
+  &__heart {
+    width: 25px;
+  }
+
+  .c-button {
+    padding-bottom: 0.7rem;
+    padding-right: 0.7rem;
+  }
+
+  &__footer {
+    padding: 0.5rem;
+  }
+}
+
+.c-course-card--secondary {
+  background: $secondary-color;
+  color: $white;
+
+  .c-course-card__likes {
+    color: $white;
+  }
+
+  .c-button--course {
+    background: $secondary-alt;
+    color: $white;
+  }
+}
+
+.c-course-card--warning {
+  background: $warning-color;
+  color: $black;
+
+  .c-course-card__likes {
+    color: $black;
+  }
+
+  .c-button--course {
+    background: $warning-light;
+    color: $black;
+  }
+}
+
+.c-course-card--success {
+  background: $success-color;
+  color: $white;
+
+  .c-course-card__likes {
+    color: $white;
+  }
+
+  .c-button--course {
+    background: $success-alt;
+    color: $white;
+  }
+}
+
+.c-course-card--pri-alt {
+  background: $primary-alt;
+  color: $white;
+
+  .c-course-card__likes {
+    color: $white;
+  }
+
+  .c-button--course {
+    background: $primary-light;
+    color: $white;
+  }
+}

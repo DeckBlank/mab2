@@ -1,0 +1,29 @@
+.c-section--my-courses {
+  .c-mab-resume {
+    &__photo {
+      display: none;
+    }
+
+    &__content {
+      padding: 2rem;
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-section--my-courses {
+    .c-mab-resume {
+      &__photo {
+        display: block;
+        height: 75%;
+        bottom: 20%;
+        right: -50px;
+        transform: rotateZ(10deg);
+      }
+
+      &__content {
+        padding: 2rem 0 2rem 5rem;
+      }
+    }
+  }
+}
