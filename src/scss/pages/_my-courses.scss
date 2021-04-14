@@ -8,6 +8,36 @@
       padding: 2rem;
     }
   }
+
+  .c-lideres {
+    &__content {
+      padding: 2rem 2rem 2rem;
+    }
+
+    .swiper-slide {
+      height: auto;
+    }
+
+    .c-lider-avatar {
+      flex-grow: 1;
+    }
+
+    .c-profile-card {
+      &__content img {
+        width: 250px;
+      }
+
+      &::before {
+        height: calc(100% - 80px);
+      }
+    }
+  }
+
+  .c-other-services {
+    &__content {
+      padding: 2rem;
+    }
+  }
 }
 
 @include breakpoint(large) {
@@ -23,6 +53,31 @@
 
       &__content {
         padding: 2rem 0 2rem 5rem;
+      }
+    }
+
+    .c-lideres {
+      &__content {
+        padding: 3rem 5rem 2rem;
+      }
+    }
+
+    .c-other-services {
+      &__content {
+        padding: 0;
+      }
+
+      &__title {
+        padding-left: 5rem;
+      }
+
+      &__info {
+        padding-top: 3rem;
+      }
+
+      .swiper-slide {
+        padding: 0 5rem 2rem;
+        box-sizing: border-box;
       }
     }
   }

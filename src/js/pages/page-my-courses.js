@@ -122,12 +122,22 @@ const myCourses = new Vue({
           }
         }
       });
+
+      let otherServices = new Swiper('.c-other-services .swiper-container', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        pagination: {
+          el: '.c-other-services .swiper-pagination',
+          type: 'bullets',
+          clickable: true,
+        },
+      });
     },1000)
   },
   methods: {
     ...baseActions(),
     initLideresBrands: function() {
-      new Swiper('#slider-brands', {
+      new Swiper('.c-lideres .swiper-container', {
         speed: 900,
         loop: false,
         allowTouchMove: false,
@@ -136,25 +146,31 @@ const myCourses = new Vue({
           disableOnInteraction: false,
         },
 
+        pagination: {
+          el: '.c-lideres .swiper-pagination',
+          type: 'bullets',
+          clickable: true,
+        },
+
         breakpoints: {
           320: {
-            slidesPerView: 2,
+            slidesPerView: 1,
             spaceBetween: 10,
           },
           480: {
-            slidesPerView: 2,
+            slidesPerView: 1,
             spaceBetween: 10,
           },
           640: {
-            slidesPerView: 3,
+            slidesPerView: 2,
             spaceBetween: 10,
           },
           1024: {
-            slidesPerView: 4,
+            slidesPerView: 2,
             spaceBetween: 30,
           },
           1140: {
-            slidesPerView: 5,
+            slidesPerView: 3,
             spaceBetween: 30,
           },
         },

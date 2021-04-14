@@ -26,3 +26,37 @@
     }
   }
 }
+
+.c-mab-slider {
+  .c-arrow-next,
+  .c-arrow-prev {
+    top: 50%;
+    font-family: swiper-icons, sans-serif;
+    color: $black;
+    width: 20px;
+    height: 20px;
+    font-size: 25px;
+    display: none;
+    outline-color: transparent;
+    cursor: pointer;
+  }
+
+  .c-arrow-next {
+    right: -0.5rem;
+  }
+
+  .c-arrow-prev {
+    left: -0.5rem;
+  }
+}
+
+@include breakpoint(large) {
+  .c-mab-slider {
+    padding: 0 2rem;
+
+    .c-arrow-next,
+    .c-arrow-prev {
+      display: flex;
+    }
+  }
+}
