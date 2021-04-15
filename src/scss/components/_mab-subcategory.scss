@@ -4,10 +4,14 @@
   border-radius: 50%;
   transition: all 0.5s;
   cursor: pointer;
-}
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
 
-.c-mab-subcategory:hover {
-  background: $warning-color;
+  &:hover,
+  &.enable {
+    background: $warning-color;
+  }
 }
 
 @include breakpoint(large) {

@@ -180,6 +180,12 @@
     font-size: $fs-18;
     font-family: $font-family-secondary;
   }
+
+  &.loading {
+    &:disabled {
+      cursor: wait;
+    }
+  }
 }
 
 .c-btn-input-social {

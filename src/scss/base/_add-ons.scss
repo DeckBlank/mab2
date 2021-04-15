@@ -163,6 +163,8 @@ $font-families: (
 }
 
 .c-link {
+  cursor: pointer;
+
   &--white {
     color: $white;
 

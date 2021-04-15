@@ -41,7 +41,7 @@
             },
             "choices": {
                 "success": "Verde",
-                "primary": "Rojo",
+                "alert": "Rojo",
                 "warning": "Amarillo",
                 "secondary": "Azul"
             },
@@ -71,5 +71,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1617931211
+    "modified": 1618384585
 }

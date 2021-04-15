@@ -24,10 +24,10 @@ require_once(__DIR__."/../controllers/BehaviourController.php");
 require_once(__DIR__."/../controllers/ExerciseController.php");
 require_once(__DIR__."/../controllers/SchoolController.php");
 
-// require_once(__DIR__ . "/../controllers/AuthController.php");
-// require_once(__DIR__ . "/../controllers/CourseController.php");
-// require_once(__DIR__ . "/../controllers/GEOController.php");
+require_once(__DIR__ . "/../controllers/AuthController.php");
+require_once(__DIR__ . "/../controllers/CourseController.php");
+require_once(__DIR__ . "/../controllers/GEOController.php");
 
-// new AuthController();
-// new CourseController();
-// new GEOController();
+new AuthController();
+new CourseController();
+new GEOController();

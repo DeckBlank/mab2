@@ -10,33 +10,30 @@ class AuthController {
                 'methods' => 'GET',
                 'callback' => array($this, 'login'),
                 'permission_callback' => function ($request) {
-                    // return ($request['_wpnonce']) ? true : false;
-                    return true;
+                    return ($request['_wpnonce']) ? true : false;
                 }
             ));
-    
+
             register_rest_route( 'custom/v1', '/auth/register', array(
                 'methods' => 'POST',
                 'callback' => array($this, 'register'),
                 'permission_callback' => function ($request) {
-                    // return ($request['_wpnonce']) ? true : false;
-                    return true;
+                    return ($request['_wpnonce']) ? true : false;
                 }
             ));
-    
+
             register_rest_route( 'custom/v1', '/auth/social', array(
                 'methods' => 'POST',
                 'callback' => array($this, 'social'),
                 'permission_callback' => function ($request) {
-                    // return ($request['_wpnonce']) ? true : false;
-                    return true;
+                    return ($request['_wpnonce']) ? true : false;
                 }
             ));
         });
     }
 
     public function login($request) {
-        if( isset($request['user']) and isset($request['password']) ){
+        if( isset($request['email']) and isset($request['password']) ){
             return $this::__handleLogin($request);
         }else{
             return new WP_Error( 'no_user_credentials', __('No user credentials'), array( 'status' => 404 ) );

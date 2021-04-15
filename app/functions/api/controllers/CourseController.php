@@ -26,7 +26,7 @@ class CourseController{
                 }
             ));
     
-            register_rest_route('custom/v1', '/courses/mab_categories/(?P<category_id>\d+)/subcategories', array(
+            register_rest_route('custom/v1', '/courses/mab_subcategories', array(
                 'methods' => 'GET',
                 'callback' => array($this,'getMabCategories'),
                 'permission_callback' => function ($request) {
@@ -163,19 +163,33 @@ class CourseController{
     }
 
     public function getMabCategories($request) {
-        $parentCategory = (!empty($request['category_id'])) ? $request['category_id'] : 0;
+        $parentCategories = (!empty($request['categories'])) ? $request['categories'] : 0;
+        $parentCategories = ($parentCategories) ? explode(',', $parentCategories) : 0;
 
-        $categories = Timber::get_terms([
-            'parent'    => $parentCategory,
-            'taxonomy'  => 'tax-mab-course'
-        ]);
+        $categories = [];
+
+        if ($parentCategories)
+            foreach($parentCategories as $pCategory) {
+                $categories = array_merge(
+                    $categories,
+                    Timber::get_terms([
+                        'parent'    => $pCategory,
+                        'taxonomy'  => 'tax-mab-course'
+                    ])
+                );
+            }
+        else
+            $categories = Timber::get_terms([
+                'parent'    => 0,
+                'taxonomy'  => 'tax-mab-course'
+            ]);
 
         if ( count($categories) ) {
-            $categories = array_map( function($category) use ($parentCategory) {
+            $categories = array_map( function($category) use ($parentCategories) {
                 return array_merge(
                     [ 'name' => $category->name, 'id' => $category->term_id ],
-                    ( !$parentCategory ) ? [ 'thumbnail' => get_field('image', 'category_' . $category->term_id) ] : [],
-                    ( !$parentCategory ) ? [ 'color'     => get_field('color', 'category_' . $category->term_id) ] : []
+                    ( !$parentCategories ) ? [ 'thumbnail' => get_field('image', 'category_' . $category->term_id) ] : [],
+                    ( !$parentCategories ) ? [ 'color'     => get_field('color', 'category_' . $category->term_id) ] : []
                 );
             }, $categories);
 

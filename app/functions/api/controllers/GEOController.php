@@ -2,13 +2,15 @@
 
 class GEOController {
     public function __construct() {
-        register_rest_route( 'custom/v1', '/geo', array(
-            'methods' => 'GET',
-            'callback' => array($this, 'show'),
-            'permission_callback' => function ($request) {
-                return ($request['_wpnonce']) ? true : false;
-            }
-        ));
+        add_action( 'rest_api_init', function () {
+            register_rest_route( 'custom/v1', '/geo', array(
+                'methods' => 'GET',
+                'callback' => array($this, 'show'),
+                'permission_callback' => function ($request) {
+                    return ($request['_wpnonce']) ? true : false;
+                }
+            ));
+        });
     }
 
     public function show($request) {
