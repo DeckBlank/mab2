@@ -48,11 +48,18 @@
   .c-arrow-prev {
     left: -0.5rem;
   }
+
+  &--side-shadow {
+    .swiper-slide {
+      padding: 0 1rem;
+      box-sizing: border-box;
+    }
+  }
 }
 
 @include breakpoint(large) {
   .c-mab-slider {
-    padding: 0 2rem;
+    padding: 0 1rem;
 
     .c-arrow-next,
     .c-arrow-prev {

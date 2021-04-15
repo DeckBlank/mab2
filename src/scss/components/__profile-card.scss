@@ -37,24 +37,20 @@
   }
 
   &--vector-right {
+    transform: rotateZ(10deg);
+    right: -40px;
+
     .c-profile-card__vector {
       right: 0;
     }
   }
 
   &--vector-left {
+    transform: rotateZ(-10deg);
+    left: -40px;
+
     .c-profile-card__vector {
       left: 0;
     }
   }
-}
-
-.c-profile-card__vector--right {
-  transform: rotateZ(10deg);
-  right: -40px;
-}
-
-.c-profile-card__vector--left {
-  transform: rotateZ(-10deg);
-  left: -40px;
 }

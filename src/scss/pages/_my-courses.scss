@@ -1,4 +1,11 @@
 .c-section--my-courses {
+  .c-banner {
+    &__title {
+      font-size: 60px;
+      line-height: 50px;
+    }
+  }
+
   .c-mab-resume {
     &__photo {
       display: none;
@@ -14,19 +21,7 @@
       padding: 2rem 2rem 2rem;
     }
 
-    .swiper-slide {
-      height: auto;
-    }
-
-    .c-lider-avatar {
-      flex-grow: 1;
-    }
-
     .c-profile-card {
-      &__content img {
-        width: 250px;
-      }
-
       &::before {
         height: calc(100% - 80px);
       }
@@ -55,6 +50,13 @@
 
 @include breakpoint(large) {
   .c-section--my-courses {
+    .c-banner {
+      &__title {
+        font-size: 90px;
+        line-height: 80px;
+      }
+    }
+
     .c-mab-resume {
       &__photo {
         display: block;

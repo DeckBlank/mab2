@@ -70,7 +70,7 @@ const myCourses = new Vue({
     setTimeout(function() {
       let courseContinue = new Swiper('.c-mab-continue .swiper-container', {
         slidesPerView: 3,
-        spaceBetween: 30,
+        spaceBetween: 0,
         navigation: {
           nextEl: '.c-mab-continue .swiper-button-next',
           prevEl: '.c-mab-continue .swiper-button-prev',
@@ -79,25 +79,25 @@ const myCourses = new Vue({
           // when window width is >= 320px
           200: {
             slidesPerView: 1,
-            spaceBetween: 20
+            spaceBetween: 10
           },
           640: {
             slidesPerView: 2,
-            spaceBetween: 40,
+            spaceBetween: 0,
           },
           768: {
             slidesPerView: 3,
-            spaceBetween: 40
+            spaceBetween: 0
           },
           1024: {
             slidesPerView: 4,
-            spaceBetween: 40
+            spaceBetween: 0
           }
         }
       });
       let courseRecommended = new Swiper('.c-mab-recommended .swiper-container', {
         slidesPerView: 3,
-        spaceBetween: 30,
+        spaceBetween: 0,
         navigation: {
           nextEl: '.c-mab-recommended .swiper-button-next',
           prevEl: '.c-mab-recommended .swiper-button-prev',
@@ -106,19 +106,19 @@ const myCourses = new Vue({
           // when window width is >= 320px
           200: {
             slidesPerView: 1,
-            spaceBetween: 20
+            spaceBetween: 10
           },
           640: {
             slidesPerView: 2,
-            spaceBetween: 40,
+            spaceBetween: 0,
           },
           768: {
             slidesPerView: 3,
-            spaceBetween: 40
+            spaceBetween: 0
           },
           1024: {
             slidesPerView: 4,
-            spaceBetween: 40
+            spaceBetween: 0
           }
         }
       });
