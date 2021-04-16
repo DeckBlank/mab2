@@ -2,10 +2,11 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1618326788930';
+$assets_version = '1618543876095';
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
+    $enviroment = [];
 
     $fa = [
         'handle'    => 'pandawp/fontawesome/base',
@@ -22,14 +23,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         'ver'       => $assets_version,
         'in_footer' => true
     ]);
-
-    /**
-     * --------------------------------------------------------------------------
-     * Enviroment variables
-     * --------------------------------------------------------------------------
-     *
-     */
-    setEnviromentVariables();
 
     /**
      * --------------------------------------------------------------------------
@@ -254,15 +247,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         register_assets('script', [
             'handle'    => 'pandawp/js/page/virtual_sesion',
             'src'       => $config['resources']['page_virtual_sesion'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);   
-
-    }elseif (is_page('login')){
-        register_assets('script', [
-            'handle'    => 'pandawp/js/page/login',
-            'src'       => $config['resources']['page_login'],
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
@@ -618,7 +602,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]);
-    
+
         register_assets('package', [
             'handle'    => 'pandawp/package/dom7',
             'src'       => $config['resources']['package_dom7'],
@@ -626,23 +610,32 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]);
-    
+
         register_assets('package', [
             'handle'    => 'pandawp/package/ssrwindow',
             'src'       => $config['resources']['package_ssr_window'],
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
-        ]);              
+        ]);
+
         register_assets('script', [
             'handle'    => 'pandawp/js/page/my-courses',
             'src'       => $config['resources']['page_my_courses'],
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
-        ]);        
-
+        ]);
     }
+
+
+    /**
+     * --------------------------------------------------------------------------
+     * Enviroment variables
+     * --------------------------------------------------------------------------
+     *
+     */
+    setEnviromentVariables($enviroment);
 }, 100);
 
 add_action('admin_enqueue_scripts', function ($hook) use ($config, $assets_version) {

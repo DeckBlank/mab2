@@ -46,6 +46,10 @@
       margin-bottom: 0;
       border-radius: 10px;
       font-family: $font-family-secondary !important;
+      font-weight: $medium-font;
+    }
+
+    select {
       text-align: center;
       text-align-last: center;
     }
@@ -72,10 +76,9 @@
   }
 
   &__error {
-    border-left: solid 4px #de0d46;
+    border-left: solid 4px $primary-color;
     padding-left: 0.5rem;
     margin-top: 0.5rem;
-    display: none;
   }
 
   &__terminos {
@@ -94,5 +97,11 @@
   .c-button {
     font-size: $fs-18;
     font-weight: 800;
+  }
+
+  &--warning {
+    .c-form-new__error {
+      border-left: solid 4px $warning-color;
+    }
   }
 }

@@ -3,9 +3,9 @@
     "title": "Más información - User Teacher",
     "fields": [
         {
-            "key": "field_5e925126a1818",
-            "label": "Edad",
-            "name": "age",
+            "key": "field_5edc94211104b",
+            "label": "Genero",
+            "name": "gender",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -22,9 +22,9 @@
             "maxlength": ""
         },
         {
-            "key": "field_5edc94211104b",
-            "label": "Genero",
-            "name": "gender",
+            "key": "field_5e925126a1818",
+            "label": "Edad",
+            "name": "age",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -65,27 +65,6 @@
             "key": "field_5e925126a1fcb",
             "label": "Celular",
             "name": "mobile",
-            "type": "number",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "min": "",
-            "max": "",
-            "step": ""
-        },
-        {
-            "key": "field_5eeecb2a2fb16",
-            "label": "Código de celular",
-            "name": "calling_code",
             "type": "number",
             "instructions": "",
             "required": 0,
@@ -180,6 +159,25 @@
             "maxlength": ""
         },
         {
+            "key": "field_606d5f305e4cf",
+            "label": "Alumnos a cargo",
+            "name": "students",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_5e925126a2f72",
             "label": "Ubicación",
             "name": "location",
@@ -197,6 +195,27 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_5eeecb2a2fb16",
+            "label": "Código de celular",
+            "name": "calling_code",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "min": "",
+            "max": "",
+            "step": ""
         }
     ],
     "location": [
@@ -216,5 +235,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1592707893
+    "modified": 1617780581
 }

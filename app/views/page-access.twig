@@ -1,969 +1,786 @@
 {% extends '_html.twig' %}
 
-{% block hero %}
-  {# {% include 'templates-parts/hero.twig' %} #}
-{% endblock %}
+{% block hero %} {% endblock %}
 
 {% block content %}
   <section class="c-section c-section--access">
-      <div class="c-split-layout">
-        <div class="grid-x height-100">
-          <div class="cell large-5">
-            <transition name="fade" mode="out-in">
-              <div v-if="view == 1" key="step1" class="c-split-layout__figure height-100">
-                <figure class="c-cover-gradient c-cover-gradient--secondary position-relative height-100 width-100">
-                  <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                  <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                    <div class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
-                      <div class="c-corner-logo">
-                        <img v-if="false" loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
-                      </div>
-                      <div class="c-corner-text text-rigth f2 w-bold">
-                        Macarena Arribas <br>
-                        Fundadora de MAB
-                      </div>
+    <div class="c-split-layout">
+      <div class="grid-x height-100">
+        <div class="cell large-5">
+          <transition name="fade" mode="out-in">
+            <div v-if="view == 'login'" key="l-login" class="c-split-layout__figure height-100">
+              <figure class="c-cover-gradient c-cover-gradient--secondary position-relative height-100 width-100">
+                <img
+                  loading="lazy"
+                  class="c-cover-gradient__image width-100 height-100"
+                  :src="'{{theme.link}}/static/images/' + gallery.login.img"
+                  alt="">
+                <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
+                  <div class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
+                    <div class="c-corner-logo">
+                      <img v-if="false" loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
                     </div>
-                    <div class="c-cover-gradient__bottom width-100 padding-3">
-                      <h2 class="c-cover-gradient__title">
-                        <span>¡Hola!</span>
-                      </h2>
-                      <h3 class="c-cover-gradient__subtitle">
-                        Qué gusto verte por <br> aquí de nuevo
-                      </h3>
-                    </div>
-                  </figcaption>
-                </figure>
-              </div>
-              <div v-if="view == 2" key="step2" class="c-split-layout__figure height-100">
-                <figure v-if="false" class="c-cover-gradient c-cover-gradient--secondary position-relative height-100 width-100">
-                  <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                  <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                    <div class="c-cover-gradient__top width-100 flex-container padding-3 padding-top-2">
-                      <div class="c-corner-logo">
-                        <img v-if="false" loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
-                      </div>
-                      <div class="c-corner-text text-rigth f2 w-xbold">
-                        Macarena Arribas <br>
-                        Fundadora de MAB
-                      </div>
-                    </div>
-                    <div class="c-cover-gradient__bottom width-100 padding-3">
-                      <h3 class="c-cover-gradient__subtitle">
-                        <span>¡Hola,</span><br>
-                          <span>soy Maca!</span>
-                      </h3>
-                      <p class="c-cover-gradient__text">
-                        ¿Estás listo para<br>
-                        girar la educación?
-                      </p>
-                    </div>
-                  </figcaption>
-                </figure>
-                <figure v-if="false" class="c-cover-gradient c-cover-gradient--alert position-relative height-100 width-100">
-                  <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                  <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                    <div class="c-cover-gradient__top width-100 flex-container padding-3 padding-top-2">
-                      <div class="c-corner-logo">
-                        <img loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
-                      </div>
-                      <div class="c-corner-text text-rigth f2 w-xbold">
-                      </div>
-                    </div>
-                    <div class="c-cover-gradient__bottom width-100 padding-3">
-                      <h3 class="c-cover-gradient__subtitle text-right">
-                        ganadora de los <br>
-                        <span>globant awards 2020</span> <br>
-                        categoría <span>game changer</span> 
-                      </h3>
-                    </div>
-                  </figcaption>
-                </figure>
-                <figure v-if="false" class="c-cover-gradient c-cover-gradient--primary position-relative height-100 width-100">
-                  <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                  <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                    <div class="c-cover-gradient__top width-100 flex-container padding-3 padding-top-2">
-                      <div class="c-corner-logo">
-                        <img v-if="false" loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
-                      </div>
-                      <div class="c-corner-text text-rigth f2 w-xbold">
-                        Viviana de Ferrari <br>
-                        Amor Propio
-                      </div>
-                    </div>
-                    <div class="c-cover-gradient__bottom width-100 padding-3">
-                      <h3 class="c-cover-gradient__subtitle">
-                        aprende con <span>especialistas</span> <br>
-                        reconocidos a nivel <br>
-                        <span>nacional e internacional</span>
-                      </h3>
-                    </div>
-                  </figcaption>
-                </figure>
-                <figure v-if="false" class="c-cover-gradient c-cover-gradient--success position-relative height-100 width-100">
-                  <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                  <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                    <div class="c-cover-gradient__top width-100 flex-container padding-3 padding-top-2">
-                      <div class="c-corner-logo">
-                        <img v-if="false" loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
-                      </div>
-                      <div class="c-corner-text text-rigth">
-                      </div>
-                    </div>
-                    <div class="c-cover-gradient__bottom width-100 padding-3">
-                      <h3 class="c-cover-gradient__subtitle">
-                        tutores que <br>
-                        han <span> pasado por </span><br>
-                        <span>lo mismo </span> que tú
-                      </h3>
-                    </div>
-                  </figcaption>
-                </figure>
-                <figure v-if="false" class="c-cover-gradient c-cover-gradient--warning position-relative height-100 width-100">
-                  <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                  <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                    <div class="c-cover-gradient__top width-100 flex-container padding-3 padding-top-2">
-                      <div class="c-corner-logo">
-                        <img v-if="false" loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
-                      </div>
-                      <div class="c-corner-text text-rigth">
-                      </div>
-                    </div>
-                    <div class="c-cover-gradient__bottom width-100 padding-3">
-                      <h3 class="c-cover-gradient__subtitle">
-                        ¡ya casi estás listo/a <br>
-                        para comenzar a <br>
-                        aprender distinto!
-                      </h3>
-                    </div>
-                  </figcaption>
-                </figure>
-                <div class="swiper-container height-100">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <figure class="c-cover-gradient c-cover-gradient--secondary position-relative  height-100 width-100">
-                        <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                        <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                          <div class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
-                            <div class="c-corner-logo">
-                            </div>
-                            <div class="c-corner-text text-rigth f1 w-bold">
-                              Proyecto “De Tambo a Tambo”
-                            </div>
-                          </div>
-                          <div class="c-cover-gradient__bottom width-100 padding-3">
-                            <h3 class="c-cover-gradient__subtitle">
-                              <span>
-                                mucho más que una <br>
-                                  plataforma de cursos
-                              </span>
-                            </h3>
-                            <p class="c-cover-gradient__text">
-                              cconoce todos nuestros proyectos y
-                              servicios que tenemos para ti
-                            </p>
-                          </div>
-                        </figcaption>
-                      </figure>
-                    </div>
-                    <div class="swiper-slide">
-                      <figure class="c-cover-gradient c-cover-gradient--secondary position-relative  height-100 width-100">
-                        <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                        <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                          <div class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
-                            <div class="c-corner-logo">
-                            </div>
-                            <div class="c-corner-text text-rigth f1 w-bold">
-                              Proyecto “De Tambo a Tambo”
-                            </div>
-                          </div>
-                          <div class="c-cover-gradient__bottom width-100 padding-3">
-                            <h3 class="c-cover-gradient__subtitle">
-                              <span>
-                                mucho más que una <br>
-                                  plataforma de cursos
-                              </span>
-                            </h3>
-                            <p class="c-cover-gradient__text">
-                              cconoce todos nuestros proyectos y
-                              servicios que tenemos para ti
-                            </p>
-                          </div>
-                        </figcaption>
-                      </figure>
-                    </div>
-                    <div class="swiper-slide">
-                      <figure class="c-cover-gradient c-cover-gradient--secondary position-relative  height-100 width-100">
-                        <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                        <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                          <div class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
-                            <div class="c-corner-logo">
-                            </div>
-                            <div class="c-corner-text text-rigth f1 w-bold">
-                              Proyecto “De Tambo a Tambo”
-                            </div>
-                          </div>
-                          <div class="c-cover-gradient__bottom width-100 padding-3">
-                            <h3 class="c-cover-gradient__subtitle">
-                              <span>
-                                mucho más que una <br>
-                                  plataforma de cursos
-                              </span>
-                            </h3>
-                            <p class="c-cover-gradient__text">
-                              cconoce todos nuestros proyectos y
-                              servicios que tenemos para ti
-                            </p>
-                          </div>
-                        </figcaption>
-                      </figure>
+                    <div class="c-corner-text text-rigth f2 w-bold">
+                      ${ gallery.login.author.name } <br> ${ gallery.login.author.job }
                     </div>
                   </div>
-                  <div class="swiper-pagination"></div>
-                </div>
-              </div>
-              <div v-if="view == 3" key="step3" class="c-image-slider height-100 ">
-                <div class="swiper-container height-100">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                      <figure class="c-cover-gradient position-relative height-100 width-100">
-                        <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                        <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                          <div class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
-                            <div class="c-corner-logo">
-                            </div>
-                            <div class="c-corner-text text-rigth f1 w-bold">
-                          </div>
-                          <div class="c-cover-gradient__bottom width-100 padding-3">
-                            <!-- <h2 class="c-cover-gradient__title">
-                              mucho más que una <br>
-                              <span>plataforma</span> de cursos
-                            </h2> -->
-                            <h3 class="c-cover-gradient__subtitle">
-                              ¡ya casi estás listo/a
-                                para <span>comenzar</span> a
-                                aprender distinto!
-                            </h3>
-                            <p class="c-cover-gradient__text">
-                              conoce todos <span> nuestros proyectos</span> y
-                              servicios que tenemos para ti terc slider1
-                            </p>
-                          </div>
-                        </figcaption>
-                      </figure>
-                    </div>
-                    <div class="swiper-slide">
-                      <figure class="c-cover-gradient position-relative height-100 width-100">
-                        <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                        <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                          <div style="background: linear-gradient(red, transparent 75%);" class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
-                            <div class="c-corner-logo">
-                              <img loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
-                            </div>
-                            <div class="c-corner-text text-rigth">
-                              Macarena Arribas <br>
-                              Fundadora de MAB
-                            </div>
-                          </div>
-                          <div style="background: linear-gradient(to top, red, transparent 75%);" class="c-cover-gradient__bottom width-100 padding-3">
-                            <!-- <h2 class="c-cover-gradient__title">
-                              mucho más que una <br>
-                              <span>plataforma</span> de cursos
-                            </h2> -->
-                            <h3 class="c-cover-gradient__subtitle">
-                              ¡ya casi estás listo/a
-                                para <span>comenzar</span> a
-                                aprender distinto!
-                            </h3>
-                            <p class="c-cover-gradient__text">
-                              conoce todos <span> nuestros proyectos</span> y
-                              servicios que tenemos para ti terc slider2
-                            </p>
-                          </div>
-                        </figcaption>
-                      </figure>
-                    </div>
-                    <div class="swiper-slide">
-                      <figure class="c-cover-gradient position-relative height-100 width-100">
-                        <img loading="lazy" class="c-cover-gradient__image width-100 height-100" src="{{theme.link}}/static/images/user.png" alt="">
-                        <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                          <div style="background: linear-gradient(green, transparent 75%);" class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
-                            <div class="c-corner-logo">
-                              <img loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
-                            </div>
-                            <div class="c-corner-text text-rigth">
-                              Macarena Arribas <br>
-                              Fundadora de MAB
-                            </div>
-                          </div>
-                          <div style="background: linear-gradient(to top,green, transparent 75%);" class="c-cover-gradient__bottom width-100 padding-3">
-                            <!-- <h2 class="c-cover-gradient__title">
-                              mucho más que una <br>
-                              <span>plataforma</span> de cursos
-                            </h2> -->
-                            <h3 class="c-cover-gradient__subtitle">
-                              ¡ya casi estás listo/a
-                                para <span>comenzar</span> a
-                                aprender distinto!
-                            </h3>
-                            <p class="c-cover-gradient__text">
-                              conoce todos <span> nuestros proyectos</span> y
-                              servicios que tenemos para ti terc slider3
-                            </p>
-                          </div>
-                        </figcaption>
-                      </figure>
-                    </div>
-                  </div>
-                  <div class="swiper-pagination"></div>
-                </div>
-              </div>
-            </transition>
-          </div>
-          <div class="cell large-7">
-            <div class="c-split-layout__content">
-              <transition>
-                <div v-if="view == 1">
-                  <div class="c-split-layout-content c-split-layout-content--secondary">
-                    <div class="width-100">
-                      <div class="text-center padding-3 width-100">
-                        <div class="grid-x align-center">
-                          <div class="cell large-7">
-                            <h1 class="c-split-layout-content__title margin-bottom-2 white">
-                              <span class="warning">inicia sesión</span><br>
-                              y continúa creciendo con nosotros
-                            </h1>
-                            <button class="c-btn-input-social width-100">
-                              <img loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                              <span class="f2">Continuar con facebook</span>
-                            </button>
-                            <button class="c-btn-input-social width-100">
-                              <img loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                              <span class="f2">Continuar con facebook</span>
-                            </button>
-                            <form class="c-form-new text-left margin-top-2" action="">
-                              <div class="c-form-new__input-container margin-bottom-1">
-                                <label class="w-bold f2 white" for="">Correo</label>
-                                <input class="f2 input-reset" type="text">
-                                <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                                  error
-                                </p>
-                              </div>
-                              <div class="c-form-new__input-container margin-bottom-1">
-                                <label class="w-bold f2 white" for="">Contraseña</label>
-                                <input class="f2 input-reset" type="text">
-                                <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
-                                  error
-                                </p>
-                              </div>
-                              <button class="c-button c-button--warning width-100 f2 margin-top-1">Ingresar</button>
-                            </form>
-                            <div class="c-label-login warning f2 margin-top-1">
-                              ¿Aún no tienes cuenta? <a href="" class="w-bold warning">Registrate</a>
-                            </div>
-                          </div>
-                        </div>
+                  <h1 class="c-cover-gradient__bottom width-100 padding-3 margin-bottom-0">
+                    <div class="grid-x">
+                      <div class="cell medium-6 large-7">
+                        <div class="c-gradient-title" v-html="gallery.login.title"></div>
                       </div>
                     </div>
-                  </div>
-                </div>
-                <div v-if="view ==  2">
-                  <div v-if="false" class="c-split-layout-content c-split-layout-content--secondary">
-                    <div class="width-100">
-                      <div class="text-center padding-3 width-100">
-                        <div class="grid-x align-center">
-                          <div class="cell large-6">
-                            <h1 class="c-split-layout-content__title margin-bottom-3 white">
-                              <span class="small-title">Conviértete en un/una</span>
-                              <div class="warning big-title">#MABLover</div> 
-                            </h1>
-                            <button class="c-btn-input-social width-100">
-                              <img loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                              <span class="f2">Continuar con facebook</span>
-                            </button>
-                            <button class="c-btn-input-social width-100">
-                              <img loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                              <span class="f2">Continuar con facebook</span>
-                            </button>
-                            <form class="c-form-new text-left margin-top-2" action="">
-                              <div class="c-form-new__input-container margin-bottom-1">
-                                <label class="w-bold f2 white" for="">Correo</label>
-                                <input class="f2" type="text">
-                                <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                                  error
-                                </p>
-                              </div>
-                              <div class="c-form-new__input-container margin-bottom-1">
-                                <label class="w-bold f2 white" for="">Contraseña</label>
-                                <input class="f2" type="text">
-                                <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
-                                  error
-                                </p>
-                              </div>
-                              <button class="button c-button--warning width-100 f2 margin-top-1">Ingresar</button>
-                              <div class="c-form-new__terminos text-center">
-                                <input type="radio"><a href="" class="f2 warning">Acepto los términos y Condiciones</a>
-                              </div>
-                            </form>
-                            <div class="c-label-login warning f2 margin-top-1">
-                              ¿Ya tienes una cuenta? <a href="" class="c-link--warning w-bold warning ">Inicia Sesión</a>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div v-if="false" class="c-split-layout-content column-between c-split-layout-content--alert">
+                  </h1>
+                </figcaption>
+              </figure>
+            </div>
+            <div v-else-if="view == 'register'" key="l-register" class="c-split-layout__figure height-100">
+              <figure class="c-cover-gradient c-cover-gradient--secondary position-relative height-100 width-100">
+                <img
+                  loading="lazy"
+                  class="c-cover-gradient__image width-100 height-100"
+                  :src="'{{theme.link}}/static/images/' + gallery.register.img"
+                  alt="">
+                <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
+                  <div class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
                     <div></div>
-                    <div class="width-100">
-                      <div class="text-center padding-3 width-100">
-                        <div class="grid-x align-center">
-                          <div class="cell large-10">
-                            <div class="grid-x grid-margin-x align-center">
-                              <div class="cell large-10">
-                                <h2 class="c-split-layout-content__title margin-bottom-2 white">
-                                  <span class="warning">¿a qué sector educativo</span>
-                                  <span class="warning">perteneces?</span>     
-                                </h2>
-                              </div>
-                              <div class="cell large-6">
-                                <div class="c-check-card text-center f2  bg-white black flex-container align-center-middle white">
-                                  <h3 class="f2 margin-0 w-xbold">Público</h3>
-                                  <p class="margin-0">Colegios estatales</p>
-                                </div>
-                              </div>
-                              <div class="cell large-6">
-                                <div class="c-check-card text-center f2 bg-white black flex-container align-center-middle white">
-                                  <h3 class="f2 margin-0 w-xbold">Privado</h3>
-                                  <p class="margin-0">Colegios particulares</p>
-                                </div>
-                              </div>
+                    <div class="c-corner-text text-rigth f2 w-bold">
+                      ${ gallery.register.author.name } <br> ${ gallery.register.author.job }
+                    </div>
+                  </div>
+                  <h1 class="c-cover-gradient__bottom width-100 padding-3 margin-bottom-0">
+                    <div class="grid-x">
+                      <div class="cell medium-6 large-7">
+                        <div class="c-gradient-title" v-html="gallery.register.title"></div>
+                      </div>
+                    </div>
+                  </h1>
+                </figcaption>
+              </figure>
+            </div>
+            <div v-else-if="view == 'step-0'" key="l-step-0" class="c-split-layout__figure height-100">
+              <figure class="c-cover-gradient c-cover-gradient--alert position-relative height-100 width-100">
+                <img
+                  loading="lazy"
+                  class="c-cover-gradient__image width-100 height-100"
+                  :src="'{{theme.link}}/static/images/' + gallery.steps[0].img"
+                  alt="">
+                <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
+                  <div class="c-cover-gradient__top width-100 flex-container padding-3 padding-top-2">
+                    <div class="c-corner-logo">
+                      <img loading="lazy" class="height-100 of--contain" :src="'{{theme.link}}/static/images/' + gallery.steps[0].sticker" alt="">
+                    </div>
+                  </div>
+                  <h1 class="c-cover-gradient__bottom width-100 padding-3 margin-bottom-0">
+                    <div class="grid-x align-right">
+                      <div class="cell medium-6 large-7 text-right">
+                        <div class="c-gradient-title" v-html="gallery.steps[0].title"></div>
+                      </div>
+                    </div>
+                  </h1>
+                </figcaption>
+              </figure>
+            </div>
+            <div v-else-if="view == 'step-1'" key="l-step-1" class="c-split-layout__figure height-100">
+              <figure class="c-cover-gradient c-cover-gradient--primary position-relative height-100 width-100">
+                <img
+                  loading="lazy"
+                  class="c-cover-gradient__image width-100 height-100"
+                  :src="'{{theme.link}}/static/images/' + gallery.steps[1].img"
+                  alt="">
+                <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
+                  <div class="c-cover-gradient__top width-100 flex-container padding-3 padding-top-2">
+                    <div class="c-corner-logo"></div>
+                    <div class="c-corner-text text-rigth f2 w-xbold">
+                      ${ gallery.steps[1].author.name } <br> ${ gallery.steps[1].author.job }
+                    </div>
+                  </div>
+                  <h1 class="c-cover-gradient__bottom width-100 padding-3 margin-bottom-0">
+                    <div class="grid-x">
+                      <div class="cell medium-8 large-10">
+                        <div class="c-gradient-title" v-html="gallery.steps[1].title"></div>
+                      </div>
+                    </div>
+                  </h1>
+                </figcaption>
+              </figure>
+            </div>
+            <div v-else-if="view == 'step-2'" key="l-step-2" class="c-split-layout__figure height-100">
+              <figure class="c-cover-gradient c-cover-gradient--success position-relative height-100 width-100">
+                <img
+                  loading="lazy"
+                  class="c-cover-gradient__image width-100 height-100"
+                  :src="'{{theme.link}}/static/images/' + gallery.steps[2].img"
+                  alt="">
+                <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
+                  <div></div>
+                  <h1 class="c-cover-gradient__bottom width-100 padding-3 margin-bottom-0">
+                    <div class="grid-x">
+                      <div class="cell medium-6 large-7">
+                        <div class="c-gradient-title" v-html="gallery.steps[2].title"></div>
+                      </div>
+                    </div>
+                  </h1>
+                </figcaption>
+              </figure>
+            </div>
+            <div v-else-if="view == 'step-3'" key="l-step-3" class="c-split-layout__figure height-100">
+              <figure class="c-cover-gradient c-cover-gradient--warning position-relative height-100 width-100">
+                <img
+                  loading="lazy"
+                  class="c-cover-gradient__image width-100 height-100"
+                  :src="'{{theme.link}}/static/images/' + gallery.steps[3].img"
+                  alt="">
+                <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
+                  <div></div>
+                  <h1 class="c-cover-gradient__bottom width-100 padding-3 margin-bottom-0">
+                    <div class="grid-x">
+                      <div class="cell medium-8 large-10">
+                        <div class="c-gradient-title" v-html="gallery.steps[3].title"></div>
+                      </div>
+                    </div>
+                  </h1>
+                </figcaption>
+              </figure>
+            </div>
+            <div v-else-if="view == 'step-4'" key="l-step-4" class="c-image-slider height-100 ">
+              <div id="slider-mab" class="swiper-container height-100">
+                <div class="swiper-wrapper">
+                  <div v-for="slide of gallery.slider" :key="slide.id" class="swiper-slide">
+                    <figure class="c-cover-gradient c-cover-gradient--secondary position-relative height-100 width-100">
+                      <img
+                        loading="lazy"
+                        class="c-cover-gradient__image width-100 height-100"
+                        :src="'{{theme.link}}/static/images/' + slide.img"
+                        alt="">
+                      <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
+                        <div class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
+                          <div class="c-corner-logo"></div>
+                          <div class="c-corner-text text-rigth f2 w-xbold">
+                            ${ slide.author.name }
+                          </div>
+                        </div>
+                        <h1 class="c-cover-gradient__bottom width-100 padding-3">
+                          <div class="grid-x">
+                            <div class="cell medium-8 large-10">
+                              <div class="c-gradient-title" v-html="slide.title"></div>
                             </div>
+                          </div>
+                        </h1>
+                      </figcaption>
+                    </figure>
+                  </div>
+                </div>
+                <div class="swiper-pagination"></div>
+              </div>
+            </div>
+          </transition>
+        </div>
+        <div class="cell large-7">
+          <div class="c-split-layout__content">
+            <transitiond>
+              <div v-if="view == 'login'" key="r-login" class="c-split-layout-content c-split-layout-content--secondary">
+                <div class="width-100">
+                  <div class="text-center padding-3 width-100">
+                    <div class="grid-x align-center">
+                      <div class="cell large-7">
+                        <h1 class="c-split-layout-content__title margin-bottom-2 white">
+                          <span class="warning">inicia sesión</span><br>
+                          y continúa creciendo con nosotros
+                        </h1>
+                        <button @click="authWithFacebook" class="c-btn-input-social width-100">
+                          <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
+                          <span class="f2">Continuar con facebook</span>
+                        </button>
+                        <button @click="authWithGoogle" class="c-btn-input-social width-100">
+                          <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
+                          <span class="f2">Continuar con google</span>
+                        </button>
+                        <form @submit="login($event)" class="c-form-new text-left margin-top-2" action="">
+                          <div class="c-form-new__input-container margin-bottom-1">
+                            <label class="w-bold f2 white" for="">Correo</label>
+                            <input v-model="user.email.value" class="f2 input-reset" type="text">
+                            <p v-if="isWrongField('email')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                              Correo vacio o no valido
+                            </p>
+                          </div>
+                          <div class="c-form-new__input-container margin-bottom-1">
+                            <label class="w-bold f2 white" for="">Contraseña</label>
+                            <input v-model="user.password.value" class="f2 input-reset" type="text">
+                            <p v-if="isWrongField('password')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
+                              Contraseña vacia
+                            </p>
+                          </div>
 
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="width-100 padding-3">
-                      <div class="grid-x align-center">
-                        <div class="cell small-6 medium-5 large-5 text-left">
-                          <button class="c-button c-button--warning-alert c-button--arrow w-xbold " @click="prev()"> < Anterior</button>
-                        </div>
-                        <div class="cell small-6 medium-5 large-5 text-right">
-                          <button class="c-button c-button--warning-alert c-button--arrow w-xbold " @click="next()">Siguiente ></button>
+                          <a :href="SITE_URL + '/recuperar-contrasena'" class="c-link c-link--warning f2 text-center w-medium w-bold display-block">¿Olvidaste tu Contraseña?</a>
+                          <div v-if="user.error" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">${ user.error }</div>
+
+                          <button
+                            :disabled="(user.loading) ? true : false"
+                            class="c-button c-button--warning width-100 f2 margin-top-1"
+                            :class="{'loading' : user.loading}">Ingresar</button>
+                        </form>
+                        <div class="c-label-login warning f2 margin-top-1">
+                          ¿Aún no tienes cuenta? <a :href="SITE_URL + '/access?auth=register'" class="c-link c-link--warning w-bold">Registrate</a>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div v-if="false" class="c-split-layout-content column-between c-split-layout-content--primary">
-                    <div></div>
-                    <div class="width-100">
-                      <div class="text-center padding-3 width-100">
-                        <div class="grid-x align-center">
+                </div>
+              </div>
+              <div v-if="view == 'register'" key="r-register" class="c-split-layout-content c-split-layout-content--secondary">
+                <div class="width-100">
+                  <div class="text-center padding-3 width-100">
+                    <div class="grid-x align-center">
+                      <div class="cell large-6">
+                        <h1 class="c-split-layout-content__title margin-bottom-3 white">
+                          <span class="small-title">Conviértete en un/una</span>
+                          <div class="warning big-title">#MABLover</div> 
+                        </h1>
+                        <button @click="authWithFacebook" class="c-btn-input-social width-100">
+                          <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
+                          <span class="f2">Registrate con facebook</span>
+                        </button>
+                        <button @click="authWithGoogle" class="c-btn-input-social width-100">
+                          <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
+                          <span class="f2">Registrate con google</span>
+                        </button>
+                        <form @submit="register($event)" class="c-form-new text-left margin-top-2">
+                          <div class="c-form-new__input-container margin-bottom-1">
+                            <label class="w-bold f2 white" for="">Correo</label>
+                            <input v-model="user.email.value" class="f2" type="text">
+                            <p v-if="isWrongField('email')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                              Correo vacio o no valido
+                            </p>
+                          </div>
+                          <div class="c-form-new__input-container margin-bottom-1">
+                            <label class="w-bold f2 white" for="">Contraseña</label>
+                            <input v-model="user.password.value" class="f2" type="text">
+                            <p v-if="isWrongField('password')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                              Contraseña vacia o muy debil (+5 caracteres)
+                            </p>
+                          </div>
+
+                          <div v-if="user.error" class="bg-pri-color white br--medium f2 text-center w-medium padding-1">${ user.error }</div>
+
+                          <button
+                            :disabled="(user.loading) ? true : false"
+                            class="c-button c-button--warning width-100 f2 margin-top-1"
+                            :class="{'loading' : user.loading}">Registrarse</button>
+
+                          <div class="c-form-new__terminos text-center">
+                            <input v-model="user.terms" type="checkbox" value="acepted" /> <a href="" class="f2 warning"> Acepto los términos y Condiciones</a>
+                          </div>
+                          <p v-if="isWrongField('terms', false)" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                            Debe aceptar los términos y condiciones
+                          </p>
+                        </form>
+                        <div class="c-label-login warning f2 margin-top-1">
+                          ¿Ya tienes una cuenta? <a :href="SITE_URL + '/access'" class="c-link--warning w-bold warning ">Inicia Sesión</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div v-if="view == 'step-0'" key="r-step-0" class="c-split-layout-content column-between c-split-layout-content--alert">
+                <div></div>
+                <div class="width-100">
+                  <div class="text-center padding-3 width-100">
+                    <div class="grid-x align-center">
+                      <div class="cell large-10">
+                        <div class="grid-x grid-margin-x grid-margin-y align-center">
                           <div class="cell large-10">
-                            <h2 class="c-split-layout-content__title margin-bottom-1 white margin-top-3">
-                              <span class="warning">¡Queremos conocerte mejor!</span>     
+                            <h2 class="c-split-layout-content__title margin-bottom-2 white">
+                              <span class="warning">¿a qué sector educativo</span>
+                              <span class="warning">perteneces?</span>     
                             </h2>
-                            <h3 class="c-split-layout-content__subtitle margin-bottom-2 white">
-                              completa los siguientes datos     
-                            </h3>
-                            <form class="c-form-new text-left margin-top-2" action="">
-                              <div class="grid-x grid-margin-x align-center">
-                                <div class="cell large-6">
-                                  <div class="c-form-new__input-container margin-bottom-1">
-                                    <label class="w-bold f2 white" for="">Nombres</label>
-                                    <input class="f2" type="text">
-                                    <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                                      error
-                                    </p>
-                                  </div>
-                                </div>
-                                <div class="cell large-6">
-                                  <div class="c-form-new__input-container margin-bottom-1">
-                                    <label class="w-bold f2 white" for="">Apellido Paterno</label>
-                                    <input class="f2" type="text">
-                                    <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                                      error
-                                    </p>
-                                  </div>
-                                </div>
-                                <div class="cell large-6">
-                                  <div class="c-form-new__input-container margin-bottom-1">
-                                    <label class="w-bold f2 white" for="">Apellido Materno</label>
-                                    <input class="f2" type="text">
-                                    <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                                      error
-                                    </p>
-                                  </div>
-                                </div>
-                                <div class="cell large-6">
-                                  <div class="c-form-new__input-container margin-bottom-1">
-                                    <label class="w-bold f2 white" for="">Fecha de Nacimiento</label>
-                                    <input class="f2" type="date">
-                                    <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                                      error
-                                    </p>
-                                  </div>
-                                </div>
-                                <div class="cell large-6">
-                                  <div class="c-form-new__input-container margin-bottom-1">
-                                    <label class="w-bold f2 white" for="">País</label>
-                                    <select class="f2" name="" id="">
-                                      <option value="">Elige un opción</option>
-                                    </select>
-                                    <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                                      error
-                                    </p>
-                                  </div>
-                                </div>
-                                <div class="cell large-6">
-                                  <div class="c-form-new__input-container margin-bottom-1">
-                                    <label class="w-bold f2 white" for="">Ciudad</label>
-                                    <select class="f2" name="" id="">
-                                      <option value="">Elige un opción</option>
-                                    </select>
-                                    <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                                      error
-                                    </p>
-                                  </div>
-                                </div>
-                                <div class="cell large-6">
-                                  <div class="c-form-new__input-container margin-bottom-1">
-                                    <label class="w-bold f2 white" for="">Número de teléfono</label>
-                                    <div class="c-fake-input c-fake-input--tel flex-container align-middle">
-                                      <span class="c-fake-input__prefix">+51</span><input type="tel">
-                                    </div>
-                                    <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                                      error
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </form>
+                          </div>
+                          <div class="cell large-6 align-self-stretch">
+                            <input v-model="user.sector.value" id="sector-pub" class="hide" type="radio" value="publico">
+                            <label
+                              for="sector-pub"
+                              class="c-check-card text-center f2 display-block height-100 bg-white black flex-container align-center-middle white"
+                              :class="{'enable' : (user.sector.value == 'publico')}">
+                              <h3 class="f2 margin-0 w-xbold">Público</h3>
+                              <p class="margin-0">Colegios estatales</p>
+                            </label>
+                          </div>
+                          <div class="cell large-6 align-self-stretch">
+                            <input v-model="user.sector.value" id="sector-priv" class="hide" type="radio" value="privado">
+                            <label
+                              for="sector-priv"
+                              class="c-check-card text-center f2 display-block height-100 bg-white black flex-container align-center-middle white"
+                              :class="{'enable' : (user.sector.value == 'privado')}">
+                              <h3 class="f2 margin-0 w-xbold">Privado</h3>
+                              <p class="margin-0">Colegios particulares</p>
+                            </label>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="width-100 padding-3">
-                      <div class="grid-x align-center">
-                        <div class="cell small-6 medium-3 large-3 text-left">
-                          <button class="c-button c-button--warning-primary c-button--arrow w-xbold " @click="prev()"> < Anterior</button>
-                        </div>
-                        <div class="cell medium-4 large-4 desktop">
-                          <div class="c-bullet-steps text-center">
-                            <div class="c-bullet-steps__bullets">
-                              <span class="bg-warning"></span>
-                              <span class="bg-white"></span>
-                              <span class="bg-white"></span>
-                              <span class="bg-white"></span>
-                            </div>
-                            <div class="c-bullet-steps__text f2 fs-21 white">
-                              Paso 1 de 4
-                            </div>
-                          </div>
-                        </div>
-                        <div class="cell small-6 medium-3 large-3 text-right">
-                          <button class="c-button c-button--warning-primary c-button--arrow w-xbold " @click="next()">Siguiente ></button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div v-if="false" class="c-split-layout-content column-between c-split-layout-content--success">
-                    <div></div>
-                    <div class="width-100">
-                      <div class="text-center padding-3 width-100">
-                        <div class="grid-x align-center">
-                          <div class="cell large-10">
-                            <div class="grid-x align-center">
-                              <div class="cell large-8">
-                                <h2 class="c-split-layout-content__title margin-bottom-2 white margin-top-3">
-                                  Buscamos adaptarnos a
-                                  <span class="warning">tus necesidades</span> 
-                                </h2>
-                              </div>
-                            </div>
-                            <h4 class="white margin-bottom-2 text-left">Actualmente, soy...</h4>
-                            <div class="grid-x grid-margin-y grid-margin-x align-center">
-                              <div class="cell medium-6 large-6 align-self-stretch">
-                                <div class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white ">
-                                  <span>
-                                    <strong>Un padre / una madre / apoderad@</strong> que busca la mejor educación para su familia
-                                  </span>
-                                  <div class="c-corner-card-image position-absolute">
-                                    <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="cell medium-6 large-6 align-self-stretch">
-                                <div class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1">
-                                  <span>
-                                    <strong>Un maestro / una
-                                      maestra</strong> que busca
-                                      hacer un cambio por
-                                      la sociedad
-                                  </span>
-                                  <div class="c-corner-card-image position-absolute">
-                                    <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="cell medium-6 large-6 align-self-stretch">
-                                <div class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1">
-                                  <span>
-                                    <strong>Un/a estudiante</strong>
-                                      que busca superarse
-                                      tanto a nivel académico
-                                      como personal
-                                  </span>
-                                  <div class="c-corner-card-image position-absolute">
-                                    <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="cell medium-6 large-6 align-self-stretch">
-                                <div class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1">
-                                  <span>
-                                    <strong>Un/a internauta
-                                      apasionado/a</strong> por la
-                                      educación
-                                  </span>
-                                  <div class="c-corner-card-image position-absolute">
-                                    <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="cell medium-6 large-6 align-self-stretch">
-                                <div class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-warning black flex-container align-center-middle white margin-bottom-1">
-                                  <span>
-                                    <strong>Parte del programa
-                                      “De Tambo a Tambo”</strong>
-                                      en zonas rurales del país
-                                  </span>
-                                  <div class="c-corner-card-image position-absolute">
-                                    <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="width-100 padding-3">
-                      <div class="grid-x align-center">
-                        <div class="cell small-6 medium-3 large-3 text-left">
-                          <button class="c-button c-button--warning-success c-button--arrow w-xbold " @click="prev()"> < Anterior</button>
-                        </div>
-                        <div class="cell medium-4 large-4 desktop">
-                          <div class="c-bullet-steps text-center">
-                            <div class="c-bullet-steps__bullets">
-                              <span class="bg-white"></span>
-                              <span class="bg-warning"></span>
-                              <span class="bg-white"></span>
-                              <span class="bg-white"></span>
-                            </div>
-                            <div class="c-bullet-steps__text f2 fs-21 white">
-                              Paso 2 de 4
-                            </div>
-                          </div>
-                        </div>
-                        <div class="cell small-6 medium-3 large-3 text-right">
-                          <button class="c-button c-button--warning-success c-button--arrow w-xbold " @click="next()">Siguiente ></button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div v-if="false" class="c-split-layout-content column-between c-split-layout-content--warning">
-                    <div></div>
-                    <div class="width-100">
-                      <div class="text-center padding-3 width-100">
-                        <div class="grid-x align-center">
-                          <div class="cell large-10">
-                            <div class="grid-x align-center">
-                              <div class="cell large-8">
-                                <h2 class="c-split-layout-content__title margin-bottom-2 black margin-top-3">
-                                  ¿Qué áreas de aprendizaje te interesan? 
-                                </h2>
-                              </div>
-                            </div>
-                            <h4 class="white margin-bottom-2 f2 w-xbold black">Elige al menos 3 categorías</h4>
-                            <div class="grid-x grid-margin-y grid-margin-x align-center">
-                              <div class="cell small-6 medium-3 large-3">
-                                <figure class="c-mab-category mab-shadow c-mab-category--secondary active position-relative">
-                                  <img class="c-mab-category__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  <div class="c-mab-category__gradient position-absolute width-100 height-100">
-                                  </div>
-                                  <figcaption class="c-mab-category__shade position-absolute width-100 height-100 white text-center flex-container">
-                                    <div class="c-mab-category__text flex-container align-center-middle width-100">
-                                      Habilidades para la vida
-                                    </div>
-                                  </figcaption>
-                                </figure>
-                              </div>
-                              <div class="cell small-6 medium-3 large-3">
-                                <figure class="c-mab-category mab-shadow c-mab-category--alert position-relative">
-                                  <img class="c-mab-category__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  <div class="c-mab-category__gradient position-absolute width-100 height-100">
-                                  </div>
-                                  <figcaption class="c-mab-category__shade position-absolute width-100 height-100 white text-center flex-container">
-                                    <div class="c-mab-category__text flex-container align-center-middle width-100">
-                                      Habilidades
-                                    </div>
-                                  </figcaption>
-                                </figure>
-                              </div>
-                              <div class="cell small-6 medium-3 large-3">
-                                <figure class="c-mab-category mab-shadow c-mab-category--warning-alt position-relative">
-                                  <img class="c-mab-category__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  <div class="c-mab-category__gradient position-absolute width-100 height-100">
-                                  </div>
-                                  <figcaption class="c-mab-category__shade position-absolute width-100 height-100 white text-center flex-container">
-                                    <div class="c-mab-category__text flex-container align-center-middle width-100">
-                                      Habilidades
-                                    </div>
-                                  </figcaption>
-                                </figure>
-                              </div>
-                              <div class="cell small-6 medium-3 large-3">
-                                <figure class="c-mab-category mab-shadow c-mab-category--success position-relative">
-                                  <img class="c-mab-category__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  <div class="c-mab-category__gradient position-absolute width-100 height-100">
-                                  </div>
-                                  <figcaption class="c-mab-category__shade position-absolute width-100 height-100 white text-center flex-container">
-                                    <div class="c-mab-category__text flex-container align-center-middle width-100">
-                                      Habilidades
-                                    </div>
-                                  </figcaption>
-                                </figure>
-                              </div>
-                              <div class="cell small-6 medium-3 large-3">
-                                <figure class="c-mab-category mab-shadow c-mab-category--secondary position-relative">
-                                  <img class="c-mab-category__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  <div class="c-mab-category__gradient position-absolute width-100 height-100">
-                                  </div>
-                                  <figcaption class="c-mab-category__shade position-absolute width-100 height-100 white text-center flex-container">
-                                    <div class="c-mab-category__text flex-container align-center-middle width-100">
-                                      Habilidades para la vida
-                                    </div>
-                                  </figcaption>
-                                </figure>
-                              </div>
-                              <div class="cell small-6 medium-3 large-3">
-                                <figure class="c-mab-category mab-shadow c-mab-category--alert position-relative">
-                                  <img class="c-mab-category__img width-100 height-100" loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                                  <div class="c-mab-category__gradient position-absolute width-100 height-100">
-                                  </div>
-                                  <figcaption class="c-mab-category__shade position-absolute width-100 height-100 white text-center flex-container">
-                                    <div class="c-mab-category__text flex-container align-center-middle width-100">
-                                      Habilidades
-                                    </div>
-                                  </figcaption>
-                                </figure>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="width-100 padding-3">
-                      <div class="grid-x align-center">
-                        <div class="cell small-6 medium-3 large-3 text-left">
-                          <button class="c-button c-button--black-warning c-button--arrow w-xbold " @click="prev()"> < Anterior</button>
-                        </div>
-                        <div class="cell medium-4 large-4 desktop">
-                          <div class="c-bullet-steps text-center">
-                            <div class="c-bullet-steps__bullets">
-                              <span class="bg-white"></span>
-                              <span class="bg-white"></span>
-                              <span class="bg-black"></span>
-                              <span class="bg-white"></span>
-                            </div>
-                            <div class="c-bullet-steps__text f2 fs-21 black">
-                              Paso 3 de 4
-                            </div>
-                          </div>
-                        </div>
-                        <div class="cell small-6 medium-3 large-3 text-right">
-                          <button class="c-button c-button--black-warning c-button--arrow w-xbold " @click="next()">Siguiente ></button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="c-split-layout-content column-between c-split-layout-content--secondary">
-                    <div></div>
-                    <div class="width-100">
-                      <div class="text-center padding-3 width-100">
-                        <div class="grid-x align-center">
-                          <div class="cell large-10">
-                            <div class="grid-x align-center">
-                              <div class="cell large-8">
-                                <h2 class="c-split-layout-content__title margin-bottom-2 white margin-top-3">
-                                  ¿qué temas específicos quieres aprender? 
-                                </h2>
-                              </div>
-                            </div>
-                            <h4 class="white margin-bottom-2 f2 w-xbold white">Elige al menos 3 subcategorías</h4>
-                            <div class="grid-x grid-margin-y grid-margin-x align-center">
-                              <div class="cell small-6 medium-3 large-3">
-                                <div class="c-mab-subcategory mab-shadow bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
-                                  Actitud y cáncer
-                                </div>
-                              </div>
-                              <div class="cell small-6 medium-3 large-3">
-                                <div class="c-mab-subcategory mab-shadow bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
-                                  Actitud y cáncer
-                                </div>
-                              </div>
-                              <div class="cell small-6 medium-3 large-3">
-                                <div class="c-mab-subcategory mab-shadow bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
-                                  Actitud y cáncer
-                                </div>
-                              </div>
-                              <div class="cell small-6 medium-3 large-3">
-                                <div class="c-mab-subcategory mab-shadow bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
-                                  Actitud y cáncer
-                                </div>
-                              </div>
-                              <div class="cell small-6 medium-3 large-3">
-                                <div class="c-mab-subcategory mab-shadow bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
-                                  Coaching ontológico
-                                </div>
-                              </div>
-                              <div class="cell small-6 medium-3 large-3">
-                                <div class="c-mab-subcategory mab-shadow bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
-                                  Autismo
-                                </div>
-                              </div>
-                              <div class="cell small-6 medium-3 large-3">
-                                <div class="c-mab-subcategory mab-shadow bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
-                                  Actitud y cáncer
-                                </div>
-                              </div>
-                              <div class="cell small-6 medium-3 large-3">
-                                <div class="c-mab-subcategory mab-shadow bg-white flex-container align-center-middle padding-1 f2 w-xbold black">
-                                  Yoga para ser feliz
-                                </div>
-                              </div>
-                            </div>
-                            <div class="margin-top-3">
-                              <button class="c-button c-button--warning-black w-xbold margin-bottom-2 padding-left-2 padding-right-2">¡Comienza a <br> aprender distinto!</button>
-                              <div class="warning f2 w-xbold fs-18">< Volver</div>
-                              <div class="c-bullet-steps text-center margin-top-1">
-                                <div class="c-bullet-steps__bullets">
-                                  <span class="bg-white"></span>
-                                  <span class="bg-white"></span>
-                                  <span class="bg-white"></span>
-                                  <span class="bg-warning"></span>
-                                </div>
-                                <div class="c-bullet-steps__text f2 fs-21 white">
-                                  Paso 4 de 4
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
-                    </div>
-                  </div>
-                </div>
-                <div v-if="view == 3">
-                  <div class="c-split-layout-content c-split-layout-content--secondary">
-                    <div class="width-100">
-                      <div class="text-center padding-3 width-100">
-                        <div class="grid-x">
-                          <div class="cell large-3"></div>
-                          <div class="cell large-6">
-                            <h1 class="c-split-layout-content__title margin-bottom-2 white">
-                              <span class="warning">inicia sesión</span><br>
-                              y continúa creciendo con nosotros
-                            </h1>
-                            <button class="c-btn-input-social width-100">
-                              <img loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                              <span class="f2">Continuar con facebook</span>
-                            </button>
-                            <button class="c-btn-input-social width-100">
-                              <img loading="lazy" src="{{theme.link}}/static/images/fb-icon.png" alt="">
-                              <span class="f2">Continuar con facebook</span>
-                            </button>
-                            <form class="c-form-new text-left margin-top-2" action="">
-                              <div class="c-form-new__input-container margin-bottom-1">
-                                <label class="text-uppercase w-bold f2 white" for="">Correo</label>
-                                <input class="f2" type="text">
-                                <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                                  error
-                                </p>
-                              </div>
-                              <div class="c-form-new__input-container margin-bottom-1">
-                                <label class="text-uppercase w-bold f2 white" for="">Contraseña</label>
-                                <input class="f2" type="text">
-                                <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
-                                  error
-                                </p>
-                              </div>
-                              <button class="c-button c-button--warning width-100 f2 margin-top-1">Ingresar</button>
-                              <div class="c-terminos text-center">
-                                <input type="radio"><a href="" class="f2 warning">Acepto los términos y Condiciones</a>
-                              </div>
-                            </form>
-                            <div class="c-label-login warning f2 margin-top-1">
-                              ¿Ya tienes una cuenta? <a href="" class="w-bold warning">Inicia Sesión</a>
-                            </div>
-                          </div>
-                        </div>
-      
-      
-                        {# <button class="c-button" @click="prev()">anterior</button>
-                        <button class="c-button" @click="next()">siguiente</button> #}
+                        <div v-if="isWrongField('sector')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">Debe elegir algun sector</div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </transition>
-            </div>  
-            <div v-if="false" class="c-mab-modal flex-container align-center-middle">
-              <div class="grid-x align-center width-100">
-                <div class="cell small-10 medium-10 large-6">
-                  <div class="c-mab-modal-content bg-white ">
-                    <h3 class="c-mab-modal-content__title text-center f2 text-uppercase">¿cuántos escolares tienes a tu
-                      cargo?</h3>
-                      <form class="c-form-new">
-                        <div class="c-form-new__input-container margin-bottom-2">
-                          <select class="f2" name="" id="">
-                            <option value="">Elige un opción</option>
-                          </select>
-                          <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                            error
-                          </p>
-                        </div>
-                        <div class="c-form-new__input-container">
-                          <select class="f2" name="" id="">
-                            <option value="">Elige un opción</option>
-                          </select>
-                          <p class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                            error
-                          </p>
-                        </div>
-                        <div class="width-100 margin-top-2">
-                          <div class="grid-x grid-margin-x grid-margin-y align-center">
-                            <div class="cell small-6 medium-4 large-4 text-left">
-                              <button class="c-button c-button--success c-button--arrow c-button--small width-100" @click="prev()">Volver</button>
+                <div class="width-100 padding-3">
+                  <div class="grid-x align-center">
+                    <div class="cell small-6 medium-5 large-5 text-left">
+                      <button class="c-button c-button--warning-alert c-button--arrow w-xbold " @click="prevStep(-1)"> < Anterior</button>
+                    </div>
+                    <div class="cell small-6 medium-5 large-5 text-right">
+                      <button class="c-button c-button--warning-alert c-button--arrow w-xbold " @click="nextStep(1)">Siguiente ></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div v-if="view == 'step-1'" key="r-step-1" class="c-split-layout-content column-between c-split-layout-content--primary">
+                <div></div>
+                <div class="width-100">
+                  <div class="text-center padding-3 width-100">
+                    <div class="grid-x align-center">
+                      <div class="cell large-10">
+                        <h2 class="c-split-layout-content__title margin-bottom-1 white margin-top-3">
+                          <span class="warning">¡Queremos conocerte mejor!</span>     
+                        </h2>
+                        <h3 class="c-split-layout-content__subtitle margin-bottom-2 white">
+                          completa los siguientes datos     
+                        </h3>
+                        <form class="c-form-new c-form-new--warning text-left margin-top-2" action="">
+                          <div class="grid-x grid-margin-x align-center">
+                            <div class="cell large-6">
+                              <div class="c-form-new__input-container margin-bottom-1">
+                                <label class="w-bold f2 white" for="">Nombres</label>
+                                <input v-model="profile.name.value" class="f2" type="text">
+                                <p v-if="isWrongField('name', true, 'profile')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                                  Nombre incorrecto
+                                </p>
+                              </div>
                             </div>
-                            <div class="cell small-6 medium-4 large-4 text-right">
-                              <button class="c-button c-button--success c-button--arrow c-button--small width-100" @click="next()">Continuar</button>
+                            <div class="cell large-6">
+                              <div class="c-form-new__input-container margin-bottom-1">
+                                <label class="w-bold f2 white" for="">Apellido Paterno</label>
+                                <input v-model="profile.father_name.value" class="f2" type="text">
+                                <p v-if="isWrongField('father_name', true, 'profile')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                                  Apellido incorrecto
+                                </p>
+                              </div>
+                            </div>
+                            <div class="cell large-6">
+                              <div class="c-form-new__input-container margin-bottom-1">
+                                <label class="w-bold f2 white" for="">Apellido Materno</label>
+                                <input v-model="profile.mother_name.value" class="f2" type="text">
+                                <p v-if="isWrongField('mother_name', true, 'profile')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                                  Apellido incorrecto
+                                </p>
+                              </div>
+                            </div>
+                            <div class="cell large-6">
+                              <div class="c-form-new__input-container margin-bottom-1">
+                                <label class="w-bold f2 white" for="">Fecha de Nacimiento</label>
+                                <input v-model="profile.date_birth.value" class="f2" type="date">
+                                <p v-if="isWrongField('date_birth', true, 'profile')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                                  Debe seleccionar una fecha
+                                </p>
+                              </div>
+                            </div>
+                            <div class="cell large-6">
+                              <div class="c-form-new__input-container margin-bottom-1">
+                                <label class="w-bold f2 white" for="">País</label>
+                                <select v-model="profile.country.value" class="f2" name="" id="">
+                                  <option disabled value="" selected>${ (profile.country.isLoading) ? 'Cargando...' :'Escoge tu país' }</option>
+                                  <option v-for="coun of countries" :key="coun.id" :value="coun">${ coun.name }</option>
+                                </select>
+                                <p v-if="isWrongField('country', true, 'profile')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                                  Debe seleccionar un país
+                                </p>
+                              </div>
+                            </div>
+                            <div v-if="profile.country.value.alpha2Code == 'PE'" class="cell large-6">
+                              <div class="c-form-new__input-container margin-bottom-1">
+                                <label class="w-bold f2 white" for="">Ciudad</label>
+                                <select v-model="profile.city.value" class="f2" name="" id="">
+                                  <option disabled value="" selected>${ (profile.city.isLoading) ? 'Cargando...' :'Escoge tu ciudad' }</option>
+                                  <option v-for="city of cities" :key="city.id" :value="city.nombre_ubigeo" >${ city.nombre_ubigeo }</option>
+                                </select>
+                                <p v-if="isWrongField('city', true, 'profile')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                                  Debe seleccionar una ciudad
+                                </p>
+                              </div>
+                            </div>
+                            <div class="cell large-6">
+                              <div class="c-form-new__input-container margin-bottom-1">
+                                <label class="w-bold f2 white" for="">Número de teléfono</label>
+                                <div class="c-fake-input c-fake-input--tel flex-container align-middle">
+                                  <span class="c-fake-input__prefix">
+                                    ${ callingCode }
+                                  </span>
+                                  <input v-model="profile.phone.value" type="tel" />
+                                </div>
+                                <p v-if="isWrongField('phone', true, 'profile')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                                  Teléfono incorrecto
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="width-100 padding-3">
+                  <div class="grid-x align-center">
+                    <div class="cell small-6 medium-3 large-3 text-left">
+                      <button class="c-button c-button--warning-primary c-button--arrow w-xbold " @click="prevStep(0)"> < Anterior</button>
+                    </div>
+                    <div class="cell medium-4 large-4 desktop">
+                      <div class="c-bullet-steps text-center">
+                        <div class="c-bullet-steps__bullets">
+                          <span class="bg-warning"></span>
+                          <span class="bg-white"></span>
+                          <span class="bg-white"></span>
+                          <span class="bg-white"></span>
+                        </div>
+                        <div class="c-bullet-steps__text f2 fs-21 white">
+                          Paso 1 de 4
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cell small-6 medium-3 large-3 text-right">
+                      <button class="c-button c-button--warning-primary c-button--arrow w-xbold " @click="nextStep(2)">Siguiente ></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div v-if="view == 'step-2'" key="r-step-2" class="c-split-layout-content column-between c-split-layout-content--success">
+                <div></div>
+                <div class="width-100">
+                  <div class="text-center padding-3 width-100">
+                    <div class="grid-x align-center">
+                      <div class="cell large-10">
+                        <div class="grid-x align-center">
+                          <div class="cell large-8">
+                            <h2 class="c-split-layout-content__title margin-bottom-2 white margin-top-3">
+                              Buscamos adaptarnos a
+                              <span class="warning">tus necesidades</span> 
+                            </h2>
+                          </div>
+                        </div>
+                        <h4 class="white margin-bottom-2 f2 w-sbold text-left">Actualmente, soy...</h4>
+                        <div class="grid-x grid-margin-y grid-margin-x align-center">
+                          <div class="cell medium-6 large-6 align-self-stretch">
+                            <input v-model="user.role.type" id="role-tutor" type="radio" value="tutor" class="hide" />
+                            <label
+                              for="role-tutor"
+                              class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white height-100"
+                              :class="{'enable' : user.role.type == 'tutor'}">
+                              <span>
+                                <strong>Un padre / una madre / apoderad@</strong> que busca la mejor educación para su familia
+                              </span>
+                              <div class="c-corner-card-image position-absolute">
+                                <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/access/roles/head.png" alt="">
+                              </div>
+                            </label>
+                          </div>
+                          <div class="cell medium-6 large-6 align-self-stretch">
+                            <input v-model="user.role.type" id="role-teacher" type="radio" value="teacher" class="hide" />
+                            <label
+                              @click="openModal('teacher')"
+                              for="role-teacher"
+                              class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1 height-100"
+                              :class="{'enable' : user.role.type == 'teacher'}">
+                              <span>
+                                <strong>Un maestro / una
+                                  maestra</strong> que busca
+                                  hacer un cambio por
+                                  la sociedad
+                              </span>
+                              <div class="c-corner-card-image position-absolute">
+                                <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/access/roles/bolb.png" alt="">
+                              </div>
+                            </label>
+                          </div>
+                          <div class="cell medium-6 large-6 align-self-stretch">
+                            <input v-model="user.role.type" id="role-student" type="radio" value="student" class="hide" />
+                            <label
+                              for="role-student"
+                              class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1 height-100"
+                              :class="{'enable' : user.role.type == 'student'}">
+                              <span>
+                                <strong>Un/a estudiante</strong>
+                                  que busca superarse
+                                  tanto a nivel académico
+                                  como personal
+                              </span>
+                              <div class="c-corner-card-image position-absolute">
+                                <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/access/roles/pen.png" alt="">
+                              </div>
+                            </label>
+                          </div>
+                          <div class="cell medium-6 large-6 align-self-stretch">
+                            <input v-model="user.role.type" id="role-foreign" type="radio" value="foreign" class="hide" />
+                            <label
+                              for="role-foreign"
+                              class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1 height-100"
+                              :class="{'enable' : user.role.type == 'foreign'}">
+                              <span>
+                                <strong>Un/a internauta
+                                  apasionado/a</strong> por la
+                                  educación
+                              </span>
+                              <div class="c-corner-card-image position-absolute">
+                                <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/access/roles/eye.png" alt="">
+                              </div>
+                            </label>
+                          </div>
+                          <div class="cell medium-6 large-6 align-self-stretch">
+                            <input v-model="user.role.type" id="role-tambero" type="radio" value="tambero" class="hide" />
+                            <label
+                              @click="openModal('tambero')"
+                              for="role-tambero"
+                              class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-warning black flex-container align-center-middle white margin-bottom-1"
+                              :class="{'enable' : user.role.type == 'tambero'}">
+                              <span>
+                                <strong>Parte del programa
+                                  “De Tambo a Tambo”</strong>
+                                  en zonas rurales del país
+                              </span>
+                              <div class="c-corner-card-image position-absolute">
+                                <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/access/roles/heart.png" alt="">
+                              </div>
+                            </label>
+                          </div>
+                        </div>
+                        <div v-if="isWrongField('role')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">
+                          ${ (user.role.error) ? user.role.error : 'Debe elegir algun perfil' }
+                        </div>
+                        <div v-if="user.role.error" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">
+                          ${ user.role.error }
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="width-100 padding-3">
+                  <div class="grid-x align-center">
+                    <div class="cell small-6 medium-3 large-3 text-left">
+                      <button class="c-button c-button--warning-success c-button--arrow w-xbold " @click="prevStep(1)"> < Anterior</button>
+                    </div>
+                    <div class="cell medium-4 large-4 desktop">
+                      <div class="c-bullet-steps text-center">
+                        <div class="c-bullet-steps__bullets">
+                          <span class="bg-white"></span>
+                          <span class="bg-warning"></span>
+                          <span class="bg-white"></span>
+                          <span class="bg-white"></span>
+                        </div>
+                        <div class="c-bullet-steps__text f2 fs-21 white">
+                          Paso 2 de 4
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cell small-6 medium-3 large-3 text-right">
+                      <button class="c-button c-button--warning-success c-button--arrow w-xbold " @click="nextStep(3)">Siguiente ></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div v-if="view == 'step-3'" key="r-step-3" class="c-split-layout-content column-between c-split-layout-content--warning">
+                <div></div>
+                <div class="width-100">
+                  <div class="text-center padding-3 width-100">
+                    <div class="grid-x align-center">
+                      <div class="cell large-10">
+                        <div class="grid-x align-center">
+                          <div class="cell large-8">
+                            <h2 class="c-split-layout-content__title margin-bottom-2 black margin-top-3">
+                              ¿Qué áreas de aprendizaje te interesan? 
+                            </h2>
+                          </div>
+                        </div>
+                        <h4 class="white margin-bottom-2 f2 w-xbold black">Elige al menos 3 categorías</h4>
+                        <div class="grid-x grid-margin-y grid-margin-x align-center">
+                          <div v-for="category of categories" :key="category.id" class="cell small-6 medium-3 large-3">
+                            <input v-model="user.categories.value" :id="'category-' + category.id" type="checkbox" :value="category.id" class="hide">
+                            <label
+                              :for="'category-' + category.id"
+                              class="c-mab-category mab-shadow position-relative"
+                              :class="[{'active' : user.categories.value.includes(category.id)}, 'c-mab-category--' + category.color]">
+                              <img class="c-mab-category__img width-100 height-100" loading="lazy" :src="category.thumbnail.url" alt="">
+                              <div class="c-mab-category__gradient position-absolute width-100 height-100">
+                              </div>
+                              <figcaption
+                                class="c-mab-category__shade position-absolute width-100 height-100 text-center flex-container"
+                                :class="(category.color != 'warning') ? 'white' : 'dark'">
+                                <div class="c-mab-category__text flex-container align-center-middle width-100">${ category.name }</div>
+                              </figcaption>
+                            </label>
+                          </div>
+                        </div>
+                        <div v-if="isWrongField('categories')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">Debe elegir al menos 3 categorías</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="width-100 padding-3">
+                  <div class="grid-x align-center">
+                    <div class="cell small-6 medium-3 large-3 text-left">
+                      <button class="c-button c-button--black-warning c-button--arrow w-xbold " @click="prevStep(2)"> < Anterior</button>
+                    </div>
+                    <div class="cell medium-4 large-4 desktop">
+                      <div class="c-bullet-steps text-center">
+                        <div class="c-bullet-steps__bullets">
+                          <span class="bg-white"></span>
+                          <span class="bg-white"></span>
+                          <span class="bg-black"></span>
+                          <span class="bg-white"></span>
+                        </div>
+                        <div class="c-bullet-steps__text f2 fs-21 black">
+                          Paso 3 de 4
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cell small-6 medium-3 large-3 text-right">
+                      <button class="c-button c-button--black-warning c-button--arrow w-xbold " @click="nextStep(4)">Siguiente ></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div v-if="view == 'step-4'" key="r-step-4">
+                <div class="c-split-layout-content column-between c-split-layout-content--secondary">
+                  <div></div>
+                  <div class="width-100">
+                    <div class="text-center padding-3 width-100">
+                      <div class="grid-x align-center">
+                        <div class="cell large-10">
+                          <div class="grid-x align-center">
+                            <div class="cell large-8">
+                              <h2 class="c-split-layout-content__title margin-bottom-2 white margin-top-3">
+                                ¿qué temas específicos quieres aprender? 
+                              </h2>
+                            </div>
+                          </div>
+                          <h4 class="white margin-bottom-2 f2 w-xbold white">Elige al menos 3 subcategorías</h4>
+                          <div class="grid-x grid-margin-y grid-margin-x align-center">
+                            <div v-for="subcategory of subcategories" :key="subcategory.id" class="cell small-6 medium-3 large-3">
+                              <input v-model="user.subcategories.value" :id="'subcategory-' + subcategory.id" type="checkbox" :value="subcategory.id" class="hide">
+                              <label
+                                :for="'subcategory-' + subcategory.id"
+                                class="c-mab-subcategory mab-shadow bg-white padding-1 f2 fs-18 c-lh--18 w-xbold black"
+                                :class="{'enable' : user.subcategories.value.includes(subcategory.id)}">
+                                ${ subcategory.name }
+                              </label>
+                            </div>
+                          </div>
+                          <div v-if="isWrongField('subcategories')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">Debe elegir al menos 3 subcategorías</div>
+                          <div v-if="user.error" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">
+                            ${ user.error }
+                          </div>
+                          <div class="margin-top-3">
+                            <button
+                              :disabled="(user.loading) ? true : false"
+                              @click="register($event, 'finish')"
+                              class="c-button c-button--warning-black w-xbold margin-bottom-2 padding-left-2 padding-right-2"
+                              :class="{'loading' : user.loading}">
+                              ¡Comienza a <br> aprender distinto!
+                            </button>
+                            <div @click="prevStep(3)" class="c-link c-link--warning f2 w-xbold fs-18">< Volver</div>
+                            <div class="c-bullet-steps text-center margin-top-1">
+                              <div class="c-bullet-steps__bullets">
+                                <span class="bg-white"></span>
+                                <span class="bg-white"></span>
+                                <span class="bg-white"></span>
+                                <span class="bg-warning"></span>
+                              </div>
+                              <div class="c-bullet-steps__text f2 fs-21 white">
+                                Paso 4 de 4
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                  </div>
+                </div>
+              </div>
+            </transitiond>
+          </div>
+
+          <div v-if="modals.teacher.isOpened" class="c-mab-modal flex-container align-center-middle">
+            <div class="grid-x align-center width-100">
+              <div class="cell small-10 medium-10 large-6">
+                <div class="c-mab-modal-content bg-white ">
+                  <h3 class="c-mab-modal-content__title text-center f2 text-uppercase">
+                    ¿cuántos escolares tienes a tu cargo?
+                  </h3>
+                  <div class="c-form-new">
+                    <div class="c-form-new__input-container margin-bottom-2">
+                      <select v-model="modals.teacher.data.students.value" class="f2" name="" id="">
+                        <option value="" disabled>Elige un opción</option>
+                        <option v-for="item of modals.teacher.students" :key="item.id"  :value="item">${ item }</option>
+                      </select>
+                      <p v-if="isWrongModalField('students', 'teacher')" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Debe seleccionar una opción</p>
+                    </div>
+                    <div class="width-100 margin-top-2">
+                      <div class="grid-x grid-margin-x grid-margin-y align-center">
+                        <div class="cell small-6 medium-4 large-4 text-left">
+                          <button class="c-button c-button--success c-button--arrow c-button--small width-100" @click="modals.teacher.isOpened = false">Volver</button>
+                        </div>
+                        <div class="cell small-6 medium-4 large-4 text-right">
+                          <button class="c-button c-button--success c-button--arrow c-button--small width-100" @click="validateModal('teacher')">Continuar</button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div> 
-      </div>
+          <div v-if="modals.tambero.isOpened" class="c-mab-modal flex-container align-center-middle">
+            <div class="grid-x align-center width-100">
+              <div class="cell small-10 medium-10 large-6">
+                <div class="c-mab-modal-content bg-white ">
+                  <h3 class="c-mab-modal-content__title text-center f2 text-uppercase">
+                    ¿de qué comunidad tambera formas parte?
+                  </h3>
+                  <div class="c-form-new">
+                    <div class="c-form-new__input-container margin-bottom-2">
+                      <select v-model="modals.tambero.data.department.value" @change="getProvincias" class="f2" name="" id="">
+                        <option disabled value="" selected>Escoge tu departamento</option>
+                        <option v-for="dep of modals.departments" :key="dep.id" :value="dep.nombre_ubigeo" >${ dep.nombre_ubigeo }</option>
+                      </select>
+                      <p v-if="isWrongModalField('department', 'tambero')" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Debe seleccionar una opción</p>
+
+                      <select v-model="modals.tambero.data.province.value" class="f2 margin-top-1" name="" id="">
+                        <option disabled value="" selected>${ (modals.tambero.data.province.isLoading) ? 'Cargando...' :'Elige el nombre de tu tambo' }</option>
+                        <option v-for="prov of modals.provinces" :key="prov.id" :value="prov.nombre_ubigeo" >${ prov.nombre_ubigeo }</option>
+                      </select>
+                      <p v-if="isWrongModalField('province', 'tambero')" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Debe seleccionar una opción</p>
+                    </div>
+                    <div class="width-100 margin-top-2">
+                      <div class="grid-x grid-margin-x grid-margin-y align-center">
+                        <div class="cell small-6 medium-4 large-4 text-left">
+                          <button class="c-button c-button--success c-button--arrow c-button--small width-100" @click="modals.tambero.isOpened = false">Volver</button>
+                        </div>
+                        <div class="cell small-6 medium-4 large-4 text-right">
+                          <button class="c-button c-button--success c-button--arrow c-button--small width-100" @click="validateModal('tambero')">Continuar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
   </section>
 {% endblock %}
 
-{% block footer %}
+{% block scripts %}
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
 {% endblock %}
+
+{% block footer %} {% endblock %}

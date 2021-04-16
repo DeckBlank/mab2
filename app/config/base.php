@@ -66,7 +66,6 @@ return [
         'page_home'                 => get_theme_file_uri('/static/js/page-home.bundle.js'),
         'page_emotional'            => get_theme_file_uri('/static/js/page-emotional.bundle.js'),
         'page_virtual_sesion'       => get_theme_file_uri('/static/js/page-virtual-sesion.bundle.js'),
-        'page_login'                => get_theme_file_uri('/static/js/page-login.bundle.js'),
         'page_solicitar_cursos'     => get_theme_file_uri('/static/js/page-solicitar-cursos.bundle.js'),
         'page_forms'                => get_theme_file_uri('/static/js/page-forms.bundle.js'),
         'page_test'                 => get_theme_file_uri('/static/js/page-test.bundle.js'),
@@ -81,8 +80,8 @@ return [
         'page_course'               => get_theme_file_uri('/static/js/page-course.bundle.js'),
         'page_topic'                => get_theme_file_uri('/static/js/page-topic.bundle.js'),
         'page_session'              => get_theme_file_uri('/static/js/page-session.bundle.js'),
-        'page_access'              => get_theme_file_uri('/static/js/page-access.bundle.js'),
-        'page_my_courses'              => get_theme_file_uri('/static/js/page-my-courses.bundle.js'),
+        'page_access'               => get_theme_file_uri('/static/js/page-access.bundle.js'),
+        'page_my_courses'           => get_theme_file_uri('/static/js/page-my-courses.bundle.js'),
 
         //WP
         'wp_session'        => get_theme_file_uri('/static/js/wp-session.bundle.js'),

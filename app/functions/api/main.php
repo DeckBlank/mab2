@@ -3,7 +3,9 @@
 /**
  * Settings
  */
-date_default_timezone_set('America/Lima');
+
+require_once(__DIR__ . "/config.php");
+require_once(__DIR__ . "/database/main.php");
 
 /**
  * Requires
@@ -135,86 +137,6 @@ add_action( 'rest_api_init', function () {
     register_rest_route( 'custom/v1', '/video/(?P<post_id>\d+)/comment/(?P<comment_id>\d+)/answer', array(
         'methods' => 'POST',
         'callback' => array($videoController,'addAnswer'),
-    ));
-});
-
-//3. Course ----------------------------------//
-add_action( 'rest_api_init', function () {
-    $courseController = new CourseController();
-
-    register_rest_route( 'custom/v1', '/course/categories', array(
-        'methods' => 'GET',
-        'callback' => array($courseController,'getCategories'),
-    ));
-
-    register_rest_route( 'custom/v1', '/course/(?P<course_id>\d+)/unities', array(
-        'methods' => 'GET',
-        'callback' => array($courseController,'getUnities'),
-    ));
-
-    register_rest_route( 'custom/v1', '/courses', array(
-        'methods' => 'GET',
-        'callback' => array($courseController,'getAll'),
-    ));
-
-    register_rest_route( 'custom/v1', '/courses/progress', array(
-        'methods' => 'GET',
-        'callback' => array($courseController,'getProgress'),
-    ));
-
-    register_rest_route( 'custom/v1', '/course/(?P<course_id>\d+)/registration/checkout', array(
-        'methods' => 'GET',
-        'callback' => array($courseController,'registrationCheckout'),
-    ));
-
-    register_rest_route( 'custom/v1', '/courses/expired_registrations', array(
-        'methods' => 'GET',
-        'callback' => array($courseController,'getExpiredRegistrations'),
-    ));
-
-    register_rest_route( 'custom/v1', '/courses/expired_registrations/download', array(
-        'methods' => 'GET',
-        'callback' => array($courseController,'downloadExpiredRegistrations'),
-    ));
-
-    register_rest_route( 'custom/v1', '/courses/user/logs', array(
-        'methods' => 'GET',
-        'callback' => array($courseController,'getUserCourseLogs'),
-    ));
-
-    register_rest_route( 'custom/v1', '/courses/user/logs/download', array(
-        'methods' => 'GET',
-        'callback' => array($courseController,'downloadUserCourseLogs'),
-    ));    
-
-    register_rest_route( 'custom/v1', '/course/request', array(
-        'methods' => 'POST',
-        'callback' => array($courseController,'sendCourseRequest'),
-    ));    
-
-    register_rest_route( 'custom/v1', '/courses/buy/log', array(
-        'methods' => 'POST',
-        'callback' => array($courseController,'saveBuyRequest'),
-    ));
-
-    register_rest_route( 'custom/v1', '/courses/buy/checkout', array(
-        'methods' => 'GET',
-        'callback' => array($courseController,'checkoutBuyRequests'),
-    ));
-
-    register_rest_route( 'custom/v1', '/courses/enrollments', array(
-        'methods' => 'GET',
-        'callback' => array($courseController,'getEnrollments'),
-    ));
-
-    register_rest_route( 'custom/v1', '/courses/enrollments/expired/download', array(
-        'methods' => 'GET',
-        'callback' => array($courseController,'downloadExpiredEnrollments'),
-    ));
-
-    register_rest_route( 'custom/v1', '/courses/export', array(
-        'methods' => 'GET',
-        'callback' => array($courseController,'export'),
     ));
 });
 

@@ -2,13 +2,151 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Timber\Timber;
 
 require(__DIR__ . '/../models/CourseModel.php');
 
 class CourseController{
-
     public function __construct(){
-
+        add_action( 'rest_api_init', function () {
+            register_rest_route('custom/v1', '/course/categories', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getCategories'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/courses/mab_categories', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getMabCategories'),
+                'permission_callback' => function ($request) {
+                    // return ($request['_wpnonce']) ? true : false;
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/courses/mab_subcategories', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getMabCategories'),
+                'permission_callback' => function ($request) {
+                    // return ($request['_wpnonce']) ? true : false;
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/course/(?P<course_id>\d+)/unities', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getUnities'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/courses', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getAll'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/courses/progress', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getProgress'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/course/(?P<course_id>\d+)/registration/checkout', array(
+                'methods' => 'GET',
+                'callback' => array($this,'registrationCheckout'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/courses/expired_registrations', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getExpiredRegistrations'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/courses/expired_registrations/download', array(
+                'methods' => 'GET',
+                'callback' => array($this,'downloadExpiredRegistrations'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/courses/user/logs', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getUserCourseLogs'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/courses/user/logs/download', array(
+                'methods' => 'GET',
+                'callback' => array($this,'downloadUserCourseLogs'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/course/request', array(
+                'methods' => 'POST',
+                'callback' => array($this,'sendCourseRequest'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/courses/buy/log', array(
+                'methods' => 'POST',
+                'callback' => array($this,'saveBuyRequest'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/courses/buy/checkout', array(
+                'methods' => 'GET',
+                'callback' => array($this,'checkoutBuyRequests'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/courses/enrollments', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getEnrollments'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/courses/enrollments/expired/download', array(
+                'methods' => 'GET',
+                'callback' => array($this,'downloadExpiredEnrollments'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/courses/export', array(
+                'methods' => 'GET',
+                'callback' => array($this,'export'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+        });
     }
 
     /**
@@ -22,6 +160,50 @@ class CourseController{
         }else{
             return new WP_REST_Response($categories, 200);
         }  
+    }
+
+    public function getMabCategories($request) {
+        $parentCategories = (!empty($request['categories'])) ? $request['categories'] : 0;
+        $parentCategories = ($parentCategories) ? explode(',', $parentCategories) : 0;
+
+        $categories = [];
+
+        if ($parentCategories)
+            foreach($parentCategories as $pCategory) {
+                $categories = array_merge(
+                    $categories,
+                    Timber::get_terms([
+                        'parent'    => $pCategory,
+                        'taxonomy'  => 'tax-mab-course'
+                    ])
+                );
+            }
+        else
+            $categories = Timber::get_terms([
+                'parent'    => 0,
+                'taxonomy'  => 'tax-mab-course'
+            ]);
+
+        if ( count($categories) ) {
+            $categories = array_map( function($category) use ($parentCategories) {
+                return array_merge(
+                    [ 'name' => $category->name, 'id' => $category->term_id ],
+                    ( !$parentCategories ) ? [ 'thumbnail' => get_field('image', 'category_' . $category->term_id) ] : [],
+                    ( !$parentCategories ) ? [ 'color'     => get_field('color', 'category_' . $category->term_id) ] : []
+                );
+            }, $categories);
+
+            return new WP_REST_Response((object)[
+                'message'   => 'Categories heres!!',
+                'data'      => $categories,
+                'status'    => true
+            ], 200);
+        } else {
+            return new WP_REST_Response((object)[
+                'message'   => 'No categories found!!',
+                'status'    => false
+            ], 200);
+        }
     }
 
     public function getAll($request){

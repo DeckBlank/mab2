@@ -22,23 +22,31 @@
 
   &__bottom {
     box-sizing: border-box;
+
+    .c-gradient-title span {
+      color: $warning-color;
+    }
+
+    .c-gradient-title > span {
+      font-size: $fs-50;
+      line-height: 60px;
+    }
+
+    .c-gradient-title p {
+      margin-bottom: 0;
+      color: $white;
+      font-size: $fs-30;
+      line-height: 35px;
+    }
   }
 
   .c-corner-logo {
-    height: 60px;
+    height: 30px;
   }
 
   .c-corner-text {
     color: $white;
     font-size: $fs-16;
-  }
-
-  &__title {
-    color: $warning-color;
-  }
-
-  &__subtitle {
-    color: $white;
   }
 
   &__text {
@@ -103,16 +111,6 @@
 
 @include breakpoint(large) {
   .c-cover-gradient {
-    &__title {
-      font-size: 55px;
-      line-height: 55px;
-    }
-
-    &__subtitle {
-      font-size: 45px;
-      line-height: 45px;
-    }
-
     &__text {
       font-size: $fs-30;
       line-height: 32px;
