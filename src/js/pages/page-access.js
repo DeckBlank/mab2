@@ -9,6 +9,7 @@ new Vue({
     return {
       metas: new URLSearchParams(window.location.search),
       view: 'login',
+      social: '',
       gallery: {
         login: {
           img: 'access/auth/login.png',
@@ -86,28 +87,26 @@ new Vue({
         error: '',
 
         email: {
-          value: 'hola@g.com',
+          value: '',
           pattern: "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$",
-          // isValid: false,
-          isValid: true,
+          isValid: false,
         },
         password: {
-          value: '12345',
-          // isValid: false,
-          isValid: true,
+          value: '',
+          isValid: false,
         },
-        terms: true,
-        // terms: false,
+        terms: false,
 
         sector: {
-          value: 'publico',
-          isValid: true,
+          value: '',
+          isValid: false,
         },
 
         role: {
           type: '',
           isValid: false,
           extension: '',
+          error: '',
         },
 
         categories: {
@@ -140,10 +139,6 @@ new Vue({
           value: '',
           isValid: false
         },
-        date_birth: {
-          value: '',
-          isValid: false
-        },
         country: {
           value: '',
           isValid: false,
@@ -166,6 +161,9 @@ new Vue({
       ],
 
       modals: {
+        departments : [],
+        provinces : [],
+
         teacher : {
           isOpened : false,
           students: [ '1', '2', '3', '4', '5+'],
@@ -181,10 +179,15 @@ new Vue({
           isOpened : false,
           data: {
             try : false,
-            students: {
+            department: {
               value: '',
               isValid: false
-            }
+            },
+            province: {
+              value: '',
+              isValid: false,
+              isLoading: false,
+            },
           }
         },
       },
@@ -273,6 +276,13 @@ new Vue({
     'modals.teacher.data.students.value' : function() {
       this.validateSelect(this.modals.teacher.data.students);
     },
+
+    'modals.tambero.data.department.value' : function() {
+      this.validateSelect(this.modals.tambero.data.department);
+    },
+    'modals.tambero.data.province.value' : function() {
+      this.validateSelect(this.modals.tambero.data.province);
+    },
   },
   mounted(){
     this.global();
@@ -281,8 +291,7 @@ new Vue({
     this.getCategories();
 
     if (this.metas.get('auth') && this.metas.get('auth') == 'register')
-      this.view = 'step-0';
-      // this.view = 'register';
+      this.view = 'register';
 
     this.initFacebook();
   },
@@ -315,10 +324,40 @@ new Vue({
       })
       .then(response => {
         if (response.status) {
-          this.cities = response.data;
+          this.cities             = response.data;
+          this.modals.departments = response.data;
         }
       })
       .catch(err => {
+        throw err;
+      })
+    },
+    getProvincias: function(option) {
+      const department = this.modals.departments[option.target.selectedIndex - 1].id_ubigeo;
+
+      this.modals.tambero.data.province.value      = '';
+      this.modals.tambero.data.province.isLoading  = true;
+
+      this.modals.provinces = [];
+
+      fetch(`${ this.API }/geo?dep=${ department }&_wpnonce=${ mab.nonce }`)
+      .then(res => {
+        if (res.status >= 200 && res.status < 300) {
+          return res.json();
+        }else{
+          throw res;
+        }
+      })
+      .then(response => {
+        if (response.status) {
+          this.modals.provinces = response.data;
+        }
+
+        this.modals.tambero.data.province.isLoading = false;
+      })
+      .catch(err => {
+        this.modals.tambero.data.province.isLoading = false;
+
         throw err;
       })
     },
@@ -411,7 +450,19 @@ new Vue({
           break;
 
         case 2: {
-            isValid = this.user.role.isValid;
+            isValid = this.user.role.isValid &&
+              ((this.user.role.type == 'teacher') ? this.modals.teacher.data.students.isValid : true) &&
+              ((this.user.role.type == 'tambero') ? this.modals.tambero.data.department.isValid && this.modals.tambero.data.province.isValid : true);
+
+            if (this.user.role.type == 'teacher') {
+              this.user.role.error = (!this.modals.teacher.data.students.isValid)
+                ? 'Debe especificar la cantidad de estudiantes a cargo'
+                : '';
+            } else if (this.user.role.type == 'tambero') {
+              this.user.role.error = (!this.modals.tambero.data.department.isValid || !this.modals.tambero.data.province.isValid)
+                ? 'Debe especificar tu comunidad tambera'
+                : '';
+            }
           }
           break;
 
@@ -475,7 +526,19 @@ new Vue({
           this.view = 'step-3';
         }
       } else {
+        this.modals.tambero.data.try = true;
 
+        if (this.modals.tambero.data.department.isValid && this.modals.tambero.data.province.isValid) {
+          this.modals.tambero.isOpened = false;
+          this.view = 'step-3';
+        }
+      }
+    },
+    openModal: function(role) {
+      this.modals[role].isOpened = true;
+
+      if (role == 'tambero') {
+        if (!this.cities.length) this.getCities();
       }
     },
 
@@ -485,7 +548,7 @@ new Vue({
       this.user.try = true;
 
       if (this.user.email.isValid && this.user.password.isValid) {
-        this.user.isLoading = true;
+        this.user.loading = true;
 
         fetch(`${ this.API }/auth/login?email=${ this.user.email.value }&password=${ this.user.password.value }&_wpnonce=${ mab.nonce }`,{
             method: 'GET'
@@ -502,8 +565,10 @@ new Vue({
             window.location = `${this.SITE_URL}/mis-cursos`;
           })
           .catch(err => {
-            this.user.error     = 'El usuario o contraseña son incorrectos';
-            this.user.isLoading = false; throw err;          
+            this.user.loading = false;
+            this.user.error = 'El usuario o contraseña son incorrectos';
+
+            throw err;
           })
       }
     },
@@ -512,18 +577,41 @@ new Vue({
 
       if (step == 'init') {
         this.user.try = true;
+        this.user.loading = true;
 
         if (this.user.email.isValid && this.user.password.isValid && this.user.terms) {
-          this.view = 'step-0';
+          fetch(`${ this.API }/auth/check?email=${ this.user.email.value }&_wpnonce=${ mab.nonce }`,{
+              method: 'GET'
+            })
+            .then(res => {
+              if (res.status >= 200 && res.status < 300) {
+                return res.json();
+              }else{
+                throw res;
+              }
+            })
+            .then(response => {
+              this.user.loading = false;
+
+              if (response.status) {
+                this.user.error = response.message;
+              } else {
+                this.view       = 'step-0';
+                this.user.error = '';
+              }
+            })
+            .catch(err => {
+              throw err;
+            })
         }
       } else {
         if ( this.validateStep(4) ) {
-          this.user.isLoading = true;
+          this.user.loading = true;
 
           const formData = new FormData();
 
           formData.append('email', this.user.email.value);
-          formData.append('password', this.user.password.value);
+          formData.append('password', (this.social) ? '123' : this.user.password.value);
           formData.append('sector', this.user.sector.value);
           formData.append('profile', JSON.stringify({
             name : this.profile.name.value,
@@ -538,26 +626,48 @@ new Vue({
             },
           }));
           formData.append('role', JSON.stringify({
-            type : this.role.type,
-            extension : 0,
+            type : this.user.role.type,
+            extension : (this.user.role.type == 'teacher')
+              ? {
+                  students : this.modals.teacher.data.students.value,
+                }
+              : {
+                  comunityDepartment : this.modals.tambero.data.department.value,
+                  comunity : this.modals.tambero.data.province.value
+                }
           }));
           formData.append('category', this.user.categories.value.join(','));
           formData.append('subcategory', this.user.subcategories.value.join(','));
           formData.append('_wpnonce', mab.nonce);
 
-          fetch(`${this.API}/course/request`, {
+          if (this.social)
+            formData.append('social', this.social);
+
+          fetch(`${ this.API }/auth/register`, {
               method: 'POST',
               body: formData
             })
             .then(res => {
               if (res.status >= 200 && res.status < 300) {
-                this.user.isLoading = false; this.isSentForm = true;
+                return res.json();
               }else{
                 throw res;
               }
             })
+            .then(response => {
+              this.user.loading = false;
+
+              if (response.status) {
+                window.location = `${this.SITE_URL}/mis-cursos`;
+              } else {
+                this.user.error = 'El usuario ya existe o ha ocurrido error, intentelo más tarde';
+              }
+            })
             .catch(err => {
-              this.user.isLoading = false; throw err;          
+              this.user.loading = false;
+              this.user.error = 'Ha ocurrido error, intentelo más tarde';
+
+              throw err;          
             })
         }
       }
@@ -583,7 +693,8 @@ new Vue({
       }(document, 'script', 'facebook-jssdk'));
     },
     authWithGoogle: function() {
-      this.user.isLoading = true;
+      this.user.loading = true;
+      this.user.error   = '';
 
       gapi.load('auth2', () => {
         const auth2 = gapi.auth2.init({
@@ -613,20 +724,34 @@ new Vue({
           .then(response => {
             if (response.status) {
               // saveUserLoginSession(user)
-              // window.location = `${this.SITE_URL}/mis-cursos`;
+              window.location = `${this.SITE_URL}/mis-cursos`;
             } else {
-              this.view = 'step-0';
+              this.view   = 'step-0';
+              this.social = 'google';
+
+              const familyName = profile.getFamilyName();
+
+              this.user.email.value           = profile.getEmail();
+
+              this.profile.name.value         = profile.getGivenName();
+              this.profile.father_name.value  = (familyName.split(' ').length) ? familyName.substr(0, familyName.indexOf(' ')) : familyName;
+              this.profile.mother_name.value  = (familyName.split(' ').length) ? familyName.substr(familyName.indexOf(' ') + 1) : '';
+
+              this.user.loading = false;
             }
           })
           .catch(err => {
-            this.user.error     = 'El usuario o contraseña son incorrectos';
-            this.user.isLoading = false; throw err;          
+            this.user.error     = 'Ha ocurrido un error, intentelo más tarde';
+            this.user.loading = false; throw err;
           })
-          // console.log('Full Name: '   + profile.getName());
-          // console.log('Given Name: '  + profile.getGivenName());
-          // console.log('Family Name: ' + profile.getFamilyName());
         }, (err) => {
-          console.log(err);
+          this.user.error = err.error == 'popup_closed_by_user'
+            ? 'No se ha podido completar la operacion'
+            : (err.error == 'access_denied'
+              ? 'No se ha autorizado la operación, vuelve a intentarlo'
+              : 'Ha ocurrido un error, intentado nuevamente en unos minutos');
+
+          this.user.loading = false;
         })
       })
     },

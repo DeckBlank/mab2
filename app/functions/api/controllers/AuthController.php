@@ -14,6 +14,14 @@ class AuthController {
                 }
             ));
 
+            register_rest_route( 'custom/v1', '/auth/check', array(
+                'methods' => 'GET',
+                'callback' => array($this, 'checkUser'),
+                'permission_callback' => function ($request) {
+                    return ($request['_wpnonce']) ? true : false;
+                }
+            ));
+
             register_rest_route( 'custom/v1', '/auth/register', array(
                 'methods' => 'POST',
                 'callback' => array($this, 'register'),
@@ -40,6 +48,27 @@ class AuthController {
         }
     }
 
+    public function checkUser($request) {
+        if( isset($request['email']) ){
+            $user = ( get_user_by('email', $request['email']) );
+
+            if ($user) {
+                return new WP_REST_Response((object)[
+                    'message'   => 'El usuario ya existe',
+                    'status'    => true
+                ], 200);
+            } else {
+                return new WP_REST_Response((object)[
+                    'message'   => 'User not exist',
+                    'status'    => false
+                ], 200);
+            }
+            
+        }else{
+            return new WP_Error( 'no_user_credentials', __('No user credentials'), array( 'status' => 404 ) );
+        }
+    }
+
     public function register($request) {
         if (
             !empty($request['email']) &&
@@ -51,7 +80,11 @@ class AuthController {
             !empty($request['subcategory'])
         ) {
             $email          = $request['email'];
-            $password       = $request['password'];
+
+            $password       = ($request['social'] && $request['social'] == 'google' || $request['social'] == 'facebook')
+                ? wp_generate_password(5)
+                : $request['password'];
+
             $sector         = $request['sector'];
             $profile        = json_decode($request['profile']);
             $role           = json_decode($request['role']);
@@ -99,6 +132,10 @@ class AuthController {
                 }
 
                 if ( $this::__sendNotification($email, $profile->name, $profile->father_name . $profile->mother_name) ) {
+                    wp_set_auth_cookie($userID, true);
+                    wp_set_current_user($userID, $email);
+                    do_action('wp_login', $email);
+
                     return new WP_REST_Response((object)[
                         'message'   => 'User registered',
                         'data'      => $userID,
@@ -128,9 +165,13 @@ class AuthController {
         $user = get_user_by('email', $request['email']);
 
         if ($user) {
-            // $this::__syncSocialMedia('google');
+            $data = $this::__handleLogin($request, 'master');
 
-            return $this::__handleLogin($request, 'master');
+            return new WP_REST_Response((object)[
+                'message'   => 'User authorized',
+                'status'    => true,
+                'data'      => $data
+            ], 200);
         } else {
             return new WP_REST_Response((object)[
                 'message'   => 'User not registered',

