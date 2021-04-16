@@ -577,9 +577,10 @@ new Vue({
 
       if (step == 'init') {
         this.user.try = true;
-        this.user.loading = true;
 
         if (this.user.email.isValid && this.user.password.isValid && this.user.terms) {
+          this.user.loading = true;
+
           fetch(`${ this.API }/auth/check?email=${ this.user.email.value }&_wpnonce=${ mab.nonce }`,{
               method: 'GET'
             })
@@ -756,38 +757,36 @@ new Vue({
       })
     },
     authWithFacebook: function() {
+      this.user.loading = true;
+
       FB.getLoginStatus((response) => {
         if (response.status == 'connected') {
-          const token = response.authResponse.accessToken;
-
-          this.handleFacebookAuth('login', token);
+          this.handleFacebookAuth();
         } else if(response.status == 'authorization_expired') {
           FB.login((response) => {
             if (response.authResponse) {
-              const token = response.authResponse.accessToken;
-
-              this.handleFacebookAuth('login', token);
+              this.handleFacebookAuth();
             } else {
-              // this.auth.isLoading     = false;
-              // this.auth.error.active  = true;
+              this.user.loading = false;
+              this.user.error   = 'No se ha autorizado la operación, vuelve a intentarlo';
             }
           }, {scope: 'public_profile,email', auth_type: 'reauthorize'});
         } else {
           FB.login((response) => {
             if (response.authResponse) {
-              this.handleFacebookAuth('login', response.authResponse.accessToken);
+              this.handleFacebookAuth();
             } else {
-              // this.auth.isLoading     = false;
-              // this.auth.error.active  = true;
-              // this.auth.error.message = 'No se ha podido completar el proceso.';
+              this.user.loading = false;
+              this.user.error   = 'No se ha autorizado la operación, vuelve a intentarlo';
             }
           }, {scope: 'public_profile,email'});
         }
       });
     },
-    handleFacebookAuth: function(type, token) {
-      console.log(type)
-      console.log(token)
+    handleFacebookAuth: function(authResponse) {
+      FB.api('/me', { fields: 'first_name, last_name, email, locale' }, (userData) => {
+        console.log(userData);
+      })
     },
   }
 })
