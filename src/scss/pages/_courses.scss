@@ -1,0 +1,25 @@
+.c-section--courses {
+  .c-banner {
+    &__title {
+      font-size: 60px;
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-section--courses {
+    .c-banner {
+      &__title {
+        font-size: 67px;
+        line-height: 60px;
+      }
+    }
+
+    .c-course-list {
+      &__content,
+      .c-form-new {
+        padding: 0 2rem;
+      }
+    }
+  }
+}

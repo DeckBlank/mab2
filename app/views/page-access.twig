@@ -614,6 +614,18 @@
                                 <div class="c-mab-category__text flex-container align-center-middle width-100">${ category.name }</div>
                               </figcaption>
                             </label>
+
+                            <!-- Este seria el nuevo c-mab-category   -->
+                            <!-- <label class="c-mab-category mab-shadow" :class="[{'active' : user.categories.value.includes(category.id)}, 'c-mab-category--' + category.color]">
+                              <figure class="c-mab-category__img position-relative">
+                                <img class="width-100 height-100 object-cover" loading="lazy" :src="category.thumbnail.url" alt="">
+                                <div class="c-mab-category__gradient position-absolute width-100 height-100">
+                                </div>
+                              </figure>
+                              <figcaption class="c-mab-category__shade width-100 text-center flex-container" :class="(category.color != 'warning') ? 'white' : 'dark'" >
+                                <div class="c-mab-category__text flex-container align-center-middle width-100">${ category.name }</div>
+                              </figcaption>
+                            </label> -->
                           </div>
                         </div>
                         <div v-if="isWrongField('categories')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">Debe elegir al menos 3 categorías</div>
