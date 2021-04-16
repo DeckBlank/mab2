@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1618540993705';
+$assets_version = '1618542977325';
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -247,15 +247,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         register_assets('script', [
             'handle'    => 'pandawp/js/page/virtual_sesion',
             'src'       => $config['resources']['page_virtual_sesion'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);   
-
-    }elseif (is_page('login')){
-        register_assets('script', [
-            'handle'    => 'pandawp/js/page/login',
-            'src'       => $config['resources']['page_login'],
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true

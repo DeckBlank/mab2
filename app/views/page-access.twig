@@ -211,7 +211,10 @@
                               Contraseña vacia
                             </p>
                           </div>
+
+                          <a :href="SITE_URL + '/recuperar-contrasena'" class="c-link c-link--warning f2 text-center w-medium w-bold display-block">¿Olvidaste tu Contraseña?</a>
                           <div v-if="user.error" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">${ user.error }</div>
+
                           <button
                             :disabled="(user.loading) ? true : false"
                             class="c-button c-button--warning width-100 f2 margin-top-1"

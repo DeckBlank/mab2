@@ -212,6 +212,10 @@ new Vue({
             },
           });
         },1000)
+      } else if (this.view == 'step-1') {
+        this.getCountries();
+      } else if (this.view == 'step-3') {
+        this.getCategories();
       }
     },
 
@@ -287,8 +291,6 @@ new Vue({
   mounted(){
     this.global();
     this.hideLoading();
-    this.getCountries();
-    this.getCategories();
 
     if (this.metas.get('auth') && this.metas.get('auth') == 'register')
       this.view = 'register';
@@ -524,6 +526,7 @@ new Vue({
         if (this.modals.teacher.data.students.isValid) {
           this.modals.teacher.isOpened = false;
           this.view = 'step-3';
+          this.user.try = false;
         }
       } else {
         this.modals.tambero.data.try = true;
@@ -531,6 +534,7 @@ new Vue({
         if (this.modals.tambero.data.department.isValid && this.modals.tambero.data.province.isValid) {
           this.modals.tambero.isOpened = false;
           this.view = 'step-3';
+          this.user.try = false;
         }
       }
     },
@@ -593,6 +597,7 @@ new Vue({
             })
             .then(response => {
               this.user.loading = false;
+              this.user.try     = false;
 
               if (response.status) {
                 this.user.error = response.message;
@@ -706,45 +711,12 @@ new Vue({
 
         auth2.signIn().then(user => {
           const profile   = user.getBasicProfile();
-          const formData  = new FormData();
 
-          formData.append('email', profile.getEmail());
-          formData.append('_wpnonce', mab.nonce );
-
-          fetch(`${ this.API }/auth/social`, {
-            method: 'POST',
-            body: formData,
-          })
-          .then(res => {
-            if (res.status >= 200 && res.status < 300) {
-              return res.json();
-            }else{
-              throw res;
-            }
-          })
-          .then(response => {
-            if (response.status) {
-              // saveUserLoginSession(user)
-              window.location = `${this.SITE_URL}/mis-cursos`;
-            } else {
-              this.view   = 'step-0';
-              this.social = 'google';
-
-              const familyName = profile.getFamilyName();
-
-              this.user.email.value           = profile.getEmail();
-
-              this.profile.name.value         = profile.getGivenName();
-              this.profile.father_name.value  = (familyName.split(' ').length) ? familyName.substr(0, familyName.indexOf(' ')) : familyName;
-              this.profile.mother_name.value  = (familyName.split(' ').length) ? familyName.substr(familyName.indexOf(' ') + 1) : '';
-
-              this.user.loading = false;
-            }
-          })
-          .catch(err => {
-            this.user.error     = 'Ha ocurrido un error, intentelo más tarde';
-            this.user.loading = false; throw err;
-          })
+          this.handleAuthSocial({
+            email: profile.getEmail(),
+            first_name: profile.getGivenName(),
+            last_name: profile.getFamilyName(),
+          }, 'google');
         }, (err) => {
           this.user.error = err.error == 'popup_closed_by_user'
             ? 'No se ha podido completar la operacion'
@@ -783,9 +755,56 @@ new Vue({
         }
       });
     },
-    handleFacebookAuth: function(authResponse) {
+    handleFacebookAuth: function() {
       FB.api('/me', { fields: 'first_name, last_name, email, locale' }, (userData) => {
-        console.log(userData);
+        this.handleAuthSocial({
+          email: userData.email,
+          first_name: userData.first_name,
+          last_name: userData.last_name,
+        }, 'facebook');
+      })
+    },
+    handleAuthSocial: function(user, social) {
+      const formData  = new FormData();
+
+      formData.append('email', user.email);
+      formData.append('_wpnonce', mab.nonce );
+
+      fetch(`${ this.API }/auth/social`, {
+        method: 'POST',
+        body: formData,
+      })
+      .then(res => {
+        if (res.status >= 200 && res.status < 300) {
+          return res.json();
+        }else{
+          throw res;
+        }
+      })
+      .then(response => {
+        if (response.status) {
+          // saveUserLoginSession(user)
+          window.location = `${this.SITE_URL}/mis-cursos`;
+        } else {
+          this.view   = 'step-0';
+          this.social = social;
+
+          const familyName = user.last_name;
+
+          this.user.email.value           = user.email;
+
+          this.profile.name.value         = user.first_name;
+          this.profile.father_name.value  = (familyName.split(' ').length) ? familyName.substr(0, familyName.indexOf(' ')) : familyName;
+          this.profile.mother_name.value  = (familyName.split(' ').length) ? familyName.substr(familyName.indexOf(' ') + 1) : '';
+
+          this.user.loading = false;
+        }
+      })
+      .catch(err => {
+        this.user.error     = 'Ha ocurrido un error, intentelo más tarde';
+        this.user.loading   = false;
+
+        throw err;
       })
     },
   }
