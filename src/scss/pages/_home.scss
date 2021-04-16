@@ -41,6 +41,119 @@
       }
     }
   }
+
+  .c-profile-card {
+    &__vector {
+      width: 150px;
+      height: 150px;
+      bottom: -40px;
+      margin: auto;
+    }
+
+    &__content {
+      img {
+        filter: drop-shadow(0 10px 20px rgba($dark, 0.5));
+      }
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: calc(100% - 10%);
+      height: calc(100% - 40px);
+      border-radius: 40px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+
+    &--secondary {
+      &::before {
+        background-color: $secondary-color;
+      }
+    }
+
+    &--warning {
+      &::before {
+        background-color: $warning-color;
+      }
+    }
+
+    &--vector-right {
+      .c-profile-card__vector {
+        right: 0;
+      }
+    }
+
+    &--vector-left {
+      .c-profile-card__vector {
+        left: 0;
+      }
+    }
+  }
+
+  .c-testimony {
+    padding-left: 2rem;
+    padding-top: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+
+    &__content {
+      padding: 2rem;
+      padding-top: 3rem;
+      padding-bottom: 6rem;
+    }
+
+    &__avatar {
+      left: 0;
+      top: 0;
+      width: 80px;
+      height: 80px;
+      border-radius: 5000px;
+    }
+
+    &__about {
+      right: 0;
+      bottom: 0;
+      width: 150px;
+      height: 150px;
+      border-radius: 5000px;
+    }
+
+    &__flag {
+      width: 25px;
+    }
+  }
+
+  .c-brands {
+    &__1,
+    &__2,
+    &__3,
+    &__4 {
+      img {
+        width: 300px;
+      }
+    }
+
+    &__mixing {
+      display: none;
+    }
+  }
+
+  .c-faq {
+    &__left,
+    &__right {
+      display: none;
+    }
+
+    .c-accordion-item {
+      &__content ul {
+        list-style: url('../images/icons/check.png');
+        padding-left: 1rem;
+      }
+    }
+  }
 }
 
 @include breakpoint(medium) {
@@ -65,11 +178,65 @@
           position: absolute;
           width: 200px;
           height: 200px;
-          background-image: url("../images/pattern.png");
+          background-image: url("../images/dots/pattern.png");
           background-size: contain;
           left: -80px;
           top: 0;
           z-index: -1;
+        }
+      }
+    }
+
+    .c-profile-card {
+      &--vector-right {
+        .c-profile-card__vector {
+          transform: rotateZ(10deg);
+          right: -40px;
+        }
+      }
+
+      &--vector-left {
+        .c-profile-card__vector {
+          transform: rotateZ(-10deg);
+          left: -40px;
+        }
+      }
+    }
+
+    .c-brands {
+      &__2 {
+        img {
+          height: 250px;
+        }
+      }
+
+      &__mixing {
+        display: block;
+        left: 0;
+        right: 0;
+        bottom: 90px;
+        margin: auto;
+        width: 200px;
+      }
+    }
+
+    .c-faq {
+      &__container {
+        margin-bottom: -80px;
+      }
+      
+      &__left,
+      &__right {
+        display: block;
+
+        img {
+          width: 450px;
+        }
+      }
+
+      &__left.c-dots-background {
+        &::before {
+          right: 100px;
         }
       }
     }
@@ -81,6 +248,47 @@
     .c-player {
       &__logo {
         height: 300px;
+      }
+    }
+
+    .c-metric {
+      img {
+        height: 400px;
+      }
+
+      &--left {
+        right: -2%;
+        top: -150px;
+      }
+
+      &--right {
+        left: -2%;
+        top: -380px;
+        margin-bottom: -380px;
+      }
+    }
+
+    .c-testimony {
+      padding-right: 4rem;
+      padding-bottom: 4rem;
+    }
+
+    .c-brands {
+      &__2 {
+        img {
+          height: 250px;
+        }
+      }
+
+      &__mixing {
+        bottom: 80px;
+        width: 250px;
+      }
+    }
+
+    .c-faq {
+      &__container {
+        margin-bottom: -200px;
       }
     }
   }

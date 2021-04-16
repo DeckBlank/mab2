@@ -34,35 +34,6 @@ body {
   background: $secondary-medium;
 }
 
-.c-link {
-  &--sec {
-    color: $secondary-color;
-
-    &:hover,
-    &:focus {
-      color: $secondary-color;
-    }
-  }
-
-  &--white {
-    color: $white;
-
-    &:hover,
-    &:focus {
-      color: $white;
-    }
-  }
-
-  &--warning {
-    color: $warning-color;
-
-    &:hover,
-    &:focus {
-      color: $warning-color;
-    }
-  }
-}
-
 .c-overmoon {
   z-index: 99999999999;
 }
@@ -101,19 +72,41 @@ body {
   opacity: 0;
 }
 
-.of {
-  &--cover {
-    object-fit: cover;
+.c-dots-background {
+  z-index: 5;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-size: contain;
+    top: 0;
+    z-index: -1;
   }
 
-  &--contain {
-    object-fit: contain;
+  &--primary {
+    &::before {
+      background-image: url("../images/dots/pattern.png");
+    }
   }
-}
 
-.br {
-  &--large {
-    border-radius: 20px;
+  &--warning {
+    &::before {
+      background-image: url("../images/dots/pattern-warning.png");
+    }
+  }
+
+  &.left {
+    &::before {
+      left: -80px;
+    }
+  }
+
+  &.right {
+    &::before {
+      right: -80px;
+    }
   }
 }
 
@@ -123,6 +116,40 @@ body {
 
 .desktop {
   display: none;
+}
+
+.lh-40 {
+  line-height: 43px;
+}
+
+.lh-50 {
+  line-height: 50px;
+}
+
+.lh-25 {
+  line-height: 27px;
+}
+
+.lh-14 {
+  line-height: 14px !important;
+}
+
+.lh-18 {
+  line-height: 18px !important;
+}
+
+.fd-column {
+  flex-direction: column;
+}
+
+.br-top--large {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+
+.br-bottom--large {
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 @include breakpoint(large) {

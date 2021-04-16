@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([19,"package.vue","package.vuex"]);
+/******/ 	deferredModules.push([20,"package.vue","package.vuex"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -318,7 +318,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ 19:
+/***/ 20:
 /*!*****************************************************!*\
   !*** multi ./src/js/pages/page-solicitar-cursos.js ***!
   \*****************************************************/

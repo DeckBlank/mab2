@@ -1,0 +1,56 @@
+.c-profile-card {
+  &__vector {
+    width: 150px;
+    height: 150px;
+    bottom: -40px;
+    margin: auto;
+  }
+
+  &__content {
+    img {
+      filter: drop-shadow(0 10px 20px rgba($dark, 0.5));
+    }
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: calc(100% - 10%);
+    height: calc(100% - 40px);
+    border-radius: 40px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+
+  &--secondary {
+    &::before {
+      background-color: $secondary-color;
+    }
+  }
+
+  &--warning {
+    &::before {
+      background-color: $warning-color;
+    }
+  }
+
+  &--vector-right {
+    transform: rotateZ(10deg);
+    right: -40px;
+
+    .c-profile-card__vector {
+      right: 0;
+    }
+  }
+
+  &--vector-left {
+    transform: rotateZ(-10deg);
+    left: -40px;
+
+    .c-profile-card__vector {
+      left: 0;
+    }
+  }
+}

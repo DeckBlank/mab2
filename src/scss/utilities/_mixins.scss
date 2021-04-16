@@ -18,6 +18,10 @@
     box-shadow: $color 0 0 $size;
   }
 
+  @if $align == bottom {
+    box-shadow: $color 0 $y $size;
+  }
+
   @else {
     box-shadow: $color $x $y $size;
   }
