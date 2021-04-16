@@ -181,6 +181,25 @@
     font-family: $font-family-secondary;
   }
 
+  &--course {
+    font-size: $fs-12;
+    padding: 0.5rem;
+  }
+
+  &--course-price {
+    font-size: $fs-14 !important;
+    font-family: $font-family-secondary;
+    background: $warning-color;
+    color: $black;
+    padding: 0.7rem;
+    display: inline-block;
+  }
+
+  &--course-price--alert {
+    background: $alert-color;
+    color: $white;
+  }
+
   &.loading {
     &:disabled {
       cursor: wait;
