@@ -1,32 +1,83 @@
 <footer class="c-footer padding-vertical-2 bg-dark">
   <div class="grid-container">
-    <div class="c-footer__content flex-container">
-      <div class="c-contacts flex-container">
-        <div class="c-contact flex-container align-middle white">
-          <p class="margin-bottom-0 fs-18">{{information.email}}</p>
+    <div class="c-footer__content">
+      <div class="grid-x grid-margin-x grid-margin-y">
+        <div class="cell medium-4 large-3 align-self-stretch">
+          <h4 class="fs-21 white w-bold f2">MAB</h4>
+          <ul class="ul-reset">
+            <li class="f2">
+              <a href="" class="c-link c-link--white fs-18">Nosotros</a>
+            </li>
+            <li class="f2">
+              <a href="" class="c-link c-link--white fs-18">Servicios</a>
+            </li>
+            <li class="f2">
+              <a href="" class="c-link c-link--white fs-18">Modalidades</a>
+            </li>
+            <li class="f2">
+              <a href="" class="c-link c-link--white fs-18">Metodología</a>
+            </li>
+            <li class="f2">
+              <a href="" class="c-link c-link--white fs-18">Programas</a>
+            </li>
+            <li class="f2">
+              <a href="" class="c-link c-link--white fs-18">Empresas</a>
+            </li>
+            <li class="f2">
+              <a href="" class="c-link c-link--white fs-18">Donaciones</a>
+            </li>
+          </ul>
         </div>
-        <div class="c-contact flex-container align-middle white">
-          <a href="https://api.whatsapp.com/send?phone=51902705461" target="_blank" class="fs-18">
-            <span class="c-icon mr-1"><i class="fab fa-whatsapp"></i></span>
-            902 705 461
-          </a>
-          <span class="margin-horizontal-1">-</span>
-          <a href="https://api.whatsapp.com/send?phone=51{{information.phone|replace({' ': ''})}}" target="_blank" class="fs-18">
-            <span class="c-icon mr-1"><i class="fab fa-whatsapp"></i></span>
-            {{information.phone}}
-          </a>
+        <div class="cell medium-4 large-3 align-self-stretch">
+          <h4 class="fs-21 white w-bold f2">Comunidad</h4>
+          <ul class="ul-reset">
+            <li class="f2">
+              <a href="" class="c-link c-link--white fs-18">Speakers</a>
+            </li>
+            <li class="f2">
+              <a href="" class="c-link c-link--white fs-18">Testimonios</a>
+            </li>
+            <li class="f2">
+              <a href="" class="c-link c-link--white fs-18">Medios</a>
+            </li>
+            <li class="f2">
+              <a href="" class="c-link c-link--white fs-18">Blog</a>
+            </li>
+          </ul>
         </div>
-
-        {# <div class="c-contact flex-container align-middle white">
-          <a href="{{site.url}}/preguntas-frecuentes" class="fs-18"><span class="c-icon mr-05"><i class="far fa-question"></i></span> Preguntas frecuentes</a>
-        </div> #}
-      </div>      
-      <div class="c-vectors flex-container">
-        {% for item in [1,2,3,4,5,6] %}          
-          <figure class="c-vectors__item">
-            <img class="of--content" src="{{theme.link}}/static/images/landing/footer_img/footer_{{item}}.png?key=20200406" alt="">
-          </figure>
-        {% endfor %}
+        <div class="cell medium-4 large-3 align-self-stretch">
+          <h4 class="fs-21 white w-bold f2">Contacto</h4>
+          <ul class="ul-reset">
+            <li class="f2">
+              <a href="mailto:info@mablovers.com" class="c-link c-link--white fs-18"><i class="far fa-envelope mr-05"></i> info@mablovers.com</a>
+            </li>
+            <li class="f2">
+              <a href="" class="c-link c-link--white fs-18"><i class="fab fa-whatsapp mr-05"></i> 924 908 228</a>
+            </li>
+            <li class="f2">
+              <a href="" class="c-link c-link--white fs-18"><i class="fab fa-whatsapp mr-05"></i> 902 705 461</a>
+            </li>
+          </ul>
+        </div>
+        <div class="cell large-3 align-self-stretch">
+          <div class="large-text-center height-100 flex-container flex-dir-column align-center-middle">
+            <h4 class="fs-25 c-lh--25 white margin-bottom-1">encuéntranos en</h4>
+            <div class="c-social-cards flex-container">
+              <a href="" class="c-social-cards__item bg-white flex-container align-center-middle rounded fs-25">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="" class="c-social-cards__item bg-white flex-container align-center-middle rounded fs-25">
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="" class="c-social-cards__item bg-white flex-container align-center-middle rounded fs-25">
+                <i class="fab fa-youtube"></i>
+              </a>
+              <a href="" class="c-social-cards__item bg-white flex-container align-center-middle rounded fs-25">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

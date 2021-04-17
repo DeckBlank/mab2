@@ -42,57 +42,6 @@
     }
   }
 
-  .c-profile-card {
-    &__vector {
-      width: 150px;
-      height: 150px;
-      bottom: -40px;
-      margin: auto;
-    }
-
-    &__content {
-      img {
-        filter: drop-shadow(0 10px 20px rgba($dark, 0.5));
-      }
-    }
-
-    &::before {
-      content: "";
-      position: absolute;
-      width: calc(100% - 10%);
-      height: calc(100% - 40px);
-      border-radius: 40px;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      margin: auto;
-    }
-
-    &--secondary {
-      &::before {
-        background-color: $secondary-color;
-      }
-    }
-
-    &--warning {
-      &::before {
-        background-color: $warning-color;
-      }
-    }
-
-    &--vector-right {
-      .c-profile-card__vector {
-        right: 0;
-      }
-    }
-
-    &--vector-left {
-      .c-profile-card__vector {
-        left: 0;
-      }
-    }
-  }
-
   .c-testimony {
     padding-left: 2rem;
     padding-top: 2rem;
@@ -102,7 +51,22 @@
     &__content {
       padding: 2rem;
       padding-top: 3rem;
-      padding-bottom: 6rem;
+      padding-bottom: 8rem;
+
+      &:before {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 0;
+        bottom: -5px;
+        left: 0;
+        margin: auto;
+        border-top: solid 50px transparent;
+        border-left: solid 70px transparent;
+        border-right: solid 70px transparent;
+        border-bottom: solid 60px $white;
+        transform: rotateZ(-30deg);
+      }
     }
 
     &__avatar {
@@ -111,13 +75,14 @@
       width: 80px;
       height: 80px;
       border-radius: 5000px;
+      z-index: 100;
     }
 
     &__about {
       right: 0;
       bottom: 0;
-      width: 150px;
-      height: 150px;
+      width: 170px;
+      height: 170px;
       border-radius: 5000px;
     }
 
@@ -145,6 +110,10 @@
     &__left,
     &__right {
       display: none;
+    }
+
+    &__people {
+      z-index: 3;
     }
 
     .c-accordion-item {
@@ -183,22 +152,6 @@
           left: -80px;
           top: 0;
           z-index: -1;
-        }
-      }
-    }
-
-    .c-profile-card {
-      &--vector-right {
-        .c-profile-card__vector {
-          transform: rotateZ(10deg);
-          right: -40px;
-        }
-      }
-
-      &--vector-left {
-        .c-profile-card__vector {
-          transform: rotateZ(-10deg);
-          left: -40px;
         }
       }
     }
@@ -271,6 +224,19 @@
     .c-testimony {
       padding-right: 4rem;
       padding-bottom: 4rem;
+
+      &__avatar {
+        width: 110px;
+        height: 110px;
+      }
+
+      &__content {
+        padding-top: 5rem;
+
+        &::before {
+          bottom: -25px;
+        }
+      }
     }
 
     .c-brands {
@@ -281,8 +247,8 @@
       }
 
       &__mixing {
-        bottom: 80px;
-        width: 250px;
+        bottom: 40px;
+        width: 400px;
       }
     }
 

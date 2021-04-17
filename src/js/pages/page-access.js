@@ -13,7 +13,7 @@ new Vue({
       gallery: {
         login: {
           img: 'access/auth/login.png',
-          title: '<span>¡Hola!</span><br><p>Qué gusto verte por aquí de nuevo</p>',
+          title: '<span>¡Hola!</span><p>Qué gusto verte por aquí de nuevo</p>',
           author: {
             name: 'Macarena Arribas',
             job: 'Fundadora de MAB'
@@ -21,7 +21,7 @@ new Vue({
         },
         register: {
           img: 'access/auth/login.png',
-          title: '<span>¡Hola, soy Maca!</span><p>¿Estás listo para girar la educación?</p>',
+          title: '<span class="medium">¡Hola,<br> soy Maca!</span><p>¿Estás listo para girar la educación?</p>',
           author: {
             name: 'Macarena Arribas',
             job: 'Fundadora de MAB'
@@ -56,21 +56,21 @@ new Vue({
             author: {
               name: 'Proyecto “De Tambo a Tambo”',
             },
-            title: '<span>mucho más que una plataforma de cursos</span> <p>conoce todos nuestros proyectos y servicios que tenemos para ti</p>',
+            title: '<span class="tiny">mucho más que una plataforma de cursos</span> <p class="tiny">conoce todos nuestros proyectos y servicios que tenemos para ti</p>',
           },
           {
             img: 'access/slider/2.png',
             author: {
               name: 'Tutorías personalizadas',
             },
-            title: '<span>mucho más que una plataforma de cursos</span> <p>conoce todos nuestros proyectos y servicios que tenemos para ti</p>',
+            title: '<span class="tiny">mucho más que una plataforma de cursos</span> <p class="tiny">conoce todos nuestros proyectos y servicios que tenemos para ti</p>',
           },
           {
             img: 'access/slider/3.png',
             author: {
               name: 'Talleres, programa Kids',
             },
-            title: '<span>mucho más que una plataforma de cursos</span> <p>conoce todos nuestros proyectos y servicios que tenemos para ti</p>',
+            title: '<span class="tiny">mucho más que una plataforma de cursos</span> <p class="tiny">conoce todos nuestros proyectos y servicios que tenemos para ti</p>',
           },
         ]
       },

@@ -71,7 +71,7 @@ $foundation-palette: (
   primary: #c03,
   secondary: #0166d0,
   success: #090,
-  warning: #fbee23,
+  warning: #fcee21,
   alert: #f32e21,
 );
 
@@ -98,10 +98,12 @@ $secondary-medium: #1c5ba3;
 $secondary-gray: #787d99;
 $secondary-dark: #1c32a6;
 
-$warning-alt: #f1c500;
+$warning-alt: #ffd600;
 $warning-light: #fff67d;
+$warning-dark: #a08405;
 
 $success-alt: rgb(79, 170, 79);
+$success-dark: #028602;
 
 //Font Weights
 $light-font: 300;
@@ -230,6 +232,7 @@ $keystroke-radius: $global-radius;
 $abbr-underline: 1px dotted $black;
 
 //Font Sizes
+$fs-70: 70px;
 $fs-60: 60px;
 $fs-50: 50px;
 $fs-40: 40px;

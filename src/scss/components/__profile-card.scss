@@ -4,6 +4,7 @@
     height: 150px;
     bottom: -40px;
     margin: auto;
+    display: none;
   }
 
   &__content {
@@ -35,22 +36,28 @@
       background-color: $warning-color;
     }
   }
+}
 
-  &--vector-right {
-    transform: rotateZ(10deg);
-    right: -40px;
-
-    .c-profile-card__vector {
-      right: 0;
+@include breakpoint(medium) {
+  .c-profile-card {
+    &__vector {
+      width: 160px;
+      height: 160px;
+      display: block;
     }
-  }
 
-  &--vector-left {
-    transform: rotateZ(-10deg);
-    left: -40px;
+    &--vector-right {
+      .c-profile-card__vector {
+        transform: rotateZ(10deg);
+        right: -40px;
+      }
+    }
 
-    .c-profile-card__vector {
-      left: 0;
+    &--vector-left {
+      .c-profile-card__vector {
+        transform: rotateZ(-10deg);
+        left: -40px;
+      }
     }
   }
 }
