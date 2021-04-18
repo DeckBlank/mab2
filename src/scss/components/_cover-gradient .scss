@@ -5,7 +5,6 @@
   }
 
   &__figcaption {
-    background: rgba($color: $black, $alpha: 0.5);
     top: 0;
     left: 0;
     flex-direction: column;
@@ -17,26 +16,45 @@
     align-items: flex-start;
     justify-content: space-between;
     box-sizing: border-box;
-    background: lineart-gradient(red, transparent);
+    background: linear-gradient(red, transparent);
   }
 
   &__bottom {
     box-sizing: border-box;
 
-    .c-gradient-title span {
-      color: $warning-color;
-    }
+    .c-gradient-title {
+      p {
+        margin-bottom: 0;
+        color: $white;
+        font-size: $fs-40;
+        line-height: 40px;
+      }
 
-    .c-gradient-title > span {
-      font-size: $fs-50;
-      line-height: 60px;
-    }
+      p.tiny {
+        font-size: $fs-30;
+        line-height: 30px;
+      }
 
-    .c-gradient-title p {
-      margin-bottom: 0;
-      color: $white;
-      font-size: $fs-30;
-      line-height: 35px;
+      span {
+        color: $warning-color;
+      }
+
+      > span {
+        font-size: 80px;
+        line-height: 70px;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      > span.medium {
+        font-size: 60px;
+        line-height: 50px;
+      }
+
+      > span.tiny {
+        font-size: $fs-50;
+        line-height: 50px;
+      }
     }
   }
 
@@ -60,51 +78,51 @@
 
   &--primary {
     .c-cover-gradient__top {
-      background: linear-gradient($primary-color, transparent 75%);
+      background: linear-gradient($primary-color, transparent);
     }
 
     .c-cover-gradient__bottom {
-      background: linear-gradient(to top, $primary-color, transparent 75%);
+      background: linear-gradient(to top, rgba($primary-dark, 0.7) 60%, transparent);
     }
   }
 
   &--secondary {
     .c-cover-gradient__top {
-      background: linear-gradient($secondary-color, transparent 75%);
+      background: linear-gradient($secondary-color, transparent);
     }
 
     .c-cover-gradient__bottom {
-      background: linear-gradient(to top, $secondary-color, transparent 75%);
+      background: linear-gradient(to top, rgba($secondary-dark, 0.7) 60%, transparent);
     }
   }
 
   &--success {
     .c-cover-gradient__top {
-      background: linear-gradient($success-color, transparent 75%);
+      background: linear-gradient($success-color, transparent);
     }
 
     .c-cover-gradient__bottom {
-      background: linear-gradient(to top, $success-color, transparent 75%);
+      background: linear-gradient(to top, rgba($success-dark, 0.8) 60%, transparent);
     }
   }
 
   &--alert {
     .c-cover-gradient__top {
-      background: linear-gradient($alert-color, transparent 75%);
+      background: linear-gradient($alert-color, transparent);
     }
 
     .c-cover-gradient__bottom {
-      background: linear-gradient(to top, $alert-color, transparent 75%);
+      background: linear-gradient(to top, rgba($primary-dark, 0.7) 60%, transparent);
     }
   }
 
   &--warning {
     .c-cover-gradient__top {
-      background: linear-gradient($warning-color, transparent 75%);
+      background: linear-gradient($warning-color, transparent);
     }
 
     .c-cover-gradient__bottom {
-      background: linear-gradient(to top, $warning-color, transparent 75%);
+      background: linear-gradient(to top, rgba($warning-dark, 0.5) 60%, transparent);
     }
   }
 }

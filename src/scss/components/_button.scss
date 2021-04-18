@@ -148,7 +148,7 @@
   }
 
   &--black-warning {
-    background: $black;
+    background: $dark;
     color: $warning-color;
 
     @include b-radious(10px);
@@ -156,7 +156,7 @@
 
   &--warning-black {
     background: $warning-color;
-    color: $black;
+    color: $dark;
     font-family: $font-family-secondary;
     font-size: $fs-21;
     line-height: 24px;

@@ -3,7 +3,7 @@
 {% block hero %} {% endblock %}
 
 {% block content %}
-  <section class="c-section c-section--access">
+  <section class="c-section c-section--access bg-sec-color">
     <div class="c-split-layout">
       <div class="grid-x height-100">
         <div class="cell large-5">
@@ -16,17 +16,17 @@
                   :src="'{{theme.link}}/static/images/' + gallery.login.img"
                   alt="">
                 <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                  <div class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
+                  <div class="c-cover-gradient__top width-100  flex-container padding-1 padding-horizontal-2">
                     <div class="c-corner-logo">
                       <img v-if="false" loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
                     </div>
-                    <div class="c-corner-text text-rigth f2 w-bold">
+                    <div class="c-corner-text text-right f2 w-bold">
                       ${ gallery.login.author.name } <br> ${ gallery.login.author.job }
                     </div>
                   </div>
-                  <h1 class="c-cover-gradient__bottom width-100 padding-3 margin-bottom-0">
+                  <h1 class="c-cover-gradient__bottom width-100 padding-2 margin-bottom-0">
                     <div class="grid-x">
-                      <div class="cell medium-6 large-7">
+                      <div class="cell medium-8 large-10">
                         <div class="c-gradient-title" v-html="gallery.login.title"></div>
                       </div>
                     </div>
@@ -42,15 +42,15 @@
                   :src="'{{theme.link}}/static/images/' + gallery.register.img"
                   alt="">
                 <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                  <div class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
+                  <div class="c-cover-gradient__top width-100  flex-container padding-1 padding-horizontal-2">
                     <div></div>
-                    <div class="c-corner-text text-rigth f2 w-bold">
+                    <div class="c-corner-text text-right f2 w-bold">
                       ${ gallery.register.author.name } <br> ${ gallery.register.author.job }
                     </div>
                   </div>
-                  <h1 class="c-cover-gradient__bottom width-100 padding-3 margin-bottom-0">
+                  <h1 class="c-cover-gradient__bottom width-100 padding-2 margin-bottom-0">
                     <div class="grid-x">
-                      <div class="cell medium-6 large-7">
+                      <div class="cell medium-8 large-10">
                         <div class="c-gradient-title" v-html="gallery.register.title"></div>
                       </div>
                     </div>
@@ -66,14 +66,14 @@
                   :src="'{{theme.link}}/static/images/' + gallery.steps[0].img"
                   alt="">
                 <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                  <div class="c-cover-gradient__top width-100 flex-container padding-3 padding-top-2">
+                  <div class="c-cover-gradient__top width-100 flex-container padding-1 padding-horizontal-2">
                     <div class="c-corner-logo">
                       <img loading="lazy" class="height-100 of--contain" :src="'{{theme.link}}/static/images/' + gallery.steps[0].sticker" alt="">
                     </div>
                   </div>
-                  <h1 class="c-cover-gradient__bottom width-100 padding-3 margin-bottom-0">
+                  <h1 class="c-cover-gradient__bottom width-100 padding-2 padding-top-3 margin-bottom-0">
                     <div class="grid-x align-right">
-                      <div class="cell medium-6 large-7 text-right">
+                      <div class="cell medium-8 large-10 text-right margin-top-2">
                         <div class="c-gradient-title" v-html="gallery.steps[0].title"></div>
                       </div>
                     </div>
@@ -89,15 +89,15 @@
                   :src="'{{theme.link}}/static/images/' + gallery.steps[1].img"
                   alt="">
                 <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                  <div class="c-cover-gradient__top width-100 flex-container padding-3 padding-top-2">
+                  <div class="c-cover-gradient__top width-100 flex-container padding-1 padding-horizontal-2">
                     <div class="c-corner-logo"></div>
-                    <div class="c-corner-text text-rigth f2 w-xbold">
+                    <div class="c-corner-text text-right f2 w-bold">
                       ${ gallery.steps[1].author.name } <br> ${ gallery.steps[1].author.job }
                     </div>
                   </div>
-                  <h1 class="c-cover-gradient__bottom width-100 padding-3 margin-bottom-0">
+                  <h1 class="c-cover-gradient__bottom width-100 padding-2 padding-top-3 margin-bottom-0">
                     <div class="grid-x">
-                      <div class="cell medium-8 large-10">
+                      <div class="cell medium-8 large-10 margin-top-2">
                         <div class="c-gradient-title" v-html="gallery.steps[1].title"></div>
                       </div>
                     </div>
@@ -114,9 +114,9 @@
                   alt="">
                 <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
                   <div></div>
-                  <h1 class="c-cover-gradient__bottom width-100 padding-3 margin-bottom-0">
+                  <h1 class="c-cover-gradient__bottom width-100 padding-2  padding-top-3 margin-bottom-0">
                     <div class="grid-x">
-                      <div class="cell medium-6 large-7">
+                      <div class="cell medium-6 large-7 margin-top-2">
                         <div class="c-gradient-title" v-html="gallery.steps[2].title"></div>
                       </div>
                     </div>
@@ -133,9 +133,9 @@
                   alt="">
                 <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
                   <div></div>
-                  <h1 class="c-cover-gradient__bottom width-100 padding-3 margin-bottom-0">
+                  <h1 class="c-cover-gradient__bottom width-100 padding-2 padding-top-3 margin-bottom-0">
                     <div class="grid-x">
-                      <div class="cell medium-8 large-10">
+                      <div class="cell medium-8 large-10 margin-top-3">
                         <div class="c-gradient-title" v-html="gallery.steps[3].title"></div>
                       </div>
                     </div>
@@ -154,15 +154,15 @@
                         :src="'{{theme.link}}/static/images/' + slide.img"
                         alt="">
                       <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
-                        <div class="c-cover-gradient__top width-100  flex-container padding-3 padding-top-2">
+                        <div class="c-cover-gradient__top width-100  flex-container padding-1 padding-horizontal-2">
                           <div class="c-corner-logo"></div>
-                          <div class="c-corner-text text-rigth f2 w-xbold">
+                          <div class="c-corner-text text-rigth f2 w-bold">
                             ${ slide.author.name }
                           </div>
                         </div>
-                        <h1 class="c-cover-gradient__bottom width-100 padding-3">
+                        <h1 class="c-cover-gradient__bottom width-100 padding-2 padding-top-3 margin-bottom-0">
                           <div class="grid-x">
-                            <div class="cell medium-8 large-10">
+                            <div class="cell medium-8 large-10 margin-top-2">
                               <div class="c-gradient-title" v-html="slide.title"></div>
                             </div>
                           </div>
@@ -178,25 +178,25 @@
         </div>
         <div class="cell large-7">
           <div class="c-split-layout__content">
-            <transitiond>
+            <transition name="fade" mode="out-in">
               <div v-if="view == 'login'" key="r-login" class="c-split-layout-content c-split-layout-content--secondary">
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
                     <div class="grid-x align-center">
                       <div class="cell large-7">
-                        <h1 class="c-split-layout-content__title margin-bottom-2 white">
-                          <span class="warning">inicia sesión</span><br>
+                        <h1 class="c-split-layout-content__title margin-bottom-2 white fs-35 c-lh--35">
+                          <span class="warning fs-30">inicia sesión</span><br>
                           y continúa creciendo con nosotros
                         </h1>
-                        <button @click="authWithFacebook" class="c-btn-input-social width-100">
+                        <button @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
                           <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
                           <span class="f2">Continuar con facebook</span>
                         </button>
-                        <button @click="authWithGoogle" class="c-btn-input-social width-100">
+                        <button @click="authWithGoogle" class="c-btn-input-social w-medium width-100">
                           <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
                           <span class="f2">Continuar con google</span>
                         </button>
-                        <form @submit="login($event)" class="c-form-new text-left margin-top-2" action="">
+                        <form @submit="login($event)" class="c-form-new text-left margin-top-1" action="">
                           <div class="c-form-new__input-container margin-bottom-1">
                             <label class="w-bold f2 white" for="">Correo</label>
                             <input v-model="user.email.value" class="f2 input-reset" type="text">
@@ -228,7 +228,7 @@
                   </div>
                 </div>
               </div>
-              <div v-if="view == 'register'" key="r-register" class="c-split-layout-content c-split-layout-content--secondary">
+              <div v-else-if="view == 'register'" key="r-register" class="c-split-layout-content c-split-layout-content--secondary">
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
                     <div class="grid-x align-center">
@@ -237,11 +237,11 @@
                           <span class="small-title">Conviértete en un/una</span>
                           <div class="warning big-title">#MABLover</div> 
                         </h1>
-                        <button @click="authWithFacebook" class="c-btn-input-social width-100">
+                        <button @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
                           <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
                           <span class="f2">Registrate con facebook</span>
                         </button>
-                        <button @click="authWithGoogle" class="c-btn-input-social width-100">
+                        <button @click="authWithGoogle" class="c-btn-input-social w-medium width-100">
                           <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
                           <span class="f2">Registrate con google</span>
                         </button>
@@ -265,7 +265,7 @@
 
                           <button
                             :disabled="(user.loading) ? true : false"
-                            class="c-button c-button--warning width-100 f2 margin-top-1"
+                            class="c-button c-button--warning width-100 f2 margin-top-3"
                             :class="{'loading' : user.loading}">Registrarse</button>
 
                           <div class="c-form-new__terminos text-center">
@@ -283,7 +283,7 @@
                   </div>
                 </div>
               </div>
-              <div v-if="view == 'step-0'" key="r-step-0" class="c-split-layout-content column-between c-split-layout-content--alert">
+              <div v-else-if="view == 'step-0'" key="r-step-0" class="c-split-layout-content column-between c-split-layout-content--alert">
                 <div></div>
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
@@ -291,7 +291,7 @@
                       <div class="cell large-10">
                         <div class="grid-x grid-margin-x grid-margin-y align-center">
                           <div class="cell large-10">
-                            <h2 class="c-split-layout-content__title margin-bottom-2 white">
+                            <h2 class="c-split-layout-content__title margin-bottom-2 white c-lh--40">
                               <span class="warning">¿a qué sector educativo</span>
                               <span class="warning">perteneces?</span>     
                             </h2>
@@ -300,20 +300,20 @@
                             <input v-model="user.sector.value" id="sector-pub" class="hide" type="radio" value="publico">
                             <label
                               for="sector-pub"
-                              class="c-check-card text-center f2 display-block height-100 bg-white black flex-container align-center-middle white"
+                              class="c-check-card text-center f2 display-block height-100 bg-white dark flex-container align-center-middle white"
                               :class="{'enable' : (user.sector.value == 'publico')}">
                               <h3 class="f2 margin-0 w-xbold">Público</h3>
-                              <p class="margin-0">Colegios estatales</p>
+                              <p class="margin-0 w-medium">Colegios estatales</p>
                             </label>
                           </div>
                           <div class="cell large-6 align-self-stretch">
                             <input v-model="user.sector.value" id="sector-priv" class="hide" type="radio" value="privado">
                             <label
                               for="sector-priv"
-                              class="c-check-card text-center f2 display-block height-100 bg-white black flex-container align-center-middle white"
+                              class="c-check-card text-center f2 display-block height-100 bg-white dark flex-container align-center-middle white"
                               :class="{'enable' : (user.sector.value == 'privado')}">
                               <h3 class="f2 margin-0 w-xbold">Privado</h3>
-                              <p class="margin-0">Colegios particulares</p>
+                              <p class="margin-0 w-medium">Colegios particulares</p>
                             </label>
                           </div>
                         </div>
@@ -333,22 +333,22 @@
                   </div>
                 </div>
               </div>
-              <div v-if="view == 'step-1'" key="r-step-1" class="c-split-layout-content column-between c-split-layout-content--primary">
+              <div v-else-if="view == 'step-1'" key="r-step-1" class="c-split-layout-content column-between c-split-layout-content--primary">
                 <div></div>
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
                     <div class="grid-x align-center">
                       <div class="cell large-10">
-                        <h2 class="c-split-layout-content__title margin-bottom-1 white margin-top-3">
+                        <h2 class="c-split-layout-content__title white margin-top-3 margin-bottom-0">
                           <span class="warning">¡Queremos conocerte mejor!</span>     
                         </h2>
-                        <h3 class="c-split-layout-content__subtitle margin-bottom-2 white">
+                        <h3 class="c-split-layout-content__subtitle margin-bottom-2 white fs-30">
                           completa los siguientes datos     
                         </h3>
                         <form class="c-form-new c-form-new--warning text-left margin-top-2" action="">
-                          <div class="grid-x grid-margin-x align-center">
+                          <div class="grid-x grid-margin-x grid-margin-y align-center">
                             <div class="cell large-6">
-                              <div class="c-form-new__input-container margin-bottom-1">
+                              <div class="c-form-new__input-container">
                                 <label class="w-bold f2 white" for="">Nombres</label>
                                 <input v-model="profile.name.value" class="f2" type="text">
                                 <p v-if="isWrongField('name', true, 'profile')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
@@ -357,7 +357,7 @@
                               </div>
                             </div>
                             <div class="cell large-6">
-                              <div class="c-form-new__input-container margin-bottom-1">
+                              <div class="c-form-new__input-container">
                                 <label class="w-bold f2 white" for="">Apellido Paterno</label>
                                 <input v-model="profile.father_name.value" class="f2" type="text">
                                 <p v-if="isWrongField('father_name', true, 'profile')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
@@ -366,7 +366,7 @@
                               </div>
                             </div>
                             <div class="cell large-6">
-                              <div class="c-form-new__input-container margin-bottom-1">
+                              <div class="c-form-new__input-container">
                                 <label class="w-bold f2 white" for="">Apellido Materno</label>
                                 <input v-model="profile.mother_name.value" class="f2" type="text">
                                 <p v-if="isWrongField('mother_name', true, 'profile')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
@@ -375,7 +375,7 @@
                               </div>
                             </div>
                             <div class="cell large-6">
-                              <div class="c-form-new__input-container margin-bottom-1">
+                              <div class="c-form-new__input-container">
                                 <label class="w-bold f2 white" for="">Fecha de Nacimiento</label>
                                 <input v-model="profile.date_birth.value" class="f2" type="date">
                                 <p v-if="isWrongField('date_birth', true, 'profile')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
@@ -384,7 +384,7 @@
                               </div>
                             </div>
                             <div class="cell large-6">
-                              <div class="c-form-new__input-container margin-bottom-1">
+                              <div class="c-form-new__input-container">
                                 <label class="w-bold f2 white" for="">País</label>
                                 <select v-model="profile.country.value" class="f2" name="" id="">
                                   <option disabled value="" selected>${ (profile.country.isLoading) ? 'Cargando...' :'Escoge tu país' }</option>
@@ -396,7 +396,7 @@
                               </div>
                             </div>
                             <div v-if="profile.country.value.alpha2Code == 'PE'" class="cell large-6">
-                              <div class="c-form-new__input-container margin-bottom-1">
+                              <div class="c-form-new__input-container">
                                 <label class="w-bold f2 white" for="">Ciudad</label>
                                 <select v-model="profile.city.value" class="f2" name="" id="">
                                   <option disabled value="" selected>${ (profile.city.isLoading) ? 'Cargando...' :'Escoge tu ciudad' }</option>
@@ -408,7 +408,7 @@
                               </div>
                             </div>
                             <div class="cell large-6">
-                              <div class="c-form-new__input-container margin-bottom-1">
+                              <div class="c-form-new__input-container">
                                 <label class="w-bold f2 white" for="">Número de teléfono</label>
                                 <div class="c-fake-input c-fake-input--tel flex-container align-middle">
                                   <span class="c-fake-input__prefix">
@@ -451,7 +451,7 @@
                   </div>
                 </div>
               </div>
-              <div v-if="view == 'step-2'" key="r-step-2" class="c-split-layout-content column-between c-split-layout-content--success">
+              <div v-else-if="view == 'step-2'" key="r-step-2" class="c-split-layout-content column-between c-split-layout-content--success">
                 <div></div>
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
@@ -459,22 +459,22 @@
                       <div class="cell large-10">
                         <div class="grid-x align-center">
                           <div class="cell large-8">
-                            <h2 class="c-split-layout-content__title margin-bottom-2 white margin-top-3">
+                            <h2 class="c-split-layout-content__title margin-bottom-2 white margin-top-3 c-lh--40">
                               Buscamos adaptarnos a
                               <span class="warning">tus necesidades</span> 
                             </h2>
                           </div>
                         </div>
-                        <h4 class="white margin-bottom-2 f2 w-sbold text-left">Actualmente, soy...</h4>
-                        <div class="grid-x grid-margin-y grid-margin-x align-center">
+                        <h4 class="white margin-bottom-2 f2 w-sbold text-left fs-21">Actualmente, soy...</h4>
+                        <div class="grid-x grid-margin-y grid-margin-x grid-padding-y align-center">
                           <div class="cell medium-6 large-6 align-self-stretch">
                             <input v-model="user.role.type" id="role-tutor" type="radio" value="tutor" class="hide" />
                             <label
                               for="role-tutor"
                               class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white height-100"
                               :class="{'enable' : user.role.type == 'tutor'}">
-                              <span>
-                                <strong>Un padre / una madre / apoderad@</strong> que busca la mejor educación para su familia
+                              <span class="c-lh--21 display-block">
+                                <strong class="w-xbold">Un padre / una madre / apoderad@</strong> que busca la mejor educación para su familia
                               </span>
                               <div class="c-corner-card-image position-absolute">
                                 <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/access/roles/head.png" alt="">
@@ -488,8 +488,8 @@
                               for="role-teacher"
                               class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1 height-100"
                               :class="{'enable' : user.role.type == 'teacher'}">
-                              <span>
-                                <strong>Un maestro / una
+                              <span class="c-lh--21 display-block">
+                                <strong class="w-xbold">Un maestro / una
                                   maestra</strong> que busca
                                   hacer un cambio por
                                   la sociedad
@@ -505,8 +505,8 @@
                               for="role-student"
                               class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1 height-100"
                               :class="{'enable' : user.role.type == 'student'}">
-                              <span>
-                                <strong>Un/a estudiante</strong>
+                              <span class="c-lh--21 display-block">
+                                <strong class="w-xbold">Un/a estudiante</strong>
                                   que busca superarse
                                   tanto a nivel académico
                                   como personal
@@ -522,8 +522,8 @@
                               for="role-foreign"
                               class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1 height-100"
                               :class="{'enable' : user.role.type == 'foreign'}">
-                              <span>
-                                <strong>Un/a internauta
+                              <span class="c-lh--21 display-block">
+                                <strong class="w-xbold">Un/a internauta
                                   apasionado/a</strong> por la
                                   educación
                               </span>
@@ -539,8 +539,8 @@
                               for="role-tambero"
                               class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-warning black flex-container align-center-middle white margin-bottom-1"
                               :class="{'enable' : user.role.type == 'tambero'}">
-                              <span>
-                                <strong>Parte del programa
+                              <span class="c-lh--21 display-block">
+                                <strong class="w-xbold">Parte del programa
                                   “De Tambo a Tambo”</strong>
                                   en zonas rurales del país
                               </span>
@@ -584,7 +584,7 @@
                   </div>
                 </div>
               </div>
-              <div v-if="view == 'step-3'" key="r-step-3" class="c-split-layout-content column-between c-split-layout-content--warning">
+              <div v-else-if="view == 'step-3'" key="r-step-3" class="c-split-layout-content column-between c-split-layout-content--warning">
                 <div></div>
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
@@ -592,12 +592,12 @@
                       <div class="cell large-10">
                         <div class="grid-x align-center">
                           <div class="cell large-8">
-                            <h2 class="c-split-layout-content__title margin-bottom-2 black margin-top-3">
+                            <h2 class="c-split-layout-content__title margin-bottom-1 dark margin-top-3 c-lh--40">
                               ¿Qué áreas de aprendizaje te interesan? 
                             </h2>
                           </div>
                         </div>
-                        <h4 class="white margin-bottom-2 f2 w-xbold black">Elige al menos 3 categorías</h4>
+                        <h4 class="white margin-bottom-2 f2 fs-21 w-xbold dark">Elige al menos 3 categorías</h4>
                         <div class="grid-x grid-margin-y grid-margin-x align-center">
                           <div v-for="category of categories" :key="category.id" class="cell small-6 medium-3 large-3">
                             <input v-model="user.categories.value" :id="'category-' + category.id" type="checkbox" :value="category.id" class="hide">
@@ -631,7 +631,7 @@
                         <div class="c-bullet-steps__bullets">
                           <span class="bg-white"></span>
                           <span class="bg-white"></span>
-                          <span class="bg-black"></span>
+                          <span class="bg-dark"></span>
                           <span class="bg-white"></span>
                         </div>
                         <div class="c-bullet-steps__text f2 fs-21 black">
@@ -645,7 +645,7 @@
                   </div>
                 </div>
               </div>
-              <div v-if="view == 'step-4'" key="r-step-4">
+              <div v-else-if="view == 'step-4'" key="r-step-4">
                 <div class="c-split-layout-content column-between c-split-layout-content--secondary">
                   <div></div>
                   <div class="width-100">
@@ -654,18 +654,18 @@
                         <div class="cell large-10">
                           <div class="grid-x align-center">
                             <div class="cell large-8">
-                              <h2 class="c-split-layout-content__title margin-bottom-2 white margin-top-3">
+                              <h2 class="c-split-layout-content__title margin-bottom-1 white margin-top-3 c-lh--40">
                                 ¿qué temas específicos quieres aprender? 
                               </h2>
                             </div>
                           </div>
-                          <h4 class="white margin-bottom-2 f2 w-xbold white">Elige al menos 3 subcategorías</h4>
+                          <h4 class="white margin-bottom-2 f2 w-xbold white fs-21">Elige al menos 3 subcategorías</h4>
                           <div class="grid-x grid-margin-y grid-margin-x align-center">
-                            <div v-for="subcategory of subcategories" :key="subcategory.id" class="cell small-6 medium-3 large-3">
+                            <div v-for="subcategory of subcategories" :key="subcategory.id" class="cell small-6 medium-3 large-3 flex-container align-center">
                               <input v-model="user.subcategories.value" :id="'subcategory-' + subcategory.id" type="checkbox" :value="subcategory.id" class="hide">
                               <label
                                 :for="'subcategory-' + subcategory.id"
-                                class="c-mab-subcategory mab-shadow bg-white padding-1 f2 fs-18 c-lh--18 w-xbold black"
+                                class="c-mab-subcategory mab-shadow bg-white padding-1 f2 fs-18 c-lh--18 w-xbold dark"
                                 :class="{'enable' : user.subcategories.value.includes(subcategory.id)}">
                                 ${ subcategory.name }
                               </label>
@@ -704,7 +704,7 @@
                   </div>
                 </div>
               </div>
-            </transitiond>
+            </transition>
           </div>
 
           <div v-if="modals.teacher.isOpened" class="c-mab-modal flex-container align-center-middle">

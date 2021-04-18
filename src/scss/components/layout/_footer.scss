@@ -1,0 +1,46 @@
+.c-footer {
+  background-image: url('../images/vectors/heart.png');
+  background-size: 200px 200px;
+  background-position: center 118%;
+  background-repeat: no-repeat;
+
+  .c-social-cards {
+    &__item {
+      width: 35px;
+      height: 35px;
+      color: $dark;
+      margin-right: 1rem;
+    }
+  }
+
+  &__content {
+    padding-bottom: 5rem;
+  }
+}
+
+@include breakpoint(medium) {
+  .c-footer {
+    background-position: center 135%;
+
+    .c-social-cards {
+      justify-content: center;
+
+      &__item {
+        margin: 0 1rem;
+      }
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-footer {
+    background-size: 250px 250px;
+    background-position: center 180%;
+
+    .c-social-cards {
+      &__item {
+        margin: 0 1rem;
+      }
+    }
+  }
+}
