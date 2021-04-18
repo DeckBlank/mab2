@@ -1,5 +1,16 @@
 .c-browser-container {
   width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  top: 50px;
+
+  @include transition;
+  @include box-shadow(right, rgba($dark, 0.4), 0, 3.5px, 10px);
+
+  &.enable {
+    visibility: visible;
+    opacity: 1;
+  }
 }
 
 .c-browser {
@@ -12,50 +23,25 @@
     @include transition(0.3s);
 
     &:hover {
-      background-color: $primary-color;
-      color: $white;
+      background-color: $warning-color;
+      color: $dark;
     }
   }
 
   &__input {
     background-color: $white !important;
     box-shadow: none;
+    font-family: $font-family-secondary;
+    color: $dark;
 
     @include transition(0.25s);
+
+    &::placeholder {
+      color: $gray;
+    }
 
     &:focus {
-      border: solid 1px $primary-color;
+      border: solid 2px transparent;
     }
-  }
-}
-
-.c-browser-result {
-  visibility: hidden;
-  opacity: 0;
-  padding-top: 0;
-
-  @include transition(0.3s);
-  @include box-shadow(right, rgba($gray, 0.4), 0, 10px, 50px);
-
-  &__item > a > p {
-    flex-grow: 1;
-
-    @include transition(0.25s);
-
-    &:hover {
-      color: $primary-color;
-    }
-  }
-}
-
-.c-browser-result.showed {
-  visibility: visible;
-  opacity: 1;
-}
-
-@include breakpoint(medium) {
-  .c-browser-container {
-    width: auto;
-    flex-grow: 1;
   }
 }

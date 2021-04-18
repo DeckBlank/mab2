@@ -165,13 +165,32 @@ $font-families: (
 
 .c-link {
   cursor: pointer;
+  transition: all 0.3s;
+
+  &--ho-warning {
+    &:hover {
+      color: $warning-color;
+    }
+  }
+
+  &--ho-primary {
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  &--ho-secondary {
+    &:hover {
+      color: $secondary-color;
+    }
+  }
 
   &--white {
     color: $white;
+  }
 
-    &:hover {
-      color: $white;
-    }
+  &--black {
+    color: $dark;
   }
 
   &--sec {
@@ -199,12 +218,18 @@ $font-families: (
   }
 }
 
-.mb-05 {
-  margin-bottom: 0.5rem;
-}
+.m {
+  &b-05 {
+    margin-bottom: 0.5rem;
+  }
 
-.mr-05 {
-  margin-right: 0.5rem;
+  &r-05 {
+    margin-right: 0.5rem;
+  }
+
+  &l-05 {
+    margin-left: 0.5rem;
+  }
 }
 
 .c-lh {
