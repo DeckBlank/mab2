@@ -1,5 +1,5 @@
 .c-course-card {
-  box-shadow: 1px 1px 10px #484747;
+  box-shadow: 1px 1px 10px rgba($black, 0.7);
 
   &__figure {
     height: 180px;
@@ -21,7 +21,6 @@
   }
 
   .c-button {
-    padding-bottom: 0.7rem;
     padding-right: 0.7rem;
   }
 
@@ -55,6 +54,11 @@
   .c-button--course {
     background: $warning-light;
     color: $black;
+  }
+
+  .c-button--mab-warning-black {
+    background: $alert-color;
+    color: $white;
   }
 }
 
