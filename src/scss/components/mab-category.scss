@@ -1,13 +1,18 @@
 .c-mab-category {
+  height: 100%;
   width: 100%;
-  height: 160px;
   cursor: pointer;
-  border-radius: 30px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
 
   &__img {
-    object-position: top;
-    object-fit: cover;
-    border-radius: 20px;
+    height: 135px;
+
+    img {
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+    }
   }
 
   &__shade,
@@ -23,6 +28,10 @@
     transition: all 0.5s;
   }
 
+  &__shade {
+    flex-grow: 1;
+  }
+
   &__text {
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -30,6 +39,7 @@
     font-size: $fs-16;
     min-height: 45px;
     line-height: 15px;
+    height: 100%;
   }
 }
 
@@ -55,7 +65,7 @@
 
 .c-mab-category--warning {
   .c-mab-category__gradient {
-    background: $warning-alt;
+    background: $warning-color;
   }
 
   .c-mab-category__text {
@@ -70,6 +80,16 @@
 
   .c-mab-category__text {
     background: $success-color;
+  }
+}
+
+.c-mab-category--pri-alt {
+  .c-mab-category__gradient {
+    background: $primary-alt;
+  }
+
+  .c-mab-category__text {
+    background: $primary-alt;
   }
 }
 

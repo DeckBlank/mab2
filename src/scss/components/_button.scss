@@ -154,14 +154,9 @@
     @include b-radious(10px);
   }
 
-  &--warning-black {
+  &--mab-warning-black {
     background: $warning-color;
-    color: $dark;
-    font-family: $font-family-secondary;
-    font-size: $fs-21;
-    line-height: 24px;
-
-    @include b-radious(20px);
+    color: $black;
   }
 
   &--success {
@@ -171,6 +166,7 @@
     @include b-radious(10px);
   }
 
+  // ----------
   &--small {
     padding: 0.3rem 1.5rem;
     font-size: $fs-14 !important;
@@ -181,23 +177,19 @@
     font-family: $font-family-secondary;
   }
 
+  &--warning-black {
+    background: $warning-color;
+    color: $black;
+    font-family: $font-family-secondary;
+    font-size: $fs-21;
+    line-height: 24px;
+
+    @include b-radious(20px);
+  }
+
   &--course {
     font-size: $fs-12;
     padding: 0.5rem;
-  }
-
-  &--course-price {
-    font-size: $fs-14 !important;
-    font-family: $font-family-secondary;
-    background: $warning-color;
-    color: $black;
-    padding: 0.7rem;
-    display: inline-block;
-  }
-
-  &--course-price--alert {
-    background: $alert-color;
-    color: $white;
   }
 
   &.loading {
@@ -217,3 +209,4 @@
     width: 30px;
   }
 }
+// ----------

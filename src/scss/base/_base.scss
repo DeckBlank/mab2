@@ -116,6 +116,10 @@ body {
   box-shadow: 1px 1px 15px $shadow;
 }
 
+.mab-shadow-soft {
+  box-shadow: 1px 1px 10px rgba($black, 0.5);
+}
+
 .desktop {
   display: none;
 }
@@ -152,6 +156,19 @@ body {
 .br-bottom--large {
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+}
+
+.object-cover {
+  object-fit: cover;
+  object-position: center;
+}
+
+.border-0 {
+  border: none !important;
+}
+
+.text-last-left {
+  text-align-last: left !important;
 }
 
 @include breakpoint(large) {

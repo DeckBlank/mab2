@@ -1,0 +1,526 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {# {% include 'templates-parts/hero.twig' %} #}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--courses padding-top-0">
+    <div class="c-banner bg-sec-color mab-shadow">
+      <div class="grid-container">
+        <div class="grid-x grid-margin-x grid-margin-y align-middle align-self-stretch">
+          <div class="cell large-5">
+            <div class="padding-vertical-3"> 
+              <h1 class="c-banner__title warning">
+                <span class="white text-uppercase">tenemos más de <span class="warning">400</span>
+                  cursos y <br> <span class="warning">3000</span>
+                  piezas
+                  educativas</span><br>
+              </h1> 
+            </div>
+          </div> 
+          <div class="cell large-7 margin-bottom-0">
+            <div class="position-relative flex-container align-center">
+              <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="of--contain"> 
+              <img src="{{ theme.link }}/static/images/home/heart.png" alt="" class="c-banner__heart position-absolute of--contain">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-mab-recommended padding-top-2">
+      <div class="grid-container padding-vertical-3">
+        <h2>
+          <p class="dark fs-50 lh-40 margin-bottom-0">recomendaciones para ti</p>
+        </h2>
+        <div class="c-mab-slider c-mab-slider--side-shadow position-relative ">
+          <div class="c-arrow-next swiper-button-next position-absolute flex-container align-center-middle">
+            next
+          </div>
+          <div class="c-arrow-prev swiper-button-prev position-absolute flex-container align-center-middle">
+            prev
+          </div>
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide padding-vertical-2">
+                <div class="c-course-card c-course-card--secondary br--large">
+                  <figure class="c-course-card__figure ">
+                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
+                  </figure>
+                  <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
+                    <div>
+                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
+                      <p class="fs-16 f2">Con Angela Hinostroza</p>
+                      <p class="fs-16 f2 lh-18">
+                        Lorem ipsum dolor sit amet, consect etu
+                        er adipiscing elit, sed diam nonummy
+                        nibh euismod nostrud .
+                      </p>
+                    </div>
+                    <div class="grid-x align-middle">
+                      <div class="small-6 medium-6 marge-6">
+                        <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
+                      </div>
+                      <div class="small-6 medium-6 marge-6 text-right">
+                        <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                          S/ 35.00 <i class="far fa-shopping-cart"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                    ¡continuar curso!
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide padding-vertical-2">
+                <div class="c-course-card c-course-card--warning br--large">
+                  <figure class="c-course-card__figure ">
+                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
+                  </figure>
+                  <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
+                    <div>
+                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
+                      <p class="fs-16 f2">Con Angela Hinostroza</p>
+                      <p class="fs-16 f2 lh-18">
+                        Lorem ipsum dolor sit amet, consect etu
+                        er adipiscing elit, sed diam nonummy
+                        nibh euismod nostrud .
+                      </p>
+                    </div>
+                    <div class="grid-x align-middle">
+                      <div class="small-6 medium-6 marge-6">
+                        <span class="c-course-card__likes f2">325 <i class="far fa-heart"></i></span>
+                      </div>
+                      <div class="small-6 medium-6 marge-6 text-right">
+                        <div class="c-button c-button--mab-warning-black c-button--mab-warning-black--alert lh-14 f2 w-xbold">
+                          S/ 35.00 <i class="far fa-shopping-cart"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                    ¡continuar curso!
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide padding-vertical-2">
+                <div class="c-course-card c-course-card--success br--large">
+                  <figure class="c-course-card__figure ">
+                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
+                  </figure>
+                  <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
+                    <div>
+                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
+                      <p class="fs-16 f2">Con Angela Hinostroza</p>
+                      <p class="fs-16 f2 lh-18">
+                        Lorem ipsum dolor sit amet, consect etu
+                        er adipiscing elit, sed diam nonummy
+                        nibh euismod nostrud .
+                      </p>
+                    </div>
+                    <div class="grid-x align-middle">
+                      <div class="small-6 medium-6 marge-6"> 
+                        <span class="c-course-card__likes f2">325<i class="far fa-heart"></i></span>
+                      </div>
+                      <div class="small-6 medium-6 marge-6 text-right">
+                        <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                          S/ 35.00 <i class="far fa-shopping-cart"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                    ¡continuar curso!
+                  </div>
+                </div>
+              </div>
+              <div class="swiper-slide padding-vertical-2">
+                <div class="c-course-card c-course-card--pri-alt br--large">
+                  <figure class="c-course-card__figure ">
+                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
+                  </figure>
+                  <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
+                    <div>
+                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
+                      <p class="fs-16 f2">Con Angela Hinostroza</p>
+                      <p class="fs-16 f2 lh-18">
+                        Lorem ipsum dolor sit amet, consect etu
+                        er adipiscing elit, sed diam nonummy
+                        nibh euismod nostrud .
+                      </p>
+                    </div>
+                    <div class="grid-x align-middle">
+                      <div class="small-6 medium-6 marge-6">
+                        <span class="c-course-card__likes f2">325 <i class="far fa-heart"></i></span>
+                      </div>
+                      <div class="small-6 medium-6 marge-6 text-right">
+                        <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                          S/ 35.00 <i class="far fa-shopping-cart"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                    ¡continuar curso!
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-category-list">
+      <div class="grid-container">
+        <h2>
+          <p class="dark fs-50 lh-40 margin-bottom-0">categorías</p>
+        </h2>
+        <div class="c-mab-slider c-mab-slider--side-shadow position-relative">
+          <div class="c-arrow-next swiper-button-next position-absolute flex-container align-center-middle">
+            next
+          </div>
+          <div class="c-arrow-prev swiper-button-prev position-absolute flex-container align-center-middle">
+            prev
+          </div>
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide padding-vertical-2">
+                <a class="c-mab-category c-mab-category--success mab-shadow  active">
+                  <figure class="c-mab-category__img position-relative">
+                    <img class="width-100 height-100 object-cover" loading="lazy" src="{{ theme.link }}/static/images/courses/banner.png" alt="">
+                    <div class="c-mab-category__gradient position-absolute width-100 height-100">
+                    </div>
+                  </figure>
+                  <figcaption class="c-mab-category__shade width-100 text-center flex-container white">
+                    <div class="c-mab-category__text flex-container align-center-middle width-100">Salud y bienestar</div>
+                  </figcaption>
+                </a>
+              </div>
+              <div class="swiper-slide padding-vertical-2">
+                <a class="c-mab-category c-mab-category--warning mab-shadow ">
+                  <figure class="c-mab-category__img position-relative">
+                    <img class="width-100 height-100 object-cover" loading="lazy" src="{{ theme.link }}/static/images/courses/banner.png" alt="">
+                    <div class="c-mab-category__gradient position-absolute width-100 height-100">
+                    </div>
+                  </figure>
+                  <figcaption class="c-mab-category__shade width-100 text-center flex-container dark">
+                    <div class="c-mab-category__text flex-container align-center-middle width-100">habilidades para la vida</div>
+                  </figcaption>
+                </a>
+              </div>
+              <div class="swiper-slide padding-vertical-2">
+                <a class="c-mab-category c-mab-category--alert mab-shadow">
+                  <figure class="c-mab-category__img position-relative">
+                    <img class="width-100 height-100 object-cover" loading="lazy" src="{{ theme.link }}/static/images/courses/banner.png" alt="">
+                    <div class="c-mab-category__gradient position-absolute width-100 height-100">
+                    </div>
+                  </figure>
+                  <figcaption class="c-mab-category__shade width-100 text-center flex-container white">
+                    <div class="c-mab-category__text flex-container align-center-middle width-100">matemática</div>
+                  </figcaption>
+                </a>
+              </div>
+              <div class="swiper-slide padding-vertical-2">
+                <a class="c-mab-category c-mab-category--secondary mab-shadow">
+                  <figure class="c-mab-category__img position-relative">
+                    <img class="width-100 height-100 object-cover" loading="lazy" src="{{ theme.link }}/static/images/courses/banner.png" alt="">
+                    <div class="c-mab-category__gradient position-absolute width-100 height-100">
+                    </div>
+                  </figure>
+                  <figcaption class="c-mab-category__shade width-100 text-center flex-container white">
+                    <div class="c-mab-category__text flex-container align-center-middle width-100">cocina y repostería</div>
+                  </figcaption>
+                </a>
+              </div>
+              <div class="swiper-slide padding-vertical-2">
+                <a class="c-mab-category c-mab-category--success mab-shadow">
+                  <figure class="c-mab-category__img position-relative">
+                    <img class="width-100 height-100 object-cover" loading="lazy" src="{{ theme.link }}/static/images/courses/banner.png" alt="">
+                    <div class="c-mab-category__gradient position-absolute width-100 height-100">
+                    </div>
+                  </figure>
+                  <figcaption class="c-mab-category__shade width-100 text-center flex-container white">
+                    <div class="c-mab-category__text flex-container align-center-middle width-100">humanidades</div>
+                  </figcaption>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-course-list padding-vertical-3">
+      <div class="grid-container">
+        <h2>
+          <p class="dark fs-50 lh-40 margin-bottom-3">CURSOS</p>
+        </h2>
+        <div class="c-form-new margin-bottom-2">
+          <div class="grid-x grid-margin-x grid-margin-y">
+            <div class="cell medium-6 large-3">
+              <div class="c-form-new__input-container margin-bottom-1">
+                <label class="w-bold dark" for="">Nivel</label>
+                <select class="f2 mab-shadow-soft text-last-left" name="" id="">
+                  <option disabled value="" selected>Escoge un opcion</option>>
+                </select>
+                <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
+                  Seleciona una opcion
+                </p>
+              </div>
+            </div>
+            <div class="cell medium-6 large-3">
+              <div class="c-form-new__input-container margin-bottom-1">
+                <label class="w-bold dark" for="">Grado</label>
+                <select class="f2 mab-shadow-soft text-last-left" name="" id="">
+                  <option disabled value="" selected>Escoge un opcion</option>>
+                </select>
+                <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
+                  Seleciona una opcion
+                </p>
+              </div>
+            </div>
+            <div class="cell large-3">
+            </div>
+            <div class="cell medium-6 large-3">
+              <div class="c-form-new__input-container margin-bottom-1">
+                <label class="w-bold f2 white desktop" for="">Buscar</label>
+                <div class="c-fake-input c-fake-input--tel flex-container align-middle mab-shadow-soft">
+                  <input type="text" placeholder="Buscar Curso" />
+                  <span class="c-fake-input__prefix border-0">
+                    <i class="far fa-search"></i>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="c-course-list__content">
+          <div class="grid-x grid-margin-x grid-margin-y">
+            <div class="cell medium-6 large-3">
+              <div class="c-course-card c-course-card--secondary br--large">
+                <figure class="c-course-card__figure ">
+                  <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
+                </figure>
+                <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
+                  <div>
+                    <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
+                    <p class="fs-16 f2">Con Angela Hinostroza</p>
+                    <p class="fs-16 f2 lh-18">
+                      Lorem ipsum dolor sit amet, consect etu
+                      er adipiscing elit, sed diam nonummy
+                      nibh euismod nostrud .
+                    </p>
+                  </div>
+                  <div class="grid-x align-middle">
+                    <div class="small-6 medium-6 marge-6">
+                      <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
+                    </div>
+                    <div class="small-6 medium-6 marge-6 text-right">
+                      <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                        S/ 35.00 <i class="far fa-shopping-cart"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                  ¡continuar curso!
+                </div>
+              </div>
+            </div>
+            <div class="cell medium-6 large-3">
+              <div class="c-course-card c-course-card--secondary br--large">
+                <figure class="c-course-card__figure ">
+                  <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
+                </figure>
+                <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
+                  <div>
+                    <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
+                    <p class="fs-16 f2">Con Angela Hinostroza</p>
+                    <p class="fs-16 f2 lh-18">
+                      Lorem ipsum dolor sit amet, consect etu
+                      er adipiscing elit, sed diam nonummy
+                      nibh euismod nostrud .
+                    </p>
+                  </div>
+                  <div class="grid-x align-middle">
+                    <div class="small-6 medium-6 marge-6">
+                      <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
+                    </div>
+                    <div class="small-6 medium-6 marge-6 text-right">
+                      <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                        S/ 35.00 <i class="far fa-shopping-cart"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                  ¡continuar curso!
+                </div>
+              </div>
+            </div>
+            <div class="cell medium-6 large-3">
+              <div class="c-course-card c-course-card--secondary br--large">
+                <figure class="c-course-card__figure ">
+                  <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
+                </figure>
+                <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
+                  <div>
+                    <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
+                    <p class="fs-16 f2">Con Angela Hinostroza</p>
+                    <p class="fs-16 f2 lh-18">
+                      Lorem ipsum dolor sit amet, consect etu
+                      er adipiscing elit, sed diam nonummy
+                      nibh euismod nostrud .
+                    </p>
+                  </div>
+                  <div class="grid-x align-middle">
+                    <div class="small-6 medium-6 marge-6">
+                      <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
+                    </div>
+                    <div class="small-6 medium-6 marge-6 text-right">
+                      <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                        S/ 35.00 <i class="far fa-shopping-cart"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                  ¡continuar curso!
+                </div>
+              </div>
+            </div>
+            <div class="cell medium-6 large-3">
+              <div class="c-course-card c-course-card--secondary br--large">
+                <figure class="c-course-card__figure ">
+                  <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
+                </figure>
+                <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
+                  <div>
+                    <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
+                    <p class="fs-16 f2">Con Angela Hinostroza</p>
+                    <p class="fs-16 f2 lh-18">
+                      Lorem ipsum dolor sit amet, consect etu
+                      er adipiscing elit, sed diam nonummy
+                      nibh euismod nostrud .
+                    </p>
+                  </div>
+                  <div class="grid-x align-middle">
+                    <div class="small-6 medium-6 marge-6">
+                      <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
+                    </div>
+                    <div class="small-6 medium-6 marge-6 text-right">
+                      <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                        S/ 35.00 <i class="far fa-shopping-cart"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                  ¡continuar curso!
+                </div>
+              </div>
+            </div>
+            <div class="cell medium-6 large-3">
+              <div class="c-course-card c-course-card--secondary br--large">
+                <figure class="c-course-card__figure ">
+                  <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
+                </figure>
+                <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
+                  <div>
+                    <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
+                    <p class="fs-16 f2">Con Angela Hinostroza</p>
+                    <p class="fs-16 f2 lh-18">
+                      Lorem ipsum dolor sit amet, consect etu
+                      er adipiscing elit, sed diam nonummy
+                      nibh euismod nostrud .
+                    </p>
+                  </div>
+                  <div class="grid-x align-middle">
+                    <div class="small-6 medium-6 marge-6">
+                      <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
+                    </div>
+                    <div class="small-6 medium-6 marge-6 text-right">
+                      <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                        S/ 35.00 <i class="far fa-shopping-cart"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                  ¡continuar curso!
+                </div>
+              </div>
+            </div>
+            <div class="cell medium-6 large-3">
+              <div class="c-course-card c-course-card--secondary br--large">
+                <figure class="c-course-card__figure ">
+                  <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
+                </figure>
+                <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
+                  <div>
+                    <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
+                    <p class="fs-16 f2">Con Angela Hinostroza</p>
+                    <p class="fs-16 f2 lh-18">
+                      Lorem ipsum dolor sit amet, consect etu
+                      er adipiscing elit, sed diam nonummy
+                      nibh euismod nostrud .
+                    </p>
+                  </div>
+                  <div class="grid-x align-middle">
+                    <div class="small-6 medium-6 marge-6">
+                      <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
+                    </div>
+                    <div class="small-6 medium-6 marge-6 text-right">
+                      <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                        S/ 35.00 <i class="far fa-shopping-cart"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                  ¡continuar curso!
+                </div>
+              </div>
+            </div>
+            <div class="cell medium-6 large-3">
+              <div class="c-course-card c-course-card--secondary br--large">
+                <figure class="c-course-card__figure ">
+                  <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
+                </figure>
+                <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
+                  <div>
+                    <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
+                    <p class="fs-16 f2">Con Angela Hinostroza</p>
+                    <p class="fs-16 f2 lh-18">
+                      Lorem ipsum dolor sit amet, consect etu
+                      er adipiscing elit, sed diam nonummy
+                      nibh euismod nostrud .
+                    </p>
+                  </div>
+                  <div class="grid-x align-middle">
+                    <div class="small-6 medium-6 marge-6">
+                      <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
+                    </div>
+                    <div class="small-6 medium-6 marge-6 text-right">
+                      <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                        S/ 35.00 <i class="far fa-shopping-cart"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                  ¡continuar curso!
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
