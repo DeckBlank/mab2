@@ -562,7 +562,11 @@ class CourseModel{
                 topic_id = ". $topic ."
         ");
 
-        return ($response && $response->fetch_assoc()['video_viewed']) ? 1 : 0;
+        if ($response) {
+            return isset($response->fetch_assoc()['video_viewed']) ? 1 : 0;
+        }
+
+        return 0;
     }
 
     public static function __getCourseName($id){
