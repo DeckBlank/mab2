@@ -14,12 +14,9 @@ $templates = [
     'page.twig'
 ];
 
-if(is_page('login')){
+if(is_page('access')){
     if (is_user_logged_in()) {
-        header('Location:' . $context['site']->url . '/emotional');        
-    } else {
-        $context['title'] = get_field('title', $post->ID);
-        $context['phrase'] = get_field('phrase', $post->ID);
+        header('Location:' . $context['site']->url . '/mis-cursos');        
     }
 
 }else if(is_page('emotional')){

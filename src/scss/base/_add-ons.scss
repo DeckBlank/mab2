@@ -48,7 +48,8 @@ $font-sizes: (
   '35' : $fs-35,
   '40' : $fs-40,
   '50' : $fs-50,
-  '60' : $fs-60
+  '60' : $fs-60,
+  '70' : $fs-70
 );
 
 $font-weights: (
@@ -164,13 +165,32 @@ $font-families: (
 
 .c-link {
   cursor: pointer;
+  transition: all 0.3s;
+
+  &--ho-warning {
+    &:hover {
+      color: $warning-color;
+    }
+  }
+
+  &--ho-primary {
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  &--ho-secondary {
+    &:hover {
+      color: $secondary-color;
+    }
+  }
 
   &--white {
     color: $white;
+  }
 
-    &:hover {
-      color: $white;
-    }
+  &--black {
+    color: $dark;
   }
 
   &--sec {
@@ -198,23 +218,54 @@ $font-families: (
   }
 }
 
-.mb-05 {
-  margin-bottom: 0.5rem;
-}
+.m {
+  &b-05 {
+    margin-bottom: 0.5rem;
+  }
 
-.mr-05 {
-  margin-right: 0.5rem;
+  &r-05 {
+    margin-right: 0.5rem;
+  }
+
+  &l-05 {
+    margin-left: 0.5rem;
+  }
 }
 
 .c-lh {
+  &--70,
+  &--70 * {
+    line-height: 70px;
+  }
+
+  &--60,
+  &--60 * {
+    line-height: 60px;
+  }
+
   &--50,
   &--50 * {
     line-height: 50px;
   }
 
+  &--40,
+  &--40 * {
+    line-height: 40px;
+  }
+
+  &--35,
+  &--35 * {
+    line-height: 35px;
+  }
+
   &--30,
   &--30 * {
     line-height: 30px;
+  }
+
+  &--21,
+  &--21 * {
+    line-height: 21px;
   }
 
   &--18,
@@ -246,6 +297,10 @@ $font-families: (
 
     &3 {
       padding: 3rem;
+    }
+
+    &l-2 {
+      padding-left: 2rem;
     }
   }
 

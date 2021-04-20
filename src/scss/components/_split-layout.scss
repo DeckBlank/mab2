@@ -25,11 +25,7 @@
     }
 
     &--warning {
-      background: $warning-color;
-    }
-
-    &__title {
-      font-size: $fs-30;
+      background: $warning-alt;
     }
 
     .small-title {
@@ -84,11 +80,15 @@
       display: block;
     }
 
-    .c-split-layout-content {
+    &__content {
       height: 100vh;
       overflow-y: auto;
+    }
+
+    .c-split-layout-content {
       display: flex;
       align-items: center;
+      justify-content: center;
 
       .small-title {
         font-size: $fs-30;
@@ -97,10 +97,6 @@
       .big-title {
         font-size: 70px;
         line-height: 40px;
-      }
-
-      &__title {
-        font-size: 45px;
       }
 
       .c-check-card {

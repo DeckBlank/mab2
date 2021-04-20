@@ -1,0 +1,408 @@
+.c-header {
+  background: $dark;
+  position: fixed;
+  z-index: 1000 !important;
+
+  @include transition(0.5s);
+
+  left: 0;
+  top: 0;
+
+  .c-nav {
+    height: 50px;
+    position: relative;
+    z-index: 100;
+
+    .c-item {
+      display: none;
+
+      label {
+        cursor: pointer;
+      }
+
+      input:checked ~ .c-menu-dropdown {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    &__left {
+      .c-item {
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  .c-brand {
+    img {
+      width: 60px;
+    }
+  }
+
+  .c-search-toggle {
+    color: $white;
+
+    &.enable {
+      color: $warning-color;
+    }
+  }
+
+  .c-login {
+    background-color: $primary-color;
+    color: $white;
+    padding: 0.35rem 1rem;
+
+    @include transition(0.3s);
+
+    &:hover {
+      background-color: $primary-alt;
+      color: $white;
+    }
+  }
+
+  .c-user {
+    &__profile {
+      width: 35px;
+      height: 35px;
+      cursor: pointer;
+    }
+
+    &.active {
+      .c-menu-dropdown {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .c-menu-dropdown {
+      width: 15rem;
+      left: -12rem;
+    }
+  }
+
+  .c-menu-dropdown {
+    top: 50px;
+    margin: auto;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(5px);
+
+    @include box-shadow(right, rgba($dark, 0.3), 0, 0, 10px);
+    @include transition(0.3s);
+
+    &::after {
+      position: absolute;
+      top: -20px;
+      content: "";
+      border-top: solid 0 transparent;
+      border-left: solid 10px transparent;
+      border-right: solid 10px transparent;
+      border-bottom: solid 20px $white;
+      width: 0;
+      height: 0;
+    }
+
+    &__item {
+      a {
+        position: relative;
+        padding: 0.5rem 1rem;
+        color: $dark;
+        display: block;
+
+        @include transition(0.2s);
+      }
+
+      a:hover {
+        color: $white;
+        background-color: $secondary-color;
+      }
+
+      a:hover::after {
+        background-color: $secondary-color;
+      }
+
+      a::after {
+        content: "";
+        position: absolute;
+        width: 80%;
+        height: 1px;
+        background-color: $gray;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+
+      &:last-child a::after {
+        opacity: 0;
+      }
+
+      &.inverse a {
+        color: $secondary-color;
+      }
+
+      &.inverse a:hover {
+        color: $white;
+        background-color: $secondary-color;
+      }
+    }
+
+    &__left {
+      border-radius: 10px 0 0 10px;
+
+      @include box-shadow(right, rgba($dark, 0.3), 0, 0, 10px);
+
+      .c-menu-dropdown__item a {
+        color: $secondary-color;
+      }
+
+      .c-menu-dropdown__item a:hover {
+        color: $white;
+      }
+    }
+
+    &--medium {
+      width: 30rem;
+    }
+
+    &.left::after {
+      left: 1rem;
+      margin: auto;
+    }
+
+    &.right::after {
+      right: 1rem;
+      margin: auto;
+    }
+
+    &.center::after {
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+  }
+
+  &--session {
+    height: auto;
+    position: relative;
+    background: $white;
+
+    .c-goback {
+      color: $primary-color;
+
+      @include transition(0.25s);
+
+      &:hover,
+      &:focus {
+        color: $primary-color;
+        transform: translateX(5px);
+      }
+    }
+
+    .c-media-controls {
+      left: 0;
+      right: 0;
+      margin: auto;
+      bottom: -4.5rem;
+
+      .c-icons {
+        background-color: $light-gray;
+        color: $dark;
+
+        @include transition(0.25s);
+      }
+
+      .c-icon-container {
+        width: 40px;
+        height: 40px;
+      }
+
+      &__item {
+        width: 40px;
+        height: 40px;
+        margin: 0 0.5rem;
+
+        @include transition(0.25s);
+      }
+
+      &__item--alone {
+        background-color: $light-gray;
+        color: $dark;
+      }
+
+      &__item.disabled .c-icons {
+        transform: translateY(-40px);
+        background-color: $primary-color;
+        color: $white;
+      }
+    }
+
+    .c-header__top {
+      height: 46px;
+
+      .c-icon {
+        width: 30px;
+        height: 34px;
+      }
+    }
+
+    .c-logout {
+      color: $primary-color;
+
+      &:hover,
+      &:focus {
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+.c-header.shadowed {
+  @include box-shadow(right, rgba($dark, 0.8), 0, 10px, 50px);
+}
+
+.c-header-mobile {
+  position: fixed !important;
+  transform: translateY(-100%);
+  z-index: 500 !important;
+  height: 100vh;
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+
+  @include transition(0.5s);
+
+  .c-nav {
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    &__right {
+      &::after {
+        width: 0;
+        height: 0;
+      }
+
+      .c-menu .c-menu__item + input:checked + .c-submenu {
+        padding: 0.5rem 0 0.5rem 1rem;
+        visibility: visible;
+        opacity: 1;
+        max-height: 2000px;
+      }
+
+      .c-menu .c-menu__item .c-icon {
+        @include transition(0.3s);
+      }
+
+      .c-submenu {
+        padding-left: 1rem;
+        visibility: hidden;
+        opacity: 0;
+        max-height: 0;
+
+        @include transition(0.3s);
+      }
+
+      .c-submenu .c-submenu__item + input:checked + .c-submenu {
+        padding: 0.5rem 0 0.5rem 1rem;
+        visibility: visible;
+        opacity: 1;
+        max-height: 2000px;
+      }
+
+      .c-submenu .c-submenu__item > a {
+        color: $white;
+        padding: 0.5rem 0;
+        font-family: $font-family-secondary;
+        font-size: $fs-18;
+      }
+    }
+
+    &__left {
+      height: 50px;
+      padding: 1rem 0;
+
+      &::after {
+        width: 0;
+        height: 0;
+      }
+    }
+  }
+
+  &--visible {
+    background: $white;
+    transform: translateY(0);
+    visibility: visible;
+    opacity: 1;
+
+    .grid-container {
+      height: 100%;
+    }
+
+    .c-nav {
+      &__right {
+        animation: menu 0.1s cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s 1 forwards;
+
+        .c-menu {
+          animation: menu 0.1s cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s 1 forwards;
+        }
+
+        .menu-item {
+          margin: 0.5rem 0;
+        }
+      }
+    }
+
+    @keyframes menu {
+      to {
+        opacity: 1;
+        visibility: visible;
+        height: auto;
+      }
+    }
+  }
+}
+
+@include breakpoint(medium) {
+  .c-header {
+    &--session {
+      background: $white;
+
+      .c-media-controls {
+        top: 0;
+        bottom: 0;
+      }
+
+      .c-another-user {
+        &__state {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-header {
+    .c-nav {
+      .c-item {
+        display: block;
+      }
+    }
+
+    &--session {
+      position: relative;
+    }
+  }
+
+  .c-header-mobile {
+    &--visible {
+      height: 80px;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+  }
+}

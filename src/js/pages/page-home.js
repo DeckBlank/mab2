@@ -48,7 +48,7 @@ const home = new Vue({
           job: 'Autismo',
           profile: '',
           padding: 2,
-          width: 300,
+          width: 320,
         },
         {
           name: 'Viviana de Ferrari',
@@ -56,7 +56,7 @@ const home = new Vue({
           job: 'Amor Propio',
           profile: '',
           padding: 2,
-          width: 250,
+          width: 280,
         },
         {
           name: 'Vanessa Vasquez',
@@ -64,7 +64,7 @@ const home = new Vue({
           job: 'El Poder de la Empatía',
           profile: '',
           padding: 1,
-          width: 250,
+          width: 300,
         },
         {
           name: 'Menta Days',
@@ -72,16 +72,24 @@ const home = new Vue({
           job: 'Arte para la Vida',
           profile: '',
           padding: 2,
-          width: 250,
+          width: 260,
         },
         {
           name: 'Verónica Álvarez',
           avatar: 'veronica',
           job: 'Danza para la Vida',
           profile: '',
-          padding: 2,
-          width: 250,
+          padding: 3,
+          width: 240,
         },
+      ],
+
+      questions: [
+        { enable : true },
+        { enable : false },
+        { enable : false },
+        { enable : false },
+        { enable : false },
       ]
     }
   },
@@ -93,14 +101,14 @@ const home = new Vue({
     this.global();
     this.initTestimoniesSlider();
     this.initLideresSlider();
-    this.initLideresBrands();
+    this.initBrandsSlider();
   },
   methods: {
     ...baseActions(),
     initTestimoniesSlider: function() {
       new Swiper('#slider-testimonies', {
         speed: 900,
-        loop: false,
+        loop: true,
         autoplay: true,
 
         pagination: {
@@ -136,7 +144,7 @@ const home = new Vue({
     initLideresSlider: function() {
       new Swiper('#slider-lideres', {
         speed: 900,
-        loop: false,
+        loop: true,
         allowTouchMove: false,
         autoplay: {
           delay: 5000,
@@ -173,14 +181,16 @@ const home = new Vue({
         },
       })
     },
-    initLideresBrands: function() {
+    initBrandsSlider: function() {
       new Swiper('#slider-brands', {
-        speed: 900,
-        loop: false,
-        allowTouchMove: false,
+        speed: 1200,
+        loop: true,
+        freeMode: true,
+        freeModeMomentum: false,
         autoplay: {
-          delay: 5000,
-          disableOnInteraction: false,
+          enabled: true,
+          delay: 0,
+          disableOnInteraction: true,
         },
 
         breakpoints: {
@@ -206,6 +216,11 @@ const home = new Vue({
           },
         },
       })
-    }
+    },
+    resetAccordion: function(question) {
+      this.questions = this.questions.map(q => {
+        return (q != question) ? { ...q, enable : false } : q;
+      })
+    },
   }
 })

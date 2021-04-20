@@ -16,9 +16,7 @@
 
 @include breakpoint(large) {
   .c-mab-subcategory {
-    width: 150px;
-    height: 150px;
-    font-size: $fs-25;
-    line-height: 28px;
+    width: 130px;
+    height: 130px;
   }
 }

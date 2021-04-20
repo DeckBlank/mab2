@@ -41,7 +41,7 @@ body {
 .fade {
   &-enter-active,
   &-leave-active {
-    transition: opacity 0.3s;
+    transition: opacity 0.25s;
   }
 
   &-enter,
@@ -88,12 +88,14 @@ body {
   &--primary {
     &::before {
       background-image: url("../images/dots/pattern.png");
+      background-repeat: no-repeat;
     }
   }
 
   &--warning {
     &::before {
       background-image: url("../images/dots/pattern-warning.png");
+      background-repeat: no-repeat;
     }
   }
 

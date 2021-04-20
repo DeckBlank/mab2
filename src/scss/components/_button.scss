@@ -148,7 +148,7 @@
   }
 
   &--black-warning {
-    background: $black;
+    background: $dark;
     color: $warning-color;
 
     @include b-radious(10px);
