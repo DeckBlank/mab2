@@ -667,6 +667,15 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         ]);        
 
     }
+    elseif (is_page('cursito')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/curso',
+            'src'       => $config['resources']['page_curso'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);        
+    }
 
 
     /**

@@ -171,6 +171,10 @@ body {
   text-align-last: left !important;
 }
 
+.bb-warning {
+  border-bottom: 1px solid $warning-color;
+}
+
 @include breakpoint(large) {
   .desktop {
     display: block;
