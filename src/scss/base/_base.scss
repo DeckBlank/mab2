@@ -175,6 +175,20 @@ body {
   border-bottom: 1px solid $warning-color;
 }
 
+.triangle {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-left: 7px solid $secondary-color;
+  border-bottom: 5px solid transparent;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.triangle--down {
+  transform: rotate(90deg);
+}
+
 @include breakpoint(large) {
   .desktop {
     display: block;

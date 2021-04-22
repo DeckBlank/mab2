@@ -6,6 +6,14 @@ const curso = new Vue({
   ...baseConfig(store),
   data() {
     return {
+      view: 2,
+      questions: [
+        { enable : true },
+        { enable : false },
+        { enable : false },
+        { enable : false },
+        { enable : false },
+      ]
     }
   },
   computed: {
@@ -17,5 +25,10 @@ const curso = new Vue({
   },
   methods: {
     ...baseActions(),
+    resetAccordion: function(question) {
+      this.questions = this.questions.map(q => {
+        return (q != question) ? { ...q, enable : false } : q;
+      })
+    },
   }
 })

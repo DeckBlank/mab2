@@ -46,102 +46,121 @@
           <div class="c-tab-head text-center">
             <div class="grid-x">
               <div class="cell large-6">
-                <div class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30 active">SOBRE EL CURSO</div>
+                <div @click="view = 1" :class="{ active : view == 1 }" class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30">SOBRE EL CURSO</div>
               </div>
               <div class="cell large-6">
-                <div class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30">FORO</div>
+                <div @click="view = 2" :class="{ active : view == 2 }" class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30 small">FORO</div>
               </div>
             </div>
           </div>
           <div class="c-tab-body padding-vertical-2">
-            <div class="c-tab-slide">
-              <div class="grid-x">
-                <div class="cell large-6">
-                  <div class="padding-horizontal-2 margin-bottom-2">
-                    <h3 class="w-xbold f2 fs-25 dark margin-bottom-1">¿Qué incluye este curso?</h3>
-                    <ul class="c-tab__list f2 dark margin-left-0 fs-18">
-                      <li><i class="far fa-clock"></i> 5hrs de clases</li>
-                      <li><i class="far fa-hourglass"></i> Acceso indefinido a todas las clases</li>
-                      <li><i class="far fa-file-download"></i> Material descargable</li>
-                      <li><i class="far fa-check-circle"></i> Prueba de opción múltiple</li>
-                      <li><i class="far fa-comments"></i> Acceso al foro del curso</li>
-                      <li><i class="far fa-clock"></i> Diploma</li>
-                    </ul>
-                  </div>
-                  <div class="c-tab-recursos br-bottom--large br-top--large padding-2">
-                    <h3 class="w-xbold f2 fs-25 dark margin-bottom-1 text-uppercase">RECURSOS</h3>
-                    <div class="grid-x align-self-strecht text-center">
-                      <div class="small-3 medium-3 large-3">
-                        <div class="c-tab-recursos__item f2 w-bold">
-                          <div></div>
-                          <figure class="margin-bottom-1">
-                            <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
-                          </figure>
-                          <div>Resúmenes</div>
+            <transition   name="fade" mode="out-in">
+              <div v-if="view == 1" key="contenido" class="c-tab-slide">
+                <div class="grid-x align-justify">
+                  <div class="cell large-6">
+                    <div class="padding-horizontal-2 margin-bottom-2">
+                      <h3 class="w-xbold f2 fs-25 dark margin-bottom-1">¿Qué incluye este curso?</h3>
+                      <ul class="c-tab__list f2 dark margin-left-0 fs-18">
+                        <li><i class="far fa-clock"></i> 5hrs de clases</li>
+                        <li><i class="far fa-hourglass"></i> Acceso indefinido a todas las clases</li>
+                        <li><i class="far fa-file-download"></i> Material descargable</li>
+                        <li><i class="far fa-check-circle"></i> Prueba de opción múltiple</li>
+                        <li><i class="far fa-comments"></i> Acceso al foro del curso</li>
+                        <li><i class="far fa-clock"></i> Diploma</li>
+                      </ul>
+                    </div>
+                    <div class="c-tab-recursos br-bottom--large br-top--large padding-2">
+                      <h3 class="w-xbold f2 fs-25 dark margin-bottom-1 text-uppercase">RECURSOS</h3>
+                      <div class="grid-x align-self-strecht text-center">
+                        <div class="small-3 medium-3 large-3">
+                          <div class="c-tab-recursos__item f2 w-bold">
+                            <div></div>
+                            <figure class="margin-bottom-1">
+                              <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
+                            </figure>
+                            <div>Resúmenes</div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="small-3 medium-3 large-3">
-                        <div class="c-tab-recursos__item f2 w-bold">
-                          <figure class="margin-bottom-1">
-                            <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
-                          </figure>
-                          <div>Resúmenes</div>
+                        <div class="small-3 medium-3 large-3">
+                          <div class="c-tab-recursos__item f2 w-bold">
+                            <figure class="margin-bottom-1">
+                              <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
+                            </figure>
+                            <div>Resúmenes</div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="small-3 medium-3 large-3">
-                        <div class="c-tab-recursos__item f2 w-bold">
-                          <figure class="margin-bottom-1">
-                            <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
-                          </figure>
-                          <div>Resúmenes</div>
+                        <div class="small-3 medium-3 large-3">
+                          <div class="c-tab-recursos__item f2 w-bold">
+                            <figure class="margin-bottom-1">
+                              <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
+                            </figure>
+                            <div>Resúmenes</div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="small-3 medium-3 large-3">
-                        <div class="c-tab-recursos__item f2 w-bold">
-                          <figure class="margin-bottom-1">
-                            <img src="{{ theme.link }}/static/images/curso/doc-2.png" alt="" class=" width-100 height-100 of--contain"> 
-                          </figure>
-                          <div>Resúmenes</div>
+                        <div class="small-3 medium-3 large-3">
+                          <div class="c-tab-recursos__item f2 w-bold">
+                            <figure class="margin-bottom-1">
+                              <img src="{{ theme.link }}/static/images/curso/doc-2.png" alt="" class=" width-100 height-100 of--contain"> 
+                            </figure>
+                            <div>Resúmenes</div>
+                          </div>
                         </div>
-                      </div>
-                      <div class="cell">
-                        <button class="c-button margin-top-1 c-button--mab-warning-black f2 w-xbold fs-21">¡Descárgalos todos!</button>
+                        <div class="cell">
+                          <button class="c-button margin-top-1 c-button--mab-warning-black f2 w-xbold fs-21">¡Descárgalos todos!</button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="cell large-6">
-                  <div class="grid-x align-center">
-                    <div class="cell medium-8 large-6">
-                      <div v-if="false" class="c-accordion position-relative c-dots-background c-dots-background--warning right">
-                        <h3 class="c-accordion__header margin-bottom-0 padding-1 bg-dark white fs-21 f2 text-uppercase text-center w-xbold">Preguntas frecuentes</h3>
-                        <div class="c-accordion__body bg-white">
-                          <ul class="ul-reset">
-                            <li v-for="(question, qindex) of questions" :key="question.id" class="c-accordion-item">
-                              <input v-model="question.enable" @change="resetAccordion(question)" :id="'accordion-item-' + qindex" class="c-accordion hide" type="checkbox">
-                              <label class="c-accordion-item__switcher width-100 bg-sec-color" :for="'accordion-item-' + qindex">
-                                <p class="margin-bottom-0 w-bold white f2 fs-18">asdsadsa dsasadasd</p>
-                                <i class="c-icon white fs-21 far fa-chevron-up"></i>
-                              </label>
-                              <div class="c-accordion-item__content position-relative bg-white f2 dark w-medium">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem sapiente dolores nulla commodi! Earum et, recusandae unde quaerat suscipit, inventore blanditiis nihil rerum voluptatum autem nulla! Quis voluptate neque quisquam!
-      
-                                <ul>
-                                  <li>asd asdsadsdsa sad</li>
-                                  <li>asd asdsadsdsa sad</li>
-                                  <li>asd asdsadsdsa sad</li>
-                                  <li>asd asdsadsdsa sad</li>
-                                </ul>
+                  <div class="cell large-5">
+                    <div class="c-accordion position-relative">
+                      <h3 class="c-accordion__header margin-bottom-0 padding-1 bg-dark white fs-21 f2 text-uppercase text-center w-xbold">CONTENIDOS</h3>
+                      <div class="c-accordion__body bg-white">
+                        <ul class="ul-reset">
+                          <li v-for="(question, qindex) of questions" :key="question.id" class="c-accordion-item">
+                            <input v-model="question.enable" @change="resetAccordion(question)" :id="'accordion-item-' + qindex" class="c-accordion hide" type="checkbox">
+                            <label class="c-accordion-item__switcher width-100 bg-sec-color" :for="'accordion-item-' + qindex">
+                              <p class="margin-bottom-0 w-bold white f2 fs-18">Unidad 1: ¿Qué es la nutrición?</p>
+                              <i class="c-icon white fs-21 far fa-chevron-up"></i>
+                            </label>
+                            <div class="c-accordion-item__content position-relative bg-white f2 dark w-medium">
+                              <div class="c-mab-toggle fs-21">
+                                <a class="dark" href=""><span class="triangle"></span> ¿Qué es la nutrición?</a> 
                               </div>
-                            </li>
-                          </ul>
-                        </div>
+                              <ul v-if="false" class="padding-1">
+                                <li> <a class="dark" href="">asd asdsadsdsa sad</a></li>
+                                <li> <a class="dark" href="">asd asdsadsdsa sad</a></li>
+                                <li> <a class="dark" href="">asd asdsadsdsa sad</a></li>
+                                <li> <a class="dark" href="">asd asdsadsdsa sad</a></li>
+                                <li> <a class="dark" href="">asd asdsadsdsa sad</a></li>
+                              </ul>
+                            </div>
+                          </li>
+                        </ul>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
+              <div v-if="view == 2" key="foro" class="c-tab-slide">
+                <div class="c-foro mab-shadow">
+                  <div class="c-foro-head bg-dark br-top--large text-center padding-horizontal-1">
+                    <div class="grid-x">
+                      <div class="cell small-8 medium-8 large-7">
+                        <h2 class="c-foro-head__title fs-21 white w-xbold text-uppercase margin-0 f2">TEMA</h2>
+                      </div>
+                      <div class="small-4 medium-4 large-5">
+                        <h2 class="c-foro-head__title fs-21 white w-xbold text-uppercase margin-0 f2">RESPUESTAS</h2>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="c-foro-body padding-1">
+
+                  </div>
+                </div>
+              </div>
+            </transition>
+
           </div>
         </div>
       </div>  

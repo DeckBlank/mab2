@@ -9,7 +9,7 @@
   .c-tab {
     .c-tab-head {
       &__title {
-        display: none;
+        cursor: pointer;
       }
 
       &__title::after {
@@ -21,11 +21,16 @@
         height: 2px;
         background: $secondary-color;
         opacity: 0;
+        transition: all 0.5s;
+      }
+
+      &__title.small::after {
+        left: calc(50% - 65px);
+        width: 130px;
       }
 
       &__title.active {
         color: $secondary-color;
-        display: block;
       }
 
       &__title.active::after {
@@ -49,6 +54,10 @@
       padding: 0 0.5rem;
     }
   }
+
+  // .c-mab-toggle {
+
+  // }
 }
 
 @include breakpoint(large) {
@@ -66,10 +75,6 @@
 
     .c-tab {
       .c-tab-head {
-        &__title {
-          display: block;
-        }
-
         .cell:first-child {
           .c-tab-head__title {
             border-right: 1px solid $dark-gray;

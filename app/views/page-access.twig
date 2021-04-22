@@ -471,7 +471,7 @@
                             <input v-model="user.role.type" id="role-tutor" type="radio" value="tutor" class="hide" />
                             <label
                               for="role-tutor"
-                              class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white height-100"
+                              class="c-role-card mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white height-100"
                               :class="{'enable' : user.role.type == 'tutor'}">
                               <span class="c-lh--21 display-block">
                                 <strong class="w-xbold">Un padre / una madre / apoderad@</strong> que busca la mejor educación para su familia
@@ -486,7 +486,7 @@
                             <label
                               @click="openModal('teacher')"
                               for="role-teacher"
-                              class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1 height-100"
+                              class="c-role-card mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1 height-100"
                               :class="{'enable' : user.role.type == 'teacher'}">
                               <span class="c-lh--21 display-block">
                                 <strong class="w-xbold">Un maestro / una
@@ -503,7 +503,7 @@
                             <input v-model="user.role.type" id="role-student" type="radio" value="student" class="hide" />
                             <label
                               for="role-student"
-                              class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1 height-100"
+                              class="c-role-card mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1 height-100"
                               :class="{'enable' : user.role.type == 'student'}">
                               <span class="c-lh--21 display-block">
                                 <strong class="w-xbold">Un/a estudiante</strong>
@@ -520,7 +520,7 @@
                             <input v-model="user.role.type" id="role-foreign" type="radio" value="foreign" class="hide" />
                             <label
                               for="role-foreign"
-                              class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1 height-100"
+                              class="c-role-card mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1 height-100"
                               :class="{'enable' : user.role.type == 'foreign'}">
                               <span class="c-lh--21 display-block">
                                 <strong class="w-xbold">Un/a internauta
@@ -537,7 +537,7 @@
                             <label
                               @click="openModal('tambero')"
                               for="role-tambero"
-                              class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-warning black flex-container align-center-middle white margin-bottom-1"
+                              class="c-role-card mab-shadow text-left position-relative f2  bg-warning black flex-container align-center-middle white margin-bottom-1"
                               :class="{'enable' : user.role.type == 'tambero'}">
                               <span class="c-lh--21 display-block">
                                 <strong class="w-xbold">Parte del programa

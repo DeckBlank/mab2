@@ -1,0 +1,21 @@
+.c-foro {
+  border-radius: 20px;
+  border: 1px solid $dark;
+
+  .c-foro-head {
+    &__title {
+      padding: 0.3rem 0;
+      font-size: $fs-18;
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-foro {
+    .c-foro-head {
+      &__title {
+        font-size: $fs-21;
+      }
+    }
+  }
+}
