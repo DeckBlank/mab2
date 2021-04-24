@@ -6,7 +6,9 @@ const curso = new Vue({
   ...baseConfig(store),
   data() {
     return {
-      view: 2,
+      view: 1,
+      foro: 1,
+      commentbox: 0,
       questions: [
         { enable : true },
         { enable : false },

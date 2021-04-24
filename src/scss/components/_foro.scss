@@ -79,6 +79,26 @@
       padding-left: 0.5rem;
     }
   }
+
+  .c-comment-box {
+    background: $light-gray;
+    padding: 1rem 2rem;
+
+    input,
+    textarea {
+      border: none;
+      border-radius: 20px;
+      font-family: $font-family-secondary;
+    }
+
+    textarea {
+      height: 100px;
+    }
+
+    &__assets {
+      padding: 0.5rem 0;
+    }
+  }
 }
 
 @include breakpoint(large) {
