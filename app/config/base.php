@@ -20,9 +20,10 @@ return [
          * */
         'fontawesome' => [
             'cdn' => [
-                'base' => get_theme_file_uri('/static/fonts/fontawesome/main.min.js'),
-                'style' => get_theme_file_uri('/static/fonts/fontawesome/regular.min.js'),
-                'brands' => get_theme_file_uri('/static/fonts/fontawesome/brands.min.js')
+                'base'          => get_theme_file_uri('/static/fonts/fontawesome/main.min.js'),
+                'style'         => get_theme_file_uri('/static/fonts/fontawesome/regular.min.js'),
+                'style_solid'   => get_theme_file_uri('/static/fonts/fontawesome/solid.min.js'),
+                'brands'        => get_theme_file_uri('/static/fonts/fontawesome/brands.min.js')
             ]
         ],
 

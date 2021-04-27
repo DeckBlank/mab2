@@ -2,13 +2,161 @@
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Timber\Timber;
 
 require(__DIR__ . '/../models/UserModel.php');
+require(__DIR__ . '/../models/schema/UserCourse.php');
+require(__DIR__ . '/../models/schema/UserCourseEnrollment.php');
+require(__DIR__ . '/../models/schema/TopicTestScore.php');
 
 class UserController{
-
     public function __construct(){
-        
+        add_action( 'rest_api_init', function () {
+            register_rest_route( 'custom/v1', '/users', array(
+                'methods' => 'GET',
+                'callback' => array($this, 'getAll'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/users/download', array(
+                'methods' => 'GET',
+                'callback' => array($this, 'downloadUsers'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/user/auth', array(
+                'methods' => 'GET',
+                'callback' => array($this, 'auth'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/user/logout', array(
+                'methods' => 'GET',
+                'callback' => array($this, 'logout'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/user/recovery_session', array(
+                'methods' => 'GET',
+                'callback' => array($this, 'getRecoverySession'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/user/recovery_session', array(
+                'methods' => 'POST',
+                'callback' => array($this, 'createRecoverySession'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/user', array(
+                'methods' => 'POST',
+                'callback' => array($this, 'createUser'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/user', array(
+                'methods' => 'PUT',
+                'callback' => array($this, 'updateUser'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/user/teacher/network', array(
+                'methods' => 'POST',
+                'callback' => array($this, 'sendTeacherData'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/user/password', array(
+                'methods' => 'PUT',
+                'callback' => array($this, 'resetPassword'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/user/enrollments', array(
+                'methods' => 'GET',
+                'callback' => array($this, 'getEnrollments'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/user/enrollments', array(
+                'methods' => 'POST',
+                'callback' => array($this, 'saveEnrollments'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/user/enrollments', array(
+                'methods' => 'DELETE',
+                'callback' => array($this, 'deleteEnrollments'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/user/access/log', array(
+                'methods' => 'PUT',
+                'callback' => array($this, 'saveAccessLog'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/users/access/logs', array(
+                'methods' => 'GET',
+                'callback' => array($this, 'getAccessLogs'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/users/courses', array(
+                'methods' => 'GET',
+                'callback' => array($this, 'getEnrolledCourses'),
+                'permission_callback' => function ($request) {
+                    // return ($request['_wpnonce']) ? true : false;
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/users/(?P<user_id>\d+)/courses/recommended', array(
+                'methods' => 'GET',
+                'callback' => array($this, 'getRecommendedCourses'),
+                'permission_callback' => function ($request) {
+                    return ($request['_wpnonce']) ? true : false;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/user/enrollments', array(
+                'methods' => 'POST',
+                'callback' => array($this, 'saveEnrollments'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+        });
     }
 
     /**
@@ -253,6 +401,111 @@ class UserController{
         }
     }
 
+    public function getEnrolledCourses($request) {
+        if ( !empty($request['user_email']) ) {
+            $userEmail      = $request['user_email'];
+            $coursesArray   = [];
+
+            $courses = UserCourse::where(['user_email' => $userEmail])
+                ->orderBy('last_date', 'DESC')
+                ->get();
+
+            $enrolledCourses = UserCourseEnrollment::where(['user_email' => $userEmail])
+                ->orderBy('last_date', 'DESC')
+                ->get();
+
+            foreach ($courses as $course) {
+                $sanitizedCourse = $this::__sanitizeCourse($course->course_id, $userEmail);
+
+                if ( $sanitizedCourse && !in_array($sanitizedCourse, $coursesArray) )
+                    array_push($coursesArray, $sanitizedCourse);
+            }
+
+            foreach ($enrolledCourses as $course) {
+                $sanitizedCourse = $this::__sanitizeCourse($course->course_id, $userEmail);
+
+                if ( $sanitizedCourse && !in_array($sanitizedCourse, $coursesArray) )
+                    array_push($coursesArray, $sanitizedCourse);
+            }
+
+            if ( count($coursesArray) ) {
+                return new WP_REST_Response((object)[
+                    'message'   => 'Courses here!!',
+                    'data'      => $coursesArray,
+                    'status'    => true
+                ], 200);
+            } else {
+                return new WP_REST_Response((object)[
+                    'message'   => 'No courses found',
+                    'status'    => false
+                ], 200);
+            }
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 403 ) );
+        }
+    }
+
+    public function getRecommendedCourses($request) {
+        if ( !empty($request['user_email']) ) {
+            $userEmail          = $request['user_email'];
+            $userId             = $request['user_id'];
+            $userPreferences    = get_field('mab_sub_category', 'user_' . $userId);
+            $userPreferences    = explode(',', $userPreferences);
+
+            $coursesArray = [];
+
+            $courses = Timber::get_posts([
+                'post_type'         => 'course',
+                'posts_per_page'    => -1,
+                'tax_query' => array( 
+                    array(
+                        'taxonomy' => 'tax-mab-course',
+                        'field'    => 'term_id',
+                        'terms'    => $userPreferences
+                    )
+                )
+            ]);
+
+            foreach ($courses as $course) {
+                $sanitizedCourse = $this::__sanitizeCourse($course->ID, $userEmail, 'recommend');
+
+                if ( $sanitizedCourse && !in_array($sanitizedCourse, $coursesArray) )
+                    array_push($coursesArray, $sanitizedCourse);
+            }
+
+            if ( count($coursesArray) ) {
+                return new WP_REST_Response((object)[
+                    'message'   => 'Courses here!!',
+                    'data'      => $coursesArray,
+                    'status'    => true
+                ], 200);
+            } else {
+                return new WP_REST_Response((object)[
+                    'message'   => 'No courses found',
+                    'status'    => false
+                ], 200);
+            }
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 403 ) );
+        }
+    }
+
+    public function downloadAccesLogs($request){
+        $access_logs = UserModel::getAccessLogs($request, 'all');
+
+        if( empty($access_logs) ){                
+            return new WP_Error( 'no_access_logs', __('No access logs'), array( 'status' => 404 ) );         
+        }else{
+            header('Content-Encoding: UTF-8');
+            header("Content-Type: application/xls; charset=UTF-8");    
+            header("Content-Disposition: attachment; filename=resportes-accesos-mabclick-".date('Y-m-d').".xls"); 
+            echo "\xEF\xBB\xBF";
+
+            //Header
+            include_once __DIR__."/../exports/reports/accesses.php";
+        }        
+    }
+
     private function sendInstructions($request, $recovery_session, $user_id){
         $username = get_user_by('id', $user_id)->data->user_login;
         $mail = new PHPMailer(true);
@@ -397,19 +650,82 @@ class UserController{
         }
     }
 
-    public function downloadAccesLogs($request){
-        $access_logs = UserModel::getAccessLogs($request, 'all');
+    private function __sanitizeCourse($courseId, $userEmail, $type = 'enrolled') {
+        $course = Timber::get_post([
+            'post_type' => 'course',
+            'p'         => $courseId
+        ]);
 
-        if( empty($access_logs) ){                
-            return new WP_Error( 'no_access_logs', __('No access logs'), array( 'status' => 404 ) );         
-        }else{
-            header('Content-Encoding: UTF-8');
-            header("Content-Type: application/xls; charset=UTF-8");    
-            header("Content-Disposition: attachment; filename=resportes-accesos-mabclick-".date('Y-m-d').".xls"); 
-            echo "\xEF\xBB\xBF";
+        if ($course) {
+            $mabCategory = array_filter($course->terms, function($cat){ return $cat->taxonomy == 'tax-mab-course' && !$cat->parent; });
+            $mabCategory = count($mabCategory) ? array_values($mabCategory)[0] : false;
 
-            //Header
-            include_once __DIR__."/../exports/reports/accesses.php";
-        }        
+            $teacher = get_field('teacher', $course->ID);
+
+            $courseObject = [
+                'id'            => $course->ID,
+                'name'          => $course->title,
+                'thumbnail'     => ($course->thumbnail) ? $course->thumbnail->src : false,
+                'teacher'       => ($teacher) ? sprintf('%s %s', $teacher['user_firstname'], $teacher['user_lastname']) : '',
+                'description'   => get_the_excerpt($course->ID),
+                'likes'         => $this::__getMetaCourse($courseId, $userEmail, 'likes'),
+                'color'         => ($mabCategory) ? get_field('color', 'category_' . $mabCategory->term_id) : 'primary',
+                'link'          => get_the_permalink($course->ID)
+            ];
+
+            if ($type == 'recommend') {
+                $courseObject = array_merge($courseObject, [
+                    'price' => get_field('price', $courseId)
+                ]);
+            } else {
+                $courseObject = array_merge($courseObject, [
+                    'last_class'    => '',
+                    'progress'      => $this::__getMetaCourse($courseId, $userEmail, 'progress'),
+                ]);
+            }
+
+            return $courseObject;
+        } else {
+            return false;
+        }
+    }
+
+    private function __getMetaCourse($courseId, $userEmail, $meta) {
+        switch ($meta) {
+            case 'likes':
+                $likes      = 0;
+                $unities    = get_field('unities', $courseId);
+
+                if ( $unities && count($unities) ) {
+                    foreach($unities as $unity){
+                        foreach($unity['topics'] as $topic) {
+                            if ($topic['topic']) {
+                                $likes += floatval( get_post_meta($topic['topic']->ID, 'post_likes_count') );
+                            }
+                        }
+                    }
+                }
+
+                return $likes;
+
+                break;
+
+            case 'progress':
+                $tests = TopicTestScore::where(['user' => $userEmail, 'course_id' => $courseId])
+                    ->get();
+
+                $topics     = 0;
+                $unities    = get_field('unities', $courseId);
+
+                if ( $unities && count($unities) ) {
+                    foreach($unities as $unity) {
+                        $topics += count($unity['topics']);
+                    }
+                }
+
+                return ($topics) ? bcdiv( (count($tests) * 100), $topics, 2 ) : 0;
+
+                break;
+        }
     }
 }

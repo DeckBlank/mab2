@@ -1,19 +1,19 @@
 {% extends '_html.twig' %}
 
 {% block hero %}
-  {# {% include 'templates-parts/hero.twig' %} #}
+  {% include 'templates-parts/hero.twig' %}
 {% endblock %}
 
 {% block content %}
-  <section class="c-section c-section--my-courses padding-top-0">
+  <section class="c-section c-section--my-courses">
     <div class="c-banner bg-warning mab-shadow">
       <div class="grid-container">
         <div class="grid-x grid-margin-x grid-margin-y align-middle">
           <div class="cell large-4">
             <div class="padding-vertical-3"> 
               <h1 class="c-banner__title warning">
-                <span class="dark text-uppercase">HOLA</span><br>
-                <span class="dark text-uppercase">Nombre!</span>
+                <span class="dark text-uppercase">¡HOLA,</span><br>
+                <span class="dark text-uppercase">${userName}!</span>
               </h1> 
               <p class="dark f2 fs-25 lh-25"> En <strong class="w-xbold">MAB</strong>, estamos orgullosos de que
                 hayas decidido girar tu educación </p> 
@@ -21,8 +21,8 @@
           </div> 
           <div class="cell large-8 margin-bottom-0">
             <div class="position-relative flex-container align-center">
-              <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--contain"> 
-              <img src="{{ theme.link }}/static/images/home/heart.png" alt="" class="c-banner__heart position-absolute of--contain">
+              <img src="{{ theme.link }}/static/images/courses/mine/banner.png" alt="" class="of--contain"> 
+              <img src="{{ theme.link }}/static/images/home/bolb.png" alt="" class="c-banner__heart position-absolute of--contain">
             </div>
           </div>
         </div>
@@ -48,9 +48,9 @@
             </div>
             <div class="cell large-7">
               <div class="position-relative flex-container align-center">
-                <img src="{{ theme.link }}/static/images/my-courses/photo.png" alt="" class="c-mab-resume__photo position-absolute of--contain">
-                <img src="{{ theme.link }}/static/images/my-courses/resume.png" alt="" class="br--large of--contain position-relative"> 
-                <img src="{{ theme.link }}/static/images/my-courses/circle.png" alt="" class="c-banner__heart position-absolute of--contain">  
+                <img src="{{ theme.link }}/static/images/courses/mine/photo.png" alt="" class="c-mab-resume__photo position-absolute of--contain">
+                <img src="{{ theme.link }}/static/images/courses/mine/resume.png" alt="" class="br--large of--contain position-relative"> 
+                <img src="{{ theme.link }}/static/images/courses/mine/circle.png" alt="" class="c-banner__heart position-absolute of--contain">  
               </div>
             </div>
           </div>
@@ -63,7 +63,7 @@
           <p class="dark fs-50 lh-40 margin-bottom-0">continúa tu aprendizaje</p>
           <p class="dark fs-25 margin-bottom-0 f2 text-uppercase">tus cursos</p> 
         </h2>
-        <div class="c-mab-slider c-mab-slider--side-shadow position-relative">
+        <div v-if="enrolledCourses.length" class="c-mab-slider c-mab-slider--side-shadow position-relative">
           <div class="c-arrow-next swiper-button-next position-absolute flex-container align-center-middle">
             next
           </div>
@@ -72,167 +72,23 @@
           </div>
           <div class="swiper-container">
             <div class="swiper-wrapper">
-              <div class="swiper-slide padding-vertical-2">
-                <div class="c-course-card c-course-card--secondary br--large">
+              <div v-for="course of enrolledCourses" :key="course.id" class="swiper-slide padding-vertical-2">
+                <div class="c-course-card br--large" :class="'c-course-card--' + course.color">
                   <figure class="c-course-card__figure position-relative">
-                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
+                    <img :src="course.thumbnail" alt="" class="of--cover br-top--large width-100 height-100"> 
                     <div class="c-course-card__progress-bar position-absolute width-100">
                       <div style="width:50%" class="bg-pri-alt height-100"></div>
                     </div>
                   </figure>
                   <div class="c-course-card__content flex-container fd-column padding-1 br--large">
                     <div>
-                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                      <p class="fs-16 f2">Con Angela Hinostroza</p>
-                      <p class="fs-16 f2 lh-18">
-                        Lorem ipsum dolor sit amet, consect etu
-                        er adipiscing elit, sed diam nonummy
-                        nibh euismod nostrud .
-                      </p>
+                      <p class="w-xbold fs-18 f2 margin-0">${ course.name }</p>
+                      <p v-if="course.teacher" class="fs-16 f2">Con ${ course.teacher }</p>
+                      <p class="fs-16 f2 lh-18">${ course.description }</p>
                     </div>
                     <div class="grid-x align-middle">
                       <div class="small-6 medium-6 marge-6">
-                        <span class="c-course-card__likes f2"> <i class="far fa-heart"></i> 325</span>
-                      </div>
-                      <div class="small-6 medium-6 marge-6 text-right">
-                        <div class="c-button c-button--course lh-14 f2">
-                          Siguiente clase:
-                          <span>Funciones</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                    ¡continuar curso!
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide padding-vertical-2">
-                <div class="c-course-card c-course-card--secondary br--large">
-                  <figure class="c-course-card__figure position-relative">
-                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                    <div class="c-course-card__progress-bar position-absolute width-100">
-                      <div style="width:50%" class="bg-pri-alt height-100"></div>
-                    </div>
-                  </figure>
-                  <div class="c-course-card__content flex-container fd-column padding-1 br--large">
-                    <div>
-                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                      <p class="fs-16 f2">Con Angela Hinostroza</p>
-                      <p class="fs-16 f2 lh-18">
-                        Lorem ipsum dolor sit amet, consect etu
-                        er adipiscing elit, sed diam nonummy
-                        nibh euismod nostrud .
-                      </p>
-                    </div>
-                    <div class="grid-x align-middle">
-                      <div class="small-6 medium-6 marge-6">
-                        <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
-                      </div>
-                      <div class="small-6 medium-6 marge-6 text-right">
-                        <div class="c-button c-button--course lh-14 f2">
-                          Siguiente clase:
-                          <span>Funciones</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                    ¡continuar curso!
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide padding-vertical-2">
-                <div class="c-course-card c-course-card--warning br--large">
-                  <figure class="c-course-card__figure position-relative">
-                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                    <div class="c-course-card__progress-bar position-absolute width-100">
-                      <div style="width:50%" class="bg-pri-alt height-100"></div>
-                    </div>
-                  </figure>
-                  <div class="c-course-card__content flex-container fd-column padding-1 br--large">
-                    <div>
-                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                      <p class="fs-16 f2">Con Angela Hinostroza</p>
-                      <p class="fs-16 f2 lh-18">
-                        Lorem ipsum dolor sit amet, consect etu
-                        er adipiscing elit, sed diam nonummy
-                        nibh euismod nostrud .
-                      </p>
-                    </div>
-                    <div class="grid-x align-middle">
-                      <div class="small-6 medium-6 marge-6"> 
-                        <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
-                      </div>
-                      <div class="small-6 medium-6 marge-6 text-right">
-                        <div class="c-button c-button--course  lh-14 f2">
-                          Siguiente clase:
-                          <span>Funciones</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                    ¡continuar curso!
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide padding-vertical-2">
-                <div class="c-course-card c-course-card--success br--large">
-                  <figure class="c-course-card__figure position-relative">
-                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                    <div class="c-course-card__progress-bar position-absolute width-100">
-                      <div style="width:50%" class="bg-pri-alt height-100"></div>
-                    </div>
-                  </figure>
-                  <div class="c-course-card__content flex-container fd-column padding-1 br--large">
-                    <div>
-                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                      <p class="fs-16 f2">Con Angela Hinostroza</p>
-                      <p class="fs-16 f2 lh-18">
-                        Lorem ipsum dolor sit amet, consect etu
-                        er adipiscing elit, sed diam nonummy
-                        nibh euismod nostrud .
-                      </p>
-                    </div>
-                    <div class="grid-x align-middle">
-                      <div class="small-6 medium-6 marge-6"> 
-                        <span class="c-course-card__likes f2"><i class="far fa-heart"> </i>325</span>
-                      </div>
-                      <div class="small-6 medium-6 marge-6 text-right">
-                        <div class="c-button c-button--course lh-14 f2">
-                          Siguiente clase:
-                          <span>Funciones</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                    ¡continuar curso!
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide padding-vertical-2">
-                <div class="c-course-card c-course-card--pri-alt br--large">
-                  <figure class="c-course-card__figure position-relative">
-                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                    <div class="c-course-card__progress-bar position-absolute width-100">
-                      <div style="width:50%" class="bg-pri-alt height-100"></div>
-                    </div>
-                  </figure>
-                  <div class="c-course-card__content flex-container fd-column padding-1 br--large">
-                    <div>
-                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                      <p class="fs-16 f2">Con Angela Hinostroza</p>
-                      <p class="fs-16 f2 lh-18">
-                        Lorem ipsum dolor sit amet, consect etu
-                        er adipiscing elit, sed diam nonummy
-                        nibh euismod nostrud .
-                      </p>
-                    </div>
-                    <div class="grid-x align-middle">
-                      <div class="small-6 medium-6 marge-6"> 
-                        <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
+                        <span class="c-course-card__likes f2"> <i class="fas fa-heart"></i> ${ course.likes }</span>
                       </div>
                       <div class="small-6 medium-6 marge-6 text-right">
                         <div class="c-button c-button--course lh-14 f2">
@@ -249,6 +105,9 @@
               </div>
             </div>
           </div>
+        </div>
+        <div v-else>
+          <p class="margin-bottom-0 text-center f2 dark fs-21">Aun sin cursos, inscribete en alguno.</p>
         </div>
       </div>
     </div>
@@ -284,11 +143,11 @@
                     </div>
                     <div class="grid-x align-middle">
                       <div class="small-6 medium-6 marge-6">
-                        <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
+                        <span class="c-course-card__likes f2"><i class="fas fa-heart"></i>325</span>
                       </div>
                       <div class="small-6 medium-6 marge-6 text-right">
                         <div class="c-button c-button--course-price lh-14 f2 w-xbold">
-                          S/ 35.00 <i class="far fa-shopping-cart"></i>
+                          S/ 35.00 <i class="fas fa-shopping-cart"></i>
                         </div>
                       </div>
                     </div>
@@ -402,29 +261,7 @@
           <h2 class="margin-bottom-1">
             <p class="white fs-50 c-lh--50 margin-bottom-0">LÍDERES MAB</p>
           </h2>
-          <div class="c-slider">
-            <div id="slider-lideres" class="c-slider swiper-container margin-bottom-2">
-              <div class="swiper-wrapper">
-                <div v-for="lider of lideres" :key="lider.id" class="swiper-slide white">
-                  <div class="flex-container flex-dir-column align-middle text-center height-100">
-                    <div class="c-lider-avatar margin-bottom-1">
-                      <div class="c-profile-card c-profile-card--warning position-relative height-100 flex-container align-center align-bottom">
-                        <figure class="c-profile-card__content position-relative" :class="'padding-horizontal-' + lider.padding">
-                          <img class="of--contain" :style="'width: ' + lider.width + 'px;'" :src="'{{ theme.link }}/static/images/home/leaders/' + lider.avatar + '.png'" alt="">
-                        </figure>
-                      </div>
-                    </div>
-                    <div>
-                      <h3 class="fs-25 f2 w-xbold white">${ lider.name }</h3>
-                      <p class="fs-21 white f2">${ lider.job }</p>
-                      <a class="c-link c-link--warning f2 w-bold fs-18" :href="lider.profile">Leer más</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="c-slider__pagination swiper-pagination"></div>
-          </div>
+          <lideres :body="lideres" />
         </div>
       </div>
     </div>
@@ -466,8 +303,8 @@
                     </div>
                     <div class="cell large-5">
                       <div class="position-relative flex-container align-center">
-                        <img src="{{ theme.link }}/static/images/my-courses/resume.png" alt="" class="br--large of--contain position-relative"> 
-                        <img src="{{ theme.link }}/static/images/my-courses/circle.png" alt="" class="c-banner__heart position-absolute of--contain">  
+                        <img src="{{ theme.link }}/static/images/courses/mine/services/1.png" alt="" class="br--large of--contain position-relative"> 
+                        <img src="{{ theme.link }}/static/images/courses/mine/services/vector1.png" alt="" class="c-banner__heart position-absolute of--contain">  
                       </div>
                     </div>
                   </div>
@@ -503,8 +340,8 @@
                     </div>
                     <div class="cell large-5">
                       <div class="position-relative flex-container align-center">
-                        <img src="{{ theme.link }}/static/images/my-courses/resume.png" alt="" class="br--large of--contain position-relative"> 
-                        <img src="{{ theme.link }}/static/images/my-courses/circle.png" alt="" class="c-banner__heart position-absolute of--contain">  
+                        <img src="{{ theme.link }}/static/images/courses/mine/services/2.png" alt="" class="br--large of--contain position-relative"> 
+                        <img src="{{ theme.link }}/static/images/home/heart.png" alt="" class="c-banner__heart position-absolute of--contain">  
                       </div>
                     </div>
                   </div>
@@ -540,8 +377,39 @@
                     </div>
                     <div class="cell large-5">
                       <div class="position-relative flex-container align-center">
-                        <img src="{{ theme.link }}/static/images/my-courses/resume.png" alt="" class="br--large of--contain position-relative"> 
-                        <img src="{{ theme.link }}/static/images/my-courses/circle.png" alt="" class="c-banner__heart position-absolute of--contain">  
+                        <img src="{{ theme.link }}/static/images/courses/mine/services/3.png" alt="" class="br--large of--contain position-relative"> 
+                        <img src="{{ theme.link }}/static/images/home/bolb.png" alt="" class="c-banner__heart position-absolute of--contain">  
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="grid-x align-middle">
+                    <div class="cell large-7">
+                      <div class="c-other-services__info margin-bottom-2">
+                        <p class="warning f2 fs-35 w-xbold">Nuestros programas</p>
+                        <ul class="white fs-18 f2">
+                          <li>MAB Empresas</li>
+                          <li>
+                            MAB Socia
+                          </li>
+                          <li>
+                            MAB Talks
+                          </li>
+                          <li>
+                            aMABlemente
+                          </li>
+                          <li>
+                            MAB Click
+                          </li>
+                        </ul>
+                        <a href="" class="c-link c-link--warning f2 w-bold fs-21">Conocer más</a>
+                      </div>
+                    </div>
+                    <div class="cell large-5">
+                      <div class="position-relative flex-container align-center">
+                        <img src="{{ theme.link }}/static/images/courses/mine/services/4.png" alt="" class="br--large of--contain position-relative"> 
+                        <img src="{{ theme.link }}/static/images/home/cup.png" alt="" class="c-banner__heart position-absolute of--contain">  
                       </div>
                     </div>
                   </div>
@@ -551,17 +419,14 @@
             <div class="c-slider__pagination swiper-pagination"></div>
           </div>
         </div>
-        <div class="c-ws position-relative bg-warning br--large dark w-xbold f2 fs-21">
-          <img src="{{ theme.link }}/static/images/my-courses/ws.png" alt="" class="position-absolute"> 
+        <a href="https://api.whatsapp.com/send?phone={{information.wsp}}" target="_blank" class="c-ws position-relative bg-warning br--large dark w-xbold f2 fs-21 display-block">
+          <img src="{{ theme.link }}/static/images/courses/mine/whatsapp.png" alt="" class="position-absolute"> 
           <span>
             Escríbenos para
             tener acceso
           </span>
-        </div>
+        </a>
       </div>
     </div>
   </section>
-{% endblock %}
-
-{% block footer %}
 {% endblock %}

@@ -21,8 +21,7 @@ class CourseController{
                 'methods' => 'GET',
                 'callback' => array($this,'getMabCategories'),
                 'permission_callback' => function ($request) {
-                    // return ($request['_wpnonce']) ? true : false;
-                    return true;
+                    return ($request['_wpnonce']) ? true : false;
                 }
             ));
     
@@ -30,8 +29,7 @@ class CourseController{
                 'methods' => 'GET',
                 'callback' => array($this,'getMabCategories'),
                 'permission_callback' => function ($request) {
-                    // return ($request['_wpnonce']) ? true : false;
-                    return true;
+                    return ($request['_wpnonce']) ? true : false;
                 }
             ));
     

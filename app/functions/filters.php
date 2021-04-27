@@ -15,6 +15,7 @@ add_filter('timber/context', function($context) {
 
     $context['information']  = (object)[
         "phone" => get_field('phone', 'options'),
+        "wsp"   => get_field('wsp', 'options'),
         "email" => get_field('email', 'options')
     ];
 
