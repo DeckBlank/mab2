@@ -247,7 +247,7 @@
                         </button>
                         <form @submit="register($event)" class="c-form-new text-left margin-top-2">
                           <div class="c-form-new__input-container margin-bottom-1">
-                            <label class="w-bold f2 white" for="">Correo</label>
+                            <label class="w-bold f2 white" for="">Ingresa tu correo electrónico</label>
                             <input v-model="user.email.value" class="f2" type="text">
                             <p v-if="isWrongField('email')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
                               Correo vacio o no valido
@@ -260,6 +260,19 @@
                               Contraseña vacia o muy debil (+5 caracteres)
                             </p>
                           </div>
+                          <div class="c-form-new__input-container margin-bottom-1">
+                            <label class="w-bold f2 white" for="">Confirma tu contraseña</label>
+                            <input v-model="user.password.value" class="f2 input-reset" type="text">
+                            <p v-if="isWrongField('password')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
+                              Contraseña vacia
+                            </p>
+                          </div>
+                          <div class="c-form-new__terminos">
+                            <input v-model="user.terms" type="checkbox" value="acepted" /> <a href="" class="f2 warning"> Acepto los términos y Condiciones</a>
+                          </div>
+                          <p v-if="isWrongField('terms', false)" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                            Debe aceptar los términos y condiciones
+                          </p>
 
                           <div v-if="user.error" class="bg-pri-color white br--medium f2 text-center w-medium padding-1">${ user.error }</div>
 
@@ -267,13 +280,6 @@
                             :disabled="(user.loading) ? true : false"
                             class="c-button c-button--warning width-100 f2 margin-top-3"
                             :class="{'loading' : user.loading}">Registrarse</button>
-
-                          <div class="c-form-new__terminos text-center">
-                            <input v-model="user.terms" type="checkbox" value="acepted" /> <a href="" class="f2 warning"> Acepto los términos y Condiciones</a>
-                          </div>
-                          <p v-if="isWrongField('terms', false)" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                            Debe aceptar los términos y condiciones
-                          </p>
                         </form>
                         <div class="c-label-login warning f2 margin-top-1">
                           ¿Ya tienes una cuenta? <a :href="SITE_URL + '/access'" class="c-link--warning w-bold warning ">Inicia Sesión</a>
@@ -317,7 +323,7 @@
                             </label>
                           </div>
                         </div>
-                        <div v-if="isWrongField('sector')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">Debe elegir algun sector</div>
+                        <div v-if="isWrongField('sector')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">Debe elegir algún sector</div>
                       </div>
                     </div>
                   </div>
@@ -342,7 +348,7 @@
                         <h2 class="c-split-layout-content__title white margin-top-3 margin-bottom-0">
                           <span class="warning">¡Queremos conocerte mejor!</span>     
                         </h2>
-                        <h3 class="c-split-layout-content__subtitle margin-bottom-2 white fs-30">
+                        <h3 class="c-split-layout-content__subtitle margin-bottom-2 white fs-30 lh-30">
                           completa los siguientes datos     
                         </h3>
                         <form class="c-form-new c-form-new--warning text-left margin-top-2" action="">
