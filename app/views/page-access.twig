@@ -543,7 +543,7 @@
                             <label
                               @click="openModal('tambero')"
                               for="role-tambero"
-                              class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-warning black flex-container align-center-middle white margin-bottom-1"
+                              class="c-split-layout-content__round-box mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1"
                               :class="{'enable' : user.role.type == 'tambero'}">
                               <span class="c-lh--21 display-block">
                                 <strong class="w-xbold">Parte del programa
@@ -725,7 +725,7 @@
             </transition>
           </div>
 
-          <div v-if="modals.teacher.isOpened" class="c-mab-modal flex-container align-center-middle">
+          <div v-if="modals.teacher.isOpened" class="c-mab-modal c-mab-modal--mini flex-container align-center-middle">
             <div class="grid-x align-center width-100">
               <div class="cell small-10 medium-10 large-6">
                 <div class="c-mab-modal-content bg-white ">
@@ -734,7 +734,7 @@
                   </h3>
                   <div class="c-form-new">
                     <div class="c-form-new__input-container margin-bottom-2">
-                      <select v-model="modals.teacher.data.students.value" class="f2" name="" id="">
+                      <select v-model="modals.teacher.data.students.value" class="f2 border-dark" name="" id="">
                         <option value="" disabled>Elige un opción</option>
                         <option v-for="item of modals.teacher.students" :key="item.id"  :value="item">${ item }</option>
                       </select>
@@ -742,11 +742,11 @@
                     </div>
                     <div class="width-100 margin-top-2">
                       <div class="grid-x grid-margin-x grid-margin-y align-center">
-                        <div class="cell small-6 medium-4 large-4 text-left">
-                          <button class="c-button c-button--success c-button--arrow c-button--small width-100" @click="modals.teacher.isOpened = false">Volver</button>
+                        <div class="cell small-6 medium-6 large-6 text-left">
+                          <button class="c-button c-button--success c-button--arrow c-button--small width-100 float-r" @click="modals.teacher.isOpened = false">Volver</button>
                         </div>
-                        <div class="cell small-6 medium-4 large-4 text-right">
-                          <button class="c-button c-button--success c-button--arrow c-button--small width-100" @click="validateModal('teacher')">Continuar</button>
+                        <div class="cell small-6 medium-6 large-6 text-right">
+                          <button class="c-button c-button--success c-button--arrow c-button--small width-100 float-l" @click="validateModal('teacher')">Continuar</button>
                         </div>
                       </div>
                     </div>
@@ -755,7 +755,7 @@
               </div>
             </div>
           </div>
-          <div v-if="modals.tambero.isOpened" class="c-mab-modal flex-container align-center-middle">
+          <div v-if="modals.tambero.isOpened" class="c-mab-modal c-mab-modal--mini flex-container align-center-middle">
             <div class="grid-x align-center width-100">
               <div class="cell small-10 medium-10 large-6">
                 <div class="c-mab-modal-content bg-white ">
@@ -764,13 +764,13 @@
                   </h3>
                   <div class="c-form-new">
                     <div class="c-form-new__input-container margin-bottom-2">
-                      <select v-model="modals.tambero.data.department.value" @change="getProvincias" class="f2" name="" id="">
+                      <select v-model="modals.tambero.data.department.value" @change="getProvincias" class="f2 border-dark" name="" id="">
                         <option disabled value="" selected>Escoge tu departamento</option>
                         <option v-for="dep of modals.departments" :key="dep.id" :value="dep.nombre_ubigeo" >${ dep.nombre_ubigeo }</option>
                       </select>
                       <p v-if="isWrongModalField('department', 'tambero')" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Debe seleccionar una opción</p>
 
-                      <select v-model="modals.tambero.data.province.value" class="f2 margin-top-1" name="" id="">
+                      <select v-model="modals.tambero.data.province.value" class="f2 margin-top-1 border-dark" name="" id="">
                         <option disabled value="" selected>${ (modals.tambero.data.province.isLoading) ? 'Cargando...' :'Elige el nombre de tu tambo' }</option>
                         <option v-for="prov of modals.provinces" :key="prov.id" :value="prov.nombre_ubigeo" >${ prov.nombre_ubigeo }</option>
                       </select>
@@ -778,11 +778,11 @@
                     </div>
                     <div class="width-100 margin-top-2">
                       <div class="grid-x grid-margin-x grid-margin-y align-center">
-                        <div class="cell small-6 medium-4 large-4 text-left">
-                          <button class="c-button c-button--success c-button--arrow c-button--small width-100" @click="modals.tambero.isOpened = false">Volver</button>
+                        <div class="cell small-6 medium-6 large-6 text-left">
+                          <button class="c-button c-button--success c-button--arrow c-button--small width-100 float-r" @click="modals.tambero.isOpened = false">Volver</button>
                         </div>
-                        <div class="cell small-6 medium-4 large-4 text-right">
-                          <button class="c-button c-button--success c-button--arrow c-button--small width-100" @click="validateModal('tambero')">Continuar</button>
+                        <div class="cell small-6 medium-6 large-6 text-right">
+                          <button class="c-button c-button--success c-button--arrow c-button--small width-100 float-l" @click="validateModal('tambero')">Continuar</button>
                         </div>
                       </div>
                     </div>

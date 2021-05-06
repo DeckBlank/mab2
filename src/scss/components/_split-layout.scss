@@ -69,7 +69,8 @@
       @include transition;
 
       &.enable {
-        box-shadow: $secondary-color 0 0 0 5px;
+        // box-shadow: $secondary-color 0 0 0 5px;
+        background: $warning-color;
       }
     }
   }

@@ -61,6 +61,12 @@
       margin-bottom: 2rem;
     }
   }
+
+  &--mini {
+    .c-button {
+      max-width: 145px;
+    }
+  }
 }
 
 @include breakpoint(large) {

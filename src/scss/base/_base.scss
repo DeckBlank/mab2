@@ -175,6 +175,18 @@ body {
   text-align-last: left !important;
 }
 
+.float-r {
+  float: right;
+}
+
+.float-l {
+  float: left;
+}
+
+.border-dark {
+  border: 1px solid $dark !important;
+}
+
 @include breakpoint(large) {
   .desktop {
     display: block;
