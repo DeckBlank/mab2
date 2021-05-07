@@ -221,6 +221,18 @@
       }
     }
 
+    .c-metodology {
+      .c-advantages {
+        p {
+          line-height: 28px;
+          height: calc(100% - 80px);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+
     .c-testimony {
       padding-right: 4rem;
       padding-bottom: 4rem;
