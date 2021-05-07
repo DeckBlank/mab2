@@ -156,12 +156,15 @@
         <a v-if="logedUser" href="{{site.url}}/carrito" class="c-link c-link--white c-link--ho-warning margin-right-1">
           <i class="far fa-shopping-cart"></i>
         </a>
-        <a href="" class="c-item c-link c-link--white c-link--ho-warning f2 fs-18 w-sbold margin-right-1">Test Emocionales</a>
+        <a href="" class="c-item c-link c-link--white c-link--ho-warning f2 fs-18 w-sbold margin-right-1">Mis cursos</a>
         <profile v-if="logedUser"></profile>
         <a 
           v-else 
           href="{{site.url}}/access" 
           class="c-login br--medium f2 fs-18 c-lh--18 w-bold">Ingresar</a>
+          <a 
+          href="{{site.url}}/access" 
+          class="c-login br--medium f2 fs-18 c-lh--18 w-bold margin-left-1 desktop">Registrarse</a>
       </div>
     </nav>
   </div>

@@ -198,6 +198,29 @@
 
 @include breakpoint(large) {
   .c-section--home {
+
+    // .c-banner {
+    //   &__figure {
+    //     width: 110%;
+    //   }
+
+    //   &__img {
+    //     width: 130%;
+    //   }
+
+    //   &__content {
+    //     padding-bottom: 3rem;
+    //     padding-right: 1rem;
+    //   }
+
+    //   &__title {
+    //     .big {
+    //       font-size: 100px;
+    //       line-height: 90px;
+    //     }
+    //   }
+    // }
+
     .c-player {
       &__logo {
         height: 300px;
@@ -218,6 +241,18 @@
         left: -2%;
         top: -380px;
         margin-bottom: -380px;
+      }
+    }
+
+    .c-metodology {
+      .c-advantages {
+        p {
+          line-height: 28px;
+          height: calc(100% - 80px);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
       }
     }
 
