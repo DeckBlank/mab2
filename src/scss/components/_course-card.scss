@@ -27,6 +27,12 @@
   &__footer {
     padding: 0.5rem;
   }
+
+  &__likes {
+    svg {
+      margin-right: 0.2rem;
+    }
+  }
 }
 
 .c-course-card--secondary {
