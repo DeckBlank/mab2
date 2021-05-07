@@ -51,11 +51,12 @@
       }
 
       p {
-        font-size: $fs-16;
+        font-size: $fs-21;
       }
 
       &.enable {
-        box-shadow: $warning-color 0 0 0 5px;
+        // box-shadow: $warning-color 0 0 0 5px;
+        background: $warning-color;
       }
     }
 
@@ -68,7 +69,8 @@
       @include transition;
 
       &.enable {
-        box-shadow: $secondary-color 0 0 0 5px;
+        // box-shadow: $secondary-color 0 0 0 5px;
+        background: $warning-color;
       }
     }
   }
