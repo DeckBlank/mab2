@@ -123,6 +123,12 @@
       }
     }
   }
+
+  .c-international-brands {
+    .swiper-wrapper {
+      transition-timing-function: linear;
+    }
+  }
 }
 
 @include breakpoint(medium) {
