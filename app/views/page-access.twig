@@ -188,14 +188,7 @@
                           <span class="warning fs-30">inicia sesión</span><br>
                           y continúa creciendo con nosotros
                         </h1>
-                        <button @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
-                          <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
-                          <span class="f2">Continuar con facebook</span>
-                        </button>
-                        <button @click="authWithGoogle" class="c-btn-input-social w-medium width-100">
-                          <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
-                          <span class="f2">Continuar con google</span>
-                        </button>
+
                         <form @submit="login($event)" class="c-form-new text-left margin-top-1" action="">
                           <div class="c-form-new__input-container margin-bottom-1">
                             <label class="w-bold f2 white" for="">Correo</label>
@@ -212,14 +205,25 @@
                             </p>
                           </div>
 
-                          <a :href="SITE_URL + '/recuperar-contrasena'" class="c-link c-link--warning f2 text-center w-medium w-bold display-block">¿Olvidaste tu Contraseña?</a>
-                          <div v-if="user.error" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">${ user.error }</div>
+                          <a :href="SITE_URL + '/recuperar-contrasena'" class="c-link c-link--warning f2 text-left w-medium w-bold display-block">¿Olvidaste tu Contraseña?</a>
+                          <div v-if="user.error" class="margin-top-2 bg-pri-color white br--medium f2 text-left w-medium padding-1">${ user.error }</div>
 
                           <button
                             :disabled="(user.loading) ? true : false"
                             class="c-button c-button--warning width-100 f2 margin-top-1"
                             :class="{'loading' : user.loading}">Ingresar</button>
                         </form>
+                        <div class="margin-vertical-2 text-center f2 fs-18 white w-bold">
+                          O
+                        </div>
+                        <button @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
+                          <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
+                          <span class="f2">Continuar con facebook</span>
+                        </button>
+                        <button @click="authWithGoogle" class="c-btn-input-social w-medium width-100">
+                          <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
+                          <span class="f2">Continuar con google</span>
+                        </button>
                         <div class="c-label-login warning f2 margin-top-1">
                           ¿Aún no tienes cuenta? <a :href="SITE_URL + '/access?auth=register'" class="c-link c-link--warning w-bold">Registrate</a>
                         </div>
@@ -607,7 +611,8 @@
                         <div class="grid-x grid-margin-y grid-margin-x align-center">
                           <div v-for="category of categories" :key="category.id" class="cell small-6 medium-3 large-3">
                             <input v-model="user.categories.value" :id="'category-' + category.id" type="checkbox" :value="category.id" class="hide">
-                            <label
+                            <!-- antiguo c-mab-category   -->
+                            <!-- <label
                               :for="'category-' + category.id"
                               class="c-mab-category mab-shadow position-relative"
                               :class="[{'active' : user.categories.value.includes(category.id)}, 'c-mab-category--' + category.color]">
@@ -619,10 +624,10 @@
                                 :class="(category.color != 'warning') ? 'white' : 'dark'">
                                 <div class="c-mab-category__text flex-container align-center-middle width-100">${ category.name }</div>
                               </figcaption>
-                            </label>
+                            </label> -->
 
-                            <!-- Este seria el nuevo c-mab-category   -->
-                            <!-- <label class="c-mab-category mab-shadow" :class="[{'active' : user.categories.value.includes(category.id)}, 'c-mab-category--' + category.color]">
+                            <!-- nuevo c-mab-category   -->
+                            <label :for="'category-' + category.id" class="c-mab-category mab-shadow" :class="[{'active' : user.categories.value.includes(category.id)}, 'c-mab-category--' + category.color]">
                               <figure class="c-mab-category__img position-relative">
                                 <img class="width-100 height-100 object-cover" loading="lazy" :src="category.thumbnail.url" alt="">
                                 <div class="c-mab-category__gradient position-absolute width-100 height-100">
@@ -631,7 +636,7 @@
                               <figcaption class="c-mab-category__shade width-100 text-center flex-container" :class="(category.color != 'warning') ? 'white' : 'dark'" >
                                 <div class="c-mab-category__text flex-container align-center-middle width-100">${ category.name }</div>
                               </figcaption>
-                            </label> -->
+                            </label>
                           </div>
                         </div>
                         <div v-if="isWrongField('categories')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">Debe elegir al menos 3 categorías</div>
