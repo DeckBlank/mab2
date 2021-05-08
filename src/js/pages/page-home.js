@@ -145,7 +145,7 @@ const home = new Vue({
     },
     initBrandsSlider: function() {
       new Swiper('#slider-brands', {
-        speed: 1200,
+        speed: 3000,
         loop: true,
         freeMode: true,
         freeModeMomentum: false,

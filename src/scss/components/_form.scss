@@ -53,6 +53,11 @@
     select {
       text-align: center;
       text-align-last: center;
+      background-image: url('../images/black-triangle.png') !important;
+      background-color: $white;
+      background-size: 10px auto;
+      background-position: 95% center;
+      background-repeat: no-repeat;
     }
 
     .c-fake-input {

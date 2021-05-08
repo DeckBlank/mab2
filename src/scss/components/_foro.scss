@@ -1,0 +1,135 @@
+.c-foro {
+  border-radius: 20px;
+
+  .c-foro-head {
+    &__title {
+      padding: 0.3rem 0;
+      font-size: $fs-18;
+    }
+  }
+
+  .c-foro-body {
+    height: 400px;
+    padding: 1rem;
+
+    .c-foro-scroll {
+      overflow: auto;
+      padding: 0 1rem 0 1.5rem;
+    }
+
+    .c-foro-scroll::-webkit-scrollbar-thumb {
+      background: $dark;
+    }
+
+    .c-foro-scroll::-webkit-scrollbar-track {
+      background: $medium-gray;
+      border-radius: 10px;
+    }
+  }
+
+  .c-foro-footer {
+    box-shadow: 0 -2px 7px rgba($color: $black, $alpha: 0.5);
+    cursor: pointer;
+  }
+
+  .c-foro-theme {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid $gray;
+
+    &__title {
+      font-size: $fs-18;
+    }
+
+    &__info {
+      border-right: 1px solid $gray;
+      padding-right: 1rem;
+    }
+
+    &__circle {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+    }
+  }
+
+  &__subtitle {
+    box-sizing: border-box;
+  }
+
+  .c-comment {
+    background: $light-gray;
+    padding: 1rem 0;
+
+    &__figure {
+      width: 40px;
+      height: 40px;
+      margin: 0 auto;
+
+      img {
+        border-radius: 50%;
+      }
+    }
+
+    .c-comment-content {
+      padding: 0 0.5rem;
+    }
+
+    &__like {
+      padding-left: 0.5rem;
+    }
+  }
+
+  .c-comment-box {
+    background: $light-gray;
+    padding: 1rem 2rem;
+
+    input,
+    textarea {
+      border: none;
+      border-radius: 20px;
+      font-family: $font-family-secondary;
+    }
+
+    textarea {
+      height: 100px;
+    }
+
+    &__assets {
+      padding: 0.5rem 0;
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-foro {
+    .c-foro-head {
+      &__title {
+        font-size: $fs-21;
+      }
+    }
+
+    .c-foro-body {
+      padding: 1rem 1rem 1rem;
+      height: 450px;
+    }
+
+    .c-foro-theme {
+      padding: 0.8rem 0;
+
+      &__title {
+        font-size: $fs-21;
+      }
+    }
+
+    .c-comment {
+      background: $light-gray;
+      padding: 1rem 0;
+
+      &__figure {
+        width: 120px;
+        height: 120px;
+      }
+    }
+  }
+}

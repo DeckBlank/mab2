@@ -20,7 +20,7 @@
         },
         {
             "key": "field_5e7ac2cf67aa6",
-            "label": "Teléfono \/ Celular",
+            "label": "Teléfono \/ Celular (principal)",
             "name": "phone",
             "type": "text",
             "instructions": "",
@@ -38,9 +38,9 @@
             "maxlength": ""
         },
         {
-            "key": "field_6085f1533f6c8",
-            "label": "Whatsapp",
-            "name": "wsp",
+            "key": "field_6096d1b045493",
+            "label": "Teléfono \/ Celular (secundario)",
+            "name": "phone_alt",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -148,5 +148,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1619390823
+    "modified": 1620496875
 }

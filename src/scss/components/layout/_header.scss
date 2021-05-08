@@ -49,16 +49,9 @@
   }
 
   .c-login {
-    background-color: $primary-color;
-    color: $white;
     padding: 0.35rem 1rem;
 
     @include transition(0.3s);
-
-    &:hover {
-      background-color: $primary-alt;
-      color: $white;
-    }
   }
 
   .c-user {

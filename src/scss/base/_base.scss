@@ -144,6 +144,10 @@ body {
   line-height: 18px !important;
 }
 
+.lh-30 {
+  line-height: 30px;
+}
+
 .fd-column {
   flex-direction: column;
 }
@@ -169,6 +173,36 @@ body {
 
 .text-last-left {
   text-align-last: left !important;
+}
+
+.bb-warning {
+  border-bottom: 1px solid $warning-color;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-left: 7px solid $secondary-color;
+  border-bottom: 5px solid transparent;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.triangle--down {
+  transform: rotate(90deg);
+}
+
+.float-r {
+  float: right;
+}
+
+.float-l {
+  float: left;
+}
+
+.border-dark {
+  border: 1px solid $dark !important;
 }
 
 @include breakpoint(large) {

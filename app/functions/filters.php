@@ -14,9 +14,9 @@ add_filter('timber/context', function($context) {
     $context['social_menu']  = new \Timber\Menu( 'social-menu' );
 
     $context['information']  = (object)[
-        "phone" => get_field('phone', 'options'),
-        "wsp"   => get_field('wsp', 'options'),
-        "email" => get_field('email', 'options')
+        "phone"     => get_field('phone', 'options'),
+        "phone_alt" => get_field('phone_alt', 'options'),
+        "email"     => get_field('email', 'options')
     ];
 
     $context['public_sector'] = Timber::get_terms([

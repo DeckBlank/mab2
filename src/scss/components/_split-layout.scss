@@ -51,15 +51,16 @@
       }
 
       p {
-        font-size: $fs-16;
+        font-size: $fs-21;
       }
 
       &.enable {
-        box-shadow: $warning-color 0 0 0 5px;
+        // box-shadow: $warning-color 0 0 0 5px;
+        background: $warning-color;
       }
     }
 
-    &__round-box {
+    .c-role-card {
       border-radius: 10px;
       font-size: $fs-16;
       padding: 1.5rem 2rem;
@@ -68,7 +69,8 @@
       @include transition;
 
       &.enable {
-        box-shadow: $secondary-color 0 0 0 5px;
+        // box-shadow: $secondary-color 0 0 0 5px;
+        background: $warning-color;
       }
     }
   }
@@ -107,7 +109,7 @@
         }
       }
 
-      &__round-box {
+      .c-role-card {
         font-size: $fs-18;
         margin-left: 2rem;
         padding: 1.5rem 4rem 1.5rem 2rem;
