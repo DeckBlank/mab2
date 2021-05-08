@@ -18,6 +18,10 @@
   .c-content {
     @include triangle(left, top, 10rem, -80px, 50px, 20px, 50px);
 
+    &::after {
+      opacity: 0;
+    }
+
     &::before {
       content: '';
       width: calc(68px - 20px);
@@ -28,6 +32,7 @@
       background-size: contain;
       background-image: url('../images/vectors/topic/bolbs.png?key=20200413');
       background-repeat: no-repeat;
+      display: none;
     }
   }
 
@@ -68,6 +73,14 @@
 
   .c-actions {
     flex-wrap: wrap;
+
+    &__reactions {
+      justify-content: center;
+    }
+
+    &__buttons {
+      margin-top: 1rem;
+    }
   }
 
   .c-questions-toggle {
@@ -97,6 +110,16 @@
 
 @include breakpoint(large) {
   .c-section--topic {
+    .c-actions {
+      &__reactions {
+        justify-content: flex-start;
+      }
+
+      &__buttons {
+        margin-top: 0;
+      }
+    }
+
     .c-questions-toggle {
       margin-top: 0;
       width: auto;

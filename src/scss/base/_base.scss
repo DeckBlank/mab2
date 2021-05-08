@@ -132,6 +132,10 @@ body {
   line-height: 50px;
 }
 
+.lh-65 {
+  line-height: 65px;
+}
+
 .lh-25 {
   line-height: 27px;
 }
@@ -162,6 +166,10 @@ body {
   border-bottom-right-radius: 20px;
 }
 
+.br-10 {
+  border-radius: 10px !important;
+}
+
 .object-cover {
   object-fit: cover;
   object-position: center;
@@ -185,6 +193,12 @@ body {
 
 .border-dark {
   border: 1px solid $dark !important;
+}
+
+.hover-sec-color {
+  &:hover {
+    color: $secondary-alt;
+  }
 }
 
 @include breakpoint(large) {

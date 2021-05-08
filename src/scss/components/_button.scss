@@ -156,7 +156,17 @@
 
   &--mab-warning-black {
     background: $warning-color;
-    color: $black;
+    // color: $black;
+    color: $dark;
+  }
+
+  &--primary-alt-white {
+    background: $primary-alt;
+    color: $white;
+
+    &:hover {
+      color: $white;
+    }
   }
 
   &--success {
@@ -164,6 +174,10 @@
     color: $white;
 
     @include b-radious(10px);
+
+    &:hover {
+      color: $white;
+    }
   }
 
   // ----------

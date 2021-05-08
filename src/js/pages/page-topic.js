@@ -98,15 +98,16 @@ const topic = new Vue({
     this.topicID      = this.$refs.topic.getAttribute('data-id');
     this.area         = this.$refs.topic.getAttribute('data-area');
     this.course_link  = `${this.SITE_URL}/curso/${this.metas.get('course_slug')}?sector=${this.metas.get('sector')}`;
+    this.hideLoading();
     
-    this.isUserAuthOnTopic(this.metas.get('course_id'))
-    this.getLikes();
-    this.getComments();
+    // this.isUserAuthOnTopic(this.metas.get('course_id'))
+    // this.getLikes();
+    // this.getComments();
     
-    if(this.logedUser){
-      this.getQuestions();
-      this.saveViewLog(this.metas.get('course_id'));
-    }
+    // if(this.logedUser){
+    //   this.getQuestions();
+    //   this.saveViewLog(this.metas.get('course_id'));
+    // }
   },
   methods: {
     ...baseActions(),
