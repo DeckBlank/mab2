@@ -42,55 +42,55 @@
     line-height: 15px;
     height: 100%;
   }
-}
 
-.c-mab-category--secondary {
-  .c-mab-category__gradient {
-    background: $secondary-color;
+  &--secondary {
+    .c-mab-category__gradient {
+      background: $secondary-color;
+    }
+
+    .c-mab-category__text {
+      background: $secondary-color;
+    }
   }
 
-  .c-mab-category__text {
-    background: $secondary-color;
-  }
-}
+  &--alert {
+    .c-mab-category__gradient {
+      background: $alert-color;
+    }
 
-.c-mab-category--alert {
-  .c-mab-category__gradient {
-    background: $alert-color;
-  }
-
-  .c-mab-category__text {
-    background: $alert-color;
-  }
-}
-
-.c-mab-category--warning {
-  .c-mab-category__gradient {
-    background: $warning-color;
+    .c-mab-category__text {
+      background: $alert-color;
+    }
   }
 
-  .c-mab-category__text {
-    background: $warning-color;
-  }
-}
+  &--warning {
+    .c-mab-category__gradient {
+      background: $warning-color;
+    }
 
-.c-mab-category--success {
-  .c-mab-category__gradient {
-    background: $success-color;
-  }
-
-  .c-mab-category__text {
-    background: $success-color;
-  }
-}
-
-.c-mab-category--pri-alt {
-  .c-mab-category__gradient {
-    background: $primary-alt;
+    .c-mab-category__text {
+      background: $warning-color;
+    }
   }
 
-  .c-mab-category__text {
-    background: $primary-alt;
+  &--success {
+    .c-mab-category__gradient {
+      background: $success-color;
+    }
+
+    .c-mab-category__text {
+      background: $success-color;
+    }
+  }
+
+  &--pri-alt {
+    .c-mab-category__gradient {
+      background: $primary-alt;
+    }
+
+    .c-mab-category__text {
+      background: $primary-alt;
+    }
   }
 }
 

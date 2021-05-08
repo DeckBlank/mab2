@@ -156,11 +156,11 @@
 
   &--mab-warning-black {
     background: $warning-color;
-    color: $black;
+    color: $dark;
 
     &:hover,
     &:focus {
-      color: $black;
+      color: $dark;
       background-color: $warning-alt;
     }
   }
