@@ -95,6 +95,10 @@ new Vue({
           value: '',
           isValid: false,
         },
+        passwordConfirm: {
+          value: '',
+          isValid: false,
+        },
         terms: false,
 
         sector: {
@@ -191,6 +195,8 @@ new Vue({
           }
         },
       },
+
+      isLoadingStep: false,
     }
   },
   computed: {
@@ -214,8 +220,6 @@ new Vue({
         },1000)
       } else if (this.view == 'step-1') {
         this.getCountries();
-      } else if (this.view == 'step-3') {
-        this.getCategories();
       }
     },
 
@@ -228,6 +232,15 @@ new Vue({
       } else {
         this.user.password.isValid = (this.user.password.value.length && this.user.password.value.length >= 5) ? true : false;
       }
+    },
+    'user.passwordConfirm.value' : function() {
+      this.user.passwordConfirm.isValid = (
+          this.user.passwordConfirm.value.length &&
+          this.user.passwordConfirm.value.length >= 5 &&
+          this.user.passwordConfirm.value == this.user.password.value
+        )
+        ? true
+        : false;
     },
 
     'user.sector.value' : function() {
@@ -265,8 +278,6 @@ new Vue({
     'user.categories' : {
       handler: function() {
         this.user.categories.isValid = (this.user.categories.value.length && this.user.categories.value.length >= 3) ? true : false;
-
-        this.getSubcategories();
       },
       deep : true,
     },
@@ -363,7 +374,9 @@ new Vue({
         throw err;
       })
     },
-    getCategories: function() {
+    getCategories: function(step) {
+      this.isLoadingStep = true;
+
       fetch(`${ this.API }/courses/mab_categories?_wpnonce=${ mab.nonce }`)
       .then(res => {
         if (res.status >= 200 && res.status < 300) {
@@ -376,12 +389,19 @@ new Vue({
         if (response.status) {
           this.categories = response.data;
         }
+
+        window.setTimeout(() => {
+          this.isLoadingStep = false;
+          this.view = `step-${ step }`;
+        }, 1000)
       })
       .catch(err => {
-        throw err;
+        this.isLoadingStep = false; throw err;
       })
     },
-    getSubcategories: function() {
+    getSubcategories: function(step) {
+      this.isLoadingStep = true;
+
       fetch(`${ this.API }/courses/mab_subcategories?categories=${ this.user.categories.value.join(',') }&_wpnonce=${ mab.nonce }`)
       .then(res => {
         if (res.status >= 200 && res.status < 300) {
@@ -394,9 +414,14 @@ new Vue({
         if (response.status) {
           this.subcategories = response.data;
         }
+
+        window.setTimeout(() => {
+          this.isLoadingStep = false;
+          this.view = `step-${ step }`;
+        }, 1000)
       })
       .catch(err => {
-        throw err;
+        this.isLoadingStep = false; throw err;
       })
     },
 
@@ -453,10 +478,10 @@ new Vue({
 
         case 2: {
             isValid = this.user.role.isValid &&
-              ((this.user.role.type == 'teacher') ? this.modals.teacher.data.students.isValid : true) &&
+              ((this.user.role.type == 'teacher' || this.user.role.type == 'tutor') ? this.modals.teacher.data.students.isValid : true) &&
               ((this.user.role.type == 'tambero') ? this.modals.tambero.data.department.isValid && this.modals.tambero.data.province.isValid : true);
 
-            if (this.user.role.type == 'teacher') {
+            if (this.user.role.type == 'teacher' || this.user.role.type == 'tutor') {
               this.user.role.error = (!this.modals.teacher.data.students.isValid)
                 ? 'Debe especificar la cantidad de estudiantes a cargo'
                 : '';
@@ -500,14 +525,24 @@ new Vue({
         case 3:
           if ( !this.validateStep(2) ) return true;
 
-          this.view     = `step-${ step }`;
+          if (!this.categories.length) {
+            this.getCategories(3);
+          } else {
+            this.view = `step-${ step }`;
+          }
+
           this.user.try = false;
           break;
 
         case 4:
           if ( !this.validateStep(3) ) return true;
 
-          this.view     = `step-${ step }`;
+          if (!this.subcategories.length) {
+            this.getSubcategories(4);
+          } else {
+            this.view = `step-${ step }`;
+          }
+
           this.user.try = false;
           break;
       }
@@ -525,16 +560,18 @@ new Vue({
 
         if (this.modals.teacher.data.students.isValid) {
           this.modals.teacher.isOpened = false;
-          this.view = 'step-3';
           this.user.try = false;
+
+          this.getCategories(3);
         }
       } else {
         this.modals.tambero.data.try = true;
 
         if (this.modals.tambero.data.department.isValid && this.modals.tambero.data.province.isValid) {
           this.modals.tambero.isOpened = false;
-          this.view = 'step-3';
           this.user.try = false;
+
+          this.getCategories(3);
         }
       }
     },
@@ -633,7 +670,7 @@ new Vue({
           }));
           formData.append('role', JSON.stringify({
             type : this.user.role.type,
-            extension : (this.user.role.type == 'teacher')
+            extension : (this.user.role.type == 'teacher' || this.user.role.type == 'tutor')
               ? {
                   students : this.modals.teacher.data.students.value,
                 }
