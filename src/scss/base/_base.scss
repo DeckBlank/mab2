@@ -144,6 +144,10 @@ body {
   line-height: 18px !important;
 }
 
+.lh-30 {
+  line-height: 30px;
+}
+
 .fd-column {
   flex-direction: column;
 }
@@ -187,6 +191,18 @@ body {
 
 .triangle--down {
   transform: rotate(90deg);
+}
+
+.float-r {
+  float: right;
+}
+
+.float-l {
+  float: left;
+}
+
+.border-dark {
+  border: 1px solid $dark !important;
 }
 
 @include breakpoint(large) {

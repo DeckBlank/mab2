@@ -17,7 +17,8 @@
 
   &__shade,
   &__gradient {
-    border-radius: 20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     bottom: 0;
     left: 0;
     align-items: flex-end;

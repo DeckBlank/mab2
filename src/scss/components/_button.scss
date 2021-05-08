@@ -157,6 +157,12 @@
   &--mab-warning-black {
     background: $warning-color;
     color: $dark;
+
+    &:hover,
+    &:focus {
+      color: $dark;
+      background-color: $warning-alt;
+    }
   }
 
   &--success {

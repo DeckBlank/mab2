@@ -183,19 +183,12 @@
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
                     <div class="grid-x align-center">
-                      <div class="cell large-7">
+                      <div class="cell large-6">
                         <h1 class="c-split-layout-content__title margin-bottom-2 white fs-35 c-lh--35">
                           <span class="warning fs-30">inicia sesión</span><br>
                           y continúa creciendo con nosotros
                         </h1>
-                        <button @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
-                          <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
-                          <span class="f2">Continuar con facebook</span>
-                        </button>
-                        <button @click="authWithGoogle" class="c-btn-input-social w-medium width-100">
-                          <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
-                          <span class="f2">Continuar con google</span>
-                        </button>
+
                         <form @submit="login($event)" class="c-form-new text-left margin-top-1" action="">
                           <div class="c-form-new__input-container margin-bottom-1">
                             <label class="w-bold f2 white" for="">Correo</label>
@@ -212,14 +205,25 @@
                             </p>
                           </div>
 
-                          <a :href="SITE_URL + '/recuperar-contrasena'" class="c-link c-link--warning f2 text-center w-medium w-bold display-block">¿Olvidaste tu Contraseña?</a>
-                          <div v-if="user.error" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">${ user.error }</div>
+                          <a :href="SITE_URL + '/recuperar-contrasena'" class="c-link c-link--warning f2 text-left w-medium w-bold display-block">¿Olvidaste tu Contraseña?</a>
+                          <div v-if="user.error" class="margin-top-2 bg-pri-color white br--medium f2 text-left w-medium padding-1">${ user.error }</div>
 
                           <button
                             :disabled="(user.loading) ? true : false"
                             class="c-button c-button--warning width-100 f2 margin-top-1"
                             :class="{'loading' : user.loading}">Ingresar</button>
                         </form>
+                        <div class="margin-vertical-2 text-center f2 fs-18 white w-bold">
+                          O
+                        </div>
+                        <button @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
+                          <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
+                          <span class="f2">Continuar con facebook</span>
+                        </button>
+                        <button @click="authWithGoogle" class="c-btn-input-social w-medium width-100">
+                          <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
+                          <span class="f2">Continuar con google</span>
+                        </button>
                         <div class="c-label-login warning f2 margin-top-1">
                           ¿Aún no tienes cuenta? <a :href="SITE_URL + '/access?auth=register'" class="c-link c-link--warning w-bold">Registrate</a>
                         </div>
@@ -247,7 +251,7 @@
                         </button>
                         <form @submit="register($event)" class="c-form-new text-left margin-top-2">
                           <div class="c-form-new__input-container margin-bottom-1">
-                            <label class="w-bold f2 white" for="">Correo</label>
+                            <label class="w-bold f2 white" for="">Ingresa tu correo electrónico</label>
                             <input v-model="user.email.value" class="f2" type="text">
                             <p v-if="isWrongField('email')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
                               Correo vacio o no valido
@@ -255,11 +259,24 @@
                           </div>
                           <div class="c-form-new__input-container margin-bottom-1">
                             <label class="w-bold f2 white" for="">Contraseña</label>
-                            <input v-model="user.password.value" class="f2" type="text">
+                            <input v-model="user.password.value" class="f2" type="password">
                             <p v-if="isWrongField('password')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
                               Contraseña vacia o muy debil (+5 caracteres)
                             </p>
                           </div>
+                          <div class="c-form-new__input-container margin-bottom-1">
+                            <label class="w-bold f2 white" for="">Confirma tu contraseña</label>
+                            <input v-model="user.passwordConfirm.value" class="f2 input-reset" type="password">
+                            <p v-if="isWrongField('passwordConfirm') && user.password.value.length >= 5" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
+                              ${ (!user.passwordConfirm.value.length) ? 'Contraseña vacia' : 'Las contraseñas no coiciden' }
+                            </p>
+                          </div>
+                          <div class="c-form-new__terminos">
+                            <input v-model="user.terms" type="checkbox" value="acepted" /> <a href="" class="f2 warning"> Acepto los términos y Condiciones</a>
+                          </div>
+                          <p v-if="isWrongField('terms', false)" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                            Debe aceptar los términos y condiciones
+                          </p>
 
                           <div v-if="user.error" class="bg-pri-color white br--medium f2 text-center w-medium padding-1">${ user.error }</div>
 
@@ -267,13 +284,6 @@
                             :disabled="(user.loading) ? true : false"
                             class="c-button c-button--warning width-100 f2 margin-top-3"
                             :class="{'loading' : user.loading}">Registrarse</button>
-
-                          <div class="c-form-new__terminos text-center">
-                            <input v-model="user.terms" type="checkbox" value="acepted" /> <a href="" class="f2 warning"> Acepto los términos y Condiciones</a>
-                          </div>
-                          <p v-if="isWrongField('terms', false)" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                            Debe aceptar los términos y condiciones
-                          </p>
                         </form>
                         <div class="c-label-login warning f2 margin-top-1">
                           ¿Ya tienes una cuenta? <a :href="SITE_URL + '/access'" class="c-link--warning w-bold warning ">Inicia Sesión</a>
@@ -317,7 +327,7 @@
                             </label>
                           </div>
                         </div>
-                        <div v-if="isWrongField('sector')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">Debe elegir algun sector</div>
+                        <div v-if="isWrongField('sector')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">Debe elegir algún sector</div>
                       </div>
                     </div>
                   </div>
@@ -342,7 +352,7 @@
                         <h2 class="c-split-layout-content__title white margin-top-3 margin-bottom-0">
                           <span class="warning">¡Queremos conocerte mejor!</span>     
                         </h2>
-                        <h3 class="c-split-layout-content__subtitle margin-bottom-2 white fs-30">
+                        <h3 class="c-split-layout-content__subtitle margin-bottom-2 white fs-30 lh-30">
                           completa los siguientes datos     
                         </h3>
                         <form class="c-form-new c-form-new--warning text-left margin-top-2" action="">
@@ -470,6 +480,7 @@
                           <div class="cell medium-6 large-6 align-self-stretch">
                             <input v-model="user.role.type" id="role-tutor" type="radio" value="tutor" class="hide" />
                             <label
+                              @click="openModal('teacher')"
                               for="role-tutor"
                               class="c-role-card mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white height-100"
                               :class="{'enable' : user.role.type == 'tutor'}">
@@ -579,7 +590,9 @@
                       </div>
                     </div>
                     <div class="cell small-6 medium-3 large-3 text-right">
-                      <button class="c-button c-button--warning-success c-button--arrow w-xbold " @click="nextStep(3)">Siguiente ></button>
+                      <button :disabled="isLoadingStep" class="c-button c-button--warning-success c-button--arrow w-xbold " @click="nextStep(3)">
+                        ${ (isLoadingStep) ? 'Procesando...' : 'Siguiente >' }
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -601,22 +614,7 @@
                         <div class="grid-x grid-margin-y grid-margin-x align-center">
                           <div v-for="category of categories" :key="category.id" class="cell small-6 medium-3 large-3">
                             <input v-model="user.categories.value" :id="'category-' + category.id" type="checkbox" :value="category.id" class="hide">
-                            <label
-                              :for="'category-' + category.id"
-                              class="c-mab-category mab-shadow position-relative"
-                              :class="[{'active' : user.categories.value.includes(category.id)}, 'c-mab-category--' + category.color]">
-                              <img class="c-mab-category__img width-100 height-100" loading="lazy" :src="category.thumbnail.url" alt="">
-                              <div class="c-mab-category__gradient position-absolute width-100 height-100">
-                              </div>
-                              <figcaption
-                                class="c-mab-category__shade position-absolute width-100 height-100 text-center flex-container"
-                                :class="(category.color != 'warning') ? 'white' : 'dark'">
-                                <div class="c-mab-category__text flex-container align-center-middle width-100">${ category.name }</div>
-                              </figcaption>
-                            </label>
-
-                            <!-- Este seria el nuevo c-mab-category   -->
-                            <!-- <label class="c-mab-category mab-shadow" :class="[{'active' : user.categories.value.includes(category.id)}, 'c-mab-category--' + category.color]">
+                            <label :for="'category-' + category.id" class="c-mab-category mab-shadow" :class="[{'active' : user.categories.value.includes(category.id)}, 'c-mab-category--' + category.color]">
                               <figure class="c-mab-category__img position-relative">
                                 <img class="width-100 height-100 object-cover" loading="lazy" :src="category.thumbnail.url" alt="">
                                 <div class="c-mab-category__gradient position-absolute width-100 height-100">
@@ -625,7 +623,7 @@
                               <figcaption class="c-mab-category__shade width-100 text-center flex-container" :class="(category.color != 'warning') ? 'white' : 'dark'" >
                                 <div class="c-mab-category__text flex-container align-center-middle width-100">${ category.name }</div>
                               </figcaption>
-                            </label> -->
+                            </label>
                           </div>
                         </div>
                         <div v-if="isWrongField('categories')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">Debe elegir al menos 3 categorías</div>
@@ -652,7 +650,9 @@
                       </div>
                     </div>
                     <div class="cell small-6 medium-3 large-3 text-right">
-                      <button class="c-button c-button--black-warning c-button--arrow w-xbold " @click="nextStep(4)">Siguiente ></button>
+                      <button :disabled="isLoadingStep" class="c-button c-button--black-warning c-button--arrow w-xbold " @click="nextStep(4)">
+                        ${ (isLoadingStep) ? 'Procesando...' : 'Siguiente >' }
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -719,7 +719,7 @@
             </transition>
           </div>
 
-          <div v-if="modals.teacher.isOpened" class="c-mab-modal flex-container align-center-middle">
+          <div v-if="modals.teacher.isOpened" class="c-mab-modal c-mab-modal--mini flex-container align-center-middle">
             <div class="grid-x align-center width-100">
               <div class="cell small-10 medium-10 large-6">
                 <div class="c-mab-modal-content bg-white ">
@@ -728,7 +728,7 @@
                   </h3>
                   <div class="c-form-new">
                     <div class="c-form-new__input-container margin-bottom-2">
-                      <select v-model="modals.teacher.data.students.value" class="f2" name="" id="">
+                      <select v-model="modals.teacher.data.students.value" class="f2 border-dark" name="" id="">
                         <option value="" disabled>Elige un opción</option>
                         <option v-for="item of modals.teacher.students" :key="item.id"  :value="item">${ item }</option>
                       </select>
@@ -736,11 +736,11 @@
                     </div>
                     <div class="width-100 margin-top-2">
                       <div class="grid-x grid-margin-x grid-margin-y align-center">
-                        <div class="cell small-6 medium-4 large-4 text-left">
-                          <button class="c-button c-button--success c-button--arrow c-button--small width-100" @click="modals.teacher.isOpened = false">Volver</button>
+                        <div class="cell small-6 medium-6 large-6 text-left">
+                          <button class="c-button c-button--success c-button--arrow c-button--small width-100 float-r" @click="modals.teacher.isOpened = false">Volver</button>
                         </div>
-                        <div class="cell small-6 medium-4 large-4 text-right">
-                          <button class="c-button c-button--success c-button--arrow c-button--small width-100" @click="validateModal('teacher')">Continuar</button>
+                        <div class="cell small-6 medium-6 large-6 text-right">
+                          <button class="c-button c-button--success c-button--arrow c-button--small width-100 float-l" @click="validateModal('teacher')">Continuar</button>
                         </div>
                       </div>
                     </div>
@@ -749,7 +749,7 @@
               </div>
             </div>
           </div>
-          <div v-if="modals.tambero.isOpened" class="c-mab-modal flex-container align-center-middle">
+          <div v-if="modals.tambero.isOpened" class="c-mab-modal c-mab-modal--mini flex-container align-center-middle">
             <div class="grid-x align-center width-100">
               <div class="cell small-10 medium-10 large-6">
                 <div class="c-mab-modal-content bg-white ">
@@ -758,13 +758,13 @@
                   </h3>
                   <div class="c-form-new">
                     <div class="c-form-new__input-container margin-bottom-2">
-                      <select v-model="modals.tambero.data.department.value" @change="getProvincias" class="f2" name="" id="">
+                      <select v-model="modals.tambero.data.department.value" @change="getProvincias" class="f2 border-dark" name="" id="">
                         <option disabled value="" selected>Escoge tu departamento</option>
                         <option v-for="dep of modals.departments" :key="dep.id" :value="dep.nombre_ubigeo" >${ dep.nombre_ubigeo }</option>
                       </select>
                       <p v-if="isWrongModalField('department', 'tambero')" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Debe seleccionar una opción</p>
 
-                      <select v-model="modals.tambero.data.province.value" class="f2 margin-top-1" name="" id="">
+                      <select v-model="modals.tambero.data.province.value" class="f2 margin-top-1 border-dark" name="" id="">
                         <option disabled value="" selected>${ (modals.tambero.data.province.isLoading) ? 'Cargando...' :'Elige el nombre de tu tambo' }</option>
                         <option v-for="prov of modals.provinces" :key="prov.id" :value="prov.nombre_ubigeo" >${ prov.nombre_ubigeo }</option>
                       </select>
@@ -772,11 +772,11 @@
                     </div>
                     <div class="width-100 margin-top-2">
                       <div class="grid-x grid-margin-x grid-margin-y align-center">
-                        <div class="cell small-6 medium-4 large-4 text-left">
-                          <button class="c-button c-button--success c-button--arrow c-button--small width-100" @click="modals.tambero.isOpened = false">Volver</button>
+                        <div class="cell small-6 medium-6 large-6 text-left">
+                          <button class="c-button c-button--success c-button--arrow c-button--small width-100 float-r" @click="modals.tambero.isOpened = false">Volver</button>
                         </div>
-                        <div class="cell small-6 medium-4 large-4 text-right">
-                          <button class="c-button c-button--success c-button--arrow c-button--small width-100" @click="validateModal('tambero')">Continuar</button>
+                        <div class="cell small-6 medium-6 large-6 text-right">
+                          <button class="c-button c-button--success c-button--arrow c-button--small width-100 float-l" @click="validateModal('tambero')">Continuar</button>
                         </div>
                       </div>
                     </div>

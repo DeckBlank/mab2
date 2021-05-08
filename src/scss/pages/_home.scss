@@ -123,6 +123,12 @@
       }
     }
   }
+
+  .c-international-brands {
+    .swiper-wrapper {
+      transition-timing-function: linear;
+    }
+  }
 }
 
 @include breakpoint(medium) {
@@ -218,6 +224,18 @@
         left: -2%;
         top: -380px;
         margin-bottom: -380px;
+      }
+    }
+
+    .c-metodology {
+      .c-advantages {
+        p {
+          line-height: 28px;
+          height: calc(100% - 80px);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
       }
     }
 
