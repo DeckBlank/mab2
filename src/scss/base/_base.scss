@@ -120,6 +120,10 @@ body {
   box-shadow: 1px 1px 10px rgba($black, 0.5);
 }
 
+.box-shadow-none {
+  box-shadow: none !important;
+}
+
 .desktop {
   display: none;
 }
@@ -130,6 +134,10 @@ body {
 
 .lh-50 {
   line-height: 50px;
+}
+
+.lh-65 {
+  line-height: 65px;
 }
 
 .lh-25 {
@@ -160,6 +168,10 @@ body {
 .br-bottom--large {
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
+}
+
+.br-10 {
+  border-radius: 10px !important;
 }
 
 .object-cover {
@@ -203,6 +215,12 @@ body {
 
 .border-dark {
   border: 1px solid $dark !important;
+}
+
+.hover-sec-color {
+  &:hover {
+    color: $secondary-alt;
+  }
 }
 
 @include breakpoint(large) {
