@@ -15,8 +15,9 @@
                 <span class="dark text-uppercase">¡HOLA,</span><br>
                 <span class="dark text-uppercase">${userName}!</span>
               </h1> 
-              <p class="dark f2 fs-25 lh-25"> En <strong class="w-xbold">MAB</strong>, estamos orgullosos de que
-                hayas decidido girar tu educación </p> 
+              <p class="dark f2 fs-25 lh-25">
+                En <strong class="w-xbold">MAB</strong>, estamos orgullosos de que hayas decidido girar tu educación
+              </p> 
             </div>
           </div> 
           <div class="cell large-8 margin-bottom-0">
@@ -43,7 +44,7 @@
                   el objetivo de disminuir brechas sociales,
                   educativas y tecnológicas en el país.
                 </p>
-                <a href="" class="c-link c-link--warning f2 w-bold fs-21">Ver más</a>
+                <a href="{{site.url}}/nosotros" class="c-link c-link--warning f2 w-bold fs-21">Ver más</a>
               </div>
             </div>
             <div class="cell large-7">
@@ -63,7 +64,19 @@
           <p class="dark fs-50 lh-40 margin-bottom-0">continúa tu aprendizaje</p>
           <p class="dark fs-25 margin-bottom-0 f2 text-uppercase">tus cursos</p> 
         </h2>
-        <div v-if="enrolledCourses.length" class="c-mab-slider c-mab-slider--side-shadow position-relative">
+        <div v-if="isLoadingEnroll">
+          <div class="c-loader c-loader--full active">
+            <div class="container height-100 flex-container align-center-middle">
+              <div class="loader">
+                {% for item in [1,2,3,4,5] %}              
+                  <div class="loader--dot"></div>
+                {% endfor %}       
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="enrolledCourses.length" class="c-mab-slider c-mab-slider--side-shadow position-relative" :class="{'opacity-0' : isLoadingEnroll}">
           <div class="c-arrow-next swiper-button-next position-absolute flex-container align-center-middle">
             next
           </div>
@@ -75,38 +88,38 @@
               <div v-for="course of enrolledCourses" :key="course.id" class="swiper-slide padding-vertical-2">
                 <div class="c-course-card br--large" :class="'c-course-card--' + course.color">
                   <figure class="c-course-card__figure position-relative">
-                    <img :src="course.thumbnail" alt="" class="of--cover br-top--large width-100 height-100"> 
+                    <img :src="(course.thumbnail) ? course.thumbnail : courseBasicThumbnail" alt="" class="of--cover br-top--large width-100 height-100"> 
                     <div class="c-course-card__progress-bar position-absolute width-100">
-                      <div style="width:50%" class="bg-pri-alt height-100"></div>
+                      <div :style="'width: '+ course.progress +'%'" class="bg-pri-alt height-100"></div>
                     </div>
                   </figure>
                   <div class="c-course-card__content flex-container fd-column padding-1 br--large">
                     <div>
                       <p class="w-xbold fs-18 f2 margin-0">${ course.name }</p>
-                      <p v-if="course.teacher" class="fs-16 f2">Con ${ course.teacher }</p>
+                      <p class="fs-16 f2">Con ${ (course.teacher) ? course.teacher : '"Sin docente"' }</p>
                       <p class="fs-16 f2 lh-18">${ course.description }</p>
                     </div>
                     <div class="grid-x align-middle">
-                      <div class="small-6 medium-6 marge-6">
-                        <span class="c-course-card__likes f2"> <i class="fas fa-heart"></i> ${ course.likes }</span>
+                      <div class="small-6 medium-6">
+                        <span class="c-course-card__likes f2"> <i class="fas fa-heart mr-05"></i> ${ course.likes }</span>
                       </div>
-                      <div class="small-6 medium-6 marge-6 text-right">
-                        <div class="c-button c-button--course lh-14 f2">
+                      <div class="small-6 medium-6 text-right">
+                        <a v-if="course.last_class" :href="course.last_class.link" class="c-button c-button--course display-block lh-14 f2">
                           Siguiente clase:
-                          <span>Funciones</span>
-                        </div>
+                          <span>${ course.last_class.title }</span>
+                        </a>
                       </div>
                     </div>
                   </div>
-                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                  <a :href="(course.last_class) ? course.last_class.link : '#'" class="c-course-card__footer display-block text-uppercase white fs-18 text-center bg-dark br-bottom--large">
                     ¡continuar curso!
-                  </div>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div v-else>
+        <div v-else-if="!isLoadingEnroll">
           <p class="margin-bottom-0 text-center f2 dark fs-21">Aun sin cursos, inscribete en alguno.</p>
         </div>
       </div>
@@ -117,7 +130,20 @@
           <p class="dark fs-50 lh-40 margin-bottom-0">cursos recomendados</p>
           <p class="dark fs-25 margin-bottom-0 f2 text-uppercase">según tus intereses</p> 
         </h2>
-        <div class="c-mab-slider c-mab-slider--side-shadow position-relative ">
+
+        <div v-if="isLoadingRecommended">
+          <div class="c-loader c-loader--full active">
+            <div class="container height-100 flex-container align-center-middle">
+              <div class="loader">
+                {% for item in [1,2,3,4,5] %}              
+                  <div class="loader--dot"></div>
+                {% endfor %}       
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="recommendCourses.length" class="c-mab-slider c-mab-slider--side-shadow position-relative"  :class="{'opacity-0' : isLoadingRecommended}">
           <div class="c-arrow-next swiper-button-next position-absolute flex-container align-center-middle">
             next
           </div>
@@ -126,132 +152,39 @@
           </div>
           <div class="swiper-container">
             <div class="swiper-wrapper">
-              <div class="swiper-slide padding-vertical-2">
+              <div v-for="course of recommendCourses" :key="course.id" class="swiper-slide padding-vertical-2">
                 <div class="c-course-card c-course-card--secondary br--large">
                   <figure class="c-course-card__figure ">
-                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
+                    <img :src="(course.thumbnail) ? course.thumbnail : courseBasicThumbnail" alt="" class="of--cover br-top--large width-100 height-100"> 
                   </figure>
                   <div class="c-course-card__content flex-container fd-column padding-1 br--large">
                     <div>
-                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                      <p class="fs-16 f2">Con Angela Hinostroza</p>
-                      <p class="fs-16 f2 lh-18">
-                        Lorem ipsum dolor sit amet, consect etu
-                        er adipiscing elit, sed diam nonummy
-                        nibh euismod nostrud .
-                      </p>
+                      <p class="w-xbold fs-18 f2 margin-0"> ${ course.name }</p>
+                      <p class="fs-16 f2">Con ${ (course.teacher) ? course.teacher : '"Sin docente"' }</p>
+                      <p class="fs-16 f2 lh-18"> ${ course.description }</p>
                     </div>
                     <div class="grid-x align-middle">
-                      <div class="small-6 medium-6 marge-6">
-                        <span class="c-course-card__likes f2"><i class="fas fa-heart"></i>325</span>
+                      <div class="small-6 medium-6">
+                        <span class="c-course-card__likes f2"><i class="fas fa-heart mr-05"></i>${ course.likes }</span>
                       </div>
-                      <div class="small-6 medium-6 marge-6 text-right">
-                        <div class="c-button c-button--course-price lh-14 f2 w-xbold">
-                          S/ 35.00 <i class="fas fa-shopping-cart"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                    ¡continuar curso!
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide padding-vertical-2">
-                <div class="c-course-card c-course-card--warning br--large">
-                  <figure class="c-course-card__figure ">
-                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                  </figure>
-                  <div class="c-course-card__content flex-container fd-column padding-1 br--large">
-                    <div>
-                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                      <p class="fs-16 f2">Con Angela Hinostroza</p>
-                      <p class="fs-16 f2 lh-18">
-                        Lorem ipsum dolor sit amet, consect etu
-                        er adipiscing elit, sed diam nonummy
-                        nibh euismod nostrud .
-                      </p>
-                    </div>
-                    <div class="grid-x align-middle">
-                      <div class="small-6 medium-6 marge-6">
-                        <span class="c-course-card__likes f2">325 <i class="far fa-heart"></i></span>
-                      </div>
-                      <div class="small-6 medium-6 marge-6 text-right">
-                        <div class="c-button c-button--course-price c-button--course-price--alert lh-14 f2 w-xbold">
-                          S/ 35.00 <i class="far fa-shopping-cart"></i>
-                        </div>
+                      <div class="small-6 medium-6 text-right">
+                        <button v-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--course-price lh-14 f2 w-xbold">
+                          S/ ${ Number(course.price).toFixed(2) } <i class="fas fa-shopping-cart"></i>
+                        </button>
+                        <span v-else>¡Grátis!</span>
                       </div>
                     </div>
                   </div>
-                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                    ¡continuar curso!
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide padding-vertical-2">
-                <div class="c-course-card c-course-card--success br--large">
-                  <figure class="c-course-card__figure ">
-                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                  </figure>
-                  <div class="c-course-card__content flex-container fd-column padding-1 br--large">
-                    <div>
-                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                      <p class="fs-16 f2">Con Angela Hinostroza</p>
-                      <p class="fs-16 f2 lh-18">
-                        Lorem ipsum dolor sit amet, consect etu
-                        er adipiscing elit, sed diam nonummy
-                        nibh euismod nostrud .
-                      </p>
-                    </div>
-                    <div class="grid-x align-middle">
-                      <div class="small-6 medium-6 marge-6"> 
-                        <span class="c-course-card__likes f2">325<i class="far fa-heart"></i></span>
-                      </div>
-                      <div class="small-6 medium-6 marge-6 text-right">
-                        <div class="c-button c-button--course-price lh-14 f2 w-xbold">
-                          S/ 35.00 <i class="far fa-shopping-cart"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                    ¡continuar curso!
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide padding-vertical-2">
-                <div class="c-course-card c-course-card--pri-alt br--large">
-                  <figure class="c-course-card__figure ">
-                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                  </figure>
-                  <div class="c-course-card__content flex-container fd-column padding-1 br--large">
-                    <div>
-                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                      <p class="fs-16 f2">Con Angela Hinostroza</p>
-                      <p class="fs-16 f2 lh-18">
-                        Lorem ipsum dolor sit amet, consect etu
-                        er adipiscing elit, sed diam nonummy
-                        nibh euismod nostrud .
-                      </p>
-                    </div>
-                    <div class="grid-x align-middle">
-                      <div class="small-6 medium-6 marge-6">
-                        <span class="c-course-card__likes f2">325 <i class="far fa-heart"></i></span>
-                      </div>
-                      <div class="small-6 medium-6 marge-6 text-right">
-                        <div class="c-button c-button--course-price lh-14 f2 w-xbold">
-                          S/ 35.00 <i class="far fa-shopping-cart"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                    ¡continuar curso!
-                  </div>
+                  <a :href="course.link" class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large display-block">
+                    ¡comenzar curso!
+                  </a>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+        <div v-else-if="!isLoadingEnroll">
+          <p class="margin-bottom-0 text-center f2 dark fs-21">Aun sin cursos, inscribete en alguno.</p>
         </div>
       </div>
     </div>

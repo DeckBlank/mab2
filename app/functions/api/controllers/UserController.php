@@ -7,6 +7,7 @@ use Timber\Timber;
 require(__DIR__ . '/../models/UserModel.php');
 require(__DIR__ . '/../models/schema/UserCourse.php');
 require(__DIR__ . '/../models/schema/UserCourseEnrollment.php');
+require(__DIR__ . '/../models/schema/UserTopic.php');
 require(__DIR__ . '/../models/schema/TopicTestScore.php');
 
 class UserController{
@@ -132,12 +133,11 @@ class UserController{
                 }
             ));
 
-            register_rest_route( 'custom/v1', '/users/courses', array(
+            register_rest_route( 'custom/v1', '/users/(?P<user_id>\d+)/courses', array(
                 'methods' => 'GET',
                 'callback' => array($this, 'getEnrolledCourses'),
                 'permission_callback' => function ($request) {
-                    // return ($request['_wpnonce']) ? true : false;
-                    return true;
+                    return ($request['_wpnonce']) ? true : false;
                 }
             ));
 
@@ -145,7 +145,8 @@ class UserController{
                 'methods' => 'GET',
                 'callback' => array($this, 'getRecommendedCourses'),
                 'permission_callback' => function ($request) {
-                    return ($request['_wpnonce']) ? true : false;
+                    // return ($request['_wpnonce']) ? true : false;
+                    return true;
                 }
             ));
 
@@ -404,6 +405,7 @@ class UserController{
     public function getEnrolledCourses($request) {
         if ( !empty($request['user_email']) ) {
             $userEmail      = $request['user_email'];
+            $userID         = $request['user_id'];
             $coursesArray   = [];
 
             $courses = UserCourse::where(['user_email' => $userEmail])
@@ -415,14 +417,14 @@ class UserController{
                 ->get();
 
             foreach ($courses as $course) {
-                $sanitizedCourse = $this::__sanitizeCourse($course->course_id, $userEmail);
+                $sanitizedCourse = $this::__sanitizeCourse($course->course_id, $userEmail, $userID);
 
                 if ( $sanitizedCourse && !in_array($sanitizedCourse, $coursesArray) )
                     array_push($coursesArray, $sanitizedCourse);
             }
 
             foreach ($enrolledCourses as $course) {
-                $sanitizedCourse = $this::__sanitizeCourse($course->course_id, $userEmail);
+                $sanitizedCourse = $this::__sanitizeCourse($course->course_id, $userEmail, $userID);
 
                 if ( $sanitizedCourse && !in_array($sanitizedCourse, $coursesArray) )
                     array_push($coursesArray, $sanitizedCourse);
@@ -454,20 +456,58 @@ class UserController{
 
             $coursesArray = [];
 
-            $courses = Timber::get_posts([
-                'post_type'         => 'course',
-                'posts_per_page'    => -1,
-                'tax_query' => array( 
-                    array(
-                        'taxonomy' => 'tax-mab-course',
-                        'field'    => 'term_id',
-                        'terms'    => $userPreferences
+            if ( $userPreferences &&  $userPreferences[0]) {
+                $courses = Timber::get_posts([
+                    'post_type'         => 'course',
+                    'posts_per_page'    => -1,
+                    'tax_query' => array( 
+                        array(
+                            'taxonomy' => 'tax-mab-course',
+                            'field'    => 'term_id',
+                            'terms'    => $userPreferences
+                        )
                     )
-                )
-            ]);
+                ]);
+            } else {
+                $coursesIds         = [];
+                $courseCategories   = [];
+                $userCourses        = UserCourse::where([
+                        'user_email' => $userEmail
+                    ])
+                    ->where('topic_views', '>', 0)
+                    ->orderBy('last_date', 'DESC')
+                    ->get();
+
+                foreach($userCourses as $uCourse) {
+                    array_push($coursesIds, $uCourse->course_id);
+                }
+
+                $userObjectCourses = Timber::get_posts([
+                    'post_type'     => 'course',
+                    'post__not_in'  => $coursesIds,
+                ]);
+
+                foreach($userObjectCourses as $course) {
+                    $courseCategories = array_merge($courseCategories, $course->terms);
+                }
+
+                $courseCategories = array_map(function($cCategory){ return $cCategory->term_id; }, $courseCategories);
+
+                $courses = Timber::get_posts([
+                    'post_type'         => 'course',
+                    'posts_per_page'    => 16,
+                    'tax_query' => array( 
+                        array(
+                            'taxonomy' => 'tax-course',
+                            'field'    => 'term_id',
+                            'terms'    => $courseCategories
+                        )
+                    )
+                ]);
+            }
 
             foreach ($courses as $course) {
-                $sanitizedCourse = $this::__sanitizeCourse($course->ID, $userEmail, 'recommend');
+                $sanitizedCourse = $this::__sanitizeCourse($course->ID, $userEmail, $userId, 'recommend');
 
                 if ( $sanitizedCourse && !in_array($sanitizedCourse, $coursesArray) )
                     array_push($coursesArray, $sanitizedCourse);
@@ -650,7 +690,7 @@ class UserController{
         }
     }
 
-    private function __sanitizeCourse($courseId, $userEmail, $type = 'enrolled') {
+    private function __sanitizeCourse($courseId, $userEmail, $userID, $type = 'enrolled') {
         $course = Timber::get_post([
             'post_type' => 'course',
             'p'         => $courseId
@@ -674,12 +714,15 @@ class UserController{
             ];
 
             if ($type == 'recommend') {
+                $sell = get_field('sell', 'options');
+                $priceSettings = get_field('price_settings', $courseId);
+
                 $courseObject = array_merge($courseObject, [
-                    'price' => get_field('price', $courseId)
+                    'price' => ($priceSettings == 'global') ? floatval( $sell['course_price'] ) : floatval( get_field('price', $courseId) )
                 ]);
             } else {
                 $courseObject = array_merge($courseObject, [
-                    'last_class'    => '',
+                    'last_class'    => $this::__getLastTopic($courseId, $userEmail, $userID),
                     'progress'      => $this::__getMetaCourse($courseId, $userEmail, 'progress'),
                 ]);
             }
@@ -726,6 +769,78 @@ class UserController{
                 return ($topics) ? bcdiv( (count($tests) * 100), $topics, 2 ) : 0;
 
                 break;
+        }
+    }
+
+    private function __getLastTopic($courseId, $userEmail, $userID) {
+        $unities    = get_field('unities', $courseId);
+        $topics     = [];
+        $unityIndex = 1;
+        $topicIndex = 0;
+        $lastClass  = '';
+        $firstClass = '';
+
+        if ( $unities && count($unities) ) {
+            foreach($unities as $unity){
+                foreach($unity['topics'] as $topic) {
+                    array_push(
+                        $topics,
+                        [
+                            'unity' => $unityIndex,
+                            'title' => ($topic['topic']) ? $topic['topic']->post_title : '',
+                            'id'    => ($topic['topic']) ? $topic['topic']->ID : 0,
+                            'link'  => ($topic['topic']) ? get_the_permalink($topic['topic']->ID) : '',
+                        ]
+                    );
+                }
+            }
+
+            $unityIndex++;
+        }
+
+        if ( count($topics) ) {
+            $firstClass = $topics[0];
+            $topics     = array_reverse($topics);
+
+            foreach($topics as $topic) {
+                $userTopic = UserTopic::where(['topic_id' => $topic['id']])
+                    ->first();
+    
+                if ($userTopic && $userTopic->video_viewed) {
+                    $lastClass = ($topics[$topicIndex++]) ? $topics[$topicIndex++] : $topic;
+                }
+    
+                if ($lastClass) break;
+    
+                $topicIndex++;
+            }
+
+            $lastClass = ($lastClass) ? $lastClass : $firstClass;
+
+            if ($lastClass) {
+                $topic = Timber::get_post([
+                    'post_type' => 'topic',
+                    'p'         => $lastClass['id']
+                ]);
+
+                $userSector = get_field('school_type', 'user_' . $userID);
+
+                $lastClass['link'] = sprintf(
+                    '%s?course_id=%s&course_name=%s&course_slug=%s&unity=%s&sector=%s',
+                    $lastClass['link'],
+                    $courseId,
+                    $topic->title,
+                    $topic->slug,
+                    $lastClass['unity'],
+                    ($userSector) ? $userSector : 'publico'
+                );
+
+                return $lastClass;
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
         }
     }
 }
