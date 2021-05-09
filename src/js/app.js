@@ -25,7 +25,7 @@ function baseConfig(store){
 function baseState(){
   return Vuex.mapState([
     'API', 
-    'SITE_URL', 
+    'SITE_URL',
     'logedUser',
     'isActiveMenu',
     'sectorMenu',
@@ -49,8 +49,6 @@ function baseActions(){
     ]),
     global: function(){
       this.saveLog();
-      this.getSector('public', 'publico');
-      this.getSector('private', 'privado');
     },
     saveLog: function(){
       if(!window.sessionStorage.getItem('mab_temp')){
@@ -75,26 +73,7 @@ function baseActions(){
             throw err;
           })      
       }
-    },
-    getSector: function(type, name){
-      fetch(`${this.API}/sectors?type=${type}`)
-        .then(res => {
-          if (res.status >= 200 && res.status < 300) {
-            return res.json()
-          }else{
-            throw res
-          }
-        })
-        .then(sector => {
-          this.updateSectorMenuData({
-            type: type,
-            data: sector
-          });
-        })
-        .catch(err => {
-          throw err;
-        })      
-    },    
+    },  
   }
 }
 

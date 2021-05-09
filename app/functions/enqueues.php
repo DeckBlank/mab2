@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1620510903347';
+$assets_version = '1620542222538';
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -120,6 +120,14 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
     register_assets('script', [
         'handle'    => 'pandawp/fontawesome/style',
         'src'       => $config['resources']['fontawesome']['cdn']['style'],
+        'deps'      => [ $fa['handle'] ],
+        'ver'       => $assets_version,
+        'in_footer' => true
+    ]);
+
+    register_assets('script', [
+        'handle'    => 'pandawp/fontawesome/style_solid',
+        'src'       => $config['resources']['fontawesome']['cdn']['style_solid'],
         'deps'      => [ $fa['handle'] ],
         'ver'       => $assets_version,
         'in_footer' => true
@@ -562,7 +570,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]);
-    }elseif (is_page('my-courses')){ 
+    }elseif (is_page('mis-cursos')){ 
         register_assets('package', [
             'handle'    => 'pandawp/package/swiper',
             'src'       => $config['resources']['package_swiper'],

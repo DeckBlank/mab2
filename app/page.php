@@ -19,25 +19,10 @@ if(is_page('access')){
         header('Location:' . $context['site']->url . '/mis-cursos');        
     }
 
-}else if(is_page('emotional')){
-    $context['video_categories'] = Timber::get_terms([
-        "taxonomy" => "tax-video",
-        'meta_key'  => 'order',
-        'orderby'   => 'meta_value_num',
-        'order' => 'ASC',
-        'meta_query' => array(
-            array(
-                'key' => 'order',
-                'value' => 0,
-                'compare' => '>',
-            )
-        )
-    ]);
-    if (is_user_logged_in()) {
-        $context['banner'] = 'https://vimeo.com/455512200/98e00c23c5';
-    } else {
-        $context['banner'] = get_field('banner', $post->ID);
-    }    
+}else if(is_page('mis-cursos')){
+    if (!is_user_logged_in()) {
+        header('Location:' . $context['site']->url . '/access');        
+    }
 
 }else if(is_page('carrito')){
     if (is_user_logged_in()) {
