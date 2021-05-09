@@ -1,0 +1,50 @@
+.c-themes-list {
+  background: $light-gray;
+  margin-top: 2rem;
+
+  &__item {
+    .triangle {
+      border-left-color: $gray;
+    }
+
+    .status {
+      display: none;
+      padding-left: 1rem;
+      opacity: 0.5;
+    }
+  }
+
+  &__item.active {
+    .triangle {
+      border-left-color: $secondary-color;
+    }
+
+    .status {
+      display: block;
+    }
+  }
+
+  &__content {
+    height: 340px;
+  }
+
+  &__scrool {
+    height: 100%;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar-thumb {
+      background: $dark;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $medium-gray;
+      border-radius: 10px;
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-themes-list {
+    margin-top: 0;
+  }
+}
