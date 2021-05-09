@@ -12,13 +12,13 @@
     class="c-section c-section--topic bg-sec-color">
     <div class="grid-container padding-vertical-3">
       <div class="grid-x align-center">
-        <div class="cell medium-10 large-8">
+        <div class="cell medium-10 large-11">
           <!-- version antigua -->
           <!-- <h2 class="c-course w-medium white">${metas.get('course_name')}</h2> -->
           <!-- <h2 class="c-unity fs-30 f2 w-bold white margin-bottom-2">UNIDAD ${metas.get('unity')}:</h2> -->
           <h2 class="c-course w-medium white margin-bottom-0 lh-65">Nutrición</h2>
           <h2 class="c-unity fs-30 f2 w-bold white margin-bottom-3">Unidad 1: ¿Qué es la nutrición?</h2>
-          <section class="c-content c-content--protected position-relative br--medium bg-white">
+          <section class="c-content c-content--protected position-relative br--large bg-white">
             <a :href="course_link" class="c-link fs-25 w-medium f2 display-inline-block margin-bottom-1 w-xbold sec-color hover-sec-color margin-bottom-2">
               <span class="c-icon margin-right-1"><i class="far fa-arrow-left"></i></span> Volver al curso
             </a>
@@ -200,7 +200,218 @@
               </div>
             </div> -->
           
-          
+            <div class="c-tab margin-top-2">
+              <div class="c-tab-head text-center">
+                <div class="grid-x">
+                  <div class="cell large-6">
+                    <div @click="view = 1" :class="{ active : view == 1 }" class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30 dark">SOBRE EL CURSO</div>
+                  </div>
+                  <div class="cell large-6">
+                    <div @click="view = 2" :class="{ active : view == 2 }" class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30 small dark">COMENTARIOS</div>
+                  </div>
+                </div>
+              </div>
+              <div class="c-tab-body padding-vertical-2">
+                <transition   name="fade" mode="out-in">
+                  <div v-if="view == 1" key="contenido" class="c-tab-slide">
+                    <div class="grid-x align-justify">
+                      <div class="cell large-6">
+                        <div class="c-tab-recursos br-bottom--large br-top--large padding-2">
+                          <h3 class="w-xbold f2 fs-25 dark margin-bottom-1 text-uppercase">RECURSOS</h3>
+                          <div class="grid-x align-self-strecht text-center">
+                            <div class="small-3 medium-3 large-3">
+                              <div class="c-tab-recursos__item f2 w-bold">
+                                <div></div>
+                                <figure class="margin-bottom-1">
+                                  <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
+                                </figure>
+                                <span>Resúmenes</span>
+                              </div>
+                            </div>
+                            <div class="small-3 medium-3 large-3">
+                              <div class="c-tab-recursos__item f2 w-bold">
+                                <figure class="margin-bottom-1">
+                                  <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
+                                </figure>
+                                <span>Hoja de trabajo</span>
+                              </div>
+                            </div>
+                            <div class="small-3 medium-3 large-3">
+                              <div class="c-tab-recursos__item f2 w-bold">
+                                <figure class="margin-bottom-1">
+                                  <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
+                                </figure>
+                                <span>Solucionario</span>
+                              </div>
+                            </div>
+                            <div class="small-3 medium-3 large-3">
+                              <div class="c-tab-recursos__item f2 w-bold">
+                                <figure class="margin-bottom-1">
+                                  <img src="{{ theme.link }}/static/images/curso/doc-2.png" alt="" class=" width-100 height-100 of--contain"> 
+                                </figure>
+                                <span>Mapa mental</span>
+                              </div>
+                            </div>
+                            <div class="cell">
+                              <button class="c-button margin-top-1 c-button--mab-warning-black f2 w-xbold fs-21">¡Descárgalos todos!</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell large-5">
+                        <div class="c-accordion position-relative">
+                          <h3 class="c-accordion__header margin-bottom-0 padding-1 bg-light-gray dark fs-21 f2 text-uppercase w-xbold">CONTENIDO DEL CURSO</h3>
+                          <div class="c-accordion__body bg-white">
+                            <ul class="ul-reset">
+                              <li v-for="(question, qindex) of questions" :key="question.id" class="c-accordion-item">
+                                <input v-model="question.enable" @change="resetAccordion(question)" :id="'accordion-item-' + qindex" class="c-accordion hide" type="checkbox">
+                                <label class="c-accordion-item__switcher width-100 bg-light-gray dark" :for="'accordion-item-' + qindex">
+                                  <p class="margin-bottom-0 w-bold white f2 fs-18">Unidad 1: ¿Qué es la nutrición?</p>
+                                  <i class="c-icon white fs-21 far fa-chevron-up"></i>
+                                </label>
+                                <div class="c-accordion-item__content position-relative bg-white f2 dark w-medium">
+                                  <div class="c-mab-toggle fs-21">
+                                    <a class="dark" href=""><span class="triangle"></span> ¿Qué es la nutrición?</a> 
+                                  </div>
+                                  <ul v-if="false" class="padding-1">
+                                    <li> <a class="dark" href="">asd asdsadsdsa sad</a></li>
+                                    <li> <a class="dark" href="">asd asdsadsdsa sad</a></li>
+                                    <li> <a class="dark" href="">asd asdsadsdsa sad</a></li>
+                                    <li> <a class="dark" href="">asd asdsadsdsa sad</a></li>
+                                    <li> <a class="dark" href="">asd asdsadsdsa sad</a></li>
+                                  </ul>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div v-if="view == 2" key="foro" class="c-tab-slide">
+                    <div class="c-foro">
+                      <div class="c-foro-body">
+                        <div class="c-foro-scroll height-100">
+                          <div class="position-relative">
+                            <div class="c-comment c-comment--small br-top--large br-bottom--large margin-bottom-1">
+                              <div class="grid-x">
+                                <div class="small-2 medium-2 large-2">
+                                  <figure class="c-comment__figure">
+                                    <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="width-100 height-100 of--cover"> 
+                                  </figure>
+                                </div>
+                                <div class="small-10 medium-8 large-8">
+                                  <div class="c-comment-content">
+                                    <div class="c-comment__autor f2 w-xbold dark fs-21">
+                                      Maca Wellness <span class="padding-left-1 fs-16"><i class="far fa-thumbtack"></i></span>
+                                    </div>
+                                    <div class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
+                                      Speaker
+                                    </div>
+                                    <p class="c-comment__text f2 dark fs-16 lh-18">
+                                      ¡Hola chic@s! Aquí les dejo un libro que puede ayudarles a profundizar en este tema. https://www.librodenutrición.com
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="cell medium-2 large-2">
+                                  <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-14">
+                                    <button><span>Responder</span></button>
+                                    <button><span class="padding-left-1 flex-container align-middle"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span></button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="c-comment c-comment--small br-top--large br-bottom--large margin-bottom-1">
+                              <div class="grid-x">
+                                <div class="small-2 medium-2 large-2">
+                                  <figure class="c-comment__figure">
+                                    <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="width-100 height-100 of--cover"> 
+                                  </figure>
+                                </div>
+                                <div class="small-10 medium-8 large-8">
+                                  <div class="c-comment-content">
+                                    <div class="c-comment__autor f2 w-xbold dark fs-21">
+                                      Angela Hinostroza
+                                    </div>
+                                    <div class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
+                                      Estudiante
+                                    </div>
+                                    <div class="c-comment__theme f2 w-xbold dark fs-16">
+                                      Carbohidratos en la noche
+                                    </div>
+                                    <p class="c-comment__text f2 dark fs-16 lh-18">
+                                      ¡Gracias Maca! Súper interesante. ¿Es cierto que comer carbohidratos en la noche es malo para nuestra salud?
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="cell medium-2 large-2">
+                                  <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-14">
+                                    <button><span>Responder</span></button>
+                                    <button><span class="padding-left-1 flex-container align-middle"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span></button> 
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="grid-x align-right">
+                              <div class="small-11 medium-11 large-11">
+                                <div class="c-comment c-comment--small br-top--large br-bottom--large margin-bottom-1">
+                                  <div class="grid-x">
+                                    <div class="small-2 medium-2 large-2">
+                                      <figure class="c-comment__figure">
+                                        <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="width-100 height-100 of--cover"> 
+                                      </figure>
+                                    </div>
+                                    <div class="small-10 medium-8 large-8">
+                                      <div class="c-comment-content">
+                                        <div class="c-comment__autor f2 w-xbold dark fs-21">
+                                          Maca Wellness
+                                        </div>
+                                        <div class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
+                                          Speaker
+                                        </div>
+                                        <div class="c-comment__theme f2 w-xbold dark fs-16">
+                                          Re: Carbohidratos en la noche
+                                        </div>
+                                        <p class="c-comment__text f2 dark fs-16 lh-18">
+                                          Hola, Angela. Gracias por preguntar. Es un mito, en este post lo explico a profundidad https://instagram/macawellness 
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <div class="cell medium-2 large-2">
+                                      <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-14">
+                                        <button><span>Responder</span></button>
+                                        <button><span class="padding-left-1 flex-container align-middle"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span></button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="c-foro-footer fs-21  padding-1 f2 dark br-bottom--large box-shadow-none">
+                        <div class="c-comment-inline flex-container align-center-middle">
+                          <div class="c-comment-inline__reactions flex-container align-center-middle">
+                            <button class="fs-25">
+                              <i class="far fa-smile"></i>
+                            </button>
+                            <button class="fs-25">
+                              <i class="far fa-paperclip"></i>
+                            </button>
+                          </div>
+                          <input class="input-reset margin-0" type="text" placeholder="Escribe un comentario">
+                          <button class="fs-25">
+                            <i class="far fa-paper-plane"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </transition>
+              </div>
+              
+            </div>
           </section>
         </div>
       </div>
@@ -305,6 +516,7 @@
         </div>
       </div>
     </section>
+    
     <section class="c-modal position-fixed width-100 height-100" :class="{ opened : isOpenedTeacherModal }">
       <div class="grid-container height-100">
         <div class="grid-x align-center-middle height-100">

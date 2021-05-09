@@ -12,6 +12,16 @@ const topic = new Vue({
   ...baseConfig(store),
   data() {
     return {
+      view: 1,
+      foro: 1,
+      commentbox: 0,
+      questions: [
+        { enable : true },
+        { enable : false },
+        { enable : false },
+        { enable : false },
+        { enable : false },
+      ],
       metas: new URLSearchParams(window.location.search),
       course_link: '',
       topicID: null,
@@ -398,6 +408,11 @@ const topic = new Vue({
             throw err;          
           })      
       }
-    }
+    },
+    resetAccordion: function(question) {
+      this.questions = this.questions.map(q => {
+        return (q != question) ? { ...q, enable : false } : q;
+      })
+    },
   }
 })

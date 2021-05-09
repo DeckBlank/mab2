@@ -110,6 +110,10 @@
 
 @include breakpoint(large) {
   .c-section--topic {
+    .c-content {
+      padding: 4rem 5rem;
+    }
+
     .c-actions {
       &__reactions {
         justify-content: flex-start;

@@ -1,0 +1,71 @@
+.c-tab {
+  .c-tab-head {
+    &__title {
+      cursor: pointer;
+    }
+
+    &__title::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: calc(50% - 125px);
+      width: 250px;
+      height: 2px;
+      background: $secondary-color;
+      opacity: 0;
+      transition: all 0.5s;
+    }
+
+    &__title.small::after {
+      left: calc(50% - 65px);
+      width: 130px;
+    }
+
+    &__title.active {
+      color: $secondary-color;
+    }
+
+    &__title.active::after {
+      opacity: 1;
+    }
+  }
+
+  &__list {
+    list-style: none;
+
+    li {
+      padding: 0.3rem 0;
+    }
+  }
+}
+
+.c-tab-recursos {
+  background: $light-gray;
+
+  figure {
+    padding: 0 0.5rem;
+  }
+
+  span {
+    display: inline-block;
+    font-size: $fs-14;
+  }
+}
+
+@include breakpoint(large) {
+  .c-tab {
+    .c-tab-head {
+      .cell:first-child {
+        .c-tab-head__title {
+          border-right: 1px solid $dark-gray;
+        }
+      }
+    }
+
+    .c-tab-recursos {
+      figure {
+        height: 150px;
+      }
+    }
+  }
+}

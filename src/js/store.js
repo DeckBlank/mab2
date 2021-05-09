@@ -18,14 +18,6 @@ export const store = new Vuex.Store({
     activedSession: (window.localStorage.getItem('mab_session')) ? JSON.parse(window.localStorage.getItem('mab_session')) : false,
 
     //Menu
-    sectorMenu: {
-      private: false,
-      public: false,
-    },
-    sectorMenuData: {
-      public: null,
-      private: null,
-    },
     isActiveMenu: false,
     isHeaderWithShadow: false,
 
@@ -42,17 +34,6 @@ export const store = new Vuex.Store({
   mutations: {
     setStatusMenu(state){
       state.isActiveMenu = !state.isActiveMenu
-    },
-
-    setSectorMenu(state, sector){
-      state.sectorMenu[sector] = !state.sectorMenu[sector]
-
-      if(sector == 'public') state.sectorMenu.private = false;
-      if(sector == 'private') state.sectorMenu.public = false;
-    },
-
-    setSectorMenuData(state, sector){
-      state.sectorMenuData[sector.type] = sector.data
     },
 
     setStatusHeaderShadow(state, status){
@@ -78,14 +59,6 @@ export const store = new Vuex.Store({
   actions: {
     updateStatusMenu: ({commit})=>{
       commit('setStatusMenu')
-    },
-
-    updateStatusSectorMenu: function({commit}, sector){
-      commit('setSectorMenu', sector);
-    },
-
-    updateSectorMenuData: function({commit}, sector){
-      commit('setSectorMenuData', sector);
     },
 
     updateStatusHeaderShadow: ({commit}, status)=>{
