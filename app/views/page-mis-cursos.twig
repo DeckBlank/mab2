@@ -161,17 +161,24 @@
                   </figure>
                   <div class="c-course-card__content flex-container fd-column padding-1 br--large">
                     <div>
-                      <p class="w-xbold fs-18 f2 margin-0"> ${ course.name }</p>
-                      <p class="fs-16 f2">Con ${ (course.teacher) ? course.teacher : '"Sin docente"' }</p>
-                      <p class="fs-16 f2 lh-18"> ${ course.description }</p>
+                      <div class="c-course-card__titles">
+                        <p class="c-course-card__name w-xbold fs-18 f2 margin-0">${ course.name }</p>
+                        <p class="c-course-card__teacher fs-16 f2">Con ${ (course.teacher) ? course.teacher : '"Sin docente"' }</p>
+                      </div>
+                      <p class="c-course-card__description fs-16 f2 lh-18">${ course.description }</p>
                     </div>
                     <div class="grid-x align-middle">
-                      <div class="small-6 medium-6">
+                      <div class="small-5 medium-5">
                         <span class="c-course-card__likes f2"><i class="fas fa-heart mr-05"></i>${ course.likes }</span>
                       </div>
-                      <div class="small-6 medium-6 text-right">
-                        <button v-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--course-price lh-14 f2 w-xbold">
+                      <div class="small-7 medium-7 text-right">
+                        <!-- <button v-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--course-price lh-14 f2 w-xbold">
                           S/ ${ Number(course.price).toFixed(2) } <i class="fas fa-shopping-cart"></i>
+                        </button> -->
+
+                        <button v-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                          S/ ${ Number(course.price).toFixed(2) } 
+                          <i class="fas fa-shopping-cart"></i>
                         </button>
                         <span v-else>¡Grátis!</span>
                       </div>

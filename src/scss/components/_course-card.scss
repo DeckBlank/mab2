@@ -16,10 +16,6 @@
     background: rgba($color: $white, $alpha: 0.8);
   }
 
-  &__titlea {
-    height: 58px;
-  }
-
   &__name {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -47,6 +43,10 @@
 
   &__footer {
     padding: 0.5rem;
+
+    &:hover {
+      color: $white;
+    }
   }
 }
 
@@ -121,6 +121,10 @@
       display: flex;
       flex-grow: 1;
       justify-content: space-between;
+    }
+
+    &__titles {
+      height: 92px;
     }
   }
 }
