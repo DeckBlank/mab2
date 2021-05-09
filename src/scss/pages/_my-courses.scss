@@ -71,6 +71,12 @@
       }
     }
 
+    .c-mab-slider {
+      .swiper-slide {
+        height: auto;
+      }
+    }
+
     .c-lideres {
       &__content {
         padding: 3rem 5rem 2rem;

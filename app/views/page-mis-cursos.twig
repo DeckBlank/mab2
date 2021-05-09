@@ -95,9 +95,11 @@
                   </figure>
                   <div class="c-course-card__content flex-container fd-column padding-1 br--large">
                     <div>
-                      <p class="w-xbold fs-18 f2 margin-0">${ course.name }</p>
-                      <p class="fs-16 f2">Con ${ (course.teacher) ? course.teacher : '"Sin docente"' }</p>
-                      <p class="fs-16 f2 lh-18">${ course.description }</p>
+                      <div class="c-course-card__titles">
+                        <p class="c-course-card__name w-xbold fs-18 f2 margin-0">${ course.name }</p>
+                        <p class="c-course-card__teacher fs-16 f2">Con ${ (course.teacher) ? course.teacher : '"Sin docente"' }</p>
+                      </div>
+                      <p class="c-course-card__description fs-16 f2 lh-18">${ course.description }</p>
                     </div>
                     <div class="grid-x align-middle">
                       <div class="small-6 medium-6">
