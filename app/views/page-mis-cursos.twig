@@ -1,0 +1,365 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--my-courses">
+    <div class="c-banner bg-warning mab-shadow">
+      <div class="grid-container">
+        <div class="grid-x grid-margin-x grid-margin-y align-middle">
+          <div class="cell large-4">
+            <div class="padding-vertical-3"> 
+              <h1 class="c-banner__title warning">
+                <span class="dark text-uppercase">¡HOLA,</span><br>
+                <span class="dark text-uppercase">${userName}!</span>
+              </h1> 
+              <p class="dark f2 fs-25 lh-25">
+                En <strong class="w-xbold">MAB</strong>, estamos orgullosos de que hayas decidido girar tu educación
+              </p> 
+            </div>
+          </div> 
+          <div class="cell large-8 margin-bottom-0">
+            <div class="position-relative flex-container align-center">
+              <img src="{{ theme.link }}/static/images/courses/mine/banner.png" alt="" class="of--contain"> 
+              <img src="{{ theme.link }}/static/images/home/bolb.png" alt="" class="c-banner__heart position-absolute of--contain">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-mab-resume padding-top-2">
+      <div class="grid-container padding-vertical-3">
+        <div class="bg-pri-color br--large mab-shadow">
+          <div class="grid-x align-middle">
+            <div class="cell large-5">
+              <div class="c-mab-resume__content">
+                <h3 class="white fs-40 lh-50">¿Sabías que este proyecto nació en un garaje?</h3>
+                <p class="white fs-18 f2">
+                  Luego de varios años dando clases
+                  particulares a niños y niñas de diferentes
+                  colegios privados de Lima, Macarena
+                  expande sus servicios a todo el Perú con
+                  el objetivo de disminuir brechas sociales,
+                  educativas y tecnológicas en el país.
+                </p>
+                <a href="{{site.url}}/nosotros" class="c-link c-link--warning f2 w-bold fs-21">Ver más</a>
+              </div>
+            </div>
+            <div class="cell large-7">
+              <div class="position-relative flex-container align-center">
+                <img src="{{ theme.link }}/static/images/courses/mine/photo.png" alt="" class="c-mab-resume__photo position-absolute of--contain">
+                <img src="{{ theme.link }}/static/images/courses/mine/resume.png" alt="" class="br--large of--contain position-relative"> 
+                <img src="{{ theme.link }}/static/images/courses/mine/circle.png" alt="" class="c-banner__heart position-absolute of--contain">  
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-mab-continue padding-top-2">
+      <div class="grid-container padding-vertical-3">
+        <h2 class="margin-bottom-2">
+          <p class="dark fs-50 lh-40 margin-bottom-0">continúa tu aprendizaje</p>
+          <p class="dark fs-25 margin-bottom-0 f2 text-uppercase">tus cursos</p> 
+        </h2>
+        <div v-if="isLoadingEnroll">
+          <div class="c-loader c-loader--full active">
+            <div class="container height-100 flex-container align-center-middle">
+              <div class="loader">
+                {% for item in [1,2,3,4,5] %}              
+                  <div class="loader--dot"></div>
+                {% endfor %}       
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="enrolledCourses.length" class="c-mab-slider c-mab-slider--side-shadow position-relative" :class="{'opacity-0' : isLoadingEnroll}">
+          <div class="c-arrow-next swiper-button-next position-absolute flex-container align-center-middle">
+            next
+          </div>
+          <div class="c-arrow-prev swiper-button-prev position-absolute flex-container align-center-middle">
+            prev
+          </div>
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div v-for="course of enrolledCourses" :key="course.id" class="swiper-slide padding-vertical-2">
+                <div class="c-course-card br--large" :class="'c-course-card--' + course.color">
+                  <figure class="c-course-card__figure position-relative">
+                    <img :src="(course.thumbnail) ? course.thumbnail : courseBasicThumbnail" alt="" class="of--cover br-top--large width-100 height-100"> 
+                    <div class="c-course-card__progress-bar position-absolute width-100">
+                      <div :style="'width: '+ course.progress +'%'" class="bg-pri-alt height-100"></div>
+                    </div>
+                  </figure>
+                  <div class="c-course-card__content flex-container fd-column padding-1 br--large">
+                    <div>
+                      <p class="w-xbold fs-18 f2 margin-0">${ course.name }</p>
+                      <p class="fs-16 f2">Con ${ (course.teacher) ? course.teacher : '"Sin docente"' }</p>
+                      <p class="fs-16 f2 lh-18">${ course.description }</p>
+                    </div>
+                    <div class="grid-x align-middle">
+                      <div class="small-6 medium-6">
+                        <span class="c-course-card__likes f2"> <i class="fas fa-heart mr-05"></i> ${ course.likes }</span>
+                      </div>
+                      <div class="small-6 medium-6 text-right">
+                        <a v-if="course.last_class" :href="course.last_class.link" class="c-button c-button--course display-block lh-14 f2">
+                          Siguiente clase:
+                          <span>${ course.last_class.title }</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <a :href="(course.last_class) ? course.last_class.link : '#'" class="c-course-card__footer display-block text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                    ¡continuar curso!
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div v-else-if="!isLoadingEnroll">
+          <p class="margin-bottom-0 text-center f2 dark fs-21">Aun sin cursos, inscribete en alguno.</p>
+        </div>
+      </div>
+    </div>
+    <div class="c-mab-recommended padding-top-2">
+      <div class="grid-container padding-vertical-3">
+        <h2 class="margin-bottom-2">
+          <p class="dark fs-50 lh-40 margin-bottom-0">cursos recomendados</p>
+          <p class="dark fs-25 margin-bottom-0 f2 text-uppercase">según tus intereses</p> 
+        </h2>
+
+        <div v-if="isLoadingRecommended">
+          <div class="c-loader c-loader--full active">
+            <div class="container height-100 flex-container align-center-middle">
+              <div class="loader">
+                {% for item in [1,2,3,4,5] %}              
+                  <div class="loader--dot"></div>
+                {% endfor %}       
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="recommendCourses.length" class="c-mab-slider c-mab-slider--side-shadow position-relative"  :class="{'opacity-0' : isLoadingRecommended}">
+          <div class="c-arrow-next swiper-button-next position-absolute flex-container align-center-middle">
+            next
+          </div>
+          <div class="c-arrow-prev swiper-button-prev position-absolute flex-container align-center-middle">
+            prev
+          </div>
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div v-for="course of recommendCourses" :key="course.id" class="swiper-slide padding-vertical-2">
+                <div class="c-course-card c-course-card--secondary br--large">
+                  <figure class="c-course-card__figure ">
+                    <img :src="(course.thumbnail) ? course.thumbnail : courseBasicThumbnail" alt="" class="of--cover br-top--large width-100 height-100"> 
+                  </figure>
+                  <div class="c-course-card__content flex-container fd-column padding-1 br--large">
+                    <div>
+                      <p class="w-xbold fs-18 f2 margin-0"> ${ course.name }</p>
+                      <p class="fs-16 f2">Con ${ (course.teacher) ? course.teacher : '"Sin docente"' }</p>
+                      <p class="fs-16 f2 lh-18"> ${ course.description }</p>
+                    </div>
+                    <div class="grid-x align-middle">
+                      <div class="small-6 medium-6">
+                        <span class="c-course-card__likes f2"><i class="fas fa-heart mr-05"></i>${ course.likes }</span>
+                      </div>
+                      <div class="small-6 medium-6 text-right">
+                        <button v-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--course-price lh-14 f2 w-xbold">
+                          S/ ${ Number(course.price).toFixed(2) } <i class="fas fa-shopping-cart"></i>
+                        </button>
+                        <span v-else>¡Grátis!</span>
+                      </div>
+                    </div>
+                  </div>
+                  <a :href="course.link" class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large display-block">
+                    ¡comenzar curso!
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div v-else-if="!isLoadingEnroll">
+          <p class="margin-bottom-0 text-center f2 dark fs-21">Aun sin cursos, inscribete en alguno.</p>
+        </div>
+      </div>
+    </div>
+    <div class="c-lideres padding-top-3">
+      <div class="grid-container padding-vertical-3">
+        <div class="c-lideres__content mab-shadow bg-pri-alt br--large">
+          <h2 class="margin-bottom-1">
+            <p class="white fs-50 c-lh--50 margin-bottom-0">LÍDERES MAB</p>
+          </h2>
+          <lideres :body="lideres" />
+        </div>
+      </div>
+    </div>
+    <div class="c-other-services padding-vertical-3">
+      <div class="grid-container">
+        <div class="c-other-services__content mab-shadow bg-sec-color padding-vertical-3 br--large">
+          <h3 class="c-other-services__title white fs-40 lh-50">otros servicios sincrónicos</h3>
+          <div class="c-slider">
+            <div class="c-slider swiper-container margin-bottom-2">
+              <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                  <div class="grid-x align-middle">
+                    <div class="cell large-7">
+                      <div class="c-other-services__info margin-bottom-2">
+                        <p class="warning f2 fs-35 w-xbold">MAB Académico</p>
+                        <ul class="white fs-18 f2">
+                          <li>Tutorías personalizadas de todos
+                            los cursos
+                          </li>
+                          <li>Clases grupales
+                          </li>
+                          <li>Exámenes internacionales
+                          </li>
+                          <li>
+                            Ingresos escolares
+                          </li>
+                          <li>
+                            Vacacionales
+                          </li>
+                          <li>
+                            Complemento en homeschool
+                          </li>
+                          <li>
+                            Prueba Starter
+                          </li>
+                        </ul>
+                        <a href="" class="c-link c-link--warning f2 w-bold fs-21">Conocer más</a>
+                      </div>
+                    </div>
+                    <div class="cell large-5">
+                      <div class="position-relative flex-container align-center">
+                        <img src="{{ theme.link }}/static/images/courses/mine/services/1.png" alt="" class="br--large of--contain position-relative"> 
+                        <img src="{{ theme.link }}/static/images/courses/mine/services/vector1.png" alt="" class="c-banner__heart position-absolute of--contain">  
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="grid-x align-middle">
+                    <div class="cell large-7">
+                      <div class="c-other-services__info margin-bottom-2">
+                        <p class="warning f2 fs-35 w-xbold">MAB Emocional</p>
+                        <ul class="white fs-18 f2">
+                          <li>Coaching vocacional (orientación
+                            vocacional)
+                          </li>
+                          <li>Terapias emocionales
+                          </li>
+                          <li>Terapias de aprendizaje
+                          </li>
+                          <li>
+                            Talleres para padres
+                          </li>
+                          <li>
+                            Evaluaciones psicológicas
+                          </li>
+                          <li>
+                            Evaluaciones emocionales
+                          </li>
+                          <li>
+                            Talleres de Habilidades para la vida, Soft Skills y más
+                          </li>
+                        </ul>
+                        <a href="" class="c-link c-link--warning f2 w-bold fs-21">Conocer más</a>
+                      </div>
+                    </div>
+                    <div class="cell large-5">
+                      <div class="position-relative flex-container align-center">
+                        <img src="{{ theme.link }}/static/images/courses/mine/services/2.png" alt="" class="br--large of--contain position-relative"> 
+                        <img src="{{ theme.link }}/static/images/home/heart.png" alt="" class="c-banner__heart position-absolute of--contain">  
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="grid-x align-middle">
+                    <div class="cell large-7">
+                      <div class="c-other-services__info margin-bottom-2">
+                        <p class="warning f2 fs-35 w-xbold">MAB 360</p>
+                        <ul class="white fs-18 f2">
+                          <li>Arte & creatividad</li>
+                          <li>
+                            Métodos de estudio
+                          </li>
+                          <li>
+                            Talleres de actualidad
+                          </li>
+                          <li>
+                            Talleres de idiomas, mate y ciencias divertidas
+                          </li>
+                          <li>
+                            MAB Babies
+                          </li>
+                          <li>
+                            Ecología y reciclaje
+                          </li>
+                          <li>
+                            Tecnología
+                          </li>
+                        </ul>
+                        <a href="" class="c-link c-link--warning f2 w-bold fs-21">Conocer más</a>
+                      </div>
+                    </div>
+                    <div class="cell large-5">
+                      <div class="position-relative flex-container align-center">
+                        <img src="{{ theme.link }}/static/images/courses/mine/services/3.png" alt="" class="br--large of--contain position-relative"> 
+                        <img src="{{ theme.link }}/static/images/home/bolb.png" alt="" class="c-banner__heart position-absolute of--contain">  
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="swiper-slide">
+                  <div class="grid-x align-middle">
+                    <div class="cell large-7">
+                      <div class="c-other-services__info margin-bottom-2">
+                        <p class="warning f2 fs-35 w-xbold">Nuestros programas</p>
+                        <ul class="white fs-18 f2">
+                          <li>MAB Empresas</li>
+                          <li>
+                            MAB Socia
+                          </li>
+                          <li>
+                            MAB Talks
+                          </li>
+                          <li>
+                            aMABlemente
+                          </li>
+                          <li>
+                            MAB Click
+                          </li>
+                        </ul>
+                        <a href="" class="c-link c-link--warning f2 w-bold fs-21">Conocer más</a>
+                      </div>
+                    </div>
+                    <div class="cell large-5">
+                      <div class="position-relative flex-container align-center">
+                        <img src="{{ theme.link }}/static/images/courses/mine/services/4.png" alt="" class="br--large of--contain position-relative"> 
+                        <img src="{{ theme.link }}/static/images/home/cup.png" alt="" class="c-banner__heart position-absolute of--contain">  
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="c-slider__pagination swiper-pagination"></div>
+          </div>
+        </div>
+        <a href="https://api.whatsapp.com/send?phone={{information.wsp}}" target="_blank" class="c-ws position-relative bg-warning br--large dark w-xbold f2 fs-21 display-block">
+          <img src="{{ theme.link }}/static/images/courses/mine/whatsapp.png" alt="" class="position-absolute"> 
+          <span>
+            Escríbenos para
+            tener acceso
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+{% endblock %}
