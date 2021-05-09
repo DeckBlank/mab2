@@ -15,7 +15,7 @@ const topic = new Vue({
       view: 1,
       foro: 1,
       commentbox: 0,
-      questions: [
+      questionsAlter: [
         { enable : true },
         { enable : false },
         { enable : false },
@@ -410,7 +410,7 @@ const topic = new Vue({
       }
     },
     resetAccordion: function(question) {
-      this.questions = this.questions.map(q => {
+      this.questionsAlter = this.questionsAlter.map(q => {
         return (q != question) ? { ...q, enable : false } : q;
       })
     },

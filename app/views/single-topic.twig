@@ -212,7 +212,7 @@
                 </div>
               </div>
               <div class="c-tab-body padding-vertical-2">
-                <transition   name="fade" mode="out-in">
+                <transition name="fade" mode="out-in">
                   <div v-if="view == 1" key="contenido" class="c-tab-slide">
                     <div class="grid-x align-justify">
                       <div class="cell large-6">
@@ -263,7 +263,7 @@
                           <h3 class="c-accordion__header margin-bottom-0 padding-1 bg-light-gray dark fs-21 f2 text-uppercase w-xbold">CONTENIDO DEL CURSO</h3>
                           <div class="c-accordion__body bg-white">
                             <ul class="ul-reset">
-                              <li v-for="(question, qindex) of questions" :key="question.id" class="c-accordion-item">
+                              <li v-for="(question, qindex) of questionsAlter" :key="question.id" class="c-accordion-item">
                                 <input v-model="question.enable" @change="resetAccordion(question)" :id="'accordion-item-' + qindex" class="c-accordion hide" type="checkbox">
                                 <label class="c-accordion-item__switcher width-100 bg-light-gray dark" :for="'accordion-item-' + qindex">
                                   <p class="margin-bottom-0 w-bold white f2 fs-18">Unidad 1: ¿Qué es la nutrición?</p>
@@ -410,7 +410,6 @@
                   </div>
                 </transition>
               </div>
-              
             </div>
           </section>
         </div>
