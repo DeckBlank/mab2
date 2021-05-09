@@ -143,7 +143,7 @@
                 <div class="cell large-7">
                   <div class="c-actions__buttons text-center large-text-right">
                     <a class="c-button c-button--primary-alt-white display-inline-block f2 w-xbold fs-18 br-10" href="">Anterior</a>
-                    <button class="c-button c-button--mab-warning-black br-10 f2 w-xbold fs-18">Repaso</button>
+                    <button class="c-button c-button--mab-warning-black br-10 f2 w-xbold fs-18 margin-horizontal-1">Repaso</button>
                     <a class="c-button c-button--success display-inline-block f2 w-xbold fs-18" href="">Siguiente</a>
                   </div>
                 </div>
@@ -204,7 +204,7 @@
               <div class="c-tab-head text-center">
                 <div class="grid-x">
                   <div class="cell large-6">
-                    <div @click="view = 1" :class="{ active : view == 1 }" class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30 dark">SOBRE EL CURSO</div>
+                    <div @click="view = 1" :class="{ active : view == 1 }" class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30 dark border-0">SOBRE EL CURSO</div>
                   </div>
                   <div class="cell large-6">
                     <div @click="view = 2" :class="{ active : view == 2 }" class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30 small dark">COMENTARIOS</div>
@@ -223,7 +223,7 @@
                               <div class="c-tab-recursos__item f2 w-bold">
                                 <div></div>
                                 <figure class="margin-bottom-1">
-                                  <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
+                                  <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 of--contain"> 
                                 </figure>
                                 <span>Resúmenes</span>
                               </div>
@@ -231,7 +231,7 @@
                             <div class="small-3 medium-3 large-3">
                               <div class="c-tab-recursos__item f2 w-bold">
                                 <figure class="margin-bottom-1">
-                                  <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
+                                  <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100  of--contain"> 
                                 </figure>
                                 <span>Hoja de trabajo</span>
                               </div>
@@ -239,7 +239,7 @@
                             <div class="small-3 medium-3 large-3">
                               <div class="c-tab-recursos__item f2 w-bold">
                                 <figure class="margin-bottom-1">
-                                  <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
+                                  <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 of--contain"> 
                                 </figure>
                                 <span>Solucionario</span>
                               </div>
@@ -247,7 +247,7 @@
                             <div class="small-3 medium-3 large-3">
                               <div class="c-tab-recursos__item f2 w-bold">
                                 <figure class="margin-bottom-1">
-                                  <img src="{{ theme.link }}/static/images/curso/doc-2.png" alt="" class=" width-100 height-100 of--contain"> 
+                                  <img src="{{ theme.link }}/static/images/curso/doc-2.png" alt="" class=" width-100 of--contain"> 
                                 </figure>
                                 <span>Mapa mental</span>
                               </div>
@@ -259,31 +259,69 @@
                         </div>
                       </div>
                       <div class="cell large-5">
-                        <div class="c-accordion position-relative">
-                          <h3 class="c-accordion__header margin-bottom-0 padding-1 bg-light-gray dark fs-21 f2 text-uppercase w-xbold">CONTENIDO DEL CURSO</h3>
-                          <div class="c-accordion__body bg-white">
-                            <ul class="ul-reset">
-                              <li v-for="(question, qindex) of questionsAlter" :key="question.id" class="c-accordion-item">
-                                <input v-model="question.enable" @change="resetAccordion(question)" :id="'accordion-item-' + qindex" class="c-accordion hide" type="checkbox">
-                                <label class="c-accordion-item__switcher width-100 bg-light-gray dark" :for="'accordion-item-' + qindex">
-                                  <p class="margin-bottom-0 w-bold white f2 fs-18">Unidad 1: ¿Qué es la nutrición?</p>
-                                  <i class="c-icon white fs-21 far fa-chevron-up"></i>
-                                </label>
-                                <div class="c-accordion-item__content position-relative bg-white f2 dark w-medium">
-                                  <div class="c-mab-toggle fs-21">
-                                    <a class="dark" href=""><span class="triangle"></span> ¿Qué es la nutrición?</a> 
-                                  </div>
-                                  <ul v-if="false" class="padding-1">
-                                    <li> <a class="dark" href="">asd asdsadsdsa sad</a></li>
-                                    <li> <a class="dark" href="">asd asdsadsdsa sad</a></li>
-                                    <li> <a class="dark" href="">asd asdsadsdsa sad</a></li>
-                                    <li> <a class="dark" href="">asd asdsadsdsa sad</a></li>
-                                    <li> <a class="dark" href="">asd asdsadsdsa sad</a></li>
+                        <div class="c-themes-list br--large padding-2">
+                          <h2 class="w-xbold f2 fs-25 dark margin-bottom-1 text-uppercase">CONTENIDOS DEL CURSO</h2>
+                          <div class="c-themes-list__content">
+                            <div class="c-themes-list__scrool">
+                              <div>
+                                <div class="margin-bottom-1">
+                                  <p class="margin-bottom-0 dark f2 fs-25 text-uppercase">Unidad 1</p>
+                                  <ul class="ul-reset">
+                                    <li class="c-themes-list__item active dark f2 active fs-18">
+                                      <span class="triangle"></span> ¿Qué es la nutrición?
+                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
+                                    </li>
                                   </ul>
                                 </div>
-                              </li>
-                            </ul>
+                                <div class="margin-bottom-1">
+                                  <p class="margin-bottom-0 dark f2 fs-25 text-uppercase">Unidad 2</p>
+                                  <ul class="ul-reset">
+                                    <li class="c-themes-list__item dark f2 fs-18">
+                                      <span class="triangle"></span> Carbohidratos
+                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
+                                    </li>
+                                    <li class="c-themes-list__item dark f2 fs-18">
+                                      <span class="triangle"></span> Proteínas
+                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
+                                    </li>
+                                    <li class="c-themes-list__item dark f2 fs-18">
+                                      <span class="triangle"></span> Grasa
+                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
+                                    </li>
+                                    <li class="c-themes-list__item dark f2 fs-18">
+                                      <span class="triangle"></span> Vitaminas
+                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
+                                    </li> 
+                                    <li class="c-themes-list__item dark f2 fs-18">
+                                      <span class="triangle"></span> Minerales
+                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
+                                    </li>
+                                    <li class="c-themes-list__item dark f2 fs-18">
+                                      <span class="triangle"></span> Fibra
+                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
+                                    </li>
+                                    <li class="c-themes-list__item dark f2 fs-18">
+                                      <span class="triangle"></span> Grasa
+                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
+                                    </li>
+                                    <li class="c-themes-list__item dark f2 fs-18">
+                                      <span class="triangle"></span> Vitaminas
+                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
+                                    </li> 
+                                    <li class="c-themes-list__item dark f2 fs-18">
+                                      <span class="triangle"></span> Minerales
+                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
+                                    </li>
+                                    <li class="c-themes-list__item dark f2 fs-18">
+                                      <span class="triangle"></span> Fibra
+                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
                           </div>
+
                         </div>
                       </div>
                     </div>
@@ -293,94 +331,143 @@
                       <div class="c-foro-body">
                         <div class="c-foro-scroll height-100">
                           <div class="position-relative">
-                            <div class="c-comment c-comment--small br-top--large br-bottom--large margin-bottom-1">
-                              <div class="grid-x">
-                                <div class="small-2 medium-2 large-2">
-                                  <figure class="c-comment__figure">
-                                    <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="width-100 height-100 of--cover"> 
-                                  </figure>
-                                </div>
-                                <div class="small-10 medium-8 large-8">
-                                  <div class="c-comment-content">
-                                    <div class="c-comment__autor f2 w-xbold dark fs-21">
-                                      Maca Wellness <span class="padding-left-1 fs-16"><i class="far fa-thumbtack"></i></span>
-                                    </div>
-                                    <div class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
-                                      Speaker
-                                    </div>
-                                    <p class="c-comment__text f2 dark fs-16 lh-18">
-                                      ¡Hola chic@s! Aquí les dejo un libro que puede ayudarles a profundizar en este tema. https://www.librodenutrición.com
-                                    </p>
+                            <div class="c-comment-container">
+                              <div class="c-comment c-comment--small br-top--large br-bottom--large margin-bottom-1">
+                                <div class="grid-x">
+                                  <div class="small-2 medium-2 large-2">
+                                    <figure class="c-comment__figure">
+                                      <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="width-100 height-100 of--cover"> 
+                                    </figure>
                                   </div>
-                                </div>
-                                <div class="cell medium-2 large-2">
-                                  <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-14">
-                                    <button><span>Responder</span></button>
-                                    <button><span class="padding-left-1 flex-container align-middle"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span></button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="c-comment c-comment--small br-top--large br-bottom--large margin-bottom-1">
-                              <div class="grid-x">
-                                <div class="small-2 medium-2 large-2">
-                                  <figure class="c-comment__figure">
-                                    <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="width-100 height-100 of--cover"> 
-                                  </figure>
-                                </div>
-                                <div class="small-10 medium-8 large-8">
-                                  <div class="c-comment-content">
-                                    <div class="c-comment__autor f2 w-xbold dark fs-21">
-                                      Angela Hinostroza
-                                    </div>
-                                    <div class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
-                                      Estudiante
-                                    </div>
-                                    <div class="c-comment__theme f2 w-xbold dark fs-16">
-                                      Carbohidratos en la noche
-                                    </div>
-                                    <p class="c-comment__text f2 dark fs-16 lh-18">
-                                      ¡Gracias Maca! Súper interesante. ¿Es cierto que comer carbohidratos en la noche es malo para nuestra salud?
-                                    </p>
-                                  </div>
-                                </div>
-                                <div class="cell medium-2 large-2">
-                                  <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-14">
-                                    <button><span>Responder</span></button>
-                                    <button><span class="padding-left-1 flex-container align-middle"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span></button> 
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="grid-x align-right">
-                              <div class="small-11 medium-11 large-11">
-                                <div class="c-comment c-comment--small br-top--large br-bottom--large margin-bottom-1">
-                                  <div class="grid-x">
-                                    <div class="small-2 medium-2 large-2">
-                                      <figure class="c-comment__figure">
-                                        <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="width-100 height-100 of--cover"> 
-                                      </figure>
-                                    </div>
-                                    <div class="small-10 medium-8 large-8">
-                                      <div class="c-comment-content">
-                                        <div class="c-comment__autor f2 w-xbold dark fs-21">
-                                          Maca Wellness
-                                        </div>
-                                        <div class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
-                                          Speaker
-                                        </div>
-                                        <div class="c-comment__theme f2 w-xbold dark fs-16">
-                                          Re: Carbohidratos en la noche
-                                        </div>
-                                        <p class="c-comment__text f2 dark fs-16 lh-18">
-                                          Hola, Angela. Gracias por preguntar. Es un mito, en este post lo explico a profundidad https://instagram/macawellness 
-                                        </p>
+                                  <div class="small-10 medium-8 large-8">
+                                    <div class="c-comment-content">
+                                      <div class="c-comment__autor f2 w-xbold dark fs-21">
+                                        Maca Wellness <span class="padding-left-1 fs-16"><i class="far fa-thumbtack"></i></span>
                                       </div>
+                                      <div class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
+                                        Speaker
+                                      </div>
+                                      <p class="c-comment__text f2 dark fs-16 lh-18">
+                                        ¡Hola chic@s! Aquí les dejo un libro que puede ayudarles a profundizar en este tema. https://www.librodenutrición.com
+                                      </p>
                                     </div>
-                                    <div class="cell medium-2 large-2">
-                                      <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-14">
-                                        <button><span>Responder</span></button>
-                                        <button><span class="padding-left-1 flex-container align-middle"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span></button>
+                                  </div>
+                                  <div class="cell medium-2 large-2">
+                                    <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-14">
+                                      <button><span>Responder</span></button>
+                                      <button><span class="padding-left-1 flex-container align-middle"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span></button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div v-if="true" class="c-answer-editor">
+                                <div class="grid-x align-right">
+                                  <div class="small-11 medium-11 large-11">
+                                    <div class="c-comment-inline flex-container align-center-middle  margin-bottom-2 f2">
+                                      <div class="c-comment-inline__reactions flex-container align-center-middle">
+                                        <button class="fs-25">
+                                          <i class="far fa-smile"></i>
+                                        </button>
+                                        <button class="fs-25">
+                                          <i class="far fa-paperclip"></i>
+                                        </button>
+                                      </div>
+                                      <input class="input-reset margin-0" type="text" placeholder="Escribe un comentario">
+                                      <button class="fs-25">
+                                        <i class="far fa-paper-plane"></i>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div v-if="false" class="c-answers-container">
+                              </div>
+                            </div>
+                            
+                            <div class="c-comment-container">
+                              <div class="c-comment c-comment--small br-top--large br-bottom--large margin-bottom-1">
+                                <div class="grid-x">
+                                  <div class="small-2 medium-2 large-2">
+                                    <figure class="c-comment__figure">
+                                      <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="width-100 height-100 of--cover"> 
+                                    </figure>
+                                  </div>
+                                  <div class="small-10 medium-8 large-8">
+                                    <div class="c-comment-content">
+                                      <div class="c-comment__autor f2 w-xbold dark fs-21">
+                                        Angela Hinostroza
+                                      </div>
+                                      <div class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
+                                        Estudiante
+                                      </div>
+                                      <div class="c-comment__theme f2 w-xbold dark fs-16">
+                                        Carbohidratos en la noche
+                                      </div>
+                                      <p class="c-comment__text f2 dark fs-16 lh-18">
+                                        ¡Gracias Maca! Súper interesante. ¿Es cierto que comer carbohidratos en la noche es malo para nuestra salud?
+                                      </p>
+                                    </div>
+                                  </div>
+                                  <div class="cell medium-2 large-2">
+                                    <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-14">
+                                      <button><span>Responder</span></button>
+                                      <button><span class="padding-left-1 flex-container align-middle"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span></button> 
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div v-if="false" class="c-answer-editor">
+                                <div class="grid-x align-right">
+                                  <div class="small-11 medium-11 large-11">
+                                    <div class="c-comment-inline flex-container align-center-middle  margin-bottom-2 f2">
+                                      <div class="c-comment-inline__reactions flex-container align-center-middle">
+                                        <button class="fs-25">
+                                          <i class="far fa-smile"></i>
+                                        </button>
+                                        <button class="fs-25">
+                                          <i class="far fa-paperclip"></i>
+                                        </button>
+                                      </div>
+                                      <input class="input-reset margin-0" type="text" placeholder="Escribe un comentario">
+                                      <button class="fs-25">
+                                        <i class="far fa-paper-plane"></i>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div v-if="true" class="c-answers-container">
+                                <div class="grid-x align-right">
+                                  <div class="small-11 medium-11 large-11">
+                                    <div class="c-comment c-comment--small br-top--large br-bottom--large margin-bottom-1">
+                                      <div class="grid-x">
+                                        <div class="small-2 medium-2 large-2">
+                                          <figure class="c-comment__figure">
+                                            <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="width-100 height-100 of--cover"> 
+                                          </figure>
+                                        </div>
+                                        <div class="small-10 medium-8 large-8">
+                                          <div class="c-comment-content">
+                                            <div class="c-comment__autor f2 w-xbold dark fs-21">
+                                              Maca Wellness
+                                            </div>
+                                            <div class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
+                                              Speaker
+                                            </div>
+                                            <div class="c-comment__theme f2 w-xbold dark fs-16">
+                                              Re: Carbohidratos en la noche
+                                            </div>
+                                            <p class="c-comment__text f2 dark fs-16 lh-18">
+                                              Hola, Angela. Gracias por preguntar. Es un mito, en este post lo explico a profundidad https://instagram/macawellness 
+                                            </p>
+                                          </div>
+                                        </div>
+                                        <div class="cell medium-2 large-2">
+                                          <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-14">
+                                            <button><span>Responder</span></button>
+                                            <button><span class="padding-left-1 flex-container align-middle"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span></button>
+                                          </div>
+                                        </div>
                                       </div>
                                     </div>
                                   </div>
@@ -400,7 +487,7 @@
                               <i class="far fa-paperclip"></i>
                             </button>
                           </div>
-                          <input class="input-reset margin-0" type="text" placeholder="Escribe un comentario">
+                          <input class="input-reset margin-0 f2" type="text" placeholder="Escribe un comentario">
                           <button class="fs-25">
                             <i class="far fa-paper-plane"></i>
                           </button>
