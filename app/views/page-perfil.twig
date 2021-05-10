@@ -1,0 +1,288 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--perfil">
+    <div class="c-banner mab-shadow-soft bg-sec-color margin-bottom-2">
+      <div class="grid-container">
+        <div class="grid-x grid-margin-x grid-margin-y align-bottom">
+          <div class="cell large-8">
+            <div class="c-banner__content padding-vertical-3">
+              <h1 class="c-banner__title text-right position-relative">  
+                <span class="white fs-70 c-lh--70 big">Estoy aquí porque quiero
+                  cambiar el mundo</span>
+                  <button  type="button" class="c-edit-circle position-absolute bg-white sec-color fs-25">
+                    <i class="far fa-pen"></i>
+                  </button>
+              </h1>
+            </div>
+          </div>
+          <div class="cell large-4 margin-0">
+            <div class="c-banner__figure position-relative flex-container align-center ">
+              <img class="c-banner__img of--contain" src="{{ theme.link }}/static/images/perfil/banner-perfil.png" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-user-info mrgin-bottom-3">
+      <div class="grid-container">
+        <div class="grid-x">
+          <div class="cell large-4">
+            <figure class="c-user-info__icon position-relative margin-right-1">
+              <img src="{{ theme.link }}/static/images/curso/doc-2.png" alt="" class=" width-100 height-100 of--cover"> 
+              <button type="button" class="c-edit-circle position-absolute bg-white sec-color fs-25">
+                <i class="far fa-pen"></i> 
+              </button> 
+            </figure>
+          </div>
+          <div class="cell large-8 position-relative ">
+            <h2 class="c-user-info__name w-xbold dark text-center large-text-left f2 margin-bottom-0"> 
+              <span>Angela Hinostroza</span>   
+              <button type="button" class="c-edit-circle c-edit-circle--text bg-white gray margine-left-1 fs-14">
+                EDITAR <i class="far fa-pen"></i>
+              </button> 
+            </h2>
+            <h4 class="c-user-info__rol text-center large-text-left f2 margin-bottom-0 gray">Estudiante</h4>
+            <button class="c-user-info__share fs-21 f2"> <i class="fas fa-share"></i> Compartir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-my-courses margin-vertical-3">
+      <div class="grid-container">
+        <h2 class="margin-bottom-2">
+          <p class="dark fs-50 lh-40 margin-bottom-0 text-uppercase">mis cursos</p>
+        </h2>
+        <div class="c-mab-slider c-mab-slider--side-shadow position-relative">
+          <div class="c-arrow-next swiper-button-next position-absolute flex-container align-center-middle">
+            next
+          </div>
+          <div class="c-arrow-prev swiper-button-prev position-absolute flex-container align-center-middle">
+            prev
+          </div>
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide padding-vertical-2">
+                <div class="c-course-card c-course-card--primary br--large ">
+                  <figure class="c-course-card__figure position-relative">
+                    <img src="{{ theme.link }}/static/images/curso/doc-2.png"  alt="" class="of--cover br-top--large width-100 height-100"> 
+                    <div class="c-course-card__progress-bar position-absolute width-100">
+                      <div style="width:50%" class="bg-pri-alt height-100"></div>
+                    </div>
+                  </figure>
+                  <div class="c-course-card__content flex-container fd-column padding-1 br--large">
+                    <div>
+                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
+                      <p class="fs-16 f2">Con Angela Hinostroza</p>
+                      <p class="fs-16 f2 lh-18">Lorem ipsum dolor sit amet, consect etu
+                        er adipiscing elit, sed diam nonummy
+                        nibh euismod nostrud .</p>
+                    </div>
+                    <div class="grid-x align-middle">
+                      <div class="small-6 medium-6">
+                        <span class="c-course-card__likes f2"> <i class="fas fa-heart mr-05"></i> 50</span>
+                      </div>
+                      <div class="small-6 medium-6 text-right">
+                        <a href="" class="c-button c-button--course display-block lh-14 f2">
+                          Siguiente clase:
+                          <span>Funciones</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="" class="c-course-card__footer display-block text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                    ¡continuar curso!
+                  </a>
+                </div>
+              </div>
+              <div class="swiper-slide padding-vertical-2">
+                <div class="c-course-card c-course-card--warning br--large ">
+                  <figure class="c-course-card__figure position-relative">
+                    <img src="{{ theme.link }}/static/images/curso/doc-2.png"  alt="" class="of--cover br-top--large width-100 height-100"> 
+                    <div class="c-course-card__progress-bar position-absolute width-100">
+                      <div style="width:50%" class="bg-pri-alt height-100"></div>
+                    </div>
+                  </figure>
+                  <div class="c-course-card__content flex-container fd-column padding-1 br--large">
+                    <div>
+                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
+                      <p class="fs-16 f2">Con Angela Hinostroza</p>
+                      <p class="fs-16 f2 lh-18">Lorem ipsum dolor sit amet, consect etu
+                        er adipiscing elit, sed diam nonummy
+                        nibh euismod nostrud .</p>
+                    </div>
+                    <div class="grid-x align-middle">
+                      <div class="small-6 medium-6">
+                        <span class="c-course-card__likes f2"> <i class="fas fa-heart mr-05"></i> 50</span>
+                      </div>
+                      <div class="small-6 medium-6 text-right">
+                        <a href="" class="c-button c-button--course display-block lh-14 f2">
+                          Siguiente clase:
+                          <span>Funciones</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="" class="c-course-card__footer display-block text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                    ¡continuar curso!
+                  </a>
+                </div>
+              </div>
+              <div class="swiper-slide padding-vertical-2">
+                <div class="c-course-card c-course-card--secondary br--large ">
+                  <figure class="c-course-card__figure position-relative">
+                    <img src="{{ theme.link }}/static/images/curso/doc-2.png"  alt="" class="of--cover br-top--large width-100 height-100"> 
+                    <div class="c-course-card__progress-bar position-absolute width-100">
+                      <div style="width:50%" class="bg-pri-alt height-100"></div>
+                    </div>
+                  </figure>
+                  <div class="c-course-card__content flex-container fd-column padding-1 br--large">
+                    <div>
+                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
+                      <p class="fs-16 f2">Con Angela Hinostroza</p>
+                      <p class="fs-16 f2 lh-18">Lorem ipsum dolor sit amet, consect etu
+                        er adipiscing elit, sed diam nonummy
+                        nibh euismod nostrud .</p>
+                    </div>
+                    <div class="grid-x align-middle">
+                      <div class="small-6 medium-6">
+                        <span class="c-course-card__likes f2"> <i class="fas fa-heart mr-05"></i> 50</span>
+                      </div>
+                      <div class="small-6 medium-6 text-right">
+                        <a href="" class="c-button c-button--course display-block lh-14 f2">
+                          Siguiente clase:
+                          <span>Funciones</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="" class="c-course-card__footer display-block text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                    ¡continuar curso!
+                  </a>
+                </div>
+              </div>
+              <div class="swiper-slide padding-vertical-2">
+                <div class="c-course-card c-course-card--secondary br--large ">
+                  <figure class="c-course-card__figure position-relative">
+                    <img src="{{ theme.link }}/static/images/curso/doc-2.png"  alt="" class="of--cover br-top--large width-100 height-100"> 
+                    <div class="c-course-card__progress-bar position-absolute width-100">
+                      <div style="width:50%" class="bg-pri-alt height-100"></div>
+                    </div>
+                  </figure>
+                  <div class="c-course-card__content flex-container fd-column padding-1 br--large">
+                    <div>
+                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
+                      <p class="fs-16 f2">Con Angela Hinostroza</p>
+                      <p class="fs-16 f2 lh-18">Lorem ipsum dolor sit amet, consect etu
+                        er adipiscing elit, sed diam nonummy
+                        nibh euismod nostrud .</p>
+                    </div>
+                    <div class="grid-x align-middle">
+                      <div class="small-6 medium-6">
+                        <span class="c-course-card__likes f2"> <i class="fas fa-heart mr-05"></i> 50</span>
+                      </div>
+                      <div class="small-6 medium-6 text-right">
+                        <a href="" class="c-button c-button--course display-block lh-14 f2">
+                          Siguiente clase:
+                          <span>Funciones</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <a href="" class="c-course-card__footer display-block text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                    ¡continuar curso!
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="c-my-tests margin-vertical-3">
+      <div class="grid-container">
+        <h2 class="margin-bottom-2">
+          <p class="dark fs-50 lh-40 margin-bottom-0 text-uppercase">Mis tests emocionales</p>
+        </h2>
+        <div class="grid-x align-center">
+          <div class="cell large-4">
+            <div class="c-my-tests__test margin-bottom-2 text-center">
+              <h4 class="margin-bottom-1">
+                <p class="dark fs-21 w-xbold lh-40 margin-bottom-0 text-uppercase f2 text-center">Mi tipo de personalidad</p>
+              </h4>
+              <figure class="c-my-tests__figure">
+                <img src="{{ theme.link }}/static/images/perfil/test-01.png" alt="" class=" width-100 height-100 of--cover"> 
+              </figure>
+              <a href="" class="c-button c-button--secondary-warning f2 fs-21 w-xbold">Tomar test</a>
+            </div>
+          </div>
+          <div class="cell large-4">
+            <div class="c-my-tests__test text-center">
+              <h4 class="margin-bottom-1">
+                <p class="dark fs-21 w-xbold lh-40 margin-bottom-0 text-uppercase f2 text-center">Mi estilo de aprendizaje</p>
+              </h4>
+              <figure class="c-my-tests__figure">
+                <img src="{{ theme.link }}/static/images/perfil/test-02.png" alt="" class=" width-100 height-100 of--cover"> 
+              </figure>
+              <a href="" class="c-button c-button--secondary-warning f2 fs-21 w-xbold">Tomar test</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-if="false" class="c-mab-modal padding-2 width-100 flex-container align-center-middle">
+        <div class="c-mab-modal__content bg-white br--large padding-2">
+          <h3 class="c-modal-editor__title dark w-xbold fs-25 f2 text-uppercase margin-bottom-1">Tus datos</h3>
+          <form class="c-form-new text-left margin-top-1" action="">
+            <div class="grid-x grid-margin-x grid-margin-y">
+              <div class="cell">
+                <div class="c-form-new__input-container">
+                  <label class="w-bold f2 dark" for="">Nombre</label>
+                  <input class="f2 input-reset border-dark" type="text">
+                  <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
+                    Nombre vacio o no valido
+                  </p>
+                </div>
+              </div>
+              <div class="cell large-6">
+                <div class="c-form-new__input-container">
+                  <label class="w-bold f2 dark" for="">Apellido Paterno</label>
+                  <input class="f2 input-reset border-dark" type="text">
+                  <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
+                    Apellido Paterno vacio o no valido
+                  </p>
+                </div>
+              </div>
+              <div class="cell large-6">
+                <div class="c-form-new__input-container">
+                  <label class="w-bold f2 dark" for="">Apellido Materno</label>
+                  <input class="f2 input-reset border-dark" type="text">
+                  <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
+                    Apellido Materno vacio o no valido
+                  </p>
+                </div>
+              </div>
+              <div class="cell">
+                <div class="c-form-new__input-container">
+                  <label class="w-bold f2 dark" for="">Frase</label>
+                  <textarea class="f2 input-reset border-dark br--medium" name="" id="" cols="30" rows="3"></textarea>
+                  <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
+                    Frase vacio o no valido
+                  </p>
+                </div>
+              </div>
+              <div class="cell text-right">
+                <button @click="modal = false" type="button" class="c-button c-button--primary--real-ghost f2">Cancelar</button>
+                <button @click="modal = false" type="button" class="c-button c-button--primary f2">Aceptar</button>
+              </div>
+
+            </div>
+
+        </div>
+    </div>
+  </section>
+{% endblock %}

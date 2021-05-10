@@ -1,0 +1,88 @@
+.c-section--perfil {
+  .c-banner {
+    .c-edit-circle {
+      bottom: -5rem;
+    }
+  }
+
+  .c-user-info {
+    &__icon {
+      width: 180px;
+      height: 180px;
+      margin-left: calc(50% - 90px);
+      margin-top: -6rem;
+
+      img {
+        border-radius: 50%;
+      }
+    }
+
+    &__name {
+      font-size: $fs-35;
+      margin-top: 2rem;
+    }
+
+    &__share {
+      margin-top: 2rem;
+      text-align: center;
+      width: 100%;
+      color: $gray;
+    }
+  }
+
+  .c-my-tests {
+    &__figure {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 2rem;
+
+      img {
+        border-radius: 50%;
+      }
+    }
+  }
+
+  .c-mab-modal {
+    z-index: 555;
+
+    textarea {
+      resize: none;
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-section--perfil {
+    .c-banner {
+      .grid-x {
+        flex-direction: row-reverse;
+      }
+
+      &__figure {
+        width: 120%;
+        margin-left: -10%;
+      }
+    }
+
+    .c-user-info {
+      &__icon {
+        width: 245px;
+        height: 245px;
+        margin-left: calc(50% - 115px);
+        margin-top: -4rem;
+      }
+
+      &__name {
+        font-size: 40px;
+      }
+
+      &__share {
+        position: absolute;
+        top: 0;
+        right: 3rem;
+        width: auto;
+        margin-top: 3.5rem;
+      }
+    }
+  }
+}
