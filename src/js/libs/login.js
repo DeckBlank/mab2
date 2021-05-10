@@ -33,7 +33,6 @@ function updateUserLoginSession(field, value){
 
 function getUserLoged() {
   if (typeof mab !== 'undefined') {
-    console.log(mab.user_auth);
     return (mab.user_auth) ? mab : false;
   } else {
     return (window.localStorage.getItem('mab_loged_user')) ? JSON.parse(window.localStorage.getItem('mab_loged_user')) : false;

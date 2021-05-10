@@ -24,6 +24,9 @@ if(is_page('access')){
         header('Location:' . $context['site']->url . '/access');        
     }
 
+}else if(is_page('cursos')){
+    $templates = 'courses/page-cursos.twig';
+
 }else if(is_page('carrito')){
     if (is_user_logged_in()) {
         $env = require(__DIR__ . '/../env.php');
@@ -40,9 +43,9 @@ if(is_page('access')){
 
 }else if(is_page('recuperar-contrasena')){
     if (isset($_GET['stage']) && $_GET['stage'] == 2) {
-        $templates = 'auth/password/page-actualizar-contrasena.twig' ;
+        $templates = 'auth/password/page-actualizar-contrasena.twig';
     } else {
-        $templates = 'auth/password/page-recuperar-contrasena.twig' ;
+        $templates = 'auth/password/page-recuperar-contrasena.twig';
     }
     
 }else if(is_page('formularios')){

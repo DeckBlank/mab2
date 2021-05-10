@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import { mapState } from 'vuex';
-import {store} from '../store';
+import {store} from '../../store';
 import Swiper from 'swiper';
 
-import {baseConfig, baseState, baseActions} from '../app';
-import {addCourseToShopCart} from '../libs/shop-cart'
+import {baseConfig, baseState, baseActions} from '../../app';
+import {addCourseToShopCart} from '../../libs/shop-cart'
 
-import '../components/lideres';
+import '../../components/lideres';
 
 const myCourses = new Vue({
   ...baseConfig(store),
