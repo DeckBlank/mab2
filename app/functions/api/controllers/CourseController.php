@@ -163,8 +163,10 @@ class CourseController{
         $level  = $request['level'];
         $grade  = $request['grade'];
         $search = $request['search'];
+        $paged  = ( !empty($request['paged']) ) ? $request['paged'] : 1;
 
-        $coursesFinal = [];
+        $coursesFinal   = [];
+        $hasPagination  = false;
 
         if ( !empty($level) || !empty($grade) || !empty($search) ) {
             if ( !empty($level) || !empty($grade) ) {
@@ -174,41 +176,48 @@ class CourseController{
                 if ( !empty($search) ) {
                     foreach ($courses as $course) {
                         if ( stripos($course->name, $search) !== false ) {
-                            array_push( $coursesArray, __sanitizeCourse($course->object_id, '-1', '-1', 'general') );
+                            array_push( $coursesFinal, __sanitizeCourse($course->object_id, '-1', '-1', 'general') );
                         }
                     }
-
-                    $coursesFinal = $coursesArray;
                 } else {
                     foreach($courses as $course) {
-                        array_push($coursesArray, __sanitizeCourse($course->object_id, '-1', '-1', 'general'));
+                        array_push($coursesFinal, __sanitizeCourse($course->object_id, '-1', '-1', 'general'));
                     }
-
-                    $coursesFinal = $coursesArray;
                 }
             } else if ( !empty($search) ) {
                 $courses = Timber::get_posts([
                     'post_type'         => 'course',
-                    'posts_per_page'    => -1,
+                    'posts_per_page'    => 12,
+                    'paged'             => $paged,
                     's'                 => $search
                 ]);
 
-                $coursesFinal = $courses;
+                foreach($courses as $course) {
+                    array_push($coursesFinal, __sanitizeCourse($course->ID, '-1', '-1', 'general'));
+                }
+
+                $hasPagination = ( count($coursesFinal) ) ? true : false;
             }
         } else {
             $courses = Timber::get_posts([
                 'post_type'         => 'course',
-                'posts_per_page'    => -1,
+                'posts_per_page'    => 12,
+                'paged'             => $paged
             ]);
 
-            $coursesFinal = $courses;
+            foreach($courses as $course) {
+                array_push($coursesFinal, __sanitizeCourse($course->ID, '-1', '-1', 'general'));
+            }
+
+            $hasPagination = ( count($coursesFinal) ) ? true : false;
         }
 
-        if ( count($coursesArray) ) {
+        if ( count($coursesFinal) ) {
             return new WP_REST_Response((object)[
-                'message'   => 'Courses heres!!',
-                'data'      => $coursesFinal,
-                'status'    => true
+                'message'       => 'Courses heres!!',
+                'data'          => $coursesFinal,
+                'pagination'    => $hasPagination,
+                'status'        => true
             ], 200);
         } else {
             return new WP_REST_Response((object)[

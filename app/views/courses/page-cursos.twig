@@ -28,12 +28,26 @@
         </div>
       </div>
     </div>
+
     <div class="c-mab-recommended padding-top-2">
       <div class="grid-container padding-vertical-3">
         <h2>
           <p class="dark fs-50 lh-40 margin-bottom-0">recomendaciones para ti</p>
         </h2>
-        <div class="c-mab-slider c-mab-slider--side-shadow position-relative ">
+
+        <div v-if="isLoadingRecommended">
+          <div class="c-loader c-loader--full active">
+            <div class="container height-100 flex-container align-center-middle">
+              <div class="loader">
+                {% for item in [1,2,3,4,5] %}              
+                  <div class="loader--dot"></div>
+                {% endfor %}       
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div v-if="recommendCourses.length" class="c-mab-slider c-mab-slider--side-shadow position-relative"  :class="{'opacity-0' : isLoadingRecommended}">
           <div class="c-arrow-next swiper-button-next position-absolute flex-container align-center-middle">
             next
           </div>
@@ -42,136 +56,48 @@
           </div>
           <div class="swiper-container">
             <div class="swiper-wrapper">
-              <div class="swiper-slide padding-vertical-2">
-                <div class="c-course-card c-course-card--secondary br--large">
+              <div v-for="course of recommendCourses" :key="course.id" class="swiper-slide padding-vertical-2">
+                <div class="c-course-card br--large" :class="'c-course-card--' + course.color">
                   <figure class="c-course-card__figure ">
-                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
+                    <img :src="(course.thumbnail) ? course.thumbnail : courseBasicThumbnail" alt="" class="of--cover br-top--large width-100 height-100"> 
                   </figure>
-                  <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
+                  <div class="c-course-card__content flex-container fd-column padding-1 br--large">
                     <div>
-                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                      <p class="fs-16 f2">Con Angela Hinostroza</p>
-                      <p class="fs-16 f2 lh-18">
-                        Lorem ipsum dolor sit amet, consect etu
-                        er adipiscing elit, sed diam nonummy
-                        nibh euismod nostrud .
-                      </p>
+                      <div class="c-course-card__titles">
+                        <p class="c-course-card__name w-xbold fs-18 f2 margin-0">${ course.name }</p>
+                        <p class="c-course-card__teacher fs-16 f2">Con ${ (course.teacher) ? course.teacher : '"Sin docente"' }</p>
+                      </div>
+                      <p class="c-course-card__description fs-16 f2 lh-18">${ course.description }</p>
                     </div>
                     <div class="grid-x align-middle">
-                      <div class="small-6 medium-6 marge-6">
-                        <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
+                      <div class="small-5 medium-5">
+                        <span class="c-course-card__likes f2"><i class="fas fa-heart mr-05"></i>${ course.likes }</span>
                       </div>
-                      <div class="small-6 medium-6 marge-6 text-right">
-                        <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
-                          S/ 35.00 <i class="far fa-shopping-cart"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                    ¡continuar curso!
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide padding-vertical-2">
-                <div class="c-course-card c-course-card--warning br--large">
-                  <figure class="c-course-card__figure ">
-                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                  </figure>
-                  <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
-                    <div>
-                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                      <p class="fs-16 f2">Con Angela Hinostroza</p>
-                      <p class="fs-16 f2 lh-18">
-                        Lorem ipsum dolor sit amet, consect etu
-                        er adipiscing elit, sed diam nonummy
-                        nibh euismod nostrud .
-                      </p>
-                    </div>
-                    <div class="grid-x align-middle">
-                      <div class="small-6 medium-6 marge-6">
-                        <span class="c-course-card__likes f2">325 <i class="far fa-heart"></i></span>
-                      </div>
-                      <div class="small-6 medium-6 marge-6 text-right">
-                        <div class="c-button c-button--mab-warning-black c-button--mab-warning-black--alert lh-14 f2 w-xbold">
-                          S/ 35.00 <i class="far fa-shopping-cart"></i>
-                        </div>
+                      <div class="small-7 medium-7 text-right">
+                        <button v-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                          S/ ${ Number(course.price).toFixed(2) } 
+                          <i class="fas fa-shopping-cart"></i>
+                        </button>
+                        <span v-else>¡Grátis!</span>
                       </div>
                     </div>
                   </div>
-                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                    ¡continuar curso!
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide padding-vertical-2">
-                <div class="c-course-card c-course-card--success br--large">
-                  <figure class="c-course-card__figure ">
-                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                  </figure>
-                  <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
-                    <div>
-                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                      <p class="fs-16 f2">Con Angela Hinostroza</p>
-                      <p class="fs-16 f2 lh-18">
-                        Lorem ipsum dolor sit amet, consect etu
-                        er adipiscing elit, sed diam nonummy
-                        nibh euismod nostrud .
-                      </p>
-                    </div>
-                    <div class="grid-x align-middle">
-                      <div class="small-6 medium-6 marge-6"> 
-                        <span class="c-course-card__likes f2">325<i class="far fa-heart"></i></span>
-                      </div>
-                      <div class="small-6 medium-6 marge-6 text-right">
-                        <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
-                          S/ 35.00 <i class="far fa-shopping-cart"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                    ¡continuar curso!
-                  </div>
-                </div>
-              </div>
-              <div class="swiper-slide padding-vertical-2">
-                <div class="c-course-card c-course-card--pri-alt br--large">
-                  <figure class="c-course-card__figure ">
-                    <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                  </figure>
-                  <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
-                    <div>
-                      <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                      <p class="fs-16 f2">Con Angela Hinostroza</p>
-                      <p class="fs-16 f2 lh-18">
-                        Lorem ipsum dolor sit amet, consect etu
-                        er adipiscing elit, sed diam nonummy
-                        nibh euismod nostrud .
-                      </p>
-                    </div>
-                    <div class="grid-x align-middle">
-                      <div class="small-6 medium-6 marge-6">
-                        <span class="c-course-card__likes f2">325 <i class="far fa-heart"></i></span>
-                      </div>
-                      <div class="small-6 medium-6 marge-6 text-right">
-                        <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
-                          S/ 35.00 <i class="far fa-shopping-cart"></i>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                    ¡continuar curso!
-                  </div>
+                  <a :href="course.link" class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large display-block">
+                    ¡comenzar curso!
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
+        <div v-else-if="!isLoadingRecommended">
+          <p class="margin-bottom-0 text-center f2 dark fs-21">Aun sin cursos, inscribete en alguno.</p>
+        </div>
       </div>
     </div>
-    <div class="c-category-list">
+
+    <div v-if="false" class="c-category-list">
       <div class="grid-container">
         <h2>
           <p class="dark fs-50 lh-40 margin-bottom-0">categorías</p>
@@ -250,17 +176,19 @@
         </div>
       </div>
     </div>
+
     <div class="c-course-list padding-vertical-3">
       <div class="grid-container">
         <h2>
           <p class="dark fs-50 lh-40 margin-bottom-3">CURSOS</p>
         </h2>
+
         <div class="c-form-new margin-bottom-2">
           <div class="grid-x grid-margin-x grid-margin-y">
             <div class="cell medium-6 large-3">
               <div class="c-form-new__input-container margin-bottom-1">
                 <label class="w-bold dark" for="">Nivel</label>
-                <select v-model="filter.level" class="f2 mab-shadow-soft text-last-left">
+                <select v-model="filter.level" @change="getCourses('level')" class="f2 mab-shadow-soft text-last-left">
                   <option disabled value="-1">Escoge un opcion</option>
                   <option v-for="level of levels" :key="level.id" :value="level.slug">${ level.name }</option>
                 </select>
@@ -269,7 +197,7 @@
             <div class="cell medium-6 large-3">
               <div class="c-form-new__input-container margin-bottom-1">
                 <label class="w-bold dark" for="">Grado</label>
-                <select v-model="filter.grade" class="f2 mab-shadow-soft text-last-left">
+                <select v-model="filter.grade" @change="getCourses('grade')" class="f2 mab-shadow-soft text-last-left">
                   <option disabled value="-1">Escoge un opcion</option>
                   <option v-for="grade of grades" :key="grade.id" :value="grade.slug">${ grade.name }</option>
                 </select>
@@ -281,8 +209,8 @@
               <div class="c-form-new__input-container margin-bottom-1">
                 <label class="w-bold f2 white desktop" for="">Buscar</label>
                 <div class="c-fake-input c-fake-input--tel flex-container align-middle mab-shadow-soft">
-                  <input type="text" placeholder="Buscar Curso" />
-                  <button class="c-fake-input__prefix border-0">
+                  <input v-model="filter.search" type="text" placeholder="Buscar Curso" />
+                  <button :disabled="!filter.search" @click="getCourses('search')" class="c-fake-input__prefix border-0">
                     <i class="far fa-search"></i>
                   </button>
                 </div>
@@ -290,226 +218,61 @@
             </div>
           </div>
         </div>
+
         <div class="c-course-list__content">
-          <div class="grid-x grid-margin-x grid-margin-y">
-            <div class="cell medium-6 large-3">
-              <div class="c-course-card c-course-card--secondary br--large">
-                <figure class="c-course-card__figure ">
-                  <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                </figure>
-                <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
-                  <div>
-                    <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                    <p class="fs-16 f2">Con Angela Hinostroza</p>
-                    <p class="fs-16 f2 lh-18">
-                      Lorem ipsum dolor sit amet, consect etu
-                      er adipiscing elit, sed diam nonummy
-                      nibh euismod nostrud .
-                    </p>
-                  </div>
-                  <div class="grid-x align-middle">
-                    <div class="small-6 medium-6 marge-6">
-                      <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
-                    </div>
-                    <div class="small-6 medium-6 marge-6 text-right">
-                      <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
-                        S/ 35.00 <i class="far fa-shopping-cart"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                  ¡continuar curso!
+          <div v-if="isLoadingCourses && !courses.length">
+            <div class="c-loader c-loader--full active">
+              <div class="container height-100 flex-container align-center-middle">
+                <div class="loader">
+                  {% for item in [1,2,3,4,5] %}              
+                    <div class="loader--dot"></div>
+                  {% endfor %}       
                 </div>
               </div>
             </div>
-            <div class="cell medium-6 large-3">
-              <div class="c-course-card c-course-card--secondary br--large">
+          </div>
+
+          <div v-if="courses.length" class="grid-x grid-margin-x grid-margin-y">
+            <div v-for="course of courses" :key="course.id" class="cell medium-6 large-3">
+              <div class="c-course-card br--large" :class="'c-course-card--' + course.color">
                 <figure class="c-course-card__figure ">
-                  <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
+                  <img :src="(course.thumbnail) ? course.thumbnail : courseBasicThumbnail" alt="" class="of--cover br-top--large width-100 height-100"> 
                 </figure>
-                <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
+                <div class="c-course-card__content flex-container fd-column padding-1 br--large">
                   <div>
-                    <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                    <p class="fs-16 f2">Con Angela Hinostroza</p>
-                    <p class="fs-16 f2 lh-18">
-                      Lorem ipsum dolor sit amet, consect etu
-                      er adipiscing elit, sed diam nonummy
-                      nibh euismod nostrud .
-                    </p>
+                    <div class="c-course-card__titles">
+                      <p class="c-course-card__name w-xbold fs-18 f2 margin-0">${ course.name }</p>
+                      <p class="c-course-card__teacher fs-16 f2">Con ${ (course.teacher) ? course.teacher : '"Sin docente"' }</p>
+                    </div>
+                    <p class="c-course-card__description fs-16 f2 lh-18">${ course.description }</p>
                   </div>
                   <div class="grid-x align-middle">
-                    <div class="small-6 medium-6 marge-6">
-                      <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
+                    <div class="small-5 medium-5">
+                      <span class="c-course-card__likes f2"><i class="fas fa-heart mr-05"></i>${ course.likes }</span>
                     </div>
-                    <div class="small-6 medium-6 marge-6 text-right">
-                      <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
-                        S/ 35.00 <i class="far fa-shopping-cart"></i>
-                      </div>
+                    <div class="small-7 medium-7 text-right">
+                      <button v-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                        S/ ${ Number(course.price).toFixed(2) } 
+                        <i class="fas fa-shopping-cart"></i>
+                      </button>
+                      <span v-else>¡Grátis!</span>
                     </div>
                   </div>
                 </div>
-                <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                  ¡continuar curso!
-                </div>
+                <a :href="course.link" class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large display-block">
+                  ¡comenzar curso!
+                </a>
               </div>
             </div>
-            <div class="cell medium-6 large-3">
-              <div class="c-course-card c-course-card--secondary br--large">
-                <figure class="c-course-card__figure ">
-                  <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                </figure>
-                <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
-                  <div>
-                    <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                    <p class="fs-16 f2">Con Angela Hinostroza</p>
-                    <p class="fs-16 f2 lh-18">
-                      Lorem ipsum dolor sit amet, consect etu
-                      er adipiscing elit, sed diam nonummy
-                      nibh euismod nostrud .
-                    </p>
-                  </div>
-                  <div class="grid-x align-middle">
-                    <div class="small-6 medium-6 marge-6">
-                      <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
-                    </div>
-                    <div class="small-6 medium-6 marge-6 text-right">
-                      <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
-                        S/ 35.00 <i class="far fa-shopping-cart"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                  ¡continuar curso!
-                </div>
-              </div>
+            <div v-if="hasPagination" class="cell text-center">
+              <button :disabled="isLoadingCourses" @click="getCourses()" class="c-button c-button--primary f2 w-sbold display-inline-block">
+                ${ (isLoadingCourses) ? 'Cargando...' : 'Cargar más cursos' }
+              </button>
             </div>
-            <div class="cell medium-6 large-3">
-              <div class="c-course-card c-course-card--secondary br--large">
-                <figure class="c-course-card__figure ">
-                  <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                </figure>
-                <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
-                  <div>
-                    <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                    <p class="fs-16 f2">Con Angela Hinostroza</p>
-                    <p class="fs-16 f2 lh-18">
-                      Lorem ipsum dolor sit amet, consect etu
-                      er adipiscing elit, sed diam nonummy
-                      nibh euismod nostrud .
-                    </p>
-                  </div>
-                  <div class="grid-x align-middle">
-                    <div class="small-6 medium-6 marge-6">
-                      <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
-                    </div>
-                    <div class="small-6 medium-6 marge-6 text-right">
-                      <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
-                        S/ 35.00 <i class="far fa-shopping-cart"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                  ¡continuar curso!
-                </div>
-              </div>
-            </div>
-            <div class="cell medium-6 large-3">
-              <div class="c-course-card c-course-card--secondary br--large">
-                <figure class="c-course-card__figure ">
-                  <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                </figure>
-                <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
-                  <div>
-                    <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                    <p class="fs-16 f2">Con Angela Hinostroza</p>
-                    <p class="fs-16 f2 lh-18">
-                      Lorem ipsum dolor sit amet, consect etu
-                      er adipiscing elit, sed diam nonummy
-                      nibh euismod nostrud .
-                    </p>
-                  </div>
-                  <div class="grid-x align-middle">
-                    <div class="small-6 medium-6 marge-6">
-                      <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
-                    </div>
-                    <div class="small-6 medium-6 marge-6 text-right">
-                      <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
-                        S/ 35.00 <i class="far fa-shopping-cart"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                  ¡continuar curso!
-                </div>
-              </div>
-            </div>
-            <div class="cell medium-6 large-3">
-              <div class="c-course-card c-course-card--secondary br--large">
-                <figure class="c-course-card__figure ">
-                  <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                </figure>
-                <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
-                  <div>
-                    <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                    <p class="fs-16 f2">Con Angela Hinostroza</p>
-                    <p class="fs-16 f2 lh-18">
-                      Lorem ipsum dolor sit amet, consect etu
-                      er adipiscing elit, sed diam nonummy
-                      nibh euismod nostrud .
-                    </p>
-                  </div>
-                  <div class="grid-x align-middle">
-                    <div class="small-6 medium-6 marge-6">
-                      <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
-                    </div>
-                    <div class="small-6 medium-6 marge-6 text-right">
-                      <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
-                        S/ 35.00 <i class="far fa-shopping-cart"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                  ¡continuar curso!
-                </div>
-              </div>
-            </div>
-            <div class="cell medium-6 large-3">
-              <div class="c-course-card c-course-card--secondary br--large">
-                <figure class="c-course-card__figure ">
-                  <img src="{{ theme.link }}/static/images/my-courses/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                </figure>
-                <div class="c-course-card__content flex-container flex-dir-column padding-1 br--large">
-                  <div>
-                    <p class="w-xbold fs-18 f2 margin-0">Álgebra</p>
-                    <p class="fs-16 f2">Con Angela Hinostroza</p>
-                    <p class="fs-16 f2 lh-18">
-                      Lorem ipsum dolor sit amet, consect etu
-                      er adipiscing elit, sed diam nonummy
-                      nibh euismod nostrud .
-                    </p>
-                  </div>
-                  <div class="grid-x align-middle">
-                    <div class="small-6 medium-6 marge-6">
-                      <span class="c-course-card__likes f2"><i class="far fa-heart"></i>325</span>
-                    </div>
-                    <div class="small-6 medium-6 marge-6 text-right">
-                      <div class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
-                        S/ 35.00 <i class="far fa-shopping-cart"></i>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                  ¡continuar curso!
-                </div>
-              </div>
-            </div>
-            
+          </div>
+
+          <div v-else-if="!isLoadingCourses">
+            <p class="margin-bottom-0 text-center f2 dark fs-21">Aun sin cursos, inscribete en alguno.</p>
           </div>
         </div>
       </div>

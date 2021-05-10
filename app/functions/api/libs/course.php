@@ -10,11 +10,12 @@ function __getMetaCourse($courseId, $userEmail, $meta) {
 
             if ( $unities && count($unities) ) {
                 foreach($unities as $unity){
-                    foreach($unity['topics'] as $topic) {
-                        if ($topic['topic']) {
-                            $likes += floatval( get_post_meta($topic['topic']->ID, 'post_likes_count') );
+                    if ($unity['topics'])
+                        foreach($unity['topics'] as $topic) {
+                            if ($topic['topic']) {
+                                $likes += floatval( get_post_meta($topic['topic']->ID, 'post_likes_count') );
+                            }
                         }
-                    }
                 }
             }
 
