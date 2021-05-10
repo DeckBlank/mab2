@@ -49,6 +49,15 @@ class CourseController{
                 }
             ));
     
+            register_rest_route('custom/v1', '/courses/all', array(
+                'methods' => 'GET',
+                'callback' => array($this,'index'),
+                'permission_callback' => function ($request) {
+                    // return ($request['_wpnonce']) ? true : false;
+                    return true;
+                }
+            ));
+    
             register_rest_route('custom/v1', '/courses/progress', array(
                 'methods' => 'GET',
                 'callback' => array($this,'getProgress'),
@@ -150,6 +159,64 @@ class CourseController{
     /**
      * Methods
      */
+    public function index($request) {
+        $level  = $request['level'];
+        $grade  = $request['grade'];
+        $search = $request['search'];
+
+        $coursesFinal = [];
+
+        if ( !empty($level) || !empty($grade) || !empty($search) ) {
+            if ( !empty($level) || !empty($grade) ) {
+                $courses        = $this::__getCourseFromPrimaryMenu($level, $grade);
+                $coursesArray   = [];
+
+                if ( !empty($search) ) {
+                    foreach ($courses as $course) {
+                        if ( stripos($course->name, $search) !== false ) {
+                            array_push( $coursesArray, __sanitizeCourse($course->object_id, '-1', '-1', 'general') );
+                        }
+                    }
+
+                    $coursesFinal = $coursesArray;
+                } else {
+                    foreach($courses as $course) {
+                        array_push($coursesArray, __sanitizeCourse($course->object_id, '-1', '-1', 'general'));
+                    }
+
+                    $coursesFinal = $coursesArray;
+                }
+            } else if ( !empty($search) ) {
+                $courses = Timber::get_posts([
+                    'post_type'         => 'course',
+                    'posts_per_page'    => -1,
+                    's'                 => $search
+                ]);
+
+                $coursesFinal = $courses;
+            }
+        } else {
+            $courses = Timber::get_posts([
+                'post_type'         => 'course',
+                'posts_per_page'    => -1,
+            ]);
+
+            $coursesFinal = $courses;
+        }
+
+        if ( count($coursesArray) ) {
+            return new WP_REST_Response((object)[
+                'message'   => 'Courses heres!!',
+                'data'      => $coursesFinal,
+                'status'    => true
+            ], 200);
+        } else {
+            return new WP_REST_Response((object)[
+                'status'    => false
+            ], 200);
+        }
+    }
+
     public function getCategories($request){
         $categories = CourseModel::getCategories($request['course_id']);
 
@@ -436,5 +503,34 @@ class CourseController{
             //Header
             include_once __DIR__."/../exports/reports/user-courses.php";
         }        
+    }
+
+    private function __getCourseFromPrimaryMenu($level, $grade) {
+        $sector = (new \Timber\Menu( 'primary-menu' ))->items[1]; /* Sector privado */
+
+        if ($level && $grade) {
+            $levelIndex = array_search($level, array_column($sector->children, 'name'));
+            $level      = $sector->children[$levelIndex];
+
+            $gradeIndex = array_search($grade, array_column($level->children, 'name'));
+            $grade      = $level->children[$gradeIndex];
+            $courses    = [];
+
+            foreach($grade->children as $course) {
+                array_push($courses, $course);
+            }
+
+            return $courses;
+        } else if ($level) {
+            $levelIndex = array_search($level, array_column($sector->children, 'name'));
+            $level      = $sector->children[$levelIndex];
+            $courses    = [];
+
+            foreach($level->children as $grade) {
+                $courses = array_merge($courses, $grade->children);
+            }
+
+            return $courses;
+        }
     }
 }

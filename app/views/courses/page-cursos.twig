@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <section class="c-section c-section--courses padding-top-0">
+  <section class="c-section c-section--courses">
     <div class="c-banner bg-sec-color mab-shadow">
       <div class="grid-container">
         <div class="grid-x grid-margin-x grid-margin-y align-middle align-self-stretch">
@@ -260,23 +260,19 @@
             <div class="cell medium-6 large-3">
               <div class="c-form-new__input-container margin-bottom-1">
                 <label class="w-bold dark" for="">Nivel</label>
-                <select class="f2 mab-shadow-soft text-last-left" name="" id="">
-                  <option disabled value="" selected>Escoge un opcion</option>>
+                <select v-model="filter.level" class="f2 mab-shadow-soft text-last-left">
+                  <option disabled value="-1">Escoge un opcion</option>
+                  <option v-for="level of levels" :key="level.id" :value="level.slug">${ level.name }</option>
                 </select>
-                <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
-                  Seleciona una opcion
-                </p>
               </div>
             </div>
             <div class="cell medium-6 large-3">
               <div class="c-form-new__input-container margin-bottom-1">
                 <label class="w-bold dark" for="">Grado</label>
-                <select class="f2 mab-shadow-soft text-last-left" name="" id="">
-                  <option disabled value="" selected>Escoge un opcion</option>>
+                <select v-model="filter.grade" class="f2 mab-shadow-soft text-last-left">
+                  <option disabled value="-1">Escoge un opcion</option>
+                  <option v-for="grade of grades" :key="grade.id" :value="grade.slug">${ grade.name }</option>
                 </select>
-                <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
-                  Seleciona una opcion
-                </p>
               </div>
             </div>
             <div class="cell large-3">
@@ -286,9 +282,9 @@
                 <label class="w-bold f2 white desktop" for="">Buscar</label>
                 <div class="c-fake-input c-fake-input--tel flex-container align-middle mab-shadow-soft">
                   <input type="text" placeholder="Buscar Curso" />
-                  <span class="c-fake-input__prefix border-0">
+                  <button class="c-fake-input__prefix border-0">
                     <i class="far fa-search"></i>
-                  </span>
+                  </button>
                 </div>
               </div>
             </div>
