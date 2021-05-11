@@ -1,6 +1,12 @@
 .c-section--test {
+  background-image: none;
+
   .c-content {
     @include transition(0.3s);
+
+    &::after {
+      display: none;
+    }
   }
 
   .c-result {
@@ -45,6 +51,15 @@
       }
     }
   }
+
+  .c-bottom-btn {
+    margin-bottom: 4rem;
+
+    .c-button {
+      width: 45%;
+      font-size: $fs-18;
+    }
+  }
 }
 
 @include breakpoint(medium) {
@@ -63,6 +78,15 @@
 
     .c-content {
       @include triangle(left, bottom, -70px, 3rem, 70px, 20px, 70px);
+    }
+
+    .c-bottom-btn {
+      margin-bottom: 4rem;
+
+      .c-button {
+        width: 200px;
+        font-size: $fs-21;
+      }
     }
   }
 }
