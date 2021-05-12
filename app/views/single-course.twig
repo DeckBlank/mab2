@@ -10,7 +10,7 @@
   <section class="c-section c-section--mab-course">
     <div class="c-banner bg-sec-color mab-shadow">
       <div class="grid-container">
-        <div class="grid-x grid-margin-x grid-margin-y align-bottom align-self-stretch">
+        <div class="grid-x grid-margin-x align-bottom align-self-stretch">
           <div class="cell large-5">
             <div class="padding-vertical-3"> 
               <h1 class="c-banner__title warning">
@@ -29,7 +29,7 @@
                   <a class="c-banner__link margin-right-1 warning bb-warning" href="">Ver trailer</a> 
                 {% endif %}
 
-                <a href="{{ teacher.link }}" class="c-banner__link warning bb-warning">Ver más sobre el speaker</a>
+                <a href="{{ teacher.link }}" class="c-banner__link c-link--warning warning bb-warning">Ver más sobre el speaker</a>
               </div>
             </div>
           </div> 
@@ -47,8 +47,8 @@
         <div class="c-tab">
           <div class="c-tab-head text-center">
             <div class="grid-x">
-              <div class="cell large-6">
-                <div @click="view = 1" :class="{ active : view == 1 }" class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30">SOBRE EL CURSO</div>
+              <div class="cell">
+                <div @click="view = 1" :class="{ active : view == 1 }" class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30 border-0">SOBRE EL CURSO</div>
               </div>
               <div v-if="false" class="cell large-6">
                 <div @click="view = 2" :class="{ active : view == 2 }" class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30 small">FORO</div>
@@ -160,7 +160,7 @@
                             </label>
                             <div class="c-accordion-item__content position-relative bg-white f2 dark w-medium">
                               <div v-for="topic of unity.topics" :key="topic.id" class="c-mab-toggle fs-21">
-                                <a :class="topic.video.state ? 'sec-color' : 'dark'" :href="topic.video.link"><span class="triangle"></span> ${ topic.title }</a> 
+                                <a :class="topic.video.state ? 'sec-color c-link--ho-secondary' : 'dark c-link--ho-secondary' " :href="topic.video.link"><span class="triangle"></span> ${ topic.title }</a> 
                               </div>
                             </div>
                           </li>
