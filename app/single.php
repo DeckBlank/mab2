@@ -87,10 +87,21 @@ if($post->post_type == "video"){
     ];
 
 }else if($post->post_type == "course"){
-    $context['price'] = 100;
-    $context['discount'] = 0;
-    $context['g_discount'] = 50;
-    $context['area'] = get_field('area', $post->ID);
+    $teacher = get_field('teacher', $post->ID);
+
+    $context['description'] = get_the_excerpt($post->ID);
+    $context['likes']       = __getMetaCourse($post->ID, '-1', 'likes');
+    $context['vector']      = get_field('vector', $post->ID);
+    $context['duration']    = __getMetaCourse($post->ID, '-1', 'duration');
+
+    if ($teacher) {
+        $context['teacher']     = [
+            'fullname'  => $teacher['user_firstname'] . ' ' . $teacher['user_lastname'],
+            'job'       => get_field('job', 'user_' . $teacher['ID']),
+            'cover'     => get_field('cover', 'user_' . $teacher['ID']),
+            'link'      => sprintf('/lider/%s', $teacher['user_nicename']),
+        ];
+    }
 
 }else if($post->post_type == "topic"){
     $context['navigation'] = (object)[

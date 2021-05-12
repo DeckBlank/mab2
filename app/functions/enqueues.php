@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1620622584234';
+$assets_version = '1620801318778';
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -448,6 +448,12 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         ]);        
 
     }elseif (is_singular('course')){
+        $enviroment = array_merge(
+            $enviroment, [
+                'course_id' => get_the_ID(),
+            ]
+        );
+
         register_assets('script', [
             'handle'    => 'pandawp/js/page/course',
             'src'       => $config['resources']['page_course'],
@@ -675,16 +681,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         ]);        
 
     }
-    elseif (is_page('cursito')){               
-        register_assets('script', [
-            'handle'    => 'pandawp/js/page/curso',
-            'src'       => $config['resources']['page_curso'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);        
-    }
-
 
     /**
      * --------------------------------------------------------------------------
