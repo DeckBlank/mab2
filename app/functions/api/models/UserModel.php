@@ -91,15 +91,16 @@ class UserModel{
         try {
             if(self::saveAccessLog($request)){
                 return (object)[
-                    "user_auth" => $user->data->display_name,
-                    "user_email" => $user->data->user_email,
-                    "user_firstname" => get_user_meta( $user->data->ID, 'first_name', true ),
-                    "user_lastname" => get_user_meta( $user->data->ID, 'last_name', true ),
-                    "user_mobile" => get_field('mobile', 'user_' . $user->data->ID),
-                    "user_rol" => $user->roles[0],
-                    "user_grade" => get_field('grade', 'user_' . $user->ID),
-                    "user_sector" => get_field('school_type', 'user_' . $user->data->ID),
-                    "user_metas" => (object)[
+                    "user_id"           => $user->data->ID,
+                    "user_auth"         => $user->data->display_name,
+                    "user_email"        => $user->data->user_email,
+                    "user_firstname"    => get_user_meta( $user->data->ID, 'first_name', true ),
+                    "user_lastname"     => get_user_meta( $user->data->ID, 'last_name', true ),
+                    "user_mobile"       => get_field('mobile', 'user_' . $user->data->ID),
+                    "user_rol"          => $user->roles[0],
+                    "user_grade"        => get_field('grade', 'user_' . $user->ID),
+                    "user_sector"       => get_field('school_type', 'user_' . $user->data->ID),
+                    "user_metas"        => (object)[
                         "questionary" => BehaviourModel::questionaryCheckout($user->data->user_email),
                         "poll" => BehaviourModel::pollCheckout($user->data->user_email)
                     ]
@@ -306,7 +307,7 @@ class UserModel{
         }
 
         $enrollments_array = [];
-        
+
         if(!empty($courses) && email_exists($request['user'])){
             foreach($courses as $course){
                 array_push($enrollments_array, (object)[

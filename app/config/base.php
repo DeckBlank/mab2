@@ -20,9 +20,10 @@ return [
          * */
         'fontawesome' => [
             'cdn' => [
-                'base' => get_theme_file_uri('/static/fonts/fontawesome/main.min.js'),
-                'style' => get_theme_file_uri('/static/fonts/fontawesome/regular.min.js'),
-                'brands' => get_theme_file_uri('/static/fonts/fontawesome/brands.min.js')
+                'base'          => get_theme_file_uri('/static/fonts/fontawesome/main.min.js'),
+                'style'         => get_theme_file_uri('/static/fonts/fontawesome/regular.min.js'),
+                'style_solid'   => get_theme_file_uri('/static/fonts/fontawesome/solid.min.js'),
+                'brands'        => get_theme_file_uri('/static/fonts/fontawesome/brands.min.js')
             ]
         ],
 
@@ -82,7 +83,9 @@ return [
         'page_session'              => get_theme_file_uri('/static/js/page-session.bundle.js'),
         'page_access'               => get_theme_file_uri('/static/js/page-access.bundle.js'),
         'page_my_courses'           => get_theme_file_uri('/static/js/page-my-courses.bundle.js'),
-        'page_courses'           => get_theme_file_uri('/static/js/page-courses.bundle.js'),
+        'page_courses'              => get_theme_file_uri('/static/js/page-courses.bundle.js'),
+        'page_curso'                => get_theme_file_uri('/static/js/page-curso.bundle.js'),
+        'page_perfil'                => get_theme_file_uri('/static/js/page-perfil.bundle.js'),
 
         //WP
         'wp_session'        => get_theme_file_uri('/static/js/wp-session.bundle.js'),

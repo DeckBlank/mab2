@@ -6,7 +6,7 @@ function custom_post_type_course() {
         'name_post_type_Singular' => 'Curso',
         'name_register_post_type' => 'course',
         'rewrite_slug'            => 'curso',
-        'supports_post_type'      => [ 'title', 'editor', 'thumbnail' ],
+        'supports_post_type'      => [ 'title', 'editor', 'excerpt', 'thumbnail' ],
         'taxonomy_post_type'      => [ 'tax-course', 'tax-mab-course' ],
         'menu_icon_post_type'     => 'dashicons-book',
         'text_domain'             => 'pandawp'

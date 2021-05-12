@@ -49,32 +49,33 @@
           <h4 class="fs-21 white w-bold f2">Contacto</h4>
           <ul class="ul-reset">
             <li class="f2">
-              <a href="mailto:info@mablovers.com" class="c-link c-link--white fs-18"><i class="far fa-envelope mr-05"></i> info@mablovers.com</a>
+              <a href="mailto:{{information.email}}" class="c-link c-link--white fs-18"><i class="far fa-envelope mr-05"></i> {{information.email}}</a>
             </li>
-            <li class="f2">
-              <a href="" class="c-link c-link--white fs-18"><i class="fab fa-whatsapp mr-05"></i> 924 908 228</a>
-            </li>
-            <li class="f2">
-              <a href="" class="c-link c-link--white fs-18"><i class="fab fa-whatsapp mr-05"></i> 902 705 461</a>
-            </li>
+
+            {% if information.phone %}
+              <li class="f2">
+                <a href="https://api.whatsapp.com/send?phone=51{{ information.phone|replace({' ': ''}) }}" class="c-link c-link--white fs-18"><i class="fab fa-whatsapp mr-05"></i> {{ information.phone }}</a>
+              </li>
+            {% endif %}
+
+            {% if information.phone_alt %}
+              <li class="f2">
+                <a href="https://api.whatsapp.com/send?phone=51{{ information.phone_alt|replace({' ': ''}) }}" class="c-link c-link--white fs-18"><i class="fab fa-whatsapp mr-05"></i> {{ information.phone_alt }}</a>
+              </li>
+            {% endif %}
           </ul>
         </div>
         <div class="cell large-3 align-self-stretch">
           <div class="large-text-center height-100 flex-container flex-dir-column align-center-middle">
             <h4 class="fs-25 c-lh--25 white margin-bottom-1">encuéntranos en</h4>
             <div class="c-social-cards flex-container">
-              <a href="" class="c-social-cards__item bg-white flex-container align-center-middle rounded fs-25">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a href="" class="c-social-cards__item bg-white flex-container align-center-middle rounded fs-25">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="" class="c-social-cards__item bg-white flex-container align-center-middle rounded fs-25">
-                <i class="fab fa-youtube"></i>
-              </a>
-              <a href="" class="c-social-cards__item bg-white flex-container align-center-middle rounded fs-25">
-                <i class="fab fa-twitter"></i>
-              </a>
+              {% for item in social_menu.items %}
+                {% set icon = (item.name|lower == 'facebook') ? item.name|lower ~ '-f' : item.name|lower %}
+
+                <a href="{{ item.link }}" class="c-social-cards__item bg-white flex-container align-center-middle rounded fs-25">
+                  <i class="fab fa-{{ icon }}"></i>
+                </a>
+              {% endfor %}
             </div>
           </div>
         </div>

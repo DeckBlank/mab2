@@ -41,6 +41,10 @@
     cursor: pointer;
   }
 
+  .swiper-button-disabled {
+    opacity: 0.3;
+  }
+
   .c-arrow-next {
     right: -0.5rem;
   }

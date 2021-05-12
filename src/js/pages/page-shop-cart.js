@@ -29,7 +29,7 @@ const shop_cart = new Vue({
   watch: {
     'total': function(val) {
       if(val == 0){
-        this.total_discount = 0;  window.location = `${this.SITE_URL}/emotional`
+        this.total_discount = 0;  window.location = `${this.SITE_URL}/mis-cursos`
 
       }else {
         if(this.courses.list.length > 1){
@@ -85,7 +85,7 @@ const shop_cart = new Vue({
           })
           .catch(err => {
             window.localStorage.removeItem('mab_shop_cart');
-            window.location = `${this.SITE_URL}/emotional`
+            window.location = `${this.SITE_URL}/mis-cursos`
 
             throw err;
           })

@@ -126,7 +126,8 @@ class AuthController {
                         update_field('comunity', $extension->comunity, 'user_' . $userID);
                         update_field('comunity_department', $extension->comunityDepartment, 'user_' . $userID);
                         break;
-                    case 'teacher' :
+                    case 'teacher'  :
+                    case 'tutor'    :
                         update_field('students', $extension->students, 'user_' . $userID);
                         break;
                 }
