@@ -280,6 +280,13 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
 
     }elseif (is_page_template('templates/template-test.php')){
         register_assets('package', [
+            'handle'    => 'pandawp/package/apexcharts',
+            'src'       => $config['resources']['package_apexcharts'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+        register_assets('package', [
             'handle'    => 'pandawp/package/swiper',
             'src'       => $config['resources']['package_swiper'],
             'deps'      => [ ],

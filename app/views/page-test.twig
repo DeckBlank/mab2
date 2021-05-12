@@ -22,13 +22,13 @@
   </div>
 
   <section class="c-section c-section--test bg-sec-color">
-    {# <div class="grid-container">
+    <div v-if="false" class="grid-container">
       <div class="grid-x align-center">
         <div class="cell medium-10 large-8">
           <h2 class="c-questions__title f1 text-uppercase w-bold text-center white">Test para determinar <br> el Canal de Aprendizaje de preferencia</h2>
         </div>
       </div>
-    </div> #}
+    </div>
 
     <div class="grid-container position-relative padding-bottom-3">
       <div class="c-result  width-100" :class="{ hidden : !testDone, 'c-result--done' : testDone }">
@@ -37,39 +37,48 @@
             <span class="w-bold f1">Resultados</span>  <br> 
             <span class="w-ligth f2">TEST DE ESTILOS DE APRENDIZAJE</span>
           </h2>
-          <div class="grid-x align-center bg-white br-45 padding-vertical-2">
-            <div class="cell medium-10 large-8">
+          <div class="grid-x align-center align-middle bg-white br-45 padding-vertical-2 padding-horizontal-3 ">
+            <div class="cell medium-4 large-4">
+              <div class="c-chart flex-container flex-dir-column align-justify text-center height-100">
+                <div>
+                  <div id="chart" class="c-chart__graph">
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="cell medium-8 large-8">
               <div class="grid-x align-center grid-margin-x grid-margin-y">
                 <div class="cell medium-6 large-4">
                   <div class="c-behaviour flex-container flex-dir-column align-middle text-center">
-                    <figure id="visual" class="c-behaviour__vector margin-bottom-2">
+                    <figure id="visual" class="c-behaviour__vector margin-bottom-1">
                       <img class="of--contain" src="{{theme.link}}/static/images/vectors/test/visual.png?key=20200419" alt="">
                     </figure>
                     <h3 class="c-behaviour__title">
-                      <p class="f2 fs-40 w-bold dark">${testResult.visual}%</p>
-                      <p class="f2 fs-30 dark margin-bottom-0">VISUAL</p>
+                      <p class="f2 fs-30 w-bold dark">${testResult.visual}%</p>
+                      <p class="f2 fs-25 dark margin-bottom-0">VISUAL</p>
                     </h3>
                   </div>
                 </div>
                 <div class="cell medium-6 large-4">
                   <div class="c-behaviour flex-container flex-dir-column align-middle text-center">
-                    <figure id="auditive" class="c-behaviour__vector margin-bottom-2">
+                    <figure id="auditive" class="c-behaviour__vector margin-bottom-1">
                       <img class="of--contain" src="{{theme.link}}/static/images/vectors/test/auditivo.png?key=20200419" alt="">
                     </figure>
                     <h3 class="c-behaviour__title">
-                      <p class="f2 fs-40 w-bold dark">${testResult.auditive}%</p>
-                      <p class="f2 fs-30 dark margin-bottom-0">AUDITIVO</p>
+                      <p class="f2 fs-30 w-bold dark">${testResult.auditive}%</p>
+                      <p class="f2 fs-25 dark margin-bottom-0">AUDITIVO</p>
                     </h3>
                   </div>
                 </div>
                 <div class="cell medium-6 large-4">
                   <div class="c-behaviour flex-container flex-dir-column align-middle text-center">
-                    <figure id="kinesthetic" class="c-behaviour__vector margin-bottom-2">
+                    <figure id="kinesthetic" class="c-behaviour__vector margin-bottom-1">
                       <img class="of--contain" src="{{theme.link}}/static/images/vectors/test/kinestesico.png?key=20200419" alt="">
                     </figure>
                     <h3 class="c-behaviour__title">
-                      <p class="f2 fs-40 w-bold dark">${testResult.kinesthetic}%</p>
-                      <p class="f2 fs-30 dark margin-bottom-0">KINESTÉSICO</p>
+                      <p class="f2 fs-30 w-bold dark">${testResult.kinesthetic}%</p>
+                      <p class="f2 fs-25 dark margin-bottom-0">KINESTÉSICO</p>
                     </h3>
                   </div>
                 </div>

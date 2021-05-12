@@ -6,7 +6,7 @@
 
 {% block content %}
   <section class="c-section c-section--test bg-sec-color">
-    <div class="grid-container">
+    <div v-if="false" class="grid-container">
       <div class="grid-x align-center">
         <div class="cell medium-10 large-8">
           <h2 class="c-questions__title f1 text-uppercase w-bold text-center white">Test para determinar <br> el Canal de Aprendizaje de preferencia ${testType}</h2>
@@ -16,27 +16,33 @@
     <div class="grid-container position-relative">
       <div class="c-result width-100" :class="{ hidden : !testDone, 'c-result--done' : testDone }">
         <div class="grid-container padding-vertical-3">
-          <div class="grid-x align-center">
-            <div class="cell medium-10 large-8 white f2">
-              <figure class="margin-bottom-1 text-center">
+          <h2 class="c-questions__title results f1 text-uppercase white margin-bottom-2">
+            <span class="w-bold f1">Resultados</span>  <br> 
+            <span class="w-ligth f2 text-uppercase">test de estilos de personalidad</span>
+          </h2>
+          <div class="c-result__container grid-x align-center bg-white br-45 padding-vertical-2">
+            <div class="cell medium-10 large-10 dark f2 position-relative">
+              <figure class="c-result__figure margin-bottom-1 text-center">
                 <img
                   v-if="questions.result.vector"
                   :src="`${THEME_URL}/static/images/vectors/test/behaviour/${questions.result.vector}.png`"
-                  alt="">
-                <img v-else src="{{theme.link}}/static/images/vectors/test/behaviour/1.png}}" alt="">
+                  alt="" class="width-100">
+                <img class="width-100" v-else src="{{theme.link}}/static/images/vectors/test/behaviour/1.png}}" alt="">
               </figure>
-              <h2 class="text-center fs-40 f2 w-bold margin-bottom-0 text-uppercase">${questions.result.title}</h2>
-              <p v-if="questions.result.subtitle" class="text-center text-uppercase fs-18 margin-bottom-2">${questions.result.subtitle}</p>
+              <h2 class="c-result__title text-center w-bold margin-bottom-0 text-uppercase">${questions.result.title}</h2>
+              <p v-if="questions.result.subtitle" class="text-center text-uppercase black fs-18 margin-bottom-2">${questions.result.subtitle}</p>
               <div v-if="questions.result.features" class="margin-bottom-2">
-                <h3 class="fs-21">Carácteristicas:</h3>
+                <h3 class="fs-35">Carácteristicas:</h3>
                 <ul>
                   <li v-for="feature of questions.result.features" :key="feature.id" v-html="feature" class="mb-05"></li>
                 </ul>
               </div>
-              <div v-if="questions.result.improvents" class="bg-pri-color padding-1">
-                <h3 class="fs-21">Aspectos a mejorar:</h3>
+            </div>
+            <div class="cell">
+              <div v-if="questions.result.improvents" class="c-result__list bg-pri-color br-45 white">
+                <h3 class="fs-25">Aspectos a mejorar:</h3>
                 <ul>
-                  <li v-for="improvent of questions.result.improvents" :key="improvent.id" v-html="improvent" class="mb-05"></li>
+                  <li v-for="improvent of questions.result.improvents" :key="improvent.id" v-html="improvent" class="mb-05 f2"></li>
                 </ul>
               </div>
             </div>
