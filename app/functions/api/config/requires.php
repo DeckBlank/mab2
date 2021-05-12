@@ -6,6 +6,7 @@
 include_once __DIR__ . "/../config/main.php";
 include_once __DIR__ . '/../libs/videos.php';
 include_once __DIR__ . '/../libs/comments.php';
+include_once __DIR__ . '/../libs/course.php';
 include_once __DIR__ . '/../libs/likes.php';
 include_once __DIR__ . '/../libs/queries.php';
 include_once __DIR__ . '/../libs/user.php';
