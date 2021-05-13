@@ -202,7 +202,7 @@
                                   <figure class="margin-bottom-1">
                                     <img src="{{ theme.link }}/static/images/curso/resources/doc1.png" alt="" class=" width-100 of--contain"> 
                                   </figure>
-                                  <span>Resúmen</span>
+                                  <span class="dark c-link--ho-secondary">Resúmen</span>
                                 </a>
                               </div>
                             {% endif %}
@@ -213,7 +213,7 @@
                                   <figure class="margin-bottom-1">
                                     <img src="{{ theme.link }}/static/images/curso/resources/doc2.png" alt="" class=" width-100  of--contain"> 
                                   </figure>
-                                  <span>Hoja de trabajo</span>
+                                  <span class="dark c-link--ho-secondary">Hoja de trabajo</span>
                                 </a>
                               </div>
                             {% endif %}
@@ -224,7 +224,7 @@
                                   <figure class="margin-bottom-1">
                                     <img src="{{ theme.link }}/static/images/curso/resources/doc3.png" alt="" class=" width-100 of--contain"> 
                                   </figure>
-                                  <span>Solucionario</span>
+                                  <span class="dark c-link--ho-secondary">Solucionario</span>
                                 </a>
                               </div>
                             {% endif %}
@@ -235,7 +235,7 @@
                                   <figure class="margin-bottom-1">
                                     <img src="{{ theme.link }}/static/images/curso/resources/doc4.png" alt="" class=" width-100 of--contain"> 
                                   </figure>
-                                  <span>Mapa mental</span>
+                                  <span class="dark c-link--ho-secondary">Mapa mental</span>
                                 </a>
                               </div>
                             {% endif %}
@@ -253,10 +253,10 @@
                             <div class="c-themes-list__scrool">
                               <div>
                                 <div v-for="(unity, uindex) of unities" class="margin-bottom-1">
-                                  <p class="margin-bottom-0 dark f2 fs-25 text-uppercase">Unidad ${ uindex + 1 }</p>
+                                  <p class="margin-bottom-0 dark f2 fs-25 text-uppercase ">Unidad ${ uindex + 1 }</p>
                                   <ul class="ul-reset">
                                     <li v-for="(topic, tindex) of unity.topics" class="c-themes-list__item dark f2 fs-18" :class="{'active' : topicID == topic.id}">
-                                      <a :href="getTopicLink(topic.video.link, tindex + 1, uindex + 1)">
+                                      <a :href="getTopicLink(topic.video.link, tindex + 1, uindex + 1)" class="dark c-link--ho-secondary">
                                         <span class="triangle"></span> ${ topic.title }
                                       </a>
                                       <p v-if="topicID == topic.id" class="margin-0"><small class="status">Reproduciendo ahora</small></p>
