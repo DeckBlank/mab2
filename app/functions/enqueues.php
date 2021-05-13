@@ -448,6 +448,12 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         ]);        
 
     }elseif (is_singular('course')){
+        $enviroment = array_merge(
+            $enviroment, [
+                'course_id' => get_the_ID(),
+            ]
+        );
+
         register_assets('script', [
             'handle'    => 'pandawp/js/page/course',
             'src'       => $config['resources']['page_course'],
@@ -675,6 +681,8 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         ]);        
 
     }
+<<<<<<< HEAD
+=======
     elseif (is_page('cursito')){               
         register_assets('script', [
             'handle'    => 'pandawp/js/page/curso',
@@ -717,6 +725,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
 
     }
 
+>>>>>>> b9ff5e60ef2e606b53abff5fbad8ae579395bb40
 
     /**
      * --------------------------------------------------------------------------

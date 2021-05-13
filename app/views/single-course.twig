@@ -6,248 +6,477 @@
 
 {% block content %}
   {% include "components/signup.twig" %}
-  <section 
-    ref="course"
-    class="c-section c-section--course bg-pri-alt"
-    data-id="{{post.id}}"
-    data-link="{{post.link}}"
-    data-area="{{area}}"
-    data-title="{{post.title}}">
-    <div class="grid-container padding-top-3 margin-bottom-2">
-      <section class="c-content" :class="{ active : sectorMenu.public || sectorMenu.private }">
-        <h1 class="c-title margin-bottom-1 padding-left-1">
-          <div class="grid-x grid-margin-x grid-margin-y align-justify align-middle">
-            <div class="cell medium-auto">
-              <p class="f1 w-medium white margin-bottom-0">{{post.title}}</p>              
+
+  <section class="c-section c-section--mab-course">
+    <div class="c-banner bg-sec-color mab-shadow">
+      <div class="grid-container">
+        <div class="grid-x grid-margin-x align-bottom align-self-stretch">
+          <div class="cell large-5">
+            <div class="padding-vertical-3"> 
+              <h1 class="c-banner__title warning">
+                <span class="white text-uppercase">{{ post.title }}</span>
+              </h1> 
+              {% if teacher and teacher.fullname %} <h5 class="f2 white w-xbold margin-0">Con {{ teacher.fullname }}</h5> {% endif %}
+
+              {% if teacher and teacher.job %} <h6 class="f2 white fs-16">{{ teacher.job }}</h6> {% endif %}
+
+              <p class="f2 white margin-top-1">{{ description }}</p>
+              <button class="c-button c-button--mab-warning-black f2 w-xbold">Comenzar curso!</button>
+              <div class="flex-container align-midle f2 white fs-18 padding-top-2">
+                <span class="margin-right-1"><i class="fas fa-heart"></i> {{ likes }}</span> 
+
+                {% if trailer %}
+                  <a class="c-banner__link margin-right-1 warning bb-warning" href="">Ver trailer</a> 
+                {% endif %}
+
+                <a href="{{ teacher.link }}" class="c-banner__link c-link--warning warning bb-warning">Ver más sobre el speaker</a>
+              </div>
             </div>
-            <div v-if="logedUser && logedUser.user_sector == 'privado' && !accessGranted" class="cell small-8 medium-4 large-2">
-              <button
-                :disabled="!isAvaibleCourse" 
-                class="fs-21 c-button c-button--secondary width-100 display-block text-center"
-                @click="addCourse({{post.id}}, '{{post.title}}', '{{post.link}}')">Comprar curso</button>
+          </div> 
+          <div class="cell large-7 margin-bottom-0">
+            <div class="position-relative flex-container align-center">
+              <img src="{{ teacher.cover.url }}" alt="" class="c-banner__figure of--contain"> 
+              <img src="{{ (vector) ? vector : theme.link }}/static/images/home/heart.png" alt="" class="c-banner__heart position-absolute of--contain">
             </div>
           </div>
-        </h1>
-        <div class="margin-bottom-1 f2 fs-18 white w-medium padding-left-1">
-          {{post.content}}
         </div>
-        <ul class="ul-reset">
-          <li v-for="(unity, u_index) of unities" class="c-unity margin-bottom-1 br--medium">
-            <input :id="'unity-' + u_index" type="checkbox" class="hide c-unity__checkbox" checked>           
-            <label :for="'unity-' + u_index" class="c-unity__toggle align-justify width-100">
-              <p class="text-left margin-bottom-0 margin-right-1 w-medium fs-25 white">
-                Unidad ${u_index + 1}:
-              </p>
-              <span class="c-icon display-block white fs-21"><i class="far fa-chevron-down"></i></span>
-            </label>
-            <div class="c-unity__content position-relative bg-white br--medium padding-1">
-              <h3 class="c-unity__title">
-                <span class="display-block fs-25 f2 dark-gray w-bold">${unity.title}</span>
-                <p class="margin-bottom-0 padding-left-2 fs-25 w-black">.....</p>
-              </h3>
-              <ul class="c-unity__topics ul-reset">
-                <ul v-for="(topic, t_index) of unity.topics" class="c-topic ul-reset f2 fs-21 dar-gray w-medium">
-                  <li class="c-topic__item">
-                    <a
-                      class="c-topic__link c-topic__link--video flex-container align-justify align-middle"
-                      @click="playVideo(
-                        topic.video.link + '?course_id={{post.id}}&course_name={{post.title}}&course_slug={{post.slug}}&unity=' + (u_index + 1) + '&sector=' + metas.get('sector'),
-                        u_index + 1,
-                        t_index + 1
-                      )">
-                      <p v-if="topic.video.state" class="margin-bottom-0 flex-container sec-color align-middle">
-                        <span class="c-icon margin-right-1 fs-21 sec-color"><i class="far fa-play-circle"></i></span>
-                        ${topic.title}
-                      </p>
-                      <p v-else class="margin-bottom-0 flex-container dark-gray align-middle">
-                        <span class="c-icon margin-right-1 fs-21 pri-color"><i class="far fa-play-circle"></i></span>
-                        ${topic.title}
-                      </p>
-                      <!-- <p class="gray-gray margin-bottom-0">
-                        <span class="c-icon margin-right-1"><i class="far fa-clock"></i></span>
-                        4:00
-                      </p> -->
-                    </a>
-                  </li>
-
-                  <li v-if="topic.summary" class="c-topic__item">
-                    <a
-                      target="_blank" 
-                      class="c-topic__link flex-container align-justify align-middle"
-                      @click="downloadMaterial(u_index + 1, t_index + 1, topic.id, topic.summary, 'summary')">
-                      <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                        <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                        Resumen
-                      </p>
-                      <p class="gray-gray margin-bottom-0">
-                        <span class="c-icon"><i class="far fa-download"></i></span>
-                      </p>
-                    </a>
-                  </li>
-
-                  <li v-if="topic.map" class="c-topic__item">
-                    <a
-                      target="_blank" 
-                      class="c-topic__link flex-container align-justify align-middle"
-                      @click="downloadMaterial(u_index + 1, t_index + 1, topic.id, topic.map, 'map')">
-                      <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                        <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                        Mapa Mental
-                      </p>
-                      <p class="gray-gray margin-bottom-0">
-                        <span class="c-icon"><i class="far fa-download"></i></span>
-                      </p>
-                    </a>
-                  </li>
-
-                  <li v-if="topic.worksheet" class="c-topic__item">
-                    <a
-                      target="_blank" 
-                      class="c-topic__link flex-container align-justify align-middle"
-                      @click="downloadMaterial(u_index + 1, t_index + 1, topic.id, topic.worksheet, 'worksheet')">
-                      <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                        <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                        Hoja de trabajo
-                      </p>
-                      <p class="gray-gray margin-bottom-0">
-                        <span class="c-icon"><i class="far fa-download"></i></span>
-                      </p>
-                    </a>
-                  </li>
-
-                  <li v-if="topic.solutions" class="c-topic__item">
-                    <a
-                      target="_blank" 
-                      class="c-topic__link flex-container align-justify align-middle"
-                      @click="downloadMaterial(u_index + 1, t_index + 1, topic.id, topic.solutions, 'solutions')">
-                      <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                        <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                        Solucionario
-                      </p>
-                      <p class="gray-gray margin-bottom-0">
-                        <span class="c-icon"><i class="far fa-download"></i></span>
-                      </p>
-                    </a>
-                  </li>                        
-                </ul>
-              </ul>
+      </div>
+    </div>
+    <div class="c-course-resume padding-vertical-3 bg-white">
+      <div class="grid-container">
+        <div class="c-tab">
+          <div class="c-tab-head text-center">
+            <div class="grid-x">
+              <div class="cell">
+                <div @click="view = 1" :class="{ active : view == 1 }" class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30 border-0">SOBRE EL CURSO</div>
+              </div>
+              <div v-if="false" class="cell large-6">
+                <div @click="view = 2" :class="{ active : view == 2 }" class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30 small">FORO</div>
+              </div>
             </div>
-          </li>
-          {% for unity in unities %}
-            {% set unity_id = loop.index %}
-              <li class="c-unity margin-bottom-1 br--medium">
-                <input id="unity-{{loop.index}}" type="checkbox" class="hide c-unity__checkbox" checked>           
-                <label for="unity-{{loop.index}}" class="c-unity__toggle align-justify width-100">
-                  <p class="text-left margin-bottom-0 margin-right-1 w-bold fs-25 white">
-                    Unidad {{loop.index}}:
-                  </p>
-                  <span class="c-icon display-block white fs-21"><i class="far fa-chevron-down"></i></span>
-                </label>
-                <div class="c-unity__content position-relative bg-white br--medium padding-1">
-                  <h3 class="c-unity__title">
-                    <span class="display-block fs-25 f2 dark-gray w-bold">{{unity.title}}</span>
-                    <p class="margin-bottom-0 padding-left-2 fs-25 w-black">.....</p>
-                  </h3>
-                  <ul class="c-unity__topics ul-reset">
-                    {% for topic in unity.topics %}
-                      <ul class="c-topic ul-reset f2 fs-21 dar-gray w-medium">
-                        <li class="c-topic__item">
-                          <a
-                            class="c-topic__link flex-container align-justify align-middle"
-                            @click="playVideo(
-                              '{{topic.video.link}}?course_id={{post.id}}&course_name={{post.title}}&unity={{unity_id}}&sector=' + metas.get('sector'),
-                              {{unity_id}}
-                            )">
-                            <!-- <p class="margin-bottom-0 flex-container sec-color align-middle">
-                              <span class="c-icon margin-right-1 fs-21 sec-color"><i class="far fa-play-circle"></i></span>
-                              {{topic.title}}
-                            </p> -->
-                            <p class="margin-bottom-0 flex-container {% if topic.video.state %} sec-color {% else %} dark-gray {% endif %} align-middle">
-                              <span class="c-icon margin-right-1 fs-21 {% if topic.video.state %} sec-color {% else %} pri-color {% endif %}"><i class="far fa-play-circle"></i></span>
-                              {{topic.title}}
-                            </p>
-                            <!-- <p class="gray-gray margin-bottom-0">
-                              <span class="c-icon margin-right-1"><i class="far fa-clock"></i></span>
-                              4:00
-                            </p> -->
-                          </a>
+          </div>
+          <div class="c-tab-body padding-vertical-2">
+            <transition name="fade" mode="out-in">
+              <div v-if="view == 1" key="contenido" class="c-tab-slide">
+                <div class="grid-x align-justify">
+                  <div class="cell large-6">
+                    <div class="padding-horizontal-2 margin-bottom-2">
+                      <h3 class="w-xbold f2 fs-25 dark margin-bottom-1">¿Qué incluye este curso?</h3>
+                      <ul class="c-tab__list f2 dark margin-left-0 fs-18">
+                        <li>
+                          <span class="c-icon-course">
+                            <i class="fas fa-clock sec-color"></i>
+                          </span>
+                          {{ duration }}hrs de clases
                         </li>
-
-                        {% if topic.summary %}
-                          <li class="c-topic__item">                 
-                            <a
-                              target="_blank" 
-                              class="c-topic__link flex-container align-justify align-middle"
-                              @click="downloadMaterial({{unity_id}}, {{topic.id}}, '{{topic.summary}}', 'summary')">
-                              <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                                <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                                Resumen
-                              </p>
-                              <p class="gray-gray margin-bottom-0">
-                                <span class="c-icon"><i class="far fa-download"></i></span>
-                              </p>
-                            </a>
-                          </li>
-                        {% endif %}
-                        
-                        {% if topic.map %}
-                          <li class="c-topic__item">                            
-                            <a
-                              target="_blank" 
-                              class="c-topic__link flex-container align-justify align-middle"
-                              @click="downloadMaterial({{unity_id}}, {{topic.id}}, '{{topic.map}}', 'map')">
-                              <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                                <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                                Mapa Mental
-                              </p>
-                              <p class="gray-gray margin-bottom-0">
-                                <span class="c-icon"><i class="far fa-download"></i></span>
-                              </p>
-                            </a>
-                          </li>                    
-                        {% endif %}
-  
-                        {% if topic.worksheet %}                      
-                          <li class="c-topic__item">
-                            <a
-                              target="_blank" 
-                              class="c-topic__link flex-container align-justify align-middle"
-                              @click="downloadMaterial({{unity_id}}, {{topic.id}}, '{{topic.worksheet}}', 'worksheet')">
-                              <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                                <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                                Hoja de trabajo
-                              </p>
-                              <p class="gray-gray margin-bottom-0">
-                                <span class="c-icon"><i class="far fa-download"></i></span>
-                              </p>
-                            </a>
-                          </li>
-                        {% endif %}
-  
-                        {% if topic.solutions %}
-                          <li class="c-topic__item">                            
-                            <a
-                              target="_blank" 
-                              class="c-topic__link flex-container align-justify align-middle"
-                              @click="downloadMaterial({{unity_id}}, {{topic.id}}, '{{topic.solutions}}', 'solutions')">
-                              <p class="margin-bottom-0 flex-container align-middle dark-gray">
-                                <span class="c-icon margin-right-1 fs-21"><i class="far fa-file-pdf"></i></span>
-                                Solucionario
-                              </p>
-                              <p class="gray-gray margin-bottom-0">
-                                <span class="c-icon"><i class="far fa-download"></i></span>
-                              </p>
-                            </a>
-                          </li>                    
-                        {% endif %}                        
+                        <li>
+                          <span class="c-icon-course">
+                            <i class="fas fa-hourglass sec-color"></i>
+                          </span>
+                          Acceso indefinido a todas las clases
+                        </li>
+                        <li>
+                          <span class="c-icon-course">
+                            <i class="fas fa-file-download sec-color"></i>
+                          </span>
+                          Material descargable
+                        </li>
+                        <li>
+                          <span class="c-icon-course">
+                            <i class="fas fa-check-circle sec-color"></i>
+                          </span>
+                          Prueba de opción múltiple
+                        </li>
+                        <li>
+                          <span class="c-icon-course">
+                            <i class="fas fa-comments sec-color"></i>
+                          </span>
+                          Acceso al foro del curso
+                        </li>
+                        <li>
+                          <span class="c-icon-course">
+                            <i class="fas fa-clock sec-color"></i>
+                          </span>
+                          Diploma
+                        </li>
                       </ul>
-                    {% endfor %}
-                  </ul>
+                    </div>
+                    <div v-if="false" class="c-tab-recursos br-bottom--large br-top--large padding-2">
+                      <h3 class="w-xbold f2 fs-25 dark margin-bottom-1 text-uppercase">RECURSOS</h3>
+                      <div class="grid-x align-self-strecht text-center">
+                        <div class="small-3 medium-3 large-3">
+                          <div class="c-tab-recursos__item f2 w-bold">
+                            <div></div>
+                            <figure class="margin-bottom-1">
+                              <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
+                            </figure>
+                            <div>Resúmenes</div>
+                          </div>
+                        </div>
+
+                        <div class="small-3 medium-3 large-3">
+                          <div class="c-tab-recursos__item f2 w-bold">
+                            <figure class="margin-bottom-1">
+                              <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
+                            </figure>
+                            <div>Hojas de trabajo</div>
+                          </div>
+                        </div>
+
+                        <div class="small-3 medium-3 large-3">
+                          <div class="c-tab-recursos__item f2 w-bold">
+                            <figure class="margin-bottom-1">
+                              <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
+                            </figure>
+                            <div>Solucionarios</div>
+                          </div>
+                        </div>
+
+                        <div class="small-3 medium-3 large-3">
+                          <div class="c-tab-recursos__item f2 w-bold">
+                            <figure class="margin-bottom-1">
+                              <img src="{{ theme.link }}/static/images/curso/doc-2.png" alt="" class=" width-100 height-100 of--contain"> 
+                            </figure>
+                            <div>Mapas mentales</div>
+                          </div>
+                        </div>
+
+                        <div class="cell">
+                          <button class="c-button margin-top-1 c-button--mab-warning-black f2 w-xbold fs-21">¡Descárgalos todos!</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="cell large-5">
+                    <div class="c-accordion position-relative">
+                      <h3 class="c-accordion__header margin-bottom-0 padding-1 bg-dark white fs-21 f2 text-uppercase text-center w-xbold">CONTENIDOS</h3>
+                      <div class="c-accordion__body bg-white">
+                        <ul class="ul-reset">
+                          <li v-for="(unity, uindex) of unities" :key="unity.id" class="c-accordion-item">
+                            <input v-model="unity.enable" @change="resetAccordion(unity)" :id="'accordion-item-' + uindex" class="c-accordion hide" type="checkbox">
+                            <label class="c-accordion-item__switcher width-100 bg-sec-color" :for="'accordion-item-' + uindex">
+                              <p class="margin-bottom-0 w-bold white f2 fs-18">Unidad ${ uindex + 1 }: ${ unity.title }</p>
+                              <i class="c-icon white fs-21 far fa-chevron-up"></i>
+                            </label>
+                            <div class="c-accordion-item__content position-relative bg-white f2 dark w-medium">
+                              <div v-for="topic of unity.topics" :key="topic.id" class="c-mab-toggle fs-21">
+                                <a :class="topic.video.state ? 'sec-color c-link--ho-secondary' : 'dark c-link--ho-secondary' " :href="topic.video.link"><span class="triangle"></span> ${ topic.title }</a> 
+                              </div>
+                            </div>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </li>
-          {% endfor %}
-        </ul>
-      </section>      
+              </div>
+              <div v-else-if="view == 2" key="foro" class="c-tab-slide">
+                <div class="c-foro mab-shadow">
+                  <div class="c-foro-head bg-dark br-top--large text-center padding-horizontal-1">
+                    <div v-if="foro == 1" class="grid-x">
+                      <div class="cell small-8 medium-8 large-7">
+                        <h2 class="c-foro-head__title fs-21 white w-xbold text-uppercase margin-0 f2">TEMA</h2>
+                      </div>
+                      <div class="small-4 medium-4 large-5">
+                        <h2 class="c-foro-head__title fs-21 white w-xbold text-uppercase margin-0 f2">RESPUESTAS</h2>
+                      </div>
+                    </div>
+                    <div v-if="foro == 2">
+                        <h2 class="c-foro-head__title fs-18 white w-xbold text-uppercase margin-0 f2 padding-horizontal-1 text-left">Clase 1: ¿Qué es la nutrición?</h2>
+                    </div>
+                  </div>
+                  <div class="c-foro-body">
+                    <div class="c-foro-scroll height-100">
+                      <div v-if="foro == 1">
+                        <div class="c-foro-theme">
+                          <div class="grid-x align-middle">
+                            <div class="small-8 medium-7 large-7">
+                              <div class="c-foro-theme__info flex-container align-justify align-middle">
+                                <div>
+                                  <a class="c-foro-theme__title f2 w-xbold dark" href="">Clase 1: ¿Qué es la nutrición?</a>
+                                  <div>
+                                    <span class="f2 fs-14 w-bold">Maca Wellness,</span> <span class="f2 fs-14">15 Marzo 2021</span>
+                                  </div>
+                                </div>
+                                <div>
+                                  <span class="fs-21">
+                                    <i class="far fa-thumbtack"></i>
+                                  </span>
+                                  <span class="c-foro-theme__circle bg-success margin-left-1">
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="small-4 medium-5 large-5">
+                              <div class="text-center">
+                                <span class="f2 w-bold fs-21">10</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="c-foro-theme">
+                          <div class="grid-x align-middle">
+                            <div class="small-8 medium-7 large-7">
+                              <div class="c-foro-theme__info flex-container align-justify align-middle">
+                                <div>
+                                  <a class="c-foro-theme__title f2 w-xbold dark" href="">Clase 1: ¿Qué es la nutrición?</a>
+                                  <div>
+                                    <span class="f2 fs-14 w-bold">Maca Wellness,</span> <span class="f2 fs-14">15 Marzo 2021</span>
+                                  </div>
+                                </div>
+                                <div>
+                                  <span class="fs-21">
+                                    <i class="far fa-thumbtack"></i>
+                                  </span>
+                                  <span class="c-foro-theme__circle bg-success margin-left-1">
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="small-4 medium-5 large-5">
+                              <div class="text-center">
+                                <span class="f2 w-bold fs-21">10</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="c-foro-theme">
+                          <div class="grid-x align-middle">
+                            <div class="small-8 medium-7 large-7">
+                              <div class="c-foro-theme__info flex-container align-justify align-middle">
+                                <div>
+                                  <a class="c-foro-theme__title f2 w-xbold dark" href="">Clase 1: ¿Qué es la nutrición?</a>
+                                  <div>
+                                    <span class="f2 fs-14 w-bold">Maca Wellness,</span> <span class="f2 fs-14">15 Marzo 2021</span>
+                                  </div>
+                                </div>
+                                <div>
+                                  <span class="fs-21">
+                                    <i class="far fa-thumbtack"></i>
+                                  </span>
+                                  <span class="c-foro-theme__circle bg-success margin-left-1">
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="small-4 medium-5 large-5">
+                              <div class="text-center">
+                                <span class="f2 w-bold fs-21">10</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="c-foro-theme">
+                          <div class="grid-x align-middle">
+                            <div class="small-8 medium-7 large-7">
+                              <div class="c-foro-theme__info flex-container align-justify align-middle">
+                                <div>
+                                  <a class="c-foro-theme__title f2 w-xbold dark" href="">Clase 1: ¿Qué es la nutrición?</a>
+                                  <div>
+                                    <span class="f2 fs-14 w-bold">Maca Wellness,</span> <span class="f2 fs-14">15 Marzo 2021</span>
+                                  </div>
+                                </div>
+                                <div>
+                                  <span class="fs-21">
+                                    <i class="far fa-thumbtack"></i>
+                                  </span>
+                                  <span class="c-foro-theme__circle bg-success margin-left-1">
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="small-4 medium-5 large-5">
+                              <div class="text-center">
+                                <span class="f2 w-bold fs-21">10</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="c-foro-theme">
+                          <div class="grid-x align-middle">
+                            <div class="small-8 medium-7 large-7">
+                              <div class="c-foro-theme__info flex-container align-justify align-middle">
+                                <div>
+                                  <a class="c-foro-theme__title f2 w-xbold dark" href="">Clase 1: ¿Qué es la nutrición?</a>
+                                  <div>
+                                    <span class="f2 fs-14 w-bold">Maca Wellness,</span> <span class="f2 fs-14">15 Marzo 2021</span>
+                                  </div>
+                                </div>
+                                <div>
+                                  <span class="fs-21">
+                                    <i class="far fa-thumbtack"></i>
+                                  </span>
+                                  <span class="c-foro-theme__circle bg-success margin-left-1">
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="small-4 medium-5 large-5">
+                              <div class="text-center">
+                                <span class="f2 w-bold fs-21">10</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="c-foro-theme">
+                          <div class="grid-x align-middle">
+                            <div class="small-8 medium-7 large-7">
+                              <div class="c-foro-theme__info flex-container align-justify align-middle">
+                                <div>
+                                  <a class="c-foro-theme__title f2 w-xbold dark" href="">Clase 1: ¿Qué es la nutrición?</a>
+                                  <div>
+                                    <span class="f2 fs-14 w-bold">Maca Wellness,</span> <span class="f2 fs-14">15 Marzo 2021</span>
+                                  </div>
+                                </div>
+                                <div>
+                                  <span class="fs-21">
+                                    <i class="far fa-thumbtack"></i>
+                                  </span>
+                                  <span class="c-foro-theme__circle bg-success margin-left-1">
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="small-4 medium-5 large-5">
+                              <div class="text-center">
+                                <span class="f2 w-bold fs-21">10</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="c-foro-theme">
+                          <div class="grid-x align-middle">
+                            <div class="small-8 medium-7 large-7">
+                              <div class="c-foro-theme__info flex-container align-justify align-middle">
+                                <div>
+                                  <a class="c-foro-theme__title f2 w-xbold dark" href="">Clase 1: ¿Qué es la nutrición?</a>
+                                  <div>
+                                    <span class="f2 fs-14 w-bold">Maca Wellness,</span> <span class="f2 fs-14">15 Marzo 2021</span>
+                                  </div>
+                                </div>
+                                <div>
+                                  <span class="fs-21">
+                                    <i class="far fa-thumbtack"></i>
+                                  </span>
+                                  <span class="c-foro-theme__circle bg-success margin-left-1">
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="small-4 medium-5 large-5">
+                              <div class="text-center">
+                                <span class="f2 w-bold fs-21">10</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div v-if="foro == 2" class="position-relative">
+                        <div class="c-foro__subtitle bg-white width-100 margin-bottom-1">
+                          <div class="f2 fs-14 w-bold">Publicado por Maca Wellness</div> 
+                          <span class="f2 fs-14">15 Marzo 2021</span>
+                        </div>
+                        <div class="c-comment br-top--large br-bottom--large margin-bottom-1">
+                          <div class="grid-x">
+                            <div class="small-2 medium-2 large-2">
+                              <figure class="c-comment__figure">
+                                <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="width-100 height-100 of--cover"> 
+                              </figure>
+                            </div>
+                            <div class="small-10 medium-8 large-8">
+                              <div class="c-comment-content">
+                                <div class="c-comment__autor f2 w-xbold dark fs-21">
+                                  Maca Wellness <span class="padding-left-1 fs-16"><i class="far fa-thumbtack"></i></span>
+                                </div>
+                                <div class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
+                                  Estudiante
+                                </div>
+                                <div class="c-comment__theme f2 w-xbold dark fs-16">
+                                  Carbohidratos en la noche
+                                </div>
+                                <p class="c-comment__text f2 dark fs-16 lh-18">
+                                  ¡Gracias Maca! Súper interesante. ¿Es cierto que comer carbohidratos en la noche es malo para nuestra salud?
+                                </p>
+                              </div>
+                            </div>
+                            <div class="cell medium-2 large-2">
+                              <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-18">
+                                <span>Responder</span>
+                                <span class="padding-left-1"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="grid-x align-right">
+                          <div class="small-11 medium-11 large-11">
+                            <div class="c-comment br-top--large br-bottom--large margin-bottom-1">
+                              <div class="grid-x">
+                                <div class="small-2 medium-2 large-2">
+                                  <figure class="c-comment__figure">
+                                    <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="width-100 height-100 of--cover"> 
+                                  </figure>
+                                </div>
+                                <div class="small-10 medium-8 large-8">
+                                  <div class="c-comment-content">
+                                    <div class="c-comment__autor f2 w-xbold dark fs-21">
+                                      Maca Wellness <span class="padding-left-1 fs-16"><i class="far fa-thumbtack"></i></span>
+                                    </div>
+                                    <div class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
+                                      Estudiante
+                                    </div>
+                                    <div class="c-comment__theme f2 w-xbold dark fs-16">
+                                      Carbohidratos en la noche
+                                    </div>
+                                    <p class="c-comment__text f2 dark fs-16 lh-18">
+                                      ¡Gracias Maca! Súper interesante. ¿Es cierto que comer carbohidratos en la noche es malo para nuestra salud?
+                                    </p>
+                                  </div>
+                                </div>
+                                <div class="cell medium-2 large-2">
+                                  <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-18">
+                                    <span>Responder</span>
+                                    <span class="padding-left-1"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div v-if="commentbox == 1" class="c-comment-box br-top--large br-bottom--large margin-bottom-1 padding-vertical-1">
+                          <div class="c-comment-box__subject flex-container align-middle">
+                            <label class="f2 fs-18 margin-right-1 dark">Asunto:</label>
+                            <input class="f2 fs-18 margin-0" type="text">
+                          </div>
+                          <div class="">
+                            <div class="c-comment-box__assets fs-25">
+                              <span><i class="far fa-smile-beam"></i> <input type="file" hidden></span>
+                              <span><i class="far fa-paperclip"></i> <input type="file" hidden></span>
+                              <span><i class="far fa-square"></i> <input type="file" hidden></span>
+                              <span><i class="far fa-square"></i> <input type="file" hidden></span>
+
+                            </div>
+                            <textarea name="" id="" cols="30" rows="10"></textarea>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-foro-footer fs-21  padding-1 f2 dark br-bottom--large">
+                    <div v-if="foro == 1" class="text-center">
+                      <span @click="foro = 2" class="w-xbold">Abrir debate</span><i class="far fa-plus-circle"></i>
+                    </div>
+                    <div v-if="foro == 2" class="flex-container align-justify padding-horizontal-1">
+                      <div @click="foro = 1" class="fs-16"><i class="far fa-chevron-left"></i> <span class="padding-left-1">Volver a todos los debates</span></div>
+                      <div @click="commentbox = 1" class="fs-16">Nuevo comentario <i class="far fa-plus-circle"></i></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </transition>
+          </div>
+        </div>
+      </div>  
     </div>
   </section>
 {% endblock %}

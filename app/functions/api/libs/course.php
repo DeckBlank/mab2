@@ -23,6 +23,20 @@ function __getMetaCourse($courseId, $userEmail, $meta) {
 
             break;
 
+        case 'duration':
+            $topics     = 0;
+            $unities    = get_field('unities', $courseId);
+
+            if ( $unities && count($unities) ) {
+                foreach($unities as $unity) {
+                    $topics += count($unity['topics']);
+                }
+            }
+
+            return intdiv( ($topics * 8) , 60);
+
+            break;
+
         case 'progress':
             $tests = TopicTestScore::where(['user' => $userEmail, 'course_id' => $courseId])
                 ->get();
