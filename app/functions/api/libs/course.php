@@ -56,7 +56,7 @@ function __getMetaCourse($courseId, $userEmail, $meta) {
     }
 }
 
-function __getLastTopic($courseId, $userEmail, $userID) {
+function __getLastTopic($courseId, $userEmail, $userID, $course) {
     $unities    = get_field('unities', $courseId);
     $topics     = [];
     $unityIndex = 1;
@@ -106,15 +106,14 @@ function __getLastTopic($courseId, $userEmail, $userID) {
                 'post_type' => 'topic',
                 'p'         => $lastClass['id']
             ]);
-
             $userSector = get_field('school_type', 'user_' . $userID);
 
             $lastClass['link'] = sprintf(
-                '%s?course_id=%s&course_name=%s&course_slug=%s&unity=%s&sector=%s',
+                '%s?course_id=%s&unity=%s&sector=%s',
                 $lastClass['link'],
                 $courseId,
-                $topic->title,
-                $topic->slug,
+                $course->title,
+                $course->slug,
                 $lastClass['unity'],
                 ($userSector) ? $userSector : 'publico'
             );
@@ -160,7 +159,7 @@ function __sanitizeCourse($courseId, $userEmail, $userID, $type = 'enrolled') {
             ]);
         } else {
             $courseObject = array_merge($courseObject, [
-                'last_class'    => __getLastTopic($courseId, $userEmail, $userID),
+                'last_class'    => __getLastTopic($courseId, $userEmail, $userID, $course),
                 'progress'      => __getMetaCourse($courseId, $userEmail, 'progress'),
             ]);
         }

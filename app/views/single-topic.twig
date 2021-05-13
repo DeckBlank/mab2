@@ -13,30 +13,26 @@
     <div class="grid-container padding-vertical-3">
       <div class="grid-x align-center">
         <div class="cell medium-10 large-11">
-          <!-- version antigua -->
-          <!-- <h2 class="c-course w-medium white">${metas.get('course_name')}</h2> -->
-          <!-- <h2 class="c-unity fs-30 f2 w-bold white margin-bottom-2">UNIDAD ${metas.get('unity')}:</h2> -->
-          <h2 class="c-course w-medium white margin-bottom-0 lh-65">Nutrición</h2>
-          <h2 class="c-unity fs-30 f2 w-bold white margin-bottom-3">Unidad 1: ¿Qué es la nutrición?</h2>
+          <h2 v-if="unityData" class="c-course w-medium white margin-bottom-0 lh-65">${ unityData.course.title }</h2>
+          <h2 v-if="unityData" class="c-unity fs-30 f2 w-bold white margin-bottom-3">Unidad ${ metas.get('unity') }: ${ unityData.unity }</h2>
+
           <section class="c-content c-content--protected position-relative br--large bg-white">
-            <a :href="course_link" class="c-link fs-25 w-medium f2 display-inline-block margin-bottom-1 w-xbold sec-color hover-sec-color margin-bottom-2">
+            <a :href="courseLink" class="c-link fs-25 w-medium f2 display-inline-block margin-bottom-1 w-xbold sec-color hover-sec-color margin-bottom-2">
               <span class="c-icon margin-right-1"><i class="far fa-arrow-left"></i></span> Volver al curso
             </a>
-            <!-- version antigua -->
-            <!-- <h1 class="c-title fs-40 f1 w-medium dark-gray margin-bottom-2">
-              {{post.title}}
-            </h1> -->
+
             <h1 class="c-title fs-40 lh-40 f1 w-medium dark">
-              ¿Qué es la nutrición?
+              {{ post.title }}
             </h1>
             <h2 class="fs-25 f2 w-ligth dark margin-bottom-2 text-uppercase">
-              clase 1
+              clase ${ metas.get('topic_number') }
             </h2>
+
             {% if source_type and source_type == 'ebook' %}
               <figure class="margin-bottom-1">
                 <img class="width-100 of--contain" src="{{source_banner['url']}}" alt="">
               </figure>
-              <a href="{{source}}" target="_blank" class="c-button c-button--secondary display-block w-100 text-center margin-bottom-2">Leer libro</a>
+              <a href="{{source}}" target="_blank" class="c-button c-button--secondary display-block f2 w-bold fs-18 w-100 text-center margin-bottom-2">Leer libro</a>
             {% else %}
               <div class="c-player margin-bottom-1">
                 <div style="padding:56.25% 0 0 0;position:relative;">
@@ -44,25 +40,7 @@
                 </div>
               </div>
             {% endif %}
-            <div v-if="logedUser" class="c-navigation flex-container align-justify margin-bottom-1 padding-bottom-1">
-              {% if navigation.previous %}
-                <a href="{{navigation.previous}}" class="c-button c-button--primary flex-container">
-                  <span class="c-icon"><i class="far fa-arrow-left"></i></span>
-                  <p class="margin-bottom-0 margin-left-1 f2 fs-18 white w-medium">Anterior</p>
-                </a>
-              {% else %}
-                <span></span>
-              {% endif %}
 
-              {% if navigation.next  %}
-                <a href="{{navigation.next}}" class="c-button c-button--primary flex-container">
-                  <p class="margin-bottom-0 margin-right-1 f2 fs-18 white w-medium">Siguiente</p>
-                  <span class="c-icon"><i class="far fa-arrow-right"></i></span>
-                </a>
-              {% else %}
-                <span></span>
-              {% endif %}
-            </div>         
             <div class="c-actions margin-bottom-1 margin-top-1">
               <!-- version antigua -->
               <!-- <div class="flex-container align-middle">
@@ -135,29 +113,27 @@
                     <div class="margin-right-2 ">
                       <Likes :count.sync="likes" :target="{ id : {{post.id}}, type: 'topic' }"></Likes>
                     </div>
-                    <div>
-                      <button class="flex-container align-center-middle"><i class="far fa-share black"></i> <p class="black w-medium margin-left-1 margin-bottom-0 f2">Compartir</p></button>
-                    </div>
                   </div>
                 </div>
                 <div class="cell large-7">
-                  <div class="c-actions__buttons text-center large-text-right">
-                    <a class="c-button c-button--primary-alt-white display-inline-block f2 w-xbold fs-18 br-10" href="">Anterior</a>
-                    <button class="c-button c-button--mab-warning-black br-10 f2 w-xbold fs-18 margin-horizontal-1">Repaso</button>
-                    <a class="c-button c-button--success display-inline-block f2 w-xbold fs-18" href="">Siguiente</a>
+                  <div v-if="logedUser" class="c-actions__buttons text-center large-text-right">
+                    {% if navigation.previous %}
+                      <a href="{{ navigation.previous }}" class="c-button c-button--primary-alt-white display-inline-block f2 w-xbold fs-18 br-10">Anterior</a>
+                    {% endif %}
+
+                    <button v-if="questions.length > 0" @click="isOpenedQuestionsModal = true" class="c-button c-button--mab-warning-black br-10 f2 w-xbold fs-18 margin-horizontal-1">Repaso</button>
+
+                    {% if navigation.next %}
+                      <a href="{{ navigation.next }}" class="c-button c-button--success display-inline-block f2 w-xbold fs-18">Siguiente</a>
+                    {% endif %}
                   </div>
                 </div>
-
               </div>
-              <button v-if="this.logedUser && questions.length > 0" class="c-questions-toggle c-button f2 fs-18 w-medium c-button--primary flex-container align-center-middle" @click="isOpenedQuestionsModal = true">
-                <p class="margin-bottom-0">Comprueba lo que has aprendido aquí</p>
-              </button>
             </div>
+
             {% if post.content %}
               <div class="margin-top-3 margin-bottom-2 f2 fs-18 w-medium black">
-                <!-- version antigua -->
-                <!-- {{post.content}} -->
-                En esta clase veremos sobre la importancia de la buena nutrición y la diferencia entre esta y alimentación
+                {{post.content}}
               </div>
             {% endif %}
 
@@ -219,40 +195,52 @@
                         <div class="c-tab-recursos br-bottom--large br-top--large padding-2">
                           <h3 class="w-xbold f2 fs-25 dark margin-bottom-1 text-uppercase">RECURSOS</h3>
                           <div class="grid-x align-self-strecht text-center">
-                            <div class="small-3 medium-3 large-3">
-                              <div class="c-tab-recursos__item f2 w-bold">
-                                <div></div>
-                                <figure class="margin-bottom-1">
-                                  <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 of--contain"> 
-                                </figure>
-                                <span>Resúmenes</span>
+                            {% if summary %}
+                              <div class="small-3 medium-3 large-3">
+                                <a href="{{ summary }}" download class="c-tab-recursos__item f2 w-bold">
+                                  <div></div>
+                                  <figure class="margin-bottom-1">
+                                    <img src="{{ theme.link }}/static/images/curso/resources/doc1.png" alt="" class=" width-100 of--contain"> 
+                                  </figure>
+                                  <span>Resúmen</span>
+                                </a>
                               </div>
-                            </div>
-                            <div class="small-3 medium-3 large-3">
-                              <div class="c-tab-recursos__item f2 w-bold">
-                                <figure class="margin-bottom-1">
-                                  <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100  of--contain"> 
-                                </figure>
-                                <span>Hoja de trabajo</span>
+                            {% endif %}
+
+                            {% if worksheet %}
+                              <div class="small-3 medium-3 large-3">
+                                <a href="{{ worksheet }}" download class="c-tab-recursos__item f2 w-bold">
+                                  <figure class="margin-bottom-1">
+                                    <img src="{{ theme.link }}/static/images/curso/resources/doc2.png" alt="" class=" width-100  of--contain"> 
+                                  </figure>
+                                  <span>Hoja de trabajo</span>
+                                </a>
                               </div>
-                            </div>
-                            <div class="small-3 medium-3 large-3">
-                              <div class="c-tab-recursos__item f2 w-bold">
-                                <figure class="margin-bottom-1">
-                                  <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 of--contain"> 
-                                </figure>
-                                <span>Solucionario</span>
+                            {% endif %}
+
+                            {% if solutions %}
+                              <div class="small-3 medium-3 large-3">
+                                <a href="{{ solutions }}" download class="c-tab-recursos__item f2 w-bold">
+                                  <figure class="margin-bottom-1">
+                                    <img src="{{ theme.link }}/static/images/curso/resources/doc3.png" alt="" class=" width-100 of--contain"> 
+                                  </figure>
+                                  <span>Solucionario</span>
+                                </a>
                               </div>
-                            </div>
-                            <div class="small-3 medium-3 large-3">
-                              <div class="c-tab-recursos__item f2 w-bold">
-                                <figure class="margin-bottom-1">
-                                  <img src="{{ theme.link }}/static/images/curso/doc-2.png" alt="" class=" width-100 of--contain"> 
-                                </figure>
-                                <span>Mapa mental</span>
+                            {% endif %}
+
+                            {% if map %}
+                              <div class="small-3 medium-3 large-3">
+                                <a href="{{ map }}" download class="c-tab-recursos__item f2 w-bold">
+                                  <figure class="margin-bottom-1">
+                                    <img src="{{ theme.link }}/static/images/curso/resources/doc4.png" alt="" class=" width-100 of--contain"> 
+                                  </figure>
+                                  <span>Mapa mental</span>
+                                </a>
                               </div>
-                            </div>
-                            <div class="cell">
+                            {% endif %}
+
+                            <div v-if="false" class="cell">
                               <button class="c-button margin-top-1 c-button--mab-warning-black f2 w-xbold fs-21">¡Descárgalos todos!</button>
                             </div>
                           </div>
@@ -264,64 +252,20 @@
                           <div class="c-themes-list__content">
                             <div class="c-themes-list__scrool">
                               <div>
-                                <div class="margin-bottom-1">
-                                  <p class="margin-bottom-0 dark f2 fs-25 text-uppercase">Unidad 1</p>
+                                <div v-for="(unity, uindex) of unities" class="margin-bottom-1">
+                                  <p class="margin-bottom-0 dark f2 fs-25 text-uppercase">Unidad ${ uindex + 1 }</p>
                                   <ul class="ul-reset">
-                                    <li class="c-themes-list__item active dark f2 active fs-18">
-                                      <span class="triangle"></span> ¿Qué es la nutrición?
-                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
-                                    </li>
-                                  </ul>
-                                </div>
-                                <div class="margin-bottom-1">
-                                  <p class="margin-bottom-0 dark f2 fs-25 text-uppercase">Unidad 2</p>
-                                  <ul class="ul-reset">
-                                    <li class="c-themes-list__item dark f2 fs-18">
-                                      <span class="triangle"></span> Carbohidratos
-                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
-                                    </li>
-                                    <li class="c-themes-list__item dark f2 fs-18">
-                                      <span class="triangle"></span> Proteínas
-                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
-                                    </li>
-                                    <li class="c-themes-list__item dark f2 fs-18">
-                                      <span class="triangle"></span> Grasa
-                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
-                                    </li>
-                                    <li class="c-themes-list__item dark f2 fs-18">
-                                      <span class="triangle"></span> Vitaminas
-                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
-                                    </li> 
-                                    <li class="c-themes-list__item dark f2 fs-18">
-                                      <span class="triangle"></span> Minerales
-                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
-                                    </li>
-                                    <li class="c-themes-list__item dark f2 fs-18">
-                                      <span class="triangle"></span> Fibra
-                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
-                                    </li>
-                                    <li class="c-themes-list__item dark f2 fs-18">
-                                      <span class="triangle"></span> Grasa
-                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
-                                    </li>
-                                    <li class="c-themes-list__item dark f2 fs-18">
-                                      <span class="triangle"></span> Vitaminas
-                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
-                                    </li> 
-                                    <li class="c-themes-list__item dark f2 fs-18">
-                                      <span class="triangle"></span> Minerales
-                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
-                                    </li>
-                                    <li class="c-themes-list__item dark f2 fs-18">
-                                      <span class="triangle"></span> Fibra
-                                      <p class="margin-0"><small class="status">Reproduciendo ahora</small></p>
+                                    <li v-for="(topic, tindex) of unity.topics" class="c-themes-list__item dark f2 fs-18" :class="{'active' : topicID == topic.id}">
+                                      <a :href="getTopicLink(topic.video.link, tindex + 1, uindex + 1)">
+                                        <span class="triangle"></span> ${ topic.title }
+                                      </a>
+                                      <p v-if="topicID == topic.id" class="margin-0"><small class="status">Reproduciendo ahora</small></p>
                                     </li>
                                   </ul>
                                 </div>
                               </div>
                             </div>
                           </div>
-
                         </div>
                       </div>
                     </div>

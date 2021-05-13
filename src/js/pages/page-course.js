@@ -199,6 +199,10 @@ const course = new Vue({
         })
     },
 
+    getTopicLink: function(topicLink, topicNumber, unityNumber) {
+      return `${ topicLink }?course_id=${ mab.course_id }&topic_number=${ topicNumber }&unity=${ unityNumber }`;
+    },
+
     resetAccordion: function(unity) {
       this.unities = this.unities.map(q => {
         return (q != unity) ? { ...q, enable : false } : q;

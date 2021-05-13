@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1620790461772';
+$assets_version = '1620884327116';
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -463,6 +463,12 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         ]);        
 
     }elseif (is_singular('topic')){
+        $enviroment = array_merge(
+            $enviroment, [
+                'topic_id' => get_the_ID(),
+            ]
+        );
+
         register_assets('package', [
             'handle'    => 'pandawp/package/swiper',
             'src'       => $config['resources']['package_swiper'],
@@ -470,7 +476,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]);
-    
+
         register_assets('package', [
             'handle'    => 'pandawp/package/dom7',
             'src'       => $config['resources']['package_dom7'],
@@ -478,7 +484,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]); 
-    
+
         register_assets('package', [
             'handle'    => 'pandawp/package/vaswiper',
             'src'       => $config['resources']['package_vaswiper'],
@@ -486,7 +492,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]);         
-    
+
         register_assets('package', [
             'handle'    => 'pandawp/package/ssrwindow',
             'src'       => $config['resources']['package_ssr_window'],
@@ -494,7 +500,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]); 
-        
+
         register_assets('script', [
             'handle'    => 'pandawp/js/page/topic',
             'src'       => $config['resources']['page_topic'],
@@ -681,51 +687,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         ]);        
 
     }
-<<<<<<< HEAD
-=======
-    elseif (is_page('cursito')){               
-        register_assets('script', [
-            'handle'    => 'pandawp/js/page/curso',
-            'src'       => $config['resources']['page_curso'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);        
-    }elseif (is_page('perfil')){ 
-        register_assets('package', [
-            'handle'    => 'pandawp/package/swiper',
-            'src'       => $config['resources']['package_swiper'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);
-    
-        register_assets('package', [
-            'handle'    => 'pandawp/package/dom7',
-            'src'       => $config['resources']['package_dom7'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);
-    
-        register_assets('package', [
-            'handle'    => 'pandawp/package/ssrwindow',
-            'src'       => $config['resources']['package_ssr_window'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);              
-        register_assets('script', [
-            'handle'    => 'pandawp/js/page/perfil',
-            'src'       => $config['resources']['page_perfil'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);        
-
-    }
-
->>>>>>> b9ff5e60ef2e606b53abff5fbad8ae579395bb40
 
     /**
      * --------------------------------------------------------------------------
