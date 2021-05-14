@@ -110,8 +110,9 @@ class CourseModel{
         if(get_field('unities', $request['course_id'])){
             foreach( get_field('unities', $request['course_id']) as $unity){
                 array_push($unities,(object)[
-                    "title" => $unity['title'],
-                    "topics" => self::__getTopicsSanitize($unity['topics'], $request['user'], $mode)
+                    "title"     => $unity['title'],
+                    "enable"    => false,
+                    "topics"    => self::__getTopicsSanitize($unity['topics'], $request['user'], $mode)
                 ]);
             }
         }        
@@ -551,18 +552,15 @@ class CourseModel{
         return $response;
     }
 
-    public static function __isViewedTopic($topic, $user){
-        $response = DBConnection::getConnection()->query("
-            SELECT
-                *
-            FROM
-                wp_user_topic
-            WHERE
-                user_email = '". $user ."' and
-                topic_id = ". $topic ."
-        ");
+    public static function __isViewedTopic($topic, $userEmail){
+        $userTopic = UserTopic::where([
+                'user_email'    => $userEmail,
+                'topic_id'      => $topic,
+                'video_viewed'  => 1
+            ])
+            ->first();
 
-        return ($response && $response->fetch_assoc()['video_viewed']) ? 1 : 0;
+        return ($userTopic) ? 1 : 0;
     }
 
     public static function __getCourseName($id){
@@ -578,7 +576,7 @@ class CourseModel{
 
     public static function __getTopicsSanitize($topics, $user, $mode){
         $topics_sanitize = [];
-    
+
         if($topics){        
             foreach($topics as $topic){
                 $tempTopic = [

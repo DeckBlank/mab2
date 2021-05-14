@@ -48,6 +48,12 @@
       color: $white;
     }
   }
+
+  &__likes {
+    svg {
+      margin-right: 0.2rem;
+    }
+  }
 }
 
 .c-course-card--secondary {

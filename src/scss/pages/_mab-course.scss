@@ -5,6 +5,11 @@
       line-height: 30px;
     }
   }
+
+  .c-icon-course {
+    width: 30px;
+    display: inline-block;
+  }
 }
 
 @include breakpoint(large) {
