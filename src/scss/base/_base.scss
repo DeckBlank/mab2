@@ -148,6 +148,10 @@ body {
   line-height: 27px;
 }
 
+.lh-21 {
+  line-height: 23px;
+}
+
 .lh-14 {
   line-height: 14px !important;
 }
@@ -158,6 +162,10 @@ body {
 
 .lh-30 {
   line-height: 30px;
+}
+
+.lh-35 {
+  line-height: 35px;
 }
 
 .fd-column {
@@ -233,6 +241,19 @@ body {
   &:hover {
     color: $secondary-alt;
   }
+}
+
+.i-white {
+  color: $white !important;
+}
+
+.i-pri-color {
+  color: $primary-color !important;
+}
+
+.input-dark::placeholder {
+  opacity: 1;
+  color: $gray;
 }
 
 @include breakpoint(large) {

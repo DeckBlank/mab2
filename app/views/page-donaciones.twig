@@ -1,0 +1,263 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--donaciones">
+    <div class="c-split-layout">
+      <div class="grid-x height-100">
+        <div class="cell large-5">
+          <transition name="fade" mode="out-in">
+            <div class="c-split-layout__figure height-100">
+              <figure class="c-cover-gradient c-cover-gradient--dark position-relative height-100 width-100">
+                  <video preload="" class="c-cover-gradient__image width-100 height-100 controls preload autoplay">
+                    <source src="{{theme.link}}/static/images/videos/test.mp4">
+                  </video>
+                <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
+                  <div class="c-cover-gradient__top width-100  flex-container padding-1 padding-horizontal-2 opacity-0">
+                  </div>
+                  <h1 class="c-cover-gradient__bottom width-100 padding-2 margin-bottom-0">
+                    <div class="grid-x">
+                      <div class="cell medium-10 large-9">
+                        <div class="fs-35 lh-35 white margin-bottom-1">
+                          <span class="i-pri-color fs-35">Tú también</span> puedes formar parte del cambio
+                        </div>
+                      </div>
+                      <div class="cell medium-11 large-11">
+                        <p class="fs-18 lh-25 white f2">
+                          <span class="w-xbold fs-16 i-white">“Asociación Civil Educación con Propósito”</span> es una organización
+                          sin fines de lucro, cuyas donaciones son destinadas a la difusión
+                          de educación a diferentes zonas rurales del país. Con tu
+                          colaboración, MAB podrá seguir viajando a estas regiones para
+                          educar a miles de personas en situaciones vulnerables,
+                          brindar capacitaciones a sus docentes y llevar herramientas
+                          tecnológicas para reducir brechas y garantizar una educación de
+                          calidad para todo el Perú.
+                        </p>
+                      </div>
+                    </div>
+                  </h1>
+                </figcaption>
+              </figure>
+            </div>
+          </transition>
+        </div>
+        <div class="cell large-7">
+          <div class="c-split-layout__content">
+            <transition name="fade" mode="out-in">
+              <div v-if="false" class="c-split-layout-content c-split-layout-content--dark">
+                <div class="width-100">
+                  <div class="text-center padding-3 width-100">
+                    <div class="grid-x align-center">
+                      <div class="cell large-6">
+                        <h1 class="c-split-layout-content__title margin-bottom-2 white fs-35 c-lh--35">
+                          <span class="white fs-30 f2 w-xbold">Dona</span><br>
+                          <div class="flex-container align-center-middle margin-top-1">
+                            AM<img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/donaciones/mab-red-logo.png" alt="">LEMENTE
+                          </div>
+                        </h1>
+
+                        <form class="c-form-new text-left margin-top-1" action="">
+                          <div class="c-form-new__input-container margin-bottom-2">
+                            <label class="text-center f2 white" for="">¿Cuánto deseas donar?</label>
+                            <div class="check-group flex-container align-middle align-justify margin-bottom-1">
+                              <div class="check-group__item">
+                                <input id="50" name="monto" value="50" type="radio" hidden>
+                                <label class="bg-white br--medium margin-0 f2" for="50">S/ 50</label>
+                              </div>
+                              <div class="check-group__item margin-horizontal-1">
+                                <input id="100" name="monto" value="100" type="radio" hidden>
+                                <label class="bg-white br--medium margin-0 f2" for="100">S/ 100</label>
+                              </div>
+                              <div class="check-group__item">
+                                <input id="150" name="monto" value="150" type="radio" hidden>
+                                <label class="bg-white br--medium margin-0 f2" for="150">S/ 150</label>
+                              </div>
+                            </div>
+                            <label class="text-center f2 white">o ingresa el monto</label>
+                            <input class="f2 input-reset input-dark" type="text" placeholder="250">
+                            
+                            <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                              Elige un monto para donar
+                            </p>
+                          </div>
+                          <div class="c-form-new__input-container margin-bottom-2">
+                            <label class="text-center f2 white" for="">Elegir medio de pago</label>
+                            <div class="check-group margin-bottom-1">
+                              <div class="check-group__item width-100 margin-bottom-1">
+                                <input id="tarjeta" name="medio" value="tarjeta" type="radio" hidden>
+                                <label class="bg-white br--medium margin-0 f2" for="tarjeta">Tarjeta de débito / crédito</label>
+                              </div>
+                              <div class="check-group__item width-100">
+                                <input id="transferencia" name="medio" value="transferencia" type="radio" hidden>
+                                <label class="bg-white br--medium margin-0 f2" for="transferencia">Depósito por transferencia </label>
+                              </div>
+                            </div>
+                            <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
+                              Elige un medio de pago
+                            </p>
+                          </div>
+
+                          <div class="c-form-new__input-container margin-bottom-2">
+                            <label class="text-center f2 white padding-horizontal-1">Ingresa tu correo electrónico para poder confirmar tu donación</label>
+                            <input class="f2 input-reset input-dark" type="email" placeholder="donador@g.com">
+                            <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
+                              Email vacío o incorrecto
+                            </p>
+                          </div>
+                          <div class="text-center">
+                            <button
+                            class="c-button c-button--primary f2 margin-top-1 text-uppercase br--large padding-horizontal-3"
+                            >siguiente</button>
+                          </div>
+                        </form>
+                        <div class="c-label-login pri-color f2 margin-top-1">
+                          <a class="c-link c-link-primary w-bold"><i class="fas fa-chevron-left"></i>  Volver a la página principal</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div v-if="false" class="c-split-layout-content c-split-layout-content--dark position-relative">
+                <div class="width-100">
+                  <div class="text-center padding-3 width-100">
+                    <div class="grid-x align-center">
+                      <div class="cell large-6">
+                        <h1 class="c-split-layout-content__title margin-bottom-2 white fs-35 c-lh--35">
+                          <span class="white fs-30 f2 w-xbold">Dona</span><br>
+                          <div class="flex-container align-center-middle margin-top-1">
+                            AM<img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/donaciones/mab-red-logo.png" alt="">LEMENTE
+                          </div>
+                        </h1>
+
+                        <div class="margin-top-2">
+                          <div class="c-donacion-info text-left">
+                            <p class="white f2 margin-bottom-2">Estos son los datos que necesitas para que puedas realizar
+                              un depósito por transferencia:  
+                            </p>
+                            <ul class="ul-reset f2 white">
+                              <li>
+                                <span class="warning padding-right">Nombre del titular:</span> Asociación civil educación con propósito
+                              </li>
+                              <li class="margin-bottom-1">
+                                <span class="warning padding-right">RUC:</span> 2060629850
+                              </li>
+                              <li>
+                                <p>Número de cuentas MAB:</p> 
+                              </li>
+                              <li>
+                                <span class="warning padding-right">BCP soles:</span> 194-03007578-0-56
+                              </li>
+                              <li>
+                                <span class="warning padding-right">CCI:</span> 002-19410300757805695
+                              </li>                              
+                              <li>
+                                <span class="warning padding-right">BCP dólares:</span> 194-2672452-1-73
+                              </li>
+                              <li>
+                                <span class="warning padding-right">CCI:</span> 002-19400267245217392
+                              </li>
+                              <li class="flex-container align-middle">
+                                <span>
+                                  <img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/donaciones/yape-logo.png" alt="">
+                                </span>
+                                <span>
+                                  902 705 515
+                                </span>
+                              </li>
+                              <li class="flex-container align-middle">
+                                <span>
+                                  <img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/donaciones/paypal-logo.png" alt="">
+                                </span>
+                                <a href="https://www.paypal.com/paypalme/MABPeru" target="_blank">
+                                  www.paypal.com/paypalme/MABPeru
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="text-center margin-top-3">
+                          <button
+                          class="c-button c-button--primary f2 margin-top-1 text-uppercase br--large padding-horizontal-3 w-xbold"
+                          >CONFIRMAR MI DONACIÓN</button>
+                        </div>
+                        <div class="c-label-login pri-color f2 margin-top-1">
+                          <a class="c-link c-link-primary w-bold"><i class="fas fa-chevron-left"></i>  Volver a la página principal</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div v-if="true" class="c-split-layout-content c-split-layout-content--dark position-relative">
+                <div class="width-100">
+                  <div class="text-center padding-3 width-100">
+                    <div class="grid-x align-center">
+                      <div class="cell large-6">
+                        <h1 class="c-split-layout-content__title margin-bottom-2 white fs-35 c-lh--35">
+                          <span class="white fs-30 f2 w-xbold">Dona</span><br>
+                          <div class="flex-container align-center-middle margin-top-1">
+                            AM<img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/donaciones/mab-red-logo.png" alt="">LEMENTE
+                          </div>
+                        </h1>
+
+                        <div class="margin-vertical-3">
+                          <div class="grid-x align-bottom">
+                            <div class="cell large-8">
+                              <p class="w-xbold white fs-21 f2 text-left">
+                                GRACIAS A PERSONAS COMO
+                                TÚ, PODEMOS SEGUIR
+                                DIFUNDINDO EDUCACIÓN
+                                INTEGRAL A TODOS 
+                                Y PARA TODAS</p>
+                            </div>
+                            <div class="cell large-4">
+                              <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/donaciones/heart.png" alt="">
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="margin-top-3">
+                          <button
+                          class="c-button c-button--primary f2 margin-top-1 text-uppercase br--large padding-horizontal-3 w-xbold"
+                          ><i class="fas fa-share-alt"></i> Invita a tus amigos a donar</button>
+                        </div>
+                        <div class="c-label-login pri-color f2 margin-top-1">
+                          <a class="c-link c-link-primary w-bold"><i class="fas fa-chevron-left"></i>  Volver a la página principal</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </transition>
+          </div>
+
+          <div v-if="false" class="c-mab-modal c-mab-modal--mini flex-container align-center-middle">
+            <div class="grid-x align-center width-100">
+              <div class="cell small-10 medium-10 large-6">
+                <div class="c-mab-modal-content bg-white text-center position-relative">
+                  <div class="text-center">
+                    <img loading="lazy" class="c-mab-modal__top-image donaciones" src="{{theme.link}}/static/images/donaciones/envelope.png" alt="">
+                  </div>
+                  <button type="button" class="c-mab-modal__cross position-absolute white bg-pri-color fs-18 fñex-container align-center-middle">
+                    <i class="fas fa-times"></i>
+                  </button>
+                  <h3 class="c-mab-modal-content__title text-center dark text-uppercase">
+                    <span class="pri-color">¡MUCHAS GRACIAS</span> POR SUMARTE AL CAMBIO!
+                  </h3>
+                  <p class="w-xbold dark f2 fs-18 margin-0">Estamos procesando tu donación.</p>
+                  <p class="dark f2 fs-18">Pronto te enviaremos un correo de confirmación</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </section>
+{% endblock %}

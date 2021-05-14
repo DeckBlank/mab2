@@ -694,8 +694,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         ]);        
 
     }
-<<<<<<< HEAD
-=======
     elseif (is_page('cursito')){               
         register_assets('script', [
             'handle'    => 'pandawp/js/page/curso',
@@ -736,9 +734,16 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);        
 
-    }
+    }elseif (is_page('donaciones')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/donaciones',
+            'src'       => $config['resources']['page_donaciones'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);        
+        }
 
->>>>>>> e5097b524e44e00f08368aaf44b7521026ff537d
 
     /**
      * --------------------------------------------------------------------------
