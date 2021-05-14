@@ -8,6 +8,7 @@ const perfil = new Vue({
   data() {
     return {
       modal: false,
+      skilss: 1,
     }
   },
   computed: {
