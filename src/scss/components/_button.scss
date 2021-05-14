@@ -205,6 +205,17 @@
     }
   }
 
+  &--white-dark {
+    background: $white;
+    color: $dark;
+
+    @include b-radious(10px);
+
+    &:hover {
+      color: $dark;
+    }
+  }
+
   // ----------
   &--small {
     padding: 0.3rem 1.5rem;

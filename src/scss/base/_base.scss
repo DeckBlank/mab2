@@ -128,6 +128,10 @@ body {
   display: none;
 }
 
+.c-mobile {
+  display: block;
+}
+
 .lh-40 {
   line-height: 43px;
 }
@@ -174,6 +178,10 @@ body {
   border-radius: 10px !important;
 }
 
+.br-45 {
+  border-radius: 45px !important;
+}
+
 .object-cover {
   object-fit: cover;
   object-position: center;
@@ -217,6 +225,10 @@ body {
   border: 1px solid $dark !important;
 }
 
+.border-black {
+  border: 1px solid $black !important;
+}
+
 .hover-sec-color {
   &:hover {
     color: $secondary-alt;
@@ -226,5 +238,9 @@ body {
 @include breakpoint(large) {
   .desktop {
     display: block;
+  }
+
+  .c-mobile {
+    display: none;
   }
 }
