@@ -159,8 +159,13 @@
                               <i class="c-icon white fs-21 far fa-chevron-up"></i>
                             </label>
                             <div class="c-accordion-item__content position-relative bg-white f2 dark w-medium">
-                              <div v-for="topic of unity.topics" :key="topic.id" class="c-mab-toggle fs-21">
-                                <a :class="topic.video.state ? 'sec-color c-link--ho-secondary' : 'dark c-link--ho-secondary' " :href="topic.video.link"><span class="triangle"></span> ${ topic.title }</a> 
+                              <div v-for="(topic, tindex) of unity.topics" :key="topic.id" class="c-mab-toggle fs-21">
+                                <a
+                                  :class="topic.video.state ? 'sec-color c-link--ho-secondary' : 'dark c-link--ho-secondary' "
+                                  :href="getTopicLink(topic.video.link, tindex + 1, uindex + 1)"
+                                >
+                                  <span class="triangle"></span> ${ topic.title }
+                                </a> 
                               </div>
                             </div>
                           </li>

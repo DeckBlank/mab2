@@ -99,6 +99,7 @@ const course = new Vue({
       addCourseToShopCart(course_id, course_title, course_link, this.SITE_URL, this.metas)
     },
     verifyIsAvaibleCourse: function(){
+      /*
       let shop_cart = window.localStorage.getItem('mab_shop_cart');
         shop_cart = JSON.parse(shop_cart);
 
@@ -107,6 +108,9 @@ const course = new Vue({
 
         this.isAvaibleCourse = (courses.length > 0) ? false : true;
       }
+      */
+
+      return true;
     },
     playVideo: function(video, unity, topic){
       event.preventDefault();
@@ -197,6 +201,10 @@ const course = new Vue({
           window.open(url, '_blank');
           throw err;
         })
+    },
+
+    getTopicLink: function(topicLink, topicNumber, unityNumber) {
+      return `${ topicLink }?course_id=${ mab.course_id }&topic_number=${ topicNumber }&unity=${ unityNumber }`;
     },
 
     resetAccordion: function(unity) {

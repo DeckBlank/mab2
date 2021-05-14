@@ -21,7 +21,6 @@ function addCourseToShopCart(course_id, course_title, course_link, site, metas){
 
       window.localStorage.setItem('mab_shop_cart', JSON.stringify(shop_cart))
     }
-
   }
 
   window.setTimeout(()=>{

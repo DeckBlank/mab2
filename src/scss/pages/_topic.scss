@@ -93,6 +93,18 @@
     overflow-x: hidden;
     overflow-y: auto;
   }
+
+  .c-tab-recursos {
+    &__item {
+      display: inline-block;
+
+      &:hover {
+        span {
+          color: $secondary-color;
+        }
+      }
+    }
+  }
 }
 
 @include breakpoint(medium) {

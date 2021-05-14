@@ -16,7 +16,7 @@ class CourseController{
                     return true;
                 }
             ));
-    
+
             register_rest_route('custom/v1', '/courses/mab_categories', array(
                 'methods' => 'GET',
                 'callback' => array($this,'getMabCategories'),
@@ -24,7 +24,7 @@ class CourseController{
                     return ($request['_wpnonce']) ? true : false;
                 }
             ));
-    
+
             register_rest_route('custom/v1', '/courses/mab_subcategories', array(
                 'methods' => 'GET',
                 'callback' => array($this,'getMabCategories'),
@@ -32,7 +32,7 @@ class CourseController{
                     return ($request['_wpnonce']) ? true : false;
                 }
             ));
-    
+
             register_rest_route('custom/v1', '/course/(?P<course_id>\d+)/unities', array(
                 'methods' => 'GET',
                 'callback' => array($this,'getUnities'),
@@ -40,7 +40,15 @@ class CourseController{
                     return true;
                 }
             ));
-    
+
+            register_rest_route('custom/v1', '/courses/(?P<course_id>\d+)/unities/(?P<unity>\d+)', array(
+                'methods' => 'GET',
+                'callback' => array($this,'showUnity'),
+                'permission_callback' => function ($request) {
+                    return ($request['_wpnonce']) ? true : false;
+                }
+            ));
+
             register_rest_route('custom/v1', '/courses', array(
                 'methods' => 'GET',
                 'callback' => array($this,'getAll'),
@@ -48,16 +56,15 @@ class CourseController{
                     return true;
                 }
             ));
-    
+
             register_rest_route('custom/v1', '/courses/all', array(
                 'methods' => 'GET',
                 'callback' => array($this,'index'),
                 'permission_callback' => function ($request) {
-                    // return ($request['_wpnonce']) ? true : false;
-                    return true;
+                    return ($request['_wpnonce']) ? true : false;
                 }
             ));
-    
+
             register_rest_route('custom/v1', '/courses/progress', array(
                 'methods' => 'GET',
                 'callback' => array($this,'getProgress'),
@@ -298,6 +305,42 @@ class CourseController{
         }else{
             return new WP_Error( 'no_unities', __('No unities found'), array( 'status' => 404 ) );
         }  
+    }
+
+    public function showUnity($request){
+        $courseId   = $request['course_id'];
+        $unity      = $request['unity'];
+        $data       = [
+            'course' => '',
+            'unity'  => '',
+        ];
+
+        $course = Timber::get_post([
+            'post_type' => 'course',
+            'p'         => $courseId
+        ]);
+
+        if ($course)
+            $data['course'] = [
+                'title' => $course->title,
+                'slug'  => $course->slug,
+            ];
+
+        $data['unity'] = get_field('unities', $course->ID)[$unity - 1];
+        $data['unity'] = ($data['unity']) ? $data['unity']['title'] : '';
+
+
+        if ( $data['course'] && $data['unity'] ) {
+            return new WP_REST_Response((object)[
+                'message'       => 'Courses heres!!',
+                'data'          => $data,
+                'status'        => true
+            ], 200);
+        } else {
+            return new WP_REST_Response((object)[
+                'status'    => false
+            ], 200);
+        }
     }
 
     public function getProgress($request){
