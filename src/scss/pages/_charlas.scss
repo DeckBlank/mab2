@@ -1,0 +1,25 @@
+.c-section--charlas {
+  .c-charlas-list {
+    &__title {
+      font-size: $fs-50;
+      line-height: 50px;
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-section--charlas {
+    .c-banner {
+      &__content {
+        margin: 2rem 0;
+      }
+    }
+
+    .c-charlas-list {
+      &__title {
+        font-size: $fs-70;
+        line-height: 70px;
+      }
+    }
+  }
+}
