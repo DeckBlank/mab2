@@ -1,0 +1,49 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--lideres-single">
+    <div class="c-lideres-single bg-warning-alt">
+      <div class="grid-container">
+        <div class="grid-x">
+          <div class="cell large-7">
+            <div class="c-lideres-single__info br--large bg-dark white position-relative">
+              <img class="c-lideres-single__heart position-absolute " src="{{ theme.link }}/static/images/lideres/heart.png" alt="">
+              <h1 class="c-lideres-single__title white w-xbold f2 fs-40">Ximena Vega</h1>
+              <h3 class="c-lideres-single__subtitle white w-xbold f2 fs-25 margin-bottom-2">Fundadora y CEO de Claridad Coaching Estratégico</h3>
+              <div class="white f2">
+                <p>
+                  Estudió Publicidad y Marketing y realizó estudios de Post-Grado en
+                  Kllogg University, EEUU. Ha llevado cursos de Gestión de Innovación
+                  en Silicon Valley, San Francisco y en la Universidad de Harvad,
+                  Boston. Durante el 20202 siguió cursos de Marketing Social en la
+                  Universidad de Cape Town, Sudáfrica.
+                </p>
+                <p>
+                  Es una #MABlover desde los inicios y vive apasionada por lo que
+                  hace. Esto la ha llevado a ganar reconocidos premios como Women
+                  Marketeers , Mujer Empresaria 2019. Además, es la creadora de la
+                  plataforma #MujerChamba y es embajadora del Perú en SheLeads,
+                  el movimiento global de WeWork.
+                </p>
+              </div>
+            </div>
+            <div class="c-dots-background c-dots-background--warning bottom position-relative">
+            </div>
+            <a href="" class="c-link dark c-link--ho-dark w-xbold f2 margin-top-1 text-center"><i class="fas fa-chevron-left"></i>  Regresar a la pagina principal</a>
+          </div>
+          <div class="cell large-5">
+            <div class="c-dots-background c-dots-background--warning right position-relative">
+              <figure class="c-lideres-single__figure">
+                <img class="of--contain" src="{{ theme.link }}/static/images/lideres/lider.png" alt="">
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

@@ -1,0 +1,66 @@
+.c-section--lideres-single {
+  outline: none;
+  overflow: hidden;
+
+  .c-lideres-single {
+    padding-top: 6rem;
+
+    &__info {
+      padding: 4rem 2rem 3rem;
+      z-index: 555;
+    }
+
+    &__figure {
+      margin-top: 2rem;
+    }
+
+    &__heart {
+      height: 140px;
+      right: 0;
+      top: -80px;
+      transform: rotate(2deg);
+    }
+  }
+
+  .c-dots-background.right::before {
+    left: 2rem;
+  }
+
+  .c-link {
+    position: relative;
+    z-index: 555;
+    display: block;
+  }
+}
+
+@include breakpoint(large) {
+  .c-section--lideres-single {
+    outline: none;
+
+    .c-lideres-single {
+      padding-top: 6rem;
+
+      &__info {
+        padding: 3rem 4rem 3rem;
+      }
+
+      &__figure {
+        width: 120%;
+        margin-left: -20%;
+      }
+
+      &__heart {
+        height: 15rem;
+        right: -7rem;
+        top: -4rem;
+        transform: rotate(12deg);
+      }
+    }
+
+    .c-dots-background.right::before {
+      right: -30px;
+      left: auto;
+      top: 4rem;
+    }
+  }
+}

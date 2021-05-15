@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([17,"package.vue","package.vuex","package.swiper","package.dom7"]);
+/******/ 	deferredModules.push([19,"package.vue","package.vuex","package.swiper","package.dom7"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -354,7 +354,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ 17:
+/***/ 19:
 /*!*******************************************!*\
   !*** multi ./src/js/pages/page-perfil.js ***!
   \*******************************************/
