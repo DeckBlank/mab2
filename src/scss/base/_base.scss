@@ -110,6 +110,13 @@ body {
       right: -80px;
     }
   }
+
+  &.bottom {
+    &::before {
+      left: 2rem;
+      top: 95%;
+    }
+  }
 }
 
 .mab-shadow {
