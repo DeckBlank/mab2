@@ -733,6 +733,14 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);        
 
+    }elseif (is_page('charlas')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/charlas',
+            'src'       => $config['resources']['page_charlas'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);        
     }
 
 
