@@ -1,0 +1,9 @@
+.c-section--lideres-single {
+  outline: none;
+}
+
+@include breakpoint(large) {
+  .c-section--lideres-single {
+    outline: none;
+  }
+}
