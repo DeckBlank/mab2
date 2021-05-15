@@ -22,22 +22,20 @@ function __getTopicOnNavigation($course_id, $unity_id, $topic_id, $direction){
             if ($direction == 'next') {
                 if( isset($topics[$i + 1]['topic']) ){
                     return sprintf(
-                        '%s?course_id=%s&course_name=%s&course_slug=%s&unity=%s&sector=%s',
+                        '%s?course_id=%s&topic_number=%s&unity=%s&sector=%s',
                         get_the_permalink($topics[$i + 1]['topic']->ID),
                         $course_id,
-                        $course->title,
-                        $course->slug,
+                        ($i + 2),
                         $unity_id,
                         $_GET['sector']
                     );                    
 
                 }else if( isset($unities[$unity_id]['topics'][0]['topic']) ){
                     return sprintf(
-                        '%s?course_id=%s&course_name=%s&course_slug=%s&unity=%s&sector=%s',
+                        '%s?course_id=%s&topic_number=%s&unity=%s&sector=%s',
                         get_the_permalink($unities[$unity_id]['topics'][0]['topic']->ID),
                         $course_id,
-                        $course->title,
-                        $course->slug,
+                        ($i + 2),
                         $unity_id + 1,
                         $_GET['sector']
                     );
@@ -48,22 +46,20 @@ function __getTopicOnNavigation($course_id, $unity_id, $topic_id, $direction){
             } else {
                 if( isset($topics[$i - 1]['topic']) ){
                     return sprintf(
-                        '%s?course_id=%s&course_name=%s&course_slug=%s&unity=%s&sector=%s',
+                        '%s?course_id=%s&topic_number=%s&unity=%s&sector=%s',
                         get_the_permalink($topics[$i - 1]['topic']->ID),
                         $course_id,
-                        $course->title,
-                        $course->slug,
+                        ($i),
                         $unity_id,
                         $_GET['sector']
                     );                    
                     
                 }else if( isset($unities[$unity_id - 2]['topics'][0]['topic']) ){
                     return sprintf(
-                        '%s?course_id=%s&course_name=%s&course_slug=%s&unity=%s&sector=%s',
+                        '%s?course_id=%s&topic_number=%s&unity=%s&sector=%s',
                         get_the_permalink($unities[$unity_id - 2]['topics'][0]['topic']->ID),
                         $course_id,
-                        $course->title,
-                        $course->slug,
+                        ($i),
                         $unity_id - 1,
                         $_GET['sector']
                     );
@@ -87,10 +83,21 @@ if($post->post_type == "video"){
     ];
 
 }else if($post->post_type == "course"){
-    $context['price'] = 100;
-    $context['discount'] = 0;
-    $context['g_discount'] = 50;
-    $context['area'] = get_field('area', $post->ID);
+    $teacher = get_field('teacher', $post->ID);
+
+    $context['description'] = get_the_excerpt($post->ID);
+    $context['likes']       = __getMetaCourse($post->ID, '-1', 'likes');
+    $context['vector']      = get_field('vector', $post->ID);
+    $context['duration']    = __getMetaCourse($post->ID, '-1', 'duration');
+
+    if ($teacher) {
+        $context['teacher']     = [
+            'fullname'  => $teacher['user_firstname'] . ' ' . $teacher['user_lastname'],
+            'job'       => get_field('job', 'user_' . $teacher['ID']),
+            'cover'     => get_field('cover', 'user_' . $teacher['ID']),
+            'link'      => sprintf('/lider/%s', $teacher['user_nicename']),
+        ];
+    }
 
 }else if($post->post_type == "topic"){
     $context['navigation'] = (object)[

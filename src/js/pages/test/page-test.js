@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Swiper from 'swiper'
+import ApexCharts from 'apexcharts'
+
 import {baseConfig, baseState, baseActions} from '../../app'
 import {store} from '../../store'
 
@@ -59,6 +61,7 @@ const test = new Vue({
     this.global();
     this.initTooltips();
     this.getTest();
+    this.initCharts();
   },
   methods: {
     ...baseActions(),
@@ -215,6 +218,33 @@ const test = new Vue({
         content: document.querySelector('#auditive-template').innerHTML,
         ...BASE_CONFIG
       });
-    }
+    },
+    initCharts: function(){
+      var options = {
+        series: [44, 55, 13],
+        legend: false,
+        chart: {
+        width: 380,
+        type: 'pie',
+      },
+      colors:['#f32e21', '#0166d0','#090'],
+      labels: ['Kinestésico','Visual','Auditivo'],
+      fill: {
+        colors: ['#f32e21', '#0166d0','#090']
+      },
+      responsive: [{
+        breakpoint: 600,
+        options: {
+          chart: {
+            width: 320
+          },
+          legend:false
+        }
+      }]
+      };
+
+      var chart = new ApexCharts(document.querySelector("#chart"), options);
+      chart.render();
+    },
   }
 })

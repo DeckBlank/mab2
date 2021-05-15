@@ -14,34 +14,46 @@ const course = new Vue({
       accessGranted: false,
 
       area: '',
-      unities: []
+      unities: [],
+
+      view: 1,
+      foro: 1,
+      commentbox: 0,
+      questions: [
+        { enable : true },
+        { enable : false },
+        { enable : false },
+        { enable : false },
+        { enable : false },
+      ]
     }
   },
   computed: {
     ...baseState()
   },
   mounted: function(){
-    this.area = this.$refs.course.getAttribute('data-area');
+    // this.area = this.$refs.course.getAttribute('data-area');
 
     this.global();
-    this.isUserAuthOnCourse( this.$refs.course.getAttribute('data-id') )
-    this.saveCourseOnMetas()
-    this.verifyIsAvaibleCourse()
-    this.getUnities( this.$refs.course.getAttribute('data-id') );
+    this.hideLoading();
+    // this.isUserAuthOnCourse( this.$refs.course.getAttribute('data-id') )
+    // this.saveCourseOnMetas()
+    // this.verifyIsAvaibleCourse()
+    this.getUnities( mab.course_id );
   },
   methods: {
     ...baseActions(),
     getUnities: function(course_id){
-      fetch(`${this.API}/course/${course_id}/unities?user=${this.logedUser.user_email}`)
+      fetch(`${ this.API }/course/${ course_id }/unities?user=${ this.logedUser.user_email }`)
         .then(res => { 
           if (res.status >= 200 && res.status < 300) {
             return res.json()
-          }else{
-            throw res
+          } else {
+            throw res;
           }
         })
         .then(unities => {
-          this.unities = unities;          
+          this.unities = unities;
           this.hideLoading();
         })
         .catch(err => {
@@ -189,6 +201,16 @@ const course = new Vue({
           window.open(url, '_blank');
           throw err;
         })
-    }
+    },
+
+    getTopicLink: function(topicLink, topicNumber, unityNumber) {
+      return `${ topicLink }?course_id=${ mab.course_id }&topic_number=${ topicNumber }&unity=${ unityNumber }`;
+    },
+
+    resetAccordion: function(unity) {
+      this.unities = this.unities.map(q => {
+        return (q != unity) ? { ...q, enable : false } : q;
+      })
+    },
   }
 })

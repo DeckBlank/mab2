@@ -3,6 +3,8 @@ import Swiper from 'swiper'
 import {baseConfig, baseState, baseActions} from '../app'
 import {store} from '../store';
 
+import '../components/lideres';
+
 const home = new Vue({
   ...baseConfig(store),
   data() {
@@ -33,6 +35,15 @@ const home = new Vue({
           title: 'pruebas psicológicas'
         },
       ],
+
+      questions: [
+        { enable : true },
+        { enable : false },
+        { enable : false },
+        { enable : false },
+        { enable : false },
+      ],
+
       lideres: [
         {
           name: 'Maca Wellness',
@@ -83,14 +94,6 @@ const home = new Vue({
           width: 240,
         },
       ],
-
-      questions: [
-        { enable : true },
-        { enable : false },
-        { enable : false },
-        { enable : false },
-        { enable : false },
-      ]
     }
   },
   computed: {
@@ -100,7 +103,6 @@ const home = new Vue({
     this.hideLoading();
     this.global();
     this.initTestimoniesSlider();
-    this.initLideresSlider();
     this.initBrandsSlider();
   },
   methods: {
@@ -113,46 +115,6 @@ const home = new Vue({
 
         pagination: {
           el: '#slider-testimonies + .swiper-pagination',
-          type: 'bullets',
-          clickable: true,
-        },
-
-        breakpoints: {
-          320: {
-            slidesPerView: 1,
-            spaceBetween: 10,
-          },
-          480: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-          1140: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-        },
-      })
-    },
-    initLideresSlider: function() {
-      new Swiper('#slider-lideres', {
-        speed: 900,
-        loop: true,
-        allowTouchMove: false,
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: false,
-        },
-
-        pagination: {
-          el: '#slider-lideres + .swiper-pagination',
           type: 'bullets',
           clickable: true,
         },

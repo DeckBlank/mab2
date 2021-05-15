@@ -120,8 +120,16 @@ body {
   box-shadow: 1px 1px 10px rgba($black, 0.5);
 }
 
+.box-shadow-none {
+  box-shadow: none !important;
+}
+
 .desktop {
   display: none;
+}
+
+.c-mobile {
+  display: block;
 }
 
 .lh-40 {
@@ -130,6 +138,10 @@ body {
 
 .lh-50 {
   line-height: 50px;
+}
+
+.lh-65 {
+  line-height: 65px;
 }
 
 .lh-25 {
@@ -162,6 +174,14 @@ body {
   border-bottom-right-radius: 20px;
 }
 
+.br-10 {
+  border-radius: 10px !important;
+}
+
+.br-45 {
+  border-radius: 45px !important;
+}
+
 .object-cover {
   object-fit: cover;
   object-position: center;
@@ -173,6 +193,24 @@ body {
 
 .text-last-left {
   text-align-last: left !important;
+}
+
+.bb-warning {
+  border-bottom: 1px solid $warning-color;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-left: 7px solid $secondary-color;
+  border-bottom: 5px solid transparent;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+.triangle--down {
+  transform: rotate(90deg);
 }
 
 .float-r {
@@ -187,8 +225,22 @@ body {
   border: 1px solid $dark !important;
 }
 
+.border-black {
+  border: 1px solid $black !important;
+}
+
+.hover-sec-color {
+  &:hover {
+    color: $secondary-alt;
+  }
+}
+
 @include breakpoint(large) {
   .desktop {
     display: block;
+  }
+
+  .c-mobile {
+    display: none;
   }
 }

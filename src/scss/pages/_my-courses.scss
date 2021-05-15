@@ -39,11 +39,17 @@
     max-width: 300px;
     margin-left: 2rem;
     margin-top: 4rem;
+    transition: all 0.5s;
 
     img {
       width: 120px;
       top: -2rem;
       left: -2rem;
+    }
+
+    &:hover {
+      color: $dark;
+      background: $warning-alt;
     }
   }
 }
@@ -71,6 +77,12 @@
       }
     }
 
+    .c-mab-slider {
+      .swiper-slide {
+        height: auto;
+      }
+    }
+
     .c-lideres {
       &__content {
         padding: 3rem 5rem 2rem;
@@ -87,11 +99,11 @@
       }
 
       &__info {
-        padding-top: 3rem;
+        // padding-top: 3rem;
       }
 
       .swiper-slide {
-        padding: 0 5rem 2rem;
+        padding: 0 5rem 3rem;
         box-sizing: border-box;
       }
     }

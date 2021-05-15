@@ -6,31 +6,43 @@
 
 {% block content %}
   <section class="c-section c-section--test bg-sec-color">
-    <h1 class="c-title white bg-alert margin-top-3 display-inline-block">Test de estilos de personalidad</h1>
-    <div class="grid-container position-relative padding-vertical-3">
+    <div v-if="false" class="grid-container">
+      <div class="grid-x align-center">
+        <div class="cell medium-10 large-8">
+          <h2 class="c-questions__title f1 text-uppercase w-bold text-center white">Test para determinar <br> el Canal de Aprendizaje de preferencia ${testType}</h2>
+        </div>
+      </div>
+    </div>
+    <div class="grid-container position-relative">
       <div class="c-result width-100" :class="{ hidden : !testDone, 'c-result--done' : testDone }">
         <div class="grid-container padding-vertical-3">
-          <div class="grid-x align-center">
-            <div class="cell medium-10 large-8 white f2">
-              <figure class="margin-bottom-1 text-center">
+          <h2 class="c-questions__title results f1 text-uppercase white margin-bottom-2">
+            <span class="w-bold f1">Resultados</span>  <br> 
+            <span class="w-ligth f2 text-uppercase">test de estilos de personalidad</span>
+          </h2>
+          <div class="c-result__container grid-x align-center bg-white br-45 padding-vertical-2">
+            <div class="cell medium-10 large-10 dark f2 position-relative">
+              <figure class="c-result__figure margin-bottom-1 text-center">
                 <img
                   v-if="questions.result.vector"
                   :src="`${THEME_URL}/static/images/vectors/test/behaviour/${questions.result.vector}.png`"
-                  alt="">
-                <img v-else src="{{theme.link}}/static/images/vectors/test/behaviour/1.png}}" alt="">
+                  alt="" class="width-100">
+                <img class="width-100" v-else src="{{theme.link}}/static/images/vectors/test/behaviour/1.png}}" alt="">
               </figure>
-              <h2 class="text-center fs-40 f2 w-bold margin-bottom-0 text-uppercase">${questions.result.title}</h2>
-              <p v-if="questions.result.subtitle" class="text-center text-uppercase fs-18 margin-bottom-2">${questions.result.subtitle}</p>
+              <h2 class="c-result__title text-center w-bold margin-bottom-0 text-uppercase">${questions.result.title}</h2>
+              <p v-if="questions.result.subtitle" class="text-center text-uppercase black fs-18 margin-bottom-2">${questions.result.subtitle}</p>
               <div v-if="questions.result.features" class="margin-bottom-2">
-                <h3 class="fs-21">Carácteristicas:</h3>
+                <h3 class="fs-35">Carácteristicas:</h3>
                 <ul>
                   <li v-for="feature of questions.result.features" :key="feature.id" v-html="feature" class="mb-05"></li>
                 </ul>
               </div>
-              <div v-if="questions.result.improvents" class="bg-pri-color padding-1">
-                <h3 class="fs-21">Aspectos a mejorar:</h3>
+            </div>
+            <div class="cell">
+              <div v-if="questions.result.improvents" class="c-result__list bg-pri-color br-45 white">
+                <h3 class="fs-25">Aspectos a mejorar:</h3>
                 <ul>
-                  <li v-for="improvent of questions.result.improvents" :key="improvent.id" v-html="improvent" class="mb-05"></li>
+                  <li v-for="improvent of questions.result.improvents" :key="improvent.id" v-html="improvent" class="mb-05 f2"></li>
                 </ul>
               </div>
             </div>
@@ -38,17 +50,17 @@
         </div>
       </div>
       <div class="c-test grid-x align-center" :class="{ hidden : testDone, 'c-test--done' : testDone }">
-        <div class="cell medium-10 large-8 padding-vertical-2">
-          <section class="c-content c-content--protected position-relative bg-white br--medium">
+        <div class="cell medium-10 large-8">
+          <section class="c-content c-content--protected position-relative bg-white br-45">
             <section class="c-questions">
-              <h2 class="c-questions__title f1 text-uppercase dark w-bold margin-bottom-2 text-center">
+              {# <h2 class="c-questions__title f1 text-uppercase dark w-bold margin-bottom-2 text-center">
                 Test de Estilos de Personalidad <br>
                 ${testType}
-              </h2>
+              </h2> #}
               <div id="slider-questions" class="c-questions__list swiper-container margin-bottom-1">
                 <div class="swiper-wrapper">
                   <div v-for="(question, qindex) of questions.list" :key="question.id" class="swiper-slide">
-                    <h3 class="fs-21 f2 dark-gray w-bold  margin-bottom-2">${qindex + 1}. ${question.title}</h3>                  
+                    <h3 class="fs-21 f2 dark w-bold">${qindex + 1}. ${question.title}</h3>                  
                     <ul class="c-question f2 w-medium ul-reset overflow-hidden">
                       <li
                         class="c-question__item dark" 
@@ -69,7 +81,7 @@
                           <div class="c-option__checkbox position-relative margin-right-1">
                             <span class="display-block rounded position-relative"></span>
                           </div>
-                          <p class="margin-bottom-0">                      
+                          <p class="margin-bottom-0 dark">                      
                             ${option.title}
                           </p>
                         </label>
@@ -78,20 +90,20 @@
                   </div>
                 </div>
               </div>
-              <div v-if="questions.list.length > 0" class="flex-container align-middle align-right">
+              <div v-if="questions.list.length > 0" class="flex-container align-center align-right">
                 <div class="flex-container align-middle" :class="{ enable: isEnableChange, hide: testDone }">
                   <button 
-                    class="flex-container f2 fs-18 w-medium align-center-middle"
+                    class="flex-container f2 fs-21 w-medium align-center-middle"
                     :class="{ 'sec-color' : currentQuestion != 1 }"
                     @click="changeQuestion('previous')" 
                     :disabled="currentQuestion == 1">
-                    <span class="c-icon margin-left-1"><i class="far fa-arrow-left"></i></span>
+                    <span class="c-icon margin-left-1"><i class="far fa-arrow-left"></i> Anterior</span>
                   </button>
-                  <p class="c-questions__progress margin-bottom-0 fs-18 f2 w-medium dark-gray text-center margin-horizontal-1">
+                  <p class="c-questions__progress margin-bottom-0 fs-21 f2 w-medium dark-gray text-center margin-horizontal-1">
                     <span>${currentQuestion}</span> de <span>${questions.count}</span>
                   </p>
                   <button 
-                    class="flex-container f2 fs-18 w-medium align-center-middle"
+                    class="flex-container f2 fs-21 w-medium align-center-middle"
                     :class="{ 'sec-color' : (isEnableChange || questions.list[currentQuestion - 1].answer != -1) }"
                     @click="changeQuestion('next')" 
                     :disabled="!isEnableChange && questions.list[currentQuestion - 1].answer == -1">
@@ -102,6 +114,10 @@
               </div>
             </section>
           </section>
+          <div class="c-bottom-btn flex-container align-center-middle margin-top-3">
+            <a href="" class="c-button c-button--white-dark margin-right-1 f2 w-xbold text-center">Volver al perfil</a>
+            <button class="c-button c-button--white-dark f2 w-xbold">Guardar</button>
+          </div>
         </div>
       </div>
     </div>

@@ -12,14 +12,16 @@ const topic = new Vue({
   ...baseConfig(store),
   data() {
     return {
+      view: 1,
+      foro: 1,
+      commentbox: 0,
+
       metas: new URLSearchParams(window.location.search),
-      course_link: '',
+      unityData: '',
       topicID: null,
 
-      //Likes
       likes: 0,
 
-      //Comments
       comments: {
         number: 0,
         list: []
@@ -27,7 +29,6 @@ const topic = new Vue({
       commentsPaged: 0,
       isLoadingComments: false,      
 
-      //Questions
       isOpenedQuestionsModal: false,
       isEnableChange: false,
       currentQuestion: 1,
@@ -37,11 +38,9 @@ const topic = new Vue({
       testResult: [],
       totalRightAnswers: 0,      
       totalWrongAnswers: 0,
-      
-      //Material
+
       isActiveMaterial: false,
 
-      //Swiper
       swiperOptions: {
         allowTouchMove: false,
         speed: 500,
@@ -51,7 +50,6 @@ const topic = new Vue({
         preventClicksPropagation: false
       },
 
-      //Teacher
       isOpenedTeacherModal: false,
       isSentFormTeacher: false,
       teacher: {
@@ -68,7 +66,9 @@ const topic = new Vue({
           pattern: '^([0-9]+)$',
           isValid: false
         },
-      }
+      },
+
+      unities: [],
     }
   },
   components: {
@@ -82,7 +82,10 @@ const topic = new Vue({
     ...baseState(),
     swiper() {
       return this.$refs.slider_questions.$swiper
-    }     
+    },
+    courseLink: function() {
+      return (this.unityData) ? `${ this.SITE_URL }/curso/${ this.unityData.course.slug }` : '#';
+    },  
   },
   watch: {
     'teacher.email.value': function(){
@@ -95,21 +98,40 @@ const topic = new Vue({
   mounted(){
     this.global();
     
-    this.topicID      = this.$refs.topic.getAttribute('data-id');
-    this.area         = this.$refs.topic.getAttribute('data-area');
-    this.course_link  = `${this.SITE_URL}/curso/${this.metas.get('course_slug')}?sector=${this.metas.get('sector')}`;
+    this.topicID  = mab.topic_id;
+    this.area     = this.$refs.topic.getAttribute('data-area');
+
+    this.getCourseUnity();
+    this.hideLoading();
     
-    this.isUserAuthOnTopic(this.metas.get('course_id'))
+    // this.isUserAuthOnTopic(this.metas.get('course_id'))
     this.getLikes();
-    this.getComments();
+    this.getUnities(  this.metas.get('course_id') );
+    // this.getComments();
     
-    if(this.logedUser){
+    if (this.logedUser) {
       this.getQuestions();
-      this.saveViewLog(this.metas.get('course_id'));
+      this.saveViewLog( this.metas.get('course_id') );
     }
   },
   methods: {
     ...baseActions(),
+    getUnities: function(course_id){
+      fetch(`${ this.API }/course/${ course_id }/unities?user=${ this.logedUser.user_email }`)
+        .then(res => { 
+          if (res.status >= 200 && res.status < 300) {
+            return res.json()
+          } else {
+            throw res;
+          }
+        })
+        .then(unities => {
+          this.unities = unities;
+        })
+        .catch(err => {
+          throw err;
+        })      
+    },
     getLikes: function(){
       fetch(`${this.API}/topic/${this.topicID}/likes`,{
           method: 'GET'
@@ -153,7 +175,8 @@ const topic = new Vue({
         .catch(err => {
           throw err;          
         })      
-    },     
+    },
+
     changeQuestion: function(direction){
       if (direction == 'next') {
         if(this.swiper.slideNext()){
@@ -397,6 +420,35 @@ const topic = new Vue({
             throw err;          
           })      
       }
-    }
+    },
+
+    getCourseUnity: function(){
+      fetch(`${ this.API }/courses/${ this.metas.get('course_id') }/unities/${ this.metas.get('unity') }?_wpnonce=${ mab.nonce }`,{
+          method: 'GET'
+        })
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            return res.json();
+          } else {
+            throw res;
+          }
+        })
+        .then(response => {
+          if (response.status)
+            this.unityData = response.data;
+        })
+        .catch(err => {
+          throw err;          
+        })      
+    },
+    getTopicLink: function(topicLink, topicNumber, unityNumber) {
+      return `${ topicLink }?course_id=${ this.metas.get('course_id') }&topic_number=${ topicNumber }&unity=${ unityNumber }`;
+    },
+
+    resetAccordion: function(question) {
+      this.questionsAlter = this.questionsAlter.map(q => {
+        return (q != question) ? { ...q, enable : false } : q;
+      })
+    },
   }
 })

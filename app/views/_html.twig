@@ -10,7 +10,7 @@
     {% endblock %}
   </head>
 
-  <body class="{% if post.post_type == 'course' or post.slug == 'carrito' or post.slug == 'compra-exitosa' %} bg-pri-alt {% endif %}">
+  <body class="{% if post.slug == 'carrito' or post.slug == 'compra-exitosa' %} bg-pri-alt {% endif %}">
     <main class="c-main position-relative overflow-hidden" id="app" data-site="{{site.url}}" data-theme="{{theme.link}}">
       <div class="c-page-loader width-100 height-100 position-fixed bg-white flex-container align-center-middle" :class="{ hidden : isLoadedPage }" style="z-index: 9000">
         <div class="c-loader c-loader--full active">

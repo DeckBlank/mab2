@@ -19,7 +19,7 @@
               <p class="white f2 fs-18"> Somos una comunidad de personas que creemos en una educación integral para todos y para todas, donde hay un balance académico, emocional y creativo. </p>
               <p class="white f2 fs-21 w-bold margin-bottom-0">Macarena Arribas</p>
               <p class="white f2 fs-16">Fundadora de MAB</p>
-              <a href="" class="c-link c-link--warning f2 w-bold fs-18">Ver más</a>
+              <a href="{{ site.url }}/nosotros" class="c-link c-link--warning f2 w-bold fs-18">Ver más</a>
             </div>
           </div>
           <div class="cell large-8">
@@ -52,7 +52,7 @@
     </div>
     <div class="c-metodology bg-pri-alt overflow-hidden">
       <div class="grid-container padding-vertical-3">
-        <h2 class="c-metodology__title margin-bottom-2">
+        <h2 class="c-metodology__title margin-bottom-3">
           <p class="white fs-30 margin-bottom-0">Por qué nuestra</p>
           <p class="warning fs-50">Metodología funciona</p>
         </h2>
@@ -207,29 +207,7 @@
         <h2 class="margin-bottom-1">
           <p class="white fs-50 c-lh--50 margin-bottom-0">LÍDERES MAB</p>
         </h2>
-        <div class="c-slider">
-          <div id="slider-lideres" class="c-slider swiper-container margin-bottom-3">
-            <div class="swiper-wrapper">
-              <div v-for="lider of lideres" :key="lider.id" class="swiper-slide white">
-                <div class="flex-container flex-dir-column align-middle text-center height-100">
-                  <div class="c-lider-avatar margin-bottom-1 margin-top-1">
-                    <div class="c-profile-card c-profile-card--warning position-relative height-100 flex-container align-center align-bottom">
-                      <figure class="c-profile-card__content position-relative" :class="'padding-horizontal-' + lider.padding">
-                        <img class="of--contain" :style="'width: ' + lider.width + 'px;'" :src="'{{ theme.link }}/static/images/home/leaders/' + lider.avatar + '.png'" alt="">
-                      </figure>
-                    </div>
-                  </div>
-                  <div>
-                    <h3 class="fs-25 f2 w-xbold white margin-bottom-0">${ lider.name }</h3>
-                    <p class="fs-18 white f2 margin-bottom-0">${ lider.job }</p>
-                    <a class="c-link c-link--warning f2 w-bold" :href="lider.profile">Leer más</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="c-slider__pagination swiper-pagination"></div>
-        </div>
+        <lideres :body="lideres" />
       </div>
     </div>
     <div class="c-brands bg-pri-alt position-relative">

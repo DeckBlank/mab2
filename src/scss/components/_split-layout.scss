@@ -60,7 +60,7 @@
       }
     }
 
-    &__round-box {
+    .c-role-card {
       border-radius: 10px;
       font-size: $fs-16;
       padding: 1.5rem 2rem;
@@ -109,7 +109,7 @@
         }
       }
 
-      &__round-box {
+      .c-role-card {
         font-size: $fs-18;
         margin-left: 2rem;
         padding: 1.5rem 4rem 1.5rem 2rem;

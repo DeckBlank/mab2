@@ -9,7 +9,7 @@ Vue.component('likes',{
         @click="addNewLike(5)"
         :disabled="isLiked"
       >
-        <span class="c-icon fs-21 margin-right-1"><i class="far fa-heart"></i></span>
+        <span class="c-icon fs-21 margin-right-1"><i class="fas fa-heart"></i></span>
         <p class="margin-bottom-0 black w-medium">{{count}}</p>
       </button>
     </div>

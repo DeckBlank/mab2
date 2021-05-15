@@ -16,6 +16,23 @@
     background: rgba($color: $white, $alpha: 0.8);
   }
 
+  &__name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  &__description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    height: 57px;
+  }
+
   &__heart {
     width: 25px;
   }
@@ -26,6 +43,16 @@
 
   &__footer {
     padding: 0.5rem;
+
+    &:hover {
+      color: $white;
+    }
+  }
+
+  &__likes {
+    svg {
+      margin-right: 0.2rem;
+    }
   }
 }
 
@@ -76,7 +103,7 @@
   }
 }
 
-.c-course-card--pri-alt {
+.c-course-card--primary {
   background: $primary-alt;
   color: $white;
 
@@ -87,5 +114,23 @@
   .c-button--course {
     background: $primary-light;
     color: $white;
+  }
+}
+
+@include breakpoint(large) {
+  .c-course-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    &__content {
+      display: flex;
+      flex-grow: 1;
+      justify-content: space-between;
+    }
+
+    &__titles {
+      height: 92px;
+    }
   }
 }

@@ -16,6 +16,16 @@
     }
   }
 
+  &--primary--real-ghost {
+    color: $primary-color;
+
+    &:hover,
+    &:focus {
+      color: $primary-alt;
+      background: $primary-ultra-light;
+    }
+  }
+
   &--secondary {
     background-color: $secondary-color;
     color: $white;
@@ -46,6 +56,16 @@
     &:focus {
       background-color: $secondary-lighter;
       color: $white;
+    }
+  }
+
+  &--secondary-warning {
+    background-color: $secondary-color;
+    color: $warning-color;
+
+    &:hover,
+    &:focus {
+      color: $warning-color;
     }
   }
 
@@ -156,7 +176,22 @@
 
   &--mab-warning-black {
     background: $warning-color;
-    color: $black;
+    color: $dark;
+
+    &:hover,
+    &:focus {
+      color: $dark;
+      background-color: $warning-alt;
+    }
+  }
+
+  &--primary-alt-white {
+    background: $primary-alt;
+    color: $white;
+
+    &:hover {
+      color: $white;
+    }
   }
 
   &--success {
@@ -164,6 +199,21 @@
     color: $white;
 
     @include b-radious(10px);
+
+    &:hover {
+      color: $white;
+    }
+  }
+
+  &--white-dark {
+    background: $white;
+    color: $dark;
+
+    @include b-radious(10px);
+
+    &:hover {
+      color: $dark;
+    }
   }
 
   // ----------
