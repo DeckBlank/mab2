@@ -69,7 +69,7 @@
   }
 
   &__item input:checked + .c-option {
-    color: $white;
+    // color: $white;
   }
 
   &__item input:checked + .c-option .c-option__checkbox span {
