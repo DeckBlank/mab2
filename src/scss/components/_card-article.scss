@@ -8,4 +8,8 @@
       object-position: top;
     }
   }
+
+  &__content {
+    min-height: 4rem;
+  }
 }
