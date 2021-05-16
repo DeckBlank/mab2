@@ -1,0 +1,18 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--lideres">
+    <div class="c-lideres bg-pri-alt padding-vertical-3">
+      <div class="grid-container padding-vertical-3">
+        <h2 class="margin-bottom-1">
+          <p class="white fs-50 c-lh--50 margin-bottom-0">LÍDERES MAB</p>
+        </h2>
+        <lideres :body="lideres" />
+      </div>
+    </div>
+  </section>
+{% endblock %}
