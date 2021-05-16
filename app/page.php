@@ -24,6 +24,8 @@ if(is_page('access')){
         header('Location:' . $context['site']->url . '/access');        
     }
 
+    $templates = 'courses/page-mis-cursos.twig';
+
 }else if(is_page('cursos')){
     $templates = 'courses/page-cursos.twig';
 
@@ -38,7 +40,7 @@ if(is_page('access')){
             "account_id" => $env['PU_ACCOUNT_ID']
         ];
     } else {
-        header('Location:' . $context['site']->url . '/emotional');
+        header('Location:' . $context['site']->url);
     }
 
 }else if(is_page('recuperar-contrasena')){

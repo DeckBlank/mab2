@@ -173,6 +173,7 @@ class CourseController{
         $grade      = $request['grade'];
         $search     = $request['search'];
         $paged      = ( !empty($request['paged']) ) ? $request['paged'] : 1;
+        $userEmail  = ( !empty($request['user_email']) ) ? $request['user_email'] : -1;
 
         $coursesFinal   = [];
         $hasPagination  = false;
@@ -199,7 +200,7 @@ class CourseController{
 
                     foreach ($coursesArray as $course) {
                         if ( stripos($course->name, $search) !== false ) {
-                            array_push( $coursesFinal, __sanitizeCourse($course->object_id, '-1', '-1', 'general') );
+                            array_push( $coursesFinal, __sanitizeCourse($course->object_id, $userEmail, '-1', 'general') );
                         }
                     }
                 } else {
@@ -219,7 +220,7 @@ class CourseController{
                     }
 
                     foreach($coursesArray as $course) {
-                        array_push($coursesFinal, __sanitizeCourse($course->object_id, '-1', '-1', 'general'));
+                        array_push($coursesFinal, __sanitizeCourse($course->object_id, $userEmail, '-1', 'general'));
                     }
                 }
             } else if ( !empty($search) ) {
@@ -244,7 +245,7 @@ class CourseController{
                 ));
 
                 foreach($courses as $course) {
-                    array_push($coursesFinal, __sanitizeCourse($course->ID, '-1', '-1', 'general'));
+                    array_push($coursesFinal, __sanitizeCourse($course->ID, $userEmail, '-1', 'general'));
                 }
 
                 $hasPagination = ( count($coursesFinal) ) ? true : false;
@@ -271,7 +272,7 @@ class CourseController{
             ));
 
             foreach($courses as $course) {
-                array_push($coursesFinal, __sanitizeCourse($course->ID, '-1', '-1', 'general'));
+                array_push($coursesFinal, __sanitizeCourse($course->ID, $userEmail, '-1', 'general'));
             }
 
             $hasPagination = ( count($coursesFinal) ) ? true : false;
