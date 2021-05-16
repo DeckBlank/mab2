@@ -61,7 +61,8 @@ class CourseController{
                 'methods' => 'GET',
                 'callback' => array($this,'index'),
                 'permission_callback' => function ($request) {
-                    return ($request['_wpnonce']) ? true : false;
+                    // return ($request['_wpnonce']) ? true : false;
+                    return true;
                 }
             ));
 
@@ -167,10 +168,11 @@ class CourseController{
      * Methods
      */
     public function index($request) {
-        $level  = $request['level'];
-        $grade  = $request['grade'];
-        $search = $request['search'];
-        $paged  = ( !empty($request['paged']) ) ? $request['paged'] : 1;
+        $category   = $request['category'];
+        $level      = $request['level'];
+        $grade      = $request['grade'];
+        $search     = $request['search'];
+        $paged      = ( !empty($request['paged']) ) ? $request['paged'] : 1;
 
         $coursesFinal   = [];
         $hasPagination  = false;
@@ -181,23 +183,65 @@ class CourseController{
                 $coursesArray   = [];
 
                 if ( !empty($search) ) {
-                    foreach ($courses as $course) {
+                    if ($category) {
+                        foreach ($courses as $course) {
+                            $__course = Timber::get_post([
+                                'post_type' => 'course',
+                                'p'         => $course->object_id
+                            ]);
+                            $categories = array_map(function($__course) { return $__course->term_id; }, $__course->terms);
+
+                            if ( in_array($category, $categories) ) array_push($coursesArray, $course);
+                        }
+                    } else {
+                        $coursesArray = $courses;
+                    }
+
+                    foreach ($coursesArray as $course) {
                         if ( stripos($course->name, $search) !== false ) {
                             array_push( $coursesFinal, __sanitizeCourse($course->object_id, '-1', '-1', 'general') );
                         }
                     }
                 } else {
-                    foreach($courses as $course) {
+
+                    if ($category) {
+                        foreach ($courses as $course) {
+                            $__course = Timber::get_post([
+                                'post_type' => 'course',
+                                'p'         => $course->object_id
+                            ]);
+                            $categories = array_map(function($__course) { return $__course->term_id; }, $__course->terms);
+
+                            if ( in_array($category, $categories) ) array_push($coursesArray, $course);
+                        }
+                    } else {
+                        $coursesArray = $courses;
+                    }
+
+                    foreach($coursesArray as $course) {
                         array_push($coursesFinal, __sanitizeCourse($course->object_id, '-1', '-1', 'general'));
                     }
                 }
             } else if ( !empty($search) ) {
-                $courses = Timber::get_posts([
-                    'post_type'         => 'course',
-                    'posts_per_page'    => 12,
-                    'paged'             => $paged,
-                    's'                 => $search
-                ]);
+                $courses = Timber::get_posts(array_merge(
+                    [
+                        'post_type'         => 'course',
+                        'posts_per_page'    => 12,
+                        'paged'             => $paged,
+                        's'                 => $search
+                    ],
+                    ($category)
+                        ? [
+                            'tax_query' => array(
+                                array(
+                                    'taxonomy'  => 'tax-mab-course',
+                                    'field'     => 'id',
+                                    'terms'     => [$category],
+                                )
+                            )
+                        ]
+                        : []
+                ));
 
                 foreach($courses as $course) {
                     array_push($coursesFinal, __sanitizeCourse($course->ID, '-1', '-1', 'general'));
@@ -206,11 +250,25 @@ class CourseController{
                 $hasPagination = ( count($coursesFinal) ) ? true : false;
             }
         } else {
-            $courses = Timber::get_posts([
-                'post_type'         => 'course',
-                'posts_per_page'    => 12,
-                'paged'             => $paged
-            ]);
+            $courses = Timber::get_posts(array_merge(
+                [
+                    'post_type'         => 'course',
+                    'posts_per_page'    => 12,
+                    'paged'             => $paged
+                ]
+                ,
+                ($category)
+                    ? [
+                        'tax_query' => array(
+                            array(
+                                'taxonomy'  => 'tax-mab-course',
+                                'field'     => 'id',
+                                'terms'     => [$category],
+                            )
+                        )
+                    ]
+                    : []
+            ));
 
             foreach($courses as $course) {
                 array_push($coursesFinal, __sanitizeCourse($course->ID, '-1', '-1', 'general'));
@@ -268,7 +326,7 @@ class CourseController{
         if ( count($categories) ) {
             $categories = array_map( function($category) use ($parentCategories) {
                 return array_merge(
-                    [ 'name' => $category->name, 'id' => $category->term_id ],
+                    [ 'name' => $category->name, 'id' => $category->term_id, 'subcategories' => $this::__getSubcategories($category->term_id) ],
                     ( !$parentCategories ) ? [ 'thumbnail' => get_field('image', 'category_' . $category->term_id) ] : [],
                     ( !$parentCategories ) ? [ 'color'     => get_field('color', 'category_' . $category->term_id) ] : []
                 );
@@ -584,5 +642,20 @@ class CourseController{
 
             return $courses;
         }
+    }
+
+    private function __getSubcategories($categoryId) {
+        $subcategories = Timber::get_terms([
+            'parent'    => $categoryId,
+            'taxonomy'  => 'tax-mab-course'
+        ]);
+
+        $subcategories = array_map( function($subcategory) {
+            return array_merge(
+                [ 'name' => $subcategory->name, 'id' => $subcategory->term_id ]
+            );
+        }, $subcategories);
+
+        return $subcategories;
     }
 }
