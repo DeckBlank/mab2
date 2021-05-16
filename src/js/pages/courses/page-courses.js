@@ -10,42 +10,44 @@ const courses = new Vue({
   ...baseConfig(store),
   data() {
     return {
+      metas: new URLSearchParams(window.location.search),
+
       levels: [
         {
           name: 'Bebés',
-          slug: 'bebes',
+          slug: 'Bebés',
           grades: [
             {
               name: '0 - 12 Meses',
-              slug: '0_12_months',
+              slug: '0 - 12 meses',
             },
             {
               name: '1 - 2 Años',
-              slug: '1_2_years',
+              slug: '1 - 2 años',
             },
           ],
         },
         {
           name: 'Inicial',
-          slug: 'inicial',
+          slug: 'Inicial',
           grades: [
             {
               name: '3 Años',
-              slug: '3_years',
+              slug: '3 años',
             },
             {
               name: '4 Años',
-              slug: '4_years',
+              slug: '4 años',
             },
             {
               name: '5 Años',
-              slug: '5_years',
+              slug: '5 años',
             },
           ],
         },
         {
           name: 'Primaria',
-          slug: 'primaria',
+          slug: 'Primaria',
           grades: [
             {
               name: '1ero',
@@ -101,27 +103,27 @@ const courses = new Vue({
         },
         {
           name: 'Adultos',
-          slug: 'adultos',
+          slug: 'Adultos',
           grades: [
             {
               name: 'Arte y creatividad',
-              slug: 'arte_y_creatividad',
+              slug: 'Arte y Creatividad',
             },
             {
               name: 'Movimiento',
-              slug: 'movimiento',
+              slug: 'Movimiento',
             },
             {
               name: 'Cocina',
-              slug: 'cocina',
+              slug: 'Cocina',
             },
             {
               name: 'Política',
-              slug: 'politica',
+              slug: 'Política',
             },
             {
               name: 'Emociones y más',
-              slug: 'emociones_y_mas',
+              slug: 'Emociones y más',
             },
           ],
         },
@@ -131,6 +133,7 @@ const courses = new Vue({
         level: -1,
         grade: -1,
         search: '',
+        category: '',
       },
 
       recommendCourses: [],
@@ -141,6 +144,8 @@ const courses = new Vue({
       isLoadingCategories: true,
       isLoadingRecommended: true,
       isLoadingCourses: false,
+
+      categories: [],
     }
   },
   computed: {
@@ -158,6 +163,8 @@ const courses = new Vue({
       if (this.filter.level && this.filter.level != -1) query += `&level=${ this.filter.level }`;
       if (this.filter.grade && this.filter.grade != -1) query += `&grade=${ this.filter.grade }`;
       if (this.filter.search) query += `&search=${ this.filter.search }`;
+      if (this.filter.category) query += `&category=${ this.filter.category }`;
+      if (this.logedUser) query += `&user_email=${ this.logedUser.user_email }`;
 
       return query;
     },
@@ -172,38 +179,15 @@ const courses = new Vue({
     this.hideLoading();
 
     this.getRecommendedCoures();
-    this.getCourses();
+    this.getCategories();
 
-    setTimeout(function() {
-      let category = new Swiper('.c-category-list .swiper-container', {
-        slidesPerView: 3,
-        spaceBetween: 0,
-        navigation: {
-          nextEl: '.c-category-list .swiper-button-next',
-          prevEl: '.c-category-list .swiper-button-prev',
-        },
-        breakpoints: {
-          // when window width is >= 320px
-          200: {
-            slidesPerView: 2,
-            spaceBetween: 10
-          },
-          640: {
-            slidesPerView: 3,
-            spaceBetween: 0,
-          },
-          768: {
-            slidesPerView: 4,
-            spaceBetween: 0
-          },
-          1024: {
-            slidesPerView: 5,
-            spaceBetween: 0
-          }
-        }
-      });
+    if ( this.metas.get('subcategory') ) {
+      this.filter.category = this.metas.get('subcategory');
 
-    },1000)
+      this.getCourses('category');
+    } else {
+      this.getCourses();
+    }
   },
   methods: {
     ...baseActions(),
@@ -242,6 +226,42 @@ const courses = new Vue({
         });
       }, 1000);
     },
+    initSliderCategories: function() {
+      setTimeout(() => {
+        new Swiper('.c-category-list .swiper-container', {
+          slidesPerView: 3,
+          spaceBetween: 0,
+          navigation: {
+            nextEl: '.c-category-list .swiper-button-next',
+            prevEl: '.c-category-list .swiper-button-prev',
+          },
+          breakpoints: {
+            200: {
+              slidesPerView: 2,
+              spaceBetween: 10
+            },
+            640: {
+              slidesPerView: 3,
+              spaceBetween: 0,
+            },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 0
+            },
+            1024: {
+              slidesPerView: 5,
+              spaceBetween: 0
+            }
+          },
+          on: {
+            init: () => {
+              this.isLoadingCategories = false;
+            },
+          },
+        });
+      }, 1000);
+    },
+
     getRecommendedCoures: function() {
       fetch(`${ this.API }/users/${ this.logedUser.user_id }/courses/recommended?user_email=${ this.logedUser.user_email }&_wpnonce=${ mab.nonce }`)
       .then(res => { 
@@ -252,26 +272,33 @@ const courses = new Vue({
         }
       })
       .then(response => {
-        if (response.status)
+        if (response.status) {
           this.recommendCourses = response.data;
-
           this.initSliderRecommendedCourses();
+        } else {
+          window.setTimeout(() => {
+            this.isLoadingRecommended = false;
+          }, 1000);
+        }
       })
       .catch(err => {
+        window.setTimeout(() => {
+          this.isLoadingRecommended = false;
+        }, 1000);
+
         throw err;
       })
     },
     getCourses: function(from = false) {
       this.isLoadingCourses = true;
 
-      if (from == 'search') {
-        this.page     = 1;
-        this.courses  = [];
-
-      } else if (from == 'level' || from == 'grade') {
+      if (from == 'level' || from == 'grade') {
         this.hasPagination  = false;
         this.page           = 1;
         this.courses        = [];
+      } else if (from == 'search' || from == 'category') {
+        this.page     = 1;
+        this.courses  = [];
       }
 
       fetch(`${ this.API }/courses/all?_wpnonce=${ mab.nonce }${ this.coursesQuery }${ (this.hasPagination) ? '&paged=' + this.page : '' }`)
@@ -308,6 +335,32 @@ const courses = new Vue({
         }, 1000);
 
         throw err;
+      })
+    },
+    getCategories: function() {
+      this.isLoadingCategories = true;
+
+      fetch(`${ this.API }/courses/mab_categories?_wpnonce=${ mab.nonce }`)
+      .then(res => {
+        if (res.status >= 200 && res.status < 300) {
+          return res.json();
+        }else{
+          throw res
+        }
+      })
+      .then(response => {
+        if (response.status) {
+          this.categories = response.data;
+
+          this.initSliderCategories();
+        } else {
+          window.setTimeout(() => {
+            this.isLoadingCategories = false;
+          }, 1000)
+        }
+      })
+      .catch(err => {
+        this.isLoadingCategories = false; throw err;
       })
     },
 
