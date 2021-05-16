@@ -1,0 +1,50 @@
+.c-section--blog {
+  outline: none;
+
+  .c-blog {
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+    overflow: hidden;
+
+    &__float-figure {
+      display: none;
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-section--blog {
+    outline: none;
+
+    .c-blog {
+      padding-bottom: 10rem;
+
+      &__float-figure {
+        display: block;
+        width: 270px;
+        height: 270px;
+
+        &.f1 {
+          top: -175px;
+          right: -5rem;
+        }
+
+        &.f2 {
+          top: 375px;
+          left: -8rem;
+          transform: rotate(-8deg);
+        }
+
+        &.f3 {
+          top: 920px;
+          right: -8rem;
+        }
+
+        &.f4 {
+          top: 1420px;
+          left: -8rem;
+        }
+      }
+    }
+  }
+}

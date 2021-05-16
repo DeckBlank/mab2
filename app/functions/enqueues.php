@@ -781,6 +781,15 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]); 
+    }
+    elseif (is_page('mab-blog')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/mab-blog',
+            'src'       => $config['resources']['page_mab-blog'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]); 
 
     }
 

@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([20,"package.vue","package.vuex","package.apexcharts"]);
+/******/ 	deferredModules.push([21,"package.vue","package.vuex","package.apexcharts"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -342,7 +342,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ 20:
+/***/ 21:
 /*!*********************************************!*\
   !*** multi ./src/js/pages/page-progress.js ***!
   \*********************************************/
