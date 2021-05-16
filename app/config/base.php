@@ -88,6 +88,7 @@ return [
         'page_lideres'               => get_theme_file_uri('/static/js/page-lideres.bundle.js'),
         'page_lideres-single'               => get_theme_file_uri('/static/js/page-lideres-single.bundle.js'),
         'page_charlas'               => get_theme_file_uri('/static/js/page-charlas.bundle.js'),
+        'page_mab-blog'               => get_theme_file_uri('/static/js/page-mab-blog.bundle.js'),
 
         //WP
         'wp_session'        => get_theme_file_uri('/static/js/wp-session.bundle.js'),

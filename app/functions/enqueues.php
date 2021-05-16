@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1621146040886';
+$assets_version = '1621188553904';
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -777,6 +777,15 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         register_assets('script', [
             'handle'    => 'pandawp/js/page/lideres-single',
             'src'       => $config['resources']['page_lideres-single'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]); 
+    }
+    elseif (is_page('mab-blog')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/mab-blog',
+            'src'       => $config['resources']['page_mab-blog'],
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
