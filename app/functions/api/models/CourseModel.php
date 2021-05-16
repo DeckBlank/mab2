@@ -208,49 +208,47 @@ class CourseModel{
     
     public static function registrationCheckout($request){
         $courses = get_field('courses', 'options');
-        $first_unity =  get_field('unities', $request['course_id'])[0];
+        // $first_unity =  get_field('unities', $request['course_id'])[0];
 
-        if( $first_unity['topics'][0]['topic']->ID == $request['topic'] ){
+        if ((get_field('price', $request['course_id']) == 0 and get_field('price_settings', $request['course_id']) == 'individual')) {
             return true;
-        }else{
-            if ((get_field('price', $request['course_id']) == 0 and get_field('price_settings', $request['course_id']) == 'individual')) {
-                return true;
-            } else {
-                if (!empty($courses)){
-                    foreach($courses as $course){
-                        if($course['course']['course']->ID == $request['course_id']){
-                            foreach($course['course']['registrations'] as $registration){
-                                if(
-                                    ($registration['registration']['user']['user_email'] == $request['user'] and
-                                    $registration['registration']['date_finish'] >= date("Y-m-d") and
-                                    $registration['registration']['state'] == true)){
-                    
-                                    return true;
-                                }
+        } else {
+            if (!empty($courses)){
+                foreach($courses as $course){
+                    if($course['course']['course']->ID == $request['course_id']){
+                        foreach($course['course']['registrations'] as $registration){
+                            if(
+                                ($registration['registration']['user']['user_email'] == $request['user'] and
+                                $registration['registration']['state'] == true)){
+                
+                                return true;
                             }
                         }
                     }
                 }
-    
-                $courses_enrollment = DBConnection::getConnection()->query("
-                    SELECT
-                        *
-                    FROM
-                        wp_user_course_enrollment
-                    WHERE
-                        state = 1 AND
-                        user_email = '". $request['user'] ."' AND
-                        course_id = '". $request['course_id'] ."' AND
-                        date_end >= '". date('Y-m-d G:i:s') ."'
-                ");
-    
-                if($courses_enrollment->num_rows > 0){
-                    return true;
-                }            
+            }
+
+            $courses_enrollment = DBConnection::getConnection()->query("
+                SELECT
+                    *
+                FROM
+                    wp_user_course_enrollment
+                WHERE
+                    state = 1 AND
+                    user_email = '". $request['user'] ."' AND
+                    course_id = '". $request['course_id'] ."'
+            ");
+
+            if($courses_enrollment->num_rows > 0){
+                return true;
             }            
         }
 
-        return false;
+        // if( $first_unity['topics'][0]['topic']->ID == $request['topic'] ){
+        //     return true;
+        // }else{
+        //      return false;
+        // }
     }
 
     public static function getExpiredRegistrations($request){

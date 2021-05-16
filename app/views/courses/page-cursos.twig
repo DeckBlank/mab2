@@ -75,7 +75,8 @@
                           <span class="c-course-card__likes f2"><i class="fas fa-heart mr-05"></i>${ course.likes }</span>
                         </div>
                         <div class="small-7 medium-7 text-right">
-                          <button v-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                          <span v-if="course.enroll">Inscrito</span>
+                          <button v-else-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
                             S/ ${ Number(course.price).toFixed(2) } 
                             <i class="fas fa-shopping-cart"></i>
                           </button>
@@ -233,7 +234,8 @@
                       <span class="c-course-card__likes f2"><i class="fas fa-heart mr-05"></i>${ course.likes }</span>
                     </div>
                     <div class="small-7 medium-7 text-right">
-                      <button v-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                      <span v-if="course.enroll">Inscrito</span>
+                      <button v-else-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
                         S/ ${ Number(course.price).toFixed(2) } 
                         <i class="fas fa-shopping-cart"></i>
                       </button>

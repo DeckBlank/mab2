@@ -95,7 +95,7 @@ if($post->post_type == "video"){
             'fullname'  => $teacher['user_firstname'] . ' ' . $teacher['user_lastname'],
             'job'       => get_field('job', 'user_' . $teacher['ID']),
             'cover'     => get_field('cover', 'user_' . $teacher['ID']),
-            'link'      => sprintf('/lider/%s', $teacher['user_nicename']),
+            'link'      => (get_field('is_lider', 'user_' . $teacher['ID'])) ? sprintf('/lider/%s', $teacher['user_nicename']) : '',
         ];
     }
 

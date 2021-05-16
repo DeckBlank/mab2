@@ -164,6 +164,7 @@ const courses = new Vue({
       if (this.filter.grade && this.filter.grade != -1) query += `&grade=${ this.filter.grade }`;
       if (this.filter.search) query += `&search=${ this.filter.search }`;
       if (this.filter.category) query += `&category=${ this.filter.category }`;
+      if (this.logedUser) query += `&user_email=${ this.logedUser.user_email }`;
 
       return query;
     },

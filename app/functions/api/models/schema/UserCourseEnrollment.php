@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserCourseenrollment extends Model {
+class UserCourseEnrollment extends Model {
     protected $table    = 'wp_user_course_enrollment';
     protected $fillable = [
         'user_email',
