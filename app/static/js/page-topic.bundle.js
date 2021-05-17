@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([28,"package.vue","package.vuex","package.swiper","package.dom7","package.vue-awesome-swiper"]);
+/******/ 	deferredModules.push([29,"package.vue","package.vuex","package.swiper","package.dom7","package.vue-awesome-swiper"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -480,7 +480,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ 28:
+/***/ 29:
 /*!******************************************!*\
   !*** multi ./src/js/pages/page-topic.js ***!
   \******************************************/
