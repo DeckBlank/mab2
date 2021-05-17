@@ -798,6 +798,14 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]); 
+    }elseif (is_page('nosotros')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/nosotros',
+            'src'       => $config['resources']['page_nosotros'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]); 
     }
 
 
