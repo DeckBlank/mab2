@@ -178,7 +178,8 @@ const courses = new Vue({
     this.global();
     this.hideLoading();
 
-    this.getRecommendedCoures();
+    if (this.logedUser) this.getRecommendedCoures();
+
     this.getCategories();
 
     if ( this.metas.get('subcategory') ) {

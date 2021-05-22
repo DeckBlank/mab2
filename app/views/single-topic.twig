@@ -137,45 +137,14 @@
               </div>
             {% endif %}
 
-            <!-- version antigua -->
-            <!-- <button
-              v-if="logedUser.user_role == 'teacher'"
+            <button
+              v-if="logedUser.user_rol == 'teacher'"
               class="c-button c-button--secondary display-block width-100 margin-bottom-3 f2 w-medium fs-18 text-center"
               :class="(logedUser.user_sector == 'privado') ? 'margin-bottom-2' : 'margin-bottom-3'"
               @click="isOpenedTeacherModal = true">
               Ser parte de una red nacional de docentes
             </button>
-            <a v-if="logedUser.user_sector == 'privado'" href="https://api.whatsapp.com/send?phone=51{{information.phone|replace({' ': ''})}}" target="_blank" class="c-button c-button--secondary display-block margin-bottom-3 f2 w-medium fs-18 text-center">
-              Para un aprendizaje más personalizado, coordina tu sesión virtual
-            </a>
-            <div class="c-comments f2 margin-bottom-2">
-              <div class="c-counter flex-container align-middle margin-bottom-2">
-                <span class="c-counter__icon"><i class="far fa-comment-lines fs-21"></i></span>
-                <p v-if="comments.number > 1 || comments.number == 0" class="margin-bottom-0 gray-gray">${comments.number} comentarios</p>
-                <p v-else class="margin-bottom-0 gray-gray">${comments.number} comentario</p>
-              </div>
-              <div class="flex-container margin-bottom-2">
-                <div class="margin-right-1">
-                  <figure class="c-avatar overflow-hidden rounded">
-                    <img src="{{theme.link}}/static/images/user.png" alt="">
-                  </figure>
-                </div>
-                <div class="width-100">
-                  <editor :target="{ id: {{post.id}}, type: 'post'}" :post="{ type: 'topic' }" :thread.sync="comments"></editor>
-                </div>
-              </div>
-              <div class="c-loading text-center gray-gray padding-vertical-1" :class="{ hide : !isLoadingComments }">
-                Cargando comentarios...
-              </div>
-              <div class="c-thread">
-                <comment v-for="comment of comments.list" :body="comment" :post="{ type: 'topic', id: {{post.id}} }" :key="comment.id" pic="{{theme.link}}/static/images/user.png"></comment>           
-                <button v-if="commentsPaged != -1 && comments.list.length != 0 && comments.list.length/commentsPaged >= 5 " class="sec-alt flex-container align-middle" @click="getComments">
-                  <span class="c-icon margin-right-1"><i class="far fa-ellipsis-h"></i></span> 
-                  <p class="margin-bottom-0">Mostrar más comentarios</p>
-                </button>           
-              </div>
-            </div> -->
-          
+
             <div class="c-tab margin-top-2">
               <div class="c-tab-head text-center">
                 <div class="grid-x">
@@ -197,7 +166,7 @@
                           <div class="grid-x align-self-strecht text-center">
                             {% if summary %}
                               <div class="small-3 medium-3 large-3">
-                                <a href="{{ summary }}" download class="c-tab-recursos__item f2 w-bold">
+                                <a href="{{ summary }}" @click="downloadMaterial('{{summary}}', 'summary')" class="c-tab-recursos__item f2 w-bold">
                                   <div></div>
                                   <figure class="margin-bottom-1">
                                     <img src="{{ theme.link }}/static/images/curso/resources/doc1.png" alt="" class=" width-100 of--contain"> 
@@ -209,7 +178,7 @@
 
                             {% if worksheet %}
                               <div class="small-3 medium-3 large-3">
-                                <a href="{{ worksheet }}" download class="c-tab-recursos__item f2 w-bold">
+                                <a href="{{ worksheet }}" @click="downloadMaterial('{{worksheet}}', 'worksheet')" class="c-tab-recursos__item f2 w-bold">
                                   <figure class="margin-bottom-1">
                                     <img src="{{ theme.link }}/static/images/curso/resources/doc2.png" alt="" class=" width-100  of--contain"> 
                                   </figure>
@@ -220,7 +189,7 @@
 
                             {% if solutions %}
                               <div class="small-3 medium-3 large-3">
-                                <a href="{{ solutions }}" download class="c-tab-recursos__item f2 w-bold">
+                                <a href="{{ solutions }}" @click="downloadMaterial('{{solutions}}', 'solutions')" class="c-tab-recursos__item f2 w-bold">
                                   <figure class="margin-bottom-1">
                                     <img src="{{ theme.link }}/static/images/curso/resources/doc3.png" alt="" class=" width-100 of--contain"> 
                                   </figure>
@@ -231,7 +200,7 @@
 
                             {% if map %}
                               <div class="small-3 medium-3 large-3">
-                                <a href="{{ map }}" download class="c-tab-recursos__item f2 w-bold">
+                                <a href="{{ map }}" @click="downloadMaterial('{{map}}', 'map')" class="c-tab-recursos__item f2 w-bold">
                                   <figure class="margin-bottom-1">
                                     <img src="{{ theme.link }}/static/images/curso/resources/doc4.png" alt="" class=" width-100 of--contain"> 
                                   </figure>
@@ -275,167 +244,12 @@
                       <div class="c-foro-body">
                         <div class="c-foro-scroll height-100">
                           <div class="position-relative">
-                            <div class="c-comment-container">
-                              <div class="c-comment c-comment--small br-top--large br-bottom--large margin-bottom-1">
-                                <div class="grid-x">
-                                  <div class="small-2 medium-2 large-2">
-                                    <figure class="c-comment__figure">
-                                      <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="width-100 height-100 of--cover"> 
-                                    </figure>
-                                  </div>
-                                  <div class="small-10 medium-8 large-8">
-                                    <div class="c-comment-content">
-                                      <div class="c-comment__autor f2 w-xbold dark fs-21">
-                                        Maca Wellness <span class="padding-left-1 fs-16"><i class="far fa-thumbtack"></i></span>
-                                      </div>
-                                      <div class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
-                                        Speaker
-                                      </div>
-                                      <p class="c-comment__text f2 dark fs-16 lh-18">
-                                        ¡Hola chic@s! Aquí les dejo un libro que puede ayudarles a profundizar en este tema. https://www.librodenutrición.com
-                                      </p>
-                                    </div>
-                                  </div>
-                                  <div class="cell medium-2 large-2">
-                                    <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-14">
-                                      <button><span>Responder</span></button>
-                                      <button><span class="padding-left-1 flex-container align-middle"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span></button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div v-if="true" class="c-answer-editor">
-                                <div class="grid-x align-right">
-                                  <div class="small-11 medium-11 large-11">
-                                    <div class="c-comment-inline flex-container align-center-middle  margin-bottom-2 f2">
-                                      <div class="c-comment-inline__reactions flex-container align-center-middle">
-                                        <button class="fs-25">
-                                          <i class="far fa-smile"></i>
-                                        </button>
-                                        <button class="fs-25">
-                                          <i class="far fa-paperclip"></i>
-                                        </button>
-                                      </div>
-                                      <input class="input-reset margin-0" type="text" placeholder="Escribe un comentario">
-                                      <button class="fs-25">
-                                        <i class="far fa-paper-plane"></i>
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div v-if="false" class="c-answers-container">
-                              </div>
-                            </div>
-                            
-                            <div class="c-comment-container">
-                              <div class="c-comment c-comment--small br-top--large br-bottom--large margin-bottom-1">
-                                <div class="grid-x">
-                                  <div class="small-2 medium-2 large-2">
-                                    <figure class="c-comment__figure">
-                                      <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="width-100 height-100 of--cover"> 
-                                    </figure>
-                                  </div>
-                                  <div class="small-10 medium-8 large-8">
-                                    <div class="c-comment-content">
-                                      <div class="c-comment__autor f2 w-xbold dark fs-21">
-                                        Angela Hinostroza
-                                      </div>
-                                      <div class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
-                                        Estudiante
-                                      </div>
-                                      <div class="c-comment__theme f2 w-xbold dark fs-16">
-                                        Carbohidratos en la noche
-                                      </div>
-                                      <p class="c-comment__text f2 dark fs-16 lh-18">
-                                        ¡Gracias Maca! Súper interesante. ¿Es cierto que comer carbohidratos en la noche es malo para nuestra salud?
-                                      </p>
-                                    </div>
-                                  </div>
-                                  <div class="cell medium-2 large-2">
-                                    <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-14">
-                                      <button><span>Responder</span></button>
-                                      <button><span class="padding-left-1 flex-container align-middle"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span></button> 
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div v-if="false" class="c-answer-editor">
-                                <div class="grid-x align-right">
-                                  <div class="small-11 medium-11 large-11">
-                                    <div class="c-comment-inline flex-container align-center-middle  margin-bottom-2 f2">
-                                      <div class="c-comment-inline__reactions flex-container align-center-middle">
-                                        <button class="fs-25">
-                                          <i class="far fa-smile"></i>
-                                        </button>
-                                        <button class="fs-25">
-                                          <i class="far fa-paperclip"></i>
-                                        </button>
-                                      </div>
-                                      <input class="input-reset margin-0" type="text" placeholder="Escribe un comentario">
-                                      <button class="fs-25">
-                                        <i class="far fa-paper-plane"></i>
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div v-if="true" class="c-answers-container">
-                                <div class="grid-x align-right">
-                                  <div class="small-11 medium-11 large-11">
-                                    <div class="c-comment c-comment--small br-top--large br-bottom--large margin-bottom-1">
-                                      <div class="grid-x">
-                                        <div class="small-2 medium-2 large-2">
-                                          <figure class="c-comment__figure">
-                                            <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="width-100 height-100 of--cover"> 
-                                          </figure>
-                                        </div>
-                                        <div class="small-10 medium-8 large-8">
-                                          <div class="c-comment-content">
-                                            <div class="c-comment__autor f2 w-xbold dark fs-21">
-                                              Maca Wellness
-                                            </div>
-                                            <div class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
-                                              Speaker
-                                            </div>
-                                            <div class="c-comment__theme f2 w-xbold dark fs-16">
-                                              Re: Carbohidratos en la noche
-                                            </div>
-                                            <p class="c-comment__text f2 dark fs-16 lh-18">
-                                              Hola, Angela. Gracias por preguntar. Es un mito, en este post lo explico a profundidad https://instagram/macawellness 
-                                            </p>
-                                          </div>
-                                        </div>
-                                        <div class="cell medium-2 large-2">
-                                          <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-14">
-                                            <button><span>Responder</span></button>
-                                            <button><span class="padding-left-1 flex-container align-middle"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span></button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
+                            <comment v-for="comment of comments.list" :body="comment" :post="{ type: 'topic', id: {{post.id}} }" :key="comment.id"></comment>
                           </div>
                         </div>
                       </div>
                       <div class="c-foro-footer fs-21  padding-1 f2 dark br-bottom--large box-shadow-none">
-                        <div class="c-comment-inline flex-container align-center-middle">
-                          <div class="c-comment-inline__reactions flex-container align-center-middle">
-                            <button class="fs-25">
-                              <i class="far fa-smile"></i>
-                            </button>
-                            <button class="fs-25">
-                              <i class="far fa-paperclip"></i>
-                            </button>
-                          </div>
-                          <input class="input-reset margin-0 f2" type="text" placeholder="Escribe un comentario">
-                          <button class="fs-25">
-                            <i class="far fa-paper-plane"></i>
-                          </button>
-                        </div>
+                        <editor :target="{ id: {{post.id}}, type: 'post'}" :post="{ type: 'topic' }" :thread.sync="comments"></editor>
                       </div>
                     </div>
                   </div>

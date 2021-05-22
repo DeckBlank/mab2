@@ -173,7 +173,7 @@ class CourseController{
         $grade      = $request['grade'];
         $search     = $request['search'];
         $paged      = ( !empty($request['paged']) ) ? $request['paged'] : 1;
-        $userEmail  = ( !empty($request['user_email']) ) ? $request['user_email'] : -1;
+        $userEmail  = ( !empty($request['user_email']) ) ? $request['user_email'] : 0;
 
         $coursesFinal   = [];
         $hasPagination  = false;
