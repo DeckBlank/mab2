@@ -1,0 +1,212 @@
+.c-section--nosotros {
+  outline: none;
+
+  .c-ceo {
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+
+    .c-ceo-bio {
+      padding: 3rem 2rem;
+      margin-bottom: 5rem;
+
+      &__title {
+        p {
+          line-height: 35px;
+        }
+      }
+
+      &__text {
+        p {
+          font-family: $font-family-secondary;
+        }
+      }
+
+      .c-corner-heart {
+        width: 126px;
+        top: 81%;
+        right: -2rem;
+        transform: rotate(15deg);
+      }
+    }
+
+    .c-us-comment {
+      margin-bottom: 5rem;
+
+      &__content {
+        padding: 6rem 2rem 3rem;
+
+        @include triangle(left, bottom, 6rem, -80px, 50px, 20px, 50px);
+
+        &::after {
+          transform: rotate(-90deg);
+          bottom: -70px;
+        }
+      }
+
+      &__figure {
+        top: -3rem;
+        width: 8rem;
+        left: 2rem;
+      }
+
+      .c-card-article {
+        margin-top: 5rem;
+      }
+    }
+
+    .c-us-comment--simple {
+      ::after {
+        display: none;
+      }
+
+      .c-us-comment__content {
+        font-size: 35px;
+        padding: 0 5rem 1rem 1rem;
+      }
+
+      .to-right {
+        padding-right: 1rem;
+
+        p {
+          padding-right: 0;
+        }
+      }
+
+      .c-us-comment__autor {
+        font-size: $fs-21;
+      }
+
+      .c-card-article {
+        margin-top: 2rem;
+      }
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-section--nosotros {
+    outline: none;
+
+    .c-ceo {
+      padding-top: 5rem;
+
+      .c-ceo-bio {
+        padding: 4rem 5rem 3rem;
+        margin-bottom: 8rem;
+
+        &__title {
+          padding-right: 10rem;
+        }
+
+        .c-card-article {
+          margin-left: 7rem;
+          margin-right: -4rem;
+          margin-top: -5rem;
+          transform: rotate(-9deg);
+
+          &__figure {
+            height: 330px;
+          }
+        }
+
+        .c-card-article.to-bottom {
+          margin-top: 0;
+          margin-bottom: -4rem;
+        }
+
+        .c-corner-heart {
+          width: 275px;
+          top: 61%;
+
+          &.to-left {
+            left: -2rem;
+          }
+        }
+
+        &__text {
+          font-size: $fs-18;
+        }
+      }
+
+      .c-ceo-bio--resume {
+        .c-card-article {
+          margin-left: -6rem !important;
+          margin-right: 6rem !important;
+          margin-top: -8rem;
+          width: calc(370px + 2rem);
+        }
+
+        .c-card-article--float {
+          transform: rotate(9deg);
+          top: 45%;
+          right: -2rem;
+        }
+
+        .c-ceo-bio__title,
+        .c-ceo-bio__text {
+          text-align: right;
+          padding: 0 0 0 1rem;
+        }
+      }
+
+      .c-us-comment {
+        margin-bottom: 10rem;
+
+        .c-card-article {
+          margin-top: 0;
+          transform: rotate(-9deg);
+          width: calc(400px + 2rem);
+          float: right;
+
+          &__figure {
+            height: 440px;
+          }
+        }
+
+        &__figure {
+          top: -6rem;
+          width: 11rem;
+          left: -3rem;
+        }
+
+        &__content {
+          padding: 4rem 4rem 3rem;
+          font-size: $fs-18;
+        }
+      }
+
+      .c-us-comment--simple {
+        margin-bottom: 5rem;
+
+        .c-us-comment__content {
+          font-size: 45px;
+
+          p {
+            line-height: 55px;
+            padding-right: 4rem;
+          }
+        }
+
+        .to-right {
+          p {
+            padding-right: 0;
+          }
+        }
+
+        .c-card-article {
+          transform: rotate(9deg);
+        }
+
+        .c-card-article.to-left {
+          transform: rotate(-9deg);
+        }
+      }
+
+      .c-us-comment--reverse {
+        .grid-x {
+          flex-direction: row-reverse;
+        }
+      }
+    }
+  }
+}

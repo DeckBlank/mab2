@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1621646088780';
+$assets_version = '1621647930179';
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -781,7 +781,31 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]); 
-
+    }
+    elseif (is_page('mab-blog')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/mab-blog',
+            'src'       => $config['resources']['page_mab-blog'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]); 
+    }elseif (is_page('articulo')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/articulo',
+            'src'       => $config['resources']['page_articulo'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]); 
+    }elseif (is_page('nosotros')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/nosotros',
+            'src'       => $config['resources']['page_nosotros'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]); 
     }
 
 
