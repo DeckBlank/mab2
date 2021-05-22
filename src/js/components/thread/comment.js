@@ -6,65 +6,58 @@ import './answer';
 
 Vue.component('comment',{
   template: /*html*/`
-    <div class="c-comment fs-18 margin-bottom-2">
-      <div class="flex-container align-middle margin-bottom-1">
-        <div class="margin-right-1">
-          <figure class="c-avatar overflow-hidden rounded">
-            <img class="width-100 height-100 of--cover" :src="pic" alt="">
-          </figure>                  
-        </div>
-        <div class="flex-container align-middle">
-          <p class="margin-bottom-0 fs-18 margin-right-1">{{body.author}}</p>
-          <span class="c-comment__date gray-gray fs-16">{{(new Date(body.date)).toLocaleDateString('es', { weekday: 'long', month: 'long', day: 'numeric' })}}</span>
-        </div>
-      </div>
-      <div class="c-comment__body">
-        <div class="c-comment__content margin-bottom-1">
-          {{body.content}}
-        </div>
-        <div class="flex-container align-middle margin-bottom-1">
-          <button v-if="logedUser" class="flex-container align-middle" @click="isShowedAnswerEditor = true">
-            <span class="margin-right-1"><i class="far fa-reply"></i></span>
-            Responder
-          </button>
-        </div>
-        <div class="flex-container margin-bottom-2" :class="{ hide : !isShowedAnswerEditor}">
-          <div class="margin-right-1">
-            <figure class="c-avatar c-avatar--small overflow-hidden rounded">
-              <img :src="pic" alt="">
+    <div class="c-comment-container">
+      <div class="c-comment c-comment--small br-top--large br-bottom--large margin-bottom-1">
+        <div class="grid-x">
+          <div class="small-2 medium-2 large-2">
+            <figure class="c-comment__figure">
+              <img v-if="body.authorAvatar" :src="body.authorAvatar" alt="" class="width-100 height-100 of--cover"> 
+              <img v-else :src="THEME_URL + '/static/images/user.png'" alt="" class="width-100 height-100 of--cover"> 
             </figure>
           </div>
-          <div class="width-100">
+          <div class="small-10 medium-8 large-8">
+            <div class="c-comment-content">
+              <div class="c-comment__autor f2 w-xbold dark fs-21">
+                {{ body.author }} <span v-if="false" class="padding-left-1 fs-16"><i class="far fa-thumbtack"></i></span>
+              </div>
+              <div v-if="body.authorField" class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
+                {{ body.authorField }}
+              </div>
+              <p class="c-comment__text f2 dark fs-16 lh-18">
+                {{ body.content }}
+              </p>
+            </div>
+          </div>
+          <div class="cell medium-2 large-2">
+            <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-14">
+              <button @click="isShowedAnswerEditor = !isShowedAnswerEditor"><span>Responder</span></button>
+              <button v-if="false"><span class="padding-left-1 flex-container align-middle"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-if="isShowedAnswerEditor" class="c-answer-editor">
+        <div class="grid-x align-right">
+          <div class="small-11 medium-11 large-11">
             <editor
               :target="{ type: 'answer', id: body.id }"
               :post="post"
               :thread.sync="answers"
               :flag.sync="isShowedAnswerEditor">
             </editor>
-          </div>      
-        </div>                  
-        <div v-if="answers.list.length != 0" class="margin-bottom-1">
-          <button 
-            class="c-show-answers sec-alt flex-container align-middle" 
-            :class="{ showed : isShowedAnswers }" 
-            @click="isShowedAnswers = !isShowedAnswers"
-          >
-            <span class="c-icon margin-right-1"><i class="far fa-chevron-down"></i></span> 
-            <p v-if="answers.list.length < 5 || answersPaged == -1  " class="margin-bottom-0">Ver {{answers.list.length}} respuesta(s)</p>
-            <p v-else class="margin-bottom-0">Ver {{answers.list.length}}+ respuesta(s)</p>
-          </button>
-        </div>                   
-        <div class="c-comment__answers" :class="{ hide : !isShowedAnswers }">
-          <answer v-for="answer of answers.list" :key="answer.id" :body="answer" :pic="pic"></answer>
-          <button 
-            v-if="answersPaged != -1 && answers.list.length != 0 && answers.list.length >= 5 " 
-            class="sec-alt flex-container align-middle"
-            @click="getAnswers"
-          >
-            <span class="c-icon margin-right-1"><i class="far fa-ellipsis-h"></i></span> 
-            <p class="margin-bottom-0">Mostrar más respuestas</p>
-          </button>
+          </div>
         </div>
+      </div>
+      <div v-if="answers.list.length" class="c-answers-container">
+        <answer v-for="answer of answers.list" :key="answer.id" :body="answer" :pic="pic"></answer>
+        <button 
+          v-if="answersPaged != -1 && answers.list.length != 0 && answers.list.length >= 5 " 
+          class="sec-alt flex-container align-middle f2"
+          @click="getAnswers"
+        >
+          <span class="c-icon margin-right-1"><i class="far fa-ellipsis-h"></i></span> 
+          <p class="margin-bottom-0">Mostrar más respuestas</p>
+        </button>
       </div>
     </div>
   `,
@@ -85,7 +78,7 @@ Vue.component('comment',{
     }
   },
   computed: {
-    ...Vuex.mapState(['API', 'logedUser'])
+    ...Vuex.mapState(['API', 'THEME_URL', 'logedUser'])
   },
   methods: {
     getAnswers: function(){

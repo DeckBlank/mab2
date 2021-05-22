@@ -102,12 +102,11 @@ const topic = new Vue({
     this.area     = this.$refs.topic.getAttribute('data-area');
 
     this.getCourseUnity();
-    this.hideLoading();
     
-    // this.isUserAuthOnTopic(this.metas.get('course_id'))
+    this.isUserAuthOnTopic(this.metas.get('course_id'))
     this.getLikes();
     this.getUnities(  this.metas.get('course_id') );
-    // this.getComments();
+    this.getComments();
     
     if (this.logedUser) {
       this.getQuestions();
@@ -294,41 +293,31 @@ const topic = new Vue({
       }
     },
     isUserAuthOnTopic: function(course_id){
-      if(!this.metas.get('course_name') || !this.metas.get('course_slug') || !this.metas.get('unity') || (this.metas.get('sector') != 'privado' && this.metas.get('sector') != 'publico')){
-        window.location = `${this.course_link}`;
+      if(!this.metas.get('course_id') && !this.metas.get('unity')){
+        window.location = this.courseLink;
       }else{
-        if (['creative', 'emotional'].includes(this.area)) {
-          this.hideLoading();
-        } else if(this.logedUser && this.logedUser.user_rol != 'foreign') {
-          if (this.metas.get('sector') == "privado") {
-            fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}&topic=${this.topicID}`)
-            .then(res => {
-              if (res.status >= 200 && res.status < 300) {
-                return res.json()
-              }else{
-                throw res
-              }
-            })
-            .then(registration => {
-              this.hideLoading();
-            })
-            .catch(err => {
-              addCourseToShopCart(
-                course_id,
-                this.metas.get('course_name'),
-                `${this.SITE_URL}/curso/${this.metas.get('course_name')}`,
-                this.SITE_URL,
-                this.metas
-              );
-
-              throw err;
-            })
-          } else if (this.metas.get('sector') == "publico") {
-            this.hideLoading();
+        fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}&topic=${this.topicID}`)
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            return res.json()
+          }else{
+            throw res
           }
-        } else {
-          window.location = `${this.course_link}`;
-        }
+        })
+        .then(registration => {
+          this.hideLoading();
+        })
+        .catch(err => {
+          addCourseToShopCart(
+            course_id,
+            this.metas.get('course_name'),
+            `${this.SITE_URL}/curso/${this.metas.get('course_name')}`,
+            this.SITE_URL,
+            this.metas
+          );
+
+          throw err;
+        })
       }
     },
     downloadMaterial: function(url, media){

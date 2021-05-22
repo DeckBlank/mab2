@@ -113,13 +113,11 @@ function __getLastTopic($courseId, $userEmail, $userID, $course) {
             $userSector = get_field('school_type', 'user_' . $userID);
 
             $lastClass['link'] = sprintf(
-                '%s?course_id=%s&unity=%s&sector=%s',
+                '%s?course_id=%s&unity=%s&topic_number=%s',
                 $lastClass['link'],
                 $courseId,
-                $course->title,
-                $course->slug,
                 $lastClass['unity'],
-                ($userSector) ? $userSector : 'publico'
+                $topicIndex + 1
             );
 
             return $lastClass;

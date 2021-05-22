@@ -260,7 +260,7 @@ class UserController{
             return new WP_Error( 'no_user_updated', __('No user updated'), array( 'status' => 404 ) );
         }
     }
-    
+
     public function sendTeacherData($request){
         $mail = new PHPMailer(true);
         $admins = array_map(function($admin){return $admin->data->user_email;}, get_users(['role' => 'administrator']));
@@ -407,21 +407,24 @@ class UserController{
             $userID         = $request['user_id'];
             $coursesArray   = [];
 
+            /*
             $courses = UserCourse::where(['user_email' => $userEmail])
                 ->orderBy('last_date', 'DESC')
                 ->get();
+            */
 
             $enrolledCourses = UserCourseEnrollment::where(['user_email' => $userEmail])
                 ->orderBy('last_date', 'DESC')
                 ->get();
 
+            /*
             foreach ($courses as $course) {
                 $sanitizedCourse = __sanitizeCourse($course->course_id, $userEmail, $userID);
 
                 if ( $sanitizedCourse && !in_array($sanitizedCourse, $coursesArray) ) {
                     if ( __checkEnrollOnCourse($course->course_id, $userEmail) ) array_push($coursesArray, $sanitizedCourse);
                 }
-            }
+            }*/
 
             foreach ($enrolledCourses as $course) {
                 $sanitizedCourse = __sanitizeCourse($course->course_id, $userEmail, $userID);

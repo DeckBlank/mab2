@@ -99,7 +99,7 @@ const home = new Vue({
   computed: {
     ...baseState()
   },
-  mounted(){   
+  mounted(){
     this.hideLoading();
     this.global();
     this.initTestimoniesSlider();

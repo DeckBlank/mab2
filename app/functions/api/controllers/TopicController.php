@@ -9,7 +9,159 @@ require(__DIR__ . '/../models/TopicModel.php');
 class TopicController{
 
     public function __construct(){
+        add_action( 'rest_api_init', function () {
+            register_rest_route( 'custom/v1', '/topic/(?P<topic_id>\d+)/questions', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getQuestions'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
 
+            register_rest_route( 'custom/v1', '/topic/(?P<post_id>\d+)/likes', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getLikes'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));    
+
+            register_rest_route( 'custom/v1', '/topic/(?P<post_id>\d+)/likes', array(
+                'methods' => 'PUT',
+                'callback' => array($this,'updateLikes'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topic/(?P<post_id>\d+)/likes/checkout', array(
+                'methods' => 'GET',
+                'callback' => array($this,'checkoutUserLike'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));    
+
+            register_rest_route( 'custom/v1', '/topic/(?P<topic_id>\d+)/test_score', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getTestScore'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topic/(?P<topic_id>\d+)/test_score', array(
+                'methods' => 'PUT',
+                'callback' => array($this,'updateTestScore'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topic/(?P<post_id>\d+)/comments', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getComments'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topic/(?P<post_id>\d+)/comment', array(
+                'methods' => 'POST',
+                'callback' => array($this,'addComment'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));     
+
+            register_rest_route( 'custom/v1', '/topic/(?P<post_id>\d+)/comment/(?P<comment_id>\d+)/answer', array(
+                'methods' => 'POST',
+                'callback' => array($this,'addAnswer'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topic/(?P<post_id>\d+)/Video/log', array(
+                'methods' => 'PUT',
+                'callback' => array($this,'saveVideoLog'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));    
+
+            register_rest_route( 'custom/v1', '/topic/(?P<post_id>\d+)/material/log', array(
+                'methods' => 'PUT',
+                'callback' => array($this,'saveMaterialLog'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topics/video/logs', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getVideoLogs'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topics/video/logs/download', array(
+                'methods' => 'GET',
+                'callback' => array($this,'downloadVideoLogs'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topics/material/logs', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getMaterialLogs'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topics/material/logs/download', array(
+                'methods' => 'GET',
+                'callback' => array($this,'downloadMaterialLogs'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topics/test/logs', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getTestLogs'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topics/test/logs/download', array(
+                'methods' => 'GET',
+                'callback' => array($this,'downloadTestLogs'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topics/comments', array(
+                'methods' => 'GET',
+                'callback' => array($this,'getAllComments'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));    
+
+            register_rest_route( 'custom/v1', '/topics/comments/download', array(
+                'methods' => 'GET',
+                'callback' => array($this,'downloadAllComments'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));    
+        });
     }
 
     /**
@@ -109,6 +261,8 @@ class TopicController{
 
             if ($comment_result && $this::__sendCommentNotification($request, $topic)) {
                 return new WP_REST_Response($comment_result, 200);
+            } else {
+                return new WP_Error( 'no_comment_added', __('No sent notification'), array( 'status' => 404 ) );
             }
         } catch (Exception $e){
             return new WP_Error( 'no_comment_added', __($e->getMessage()), array( 'status' => 404 ) );
@@ -125,6 +279,8 @@ class TopicController{
 
             if ($answer_result && $this::__sendAnswerNotification($request, $topic)) {
                 return new WP_REST_Response($answer_result, 200);
+            } else {
+                return new WP_Error( 'no_comment_added', __('No sent notification'), array( 'status' => 404 ) );
             }
         } catch (Exception $e){
             return new WP_Error( 'no_answer_added', __($e->getMessage()), array( 'status' => 404 ) );
@@ -246,8 +402,8 @@ class TopicController{
             include_once __DIR__."/../exports/reports/tests.php";
         }     
     }
-    
-    public function __sendCommentNotification($request, $topic){
+
+    private function __sendCommentNotification($request, $topic){
         $mail = new PHPMailer(true);
         $admins = array_map(function($admin){return $admin->data->user_email;}, get_users(['role' => 'administrator']));
 
@@ -270,7 +426,7 @@ class TopicController{
             foreach($admins as $admin){
                 $mail->addAddress($admin);
             }
-    
+
             // Content
             $body = '
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #DE0D46; padding: 3rem 0;">
@@ -329,7 +485,7 @@ class TopicController{
         }
     }    
     
-    public function __sendAnswerNotification($request, $topic){
+    private function __sendAnswerNotification($request, $topic){
         $mail = new PHPMailer(true);
         $admins = array_map(function($admin){return $admin->data->user_email;}, get_users(['role' => 'administrator']));
         $comment = get_comments([

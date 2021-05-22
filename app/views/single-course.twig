@@ -21,7 +21,7 @@
               {% if teacher and teacher.job %} <h6 class="f2 white fs-16">{{ teacher.job }}</h6> {% endif %}
 
               <p class="f2 white margin-top-1">{{ description }}</p>
-              <button @click="startCourse('{{ post.id }}', '{{ post.title }}', '{{ post.link }}')" class="c-button c-button--mab-warning-black f2 w-xbold">Comenzar curso!</button>
+              <button v-if="logedUser" @click="startCourse('{{ post.id }}', '{{ post.title }}', '{{ post.link }}')" class="c-button c-button--mab-warning-black f2 w-xbold">Comenzar curso!</button>
               <div class="flex-container align-midle f2 white fs-18 padding-top-2">
                 <span class="margin-right-1"><i class="fas fa-heart"></i> {{ likes }}</span> 
 

@@ -29,7 +29,7 @@
       </div>
     </div>
 
-    <template v-if="!metas.get('subcategory')">
+    <template v-if="logedUser && !metas.get('subcategory')">
       <div class="c-mab-recommended padding-top-2">
         <div class="grid-container padding-vertical-3">
           <h2>
@@ -151,7 +151,7 @@
         </div>
       </div>
     </template>
-    <div v-else class="grid-container">
+    <div v-else-if="logedUser" class="grid-container">
       <section class="padding-top-3">
         <a href="{{ site.url }}/cursos" class="c-link c-link--secondary fs-21 w-bold f2">
           <i class="fas fa-arrow-left"></i>
