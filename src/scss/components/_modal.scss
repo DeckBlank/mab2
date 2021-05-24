@@ -63,6 +63,19 @@
     }
   }
 
+  &__top-image {
+    width: 150px;
+    margin: -8rem auto -2rem;
+  }
+
+  &__cross {
+    top: 1rem;
+    right: 1rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+  }
+
   &--mini {
     .c-button {
       max-width: 145px;
@@ -86,6 +99,11 @@
       &__title {
         font-size: $fs-25;
       }
+    }
+
+    &__top-image {
+      width: 180px;
+      margin: -12rem auto -3em;
     }
   }
 }

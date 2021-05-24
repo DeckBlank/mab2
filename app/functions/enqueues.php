@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1621828321742';
+$assets_version = '1621884400337';
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -733,6 +733,14 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);        
 
+    }elseif (is_page('donaciones')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/donaciones',
+            'src'       => $config['resources']['page_donaciones'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
     }elseif (is_page('lideres')){ 
         register_assets('package', [
             'handle'    => 'pandawp/package/swiper',

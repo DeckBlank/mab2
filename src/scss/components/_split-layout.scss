@@ -8,6 +8,13 @@
   .c-split-layout-content {
     min-height: 100vh;
 
+    &__title {
+      img.donaciones {
+        width: 84px;
+        margin: -11px 3px 0;
+      }
+    }
+
     &--primary {
       background: $primary-color;
     }
@@ -26,6 +33,10 @@
 
     &--warning {
       background: $warning-alt;
+    }
+
+    &--dark {
+      background: $dark;
     }
 
     .small-title {
