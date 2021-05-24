@@ -3,43 +3,19 @@ import Vuex from 'vuex'
 
 Vue.component('editor',{
   template: /*html*/`
-    <div class="c-editor">
-      <textarea class="c-editor__textarea input-reset bg-light-gray br--small margin-bottom-1" rows="1" v-model="textContent" @focus="activeEditor"></textarea>
-      <div class="flex-container align-right" :class="{ hide : !isActiveEditor }">
-        <button v-if="target.type == 'post'" class="c-button margin-right-1" @click="isActiveEditor = false">Cancelar</button>
-        <button v-else class="c-button margin-right-1" @click="$emit('update:flag', false);">Cancelar</button>
-        
-        <button 
-          v-if="target.type == 'post'" 
-          class="c-button c-button--secondary-alt" 
-          @click="$emit('update:thread', {
-            number: thread.number + 1,
-            list: [{
-              author: logedUser.user_auth,
-              date: new Date(),
-              content: textContent,
-              answers: []
-            }, ...thread.list]
-          });"
-        >
-          Comentar
+    <div class="c-comment-inline flex-container align-center-middle">
+      <div v-if="false" class="c-comment-inline__reactions flex-container align-center-middle">
+        <button class="fs-25">
+          <i class="far fa-smile"></i>
         </button>
-        <button 
-          v-else 
-          class="c-button c-button--secondary-alt" 
-          @click="$emit('update:thread', {
-            list: [{
-                comment_author: logedUser.user_auth,
-                comment_date: new Date(),
-                comment_content: textContent
-              }, 
-              ...thread.list
-            ]
-          });"
-        >
-          Responder
+        <button class="fs-25">
+          <i class="far fa-paperclip"></i>
         </button>
-      </div>  
+      </div>
+      <input v-model="textContent" class="input-reset margin-0 f2" type="text" placeholder="Escribe un comentario">
+      <button @click="add()" class="fs-25">
+        <i class="far fa-paper-plane"></i>
+      </button>
     </div>
   `,
   data() {
@@ -127,6 +103,31 @@ Vue.component('editor',{
         .catch(err => {
           throw err;          
         })      
-    }
+    },
+    add: function() {
+      if (this.target.type == 'post') {
+        this.$emit('update:thread', {
+          number: this.thread.number + 1,
+          list: [{
+            author: this.logedUser.user_auth,
+            authorField: '',
+            authorAvatar: this.logedUser.user_avatar,
+            date: new Date(),
+            content: this.textContent,
+            answers: []
+          }, ...this.thread.list]
+        });
+      } else {
+        this.$emit('update:thread', {
+          list: [{
+              comment_author: this.logedUser.user_auth,
+              comment_date: new Date(),
+              comment_content: this.textContent
+            }, 
+            ...this.thread.list
+          ]
+        });
+      }
+    },
   },
 })

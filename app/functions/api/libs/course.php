@@ -46,7 +46,7 @@ function __getMetaCourse($courseId, $userEmail, $meta) {
 
             if ( $unities && count($unities) ) {
                 foreach($unities as $unity) {
-                    $topics += count($unity['topics']);
+                    $topics += ($unity['topics']) ? count($unity['topics']) : 0;
                 }
             }
 
@@ -66,16 +66,18 @@ function __getLastTopic($courseId, $userEmail, $userID, $course) {
 
     if ( $unities && count($unities) ) {
         foreach($unities as $unity){
-            foreach($unity['topics'] as $topic) {
-                array_push(
-                    $topics,
-                    [
-                        'unity' => $unityIndex,
-                        'title' => ($topic['topic']) ? $topic['topic']->post_title : '',
-                        'id'    => ($topic['topic']) ? $topic['topic']->ID : 0,
-                        'link'  => ($topic['topic']) ? get_the_permalink($topic['topic']->ID) : '',
-                    ]
-                );
+            if ($unity['topics']) {
+                foreach($unity['topics'] as $topic) {
+                    array_push(
+                        $topics,
+                        [
+                            'unity' => $unityIndex,
+                            'title' => ($topic['topic']) ? $topic['topic']->post_title : '',
+                            'id'    => ($topic['topic']) ? $topic['topic']->ID : 0,
+                            'link'  => ($topic['topic']) ? get_the_permalink($topic['topic']->ID) : '',
+                        ]
+                    );
+                }
             }
         }
 
@@ -91,7 +93,9 @@ function __getLastTopic($courseId, $userEmail, $userID, $course) {
                 ->first();
 
             if ($userTopic && $userTopic->video_viewed) {
-                $lastClass = ($topics[$topicIndex++]) ? $topics[$topicIndex++] : $topic;
+                $nextIndex = $topicIndex++;
+
+                $lastClass = ($topics[$nextIndex]) ? $topics[$nextIndex] : $topic;
             }
 
             if ($lastClass) break;
@@ -109,13 +113,11 @@ function __getLastTopic($courseId, $userEmail, $userID, $course) {
             $userSector = get_field('school_type', 'user_' . $userID);
 
             $lastClass['link'] = sprintf(
-                '%s?course_id=%s&unity=%s&sector=%s',
+                '%s?course_id=%s&unity=%s&topic_number=%s',
                 $lastClass['link'],
                 $courseId,
-                $course->title,
-                $course->slug,
                 $lastClass['unity'],
-                ($userSector) ? $userSector : 'publico'
+                $topicIndex + 1
             );
 
             return $lastClass;
@@ -124,6 +126,49 @@ function __getLastTopic($courseId, $userEmail, $userID, $course) {
         }
     } else {
         return 0;
+    }
+}
+
+function __checkEnrollOnCourse($courseId, $userEmail) {
+    $courses = get_field('courses', 'options');
+
+    if ((get_field('price', $courseId) == 0 and get_field('price_settings', $courseId) == 'individual')) {
+        return true;
+    } else {
+        if (!empty($courses)){
+            foreach($courses as $course){
+                if($course['course']['course']->ID == $courseId){
+                    
+                    foreach($course['course']['registrations'] as $registration){
+                        if(
+                            $registration['registration']['user'] &&
+                            (
+                                $registration['registration']['user']['user_email'] == $userEmail and
+                                $registration['registration']['state'] == true
+                            )
+                        ){
+            
+                            return true;
+                        }
+                    }
+                }
+            }
+        }
+
+        $courses_enrollment = DBConnection::getConnection()->query("
+            SELECT
+                *
+            FROM
+                wp_user_course_enrollment
+            WHERE
+                state = 1 AND
+                user_email = '". $userEmail ."' AND
+                course_id = '". $courseId ."'
+        ");
+
+        if($courses_enrollment->num_rows > 0){
+            return true;
+        }            
     }
 }
 
@@ -147,7 +192,7 @@ function __sanitizeCourse($courseId, $userEmail, $userID, $type = 'enrolled') {
             'description'   => get_the_excerpt($course->ID),
             'likes'         => __getMetaCourse($courseId, $userEmail, 'likes'),
             'color'         => ($mabCategory) ? get_field('color', 'category_' . $mabCategory->term_id) : 'primary',
-            'link'          => get_the_permalink($course->ID)
+            'link'          => get_the_permalink($course->ID),
         ];
 
         if ($type == 'recommend' || $type == 'general') {
@@ -155,7 +200,8 @@ function __sanitizeCourse($courseId, $userEmail, $userID, $type = 'enrolled') {
             $priceSettings = get_field('price_settings', $courseId);
 
             $courseObject = array_merge($courseObject, [
-                'price' => ($priceSettings == 'global') ? floatval( $sell['course_price'] ) : floatval( get_field('price', $courseId) )
+                'price'     => ($priceSettings == 'global') ? floatval( $sell['course_price'] ) : floatval( get_field('price', $courseId) ),
+                'enroll'    => ($userEmail) ? __checkEnrollOnCourse($course->ID, $userEmail) : false
             ]);
         } else {
             $courseObject = array_merge($courseObject, [

@@ -1,0 +1,15 @@
+.c-card-article {
+  padding: 1rem;
+
+  &__figure {
+    height: 320px;
+
+    img {
+      object-position: top;
+    }
+  }
+
+  &__content {
+    min-height: 4rem;
+  }
+}

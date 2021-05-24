@@ -19,31 +19,28 @@ const course = new Vue({
       view: 1,
       foro: 1,
       commentbox: 0,
-      questions: [
-        { enable : true },
-        { enable : false },
-        { enable : false },
-        { enable : false },
-        { enable : false },
-      ]
+
+      isLoadingUnities: false,
     }
   },
   computed: {
-    ...baseState()
+    ...baseState(),
+    firstClass: function() {
+      return (this.unities.length) ? this.unities[0].topics[0].video.link : '';
+    },
   },
   mounted: function(){
-    // this.area = this.$refs.course.getAttribute('data-area');
-
     this.global();
     this.hideLoading();
-    // this.isUserAuthOnCourse( this.$refs.course.getAttribute('data-id') )
-    // this.saveCourseOnMetas()
-    // this.verifyIsAvaibleCourse()
+
+    this.isUserAuthOnCourse( mab.course_id )
     this.getUnities( mab.course_id );
   },
   methods: {
     ...baseActions(),
     getUnities: function(course_id){
+      this.isLoadingUnities = true;
+
       fetch(`${ this.API }/course/${ course_id }/unities?user=${ this.logedUser.user_email }`)
         .then(res => { 
           if (res.status >= 200 && res.status < 300) {
@@ -54,64 +51,42 @@ const course = new Vue({
         })
         .then(unities => {
           this.unities = unities;
-          this.hideLoading();
+
+          window.setTimeout(() => {
+            this.isLoadingUnities = false;
+          }, 1000);
         })
         .catch(err => {
           throw err;
         })      
     },
     isUserAuthOnCourse: function(course_id){
-      if(this.metas.get('sector') != 'privado' && this.metas.get('sector') != 'publico'){
-        window.location = `${this.SITE_URL}/emotional`
-      }else{
-        if (['creative', 'emotional'].includes(this.area)) {
-          this.accessGranted = true;
-        } else if(this.logedUser && this.logedUser.user_rol != 'foreign') {
-          if (this.metas.get('sector') == 'privado') {
-            fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}`,{
-              method: 'GET'
-            })
-            .then(res => {
-              if (res.status >= 200 && res.status < 300) {
-                return res.json();
-              }else{
-                throw res;
-              }
-            })
-            .then(registration => {
-              this.accessGranted = true;
-            })
-            .catch(err => {
-              throw err;          
-            })
-          } else if (this.metas.get('sector') == 'publico') {
-            this.accessGranted = true;
-          }
+      fetch(`${ this.API }/course/${ course_id }/registration/checkout?user=${ this.logedUser.user_email }`,{
+        method: 'GET'
+      })
+      .then(res => {
+        if (res.status >= 200 && res.status < 300) {
+          return res.json();
+        } else {
+          throw res;
         }
+      })
+      .then(registration => {
+        this.accessGranted = true;
+      })
+      .catch(err => {
+        throw err;          
+      })
+    },
+
+    startCourse: function(course_id, course_title, course_link) {
+      if (this.accessGranted) {
+        window.location.href = this.firstClass;
+      } else {
+        addCourseToShopCart(course_id, course_title, course_link, this.SITE_URL, this.metas)
       }
     },
-    saveCourseOnMetas: function(){
-      window.localStorage.setItem('mab_metas', JSON.stringify({
-        course: this.$refs.course.getAttribute('data-title')
-      }))
-    },
-    addCourse: function(course_id, course_title, course_link){
-      addCourseToShopCart(course_id, course_title, course_link, this.SITE_URL, this.metas)
-    },
-    verifyIsAvaibleCourse: function(){
-      /*
-      let shop_cart = window.localStorage.getItem('mab_shop_cart');
-        shop_cart = JSON.parse(shop_cart);
-
-      if(shop_cart){
-        let courses = shop_cart.filter(course => course.id == this.$refs.course.getAttribute('data-id'))
-
-        this.isAvaibleCourse = (courses.length > 0) ? false : true;
-      }
-      */
-
-      return true;
-    },
+    /* FIXME: Clean me when it's done */
     playVideo: function(video, unity, topic){
       event.preventDefault();
 
@@ -204,7 +179,7 @@ const course = new Vue({
     },
 
     getTopicLink: function(topicLink, topicNumber, unityNumber) {
-      return `${ topicLink }?course_id=${ mab.course_id }&topic_number=${ topicNumber }&unity=${ unityNumber }`;
+      return (this.accessGranted) ? `${ topicLink }?course_id=${ mab.course_id }&topic_number=${ topicNumber }&unity=${ unityNumber }` : '#';
     },
 
     resetAccordion: function(unity) {

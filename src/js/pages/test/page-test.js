@@ -46,11 +46,16 @@ const test = new Vue({
         style: {},
         list: []
       },
-      sliderQuestions: null    
+      sliderQuestions: null,
+
+      isSaving: false,
     }
   },
   computed: {
-    ...baseState()
+    ...baseState(),
+    filled: function() {
+      return (this.testResult.list.filter(q => q.value).length == this.questions.count) ? true : false;
+    },
   },
   created(){
     if(!this.logedUser){
@@ -73,29 +78,6 @@ const test = new Vue({
           if(this.currentQuestion < this.questions.count){
             this.currentQuestion += 1;
           }
-        }else{
-          let visualResult = this.testResult.list.filter(el => el.type == 'visual'),
-          auditiveResult = this.testResult.list.filter(el => el.type == 'auditivo'),
-          kinestheticResult = this.testResult.list.filter(el => el.type == 'kinestesico'),
-          result = this.testResult.list.map(el => el.value).reduce((total, current)=>{ return total + current});
-  
-          if(visualResult.length > 0){
-            let visualSum = visualResult.map(el => el.value).reduce((total, current)=>{ return total + current})
-            this.testResult.visual = ((visualSum/result)*100).toFixed(0);
-          }
-  
-          if(kinestheticResult.length > 0){
-            let kinestheticSum = kinestheticResult.map(el => el.value).reduce((total, current)=>{ return total + current});
-            this.testResult.kinesthetic = ((kinestheticSum/result)*100).toFixed(0);
-          }
-
-          if(auditiveResult.length > 0){
-            let auditiveSum = auditiveResult.map(el => el.value).reduce((total, current)=>{ return total + current});
-            this.testResult.auditive = 100 - this.testResult.visual - this.testResult.kinesthetic;
-          }
-
-          this.testDone = true
-          this.saveTest();
         }
       }else if(direction == 'previous'){
         if(this.sliderQuestions.slidePrev()){
@@ -171,6 +153,10 @@ const test = new Vue({
     saveTest: function(){
       let form_data = new FormData();
 
+      this.isSaving = true;
+
+      this.calculateTest();
+
       form_data.append('user', this.logedUser.user_email)
       form_data.append('result', JSON.stringify({
         visual: this.testResult.visual,
@@ -190,9 +176,15 @@ const test = new Vue({
           }
         })
         .then(response => {
-
+          window.setTimeout(() => {
+            this.isSaving = false;
+          }, 1000);
         })
         .catch(err => {
+          window.setTimeout(() => {
+            this.isSaving = false;
+          }, 1000);
+
           throw err;
         }) 
     },
@@ -245,6 +237,30 @@ const test = new Vue({
 
       var chart = new ApexCharts(document.querySelector("#chart"), options);
       chart.render();
+    },
+
+    calculateTest: function() {
+      let visualResult      = this.testResult.list.filter(el => el.type == 'visual');
+      let auditiveResult    = this.testResult.list.filter(el => el.type == 'auditivo');
+      let kinestheticResult = this.testResult.list.filter(el => el.type == 'kinestesico');
+      let result            = this.testResult.list.map(el => el.value).reduce((total, current)=>{ return total + current});
+
+      if(visualResult.length > 0){
+        let visualSum = visualResult.map(el => el.value).reduce((total, current)=>{ return total + current})
+        this.testResult.visual = ((visualSum/result)*100).toFixed(0);
+      }
+
+      if(kinestheticResult.length > 0){
+        let kinestheticSum = kinestheticResult.map(el => el.value).reduce((total, current)=>{ return total + current});
+        this.testResult.kinesthetic = ((kinestheticSum/result)*100).toFixed(0);
+      }
+
+      if(auditiveResult.length > 0){
+        let auditiveSum = auditiveResult.map(el => el.value).reduce((total, current)=>{ return total + current});
+        this.testResult.auditive = 100 - this.testResult.visual - this.testResult.kinesthetic;
+      }
+
+      this.testDone = true;
     },
   }
 })

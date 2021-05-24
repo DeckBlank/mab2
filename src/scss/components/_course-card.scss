@@ -54,6 +54,14 @@
       margin-right: 0.2rem;
     }
   }
+
+  &__cirle-corner {
+    border-radius: 50%;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+  }
 }
 
 .c-course-card--secondary {
@@ -114,6 +122,25 @@
   .c-button--course {
     background: $primary-light;
     color: $white;
+  }
+}
+
+.c-course-card--dark {
+  background: $dark;
+  color: $white;
+
+  .c-course-card__likes {
+    color: $white;
+  }
+
+  .c-button--course {
+    background: $dark;
+    color: $warning-alt;
+  }
+
+  .c-course-card__footer {
+    background: $warning-alt;
+    color: $dark;
   }
 }
 

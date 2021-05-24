@@ -12,16 +12,29 @@ function __getComments($request){
         $comments_answers = [];
 
         foreach($comments as $comment){
+            $user = get_user_by('email', $comment->comment_author_email);
+
+            $answers = get_comments([
+                "parent" => $comment->comment_ID,
+                "number" => 5,
+                "paged" => $request['paged']
+            ]);
+
+            foreach($answers as $answer) {
+                $userAnswer = get_user_by('email', $answer->comment_author_email);
+
+                $answer->authorAvatar = get_field('avatar', 'user_' . $userAnswer->ID);
+                $answer->authorField = get_field('job', 'user_' . $userAnswer->ID);
+            }
+
             array_push($comments_answers, (object)[
                 "id" => $comment->comment_ID,
                 "author" => $comment->comment_author,
+                "authorAvatar"  => get_field('avatar', 'user_' . $user->ID),
+                "authorField"   => get_field('job', 'user_' . $user->ID),
                 "date" => $comment->comment_date,
                 "content" => $comment->comment_content,
-                "answers" => get_comments([
-                    "parent" => $comment->comment_ID,
-                    "number" => 5,
-                    "paged" => $request['paged']                         
-                ])
+                "answers" => $answers
             ]);
         }
         

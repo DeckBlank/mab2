@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1620964526076';
+$assets_version = '1621884400337';
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -691,8 +691,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
-        ]);        
-
+        ]);
     }
     elseif (is_page('cursito')){               
         register_assets('script', [
@@ -741,8 +740,81 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
+        ]);
+    }elseif (is_page('lideres')){ 
+        register_assets('package', [
+            'handle'    => 'pandawp/package/swiper',
+            'src'       => $config['resources']['package_swiper'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+
+        register_assets('package', [
+            'handle'    => 'pandawp/package/dom7',
+            'src'       => $config['resources']['package_dom7'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+
+        register_assets('package', [
+            'handle'    => 'pandawp/package/ssrwindow',
+            'src'       => $config['resources']['package_ssr_window'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);      
+
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/lideres',
+            'src'       => $config['resources']['page_lideres'],     
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]); 
+    }elseif (is_page('charlas')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/charlas',
+            'src'       => $config['resources']['page_charlas'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
         ]);        
-        }
+    }elseif (is_page('lideres-single')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/lideres-single',
+            'src'       => $config['resources']['page_lideres-single'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]); 
+    }
+    elseif (is_page('mab-blog')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/mab-blog',
+            'src'       => $config['resources']['page_mab-blog'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]); 
+    }elseif (is_page('articulo')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/articulo',
+            'src'       => $config['resources']['page_articulo'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]); 
+    }elseif (is_page('nosotros')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/nosotros',
+            'src'       => $config['resources']['page_nosotros'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]); 
+    }
 
 
     /**

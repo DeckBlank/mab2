@@ -22,39 +22,9 @@ Vue.component('header-main',{
                 <div class="cell small-6">
                   <div class="c-menu-dropdown__left padding-vertical-2">
                     <ul class="bg-white ul-reset overflow-hidden">
-                      <li class="c-menu-dropdown__item">
-                        <a href="" class="w-xbold padding-horizontal-2">
-                          Matemáticas
-                        </a>
-                      </li>
-                      <li class="c-menu-dropdown__item">
-                        <a href="" class="w-xbold padding-horizontal-2">
-                          Empresas
-                        </a>
-                      </li>
-                      <li class="c-menu-dropdown__item">
-                        <a href="" class="w-xbold padding-horizontal-2">
-                          Proyectos
-                        </a>
-                      </li>
-                      <li class="c-menu-dropdown__item">
-                        <a href="" class="w-xbold padding-horizontal-2">
-                          Servicios
-                        </a>
-                      </li>
-                      <li class="c-menu-dropdown__item">
-                        <a href="" class="w-xbold padding-horizontal-2">
-                          Modalidades
-                        </a>
-                      </li>
-                      <li class="c-menu-dropdown__item">
-                        <a href="" class="w-xbold padding-horizontal-2">
-                          Metodología
-                        </a>
-                      </li>
-                      <li class="c-menu-dropdown__item">
-                        <a href="" class="w-xbold padding-horizontal-2">
-                          Programas
+                      <li v-for="category of categories" :key="category.id" class="c-menu-dropdown__item">
+                        <a @click="getSubcategories($event, category)" href="#" class="w-xbold padding-horizontal-2">
+                          {{ category.name }}
                         </a>
                       </li>
                       <li class="padding-horizontal-2 padding-top-2">
@@ -67,20 +37,13 @@ Vue.component('header-main',{
                 </div>
                 <div class="cell small-6">
                   <div class="padding-2">
-                    <ul class="ul-reset">
-                      <li class="mb-05">
-                        <a href="" class="c-link c-link--black c-link--ho-secondary display-block w-medium fs-18 f2">Álgebra</a>
-                      </li>
-                      <li class="mb-05">
-                        <a href="" class="c-link c-link--black c-link--ho-secondary display-block w-medium fs-18 f2">Álgebra</a>
-                      </li>
-                      <li class="mb-05">
-                        <a href="" class="c-link c-link--black c-link--ho-secondary display-block w-medium fs-18 f2">Álgebra</a>
-                      </li>
-                      <li class="mb-05">
-                        <a href="" class="c-link c-link--black c-link--ho-secondary display-block w-medium fs-18 f2">Álgebra</a>
+                    <p v-if="isLoadingSubcategories" class="w-bold dark text-center">Cargando...</p>
+                    <ul v-else-if="subcategories.length" class="ul-reset">
+                      <li v-for="subcategory of subcategories" :key="subcategory.id" class="mb-05">
+                        <a :href="getSubcategoryLink(subcategory)" class="c-link c-link--black c-link--ho-secondary display-block w-medium fs-18 f2">{{ subcategory.name }}</a>
                       </li>
                     </ul>
+                    <p v-else class="w-bold dark text-center">Sin subcategorias...</p>
                   </div>
                 </div>
               </div>
@@ -166,7 +129,7 @@ Vue.component('header-main',{
           <a v-if="logedUser" :href="SITE_URL + '/mis-cursos'" class="c-item c-link c-link--white c-link--ho-warning f2 fs-18 w-sbold margin-right-1">Mis cursos</a>
           <profile v-if="logedUser"></profile>
           <a 
-            v-if="!logedUser" 
+            v-if="!logedUser"
             :href="SITE_URL + '/access'" 
             class="c-link c-link--white c-link--ho-warning br--medium white f2 fs-18 c-lh--18 w-bold margin-left-1"
           >
@@ -200,7 +163,12 @@ Vue.component('header-main',{
           isActiveMenuOptions: false,
           switcher: false,
         },
-      }
+      },
+
+      categories: [],
+      subcategories: [],
+
+      isLoadingSubcategories: false,
     }
   },
   computed: {
@@ -222,6 +190,9 @@ Vue.component('header-main',{
         this.unblockMenu('world');
       }
     },
+  },
+  mounted() {
+    this.getCategories();
   },
   methods: {
     ...mapActions(['updateStatusBrowserToggle']),
@@ -246,6 +217,62 @@ Vue.component('header-main',{
 
       if ('world' != menu)
         this.menus.world.switcher = false;
+    },
+
+    getCategories: function() {
+      fetch(`${ this.API }/courses/mab_categories?_wpnonce=${ mab.nonce }`)
+      .then(res => {
+        if (res.status >= 200 && res.status < 300) {
+          return res.json();
+        }else{
+          throw res
+        }
+      })
+      .then(response => {
+        if (response.status) {
+          this.categories = response.data;
+
+          this.getSubcategories(null, this.categories[0]);
+        }
+      })
+      .catch(err => {
+        throw err;
+      })
+    },
+    getSubcategories: function(e, category) {
+      if (e) e.preventDefault();
+
+      if (!category.subcategories.length) {
+        this.subcategories = [];
+        this.isLoadingSubcategories = true;
+
+        fetch(`${ this.API }/courses/mab_subcategories?categories=${ category.id }&_wpnonce=${ mab.nonce }`)
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            return res.json();
+          }else{
+            throw res
+          }
+        })
+        .then(response => {
+          if (response.status) {
+            this.subcategories = response.data; category.subcategories = response.data;
+          }
+
+          window.setTimeout(() => {
+            this.isLoadingSubcategories = false;
+          }, 1000)
+        })
+        .catch(err => {
+          this.isLoadingSubcategories = false; throw err;
+        })
+      } else {
+        this.subcategories = category.subcategories;
+      }
+    },
+
+    getSubcategoryLink: function(subcategory) {
+      return `${ this.SITE_URL }/cursos?subcategory=${ subcategory.id }`;
     }
   },
 })

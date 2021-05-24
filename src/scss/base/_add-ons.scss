@@ -193,6 +193,12 @@ $font-families: (
     color: $dark;
   }
 
+  &--ho-dark {
+    &:hover {
+      color: $dark;
+    }
+  }
+
   &--sec {
     color: $secondary-color;
 

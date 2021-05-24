@@ -627,7 +627,9 @@
               <figure class="c-my-tests__figure">
                 <img src="{{ theme.link }}/static/images/perfil/test-01.png" alt="" class=" width-100 height-100 of--cover"> 
               </figure>
-              <a href="" class="c-button c-button--secondary-warning f2 fs-21 w-xbold">Tomar test</a>
+              <a href="{{ site.url }}/test-personalidad" class="c-button c-button--secondary-warning f2 fs-21 w-xbold">
+                ${ (!tests.behaviour) ? 'Tomar test' : 'Ver mi resultado' }
+              </a>
             </div>
           </div>
           <div class="cell large-4">
@@ -638,7 +640,9 @@
               <figure class="c-my-tests__figure">
                 <img src="{{ theme.link }}/static/images/perfil/test-02.png" alt="" class=" width-100 height-100 of--cover"> 
               </figure>
-              <a href="" class="c-button c-button--secondary-warning f2 fs-21 w-xbold">Tomar test</a>
+              <a href="{{ site.url }}/test" class="c-button c-button--secondary-warning f2 fs-21 w-xbold">
+                ${ (!tests.learning) ? 'Tomar test' : 'Ver mi resultado' }
+              </a>
             </div>
           </div>
         </div>

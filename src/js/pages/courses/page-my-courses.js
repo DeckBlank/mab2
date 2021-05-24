@@ -186,9 +186,17 @@ const myCourses = new Vue({
           this.enrolledCourses = response.data;
 
           this.initSliderEnrolledCourses();
+        } else {
+          window.setTimeout(() => {
+            this.isLoadingEnroll = false;
+          }, 1000);
         }
       })
       .catch(err => {
+        window.setTimeout(() => {
+          this.isLoadingEnroll = false;
+        }, 1000);
+
         throw err;
       })
     },
@@ -202,12 +210,21 @@ const myCourses = new Vue({
         }
       })
       .then(response => {
-        if (response.status)
+        if (response.status) {
           this.recommendCourses = response.data;
 
           this.initSliderRecommendedCourses();
+        } else {
+          window.setTimeout(() => {
+            this.isLoadingRecommended = false;
+          }, 1000);
+        }
       })
       .catch(err => {
+        window.setTimeout(() => {
+          this.isLoadingRecommended = false;
+        }, 1000);
+
         throw err;
       })
     },

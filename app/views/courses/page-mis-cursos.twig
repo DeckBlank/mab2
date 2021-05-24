@@ -172,7 +172,8 @@
                         <span class="c-course-card__likes f2"><i class="fas fa-heart mr-05"></i>${ course.likes }</span>
                       </div>
                       <div class="small-7 medium-7 text-right">
-                        <button v-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                        <span v-if="course.enroll">Inscrito</span>
+                        <button v-else-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
                           S/ ${ Number(course.price).toFixed(2) } 
                           <i class="fas fa-shopping-cart"></i>
                         </button>
@@ -357,7 +358,7 @@
             <div class="c-slider__pagination swiper-pagination"></div>
           </div>
         </div>
-        <a href="https://api.whatsapp.com/send?phone={{information.wsp}}" target="_blank" class="c-ws position-relative bg-warning br--large dark w-xbold f2 fs-21 display-block">
+        <a href="https://api.whatsapp.com/send?phone=51{{ information.phone|replace({' ': ''}) }}" target="_blank" class="c-ws position-relative bg-warning br--large dark w-xbold f2 fs-21 display-block">
           <img src="{{ theme.link }}/static/images/courses/mine/whatsapp.png" alt="" class="position-absolute"> 
           <span>
             Escríbenos para

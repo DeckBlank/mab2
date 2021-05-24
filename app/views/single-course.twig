@@ -21,7 +21,7 @@
               {% if teacher and teacher.job %} <h6 class="f2 white fs-16">{{ teacher.job }}</h6> {% endif %}
 
               <p class="f2 white margin-top-1">{{ description }}</p>
-              <button class="c-button c-button--mab-warning-black f2 w-xbold">Comenzar curso!</button>
+              <button v-if="logedUser" @click="startCourse('{{ post.id }}', '{{ post.title }}', '{{ post.link }}')" class="c-button c-button--mab-warning-black f2 w-xbold">Comenzar curso!</button>
               <div class="flex-container align-midle f2 white fs-18 padding-top-2">
                 <span class="margin-right-1"><i class="fas fa-heart"></i> {{ likes }}</span> 
 
@@ -29,7 +29,9 @@
                   <a class="c-banner__link margin-right-1 warning bb-warning" href="">Ver trailer</a> 
                 {% endif %}
 
-                <a href="{{ teacher.link }}" class="c-banner__link c-link--warning warning bb-warning">Ver más sobre el speaker</a>
+                {% if teacher.link %}
+                  <a href="{{ teacher.link }}" class="c-banner__link c-link--warning warning bb-warning">Ver más sobre el speaker</a>
+                {% endif %}
               </div>
             </div>
           </div> 
@@ -148,7 +150,18 @@
                     </div>
                   </div>
                   <div class="cell large-5">
-                    <div class="c-accordion position-relative">
+                    <div v-if="isLoadingUnities">
+                      <div class="c-loader c-loader--full active">
+                        <div class="container height-100 flex-container align-center-middle">
+                          <div class="loader">
+                            {% for item in [1,2,3,4,5] %}              
+                              <div class="loader--dot"></div>
+                            {% endfor %}       
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div v-else class="c-accordion position-relative">
                       <h3 class="c-accordion__header margin-bottom-0 padding-1 bg-dark white fs-21 f2 text-uppercase text-center w-xbold">CONTENIDOS</h3>
                       <div class="c-accordion__body bg-white">
                         <ul class="ul-reset">

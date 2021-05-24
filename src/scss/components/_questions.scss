@@ -66,29 +66,13 @@
 .c-question {
   &__item {
     @include transition(0.25s);
-
-    &:hover {
-      // background: $success-color;
-      color: $white;
-    }
-
-    &:hover .c-option {
-      color: $white;
-    }
-
-    &:hover .c-option__checkbox span {
-      // border-color: $white;
-    }
   }
 
   &__item input:checked + .c-option {
-    // background-color: $success-color;
-    color: $white;
+    // color: $white;
   }
 
   &__item input:checked + .c-option .c-option__checkbox span {
-    // border-color: $white;
-    // background-color: $white;
     position: relative;
   }
 
