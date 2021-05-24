@@ -22,7 +22,7 @@
   </div>
 
   <section class="c-section c-section--test bg-sec-color">
-    <div v-if="false" class="grid-container">
+    <div v-if="!testDone" class="grid-container">
       <div class="grid-x align-center">
         <div class="cell medium-10 large-8">
           <h2 class="c-questions__title f1 text-uppercase w-bold text-center white">Test para determinar <br> el Canal de Aprendizaje de preferencia</h2>
@@ -33,10 +33,13 @@
     <div class="grid-container position-relative padding-bottom-3">
       <div class="c-result  width-100" :class="{ hidden : !testDone, 'c-result--done' : testDone }">
         <div class="grid-container padding-vertical-3 ">
-          <h2 class="c-questions__title results f1 text-uppercase white margin-bottom-2">
+          <h2 class="c-questions__title results f1 text-uppercase white margin-bottom-1">
             <span class="w-bold f1">Resultados</span>  <br> 
             <span class="w-ligth f2">TEST DE ESTILOS DE APRENDIZAJE</span>
           </h2>
+
+          <a href="{{ site.url }}/perfil" class="c-button c-button--white-dark margin-right-1 f2 w-xbold text-center margin-bottom-2 display-inline-block">Volver al perfil</a>
+
           <div class="grid-x align-center align-middle bg-white br-45 padding-vertical-2 padding-horizontal-3 ">
             <div class="cell medium-4 large-4">
               <div class="c-chart flex-container flex-dir-column align-justify text-center height-100">
@@ -91,7 +94,6 @@
         <div class="cell medium-10 large-8 padding-bottom-2">
           <section class="c-content c-content--protected position-relative bg-white br-45">
             <section class="c-questions">
-              {# <h2 class="c-questions__title f1 text-uppercase dark w-bold margin-bottom-2 text-center">Test para determinar <br> el Canal de Aprendizaje de preferencia</h2> #}
               <div id="slider-questions" class="c-questions__list swiper-container margin-bottom-1">
                 <div class="swiper-wrapper">
                   <div v-for="(q_, qindex) of questions.list" :key="q_.id" class="swiper-slide">
@@ -137,7 +139,8 @@
                   <p class="c-questions__progress margin-bottom-0 fs-21 f2 w-medium dark-gray text-center margin-horizontal-1">
                     <span>${currentQuestion}</span> de <span>${questions.count}</span>
                   </p>
-                  <button 
+                  <button
+                    v-if="!filled"
                     class="flex-container f2 fs-21 w-medium align-center-middle"
                     :class="{ 'sec-color' : (isEnableChange || testResult.list[currentQuestion - 1].value != '') }"
                     @click="changeQuestion('next')" 
@@ -150,8 +153,8 @@
             </section>
           </section>
           <div class="c-bottom-btn flex-container align-center-middle margin-top-3">
-            <a href="" class="c-button c-button--white-dark margin-right-1 f2 w-xbold text-center">Volver al perfil</a>
-            <button class="c-button c-button--white-dark f2 w-xbold">Guardar</button>
+            <a href="{{ site.url }}/perfil" class="c-button c-button--white-dark margin-right-1 f2 w-xbold text-center">Volver al perfil</a>
+            <button @click="saveTest()" :disabled="!filled || isSaving" class="c-button c-button--white-dark f2 w-xbold">Guardar</button>
           </div>
         </div>
       </div>
