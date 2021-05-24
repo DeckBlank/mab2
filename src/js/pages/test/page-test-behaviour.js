@@ -20,6 +20,8 @@ const test = new Vue({
         result: {},
       },
       sliderQuestions: null,
+
+      isSaving: false,
     }
   },
   computed: {
@@ -28,9 +30,12 @@ const test = new Vue({
     testType: function() {
       return (this.getUserType() == 'primary') ? 'JEPI' : 'MBTI';
     },
-    home: function() {
-      return `${this.SITE_URL}/emotional/`;
-    }
+    profile: function() {
+      return `${this.SITE_URL}/perfil`;
+    },
+    filled: function() {
+      return (this.questions.list.filter(q => q.answer != '-1').length == this.questions.count) ? true : false;
+    },
   },
   created(){
     if(!this.logedUser){
@@ -55,8 +60,6 @@ const test = new Vue({
           if(this.currentQuestion < this.questions.count){
             this.currentQuestion += 1;
           }
-        }else{
-          this.saveTest();
         }
       }else if(direction == 'previous'){
         if(this.sliderQuestions.slidePrev()){
@@ -76,7 +79,7 @@ const test = new Vue({
           return {
             ...question,
             options: [
-              {title: 'Si', credit: 1},
+              {title: 'Sí', credit: 1},
               {title: 'No', credit: 0},
             ]
           }
@@ -109,7 +112,7 @@ const test = new Vue({
           case '1RO SECUNDARIA':
             return 'primary';
             break;
-  
+
           case '2DO SECUNDARIA':
           case '3RO SECUNDARIA':
           case '4TO SECUNDARIA':

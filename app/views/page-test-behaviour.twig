@@ -6,7 +6,7 @@
 
 {% block content %}
   <section class="c-section c-section--test bg-sec-color">
-    <div v-if="false" class="grid-container">
+    <div v-if="!testDone" class="grid-container">
       <div class="grid-x align-center">
         <div class="cell medium-10 large-8">
           <h2 class="c-questions__title f1 text-uppercase w-bold text-center white">Test para determinar <br> el Canal de Aprendizaje de preferencia ${testType}</h2>
@@ -16,10 +16,13 @@
     <div class="grid-container position-relative">
       <div class="c-result width-100" :class="{ hidden : !testDone, 'c-result--done' : testDone }">
         <div class="grid-container padding-vertical-3">
-          <h2 class="c-questions__title results f1 text-uppercase white margin-bottom-2">
+          <h2 class="c-questions__title results f1 text-uppercase white margin-bottom-1">
             <span class="w-bold f1">Resultados</span>  <br> 
             <span class="w-ligth f2 text-uppercase">test de estilos de personalidad</span>
           </h2>
+
+          <a href="{{ site.url }}/perfil" class="c-button c-button--white-dark margin-right-1 f2 w-xbold text-center margin-bottom-2 display-inline-block">Volver al perfil</a>
+
           <div class="c-result__container grid-x align-center bg-white br-45 padding-vertical-2">
             <div class="cell medium-10 large-10 dark f2 position-relative">
               <figure class="c-result__figure margin-bottom-1 text-center">
@@ -53,10 +56,6 @@
         <div class="cell medium-10 large-8">
           <section class="c-content c-content--protected position-relative bg-white br-45">
             <section class="c-questions">
-              {# <h2 class="c-questions__title f1 text-uppercase dark w-bold margin-bottom-2 text-center">
-                Test de Estilos de Personalidad <br>
-                ${testType}
-              </h2> #}
               <div id="slider-questions" class="c-questions__list swiper-container margin-bottom-1">
                 <div class="swiper-wrapper">
                   <div v-for="(question, qindex) of questions.list" :key="question.id" class="swiper-slide">
@@ -103,6 +102,7 @@
                     <span>${currentQuestion}</span> de <span>${questions.count}</span>
                   </p>
                   <button 
+                    v-if="!filled"
                     class="flex-container f2 fs-21 w-medium align-center-middle"
                     :class="{ 'sec-color' : (isEnableChange || questions.list[currentQuestion - 1].answer != -1) }"
                     @click="changeQuestion('next')" 
@@ -115,8 +115,8 @@
             </section>
           </section>
           <div class="c-bottom-btn flex-container align-center-middle margin-top-3">
-            <a href="" class="c-button c-button--white-dark margin-right-1 f2 w-xbold text-center">Volver al perfil</a>
-            <button class="c-button c-button--white-dark f2 w-xbold">Guardar</button>
+            <a href="{{ site.url }}/perfil" class="c-button c-button--white-dark margin-right-1 f2 w-xbold text-center">Volver al perfil</a>
+            <button @click="saveTest()" :disabled="!filled || isSaving" class="c-button c-button--white-dark f2 w-xbold">Guardar</button>
           </div>
         </div>
       </div>
@@ -151,7 +151,7 @@
                 <p class="margin-bottom-2 w-medium fs-18 f2 white">
                   Vuelve en 15 minutos.
                 </p>
-                <a :href="home" class="c-button c-button--primary fs-18 w-medium f2 display-block width-100">Salir</a>
+                <a :href="profile" class="c-button c-button--primary fs-18 w-medium f2 display-block width-100">Salir</a>
               </div>
             </div>
           </div>
