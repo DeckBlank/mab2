@@ -81,6 +81,26 @@
     }
   }
 
+  .check-group {
+    &__item {
+      width: 30%;
+
+      label {
+        width: 100%;
+        padding: 0.3rem 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      input[type=radio]:checked ~ label {
+        outline: none;
+        background: $primary-color;
+        color: $white;
+      }
+    }
+  }
+
   &__error {
     border-left: solid 4px $primary-color;
     padding-left: 0.5rem;
