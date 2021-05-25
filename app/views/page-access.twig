@@ -191,21 +191,21 @@
 
                         <form @submit="login($event)" class="c-form-new text-left margin-top-1" action="">
                           <div class="c-form-new__input-container margin-bottom-1">
-                            <label class="w-bold f2 white" for="">Correo</label>
+                            <label class="w-bold f2 white" for="">Ingresa tu correo electrónico</label>
                             <input v-model="user.email.value" class="f2 input-reset" type="text">
                             <p v-if="isWrongField('email')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                              Correo vacio o no valido
+                              Correo vacío o no válido
                             </p>
                           </div>
                           <div class="c-form-new__input-container margin-bottom-1">
                             <label class="w-bold f2 white" for="">Contraseña</label>
                             <input v-model="user.password.value" class="f2 input-reset" type="password">
                             <p v-if="isWrongField('password')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
-                              Contraseña vacia
+                              Contraseña vacía
                             </p>
                           </div>
 
-                          <a :href="SITE_URL + '/recuperar-contrasena'" class="c-link c-link--warning f2 text-left w-medium w-bold display-block">¿Olvidaste tu Contraseña?</a>
+                          <a :href="SITE_URL + '/recuperar-contrasena'" class="c-link c-link--warning f2 text-left w-medium w-bold display-block">¿Olvidaste tu contraseña?</a>
                           <div v-if="user.error" class="margin-top-2 bg-pri-color white br--medium f2 text-left w-medium padding-1">${ user.error }</div>
 
                           <button
@@ -218,14 +218,14 @@
                         </div>
                         <button @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
                           <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
-                          <span class="f2">Continuar con facebook</span>
+                          <span class="f2">Continuar con Facebook</span>
                         </button>
                         <button @click="authWithGoogle" class="c-btn-input-social w-medium width-100">
                           <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
-                          <span class="f2">Continuar con google</span>
+                          <span class="f2">Continuar con Google</span>
                         </button>
                         <div class="c-label-login warning f2 margin-top-1">
-                          ¿Aún no tienes cuenta? <a :href="SITE_URL + '/access?auth=register'" class="c-link c-link--warning w-bold">Registrate</a>
+                          ¿Aún no tienes cuenta? <a :href="SITE_URL + '/access?auth=register'" class="c-link c-link--warning w-bold">Regístrate</a>
                         </div>
                       </div>
                     </div>
@@ -243,39 +243,39 @@
                         </h1>
                         <button @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
                           <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
-                          <span class="f2">Registrate con facebook</span>
+                          <span class="f2">Regístrate con Facebook</span>
                         </button>
                         <button @click="authWithGoogle" class="c-btn-input-social w-medium width-100">
                           <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
-                          <span class="f2">Registrate con google</span>
+                          <span class="f2">Regístrate con Google</span>
                         </button>
                         <form @submit="register($event)" class="c-form-new text-left margin-top-2">
                           <div class="c-form-new__input-container margin-bottom-1">
                             <label class="w-bold f2 white" for="">Ingresa tu correo electrónico</label>
                             <input v-model="user.email.value" class="f2" type="text">
                             <p v-if="isWrongField('email')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                              Correo vacio o no valido
+                              Correo vacío o no válido
                             </p>
                           </div>
                           <div class="c-form-new__input-container margin-bottom-1">
                             <label class="w-bold f2 white" for="">Contraseña</label>
                             <input v-model="user.password.value" class="f2" type="password">
                             <p v-if="isWrongField('password')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                              Contraseña vacia o muy debil (+5 caracteres)
+                              Contraseña vacía o muy débil (+5 caracteres)
                             </p>
                           </div>
                           <div class="c-form-new__input-container margin-bottom-1">
                             <label class="w-bold f2 white" for="">Confirma tu contraseña</label>
                             <input v-model="user.passwordConfirm.value" class="f2 input-reset" type="password">
                             <p v-if="isWrongField('passwordConfirm') && user.password.value.length >= 5" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
-                              ${ (!user.passwordConfirm.value.length) ? 'Contraseña vacia' : 'Las contraseñas no coiciden' }
+                              ${ (!user.passwordConfirm.value.length) ? 'Contraseña vacía' : 'Las contraseñas no coiciden' }
                             </p>
                           </div>
                           <div class="c-form-new__terminos">
-                            <input v-model="user.terms" type="checkbox" value="acepted" /> <a href="" class="f2 warning"> Acepto los términos y Condiciones</a>
+                            <input v-model="user.terms" type="checkbox" value="acepted" /> <a href="" class="f2 warning"> Acepto los Términos y Condiciones</a>
                           </div>
                           <p v-if="isWrongField('terms', false)" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                            Debe aceptar los términos y condiciones
+                            Debes aceptar los Términos y Condiciones
                           </p>
 
                           <div v-if="user.error" class="bg-pri-color white br--medium f2 text-center w-medium padding-1">${ user.error }</div>
@@ -286,7 +286,7 @@
                             :class="{'loading' : user.loading}">Registrarse</button>
                         </form>
                         <div class="c-label-login warning f2 margin-top-1">
-                          ¿Ya tienes una cuenta? <a :href="SITE_URL + '/access'" class="c-link--warning w-bold warning ">Inicia Sesión</a>
+                          ¿Ya tienes una cuenta? <a :href="SITE_URL + '/access'" class="c-link--warning w-bold warning ">Inicia sesión</a>
                         </div>
                       </div>
                     </div>
@@ -327,7 +327,7 @@
                             </label>
                           </div>
                         </div>
-                        <div v-if="isWrongField('sector')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">Debe elegir algún sector</div>
+                        <div v-if="isWrongField('sector')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">Debes elegir algún sector</div>
                       </div>
                     </div>
                   </div>
@@ -389,19 +389,19 @@
                                 <label class="w-bold f2 white" for="">Fecha de Nacimiento</label>
                                 <input v-model="profile.date_birth.value" class="f2" type="date">
                                 <p v-if="isWrongField('date_birth', true, 'profile')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                                  Debe seleccionar una fecha
+                                  Debes seleccionar una fecha
                                 </p>
                               </div>
                             </div>
                             <div class="cell large-6">
                               <div class="c-form-new__input-container">
                                 <label class="w-bold f2 white" for="">País</label>
-                                <select v-model="profile.country.value" class="f2" name="" id="">
+                                <select v-model="profile.country.value" class="f2 text-last-left" name="" id="">
                                   <option disabled value="" selected>${ (profile.country.isLoading) ? 'Cargando...' :'Escoge tu país' }</option>
                                   <option v-for="coun of countries" :key="coun.id" :value="coun">${ coun.name }</option>
                                 </select>
                                 <p v-if="isWrongField('country', true, 'profile')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                                  Debe seleccionar un país
+                                  Debes seleccionar un país
                                 </p>
                               </div>
                             </div>
@@ -413,7 +413,7 @@
                                   <option v-for="city of cities" :key="city.id" :value="city.nombre_ubigeo" >${ city.nombre_ubigeo }</option>
                                 </select>
                                 <p v-if="isWrongField('city', true, 'profile')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                                  Debe seleccionar una ciudad
+                                  Debes seleccionar una ciudad
                                 </p>
                               </div>
                             </div>
@@ -548,7 +548,7 @@
                             <label
                               @click="openModal('tambero')"
                               for="role-tambero"
-                              class="c-role-card mab-shadow text-left position-relative f2  bg-warning black flex-container align-center-middle white margin-bottom-1"
+                              class="c-role-card mab-shadow text-left position-relative f2  bg-white black flex-container align-center-middle white margin-bottom-1"
                               :class="{'enable' : user.role.type == 'tambero'}">
                               <span class="c-lh--21 display-block">
                                 <strong class="w-xbold">Parte del programa
@@ -562,7 +562,7 @@
                           </div>
                         </div>
                         <div v-if="isWrongField('role')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">
-                          ${ (user.role.error) ? user.role.error : 'Debe elegir algun perfil' }
+                          ${ (user.role.error) ? user.role.error : 'Debes elegir algun perfil' }
                         </div>
                         <div v-if="user.role.error" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">
                           ${ user.role.error }
@@ -610,7 +610,7 @@
                             </h2>
                           </div>
                         </div>
-                        <h4 class="white margin-bottom-2 f2 fs-21 w-xbold dark">Elige al menos 3 categorías</h4>
+                        <h4 class="white margin-bottom-2 f2 fs-21 w-xbold dark">¡No te olvides de escoger al menos 3 categorías!</h4>
                         <div class="grid-x grid-margin-y grid-margin-x align-center">
                           <div v-for="category of categories" :key="category.id" class="cell small-6 medium-3 large-3">
                             <input v-model="user.categories.value" :id="'category-' + category.id" type="checkbox" :value="category.id" class="hide">
@@ -626,7 +626,7 @@
                             </label>
                           </div>
                         </div>
-                        <div v-if="isWrongField('categories')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">Debe elegir al menos 3 categorías</div>
+                        <div v-if="isWrongField('categories')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">Debes elegir al menos 3 categorías</div>
                       </div>
                     </div>
                   </div>
@@ -671,7 +671,7 @@
                               </h2>
                             </div>
                           </div>
-                          <h4 class="white margin-bottom-2 f2 w-xbold white fs-21">Elige al menos 3 subcategorías</h4>
+                          <h4 class="white margin-bottom-2 f2 w-xbold white fs-21">¡No te olvides de escoger al menos 3 subcategorías!</h4>
                           <div class="grid-x grid-margin-y grid-margin-x align-center">
                             <div v-for="subcategory of subcategories" :key="subcategory.id" class="cell small-6 medium-3 large-3 flex-container align-center">
                               <input v-model="user.subcategories.value" :id="'subcategory-' + subcategory.id" type="checkbox" :value="subcategory.id" class="hide">
@@ -683,7 +683,7 @@
                               </label>
                             </div>
                           </div>
-                          <div v-if="isWrongField('subcategories')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">Debe elegir al menos 3 subcategorías</div>
+                          <div v-if="isWrongField('subcategories')" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">Debes elegir al menos 3 subcategorías</div>
                           <div v-if="user.error" class="margin-top-2 bg-pri-color white br--medium f2 text-center w-medium padding-1">
                             ${ user.error }
                           </div>
@@ -732,7 +732,7 @@
                         <option value="" disabled>Elige un opción</option>
                         <option v-for="item of modals.teacher.students" :key="item.id"  :value="item">${ item }</option>
                       </select>
-                      <p v-if="isWrongModalField('students', 'teacher')" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Debe seleccionar una opción</p>
+                      <p v-if="isWrongModalField('students', 'teacher')" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Debes seleccionar una opción</p>
                     </div>
                     <div class="width-100 margin-top-2">
                       <div class="grid-x grid-margin-x grid-margin-y align-center">
@@ -762,13 +762,13 @@
                         <option disabled value="" selected>Escoge tu departamento</option>
                         <option v-for="dep of modals.departments" :key="dep.id" :value="dep.nombre_ubigeo" >${ dep.nombre_ubigeo }</option>
                       </select>
-                      <p v-if="isWrongModalField('department', 'tambero')" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Debe seleccionar una opción</p>
+                      <p v-if="isWrongModalField('department', 'tambero')" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Debes seleccionar una opción</p>
 
                       <select v-model="modals.tambero.data.province.value" class="f2 margin-top-1 border-dark" name="" id="">
                         <option disabled value="" selected>${ (modals.tambero.data.province.isLoading) ? 'Cargando...' :'Elige el nombre de tu tambo' }</option>
                         <option v-for="prov of modals.provinces" :key="prov.id" :value="prov.nombre_ubigeo" >${ prov.nombre_ubigeo }</option>
                       </select>
-                      <p v-if="isWrongModalField('province', 'tambero')" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Debe seleccionar una opción</p>
+                      <p v-if="isWrongModalField('province', 'tambero')" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Debes seleccionar una opción</p>
                     </div>
                     <div class="width-100 margin-top-2">
                       <div class="grid-x grid-margin-x grid-margin-y align-center">

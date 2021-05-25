@@ -13,7 +13,7 @@
             <div class="padding-vertical-3"> 
               <h1 class="c-banner__title warning">
                 <span class="white text-uppercase">tenemos más de <span class="warning">400</span>
-                  cursos y <br> <span class="warning">3000</span>
+                  cursos y <br> <span class="warning">30 mil</span>
                   piezas
                   educativas</span><br>
               </h1> 
@@ -94,7 +94,7 @@
           </div>
   
           <div v-else-if="!isLoadingRecommended">
-            <p class="margin-bottom-0 text-center f2 dark fs-21">Aun sin cursos, inscribete en alguno.</p>
+            <p class="margin-bottom-0 text-center f2 dark fs-21">Aún sin cursos, inscríbete en alguno.</p>
           </div>
         </div>
       </div>
@@ -146,7 +146,7 @@
           </div>
   
           <div v-else-if="!isLoadingCategories">
-            <p class="margin-bottom-0 text-center f2 dark fs-21">Aun sin categorias.</p>
+            <p class="margin-bottom-0 text-center f2 dark fs-21">Aún sin categorías.</p>
           </div>
         </div>
       </div>
@@ -172,7 +172,7 @@
               <div class="c-form-new__input-container margin-bottom-1">
                 <label class="w-bold dark" for="">Nivel</label>
                 <select v-model="filter.level" @change="getCourses('level')" class="f2 mab-shadow-soft text-last-left">
-                  <option disabled value="-1">Escoge un opcion</option>
+                  <option disabled value="-1">Escoge un opción</option>
                   <option v-for="level of levels" :key="level.id" :value="level.slug">${ level.name }</option>
                 </select>
               </div>
@@ -181,7 +181,7 @@
               <div class="c-form-new__input-container margin-bottom-1">
                 <label class="w-bold dark" for="">Grado</label>
                 <select v-model="filter.grade" @change="getCourses('grade')" class="f2 mab-shadow-soft text-last-left">
-                  <option disabled value="-1">Escoge un opcion</option>
+                  <option disabled value="-1">Escoge un opción</option>
                   <option v-for="grade of grades" :key="grade.id" :value="grade.slug">${ grade.name }</option>
                 </select>
               </div>
@@ -256,7 +256,7 @@
           </div>
 
           <div v-else-if="!isLoadingCourses">
-            <p class="margin-bottom-0 text-center f2 dark fs-21">Aun sin cursos, inscribete en alguno.</p>
+            <p class="margin-bottom-0 text-center f2 dark fs-21">Aún sin cursos, inscríbete en alguno.</p>
           </div>
         </div>
       </div>

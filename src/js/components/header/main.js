@@ -54,17 +54,17 @@ Vue.component('header-main',{
             <label @mouseover="blockMenu('comunity', true)" @mouseleave="blockMenu('comunity', false)" for="cbx-comunity" class="white f2 fs-18 w-medium">Comunidad <i class="far fa-chevron-down fs-16 ml-05"></i></label>
             <div @mouseover="blockMenu('comunity', true)" @mouseleave="blockMenu('comunity', false)" class="c-menu-dropdown left br--medium position-absolute f2">
               <ul class="bg-white ul-reset br--medium overflow-hidden">
-                <li class="c-menu-dropdown__item">
+                <li class="c-menu-dropdown__item inverse">
                   <a href="" class="w-xbold text-center padding-horizontal-2">
                     Charlas
                   </a>
                 </li>
-                <li class="c-menu-dropdown__item">
+                <li class="c-menu-dropdown__item inverse">
                   <a href="" class="w-xbold text-center padding-horizontal-2">
                     Speakers
                   </a>
                 </li>
-                <li class="c-menu-dropdown__item">
+                <li class="c-menu-dropdown__item inverse">
                   <a href="" class="w-xbold text-center padding-horizontal-2">
                     Blog
                   </a>
@@ -77,32 +77,32 @@ Vue.component('header-main',{
             <label @mouseover="blockMenu('world', true)" @mouseleave="blockMenu('world', false)" for="cbx-world" class="white f2 fs-18 w-medium">Mundo MAB <i class="far fa-chevron-down fs-16 ml-05"></i></label>
             <div @mouseover="blockMenu('world', true)" @mouseleave="blockMenu('world', false)" class="c-menu-dropdown center br--medium position-absolute f2">
               <ul class="bg-white ul-reset br--medium overflow-hidden">
-                <li class="c-menu-dropdown__item">
-                  <a href="" class="w-xbold text-center padding-horizontal-2">
+                <li class="c-menu-dropdown__item inverse">
+                  <a href="" class="w-xbold text-center padding-horizontal-2 ">
                     Nosotros
                   </a>
                 </li>
-                <li class="c-menu-dropdown__item">
+                <li class="c-menu-dropdown__item inverse">
                   <a href="" class="w-xbold text-center padding-horizontal-2">
                     Empresas
                   </a>
                 </li>
-                <li class="c-menu-dropdown__item">
+                <li class="c-menu-dropdown__item inverse">
                   <a href="" class="w-xbold text-center padding-horizontal-2">
                     Proyectos
                   </a>
                 </li>
-                <li class="c-menu-dropdown__item">
+                <li class="c-menu-dropdown__item inverse">
                   <a href="" class="w-xbold text-center padding-horizontal-2">
                     Servicios
                   </a>
                 </li>
-                <li class="c-menu-dropdown__item">
+                <li class="c-menu-dropdown__item inverse">
                   <a href="" class="w-xbold text-center padding-horizontal-2">
                     Modalidades
                   </a>
                 </li>
-                <li class="c-menu-dropdown__item">
+                <li class="c-menu-dropdown__item inverse">
                   <a href="" class="w-xbold text-center padding-horizontal-2">
                     Metodología
                   </a>
@@ -116,7 +116,7 @@ Vue.component('header-main',{
             </div>
           </div>
           <div class="c-item margin-left-1">
-            <a href="" class="c-item c-link c-link--warning c-link--ho-warning f2 fs-18 w-sbold">Donaciones</a>
+            <a href="" class="c-item c-link c-link--ho-warning f2 fs-18 w-sbold white">Donaciones</a>
           </div>
         </div>
         <div class="c-nav__right flex-container align-middle">
