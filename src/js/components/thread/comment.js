@@ -49,15 +49,19 @@ Vue.component('comment',{
         </div>
       </div>
       <div v-if="answers.list.length" class="c-answers-container">
-        <answer v-for="answer of answers.list" :key="answer.id" :body="answer" :pic="pic"></answer>
-        <button 
-          v-if="answersPaged != -1 && answers.list.length != 0 && answers.list.length >= 5 " 
-          class="sec-alt flex-container align-middle f2"
-          @click="getAnswers"
-        >
-          <span class="c-icon margin-right-1"><i class="far fa-ellipsis-h"></i></span> 
-          <p class="margin-bottom-0">Mostrar más respuestas</p>
-        </button>
+        <div class="grid-x align-right">
+          <div class="small-11 medium-11 large-11">
+            <answer v-for="answer of answers.list" :key="answer.id" :body="answer" :pic="pic"></answer>
+            <button 
+              v-if="answersPaged != -1 && answers.list.length != 0 && answers.list.length >= 5 " 
+              class="sec-alt flex-container align-middle f2"
+              @click="getAnswers"
+            >
+              <span class="c-icon margin-right-1"><i class="far fa-ellipsis-h"></i></span> 
+              <p class="margin-bottom-0">Mostrar más respuestas</p>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   `,
