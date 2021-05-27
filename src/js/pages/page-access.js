@@ -756,7 +756,7 @@ new Vue({
           }, 'google');
         }, (err) => {
           this.user.error = err.error == 'popup_closed_by_user'
-            ? 'No se ha podido completar la operacion'
+            ? 'No se ha podido completar la operación'
             : (err.error == 'access_denied'
               ? 'No se ha autorizado la operación, vuelve a intentarlo'
               : 'Ha ocurrido un error, intentado nuevamente en unos minutos');

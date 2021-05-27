@@ -6,25 +6,25 @@
           <h4 class="fs-21 white w-bold f2">MAB</h4>
           <ul class="ul-reset">
             <li class="f2">
-              <a href="" class="c-link c-link--white fs-18">Nosotros</a>
+              <a href="" class="c-link c-link--white fs-18 c-link--ho-warning">Nosotros</a>
             </li>
             <li class="f2">
-              <a href="" class="c-link c-link--white fs-18">Servicios</a>
+              <a href="" class="c-link c-link--white fs-18 c-link--ho-warning">Servicios</a>
             </li>
             <li class="f2">
-              <a href="" class="c-link c-link--white fs-18">Modalidades</a>
+              <a href="" class="c-link c-link--white fs-18 c-link--ho-warning">Modalidades</a>
             </li>
             <li class="f2">
-              <a href="" class="c-link c-link--white fs-18">Metodología</a>
+              <a href="" class="c-link c-link--white fs-18 c-link--ho-warning">Metodología</a>
             </li>
             <li class="f2">
-              <a href="" class="c-link c-link--white fs-18">Programas</a>
+              <a href="" class="c-link c-link--white fs-18 c-link--ho-warning">Programas</a>
             </li>
             <li class="f2">
-              <a href="" class="c-link c-link--white fs-18">Empresas</a>
+              <a href="" class="c-link c-link--white fs-18 c-link--ho-warning">Empresas</a>
             </li>
             <li class="f2">
-              <a href="" class="c-link c-link--white fs-18">Donaciones</a>
+              <a href="" class="c-link c-link--white fs-18 c-link--ho-warning">Donaciones</a>
             </li>
           </ul>
         </div>
@@ -32,16 +32,16 @@
           <h4 class="fs-21 white w-bold f2">Comunidad</h4>
           <ul class="ul-reset">
             <li class="f2">
-              <a href="" class="c-link c-link--white fs-18">Speakers</a>
+              <a href="" class="c-link c-link--white fs-18 c-link--ho-warning">Speakers</a>
             </li>
             <li class="f2">
-              <a href="" class="c-link c-link--white fs-18">Testimonios</a>
+              <a href="" class="c-link c-link--white fs-18 c-link--ho-warning">Testimonios</a>
             </li>
             <li class="f2">
-              <a href="" class="c-link c-link--white fs-18">Medios</a>
+              <a href="" class="c-link c-link--white fs-18 c-link--ho-warning">Medios</a>
             </li>
             <li class="f2">
-              <a href="" class="c-link c-link--white fs-18">Blog</a>
+              <a href="" class="c-link c-link--white fs-18 c-link--ho-warning">Blog</a>
             </li>
           </ul>
         </div>
@@ -49,18 +49,18 @@
           <h4 class="fs-21 white w-bold f2">Contacto</h4>
           <ul class="ul-reset">
             <li class="f2">
-              <a href="mailto:{{information.email}}" class="c-link c-link--white fs-18"><i class="far fa-envelope mr-05"></i> {{information.email}}</a>
+              <a href="mailto:{{information.email}}" class="c-link c-link--white c-link--ho-warning fs-18"><i class="far fa-envelope mr-05"></i> {{information.email}}</a>
             </li>
 
             {% if information.phone %}
               <li class="f2">
-                <a href="https://api.whatsapp.com/send?phone=51{{ information.phone|replace({' ': ''}) }}" class="c-link c-link--white fs-18"><i class="fab fa-whatsapp mr-05"></i> {{ information.phone }}</a>
+                <a href="https://api.whatsapp.com/send?phone=51{{ information.phone|replace({' ': ''}) }}" class="c-link c-link--white fs-18 c-link--ho-warning"><i class="fab fa-whatsapp mr-05"></i> {{ information.phone }}</a>
               </li>
             {% endif %}
 
             {% if information.phone_alt %}
               <li class="f2">
-                <a href="https://api.whatsapp.com/send?phone=51{{ information.phone_alt|replace({' ': ''}) }}" class="c-link c-link--white fs-18"><i class="fab fa-whatsapp mr-05"></i> {{ information.phone_alt }}</a>
+                <a href="https://api.whatsapp.com/send?phone=51{{ information.phone_alt|replace({' ': ''}) }}" class="c-link c-link--white fs-18 c-link--ho-warning"><i class="fab fa-whatsapp mr-05"></i> {{ information.phone_alt }}</a>
               </li>
             {% endif %}
           </ul>
