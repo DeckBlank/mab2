@@ -14,6 +14,11 @@ const donaciones = new Vue({
   mounted(){
     this.global();
     this.hideLoading();
+
+    setTimeout(function() {
+      let video = document.getElementById("donac_video")
+      video.play(); 
+    },100)
   },
   methods: {
     ...baseActions()

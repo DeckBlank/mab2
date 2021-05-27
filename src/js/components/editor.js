@@ -3,8 +3,8 @@ import Vuex from 'vuex'
 
 Vue.component('editor',{
   template: /*html*/`
-    <div class="c-comment-inline flex-container align-center-middle">
-      <div v-if="false" class="c-comment-inline__reactions flex-container align-center-middle">
+    <div class="c-mab-editor flex-container align-center-middle margin-bottom-1">
+      <div v-if="false" class="c-mab-editor__reactions flex-container align-center-middle">
         <button class="fs-25">
           <i class="far fa-smile"></i>
         </button>
