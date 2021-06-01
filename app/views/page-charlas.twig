@@ -224,5 +224,39 @@
         </div>
       </div>
     </div>
+
+    <div v-if="true" class="c-mab-modal c-mab-modal--bg-blue c-mab-modal--mini flex-container align-center-middle width-100">
+      <div class="grid-x align-center width-100">
+        <div class="cell small-10 medium-10 large-4">
+          <div class="c-mab-modal-content bg-white ">
+            <h3 class="c-mab-modal-content__title text-center f2 text-uppercase dark">
+              ¡Déjanos tus datos <br> para ponernos en contacto!
+            </h3>
+            <div class="c-form-new">
+              <div class="c-form-new__input-container margin-bottom-2">
+                <div class="margin-bottom-1">
+                  <input class="f2 border-gray input-dark" type="text" placeholder="Nombre y apellido">
+                  <p v-if="false" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Nombre vacío o incorrecto</p>  
+                </div>
+                <div>
+                  <input class="f2 border-gray input-dark" type="email" placeholder="Correo electrónico">
+                  <p v-if="false" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Email vacío o incorrecto</p>
+                </div>
+              </div>
+              <div class="width-100 margin-top-2">
+                <div class="grid-x grid-margin-x grid-margin-y align-center">
+                  <div class="cell small-6 medium-6 large-6 text-left">
+                    <button class="c-button c-button--success c-button--arrow c-button--small width-100 float-r w-mab-light">Volver</button>
+                  </div>
+                  <div class="cell small-6 medium-6 large-6 text-right">
+                    <button class="c-button c-button--success c-button--arrow c-button--small width-100 float-l w-mab-light">Continuar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 {% endblock %}
