@@ -30,202 +30,64 @@
         <img class="c-banner__img of--contain" src="{{ theme.link }}/static/images/charlas/banner.png" alt="">
       </div>
     </div>
-    <div class="c-charlas-list padding-vertical-3 margin-bottom-3">
-      <div class="grid-container">
-        <h2 class="c-charlas-list__title text-left dark big text-uppercase margin-bottom-2">  
-          abril,2021
-        </h2>
-        <div class="grid-x grid-margin-x grid-margin-y">
-          <div class="cell large-3">
-            <div class="c-course-card  c-course-card--dark br--large" >
-              <figure class="c-course-card__figure position-relative">
-                <img src="{{ theme.link }}/static/images/charlas/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                <div class="c-course-card__progress-bar position-absolute width-100">
-                  <div style="width:50%" class="bg-pri-alt height-100"></div>
-                </div>
-                <div class="c-course-card__cirle-corner position-absolute flex-container align-center-middle bg-dark warning-alt fs-25">
-                  1
-                </div>
-              </figure>
-              <div class="c-course-card__content flex-container fd-column padding-1 br--large">
-                <div>
-                  <div class="c-course-card__titles">
-                    <p class="c-course-card__name w-xbold fs-18 f2 margin-0">Todo sobre macronutrientes</p>
-                    <p class="c-course-card__teacher fs-16 f2">Con Maca Wellness</p>
+
+    {% for groupEvent in groupEvents %}
+      <div class="c-charlas-list padding-vertical-3 margin-bottom-3">
+        <div class="grid-container">
+          <h2 class="c-charlas-list__title text-left dark big text-uppercase margin-bottom-2">  
+            {{groupEvent.date}}
+          </h2>
+          <div class="grid-x grid-margin-x grid-margin-y">
+            {% for event in groupEvent.events %}
+              <div class="cell large-3">
+                <div class="c-course-card  c-course-card--dark br--large" >
+                  <figure class="c-course-card__figure position-relative">
+                    <img src="{{ event.thumbnail }}" alt="" class="of--cover br-top--large width-100 height-100"> 
+                    <div class="c-course-card__progress-bar position-absolute width-100">
+                      <div style="width:{{ event.percentage }}%" class="bg-pri-alt height-100"></div>
+                    </div>
+                    <div class="c-course-card__cirle-corner position-absolute flex-container align-center-middle bg-dark warning-alt fs-25">
+                      {{ event.day }}
+                    </div>
+                  </figure>
+                  <div class="c-course-card__content flex-container fd-column padding-1 br--large">
+                    <div>
+                      <div class="c-course-card__titles">
+                        <p class="c-course-card__name w-xbold fs-18 f2 margin-0">{{ event.title }}</p>
+                        <p class="c-course-card__teacher fs-16 f2">Con {{ event.speaker }}</p>
+                      </div>
+                      <p class="c-course-card__description fs-16 f2 lh-18">{{ event.description }}</p>
+                    </div>
+                    <div class="grid-x align-middle">
+                      <div class="small-6 medium-6">
+                        <span class="c-course-card__likes f2"> <i class="far fa-user"></i>  {{event.participants}} / {{event.limit}}</span>
+                      </div>
+                      <div v-if="false" class="small-6 medium-6 text-right">
+                        <a href="" class="c-button c-button--course display-block lh-14 f2">
+                          <span>+ Agendar evento</span>
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                  <p class="c-course-card__description fs-16 f2 lh-18">Lorem ipsum dolor sit amet, consect etu
-                    er adipiscing elit, sed diam nonummy
-                    nibh euismod nostrud .</p>
-                </div>
-                <div class="grid-x align-middle">
-                  <div class="small-6 medium-6">
-                    <span class="c-course-card__likes f2"> <i class="far fa-user"></i>  50</span>
-                  </div>
-                  <div class="small-6 medium-6 text-right">
-                    <a href="" class="c-button c-button--course display-block lh-14 f2">
-                      <span>+ Agendar evento</span>
-                    </a>
-                  </div>
+
+                  {% if event.complete %}
+                    <button disabled class="c-course-card__footer display-block text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                      inscribirse
+                    </button>
+                  {% else %}
+                    <button @click="openInscriptionModal({{ event.id }})" class="c-course-card__footer display-block text-uppercase white fs-18 text-center bg-dark br-bottom--large">
+                      inscribirse
+                    </button>
+                  {% endif %}
                 </div>
               </div>
-              <a href="" class="c-course-card__footer display-block text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                inscribirse
-              </a>
-            </div>
-          </div>
-          <div class="cell large-3">
-            <div class="c-course-card  c-course-card--dark br--large" >
-              <figure class="c-course-card__figure position-relative">
-                <img src="{{ theme.link }}/static/images/charlas/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                <div class="c-course-card__progress-bar position-absolute width-100">
-                  <div style="width:50%" class="bg-pri-alt height-100"></div>
-                </div>
-                <div class="c-course-card__cirle-corner position-absolute flex-container align-center-middle bg-dark warning-alt fs-25">
-                  8
-                </div>
-              </figure>
-              <div class="c-course-card__content flex-container fd-column padding-1 br--large">
-                <div>
-                  <div class="c-course-card__titles">
-                    <p class="c-course-card__name w-xbold fs-18 f2 margin-0">Todo sobre macronutrientes</p>
-                    <p class="c-course-card__teacher fs-16 f2">Con Maca Wellness</p>
-                  </div>
-                  <p class="c-course-card__description fs-16 f2 lh-18">Lorem ipsum dolor sit amet, consect etu
-                    er adipiscing elit, sed diam nonummy
-                    nibh euismod nostrud .</p>
-                </div>
-                <div class="grid-x align-middle">
-                  <div class="small-6 medium-6">
-                    <span class="c-course-card__likes f2"> <i class="far fa-user"></i>  50</span>
-                  </div>
-                  <div class="small-6 medium-6 text-right">
-                    <a href="" class="c-button c-button--course display-block lh-14 f2">
-                      <span>+ Agendar evento</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <a href="" class="c-course-card__footer display-block text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                inscribirse
-              </a>
-            </div>
-          </div>
-          <div class="cell large-3">
-            <div class="c-course-card  c-course-card--dark br--large" >
-              <figure class="c-course-card__figure position-relative">
-                <img src="{{ theme.link }}/static/images/charlas/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                <div class="c-course-card__progress-bar position-absolute width-100">
-                  <div style="width:50%" class="bg-pri-alt height-100"></div>
-                </div>
-                <div class="c-course-card__cirle-corner position-absolute flex-container align-center-middle bg-dark warning-alt fs-25">
-                  15
-                </div>
-              </figure>
-              <div class="c-course-card__content flex-container fd-column padding-1 br--large">
-                <div>
-                  <div class="c-course-card__titles">
-                    <p class="c-course-card__name w-xbold fs-18 f2 margin-0">Todo sobre macronutrientes</p>
-                    <p class="c-course-card__teacher fs-16 f2">Con Maca Wellness</p>
-                  </div>
-                  <p class="c-course-card__description fs-16 f2 lh-18">Lorem ipsum dolor sit amet, consect etu
-                    er adipiscing elit, sed diam nonummy
-                    nibh euismod nostrud .</p>
-                </div>
-                <div class="grid-x align-middle">
-                  <div class="small-6 medium-6">
-                    <span class="c-course-card__likes f2"> <i class="far fa-user"></i>  50</span>
-                  </div>
-                  <div class="small-6 medium-6 text-right">
-                    <a href="" class="c-button c-button--course display-block lh-14 f2">
-                      <span>+ Agendar evento</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <a href="" class="c-course-card__footer display-block text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                inscribirse
-              </a>
-            </div>
-          </div>
-          <div class="cell large-3">
-            <div class="c-course-card  c-course-card--dark br--large" >
-              <figure class="c-course-card__figure position-relative">
-                <img src="{{ theme.link }}/static/images/charlas/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                <div class="c-course-card__progress-bar position-absolute width-100">
-                  <div style="width:50%" class="bg-pri-alt height-100"></div>
-                </div>
-                <div class="c-course-card__cirle-corner position-absolute flex-container align-center-middle bg-dark warning-alt fs-25">
-                  22
-                </div>
-              </figure>
-              <div class="c-course-card__content flex-container fd-column padding-1 br--large">
-                <div>
-                  <div class="c-course-card__titles">
-                    <p class="c-course-card__name w-xbold fs-18 f2 margin-0">Todo sobre macronutrientes</p>
-                    <p class="c-course-card__teacher fs-16 f2">Con Maca Wellness</p>
-                  </div>
-                  <p class="c-course-card__description fs-16 f2 lh-18">Lorem ipsum dolor sit amet, consect etu
-                    er adipiscing elit, sed diam nonummy
-                    nibh euismod nostrud .</p>
-                </div>
-                <div class="grid-x align-middle">
-                  <div class="small-6 medium-6">
-                    <span class="c-course-card__likes f2"> <i class="far fa-user"></i>  50</span>
-                  </div>
-                  <div class="small-6 medium-6 text-right">
-                    <a href="" class="c-button c-button--course display-block lh-14 f2">
-                      <span>+ Agendar evento</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <a href="" class="c-course-card__footer display-block text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                inscribirse
-              </a>
-            </div>
-          </div>
-          <div class="cell large-3">
-            <div class="c-course-card  c-course-card--dark br--large" >
-              <figure class="c-course-card__figure position-relative">
-                <img src="{{ theme.link }}/static/images/charlas/banner.png" alt="" class="of--cover br-top--large width-100 height-100"> 
-                <div class="c-course-card__progress-bar position-absolute width-100">
-                  <div style="width:50%" class="bg-pri-alt height-100"></div>
-                </div>
-                <div class="c-course-card__cirle-corner position-absolute flex-container align-center-middle bg-dark warning-alt fs-25">
-                  29
-                </div>
-              </figure>
-              <div class="c-course-card__content flex-container fd-column padding-1 br--large">
-                <div>
-                  <div class="c-course-card__titles">
-                    <p class="c-course-card__name w-xbold fs-18 f2 margin-0">Todo sobre macronutrientes</p>
-                    <p class="c-course-card__teacher fs-16 f2">Con Maca Wellness</p>
-                  </div>
-                  <p class="c-course-card__description fs-16 f2 lh-18">Lorem ipsum dolor sit amet, consect etu
-                    er adipiscing elit, sed diam nonummy
-                    nibh euismod nostrud .</p>
-                </div>
-                <div class="grid-x align-middle">
-                  <div class="small-6 medium-6">
-                    <span class="c-course-card__likes f2"> <i class="far fa-user"></i>  50</span>
-                  </div>
-                  <div class="small-6 medium-6 text-right">
-                    <a href="" class="c-button c-button--course display-block lh-14 f2">
-                      <span>+ Agendar evento</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <a href="" class="c-course-card__footer display-block text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                inscribirse
-              </a>
-            </div>
+            {% endfor %}
           </div>
         </div>
       </div>
-    </div>
+    {% endfor %}
 
-    <div v-if="true" class="c-mab-modal c-mab-modal--bg-blue c-mab-modal--mini flex-container align-center-middle width-100">
+    <div v-if="isOpenedModal" class="c-mab-modal c-mab-modal--bg-blue c-mab-modal--mini flex-container align-center-middle width-100">
       <div class="grid-x align-center width-100">
         <div class="cell small-10 medium-10 large-4">
           <div class="c-mab-modal-content bg-white ">
@@ -235,21 +97,23 @@
             <div class="c-form-new">
               <div class="c-form-new__input-container margin-bottom-2">
                 <div class="margin-bottom-1">
-                  <input class="f2 border-gray input-dark" type="text" placeholder="Nombre y apellido">
-                  <p v-if="false" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Nombre vacío o incorrecto</p>  
+                  <input v-model="user.fullname.value" class="f2 border-gray input-dark" type="text" placeholder="Nombre y apellido">
+                  <p v-if="isWrongField('fullname')" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Nombre vacío o incorrecto</p>  
                 </div>
                 <div>
-                  <input class="f2 border-gray input-dark" type="email" placeholder="Correo electrónico">
-                  <p v-if="false" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Email vacío o incorrecto</p>
+                  <input v-model="user.email.value" class="f2 border-gray input-dark" type="email" placeholder="Correo electrónico">
+                  <p v-if="isWrongField('email')" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Email vacío o incorrecto</p>
                 </div>
               </div>
               <div class="width-100 margin-top-2">
                 <div class="grid-x grid-margin-x grid-margin-y align-center">
                   <div class="cell small-6 medium-6 large-6 text-left">
-                    <button class="c-button c-button--success c-button--arrow c-button--small width-100 float-r w-mab-light">Volver</button>
+                    <button @click="isOpenedModal = false" class="c-button c-button--success c-button--arrow c-button--small width-100 float-r w-mab-light">Volver</button>
                   </div>
                   <div class="cell small-6 medium-6 large-6 text-right">
-                    <button class="c-button c-button--success c-button--arrow c-button--small width-100 float-l w-mab-light">Continuar</button>
+                    <button @click="sendInscription()" :disabled="user.isLoading" class="c-button c-button--success c-button--arrow c-button--small width-100 float-l w-mab-light">
+                      ${ (user.isLoading) ? 'Enviando...' : 'Continuar' }
+                    </button>
                   </div>
                 </div>
               </div>

@@ -28,9 +28,11 @@ require_once(__DIR__ . "/../controllers/AuthController.php");
 require_once(__DIR__ . "/../controllers/CourseController.php");
 require_once(__DIR__ . "/../controllers/TopicController.php");
 require_once(__DIR__ . "/../controllers/GEOController.php");
+require_once(__DIR__ . "/../controllers/EventController.php");
 
 new UserController();
 new AuthController();
 new CourseController();
 new TopicController();
 new GEOController();
+new EventController();
