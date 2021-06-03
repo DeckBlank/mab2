@@ -81,6 +81,10 @@
       max-width: 145px;
     }
   }
+
+  &--bg-blue {
+    background: rgba($color: $secondary-color, $alpha: 0.8);
+  }
 }
 
 @include breakpoint(large) {
