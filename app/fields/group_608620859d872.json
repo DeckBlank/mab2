@@ -1,6 +1,6 @@
 {
     "key": "group_608620859d872",
-    "title": "MAB Lider -  Content",
+    "title": "MAB Lider, Teacher y Speaker -  Content",
     "fields": [
         {
             "key": "field_60862098932a9",
@@ -91,6 +91,20 @@
                 "operator": "==",
                 "value": "leader"
             }
+        ],
+        [
+            {
+                "param": "user_role",
+                "operator": "==",
+                "value": "mab-teacher"
+            }
+        ],
+        [
+            {
+                "param": "user_role",
+                "operator": "==",
+                "value": "speaker"
+            }
         ]
     ],
     "menu_order": 0,
@@ -101,5 +115,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1621139299
+    "modified": 1622695210
 }
