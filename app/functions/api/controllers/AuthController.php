@@ -106,7 +106,7 @@ class AuthController {
                     'user_pass'     => $password,
                     'user_email'    => $email,
                     'first_name'    => $profile->name,
-                    'last_name'     => $profile->father_name . '-' . $profile->mother_name,
+                    'last_name'     => $profile->father_name . '-panda-' . $profile->mother_name,
                     'role'          => $role->type
                 ]);
 

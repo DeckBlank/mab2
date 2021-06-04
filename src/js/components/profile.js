@@ -15,7 +15,7 @@ Vue.component('profile',{
       <div @mouseover="blockMenu(true)" @mouseleave="blockMenu(false)" class="c-menu-dropdown right br--medium position-absolute f2">
         <ul class="bg-white ul-reset br--medium overflow-hidden">
           <li class="c-menu-dropdown__item w-bold">
-            <a :href="SITE_URL + '/perfil'" class="w-xbold text-center padding-horizontal-2">Mi perfil</a>
+            <a :href="SITE_URL + '/user/' + logedUser.user_nicename" class="w-xbold text-center padding-horizontal-2">Mi perfil</a>
           </li>
           <li class="c-menu-dropdown__item w-bold">
             <a :href="SITE_URL + '/me-organizo'" class="w-xbold text-center padding-horizontal-2">Me organizo</a>

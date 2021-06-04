@@ -14,6 +14,9 @@ const perfil = new Vue({
         behaviour: false,
         learning: false,
       },
+
+      isLoadingEnroll: true,
+      enrolledCourses: [],
     }
   },
   computed: {
@@ -23,41 +26,48 @@ const perfil = new Vue({
     this.global();
     this.hideLoading();
 
+    this.getEnrolledCourses();
     this.getTestLearning();
     this.getTestBehaviour();
-
-    setTimeout(function() {
-      let cursos = new Swiper('.c-my-courses .swiper-container', {
-        slidesPerView: 3,
-        spaceBetween: 0,
-        navigation: {
-          nextEl: '.c-my-courses .swiper-button-next',
-          prevEl: '.c-my-courses .swiper-button-prev',
-        },
-        breakpoints: {
-          // when window width is >= 320px
-          200: {
-            slidesPerView: 1,
-            spaceBetween: 10
-          },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 0,
-          },
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 0
-          },
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 0
-          }
-        }
-      });
-    })
   },
   methods: {
     ...baseActions(),
+    initSliderEnrolledCourses: function() {
+      window.setTimeout(() => {
+        new Swiper('.c-my-courses .swiper-container', {
+          slidesPerView: 3,
+          spaceBetween: 0,
+          navigation: {
+            nextEl: '.c-my-courses .swiper-button-next',
+            prevEl: '.c-my-courses .swiper-button-prev',
+          },
+          breakpoints: {
+            200: {
+              slidesPerView: 1,
+              spaceBetween: 10
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 0,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 0
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 0
+            }
+          },
+          on: {
+            init: () => {
+              this.isLoadingEnroll = false;
+            },
+          },
+        });
+      }, 1000)
+    },
+
     getTestLearning: function(){
       fetch(`${this.API}/test?user=${this.logedUser.user_email}`,{
         method: 'GET'
@@ -93,6 +103,35 @@ const perfil = new Vue({
       .catch(err => {
         throw err;
       })      
+    },
+
+    getEnrolledCourses: function() {
+      fetch(`${ this.API }/users/${ this.logedUser.user_id }/courses?user_email=${ this.logedUser.user_email }&_wpnonce=${ mab.nonce }`)
+      .then(res => { 
+        if (res.status >= 200 && res.status < 300) {
+          return res.json();
+        } else {
+          throw res;
+        }
+      })
+      .then(response => {
+        if (response.status) {
+          this.enrolledCourses = response.data;
+
+          this.initSliderEnrolledCourses();
+        } else {
+          window.setTimeout(() => {
+            this.isLoadingEnroll = false;
+          }, 1000);
+        }
+      })
+      .catch(err => {
+        window.setTimeout(() => {
+          this.isLoadingEnroll = false;
+        }, 1000);
+
+        throw err;
+      })
     },
   }
 })

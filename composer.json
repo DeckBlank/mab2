@@ -12,7 +12,8 @@
         "timber/timber": "^1.10",
         "opentok/opentok": "^4.4",
         "phpmailer/phpmailer": "^6.1",
-        "illuminate/database": "7.28"
+        "illuminate/database": "7.28",
+        "upstatement/routes": "*"
     },
     "require-dev": {
         "symfony/console": "^5.0"

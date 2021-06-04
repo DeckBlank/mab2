@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1622704552472';
+$assets_version = '1622788912877';
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -700,39 +700,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
-        ]);        
-    }elseif (is_page('perfil')){ 
-        register_assets('package', [
-            'handle'    => 'pandawp/package/swiper',
-            'src'       => $config['resources']['package_swiper'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
         ]);
-    
-        register_assets('package', [
-            'handle'    => 'pandawp/package/dom7',
-            'src'       => $config['resources']['package_dom7'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);
-    
-        register_assets('package', [
-            'handle'    => 'pandawp/package/ssrwindow',
-            'src'       => $config['resources']['package_ssr_window'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);              
-        register_assets('script', [
-            'handle'    => 'pandawp/js/page/perfil',
-            'src'       => $config['resources']['page_perfil'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);        
-
     }elseif (is_page('donaciones')){               
         register_assets('script', [
             'handle'    => 'pandawp/js/page/donaciones',
@@ -815,6 +783,10 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]); 
     }
+
+    Routes::map('perfil', function() {
+        echo('ddd');
+    });
 
 
     /**

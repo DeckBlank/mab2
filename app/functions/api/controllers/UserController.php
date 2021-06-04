@@ -156,6 +156,32 @@ class UserController{
                     return true;
                 }
             ));
+
+            register_rest_route( 'custom/v1', '/users/(?P<user_id>\d+)/profile', array(
+                'methods' => 'GET',
+                'callback' => array($this, 'showProfile'),
+                'permission_callback' => function ($request) {
+                    return ($request['_wpnonce']) ? true : false;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/users/(?P<user_id>\d+)/profile', array(
+                'methods' => 'PUT',
+                'callback' => array($this, 'updateProfile'),
+                'permission_callback' => function ($request) {
+                    // return ($request['_wpnonce']) ? true : false;
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/users/(?P<user_id>\d+)/profile/habilities', array(
+                'methods' => 'PUT',
+                'callback' => array($this, 'updateProfileHabilities'),
+                'permission_callback' => function ($request) {
+                    // return ($request['_wpnonce']) ? true : false;
+                    return true;
+                }
+            ));
         });
     }
 
@@ -548,6 +574,54 @@ class UserController{
             //Header
             include_once __DIR__."/../exports/reports/accesses.php";
         }        
+    }
+
+    public function showProfile($request) {
+        $userId = $request['user_id'];
+
+        $habilitesSoft = get_field('habilities_soft', 'user_' . $userId);
+        $habilitesHard = get_field('habilities_hard', 'user_' . $userId);
+
+        $data = [
+            'phrase'    => get_field('phrase', 'user_' . $userId),
+            'avatar'    => get_field('avatar', 'user_' . $userId),
+            'habilites' => [
+                'soft' => ($habilitesSoft) ? explode(',', $habilitesSoft) : [],
+                'hard' => ($habilitesHard) ? explode(',', $habilitesHard) : [],
+            ],
+        ];
+
+        return new WP_REST_Response((object)[
+            'message'   => 'Profile data found!!',
+            'data'      => $data,
+            'status'    => false
+        ], 200);
+    }
+
+    public function updateProfile($request) {
+        if (
+            !empty($request['firstname']) &&
+            !empty($request['father_name']) &&
+            !empty($request['mother_name']) &&
+            !empty($request['phrase'])
+        ) {
+            $userId = $request['user_id'];
+
+            wp_update_user([
+                'ID'            => $userId,
+                'first_name'    => $request['firstname'],
+                'last_name'     => sprintf('%s-panda-%s', $request['father_name'], $request['mother_name']),
+            ]);
+
+            update_field('phrase', $request['phrase'], 'user_' . $userId);
+
+            return new WP_REST_Response((object)[
+                'message'   => 'Profile updated!!',
+                'status'    => true
+            ], 200);
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 403 ) );
+        }
     }
 
     private function sendInstructions($request, $recovery_session, $user_id){
