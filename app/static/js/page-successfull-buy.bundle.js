@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([29,"package.vue","package.vuex"]);
+/******/ 	deferredModules.push([30,"package.vue","package.vuex"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -342,7 +342,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ 29:
+/***/ 30:
 /*!****************************************************!*\
   !*** multi ./src/js/pages/page-successfull-buy.js ***!
   \****************************************************/

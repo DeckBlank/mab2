@@ -57,7 +57,7 @@
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		"page-solicitar-cursos": 0
+/******/ 		"page-psicologos": 0
 /******/ 	};
 /******/
 /******/ 	var deferredModules = [];
@@ -148,7 +148,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([29,"package.vue","package.vuex"]);
+/******/ 	deferredModules.push([25,"package.vue","package.vuex"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -318,15 +318,15 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ "./src/js/pages/page-solicitar-cursos.js":
-/*!***********************************************!*\
-  !*** ./src/js/pages/page-solicitar-cursos.js ***!
-  \***********************************************/
+/***/ "./src/js/pages/page-psicologos.js":
+/*!*****************************************!*\
+  !*** ./src/js/pages/page-psicologos.js ***!
+  \*****************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ \"./node_modules/@babel/runtime/helpers/defineProperty.js\");\n/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.esm.js\");\n/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app */ \"./src/js/app.js\");\n/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store */ \"./src/js/store.js\");\n\n\nfunction ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }\n\nfunction _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }\n\n\n\n\nvar solicitar_cursos = new vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"](_objectSpread(_objectSpread({}, Object(_app__WEBPACK_IMPORTED_MODULE_2__[\"baseConfig\"])(_store__WEBPACK_IMPORTED_MODULE_3__[\"store\"])), {}, {\n  data: function data() {\n    return {\n      isLoading: false,\n      isSentForm: false,\n      form: {\n        fullname: {\n          value: ''\n        },\n        ocupation: {\n          value: ''\n        },\n        email: {\n          value: ''\n        },\n        mobile: {\n          value: ''\n        },\n        course: {\n          value: ''\n        }\n      }\n    };\n  },\n  computed: _objectSpread({}, Object(_app__WEBPACK_IMPORTED_MODULE_2__[\"baseState\"])()),\n  mounted: function mounted() {\n    this.global();\n    this.fillForm();\n    this.hideLoading();\n  },\n  methods: _objectSpread(_objectSpread({}, Object(_app__WEBPACK_IMPORTED_MODULE_2__[\"baseActions\"])()), {}, {\n    fillForm: function fillForm() {\n      if (this.logedUser) {\n        this.form.fullname.value = this.logedUser.user_auth;\n        this.form.email.value = this.logedUser.user_email;\n        this.form.mobile.value = this.logedUser.user_mobile;\n\n        switch (this.logedUser.user_rol) {\n          case 'teacher':\n            this.form.ocupation.value = 'Profesor';\n            break;\n\n          case 'student':\n            this.form.ocupation.value = 'Alumno';\n            break;\n\n          case 'tutor':\n            this.form.ocupation.value = 'Padre';\n            break;\n        }\n\n        var mab_metas = window.localStorage.getItem('mab_metas');\n\n        if (mab_metas) {\n          this.form.course.value = JSON.parse(mab_metas).course;\n        }\n      }\n    },\n    sendRequest: function sendRequest() {\n      var _this = this;\n\n      var form_data = new FormData();\n      Object.keys(this.form).forEach(function (key) {\n        form_data.append(key, _this.form[key].value);\n      });\n      this.isLoading = true;\n      fetch(\"\".concat(this.API, \"/course/request\"), {\n        method: 'POST',\n        body: form_data\n      }).then(function (res) {\n        if (res.status >= 200 && res.status < 300) {\n          _this.isLoading = false;\n          _this.isSentForm = true;\n        } else {\n          throw res;\n        }\n      }).catch(function (err) {\n        _this.isLoading = false;\n        throw err;\n      });\n    }\n  })\n}));\n\n//# sourceURL=webpack:///./src/js/pages/page-solicitar-cursos.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ \"./node_modules/@babel/runtime/helpers/defineProperty.js\");\n/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ \"./node_modules/vue/dist/vue.esm.js\");\n/* harmony import */ var _app__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../app */ \"./src/js/app.js\");\n/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../store */ \"./src/js/store.js\");\n\n\nfunction ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }\n\nfunction _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }\n\n\n\n\nvar psicologos = new vue__WEBPACK_IMPORTED_MODULE_1__[\"default\"](_objectSpread(_objectSpread({}, Object(_app__WEBPACK_IMPORTED_MODULE_2__[\"baseConfig\"])(_store__WEBPACK_IMPORTED_MODULE_3__[\"store\"])), {}, {\n  data: function data() {\n    return {};\n  },\n  computed: _objectSpread({}, Object(_app__WEBPACK_IMPORTED_MODULE_2__[\"baseState\"])()),\n  mounted: function mounted() {\n    this.global();\n    this.hideLoading();\n  },\n  methods: _objectSpread({}, Object(_app__WEBPACK_IMPORTED_MODULE_2__[\"baseActions\"])())\n}));\n\n//# sourceURL=webpack:///./src/js/pages/page-psicologos.js?");
 
 /***/ }),
 
@@ -342,14 +342,14 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) *
 
 /***/ }),
 
-/***/ 29:
-/*!*****************************************************!*\
-  !*** multi ./src/js/pages/page-solicitar-cursos.js ***!
-  \*****************************************************/
+/***/ 25:
+/*!***********************************************!*\
+  !*** multi ./src/js/pages/page-psicologos.js ***!
+  \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-eval("module.exports = __webpack_require__(/*! C:\\laragon\\www\\mab\\wp-content\\themes\\mab-theme\\src\\js\\pages\\page-solicitar-cursos.js */\"./src/js/pages/page-solicitar-cursos.js\");\n\n\n//# sourceURL=webpack:///multi_./src/js/pages/page-solicitar-cursos.js?");
+eval("module.exports = __webpack_require__(/*! C:\\laragon\\www\\mab\\wp-content\\themes\\mab-theme\\src\\js\\pages\\page-psicologos.js */\"./src/js/pages/page-psicologos.js\");\n\n\n//# sourceURL=webpack:///multi_./src/js/pages/page-psicologos.js?");
 
 /***/ })
 
