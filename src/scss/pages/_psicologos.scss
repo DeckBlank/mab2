@@ -1,0 +1,62 @@
+.c-psicologos-list {
+  padding: 3rem 0;
+
+  &__title {
+    margin-bottom: 4rem;
+
+    p {
+      font-size: $fs-40;
+      margin: 0;
+      line-height: 40px;
+    }
+  }
+
+  .c-us-comment {
+    &__figure {
+      width: 7rem;
+    }
+
+    &__content {
+      border-radius: 20px;
+      padding: 5rem 2rem 3rem;
+    }
+
+    .c-card-article {
+      max-width: 430px;
+      margin: 5rem auto 0;
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-psicologos-list {
+    &__title {
+      margin-top: 2rem;
+      margin-bottom: 6rem;
+
+      p {
+        font-size: 70px;
+        line-height: 70px;
+      }
+    }
+
+    .c-us-comment {
+      border-radius: 40px;
+
+      &__figure {
+        width: 9rem;
+        top: -6rem;
+      }
+
+      &__content {
+        border-radius: 40px;
+        padding: 5rem 2rem;
+      }
+
+      .c-card-article {
+        transform: rotate(-7deg);
+        margin-top: 0;
+      }
+    }
+  }
+}
