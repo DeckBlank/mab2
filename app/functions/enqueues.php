@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1622704552472';
+$assets_version = '1622935907153';
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -806,7 +806,46 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]); 
-    }elseif (is_page('nosotros')){               
+    }elseif (is_page('nosotros')){   
+        register_assets('package', [
+            'handle'    => 'pandawp/package/swiper',
+            'src'       => $config['resources']['package_swiper'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+
+        register_assets('package', [
+            'handle'    => 'pandawp/package/dom7',
+            'src'       => $config['resources']['package_dom7'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+
+        register_assets('package', [
+            'handle'    => 'pandawp/package/popperjs',
+            'src'       => $config['resources']['package_popperjs'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+
+        register_assets('package', [
+            'handle'    => 'pandawp/package/tippyjs',
+            'src'       => $config['resources']['package_tippyjs'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);
+
+        register_assets('package', [
+            'handle'    => 'pandawp/package/ssrwindow',
+            'src'       => $config['resources']['package_ssr_window'],
+            'deps'      => [ ],
+            'ver'       => $assets_version,
+            'in_footer' => true
+        ]);             
         register_assets('script', [
             'handle'    => 'pandawp/js/page/nosotros',
             'src'       => $config['resources']['page_nosotros'],
