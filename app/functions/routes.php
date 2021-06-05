@@ -6,6 +6,10 @@ $vertion    = '1622704552472';
 $config     = require get_theme_file_path('config/base.php');
 
 Routes::map('user/:user_nicename', function($routeParams) use ($vertion, $config) {
+    if (!is_user_logged_in()) {
+        header('Location:' . $context['site']->url . '/');        
+    }
+
     $params = [
         'route' => $routeParams,
         'view'  => 'perfil',

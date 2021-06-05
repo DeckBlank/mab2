@@ -12,11 +12,12 @@
           <div class="cell large-8">
             <div class="c-banner__content padding-vertical-3">
               <h1 class="c-banner__title text-right position-relative">  
-                <span class="white fs-70 c-lh--70 big">Estoy aquí porque quiero
-                  cambiar el mundo</span>
-                  <button  type="button" class="c-edit-circle position-absolute bg-white sec-color fs-25">
-                    <i class="far fa-pen"></i>
-                  </button>
+                <span class="white fs-70 c-lh--70 big">
+                  ${(user.profile && user.profile.phrase) ? user.profile.phrase : 'Estoy aquí porque quiero cambiar el mundo' }
+                </span>
+                <button @click="user.isModalOpened = true" class="c-edit-circle position-absolute bg-white sec-color fs-25">
+                  <i class="far fa-pen"></i>
+                </button>
               </h1>
             </div>
           </div>
@@ -28,21 +29,24 @@
         </div>
       </div>
     </div>
+
     <div class="c-user-info mrgin-bottom-3">
       <div class="grid-container">
         <div class="grid-x">
           <div class="cell large-4">
             <figure class="c-user-info__icon position-relative margin-right-1">
-              <img src="{{ theme.link }}/static/images/curso/doc-2.png" alt="" class=" width-100 height-100 of--cover"> 
-              <button type="button" class="c-edit-circle position-absolute bg-white sec-color fs-25">
+              <img :src="(user.profile && user.profile.avatar) ? user.profile.avatar.url : userBasicAvatar" alt="" class=" width-100 height-100 of--cover">
+
+              <input @change="changeAvatarImage" id="avatar-file" type="file" class="hide" :disabled="avatar.isLoadingAvatar">
+              <label for="avatar-file" class="c-edit-circle position-absolute bg-white sec-color fs-25">
                 <i class="far fa-pen"></i> 
-              </button> 
+              </label> 
             </figure>
           </div>
           <div class="cell large-8 position-relative ">
             <h2 class="c-user-info__name w-xbold dark text-center large-text-left f2 margin-bottom-0"> 
-              <span>Angela Hinostroza</span>   
-              <button type="button" class="c-edit-circle c-edit-circle--text bg-white gray margine-left-1 fs-14">
+              <span>${ userFullName }</span>   
+              <button @click="user.isModalOpened = true" class="c-edit-circle c-edit-circle--text bg-white gray margine-left-1 fs-14">
                 EDITAR <i class="far fa-pen"></i>
               </button> 
             </h2>
@@ -52,49 +56,36 @@
         </div>
       </div>
     </div>
+
     <div class="c-skills padding-vertical-3 margin-top-3">
       <div class="grid-container">
         <h2 class="c-skills__title margin-bottom-3 position-relative">
           <p class="dark fs-50 lh-40 margin-bottom-0 text-uppercase">mis habilidades</p>
-          <button type="button" class="c-edit-circle position-absolute bg-white sec-color fs-25">
+          <button v-if="skills.view == 1" @click="skills.view = 2" type="button" class="c-edit-circle position-absolute bg-white sec-color fs-25">
             <i class="far fa-pen"></i> 
           </button> 
         </h2>
         <transition name="fade" mode="out-in">
-          <div v-if="false" key="mapa">
+          <div v-if="skills.view == 1" key="mapa">
             <div class="c-skills-map position-relative desktop">
               <figure class="c-skills__figure position-relative">
                 <img class="width-100" src="{{ theme.link }}/static/images/perfil/mapa.png" alt="">
-                <div class="c-float-circle fc-1 flex-container align-center-middle dark f2 position-absolute w-xbold text-center padding-1">
-                  Optimización del tiempo
+                <div
+                  v-for="(option, oindex) of skills.values.soft.value"
+                  :key="option.id"
+                  class="c-float-circle flex-container align-center-middle dark f2 position-absolute w-xbold text-center padding-1"
+                  :class="'fc-' + (oindex + 1)"
+                >
+                  ${ option }
                 </div>
-                <div class="c-float-circle fc-2 flex-container align-center-middle dark f2 position-absolute w-xbold text-center padding-1">
-                  Pensamiento crítico
-                </div>
-                <div class="c-float-circle fc-3 flex-container align-center-middle dark f2 position-absolute w-xbold text-center padding-1">
-                  Empatía
-                </div>
-                <div class="c-float-circle fc-4 flex-container align-center-middle dark f2 position-absolute w-xbold text-center padding-1">
-                  Manejo de emociones
-                </div>
-                <div class="c-float-circle fc-5 flex-container align-center-middle dark f2 position-absolute w-xbold text-center padding-1">
-                  Perseverancia
-                </div>
-      
-                <div class="c-float-box fb-1 flex-container align-center-middle white f2 position-absolute w-xbold text-center padding-1">
-                  Matemáticas
-                </div>
-                <div class="c-float-box fb-2 flex-container align-center-middle white f2 position-absolute w-xbold text-center padding-1">
-                  Buena memoria
-                </div>
-                <div class="c-float-box fb-3 flex-container align-center-middle white f2 position-absolute w-xbold text-center padding-1">
-                  Deportes
-                </div>
-                <div class="c-float-box fb-4 flex-container align-center-middle white f2 position-absolute w-xbold text-center padding-1">
-                  Dibujar
-                </div>
-                <div class="c-float-box fb-5 flex-container align-center-middle white f2 position-absolute w-xbold">
-                  Cantar
+
+                <div
+                  v-for="(option, oindex) of skills.values.soft.value"
+                  :key="option.id"
+                  class="c-float-box fb-1 flex-container align-center-middle white f2 position-absolute w-xbold text-center padding-1"
+                  :class="'fb-' + (oindex + 1)"
+                >
+                  ${ option }
                 </div>
               </figure>
               <div class="c-float-legend position-absolute">
@@ -112,182 +103,42 @@
                   <span class="color-circle margin-right-1 bg-warning"></span> Habilidades blandas 
                 </div>
               </div>
-              <div class="c-skills-list-item w-xbold fs-21 flex-container align-center margin-bottom-1">
+              <div v-for="option of skills.values.soft.value" :key="option.id" class="c-skills-list-item w-xbold fs-21 flex-container align-center margin-bottom-1">
                 <img src="{{ theme.link }}/static/images/perfil/head.png" class="of--contain" alt="">
-                <div class="c-skills-list-item__text padding-vertical-1 f2 bg-warning dark">Optimización del tiempo</div>
+                <div class="c-skills-list-item__text padding-vertical-1 f2 bg-warning dark">${ option }</div>
               </div>
-              <div class="c-skills-list-item w-xbold fs-21 flex-container align-center margin-bottom-1">
-                <img src="{{ theme.link }}/static/images/perfil/head.png" class="of--contain" alt="">
-                <div class="c-skills-list-item__text padding-vertical-1 f2 bg-warning dark">Pensamiento crítico</div>
-              </div>
-              <div class="c-skills-list-item w-xbold fs-21 flex-container align-center margin-bottom-1">
-                <img src="{{ theme.link }}/static/images/perfil/head.png" class="of--contain" alt="">
-                <div class="c-skills-list-item__text padding-vertical-1 f2 bg-warning dark">Empatía</div>
-              </div>
-              <div class="c-skills-list-item w-xbold fs-21 flex-container align-center margin-bottom-1">
-                <img src="{{ theme.link }}/static/images/perfil/head.png" class="of--contain"  alt="">
-                <div class="c-skills-list-item__text padding-vertical-1 f2 bg-warning dark">Manejo de emociones</div>
-              </div>
-              <div class="c-skills-list-item w-xbold fs-21 flex-container align-center margin-bottom-1">
-                <img src="{{ theme.link }}/static/images/perfil/head.png" class="of--contain" alt="">
-                <div class="c-skills-list-item__text padding-vertical-1 f2 bg-warning dark">Perseverancia</div>
-              </div>
+
               <div class="c-float-legend margin-top-2">
                 <div class="c-float-legend__item w-xbold dark f2 fs-16 margin-bottom-1 flex-container align-middle">
                   <span class="color-box margin-right-1 bg-sec-color"></span> Habilidades duras 
                 </div>
               </div>
-              <div class="c-skills-list-item w-xbold fs-21 flex-container align-center margin-bottom-1">
+              <div v-for="option of skills.values.soft.value" :key="option.id" class="c-skills-list-item w-xbold fs-21 flex-container align-center margin-bottom-1">
                 <img src="{{ theme.link }}/static/images/perfil/head.png" class="of--contain" alt="">
-                <div class="c-skills-list-item__text padding-vertical-1 f2 bg-sec-color white">Matemáticas</div>
+                <div class="c-skills-list-item__text padding-vertical-1 f2 bg-sec-color white">${ option }</div>
               </div>
-              <div class="c-skills-list-item w-xbold fs-21 flex-container align-center margin-bottom-1">
-                <img src="{{ theme.link }}/static/images/perfil/head.png" class="of--contain" alt="">
-                <div class="c-skills-list-item__text padding-vertical-1 f2 bg-sec-color white">Buena memoria</div>
-              </div>
-              <div class="c-skills-list-item w-xbold fs-21 flex-container align-center margin-bottom-1">
-                <img src="{{ theme.link }}/static/images/perfil/head.png" class="of--contain" alt="">
-                <div class="c-skills-list-item__text padding-vertical-1 f2 bg-sec-color white">Deportes</div>
-              </div>
-              <div class="c-skills-list-item w-xbold fs-21 flex-container align-center margin-bottom-1">
-                <img src="{{ theme.link }}/static/images/perfil/head.png" class="of--contain" alt="">
-                <div class="c-skills-list-item__text padding-vertical-1 f2 bg-sec-color white">Dibujar</div>
-              </div>
-              <div class="c-skills-list-item w-xbold fs-21 flex-container align-center margin-bottom-1">
-                <img src="{{ theme.link }}/static/images/perfil/head.png" class="of--contain" alt="">
-                <div class="c-skills-list-item__text padding-vertical-1 f2 bg-sec-color white">Cantar</div>
-              </div>
-    
             </div>
           </div>
-          <div v-if="true" key="editor">
+          <div v-else-if="skills.view == 2" key="editor">
             <div class="c-skills-editor">
               <h3 class="c-skills-editor__title margin-bottom-0 w-xbold dark f2">Habilidades blandas</h3>
               <p class="fs-18 f2 gray margin-bottom-1">Elige 5</p>
-              <div class="grid-x grid-margin-x align-middle">
+              <div class="grid-x grid-margin-x grid-margin-y align-middle">
                 <div class="cell large-7">
                   <div class="c-skills-editor-list c-skills-editor-list--warning">
-                    <div class="grid-x align-self-stretch">
-                      <div class="cell medium-4 large-3">
+                    <div class="grid-x grid-margin-x grid-margin-y align-self-stretch">
+                      <div v-for="option of skills.soft.options" :key="option.id" class="cell medium-4 large-3">
                         <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="15" value="15" hidden>
-                          <label for="15" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Optimización del tiempo
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="1" value="1" hidden>
-                          <label for="1" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Optimización del tiempo
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="2" value="2" hidden>
-                          <label for="2" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Pensamiento crítico
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="3" value="3" hidden>
-                          <label for="3" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Relaciones interpersonales
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="4" value="4" hidden>
-                          <label for="4" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Perseverancia
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="5" value="5" hidden>
-                          <label for="5" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Autoconocimiento
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="6" value="6" hidden>
-                          <label for="6" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Solución de
-                            problemas y
-                            conflictos
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="7" value="7" hidden>
-                          <label for="7" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Actitud positiva
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="8" value="8" hidden>
-                          <label for="8" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Manejo de emociones
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="9" value="9" hidden>
-                          <label for="9" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Toma de decisiones
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="10" value="10" hidden>
-                          <label for="10" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Manejo de
-                            tensión y estrés
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="11" value="11" hidden>
-                          <label for="11" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Empatía
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="12" value="12" hidden>
-                          <label for="12" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Comunicación asertiva
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="13" value="13" hidden>
-                          <label for="13" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Motivación
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="14" value="14" hidden>
-                          <label for="14" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Pensamiento creativo
+                          <input
+                            v-model="skills.values.soft.value"
+                            :disabled="skills.values.soft.value.length == 5 && skills.values.soft.value.indexOf(option) === -1"
+                            type="checkbox"
+                            :id="'s' + option"
+                            :value="option"
+                            hidden
+                          >
+                          <label :for="'s' + option" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
+                            ${ option }
                           </lable>
                         </div>
                       </div>
@@ -296,143 +147,39 @@
                 </div>
                 <div class="cell large-5">
                   <div class="c-skills-editor__description f2 text-center bg-warning br--large padding-2">
-                    <h3 class="c-skills-editor__title margin-bottom-0 w-xbold dark f2 margin-bottom-1">Habilidades blandas</h3>
+                    <h3 class="c-skills-editor__title margin-bottom-0 w-xbold dark f2 margin-bottom-1">Actitud positiva</h3>
                     <p class="fs-18 dark">
-                      Lorem ipsum dolor sit amet, consectetuer
-                      adipiscing elit, sed diam nonummy nibh
-                      euismod tincidunt ut laoreet dolore
-                      magna aliquam erat volutpat. Ut wisi
-                      enim ad minim veniam, quis nostrud
-                      exerci tation ullamcorper suscipit lobortis
+                      Encontrar la oportunidad o el provecho 
+                      que nos puede traer una situación 
+                      compleja. Se trata de enfrentar los 
+                      momentos con una mirada optimista, 
+                      intentando extraer lo mejor de cada 
+                      situación.
                     </p>
                   </div>
                 </div>
               </div>
+              <p v-if="isWrongFieldHability('soft')" class="">La cantidad de items esta incompleta</p>
             </div>
             <div class="c-skills-editor">
               <h3 class="c-skills-editor__title margin-bottom-0 w-xbold dark f2">Habilidades duras</h3>
               <p class="fs-18 f2 gray margin-bottom-1">Elige 5</p>
-              <div class="grid-x grid-margin-x align-middle">
+              <div class="grid-x grid-margin-x grid-margin-y align-middle">
                 <div class="cell large-7">
                   <div class="c-skills-editor-list c-skills-editor-list--secondary">
-                    <div class="grid-x align-self-stretch">
-                      <div class="cell medium-4 large-3">
+                    <div class="grid-x grid-margin-x grid-margin-y align-self-stretch">
+                      <div v-for="option of skills.hard.options" class="cell medium-4 large-3">
                         <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="a1" value="a1" hidden>
-                          <label for="a1" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Deportes
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="a2" value="a2" hidden>
-                          <label for="a2" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Idiomas
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="a3" value="a3" hidden>
-                          <label for="a3" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Matemáticas
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="a4" value="a4" hidden>
-                          <label for="a4" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Correr veloz
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="a5" value="a5" hidden>
-                          <label for="a5" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Bailar
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="a6" value="a6" hidden>
-                          <label for="a6" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Instrumentos musicales
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="a7" value="a7" hidden>
-                          <label for="a7" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Cantar
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="a8" value="a8" hidden>
-                          <label for="a8" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Pintar
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="a9" value="a9" hidden>
-                          <label for="a9" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Dibujar
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="a10" value="a10" hidden>
-                          <label for="a10" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Jugar videojuegos
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="a11" value="a11" hidden>
-                          <label for="a11" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Lectura
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="a12" value="a12" hidden>
-                          <label for="a12" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Pensamiento crítico
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="a13" value="a13" hidden>
-                          <label for="a13" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Pensamiento crítico
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="a14" value="a14" hidden>
-                          <label for="a14" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Optimización del tiempo
-                          </lable>
-                        </div>
-                      </div>
-                      <div class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input type="checkbox" name="hb" id="a14" value="a14" hidden>
-                          <label for="a14" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            Optimización del tiempo
+                          <input
+                            v-model="skills.values.hard.value"
+                            type="checkbox"
+                            :disabled="skills.values.hard.value.length == 5 && skills.values.hard.value.indexOf(option) === -1"
+                            :id="'h' + option"
+                            :value="option"
+                            hidden
+                          >
+                          <label :for="'h' + option" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
+                            ${ option }
                           </lable>
                         </div>
                       </div>
@@ -453,15 +200,17 @@
                   </div>
                 </div>
               </div>
+              <p v-if="isWrongFieldHability('hard')" class="">La cantidad de items esta incompleta</p>
             </div>
             <div class="flex-container align-center-middle width-100 margin-top-2">
-              <button class="c-button c-button--secondary-warning br--large f2 fs-21 w-xbold margin-right-1">Volver a perfil</button>
-              <button class="c-button c-button--secondary-warning br--large f2 fs-21 w-xbold">Guardar</button>
+              <button @click="skills.view = 1" class="c-button c-button--secondary-warning br--large f2 fs-21 w-xbold margin-right-1">Volver</button>
+              <button @click="updateProfileHabilities()" :disabled="skills.isLoading" class="c-button c-button--secondary-warning br--large f2 fs-21 w-xbold">Guardar</button>
             </div>
           </div>
         </transition>
       </div>
     </div>
+
     <div class="c-my-courses margin-vertical-3">
       <div class="grid-container">
         <h2 class="margin-bottom-2">
@@ -674,6 +423,7 @@
         </div> -->
       </div>
     </div>
+
     <div class="c-my-tests margin-vertical-3">
       <div class="grid-container">
         <h2 class="margin-bottom-2">
@@ -710,55 +460,55 @@
       </div>
     </div>
 
-    <div v-if="false" class="c-mab-modal padding-2 width-100 flex-container align-center-middle">
-        <div class="c-mab-modal__content bg-white br--large padding-2">
-          <h3 class="c-modal-editor__title dark w-xbold fs-25 f2 text-uppercase margin-bottom-1">Tus datos</h3>
-          <form class="c-form-new text-left margin-top-1" action="">
-            <div class="grid-x grid-margin-x grid-margin-y">
-              <div class="cell">
-                <div class="c-form-new__input-container">
-                  <label class="w-bold f2 dark" for="">Nombre</label>
-                  <input class="f2 input-reset border-dark" type="text">
-                  <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
-                    Nombre vacio o no valido
-                  </p>
-                </div>
+    <div class="c-mab-modal padding-2 width-100 flex-container align-center-middle" :class="{'visible' : user.isModalOpened}">
+      <div class="c-mab-modal__content bg-white br--large padding-2">
+        <h3 class="c-modal-editor__title dark w-xbold fs-25 f2 text-uppercase margin-bottom-1">Tus datos</h3>
+        <form @submit="updateProfileData($event)" class="c-form-new text-left margin-top-1" action="">
+          <div class="grid-x grid-margin-x grid-margin-y">
+            <div class="cell">
+              <div class="c-form-new__input-container">
+                <label class="w-bold f2 dark" for="">Nombre</label>
+                <input v-model="user.firstname.value" class="f2 input-reset border-dark" type="text">
+                <p v-if="isWrongField('firstname')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
+                  Nombre vacío o no válido
+                </p>
               </div>
-              <div class="cell large-6">
-                <div class="c-form-new__input-container">
-                  <label class="w-bold f2 dark" for="">Apellido Paterno</label>
-                  <input class="f2 input-reset border-dark" type="text">
-                  <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
-                    Apellido Paterno vacio o no valido
-                  </p>
-                </div>
-              </div>
-              <div class="cell large-6">
-                <div class="c-form-new__input-container">
-                  <label class="w-bold f2 dark" for="">Apellido Materno</label>
-                  <input class="f2 input-reset border-dark" type="text">
-                  <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
-                    Apellido Materno vacio o no valido
-                  </p>
-                </div>
-              </div>
-              <div class="cell">
-                <div class="c-form-new__input-container">
-                  <label class="w-bold f2 dark" for="">Frase</label>
-                  <textarea class="f2 input-reset border-dark br--medium" name="" id="" cols="30" rows="3"></textarea>
-                  <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
-                    Frase vacio o no valido
-                  </p>
-                </div>
-              </div>
-              <div class="cell text-right">
-                <button @click="modal = false" type="button" class="c-button c-button--primary--real-ghost f2 margin-right-1">Cancelar</button>
-                <button @click="modal = false" type="button" class="c-button c-button--primary f2">Aceptar</button>
-              </div>
-
             </div>
-
-        </div>
+            <div class="cell large-6">
+              <div class="c-form-new__input-container">
+                <label class="w-bold f2 dark" for="">Apellido Paterno</label>
+                <input v-model="user.fatherName.value" class="f2 input-reset border-dark" type="text">
+                <p v-if="isWrongField('fatherName')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
+                  Apellido Paterno vacío o no válido
+                </p>
+              </div>
+            </div>
+            <div class="cell large-6">
+              <div class="c-form-new__input-container">
+                <label class="w-bold f2 dark" for="">Apellido Materno</label>
+                <input v-model="user.motherName.value" class="f2 input-reset border-dark" type="text">
+                <p v-if="isWrongField('motherName')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
+                  Apellido Materno vacío o no válido
+                </p>
+              </div>
+            </div>
+            <div class="cell">
+              <div class="c-form-new__input-container">
+                <label class="w-bold f2 dark" for="">Frase</label>
+                <textarea v-model="user.phrase.value" class="f2 input-reset border-dark br--medium" name="" id="" cols="30" rows="3"></textarea>
+                <p v-if="isWrongField('phrase')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
+                  Frase vacía o muy corta
+                </p>
+              </div>
+            </div>
+            <div class="cell text-right">
+              <button @click="user.isModalOpened = false" class="c-button c-button--primary--real-ghost f2 margin-right-1">Cancelar</button>
+              <button :disabled="user.isLoading" class="c-button c-button--primary f2">
+                ${(user.isLoading) ? 'Actualizando...' : 'Aceptar'}
+              </button>
+            </div>
+          </div>
+      </div>
     </div>
   </section>
 {% endblock %}

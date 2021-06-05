@@ -600,7 +600,7 @@ class UserController{
         return new WP_REST_Response((object)[
             'message'   => 'Profile data found!!',
             'data'      => $data,
-            'status'    => false
+            'status'    => true
         ], 200);
     }
 
@@ -640,6 +640,7 @@ class UserController{
             if ($user) {
                 return new WP_REST_Response((object)[
                     'message'   => 'Profile updated!!',
+                    "avatar"    => $userAvatar->url,
                     'status'    => true
                 ], 200);
             } else {
