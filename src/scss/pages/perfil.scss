@@ -1,7 +1,13 @@
 .c-section--perfil {
   .c-banner {
     .c-edit-circle {
-      bottom: -5rem;
+      bottom: -6rem;
+    }
+
+    &__title {
+      span {
+        font-size: 65px;
+      }
     }
   }
 
@@ -29,6 +35,10 @@
       color: $gray;
     }
 
+    .c-edit-circle {
+      margin-bottom: 1rem;
+    }
+
     #avatar-file:disabled ~ .c-edit-circle {
       opacity: 0.5;
       cursor: not-allowed;
@@ -54,6 +64,12 @@
   }
 
   .c-skills {
+    &__title {
+      .c-edit-circle {
+        bottom: 0;
+      }
+    }
+
     .c-skills-list-item {
       justify-content: flex-start;
 
@@ -131,6 +147,7 @@
       }
 
       &__title {
+        margin-left: 1.5rem;
         height: 150px;
         display: flex;
         align-items: center;
@@ -230,7 +247,7 @@
         height: 17%;
         border-radius: 20px;
         background: rgba($color: $secondary-color, $alpha: 0.5);
-        font-size: $fs-21;
+        font-size: $fs-18;
         line-height: 21px;
 
         &.fb-1 {
