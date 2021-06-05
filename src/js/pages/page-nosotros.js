@@ -44,6 +44,7 @@ const nosotros = new Vue({
     },100)
 
     this.initTooltips();
+    // this.initTooltipsMobile();
   },
   methods: {
     ...baseActions(),
@@ -56,11 +57,35 @@ const nosotros = new Vue({
     initTooltips: function(){
       const BASE_CONFIG = {
         allowHTML: true,
-        theme: 'mab-warning',
+        theme: 'mab-secondary',
         inertia: true,
         animation: 'scale-subtle',
         trigger: 'click',
         placement: 'left',
+      }
+
+      tippy('#test', {
+        content: document.querySelector('#test-template').innerHTML,
+        ...BASE_CONFIG
+      });
+      tippy('#test-2', {
+        content: document.querySelector('#test-template-2').innerHTML,
+        ...BASE_CONFIG
+      });
+      tippy('#test-3', {
+        content: document.querySelector('#test-template-3').innerHTML,
+        ...BASE_CONFIG
+      });
+    },
+
+    initTooltipsMobile: function(){
+      const BASE_CONFIG = {
+        allowHTML: true,
+        theme: 'mab-secondary',
+        inertia: true,
+        animation: 'scale-subtle',
+        trigger: 'click',
+        placement: 'bottom',
       }
 
       tippy('#test', {
