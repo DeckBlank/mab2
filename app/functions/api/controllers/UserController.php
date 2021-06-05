@@ -5,6 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 use Timber\Timber;
 
 require(__DIR__ . '/../models/UserModel.php');
+require(__DIR__ . '/../models/schema/User.php');
 require(__DIR__ . '/../models/schema/UserCourse.php');
 require(__DIR__ . '/../models/schema/UserCourseEnrollment.php');
 require(__DIR__ . '/../models/schema/UserTopic.php');
@@ -589,9 +590,11 @@ class UserController{
         $habilitesHard = get_field('habilities_hard', 'user_' . $userId);
 
         $data = [
-            'phrase'    => get_field('phrase', 'user_' . $userId),
-            'avatar'    => get_field('avatar', 'user_' . $userId),
-            'habilites' => [
+            'user_firstname'    => get_user_meta($userId, 'first_name', true),
+            'user_lastname'     => get_user_meta($userId, 'last_name', true),
+            'phrase'            => get_field('phrase', 'user_' . $userId),
+            'avatar'            => get_field('avatar', 'user_' . $userId),
+            'habilites'         => [
                 'soft' => ($habilitesSoft) ? explode(',', $habilitesSoft) : [],
                 'hard' => ($habilitesHard) ? explode(',', $habilitesHard) : [],
             ],
