@@ -117,8 +117,8 @@ if ($post->post_type == "video") {
         'twitter'   => sprintf(
             'https://twitter.com/share?text=%s&url=%s',
             'Hola, te comparto esta articulo de mab',
-            $context['post']->link,
-        )
+            $context['post']->link
+        ),
     ];
 
     $articles = Timber::get_posts([
