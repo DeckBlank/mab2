@@ -1,0 +1,51 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--blog">
+    <div class="c-blog bg-warning-alt">
+      <div class="grid-container">
+        <h2 class="margin-bottom-3">
+          <p class="dark fs-70 margin-bottom-0 text-uppercase">blog</p>
+        </h2>
+        <div class="position-relative">
+          <figure class="c-blog__float-figure f1 position-absolute">
+            <img class="of--contain" src="{{ theme.link }}/static/images/blog/eye.png" alt="">
+          </figure>
+          <figure class="c-blog__float-figure f2 position-absolute">
+            <img class="of--contain" src="{{ theme.link }}/static/images/blog/heart.png" alt="">
+          </figure>
+          <figure class="c-blog__float-figure f3 position-absolute">
+            <img class="of--contain" src="{{ theme.link }}/static/images/blog/green.png" alt="">
+          </figure>
+          <figure class="c-blog__float-figure f4 position-absolute">
+            <img class="of--contain" src="{{ theme.link }}/static/images/blog/lapiz.png" alt="">
+          </figure>
+          <div class="grid-x grid-margin-x grid-margin-y position-relative">
+            {% for article in articles %}
+              <div class="cell large-4">
+                <div class="c-card-article bg-white mab-shadow-soft">
+                  <figure class="c-card-article__figure margin-bottom-1">
+                    <img class="width-100 height-100 of--cover" src="{{ article.author }}" alt="">
+                  </figure>
+                  <div class="c-card-aticle__content">
+                    <h3 class="c-card-aticle__title dark f2 w-xbold fs-25 lh-25 margin-0">
+                      {{ article.title }}
+                    </h3>
+                    <p class="c-card-aticle__title dark f2 fs-16">{{ article.date }}</p>
+                    <div class="text-center padding-top-1">
+                      <a href="{{ article.link }}" class="dark c-link--ho-dark f2 w-xbold fs-16">Leer más</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
