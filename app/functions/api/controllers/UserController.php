@@ -5,6 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 use Timber\Timber;
 
 require(__DIR__ . '/../models/UserModel.php');
+require(__DIR__ . '/../models/schema/User.php');
 require(__DIR__ . '/../models/schema/UserCourse.php');
 require(__DIR__ . '/../models/schema/UserCourseEnrollment.php');
 require(__DIR__ . '/../models/schema/UserTopic.php');
@@ -154,6 +155,38 @@ class UserController{
                 'callback' => array($this, 'saveEnrollments'),
                 'permission_callback' => function ($request) {
                     return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/users/(?P<user_id>\d+)/profile', array(
+                'methods' => 'GET',
+                'callback' => array($this, 'showProfile'),
+                'permission_callback' => function ($request) {
+                    return ($request['_wpnonce']) ? true : false;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/users/(?P<user_id>\d+)/profile', array(
+                'methods' => 'PUT',
+                'callback' => array($this, 'updateProfile'),
+                'permission_callback' => function ($request) {
+                    return ($request['_wpnonce']) ? true : false;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/users/(?P<user_id>\d+)/profile/avatar', array(
+                'methods' => 'POST',
+                'callback' => array($this, 'updateProfileAvatar'),
+                'permission_callback' => function ($request) {
+                    return ($request['_wpnonce']) ? true : false;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/users/(?P<user_id>\d+)/profile/habilities', array(
+                'methods' => 'PUT',
+                'callback' => array($this, 'updateProfileHabilities'),
+                'permission_callback' => function ($request) {
+                    return ($request['_wpnonce']) ? true : false;
                 }
             ));
         });
@@ -550,6 +583,99 @@ class UserController{
         }        
     }
 
+    public function showProfile($request) {
+        $userId = $request['user_id'];
+
+        $habilitesSoft = get_field('habilities_soft', 'user_' . $userId);
+        $habilitesHard = get_field('habilities_hard', 'user_' . $userId);
+
+        $data = [
+            'user_firstname'    => get_user_meta($userId, 'first_name', true),
+            'user_lastname'     => get_user_meta($userId, 'last_name', true),
+            'phrase'            => get_field('phrase', 'user_' . $userId),
+            'avatar'            => get_field('avatar', 'user_' . $userId),
+            'habilites'         => [
+                'soft' => ($habilitesSoft) ? explode(',', $habilitesSoft) : [],
+                'hard' => ($habilitesHard) ? explode(',', $habilitesHard) : [],
+            ],
+        ];
+
+        return new WP_REST_Response((object)[
+            'message'   => 'Profile data found!!',
+            'data'      => $data,
+            'status'    => true
+        ], 200);
+    }
+
+    public function updateProfile($request) {
+        if (
+            !empty($request['firstname']) &&
+            !empty($request['father_name']) &&
+            !empty($request['mother_name']) &&
+            !empty($request['phrase'])
+        ) {
+            $userId = $request['user_id'];
+
+            wp_update_user([
+                'ID'            => $userId,
+                'first_name'    => $request['firstname'],
+                'last_name'     => sprintf('%s-panda-%s', $request['father_name'], $request['mother_name']),
+            ]);
+
+            update_field('phrase', $request['phrase'], 'user_' . $userId);
+
+            return new WP_REST_Response((object)[
+                'message'   => 'Profile updated!!',
+                'status'    => true
+            ], 200);
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 403 ) );
+        }
+    }
+
+    public function updateProfileAvatar($request) {
+        if (
+            isset($_FILES['avatar'])
+        ) {
+            $userAvatar = $this::__saveAvatarFile();
+            $user       = update_field('avatar', $userAvatar->id, 'user_' . $request['user_id']);
+
+            if ($user) {
+                return new WP_REST_Response((object)[
+                    'message'   => 'Profile updated!!',
+                    "avatar"    => $userAvatar->url,
+                    'status'    => true
+                ], 200);
+            } else {
+                return new WP_REST_Response((object)[
+                    'message'   => 'Profile avatar not updated!!',
+                    'status'    => false
+                ], 200);
+            }
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 403 ) );
+        }
+    }
+
+    public function updateProfileHabilities($request) {
+        if (
+            !empty($request['soft']) &&
+            !empty($request['hard'])
+        ) {
+            $userId = $request['user_id'];
+
+            update_field('habilities_soft', $request['soft'], 'user_' . $userId);
+            update_field('habilities_hard', $request['hard'], 'user_' . $userId);
+
+            return new WP_REST_Response((object)[
+                'message'   => 'Profile habilities updated!!',
+                'status'    => true
+            ], 200);
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 403 ) );
+        }
+    }
+
     private function sendInstructions($request, $recovery_session, $user_id){
         $username = get_user_by('id', $user_id)->data->user_login;
         $mail = new PHPMailer(true);
@@ -691,6 +817,46 @@ class UserController{
             return true;
         } catch (Exception $e) {
             return false;
+        }
+    }
+
+    private function __saveAvatarFile() {
+        $uploadDir = wp_upload_dir(); $i = 1;
+
+        $avatar         = $_FILES['avatar'];
+        $avatarFilepath = $uploadDir['path'] . '/' . $avatar['name'];
+        $avatarFilemime = mime_content_type( $avatar['tmp_name'] );
+
+        if( $avatar['size'] > wp_max_upload_size() )
+            die( 'It is too large than expected.' );
+
+        if( !in_array( $avatarFilemime, get_allowed_mime_types() ) )
+            die( 'WordPress doesn\'t allow this type of uploads.' );
+
+        while( file_exists( $avatarFilepath ) ) {
+            $i++;
+            $avatarFilepath = $uploadDir['path'] . '/' . $i . '_' . $avatar['name'];
+        }
+
+        if( move_uploaded_file( $avatar['tmp_name'], $avatarFilepath ) ) {
+            $attachmentId = wp_insert_attachment( array(
+                'guid'           => $avatarFilepath, 
+                'post_mime_type' => $avatarFilemime,
+                'post_title'     => preg_replace( '/\.[^.]+$/', '', $avatar['name'] ),
+                'post_content'   => '',
+                'post_status'    => 'inherit'
+            ), $avatarFilepath );
+
+            require_once( ABSPATH . 'wp-admin/includes/image.php' );
+
+            wp_update_attachment_metadata( $attachmentId, wp_generate_attachment_metadata( $attachmentId, $avatarFilepath ) );
+
+            return (object)[
+                'id'    => $attachmentId,
+                'url'   => wp_get_attachment_url($attachmentId)
+            ];
+        } else {
+            return new WP_Error( 'no_avatar_file_saved', __('No avatar file saved'), array( 'status' => 500 ) );
         }
     }
 }

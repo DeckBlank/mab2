@@ -700,39 +700,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
-        ]);        
-    }elseif (is_page('perfil')){ 
-        register_assets('package', [
-            'handle'    => 'pandawp/package/swiper',
-            'src'       => $config['resources']['package_swiper'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
         ]);
-    
-        register_assets('package', [
-            'handle'    => 'pandawp/package/dom7',
-            'src'       => $config['resources']['package_dom7'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);
-    
-        register_assets('package', [
-            'handle'    => 'pandawp/package/ssrwindow',
-            'src'       => $config['resources']['package_ssr_window'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);              
-        register_assets('script', [
-            'handle'    => 'pandawp/js/page/perfil',
-            'src'       => $config['resources']['page_perfil'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]);        
-
     }elseif (is_page('donaciones')){               
         register_assets('script', [
             'handle'    => 'pandawp/js/page/donaciones',
@@ -790,10 +758,10 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]); 
     }
-    elseif (is_page('mab-blog')){               
+    elseif (is_page('blog')){               
         register_assets('script', [
-            'handle'    => 'pandawp/js/page/mab-blog',
-            'src'       => $config['resources']['page_mab-blog'],
+            'handle'    => 'pandawp/js/page/blog',
+            'src'       => $config['resources']['page_blog'],
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true

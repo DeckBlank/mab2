@@ -137,7 +137,7 @@ function __checkEnrollOnCourse($courseId, $userEmail) {
     } else {
         if (!empty($courses)){
             foreach($courses as $course){
-                if($course['course']['course']->ID == $courseId){
+                if( $course['course']['course'] && ($course['course']['course']->ID == $courseId) ){
                     
                     foreach($course['course']['registrations'] as $registration){
                         if(
