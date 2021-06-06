@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1622957508789';
+$assets_version = '1622960242474';
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -747,15 +747,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'deps'      => [ ],
             'ver'       => $assets_version,
             'in_footer' => true
-        ]);        
-    }elseif (is_page('lideres-single')){               
-        register_assets('script', [
-            'handle'    => 'pandawp/js/page/lideres-single',
-            'src'       => $config['resources']['page_lideres-single'],
-            'deps'      => [ ],
-            'ver'       => $assets_version,
-            'in_footer' => true
-        ]); 
+        ]);
     }elseif (is_page('blog')){               
         register_assets('script', [
             'handle'    => 'pandawp/js/page/blog',
