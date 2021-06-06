@@ -55,17 +55,17 @@ Vue.component('header-main',{
             <div @mouseover="blockMenu('comunity', true)" @mouseleave="blockMenu('comunity', false)" class="c-menu-dropdown left br--medium position-absolute f2">
               <ul class="bg-white ul-reset br--medium overflow-hidden">
                 <li class="c-menu-dropdown__item inverse">
-                  <a href="" class="w-xbold text-center padding-horizontal-2">
+                  <a :href="SITE_URL + '/charlas'" class="w-xbold text-center padding-horizontal-2">
                     Charlas
                   </a>
                 </li>
                 <li class="c-menu-dropdown__item inverse">
-                  <a href="" class="w-xbold text-center padding-horizontal-2">
+                  <a :href="SITE_URL + '/lideres'" class="w-xbold text-center padding-horizontal-2">
                     Speakers
                   </a>
                 </li>
                 <li class="c-menu-dropdown__item inverse">
-                  <a href="" class="w-xbold text-center padding-horizontal-2">
+                  <a :href="SITE_URL + '/blog'" class="w-xbold text-center padding-horizontal-2">
                     Blog
                   </a>
                 </li>

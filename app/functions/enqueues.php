@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1622936335673';
+$assets_version = '1622951139999';
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -692,8 +692,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]);
-    }
-    elseif (is_page('cursito')){               
+    }elseif (is_page('cursito')){               
         register_assets('script', [
             'handle'    => 'pandawp/js/page/curso',
             'src'       => $config['resources']['page_curso'],
@@ -757,8 +756,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]); 
-    }
-    elseif (is_page('blog')){               
+    }elseif (is_page('blog')){               
         register_assets('script', [
             'handle'    => 'pandawp/js/page/blog',
             'src'       => $config['resources']['page_blog'],
@@ -766,7 +764,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]); 
-    }elseif (is_page('articulo')){               
+    }elseif (is_singular('post')){
         register_assets('script', [
             'handle'    => 'pandawp/js/page/articulo',
             'src'       => $config['resources']['page_articulo'],

@@ -53,13 +53,13 @@ Vue.component('header-mobile', {
 
                 <ul class="c-submenu ul-reset bg-sec-color br--medium width-100 overflow-hidden">
                   <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                    <a href="" class="position-relative">Charlas</a>
+                    <a :href="SITE_URL + '/charlas'" class="position-relative">Charlas</a>
                   </div>
                   <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                    <a href="" class="position-relative">Speakers</a>
+                    <a :href="SITE_URL + '/lideres'" class="position-relative">Speakers</a>
                   </div>
                   <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                    <a href="" class="position-relative">Blog</a>
+                    <a :href="SITE_URL + '/blog'" class="position-relative">Blog</a>
                   </div>
                 </ul>
               </li>
