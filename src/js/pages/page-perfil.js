@@ -8,6 +8,8 @@ const perfil = new Vue({
   ...baseConfig(store),
   data() {
     return {
+      userId: -1,
+
       user: {
         try: false,
         profile: {},
@@ -69,18 +71,19 @@ const perfil = new Vue({
           options: [
             'Deportes',
             'Idiomas',
-            'Matemáticas',
+            'Saber matemáticas',
             'Correr veloz',
             'Bailar',
-            'Instrumentos musicales',
+            'Tocar instrumentos musicales',
             'Cantar',
             'Pintar',
             'Dibujar',
             'Jugar videojuegos',
-            'Pensamiento crítico',
-            'Pensamiento lógico',
-            'Buena memoría',
-            'Optimización del tiempo',
+            'Cocinar',
+            'Cosechar',
+            'Saber ciencias',
+            'Saber maquillar',
+            'Tomar fotografías',
           ],
         },
 
@@ -150,6 +153,10 @@ const perfil = new Vue({
     userBasicAvatar: function() {
       return `${ this.THEME_URL }/static/images/user.png`;
     },
+
+    isProfileOwner: function() {
+      return (this.logedUser && this.logedUser.user_id == this.userId) ? true : false;
+    },
   },
   watch: {
     'user.firstname.value': function() {
@@ -176,22 +183,14 @@ const perfil = new Vue({
     this.global();
     this.hideLoading();
 
+    this.userId = document.querySelector('#profile').getAttribute('data-user');
+
     this.getProfile();
-    this.getEnrolledCourses();
-    this.getTestLearning();
-    this.getTestBehaviour();
 
-    this.user.firstname.value = this.logedUser.user_firstname;
-
-    const lastname = this.logedUser.user_lastname.split('-panda-');
-
-    if (lastname.length == 2) {
-      this.user.fatherName.value  = lastname[0];
-      this.user.motherName.value  = lastname[1];
-    } else {
-      this.user.fatherName.value  = lastname.substr(0, lastname.indexOf(' '));
-      this.user.motherName.value  = lastname.substr(lastname.indexOf(' ') + 1);
-    }
+    if (this.logedUser)
+      this.getEnrolledCourses();
+      this.getTestLearning();
+      this.getTestBehaviour();
   },
   methods: {
     ...baseActions(),
@@ -249,7 +248,7 @@ const perfil = new Vue({
     },
 
     getProfile: function() {
-      fetch(`${this.API}/users/${ this.logedUser.user_id }/profile?_wpnonce=${ mab.nonce }`)
+      fetch(`${this.API}/users/${ this.userId }/profile?_wpnonce=${ mab.nonce }`)
       .then(res => {
         if (res.status >= 200 && res.status < 300) {
           return res.json();
@@ -260,6 +259,18 @@ const perfil = new Vue({
       .then(response => {
         if (response.status) {
           this.user.profile = response.data;
+
+          this.user.firstname.value = response.data.user_firstname;
+
+          const lastname = response.data.user_lastname.split('-panda-');
+
+          if (lastname.length == 2) {
+            this.user.fatherName.value  = lastname[0];
+            this.user.motherName.value  = lastname[1];
+          } else {
+            this.user.fatherName.value  = lastname.substr(0, lastname.indexOf(' '));
+            this.user.motherName.value  = lastname.substr(lastname.indexOf(' ') + 1);
+          }
 
           this.skills.values.soft.value = response.data.habilites.soft;
           this.skills.values.hard.value = response.data.habilites.hard;

@@ -1,0 +1,113 @@
+.c-timeline {
+  margin: 5rem 0;
+
+  &__line {
+    bottom: 40%;
+    left: 0;
+    height: 9px;
+  }
+
+  &__year {
+    padding: 0 2rem 20% 2rem;
+  }
+
+  &__gradient {
+    background: rgba($color: $success-color, $alpha: 0.5);
+    top: 0;
+    left: 0;
+    z-index: 55;
+  }
+
+  .c-card-article {
+    margin: 2rem 0;
+
+    &__content {
+      min-height: 3rem;
+    }
+
+    &__figure {
+      height: 235px;
+    }
+  }
+
+  .swiper-slide:nth-child(odd) {
+    .c-card-article {
+      transform: rotate(-11deg);
+    }
+  }
+
+  .swiper-slide:nth-child(even) {
+    .c-card-article {
+      transform: rotate(11deg);
+    }
+
+    .c-timeline__year {
+      padding: 0 2rem 50% 2rem;
+    }
+  }
+}
+
+.tippy-box[data-theme~="mab-secondary"] {
+  background-color: $secondary-color;
+  color: $white;
+  border-radius: 20px;
+
+  &[data-placement^="top"] > .tippy-arrow::before {
+    border-top-color: $secondary-color;
+  }
+
+  &[data-placement^="bottom"] > .tippy-arrow::before {
+    border-bottom-color: $secondary-color;
+  }
+
+  &[data-placement^="left"] > .tippy-arrow::before {
+    border-left-color: $secondary-color;
+  }
+
+  &[data-placement^="right"] > .tippy-arrow::before {
+    border-right-color: $secondary-color;
+  }
+}
+
+.c-timeline-tooltip {
+  .flex-container {
+    flex-wrap: wrap;
+  }
+
+  &__year {
+    width: 100%;
+  }
+}
+
+@include breakpoint(large) {
+  .c-timeline {
+    margin: 12rem 0 7rem;
+
+    .swiper-container {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .c-card-article {
+      &__figure {
+        height: 255px;
+      }
+    }
+  }
+
+  .tippy-box[data-theme~="mab-secondary"] {
+    max-width: none !important;
+    width: 600px;
+  }
+
+  .c-timeline-tooltip {
+    .flex-container {
+      flex-wrap: unset;
+    }
+
+    &__year {
+      width: auto;
+      padding: 2rem;
+    }
+  }
+}

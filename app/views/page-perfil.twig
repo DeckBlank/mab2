@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <section class="c-section c-section--perfil">
+  <section id="profile" data-user="{{ user.ID }}" class="c-section c-section--perfil">
     <div class="c-banner mab-shadow-soft bg-sec-color margin-bottom-2">
       <div class="grid-container">
         <div class="grid-x grid-margin-x grid-margin-y align-bottom">
@@ -15,7 +15,7 @@
                 <span class="white c-lh--70 big">
                   ${(user.profile && user.profile.phrase) ? user.profile.phrase : 'Estoy aquí porque quiero cambiar el mundo' }
                 </span>
-                <button @click="user.isModalOpened = true" class="c-edit-circle position-absolute bg-white sec-color fs-25">
+                <button v-if="isProfileOwner" @click="user.isModalOpened = true" class="c-edit-circle position-absolute bg-white sec-color fs-25">
                   <i class="far fa-pen"></i>
                 </button>
               </h1>
@@ -37,8 +37,8 @@
             <figure class="c-user-info__icon position-relative margin-right-1">
               <img :src="(user.profile && user.profile.avatar) ? user.profile.avatar.url : userBasicAvatar" alt="" class=" width-100 height-100 of--cover">
 
-              <input @change="changeAvatarImage" id="avatar-file" type="file" class="hide" :disabled="avatar.isLoadingAvatar">
-              <label for="avatar-file" class="c-edit-circle position-absolute bg-white sec-color fs-25 flex-container align-center-middle">
+              <input v-if="isProfileOwner" @change="changeAvatarImage" id="avatar-file" type="file" class="hide" :disabled="avatar.isLoadingAvatar">
+              <label v-if="isProfileOwner" for="avatar-file" class="c-edit-circle position-absolute bg-white sec-color fs-25 flex-container align-center-middle">
                 <i class="far fa-pen"></i> 
               </label> 
             </figure>
@@ -46,7 +46,7 @@
           <div class="cell large-8 position-relative ">
             <h2 class="c-user-info__name w-xbold dark text-center large-text-left f2 margin-bottom-0"> 
               <span>${ userFullName }</span>   
-              <button @click="user.isModalOpened = true" class="c-edit-circle c-edit-circle--text bg-white gray margine-left-1 fs-14">
+              <button v-if="isProfileOwner" @click="user.isModalOpened = true" class="c-edit-circle c-edit-circle--text bg-white gray margine-left-1 fs-14">
                 EDITAR <i class="far fa-pen"></i>
               </button> 
             </h2>
@@ -61,7 +61,7 @@
       <div class="grid-container">
         <h2 class="c-skills__title margin-bottom-3 position-relative">
           <p class="dark fs-50 lh-40 margin-bottom-0 text-uppercase">mis habilidades</p>
-          <button v-if="skills.view == 1" @click="skills.view = 2" type="button" class="c-edit-circle position-absolute bg-white sec-color fs-25">
+          <button v-if="isProfileOwner && skills.view == 1" @click="skills.view = 2" type="button" class="c-edit-circle position-absolute bg-white sec-color fs-25">
             <i class="far fa-pen"></i> 
           </button> 
         </h2>
@@ -149,12 +149,21 @@
                   <div class="c-skills-editor__description f2 text-center bg-warning br--large padding-2">
                     <h3 class="c-skills-editor__title margin-bottom-0 w-xbold dark f2 margin-bottom-1">Actitud positiva</h3>
                     <p class="fs-18 dark">
-                      Encontrar la oportunidad o el provecho 
-                      que nos puede traer una situación 
-                      compleja. Se trata de enfrentar los 
-                      momentos con una mirada optimista, 
-                      intentando extraer lo mejor de cada 
-                      situación.
+                      Una habilidad blanda es aquella que se
+                      refiere a las capacidades y competencias
+                      que involucran actitudes, emociones y
+                      relaciones sociales. Se trata de cómo
+                      nos comportamos frente a diversas
+                      situaciones. Podemos reconocerlas
+                      cuando conocemos a los otros de
+                      forma más profunda. Estas habilidades
+                      nos permiten convertirnos en mejores
+                      personas. Por ejemplo: la empatía, el
+                      trabajo en equipo o la creatividad.
+                      Por ejemplo: ser rápido nadando, ser
+                      flexible en gimnasia, ser bueno en
+                      historia o matemáticas, ser bueno en
+                      ciencias o en deportes, etc.
                     </p>
                   </div>
                 </div>
@@ -190,12 +199,11 @@
                   <div class="c-skills-editor__description f2 text-center bg-sec-color br--large padding-2">
                     <h3 class="c-skills-editor__title margin-bottom-0 w-xbold white f2 margin-bottom-1">Habilidades duras</h3>
                     <p class="fs-18 white">
-                      Lorem ipsum dolor sit amet, consectetuer
-                      adipiscing elit, sed diam nonummy nibh
-                      euismod tincidunt ut laoreet dolore
-                      magna aliquam erat volutpat. Ut wisi
-                      enim ad minim veniam, quis nostrud
-                      exerci tation ullamcorper suscipit lobortis
+                      Una habilidad dura es aquella que
+                      se refiere al conocimiento o destreza
+                      de algún deporte, ciencia o actividad.
+                      Podemos reconocerlas fácilmente en
+                      las personas y suelen ser objetivas.
                     </p>
                   </div>
                 </div>
@@ -211,7 +219,7 @@
       </div>
     </div>
 
-    <div class="c-my-courses margin-vertical-3">
+    <div v-if="isProfileOwner" class="c-my-courses margin-vertical-3">
       <div class="grid-container">
         <h2 class="margin-bottom-2">
           <p class="dark fs-50 lh-40 margin-bottom-0 text-uppercase">mis cursos</p>
@@ -424,7 +432,7 @@
       </div>
     </div>
 
-    <div class="c-my-tests margin-vertical-3">
+    <div v-if="isProfileOwner" class="c-my-tests margin-vertical-3">
       <div class="grid-container">
         <h2 class="margin-bottom-2">
           <p class="dark fs-50 lh-40 margin-bottom-0 text-uppercase">Mis tests emocionales</p>
@@ -460,7 +468,7 @@
       </div>
     </div>
 
-    <div class="c-mab-modal padding-2 width-100 flex-container align-center-middle" :class="{'visible' : user.isModalOpened}">
+    <div v-if="isProfileOwner" class="c-mab-modal padding-2 width-100 flex-container align-center-middle" :class="{'visible' : user.isModalOpened}">
       <div class="c-mab-modal__content bg-white br--large padding-2">
         <h3 class="c-modal-editor__title dark w-xbold fs-25 f2 text-uppercase margin-bottom-1">Tus datos</h3>
         <form @submit="updateProfileData($event)" class="c-form-new text-left margin-top-1" action="">

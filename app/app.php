@@ -11,6 +11,15 @@ $context['params']  = $params;
 
 switch ($params['view']) {
     case 'perfil':
-        Timber::render('page-perfil.twig', $context);
+        $userNicename   = $params['route']['user_nicename'];
+        $user           = User::where(['user_nicename' => $userNicename])->first();
+
+        if ($user) {
+            $context['user'] = $user;
+
+            Timber::render('page-perfil.twig', $context);
+        } else {
+            Timber::render('404.twig', $context);
+        }
         break;
 }
