@@ -8,6 +8,10 @@
     &__content {
       padding: 2rem;
       z-index: 555;
+
+      h2 {
+        font-size: $fs-25;
+      }
     }
 
     &__title {

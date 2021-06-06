@@ -71,14 +71,14 @@ function __getTopicOnNavigation($course_id, $unity_id, $topic_id, $direction){
 $context         = Timber::get_context();
 $context['post'] = Timber::get_post();
 
-if($post->post_type == "video"){
+if ($post->post_type == "video") {
     $context['author'] = (object)[
         "first_name" =>  $context['post']->author->first_name,
         "last_name" =>  $context['post']->author->last_name,
         "avatar" => get_field('picture', 'user_'. $context['post']->author->ID )
     ];
 
-}else if($post->post_type == "course"){
+} else if($post->post_type == "course") {
     $teacher = get_field('teacher', $post->ID);
 
     $context['description'] = get_the_excerpt($post->ID);
@@ -95,14 +95,11 @@ if($post->post_type == "video"){
         ];
     }
 
-}else if($post->post_type == "topic"){
+} else if($post->post_type == "topic") {
     $context['navigation'] = (object)[
         "previous" => __getTopicOnNavigation($_GET['course_id'], $_GET['unity'], $post->ID, 'previous'),
         "next" => __getTopicOnNavigation($_GET['course_id'], $_GET['unity'], $post->ID, 'next')
     ];
-
-    /* FIXME: Clean me after */
-    // $context['area'] = get_field('area', $_GET['course_id']);
 
     $context['source']          = get_field('source', $post->ID);
     $context['source_type']     = get_field('source_type', $post->ID);
@@ -111,6 +108,35 @@ if($post->post_type == "video"){
     $context['map']             = ( get_field('map', $post->ID) ) ? get_field('map', $post->ID)['url'] : false;
     $context['worksheet']       = ( get_field('worksheet', $post->ID) ) ? get_field('worksheet', $post->ID)['url'] : false;
     $context['solutions']       = ( get_field('solutions', $post->ID) ) ? get_field('solutions', $post->ID)['url'] : false;
+} else {
+    $author = get_field('author', $post->ID);
+
+    $context['author']  = ($author) ? $author['user_firstname'] . ' ' . $author['user_lastname'] : 'MAB';
+    $context['share']   = [
+        'facebook'  => 'https://www.facebook.com/sharer/sharer.php?u=' . $context['post']->link,
+        'twitter'   => sprintf(
+            'https://twitter.com/share?text=%s&url=%s',
+            'Hola, te comparto esta articulo de mab',
+            $context['post']->link,
+        ),
+    ];
+
+    $articles = Timber::get_posts([
+        'post_type'         => 'post',
+        'posts_per_page'    => -1
+    ]);
+
+    $context['articles'] = array_map(function($article) use ($context){
+        $author = get_field('author', $article->ID);
+        $avatar = ($author) ? get_field('avatar', 'user_' . $author['ID']) : false;
+
+        return [
+            'title'     => $article->title,
+            'author'    => ($avatar) ? $avatar['url'] : $context['theme']->link . 'static/images/og_image.png',
+            'date'      => $article->date,
+            'link'      => $article->link,
+        ];
+    }, $articles);
 }
 
 $templates = [

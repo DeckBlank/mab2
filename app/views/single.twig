@@ -5,7 +5,94 @@
 {% endblock %}
 
 {% block content %}
-  <section class="c-section c-section--article">
-    <h1 class="text-center">Title</h1>
+  <section class="c-section c-section--articulo overflow-hidden">
+    <div class="c-article bg-warning-alt">
+      <div class="grid-container">
+        <h2 class="c-article__title margin-bottom-0 dark fs-50 lh-50 margin-bottom-0 text-uppercase">
+          <p>{{ post.title }}</p>
+        </h2>
+        <h4 class="c-article__autor dark fs-30 lh-30 margin-bottom-0 text-uppercase">
+          <p>por {{ author }}</p>
+        </h4>
+        <h5 class="c-article__date dark fs-18 lh-18 margin-bottom-0 text-uppercase margin-bottom-3 f2">
+          <p>{{ post.date }}</p>
+        </h5>
+        <div class="position-relative">
+          <figure class="c-blog__float-figure f1 position-absolute desktop">
+            <img class="of--contain" src="{{ theme.link }}/static/images/blog/eye.png" alt="">
+          </figure>
+          <figure class="c-blog__float-figure f2 position-absolute desktop">
+            <img class="of--contain" src="{{ theme.link }}/static/images/blog/heart.png" alt="">
+          </figure>
+          <figure class="c-blog__float-figure f3 position-absolute desktop">
+            <img class="of--contain" src="{{ theme.link }}/static/images/blog/green.png" alt="">
+          </figure>
+          <figure class="c-blog__float-figure f4 position-absolute desktop">
+            <img class="of--contain" src="{{ theme.link }}/static/images/blog/lapiz.png" alt="">
+          </figure>
+          <div class="c-article__content bg-white dark br--large f2 position-relative mab-shadow-soft">
+            {{ post.content }}
+
+            <div class="grid-x align-justify align-bottom">
+              <div class="cell large-7">
+                <h4 class="c-article__share-text dark margin-bottom-1 text-uppercase">
+                  <p>¿te gustó?</p>
+                  <p>comparte aprendizaje</p> 
+                </h4>
+                <ul class="c-article__share-list ul-reset flex-container margin-bottom-3">
+                  <li>
+                    <a href="{{ share.facebook }}" target="_blank">
+                      <i class="fab fa-facebook-f"></i>
+                    </a>
+                  </li>
+                  <li class="margin-horizontal-1">
+                    <a href="">
+                      <i class="fab fa-instagram"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{{ share.twitter }}" target="_blank">
+                      <i class="fab fa-twitter"></i>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="cell large-4">
+                <div class="c-card-article bg-white mab-shadow">
+                  <figure class="c-card-article__figure margin-bottom-1">
+                    <img class="width-100 height-100 of--cover" src="{{ (post.thumbnail) ? post.thumbnail : theme.link ~ '/static/images/og_image.png' }}" alt="">
+                  </figure>
+                  <div class="c-card-article__content">
+                  </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="c-otros-articulos">
+          <h2 class="c-article__title margin-bottom-2 dark fs-50 lh-50 margin-bottom-0 text-uppercase">
+            <p>podría interesarte</p>
+          </h2>
+          <div class="grid-x grid-margin-x grid-margin-y">
+            {% for article in articles %}
+              <div class="cell large-4">
+                <div class="c-card-article bg-white mab-shadow-soft">
+                  <figure class="c-card-article__figure margin-bottom-1">
+                    <img class="width-100 height-100 of--cover" src="{{ article.author }}" alt="">
+                  </figure>
+                  <div class="c-card-aticle__content">
+                    <h3 class="c-card-aticle__title dark f2 w-xbold fs-25 lh-25 margin-0">{{ article.title }}</h3>
+                    <p class="c-card-aticle__title dark f2 fs-16">{{ article.date }}</p>
+                    <div class="text-center padding-top-1">
+                      <a href="{{ article.link }}" class="dark c-link--ho-dark f2 w-xbold fs-16">Leer más</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 {% endblock %}
