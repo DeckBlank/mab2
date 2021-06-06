@@ -22,4 +22,28 @@ switch ($params['view']) {
             Timber::render('404.twig', $context);
         }
         break;
+
+    case 'leader':
+        $userNicename   = $params['route']['user_nicename'];
+        $user           = User::where(['user_nicename' => $userNicename])->first();
+
+        if ($user) {
+            $cover = get_field('cover', 'user_' . $user->ID);
+
+            $context['user'] = [
+                'fullname' => sprintf(
+                    '%s %s',
+                    get_user_meta( $user->ID, 'first_name', true ),
+                    get_user_meta( $user->ID, 'last_name', true ),
+                ),
+                'slogan'        => get_field('slogan', 'user_' . $user->ID),
+                'description'   => get_field('about', 'user_' . $user->ID),
+                'cover'         => ($cover) ? $cover['url'] : '',
+            ];
+
+            Timber::render('user/leader.twig', $context);
+        } else {
+            Timber::render('404.twig', $context);
+        }
+        break;
 }

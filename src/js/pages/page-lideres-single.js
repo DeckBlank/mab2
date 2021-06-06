@@ -16,6 +16,11 @@ const lideresSingle = new Vue({
     this.hideLoading();
   },
   methods: {
-    ...baseActions()
+    ...baseActions(),
+    goBack: function(e) {
+      e.preventDefault();
+
+      window.history.back();
+    },
   }
 })
