@@ -12,7 +12,7 @@
           <div class="cell large-8">
             <div class="c-banner__content padding-vertical-3">
               <h1 class="c-banner__title text-right position-relative">  
-                <span class="white fs-70 c-lh--70 big">
+                <span class="white c-lh--70 big">
                   ${(user.profile && user.profile.phrase) ? user.profile.phrase : 'Estoy aquí porque quiero cambiar el mundo' }
                 </span>
                 <button v-if="isProfileOwner" @click="user.isModalOpened = true" class="c-edit-circle position-absolute bg-white sec-color fs-25">
@@ -38,7 +38,7 @@
               <img :src="(user.profile && user.profile.avatar) ? user.profile.avatar.url : userBasicAvatar" alt="" class=" width-100 height-100 of--cover">
 
               <input v-if="isProfileOwner" @change="changeAvatarImage" id="avatar-file" type="file" class="hide" :disabled="avatar.isLoadingAvatar">
-              <label v-if="isProfileOwner" for="avatar-file" class="c-edit-circle position-absolute bg-white sec-color fs-25">
+              <label v-if="isProfileOwner" for="avatar-file" class="c-edit-circle position-absolute bg-white sec-color fs-25 flex-container align-center-middle">
                 <i class="far fa-pen"></i> 
               </label> 
             </figure>
@@ -126,7 +126,7 @@
               <div class="grid-x grid-margin-x grid-margin-y align-middle">
                 <div class="cell large-7">
                   <div class="c-skills-editor-list c-skills-editor-list--warning">
-                    <div class="grid-x grid-margin-x grid-margin-y align-self-stretch">
+                    <div class="grid-x grid-margin-x align-self-stretch">
                       <div v-for="option of skills.soft.options" :key="option.id" class="cell medium-4 large-3">
                         <div class="c-skills-editor-item">
                           <input
@@ -176,7 +176,7 @@
               <div class="grid-x grid-margin-x grid-margin-y align-middle">
                 <div class="cell large-7">
                   <div class="c-skills-editor-list c-skills-editor-list--secondary">
-                    <div class="grid-x grid-margin-x grid-margin-y align-self-stretch">
+                    <div class="grid-x grid-margin-x align-self-stretch">
                       <div v-for="option of skills.hard.options" class="cell medium-4 large-3">
                         <div class="c-skills-editor-item">
                           <input
