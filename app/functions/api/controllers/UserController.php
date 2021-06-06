@@ -189,6 +189,14 @@ class UserController{
                     return ($request['_wpnonce']) ? true : false;
                 }
             ));
+
+            register_rest_route( 'custom/v1', '/users/(?P<user_id>\d+)/certificate', array(
+                'methods' => 'GET',
+                'callback' => array($this, 'renderCertificate'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
         });
     }
 
@@ -674,6 +682,41 @@ class UserController{
         } else {
             return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 403 ) );
         }
+    }
+
+    public function renderCertificate($request) {
+        $quotationPDF   = new \Mpdf\Mpdf([
+            'mode'          => 'utf-8',
+            'margin_top'    => 0,
+            'margin_bottom' => 0,
+            'margin_left'   => 0,
+            'margin_right'  => 0,
+            'format'        => [190, 236],
+            'orientation'   => 'L'
+        ]);
+
+        $document = '
+            <html lang="en">
+                <head>
+                    <style>
+                        body {
+                            font-family: sans-serif;
+                        }
+
+                        h1 {
+                            color: red;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <h1>Hola mundo...</h1>
+                </body>
+            </html>
+        ';
+
+        $quotationPDF->SetTitle("Certificado - Cleiver Valera Flores");
+        $quotationPDF->WriteHTML($document);
+        $quotationPDF->Output();
     }
 
     private function sendInstructions($request, $recovery_session, $user_id){
