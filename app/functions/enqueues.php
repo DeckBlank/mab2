@@ -811,7 +811,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'ver'       => $assets_version,
             'in_footer' => true
         ]); 
-    }elseif (is_page('psicologos')){               
+    }elseif (is_page_template('templates/template-psicologos.php')){               
         register_assets('script', [
             'handle'    => 'pandawp/js/page/psicologos',
             'src'       => $config['resources']['page_psicologos'],
@@ -820,7 +820,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]); 
     }
-
 
     /**
      * --------------------------------------------------------------------------
