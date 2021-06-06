@@ -22,6 +22,25 @@
             "maxlength": ""
         },
         {
+            "key": "field_60bc5746e6f39",
+            "label": "Slogan",
+            "name": "slogan",
+            "type": "text",
+            "instructions": "Solo aparecerá en la vista de cada lider",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "e.g: Fundadora y CEO de Claridad Coaching Estratégico",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_608620a8932aa",
             "label": "Descripción",
             "name": "about",
@@ -45,7 +64,7 @@
             "label": "Banner (imagen en png)",
             "name": "cover",
             "type": "image",
-            "instructions": "La imágen será usada en el curso que llegue a dictar el profesor o lider",
+            "instructions": "La imágen será usada en la vista del lider o curso que dicte el profesor",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -63,25 +82,6 @@
             "max_height": "",
             "max_size": "",
             "mime_types": ""
-        },
-        {
-            "key": "field_60a09f1a25dc1",
-            "label": "¿Es lider?",
-            "name": "is_lider",
-            "type": "true_false",
-            "instructions": "Esto nos permite habilitar o no al profesor como lider",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "Si",
-            "ui_off_text": "No"
         }
     ],
     "location": [
@@ -115,5 +115,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1622695210
+    "modified": 1622955921
 }

@@ -19,7 +19,7 @@ Vue.component('lideres',{
               <div>
                 <h3 class="fs-25 f2 w-xbold white margin-bottom-0">{{ lider.name }}</h3>
                 <p class="fs-18 white f2 margin-bottom-0">{{ lider.job }}</p>
-                <a class="c-link c-link--warning f2 w-bold" :href="lider.profile">Leer más</a>
+                <a class="c-link c-link--warning f2 w-bold" :href="SITE_URL + '/lider/' + lider.profile">Leer más</a>
               </div>
             </div>
           </div>
@@ -33,7 +33,7 @@ Vue.component('lideres',{
   },
   props: ['body'],
   computed: {
-    ...Vuex.mapState(['THEME_URL'])
+    ...Vuex.mapState(['SITE_URL', 'THEME_URL'])
   },
   mounted() {
     this.initLideresSlider();

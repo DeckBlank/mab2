@@ -47,3 +47,22 @@ Routes::map('user/:user_nicename', function($routeParams) use ($vertion, $config
 
     Routes::load('app.php', $params, "", 200);
 });
+
+Routes::map('lider/:user_nicename', function($routeParams) use ($vertion, $config) {
+    $params = [
+        'route' => $routeParams,
+        'view'  => 'leader',
+    ];
+
+    add_action( 'wp_enqueue_scripts', function () use ($config, $vertion) {
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/lideres-single',
+            'src'       => $config['resources']['page_lideres-single'],
+            'deps'      => [ ],
+            'ver'       => $vertion,
+            'in_footer' => true
+        ]); 
+    });
+
+    Routes::load('app.php', $params, "", 200);
+});
