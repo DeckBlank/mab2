@@ -150,13 +150,20 @@
                             <figure class="margin-bottom-1 position-relative">
                               <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class=" width-100"> 
                               <div class="c-tab-recursos__shade width-100 height-100 position-absolute flex-container align-justify flex-dir-column warning-alt">
-                                <div class="width-100 text-right">
-                                  <i class="far fa-exclamation-circle"></i>
+                                <div @click="showTooltipCerticado = !showTooltipCerticado" class="width-100 text-right ">
+                                  <i class="far fa-exclamation-circle c-pointer"></i>
                                 </div>
 
-                                <div class="white">
+                                <div v-if="showTooltipCerticado == false" class="white">
                                   <i class="far fa-lock"></i>
                                 </div>
+
+                                <div>
+                                  <div v-if="showTooltipCerticado == true" class="white">
+                                    <span>Debes completar el curso para obtener tu certificado</span> 
+                                  </div>
+                                </div>
+                                
 
                                 <div class="opacity-0">
                                   <i class="far fa-exclamation-circle"></i>

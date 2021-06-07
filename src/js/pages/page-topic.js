@@ -12,6 +12,7 @@ const topic = new Vue({
   ...baseConfig(store),
   data() {
     return {
+      showTooltipCerticado: false,
       view: 1,
       foro: 1,
       commentbox: 0,
