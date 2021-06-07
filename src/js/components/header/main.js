@@ -78,38 +78,8 @@ Vue.component('header-main',{
             <div @mouseover="blockMenu('world', true)" @mouseleave="blockMenu('world', false)" class="c-menu-dropdown center br--medium position-absolute f2">
               <ul class="bg-white ul-reset br--medium overflow-hidden">
                 <li class="c-menu-dropdown__item inverse">
-                  <a href="" class="w-xbold text-center padding-horizontal-2 ">
+                  <a :href="SITE_URL + '/nosotros'" class="w-xbold text-center padding-horizontal-2 ">
                     Nosotros
-                  </a>
-                </li>
-                <li class="c-menu-dropdown__item inverse">
-                  <a href="" class="w-xbold text-center padding-horizontal-2">
-                    Empresas
-                  </a>
-                </li>
-                <li class="c-menu-dropdown__item inverse">
-                  <a href="" class="w-xbold text-center padding-horizontal-2">
-                    Proyectos
-                  </a>
-                </li>
-                <li class="c-menu-dropdown__item inverse">
-                  <a href="" class="w-xbold text-center padding-horizontal-2">
-                    Servicios
-                  </a>
-                </li>
-                <li class="c-menu-dropdown__item inverse">
-                  <a href="" class="w-xbold text-center padding-horizontal-2">
-                    Modalidades
-                  </a>
-                </li>
-                <li class="c-menu-dropdown__item inverse">
-                  <a href="" class="w-xbold text-center padding-horizontal-2">
-                    Metodología
-                  </a>
-                </li>
-                <li class="c-menu-dropdown__item inverse">
-                  <a href="" class="w-xbold text-center padding-horizontal-2">
-                    Programas
                   </a>
                 </li>
               </ul>

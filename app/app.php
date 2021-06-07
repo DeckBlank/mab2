@@ -34,7 +34,7 @@ switch ($params['view']) {
                 'fullname' => sprintf(
                     '%s %s',
                     get_user_meta( $user->ID, 'first_name', true ),
-                    get_user_meta( $user->ID, 'last_name', true ),
+                    get_user_meta( $user->ID, 'last_name', true )
                 ),
                 'slogan'        => get_field('slogan', 'user_' . $user->ID),
                 'description'   => get_field('about', 'user_' . $user->ID),

@@ -31,8 +31,15 @@ function register_assets($type, $resource) {
         wp_enqueue_script( $resource['handle'] );
     }else if($type === 'package'){
         $resource_src = explode('/', $resource['src']);
+        $resource_exist = false;
 
-        if ( file_exists(__DIR__ . '/../static/js/' . $resource_src[ count($resource_src) - 1 ]) ) {
+        if (ENV['ENV'] == 'dev') {
+            $resource_exist = file_exists(__DIR__ . '/../static/temp/js/' . $resource_src[ count($resource_src) - 1 ]);
+        } else {
+            $resource_exist = file_exists(__DIR__ . '/../static/js/' . $resource_src[ count($resource_src) - 1 ]);
+        }
+
+        if ( $resource_exist ) {
             wp_register_script(
                 $resource['handle'],
                 $resource['src'],

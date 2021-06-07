@@ -1,9 +1,19 @@
 <?php
 
+define('ENV', require(__DIR__ . '/../env.php'));
+
+function __getResourceURL($type, $resource){
+    $staticDir  = (ENV['ENV'] == 'dev') ? 'temp/' : '';
+
+    if ($type == 'css') {
+        return "/static/{$staticDir}css/{$resource}";
+    } elseif ($type == 'js') {
+        return "/static/{$staticDir}js/{$resource}";
+    }
+}
+
 require_once( __DIR__ . '/../vendor/autoload.php' );
 require_once( __DIR__ . '/functions/routes.php' );
-
-define('ENV', require(__DIR__ . '/../env.php'));
 
 /**
  * --------------------------------------------------------------------------

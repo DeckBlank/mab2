@@ -4,13 +4,13 @@ import {store} from '../store'
 import tippy from 'tippy.js';
 import Swiper from 'swiper';
 
-
-
-const nosotros = new Vue({
+new Vue({
   ...baseConfig(store),
   data() {
     return {
       sliderGradient: false,
+
+      slider: null,
     }
   },
   computed: {
@@ -20,86 +20,82 @@ const nosotros = new Vue({
     this.global();
     this.hideLoading();
 
-    setTimeout(function(){
-      var swiper = new Swiper(".mySwiper", {
-        pagination: {
-          el: ".swiper-pagination",
-          clickable: true,
-        },
-        breakpoints: {
-          320: {
-            slidesPerView: 1,
-            spaceBetween: 0
-          },
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 0
-          },
-          1024: {
-            slidesPerView: 2.8,
-            spaceBetween: 0
-          }
-        }
-      });
-    },100)
+    let breakpoint = window.matchMedia('(min-width: 1024px)');
 
-    this.initTooltips();
-    // this.initTooltipsMobile();
+    this.checkDevice(breakpoint); breakpoint.addEventListener('change', this.checkDevice);
+    this.initSlider();
   },
   methods: {
     ...baseActions(),
-    toggleSlidergradient: function() {
-      this.sliderGradient = true
+    checkDevice: function(breakpoint) {
+      if (breakpoint.matches) {
+        this.initTooltips('desktop');
+      } else {
+        this.initTooltips('mobile');
+      }
     },
-    hideSliderGradient: function() {
-      this.sliderGradient = false;
-    },
-    initTooltips: function(){
+
+    initTooltips: function(device) {
       const BASE_CONFIG = {
         allowHTML: true,
         theme: 'mab-secondary',
         inertia: true,
         animation: 'scale-subtle',
         trigger: 'click',
-        placement: 'left',
+        placement: (device == 'desktop') ? 'left' : 'bottom',
       }
+      const totalHitos = document.querySelector('#about').getAttribute('data-hitos');
 
-      tippy('#test', {
-        content: document.querySelector('#test-template').innerHTML,
-        ...BASE_CONFIG
-      });
-      tippy('#test-2', {
-        content: document.querySelector('#test-template-2').innerHTML,
-        ...BASE_CONFIG
-      });
-      tippy('#test-3', {
-        content: document.querySelector('#test-template-3').innerHTML,
-        ...BASE_CONFIG
-      });
+      for (let index = 0; index < totalHitos; index++) {
+        tippy(`#tooltip-${ index + 1 }`, {
+          ...BASE_CONFIG,
+          content: document.querySelector(`#template-${ index + 1 }`).innerHTML,
+          onShow: () => {
+            this.sliderGradient = true;
+          },
+          onHide: () => {
+            this.sliderGradient = false;
+          },
+        });
+      }
     },
 
-    initTooltipsMobile: function(){
-      const BASE_CONFIG = {
-        allowHTML: true,
-        theme: 'mab-secondary',
-        inertia: true,
-        animation: 'scale-subtle',
-        trigger: 'click',
-        placement: 'bottom',
-      }
+    initSlider: function() {
+      setTimeout(() => {
+        this.slider = new Swiper(".mySwiper", {
+          speed: 3000,
+          loop: true,
+          freeMode: true,
+          freeModeMomentum: false,
+          autoplay: {
+            enabled: true,
+            delay: 0,
+            disableOnInteraction: true,
+          },
 
-      tippy('#test', {
-        content: document.querySelector('#test-template').innerHTML,
-        ...BASE_CONFIG
-      });
-      tippy('#test-2', {
-        content: document.querySelector('#test-template-2').innerHTML,
-        ...BASE_CONFIG
-      });
-      tippy('#test-3', {
-        content: document.querySelector('#test-template-3').innerHTML,
-        ...BASE_CONFIG
-      });
+          breakpoints: {
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 0
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 0
+            },
+            1024: {
+              slidesPerView: 2.8,
+              spaceBetween: 0
+            }
+          }
+        });
+      }, 100);
+    },
+    pauseSlider: function(mode) {
+      if (mode) {
+        this.slider.autoplay.stop();
+      } else {
+        this.slider.autoplay.start();
+      }
     },
   }
 })
