@@ -100,5 +100,5 @@ return [
         'wp_questionaries'  => get_theme_file_uri( __getResourceURL('js', 'wp-questionaries.bundle.js') ),
         'wp_courses'        => get_theme_file_uri( __getResourceURL('js', 'wp-courses.bundle.js') )
     ],
-    'vertion' => '1623045885112'
+    'vertion' => '1623047462765'
 ];
