@@ -98,7 +98,7 @@ return [
         'wp_session'        => get_theme_file_uri( __getResourceURL('js', 'wp-session.bundle.js') ),
         'wp_registration'   => get_theme_file_uri( __getResourceURL('js', 'wp-registration.bundle.js') ),
         'wp_questionaries'  => get_theme_file_uri( __getResourceURL('js', 'wp-questionaries.bundle.js') ),
-        'wp_courses'        => get_theme_file_uri( __getResourceURL('js', 'wp-courses.bundle.js) ')
+        'wp_courses'        => get_theme_file_uri( __getResourceURL('js', 'wp-courses.bundle.js') )
     ],
-    'vertion' => '1614041061670'
+    'vertion' => '1623033701589'
 ];

@@ -2,16 +2,6 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-function __getResourceURL($type, $resource){
-    $staticDir  = (ENV['ENV'] == 'dev') ? 'temp/' : '';
-
-    if ($type == 'css') {
-        return "/static/{$staticDir}css/{$resource}";
-    } elseif ($type == 'js') {
-        return "/static/{$staticDir}js/{$resource}";
-    }
-}
-
 $config = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config) {
@@ -839,7 +829,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config) {
     setEnviromentVariables($enviroment);
 }, 100);
 
-add_action('admin_enqueue_scripts', function ($hook) use ($config, $config['vertion']) {
+add_action('admin_enqueue_scripts', function ($hook) use ($config) {
     if ('post.php' !== $hook) {
         return;
     }
@@ -852,7 +842,7 @@ add_action('admin_enqueue_scripts', function ($hook) use ($config, $config['vert
     ]);
 });
 
-add_action( 'admin_head', function() use ($config, $config['vertion']) {
+add_action( 'admin_head', function() use ($config) {
     $current = get_current_screen();
 
     switch ($current->base) {

@@ -8,9 +8,9 @@ const configProd = {
         files: ['base.php'],
         rules: [
           {
-            search: new RegExp("version = '[0-9a-zA-Z]+'"),
+            search: new RegExp("'vertion' => '[0-9a-zA-Z]+'"),
             replace: function(match){
-              return `version = '${Date.now()}'`
+              return `'vertion' => '${Date.now()}'`
             }
           }
         ]
