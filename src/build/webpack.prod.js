@@ -4,8 +4,8 @@ const configProd = {
   plugins: [
     new ReplaceInFileWebpackPlugin([
       {
-        dir: 'app/functions',
-        files: ['enqueues.php'],
+        dir: 'app/config',
+        files: ['base.php'],
         rules: [
           {
             search: new RegExp("version = '[0-9a-zA-Z]+'"),

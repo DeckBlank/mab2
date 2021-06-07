@@ -20,7 +20,9 @@ import webpackConfig from './src/build/webpack.config'
 import config from './src/config'
 
 const env = yargs.argv.env
-const publicPath = (folder = '') => `${config.publicPath}/${folder}`
+const publicPath = (folder = '') => {
+  return (env == 'development') ? `${config.publicPath}/temp/${folder}` : `${config.publicPath}/${folder}`;
+}
 
 /*
  * Server Live
