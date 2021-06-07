@@ -8,22 +8,24 @@
   <section class="c-section c-section--lideres-single ">
     <div class="c-lideres-single bg-warning-alt">
       <div class="grid-container">
-        <div class="grid-x">
+        <div class="grid-x align-bottom">
           <div class="cell large-7">
-            <div class="c-lideres-single__info br--large bg-dark white position-relative">
-              <img class="c-lideres-single__heart position-absolute " src="{{ theme.link }}/static/images/lideres/heart.png" alt="">
-              <h1 class="c-lideres-single__title white w-xbold f2 fs-40">{{ user.fullname }}</h1>
-              <h3 class="c-lideres-single__subtitle white w-xbold f2 fs-25 margin-bottom-2">{{ user.slogan }}</h3>
-              <div class="white f2">{{ user.description }}</div>
+            <div class="c-lideres-single__content">
+              <div class="c-lideres-single__info br--large bg-dark white position-relative">
+                <img class="c-lideres-single__heart position-absolute " src="{{ theme.link }}/static/images/lideres/heart.png" alt="">
+                <h1 class="c-lideres-single__title white w-xbold f2 fs-40">{{ user.fullname }}</h1>
+                <h3 class="c-lideres-single__subtitle white w-xbold f2 fs-25 margin-bottom-2">{{ user.slogan }}</h3>
+                <div class="white f2">{{ user.description }}</div>
+              </div>
+              <div class="c-dots-background c-dots-background--warning bottom position-relative">
+              </div>
+              <a @click="goBack($event)" href="#" class="c-link dark c-link--ho-dark w-xbold f2 margin-top-1 text-center"><i class="fas fa-chevron-left"></i>  Regresar</a>
             </div>
-            <div class="c-dots-background c-dots-background--warning bottom position-relative">
-            </div>
-            <a @click="goBack($event)" href="#" class="c-link dark c-link--ho-dark w-xbold f2 margin-top-1 text-center"><i class="fas fa-chevron-left"></i>  Regresar</a>
           </div>
           <div class="cell large-5">
             <div class="c-dots-background c-dots-background--warning right position-relative">
               <figure class="c-lideres-single__figure">
-                <img class="of--contain" src="{{ user.cover }}" alt="">
+                <img class="of--contain width-100" src="{{ user.cover }}" alt="">
               </figure>
             </div>
           </div>

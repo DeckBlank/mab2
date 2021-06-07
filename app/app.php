@@ -17,7 +17,7 @@ switch ($params['view']) {
         if ($user) {
             $context['user'] = $user;
 
-            Timber::render('page-perfil.twig', $context);
+            Timber::render('user/profile.twig', $context);
         } else {
             Timber::render('404.twig', $context);
         }

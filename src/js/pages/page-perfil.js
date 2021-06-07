@@ -211,6 +211,15 @@ const perfil = new Vue({
       return this.skills.try && !this.skills.values[field].isValid;
     },
 
+    observePhraseInput: function(evt) {
+      if (this.user.phrase.value.length > 42) {
+        if (evt.keyCode >= 48 && evt.keyCode <= 90) {
+          evt.preventDefault()
+          return
+        }
+      }
+    },
+
     initSliderEnrolledCourses: function() {
       window.setTimeout(() => {
         new Swiper('.c-my-courses .swiper-container', {
