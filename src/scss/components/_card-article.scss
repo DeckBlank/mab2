@@ -8,4 +8,8 @@
   &__content {
     min-height: 4rem;
   }
+
+  &__content.aligned-text {
+    height: calc(96.5% - 320px);
+  }
 }
