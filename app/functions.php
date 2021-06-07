@@ -15,7 +15,6 @@ function __getResourceURL($type, $resource){
 require_once( __DIR__ . '/../vendor/autoload.php' );
 require_once( __DIR__ . '/functions/routes.php' );
 
-
 /**
  * --------------------------------------------------------------------------
  * Functions

@@ -93,8 +93,8 @@ export const clean = () => del([publicPath('css'), publicPath('js')])
  * Watch
  * */
 export const watchForChanges = () => {
-  watch([config.globalResources.styles], parallel(styles, lintCss))
   watch(config.ignoreFoldersDevelopment, series(reload))
+  watch([config.globalResources.styles], parallel(styles, lintCss))
   watch([config.globalResources.js], series(scripts, reload))
   watch([config.globalResources.images], reload);
   watch([config.globalResources.twig], reload);
