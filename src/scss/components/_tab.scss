@@ -50,6 +50,21 @@
     display: inline-block;
     font-size: $fs-14;
   }
+
+  &__item--auto {
+    figure {
+      padding: 0;
+      margin: 0 0.5rem;
+    }
+  }
+
+  &__shade {
+    background: rgba($color: $secondary-color, $alpha: 0.8);
+    top: 0;
+    left: 0;
+    padding-right: 0.3rem;
+    font-size: $fs-18;
+  }
 }
 
 @include breakpoint(large) {
@@ -69,6 +84,20 @@
         img {
           height: 100%;
         }
+      }
+
+      &__item--auto {
+        figure {
+          height: auto;
+
+          img {
+            height: auto;
+          }
+        }
+      }
+
+      &__shade {
+        font-size: $fs-21;
       }
     }
   }
