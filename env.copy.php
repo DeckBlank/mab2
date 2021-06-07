@@ -12,6 +12,7 @@
         'DB_USER'       => 'root',
         'DB_PASSWORD'   => '',
         'DB_NAME'       => 'db_mab',
+        'DB_PREFIX'     => 'db_mab',
 
         /**
          * Open Tok
