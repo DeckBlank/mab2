@@ -73,25 +73,7 @@ Vue.component('header-mobile', {
 
                 <ul class="c-submenu ul-reset bg-sec-color br--medium width-100 overflow-hidden">
                   <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                    <a href="" class="position-relative">Nosotros</a>
-                  </div>
-                  <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                    <a href="" class="position-relative">Empresas</a>
-                  </div>
-                  <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                    <a href="" class="position-relative">Proyectos</a>
-                  </div>
-                  <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                    <a href="" class="position-relative">Servicios</a>
-                  </div>
-                  <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                    <a href="" class="position-relative">Modalidades</a>
-                  </div>
-                  <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                    <a href="" class="position-relative">Metodología</a>
-                  </div>
-                  <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
-                    <a href="" class="position-relative">Programas</a>
+                    <a :href="SITE_URL + '/nosotros'" class="position-relative">Nosotros</a>
                   </div>
                 </ul>
               </li>

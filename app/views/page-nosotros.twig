@@ -5,56 +5,22 @@
 {% endblock %}
 
 {% block content %}
-  <section class="c-section c-section--nosotros bg-warning-alt">
-
-    <div id="test-template" style="display: none;">
-      <div class="c-timeline-tooltip c-behaviour-template padding-1 f2 w-medium">
-        <div class="flex-container align-center align-middle">
-            <div class="c-timeline-tooltip__year fs-40 w-xbold">
-              2014
-            </div>
-            <div class="f2 fs-16">
-              <h4 class="w-xbold">El garage</h4>
-              <p>
-                lorem lore Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo deserunt omnis tenetur rem sequi facilis ea eius fuga quam 
-              </p>
-            </div>
+  <section id="about" data-hitos="{{ time|length }}" class="c-section c-section--nosotros bg-warning-alt">
+    {% for hito in time %}
+      <div id="template-{{ loop.index }}" style="display: none;">
+        <div class="c-timeline-tooltip c-behaviour-template padding-1 f2 w-medium">
+          <div class="flex-container align-center align-middle">
+              <div class="c-timeline-tooltip__year fs-40 w-xbold">
+                {{ hito.year }}
+              </div>
+              <div class="f2 fs-16">
+                <h4 class="w-xbold">{{ hito.title }}</h4>
+                <p>{{ hito.description }}</p>
+              </div>
+          </div>
         </div>
-      </div>
-    </div>  
-
-    <div id="test-template-2" style="display: none;">
-      <div class="c-timeline-tooltip c-behaviour-template padding-1 f2 w-medium">
-        <div class="flex-container align-center align-middle">
-            <div class="c-timeline-tooltip__year fs-40 w-xbold">
-              2015
-            </div>
-            <div class="f2 fs-16">
-              <h4 class="w-xbold">El garage</h4>
-              <p>
-                lorem lore Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo deserunt omnis tenetur rem sequi facilis ea eius fuga quam 
-              </p>
-            </div>
-        </div>
-      </div>
-    </div>  
-
-
-    <div id="test-template-3" style="display: none;">
-      <div class="c-timeline-tooltip c-behaviour-template padding-1 f2 w-medium">
-        <div class="flex-container align-center align-middle">
-            <div class="c-timeline-tooltip__year fs-40 w-xbold">
-              2016
-            </div>
-            <div class="f2 fs-16">
-              <h4 class="w-xbold">El garage</h4>
-              <p>
-                lorem lore Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo deserunt omnis tenetur rem sequi facilis ea eius fuga quam 
-              </p>
-            </div>
-        </div>
-      </div>
-    </div>  
+      </div>  
+    {% endfor %}
 
     <div class="c-ceo">
       <div class="grid-container">
@@ -89,7 +55,7 @@
             <div class="cell large-5 position-relative">
               <div class="c-card-article bg-white mab-shadow-soft">
                 <figure class="c-card-article__figure margin-bottom-1">
-                  <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/blog/article.png" alt="">
+                  <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/nosotros/maca-0.png" alt="">
                 </figure>
                 <div class="c-card-article__content">
                 </div>
@@ -144,14 +110,14 @@
             <div class="cell large-6 position-relative desktop">
               <div class="c-card-article bg-white mab-shadow-soft">
                 <figure class="c-card-article__figure margin-bottom-1">
-                  <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/blog/article.png" alt="">
+                  <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/nosotros/garage-1.png" alt="">
                 </figure>
                 <div class="c-card-article__content">
                 </div>
               </div>
               <div class="c-card-article c-card-article--float bg-white mab-shadow-soft position-absolute desktop">
                 <figure class="c-card-article__figure margin-bottom-1">
-                  <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/blog/article.png" alt="">
+                  <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/nosotros/garage-0.png" alt="">
                 </figure>
                 <div class="c-card-article__content">
                 </div>
@@ -184,50 +150,30 @@
           </div>
         </div>
 
-        <div class="c-timeline bg-success white br--large padding-vertical-2 position-relative">
+        <div @mouseenter="pauseSlider(true)" @mouseleave="pauseSlider(false)" class="c-timeline bg-success white br--large padding-vertical-2 position-relative">
           <div class="c-timeline__line bg-white width-100 position-absolute">
           </div>
 
           <div class="swiper-container mySwiper">
             <div class="swiper-wrapper">
-              <div  @click="toggleSlidergradient()" class="swiper-slide">
-                <label for="2014" class="flex-container align-bottom">
-                  <div class="c-timeline__year white fs-35">2014</div>
-                  <div class="c-card-article bg-white mab-shadow-soft">
-                    <figure id="test" class="c-card-article__figure margin-bottom-1">
-                      <img src="{{ theme.link }}/static/images/nosotros/maca-2.png" alt="" class="width-100 height-100 of--cover">
-                    </figure> <div class="c-card-article__content">
+              {% for hito in time %}
+                <div class="swiper-slide">
+                  <label for="{{ hito.year }}" class="flex-container align-bottom">
+                    <div class="c-timeline__year white fs-35">{{ hito.year }}</div>
+                    <div class="c-card-article bg-white mab-shadow-soft">
+                      <figure id="tooltip-{{ loop.index }}" class="c-card-article__figure margin-bottom-1">
+                        <img src="{{ hito.image['url'] }}" alt="" class="width-100 height-100 of--cover">
+                      </figure>
+                      <div class="c-card-article__content"></div>
                     </div>
-                  </div>
-                </label>
-              </div>
-              <div  @click="toggleSlidergradient()" class="swiper-slide">
-                <label class="flex-container align-bottom">
-                  <div class="c-timeline__year white fs-35">2015</div>
-                  <div class="c-card-article bg-white mab-shadow-soft">
-                    <figure id="test-2" class="c-card-article__figure margin-bottom-1">
-                      <img src="{{ theme.link }}/static/images/nosotros/maca-2.png" alt="" class="width-100 height-100 of--cover">
-                    </figure> <div class="c-card-article__content">
-                    </div>
-                  </div>
-                </label>
-              </div>
-              <div  @click="toggleSlidergradient()" class="swiper-slide">
-                <label class="flex-container align-bottom">
-                  <div class="c-timeline__year white fs-35">2016</div>
-                  <div class="c-card-article bg-white mab-shadow-soft">
-                    <figure id="test-3" class="c-card-article__figure margin-bottom-1">
-                      <img src="{{ theme.link }}/static/images/nosotros/maca-2.png" alt="" class="width-100 height-100 of--cover">
-                    </figure> <div class="c-card-article__content">
-                    </div>
-                  </div>
-                </label>
-              </div>
+                  </label>
+                </div>
+              {% endfor %}
             </div>
             <div class="swiper-pagination"></div>
           </div>
 
-          <div v-if="sliderGradient" @click="hideSliderGradient()" class="c-timeline__gradient position-absolute width-100 height-100 br--large">
+          <div v-if="sliderGradient" class="c-timeline__gradient position-absolute width-100 height-100 br--large">
 
           </div>
         </div>
@@ -284,7 +230,7 @@
             <div class="cell large-5 position-relative">
               <div class="c-card-article to-bottom bg-white mab-shadow-soft">
                 <figure class="c-card-article__figure margin-bottom-1">
-                  <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/blog/article.png" alt="">
+                  <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/nosotros/team.png" alt="">
                 </figure>
                 <div class="c-card-article__content">
                 </div>

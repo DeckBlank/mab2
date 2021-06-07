@@ -20,7 +20,9 @@ import webpackConfig from './src/build/webpack.config'
 import config from './src/config'
 
 const env = yargs.argv.env
-const publicPath = (folder = '') => `${config.publicPath}/${folder}`
+const publicPath = (folder = '') => {
+  return (env == 'development') ? `${config.publicPath}/temp/${folder}` : `${config.publicPath}/${folder}`;
+}
 
 /*
  * Server Live
@@ -91,8 +93,8 @@ export const clean = () => del([publicPath('css'), publicPath('js')])
  * Watch
  * */
 export const watchForChanges = () => {
-  watch([config.globalResources.styles], parallel(styles, lintCss))
   watch(config.ignoreFoldersDevelopment, series(reload))
+  watch([config.globalResources.styles], parallel(styles, lintCss))
   watch([config.globalResources.js], series(scripts, reload))
   watch([config.globalResources.images], reload);
   watch([config.globalResources.twig], reload);

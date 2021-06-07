@@ -1,10 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import './components/sector';
 import './components/toggle';
 import './components/header/main';
 import './components/header/mobile';
-import './components/video';
 
 Vue.use(Vuex)
 

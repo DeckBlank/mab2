@@ -29,6 +29,10 @@
       }
     }
   }
+
+  .swiper-wrapper {
+    transition-timing-function: linear;
+  }
 }
 
 @include breakpoint(large) {
