@@ -46,4 +46,16 @@ switch ($params['view']) {
             Timber::render('404.twig', $context);
         }
         break;
+    case 'donations':
+        $env = require(__DIR__ . '/../env.php');
+
+        $context['pasarell'] = (object)[
+            "enviroment"    => $env['ENV'],
+            "action"        => $env['PU_ACTION'],
+            "merchan_id"    => $env['PU_MERCHAND_ID'],
+            "account_id"    => $env['PU_ACCOUNT_ID']
+        ];
+
+        Timber::render('page-donaciones.twig', $context);
+        break;
 }

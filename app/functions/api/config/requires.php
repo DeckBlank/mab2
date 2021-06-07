@@ -29,6 +29,7 @@ require_once(__DIR__ . "/../controllers/CourseController.php");
 require_once(__DIR__ . "/../controllers/TopicController.php");
 require_once(__DIR__ . "/../controllers/GEOController.php");
 require_once(__DIR__ . "/../controllers/EventController.php");
+require_once(__DIR__ . "/../controllers/DonationController.php");
 
 new UserController();
 new AuthController();
@@ -36,3 +37,4 @@ new CourseController();
 new TopicController();
 new GEOController();
 new EventController();
+new DonationController();

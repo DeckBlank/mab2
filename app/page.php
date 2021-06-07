@@ -52,10 +52,10 @@ if(is_page('access')){
         $env = require(__DIR__ . '/../env.php');
     
         $context['pasarell'] = (object)[
-            "enviroment" => $env['ENV'],
-            "action" => $env['PU_ACTION'],
-            "merchan_id" => $env['PU_MERCHAND_ID'],
-            "account_id" => $env['PU_ACCOUNT_ID']
+            "enviroment"    => $env['ENV'],
+            "action"        => $env['PU_ACTION'],
+            "merchan_id"    => $env['PU_MERCHAND_ID'],
+            "account_id"    => $env['PU_ACCOUNT_ID']
         ];
     } else {
         header('Location:' . $context['site']->url);

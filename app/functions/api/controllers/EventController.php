@@ -11,8 +11,7 @@ class EventController {
                 'methods' => 'POST',
                 'callback' => array($this, 'storeParticipants'),
                 'permission_callback' => function ($request) {
-                    // return ($request['_wpnonce']) ? true : false;
-                    return true;
+                    return ($request['_wpnonce']) ? true : false;
                 }
             ));
         });

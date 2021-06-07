@@ -5,16 +5,16 @@
 {% endblock %}
 
 {% block content %}
-  <section class="c-section c-section--donaciones">
+  <section class="c-section c-section--donaciones bg-dark">
     <div class="c-split-layout">
       <div class="grid-x height-100">
         <div class="cell large-5">
           <transition name="fade" mode="out-in">
             <div class="c-split-layout__figure height-100">
               <figure class="c-cover-gradient c-cover-gradient--dark position-relative height-100 width-100">
-                  <video id="donac_video" class="c-cover-gradient__image width-100 height-100" loop preload autoplay muted>
-                    <source src="{{theme.link}}/static/images/videos/test.mp4">
-                  </video>
+                <video id="donac_video" class="c-cover-gradient__image width-100 height-100" loop preload muted>
+                  <source src="{{theme.link}}/static/images/videos/test.mp4">
+                </video>
                 <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
                   <div class="c-cover-gradient__top width-100  flex-container padding-1 padding-horizontal-2 opacity-0">
                   </div>
@@ -27,7 +27,8 @@
                       </div>
                       <div class="cell medium-11 large-11">
                         <p class="fs-18 lh-25 white f2">
-                          <span class="w-xbold fs-16 i-white">“Asociación Civil Educación con Propósito”</span> es una organización
+                          <span class="w-xbold fs-16 i-white">“Asociación Civil Educación con Propósito”</span>
+                          es una organización
                           sin fines de lucro, cuyas donaciones son destinadas a la difusión
                           de educación a diferentes zonas rurales del país. Con tu
                           colaboración, MAB podrá seguir viajando a estas regiones para
@@ -44,10 +45,10 @@
             </div>
           </transition>
         </div>
-        <div class="cell large-7">
+        <div class="cell large-7 overflow-hidden">
           <div class="c-split-layout__content">
             <transition name="fade" mode="out-in">
-              <div v-if="true" class="c-split-layout-content c-split-layout-content--dark">
+              <div v-if="step == 1" key="step1" class="c-split-layout-content c-split-layout-content--dark">
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
                     <div class="grid-x align-center">
@@ -55,73 +56,90 @@
                         <h1 class="c-split-layout-content__title margin-bottom-2 white fs-35 c-lh--35">
                           <span class="white fs-30 f2 w-xbold">Dona</span><br>
                           <div class="flex-container align-center-middle margin-top-1">
-                            AM<img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/donaciones/mab-red-logo.png" alt="">LEMENTE
+                            A<img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/donaciones/mab-red-logo.png" alt="">LEMENTE
                           </div>
                         </h1>
 
-                        <form class="c-form-new text-left margin-top-1" action="">
+                        <form @submit="handleDonation($event)" class="c-form-new text-left margin-top-1" action="">
                           <div class="c-form-new__input-container margin-bottom-2">
                             <label class="text-center f2 white" for="">¿Cuánto deseas donar?</label>
                             <div class="check-group flex-container align-middle align-justify margin-bottom-1">
                               <div class="check-group__item">
-                                <input id="50" name="monto" value="50" type="radio" hidden>
-                                <label class="bg-white br--medium margin-0 f2" for="50">S/ 50</label>
+                                <input v-model="donation.amount.value" id="amount-50" name="monto" value="50" type="radio" hidden>
+                                <label class="bg-white br--medium margin-0 f2" for="amount-50">S/ 50</label>
                               </div>
                               <div class="check-group__item margin-horizontal-1">
-                                <input id="100" name="monto" value="100" type="radio" hidden>
-                                <label class="bg-white br--medium margin-0 f2" for="100">S/ 100</label>
+                                <input v-model="donation.amount.value" id="amount-100" name="monto" value="100" type="radio" hidden>
+                                <label class="bg-white br--medium margin-0 f2" for="amount-100">S/ 100</label>
                               </div>
                               <div class="check-group__item">
-                                <input id="150" name="monto" value="150" type="radio" hidden>
-                                <label class="bg-white br--medium margin-0 f2" for="150">S/ 150</label>
+                                <input v-model="donation.amount.value" id="amount-150" name="monto" value="150" type="radio" hidden>
+                                <label class="bg-white br--medium margin-0 f2" for="amount-150">S/ 150</label>
                               </div>
                             </div>
                             <label class="text-center f2 white">o ingresa el monto</label>
-                            <input class="f2 input-reset input-dark" type="text" placeholder="250">
-                            
-                            <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
+                            <input v-model="donation.amount.value" class="f2 input-reset input-dark" type="number" placeholder="250">
+
+                            <p v-if="isWrongField('amount')" class="c-form-new__error pri-alt margin-bottom-0 fs-18 f2 w-medium">
                               Elige un monto para donar
                             </p>
                           </div>
+
                           <div class="c-form-new__input-container margin-bottom-2">
                             <label class="text-center f2 white" for="">Elegir medio de pago</label>
                             <div class="check-group margin-bottom-1">
                               <div class="check-group__item width-100 margin-bottom-1">
-                                <input id="tarjeta" name="medio" value="tarjeta" type="radio" hidden>
+                                <input v-model="donation.method.value" id="tarjeta" value="tarjeta" type="radio" hidden>
                                 <label class="bg-white br--medium margin-0 f2" for="tarjeta">Tarjeta de débito / crédito</label>
                               </div>
                               <div class="check-group__item width-100">
-                                <input id="transferencia" name="medio" value="transferencia" type="radio" hidden>
+                                <input v-model="donation.method.value" id="transferencia" value="transferencia" type="radio" hidden>
                                 <label class="bg-white br--medium margin-0 f2" for="transferencia">Depósito por transferencia </label>
                               </div>
                             </div>
-                            <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
+                            <p v-if="isWrongField('method')" class="c-form-new__error pri-alt margin-bottom-0 fs-18 f2 w-medium">
                               Elige un medio de pago
                             </p>
                           </div>
 
                           <div class="c-form-new__input-container margin-bottom-2">
                             <label class="text-center f2 white padding-horizontal-1">Ingresa tu correo electrónico para poder confirmar tu donación</label>
-                            <input class="f2 input-reset input-dark" type="email" placeholder="donador@g.com">
-                            <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
+                            <input v-model="donation.email.value" class="f2 input-reset input-dark" type="email" placeholder="donador@g.com">
+                            <p v-if="isWrongField('email')" class="c-form-new__error pri-alt margin-bottom-0 fs-18 f2 w-medium">
                               Email vacío o incorrecto
                             </p>
                           </div>
                           <div class="text-center">
-                            <button
-                            class="c-button c-button--primary f2 margin-top-1 text-uppercase br--large padding-horizontal-3"
-                            >siguiente</button>
+                            <button :disabled="isCreatingSignature" class="c-button c-button--primary f2 margin-top-1 text-uppercase br--large padding-horizontal-3">
+                              ${ (isCreatingSignature) ? 'Procesando...' : 'siguiente' }
+                            </button>
                           </div>
                         </form>
+
+                        <form v-if="donation.method.value == 'tarjeta'" ref="donation_form" action="{{pasarell.action}}" method="POST">
+                          <input name="merchantId"    type="hidden"  value="{{pasarell.merchan_id}}">
+                          <input name="accountId"     type="hidden"  value="{{pasarell.account_id}}">
+                          <input name="description"   type="hidden"  value="Donación MAB">
+                          <input name="referenceCode" type="hidden"  :value="referenceCode">
+                          <input name="amount"        type="hidden"  :value="amount">
+                          <input name="tax"           type="hidden"  value="0" >
+                          <input name="taxReturnBase" type="hidden"  value="0" >
+                          <input name="currency"      type="hidden"  value="USD" >
+                          <input name="signature"     type="hidden"  :value="signature">
+                          <input name="test"          type="hidden"  value="{% if pasarell.enviroment == 'dev' %}1{% else %}0{% endif %}" >
+                          <input name="buyerEmail"    type="hidden"  :value="donation.email.value" >
+                          <input name="responseUrl"    type="hidden"  value="{{site.url}}/donaciones?step=3">
+                        </form>
+
                         <div class="c-label-login pri-color f2 margin-top-1">
-                          <a class="c-link c-link-primary w-bold"><i class="fas fa-chevron-left"></i>  Volver a la página principal</a>
+                          <a href="{{ site.url }}" class="c-link c-link-primary w-bold"><i class="fas fa-chevron-left"></i>  Volver a la página principal</a>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div v-if="false" class="c-split-layout-content c-split-layout-content--dark position-relative">
+              <div v-else-if="step == 2" key="step2" class="c-split-layout-content c-split-layout-content--dark position-relative">
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
                     <div class="grid-x align-center">
@@ -129,7 +147,7 @@
                         <h1 class="c-split-layout-content__title margin-bottom-2 white fs-35 c-lh--35">
                           <span class="white fs-30 f2 w-xbold">Dona</span><br>
                           <div class="flex-container align-center-middle margin-top-1">
-                            AM<img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/donaciones/mab-red-logo.png" alt="">LEMENTE
+                            A<img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/donaciones/mab-red-logo.png" alt="">LEMENTE
                           </div>
                         </h1>
 
@@ -182,18 +200,21 @@
 
                         <div class="text-center margin-top-3">
                           <button
-                          class="c-button c-button--primary f2 margin-top-1 text-uppercase br--large padding-horizontal-3 w-xbold"
-                          >CONFIRMAR MI DONACIÓN</button>
+                            @click="isOpenedModal = true"
+                            class="c-button c-button--primary f2 margin-top-1 text-uppercase br--large padding-horizontal-3 w-xbold"
+                          >
+                          CONFIRMAR MI DONACIÓN
+                          </button>
                         </div>
                         <div class="c-label-login pri-color f2 margin-top-1">
-                          <a class="c-link c-link-primary w-bold"><i class="fas fa-chevron-left"></i>  Volver a la página principal</a>
+                          <a href="{{ site.url }}" class="c-link c-link-primary w-bold"><i class="fas fa-chevron-left"></i>  Volver a la página principal</a>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div v-if="false" class="c-split-layout-content c-split-layout-content--dark position-relative">
+              <div v-else-if="step == 3" key="step3" class="c-split-layout-content c-split-layout-content--dark position-relative">
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
                     <div class="grid-x align-center">
@@ -201,7 +222,7 @@
                         <h1 class="c-split-layout-content__title margin-bottom-2 white fs-35 c-lh--35">
                           <span class="white fs-30 f2 w-xbold">Dona</span><br>
                           <div class="flex-container align-center-middle margin-top-1">
-                            AM<img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/donaciones/mab-red-logo.png" alt="">LEMENTE
+                            A<img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/donaciones/mab-red-logo.png" alt="">LEMENTE
                           </div>
                         </h1>
 
@@ -227,7 +248,7 @@
                           ><i class="fas fa-share-alt"></i> Invita a tus amigos a donar</button>
                         </div>
                         <div class="c-label-login pri-color f2 margin-top-1">
-                          <a class="c-link c-link-primary w-bold"><i class="fas fa-chevron-left"></i>  Volver a la página principal</a>
+                          <a href="{{ site.url }}" class="c-link c-link-primary w-bold"><i class="fas fa-chevron-left"></i>  Volver a la página principal</a>
                         </div>
                       </div>
                     </div>
@@ -237,14 +258,14 @@
             </transition>
           </div>
 
-          <div v-if="false" class="c-mab-modal c-mab-modal--mini flex-container align-center-middle">
+          <div class="c-mab-modal c-mab-modal--mini flex-container align-center-middle" :class="{'visible' : isOpenedModal}">
             <div class="grid-x align-center width-100">
               <div class="cell small-10 medium-10 large-6">
                 <div class="c-mab-modal-content bg-white text-center position-relative">
                   <div class="text-center">
                     <img loading="lazy" class="c-mab-modal__top-image donaciones" src="{{theme.link}}/static/images/donaciones/envelope.png" alt="">
                   </div>
-                  <button type="button" class="c-mab-modal__cross position-absolute white bg-pri-color fs-18 fñex-container align-center-middle">
+                  <button @click="nextStep(3)" class="c-mab-modal__cross position-absolute white bg-pri-color fs-18 fñex-container align-center-middle">
                     <i class="fas fa-times"></i>
                   </button>
                   <h3 class="c-mab-modal-content__title text-center dark text-uppercase">
