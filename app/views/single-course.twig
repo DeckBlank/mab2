@@ -528,7 +528,8 @@
       </div>  
     </div>
 
-    <div v-if="true" class="c-mab-modal c-mab-modal--bg-blue visible c-mab-modal--mini width-100 flex-container align-center-middle">
+    {# modal por completar el curso/ certificado  #}
+    <div v-if="false" class="c-mab-modal c-mab-modal--bg-blue visible c-mab-modal--mini width-100 flex-container align-center-middle">
       <div class="grid-x align-center width-100">
         <div class="cell small-10 medium-10 large-5">
           <div class="c-mab-modal-content bg-sec-color text-center position-relative">
@@ -544,6 +545,20 @@
             <p class="w-bold white f2 fs-18">Esperamos que hayas aprendido y disfurtado de este curso, no olvides descargar y compartir tu certificado </p>
             <a href="" class="c-link c-link--warning f2 w-xbold">Ver certificado</a>
           </div>
+        </div>
+      </div>
+    </div>
+
+    {# modal de trailer  #}
+    <div v-if="false" class="c-video-modal visible width-100 flex-container align-center-middle">
+      <div class="c-video-modal__content">
+        <div class="flex-container align-right">
+          <button class="c-video-modal__cross white bg-warning fs-18 flex-container align-center-middle">
+            <i class="fas fa-times sec-color"></i>
+          </button>
+        </div>
+        <div class="c-video-modal__iframe-container position-relative width-100">
+          <iframe src="https://www.youtube.com/embed/NZuvfYptle0" class="width-100 height-100 position-absolute" frameborder="0"></iframe>
         </div>
       </div>
     </div>

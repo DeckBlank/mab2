@@ -98,6 +98,45 @@
   display: flex !important;
 }
 
+.c-video-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: rgba($color: $black, $alpha: 0.8);
+  height: 100vh;
+  width: 100%;
+  z-index: 54656564654;
+  display: none !important;
+
+  &__content {
+    width: 100%;
+  }
+
+  &__iframe-container {
+    height: 0;
+    padding-bottom: 56.25%;
+  }
+
+  iframe {
+    left: 0;
+    top: 0;
+    overflow: hidden;
+  }
+
+  &__cross {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    margin-top: -3rem;
+  }
+}
+
+.c-video-modal.visible {
+  display: flex !important;
+}
+
 @include breakpoint(large) {
   .c-modal {
     &__content {
@@ -119,6 +158,16 @@
     &__top-image {
       width: 180px;
       margin: -12rem auto -3em;
+    }
+  }
+
+  .c-video-modal {
+    &__content {
+      width: 60%;
+    }
+
+    &__cross {
+      padding-right: 0;
     }
   }
 }
