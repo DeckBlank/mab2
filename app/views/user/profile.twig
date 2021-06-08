@@ -477,7 +477,7 @@
               <div class="c-form-new__input-container">
                 <label class="w-bold f2 dark" for="">Nombre</label>
                 <input v-model="user.firstname.value" class="f2 input-reset border-dark" type="text">
-                <p v-if="isWrongField('firstname')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
+                <p v-if="isWrongField('firstname')" class="c-form-new__error pri-alt margin-bottom-0 fs-18 f2 w-medium">
                   Nombre vacío o no válido
                 </p>
               </div>
@@ -486,7 +486,7 @@
               <div class="c-form-new__input-container">
                 <label class="w-bold f2 dark" for="">Apellido Paterno</label>
                 <input v-model="user.fatherName.value" class="f2 input-reset border-dark" type="text">
-                <p v-if="isWrongField('fatherName')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
+                <p v-if="isWrongField('fatherName')" class="c-form-new__error pri-alt margin-bottom-0 fs-18 f2 w-medium">
                   Apellido Paterno vacío o no válido
                 </p>
               </div>
@@ -495,7 +495,7 @@
               <div class="c-form-new__input-container">
                 <label class="w-bold f2 dark" for="">Apellido Materno</label>
                 <input v-model="user.motherName.value" class="f2 input-reset border-dark" type="text">
-                <p v-if="isWrongField('motherName')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
+                <p v-if="isWrongField('motherName')" class="c-form-new__error pri-alt margin-bottom-0 fs-18 f2 w-medium">
                   Apellido Materno vacío o no válido
                 </p>
               </div>
@@ -504,7 +504,7 @@
               <div class="c-form-new__input-container">
                 <label class="w-bold f2 dark" for="">Frase</label>
                 <textarea v-model="user.phrase.value" @keydown="observePhraseInput" class="f2 input-reset border-dark br--medium" name="" id="" cols="30" rows="3"></textarea>
-                <p v-if="isWrongField('phrase')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium dark">
+                <p v-if="isWrongField('phrase')" class="c-form-new__error pri-alt margin-bottom-0 fs-18 f2 w-medium">
                   Frase vacía o muy corta
                 </p>
               </div>

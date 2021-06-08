@@ -12,6 +12,7 @@
         'DB_USER'       => 'root',
         'DB_PASSWORD'   => '',
         'DB_NAME'       => 'db_mab',
+        'DB_PREFIX'     => 'db_mab',
 
         /**
          * Open Tok
@@ -24,7 +25,7 @@
          */
         'PU_ACTION'         => 'https://sandbox.checkout.payulatam.com/ppp-web-gateway-payu/',
         'PU_API_KEY'        => '4Vj8eK4rloUd272L48hsrarnUA',
-        'PU_ACCOUNT_ID'     => '512326',
+        'PU_ACCOUNT_ID'     => '512323',
         'PU_MERCHAND_ID'    => '508029',
 
         /**

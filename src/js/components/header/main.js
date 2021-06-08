@@ -86,7 +86,7 @@ Vue.component('header-main',{
             </div>
           </div>
           <div class="c-item margin-left-1">
-            <a href="" class="c-item c-link c-link--ho-warning f2 fs-18 w-sbold white">Donaciones</a>
+            <a :href="SITE_URL + '/donaciones'" class="c-item c-link c-link--ho-warning f2 fs-18 w-sbold white">Donaciones</a>
           </div>
         </div>
         <div class="c-nav__right flex-container align-middle">
