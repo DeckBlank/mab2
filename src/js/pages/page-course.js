@@ -7,6 +7,7 @@ const course = new Vue({
   ...baseConfig(store),
   data() {
     return {
+      showTooltipCerticado: false,
       metas: new URLSearchParams(window.location.search),
       isActiveUnity: false,
       isAvaibleCourse: true,

@@ -215,7 +215,7 @@ class CourseModel{
         } else {
             if (!empty($courses)){
                 foreach($courses as $course){
-                    if($course['course']['course']->ID == $request['course_id']){
+                    if($course['course']['course'] && $course['course']['course']->ID == $request['course_id']){
                         foreach($course['course']['registrations'] as $registration){
                             if(
                                 ($registration['registration']['user']['user_email'] == $request['user'] and

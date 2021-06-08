@@ -84,7 +84,13 @@
   }
 
   &--bg-blue {
-    background: rgba($color: $secondary-color, $alpha: 0.8);
+    background: rgba($color: $secondary-color, $alpha: 0.7);
+
+    .c-mab-modal-content {
+      box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
+      max-width: 630px;
+      margin: 0 auto;
+    }
   }
 }
 
