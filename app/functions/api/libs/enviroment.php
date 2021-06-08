@@ -7,7 +7,8 @@ function setEnviromentVariables($context = []) {
     ]);
 
     if(is_user_logged_in()){
-        $current_user = wp_get_current_user();
+        $current_user   = wp_get_current_user();
+        $avatar         = get_field('avatar', 'user_' . $current_user->ID);
 
         $context = array_merge(
             $context,
@@ -22,6 +23,7 @@ function setEnviromentVariables($context = []) {
                 "user_rol"          => $current_user->roles[0],
                 "user_grade"        => get_field('grade', 'user_' . $current_user->ID),
                 "user_sector"       => get_field('school_type', 'user_' . $current_user->ID),
+                "user_avatar"       => ($avatar) ? $avatar['url'] : '',
                 "user_metas"        => (object)[
                     "questionary"   => BehaviourModel::questionaryCheckout($current_user->data->user_email),
                     "poll"          => BehaviourModel::pollCheckout($current_user->data->user_email)

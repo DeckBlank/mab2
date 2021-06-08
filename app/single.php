@@ -71,6 +71,11 @@ function __getTopicOnNavigation($course_id, $unity_id, $topic_id, $direction){
 $context         = Timber::get_context();
 $context['post'] = Timber::get_post();
 
+$templates = [
+    'single-' . $post->post_type . '.twig',
+    'single.twig'
+];
+
 if ($post->post_type == "video") {
     $context['author'] = (object)[
         "first_name" =>  $context['post']->author->first_name,
@@ -84,17 +89,21 @@ if ($post->post_type == "video") {
     $context['description'] = get_the_excerpt($post->ID);
     $context['likes']       = __getMetaCourse($post->ID, '-1', 'likes');
     $context['vector']      = get_field('vector', $post->ID);
+    $context['trailer']     = get_field('trailer', $post->ID);
     $context['duration']    = __getMetaCourse($post->ID, '-1', 'duration');
 
     if ($teacher) {
+        $teacherUser = get_userdata($teacher['ID']);
+
         $context['teacher']     = [
             'fullname'  => $teacher['user_firstname'] . ' ' . $teacher['user_lastname'],
             'job'       => get_field('job', 'user_' . $teacher['ID']),
             'cover'     => get_field('cover', 'user_' . $teacher['ID']),
-            'link'      => (get_field('is_lider', 'user_' . $teacher['ID'])) ? sprintf('/lider/%s', $teacher['user_nicename']) : '',
+            'link'      => ( in_array( 'leader', (array) $teacherUser->roles ) ) ? sprintf('/lider/%s', $teacher['user_nicename']) : '',
         ];
     }
 
+    $templates = ['courses/single.twig'];
 } else if($post->post_type == "topic") {
     $context['navigation'] = (object)[
         "previous" => __getTopicOnNavigation($_GET['course_id'], $_GET['unity'], $post->ID, 'previous'),
@@ -114,6 +123,7 @@ if ($post->post_type == "video") {
     $context['author']  = ($author) ? $author['user_firstname'] . ' ' . $author['user_lastname'] : 'MAB';
     $context['share']   = [
         'facebook'  => 'https://www.facebook.com/sharer/sharer.php?u=' . $context['post']->link,
+        'linkedin'  => 'http://www.linkedin.com/shareArticle?mini=true&url=' . $context['post']->link,
         'twitter'   => sprintf(
             'https://twitter.com/share?text=%s&url=%s',
             'Hola, te comparto esta articulo de mab',
@@ -123,7 +133,9 @@ if ($post->post_type == "video") {
 
     $articles = Timber::get_posts([
         'post_type'         => 'post',
-        'posts_per_page'    => -1
+        'posts_per_page'    => -1,
+        'post__not_in'      => [$post->ID],
+        'orderby'           => 'rand'
     ]);
 
     $context['articles'] = array_map(function($article) use ($context){
@@ -137,11 +149,8 @@ if ($post->post_type == "video") {
             'link'      => $article->link,
         ];
     }, $articles);
-}
 
-$templates = [
-    'single-' . $post->post_type . '.twig',
-    'single.twig'
-];
+    $templates = ['blog/article.twig'];
+}
 
 Timber::render( $templates, $context );

@@ -3,6 +3,49 @@
     "title": "Course Side",
     "fields": [
         {
+            "key": "field_5f8140abc913e",
+            "label": "Area",
+            "name": "area",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "creative": "Creativo",
+                "emotional": "Emocional\/Bienestar",
+                "academic": "Académico"
+            },
+            "default_value": [],
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "ajax": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_609b5ffedb16d",
+            "label": "Precio",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
             "key": "field_5ee31c92b62d5",
             "label": "Precio",
             "name": "price",
@@ -24,10 +67,10 @@
             "step": ""
         },
         {
-            "key": "field_609b5ffedb16d",
-            "label": "Precio",
-            "name": "",
-            "type": "accordion",
+            "key": "field_5efa0663abd13",
+            "label": "Configuración",
+            "name": "price_settings",
+            "type": "radio",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -36,9 +79,16 @@
                 "class": "",
                 "id": ""
             },
-            "open": 0,
-            "multi_expand": 0,
-            "endpoint": 0
+            "choices": {
+                "global": "Global",
+                "individual": "Individual"
+            },
+            "allow_null": 1,
+            "other_choice": 0,
+            "default_value": "global",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
         },
         {
             "key": "field_609b600cdb16e",
@@ -56,6 +106,26 @@
             "open": 0,
             "multi_expand": 0,
             "endpoint": 0
+        },
+        {
+            "key": "field_608620316aed0",
+            "label": "Teacher",
+            "name": "teacher",
+            "type": "user",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "role": [
+                "mab-teacher"
+            ],
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "array"
         },
         {
             "key": "field_609b5d65b4266",
@@ -96,76 +166,6 @@
             },
             "default_value": "",
             "placeholder": "Enlace (vimeo)"
-        },
-        {
-            "key": "field_5efa0663abd13",
-            "label": "Configuración",
-            "name": "price_settings",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "global": "Global",
-                "individual": "Individual"
-            },
-            "allow_null": 1,
-            "other_choice": 0,
-            "default_value": "global",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
-        },
-        {
-            "key": "field_5f8140abc913e",
-            "label": "Area",
-            "name": "area",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "creative": "Creativo",
-                "emotional": "Emocional\/Bienestar",
-                "academic": "Académico"
-            },
-            "default_value": [],
-            "allow_null": 0,
-            "multiple": 0,
-            "ui": 0,
-            "return_format": "value",
-            "ajax": 0,
-            "placeholder": ""
-        },
-        {
-            "key": "field_608620316aed0",
-            "label": "Teacher",
-            "name": "teacher",
-            "type": "user",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "role": [
-                "mab-teacher"
-            ],
-            "allow_null": 0,
-            "multiple": 0,
-            "return_format": "array"
         }
     ],
     "location": [
@@ -185,5 +185,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1622695125
+    "modified": 1623131231
 }
