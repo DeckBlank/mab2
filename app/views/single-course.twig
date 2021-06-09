@@ -550,15 +550,23 @@
     </div>
 
     {# modal de trailer  #}
-    <div v-if="false" class="c-video-modal visible width-100 flex-container align-center-middle">
-      <div class="c-video-modal__content">
-        <div class="flex-container align-right">
+    <div v-if="true" class="c-video-modal visible width-100 flex-container align-center-middle">
+      <div class="c-video-modal__content bg-white br--large">
+        {# <div class="flex-container align-right">
           <button class="c-video-modal__cross white bg-warning fs-18 flex-container align-center-middle">
             <i class="fas fa-times sec-color"></i>
-          </button>
+          </button> 
+        </div> #}
+        <div>
+          <div class="c-video-modal__iframe-container position-relative width-100">
+            <iframe src="https://www.youtube.com/embed/NZuvfYptle0" class="width-100 height-100 position-absolute" frameborder="0"></iframe>
+          </div>
         </div>
-        <div class="c-video-modal__iframe-container position-relative width-100">
-          <iframe src="https://www.youtube.com/embed/NZuvfYptle0" class="width-100 height-100 position-absolute" frameborder="0"></iframe>
+        <div class="flex-container align-justify align-center margin-top-1">
+          <div class="sec-color fs-21 f2">
+            <i class="fas fa-heart"></i> <span>30</span>
+          </div>
+          <button type="button" class="c-button c-button--success f2"> Regresar</button>
         </div>
       </div>
     </div>

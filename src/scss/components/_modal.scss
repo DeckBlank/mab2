@@ -102,14 +102,15 @@
   position: fixed;
   top: 0;
   right: 0;
-  background: rgba($color: $black, $alpha: 0.8);
+  background: rgba($color: $secondary-color, $alpha: 0.9);
   height: 100vh;
   width: 100%;
-  z-index: 54656564654;
+  z-index: 444;
   display: none !important;
 
   &__content {
-    width: 100%;
+    width: 90%;
+    padding: 2rem 1rem 1rem;
   }
 
   &__iframe-container {
@@ -163,7 +164,8 @@
 
   .c-video-modal {
     &__content {
-      width: 60%;
+      width: 62%;
+      padding: 3rem 5% 2rem;
     }
 
     &__cross {
