@@ -98,6 +98,46 @@
   display: flex !important;
 }
 
+.c-video-modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background: rgba($color: $secondary-color, $alpha: 0.9);
+  height: 100vh;
+  width: 100%;
+  z-index: 444;
+  display: none !important;
+
+  &__content {
+    width: 90%;
+    padding: 2rem 1rem 1rem;
+  }
+
+  &__iframe-container {
+    height: 0;
+    padding-bottom: 56.25%;
+  }
+
+  iframe {
+    left: 0;
+    top: 0;
+    overflow: hidden;
+  }
+
+  &__cross {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    margin-top: -3rem;
+  }
+}
+
+.c-video-modal.visible {
+  display: flex !important;
+}
+
 @include breakpoint(large) {
   .c-modal {
     &__content {
@@ -119,6 +159,17 @@
     &__top-image {
       width: 180px;
       margin: -12rem auto -3em;
+    }
+  }
+
+  .c-video-modal {
+    &__content {
+      width: 62%;
+      padding: 3rem 5% 2rem;
+    }
+
+    &__cross {
+      padding-right: 0;
     }
   }
 }

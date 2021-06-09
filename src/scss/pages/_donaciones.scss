@@ -18,6 +18,15 @@
 
 @include breakpoint(large) {
   .c-section--donaciones {
+    .c-split-layout {
+      height: calc(100vh - 50px);
+      min-height: auto;
+
+      .large-7 {
+        height: 100%;
+      }
+    }
+
     .c-donacion-info {
       img {
         width: 60px;

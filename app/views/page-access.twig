@@ -217,12 +217,16 @@
                           O
                         </div>
                         <button @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
-                          <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
-                          <span class="f2">Continuar con Facebook</span>
+                          <span class="content">
+                            <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
+                            <span class="f2">Continuar con Facebook</span>
+                          </span>
                         </button>
                         <button @click="authWithGoogle" class="c-btn-input-social w-medium width-100">
-                          <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
-                          <span class="f2">Continuar con Google</span>
+                          <span class="content">
+                            <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
+                            <span class="f2">Continuar con Google</span>
+                          </span>
                         </button>
                         <div class="c-label-login warning f2 margin-top-1">
                           ¿Aún no tienes cuenta? <a :href="SITE_URL + '/access?auth=register'" class="c-link c-link--warning w-bold">Regístrate</a>
@@ -242,12 +246,16 @@
                           <div class="warning big-title">#MABLover</div> 
                         </h1>
                         <button @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
-                          <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
-                          <span class="f2">Regístrate con Facebook</span>
+                          <span class="content">
+                            <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
+                            <span class="f2">Regístrate con Facebook</span>
+                          </span>
                         </button>
                         <button @click="authWithGoogle" class="c-btn-input-social w-medium width-100">
-                          <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
-                          <span class="f2">Regístrate con Google</span>
+                          <span class="content">
+                            <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
+                            <span class="f2">Regístrate con Google</span>
+                          </span>
                         </button>
                         <form @submit="register($event)" class="c-form-new text-left margin-top-2">
                           <div class="c-form-new__input-container margin-bottom-1">
