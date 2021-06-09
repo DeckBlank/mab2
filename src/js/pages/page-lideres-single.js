@@ -20,7 +20,10 @@ const lideresSingle = new Vue({
     goBack: function(e) {
       e.preventDefault();
 
-      window.history.back();
+      if (window.history.length == 1)
+        window.location.href = this.SITE_URL;
+      else
+        window.history.back();
     },
   }
 })

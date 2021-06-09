@@ -66,18 +66,18 @@ Routes::map('lider/:user_nicename', function($routeParams) use ($config) {
     Routes::load('app.php', $params, "", 200);
 });
 
-Routes::map('donaciones', function($routeParams) use ($vertion, $config) {
+Routes::map('donaciones', function($routeParams) use ($config) {
     $params = [
         'route' => $routeParams,
         'view'  => 'donations',
     ];
 
-    add_action( 'wp_enqueue_scripts', function () use ($config, $vertion) {
+    add_action( 'wp_enqueue_scripts', function () use ($config) {
         register_assets('script', [
             'handle'    => 'pandawp/js/page/donaciones',
             'src'       => $config['resources']['page_donaciones'],
             'deps'      => [ ],
-            'ver'       => $vertion,
+            'ver'       => $config['vertion'],
             'in_footer' => true
         ]); 
     });

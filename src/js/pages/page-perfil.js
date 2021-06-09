@@ -486,7 +486,9 @@ const perfil = new Vue({
       })
       .then(data => {
         if (data.status && data.avatar) {
-          this.user.profile.avatar.url = data.avatar;
+          this.user.profile.avatar = {
+            url: data.avatar
+          };
         }
       })
       .catch(err => {

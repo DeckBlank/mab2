@@ -10,15 +10,12 @@ Vue.component('profile',{
         @mouseover="blockMenu(true)"
         @mouseleave="blockMenu(false)"
         class="c-user__profile rounded overflow-hidden flex-container align-center-middle margin-right-0">
-        <img class="width-100 height-100 of--cover" src="https://scontent.ftru2-3.fna.fbcdn.net/v/t1.6435-9/90084625_100247424944921_6658651316983693312_n.png?_nc_cat=1&ccb=1-3&_nc_sid=09cbfe&_nc_eui2=AeH8SMN_QIP3IJ_ms2flzSGC7uTsun36oivu5Oy6ffqiK27aX0MPf5vz-Rwx_QoAkSzKJuE2Godzf3420d3fQiN5&_nc_ohc=ZbdM-IG-ZYgAX8bf5nW&_nc_ht=scontent.ftru2-3.fna&oh=d8cb89a3777077de2fa774e59e112a26&oe=609F42F2"></img>
+        <img class="width-100 height-100 of--cover" :src="avatar"></img>
       </label>
       <div @mouseover="blockMenu(true)" @mouseleave="blockMenu(false)" class="c-menu-dropdown right br--medium position-absolute f2">
         <ul class="bg-white ul-reset br--medium overflow-hidden">
           <li class="c-menu-dropdown__item w-bold">
             <a :href="SITE_URL + '/user/' + logedUser.user_nicename" class="w-xbold text-center padding-horizontal-2">Mi perfil</a>
-          </li>
-          <li class="c-menu-dropdown__item w-bold">
-            <a :href="SITE_URL + '/me-organizo'" class="w-xbold text-center padding-horizontal-2">Me organizo</a>
           </li>
           <li class="c-menu-dropdown__item w-bold">
             <a :href="SITE_URL + '/mis-cursos'" class="w-xbold text-center padding-horizontal-2">Mis cursos</a>
@@ -37,7 +34,10 @@ Vue.component('profile',{
     }
   },
   computed: {
-    ...Vuex.mapState(['API', 'SITE_URL', 'logedUser'])
+    ...Vuex.mapState(['API', 'SITE_URL', 'logedUser', 'THEME_URL']),
+    avatar: function() {
+      return (this.logedUser.user_avatar) ? this.logedUser.user_avatar : `${ this.THEME_URL }/static/images/user.png`;
+    },
   },
   watch: {
     'switcher': function() {

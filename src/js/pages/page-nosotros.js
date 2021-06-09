@@ -63,7 +63,7 @@ new Vue({
     initSlider: function() {
       setTimeout(() => {
         this.slider = new Swiper(".mySwiper", {
-          speed: 3000,
+          speed: 10000,
           loop: true,
           freeMode: true,
           freeModeMomentum: false,
