@@ -271,6 +271,10 @@ body {
   font-weight: 300 !important;
 }
 
+.c-pointer {
+  cursor: pointer;
+}
+
 @include breakpoint(large) {
   .desktop {
     display: block;

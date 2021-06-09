@@ -105,7 +105,7 @@
                         </li>
                       </ul>
                     </div>
-                    <div v-if="false" class="c-tab-recursos br-bottom--large br-top--large padding-2">
+                    <div v-if="true" class="c-tab-recursos br-bottom--large br-top--large padding-2">
                       <h3 class="w-xbold f2 fs-25 dark margin-bottom-1 text-uppercase">RECURSOS</h3>
                       <div class="grid-x align-self-strecht text-center">
                         <div class="small-3 medium-3 large-3">
@@ -142,6 +142,37 @@
                               <img src="{{ theme.link }}/static/images/curso/doc-2.png" alt="" class=" width-100 height-100 of--contain"> 
                             </figure>
                             <div>Mapas mentales</div>
+                          </div>
+                        </div>
+                        <div class="cell">
+                          <h3 class="w-xbold f2 fs-25 dark margin-bottom-1 text-uppercase text-left margin-top-2">Certificado</h3>
+                        </div>
+                        <div class="small-5 medium-5 large-4">
+                          <div class="c-tab-recursos__item c-tab-recursos__item--auto f2 w-bold">
+                            <figure class="margin-bottom-1 position-relative">
+                              <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class=" width-100"> 
+                              <div class="c-tab-recursos__shade width-100 height-100 position-absolute flex-container align-justify flex-dir-column warning-alt">
+                                <div @click="showTooltipCerticado = !showTooltipCerticado" class="width-100 text-right ">
+                                  <i class="far fa-exclamation-circle c-pointer"></i>
+                                </div>
+
+                                <div v-if="showTooltipCerticado == false" class="white">
+                                  <i class="far fa-lock"></i>
+                                </div>
+
+                                <div>
+                                  <div v-if="showTooltipCerticado == true" class="white">
+                                    <span>Debes completar el curso para obtener tu certificado</span> 
+                                  </div>
+                                </div>
+                                
+
+                                <div class="opacity-0">
+                                  <i class="far fa-exclamation-circle"></i>
+                                </div>
+                              </div>
+                            </figure>
+                            <!-- <div>Certificado</div> -->
                           </div>
                         </div>
 
@@ -498,6 +529,27 @@
         </div>
       </div>  
     </div>
+
+    <div v-if="true" class="c-mab-modal c-mab-modal--bg-blue visible c-mab-modal--mini width-100 flex-container align-center-middle">
+      <div class="grid-x align-center width-100">
+        <div class="cell small-10 medium-10 large-5">
+          <div class="c-mab-modal-content bg-sec-color text-center position-relative">
+            <div class="text-center">
+              <img loading="lazy" class="c-mab-modal__top-image donaciones" src="{{theme.link}}/static/images/vectors/heart-expression.png" alt="">
+            </div>
+            <button type="button" class="c-mab-modal__cross position-absolute white bg-warning fs-18 flex-container align-center-middle">
+              <i class="fas fa-times sec-color"></i>
+            </button>
+            <h3 class="c-mab-modal-content__title text-center  text-uppercase margin-top-3">
+              <span class="warning f2 w-xbold">¡LO LOGRASTE! FELICIDADES POR COMPLETAR EL CURSO!
+            </h3>
+            <p class="w-bold white f2 fs-18">Esperamos que hayas aprendido y disfurtado de este curso, no olvides descargar y compartir tu certificado </p>
+            <a href="" class="c-link c-link--warning f2 w-xbold">Ver certificado</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </section>
 {% endblock %}
 
