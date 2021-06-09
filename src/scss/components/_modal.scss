@@ -92,6 +92,24 @@
       margin: 0 auto;
     }
   }
+
+  &__share {
+    width: 90%;
+    margin: 2.5rem auto 0;
+
+    a {
+      display: inline-block;
+
+      img {
+        max-width: 60px;
+      }
+
+      span {
+        display: inline-block;
+        width: 100%;
+      }
+    }
+  }
 }
 
 .c-mab-modal.visible {
@@ -159,6 +177,14 @@
     &__top-image {
       width: 180px;
       margin: -12rem auto -3em;
+    }
+
+    &__share {
+      a {
+        img {
+          max-width: 90%;
+        }
+      }
     }
   }
 

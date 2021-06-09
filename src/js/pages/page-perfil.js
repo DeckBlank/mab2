@@ -9,6 +9,7 @@ const perfil = new Vue({
   data() {
     return {
       userId: -1,
+      showShareBox: false,
 
       user: {
         try: false,
