@@ -7,6 +7,7 @@ use Timber\Timber;
 require(__DIR__ . '/../models/UserModel.php');
 require(__DIR__ . '/../models/schema/User.php');
 require(__DIR__ . '/../models/schema/UserCourse.php');
+require(__DIR__ . '/../models/schema/UserCertificate.php');
 require(__DIR__ . '/../models/schema/UserCourseEnrollment.php');
 require(__DIR__ . '/../models/schema/UserTopic.php');
 require(__DIR__ . '/../models/schema/TopicTestScore.php');
@@ -192,7 +193,8 @@ class UserController{
 
             register_rest_route( 'custom/v1', '/users/(?P<user_id>\d+)/certificate', array(
                 'methods' => 'GET',
-                'callback' => array($this, 'renderCertificate'),
+                // 'callback' => array($this, 'renderCertificate'),
+                'callback' => array($this, 'renderCertificateTemp'),
                 'permission_callback' => function ($request) {
                     return true;
                 }
@@ -818,6 +820,169 @@ class UserController{
         $quotationPDF->SetTitle("Certificado - Cleiver Valera Flores");
         $quotationPDF->WriteHTML($document);
         $quotationPDF->Output();
+    }
+
+    public function renderCertificateTemp($request) {
+        if (
+            !empty($request['course'])
+        ) {
+            $quotationPDF   = new \Mpdf\Mpdf([
+                'mode'          => 'utf-8',
+                'margin_top'    => 0,
+                'margin_bottom' => 0,
+                'margin_left'   => 0,
+                'margin_right'  => 0,
+                'format'        => [190, 236],
+                'orientation'   => 'L'
+            ]);
+
+            $courseId   = $request['course'];
+            $userId     = $request['user_id'];
+
+            $userFullname = get_user_meta( $userId, 'first_name', true ) . ' ' . get_user_meta( $userId, 'last_name', true );
+            $userFullname = count( explode('-panda-', $userFullname) ) ? str_replace(['-panda-'], ' ', $userFullname) : $userFullname;
+
+            $course     = Timber::get_post(['post_type' => 'course', 'p' => $courseId]);
+            $userCertificate = UserCertificate::where([
+                'user_id'   => $userId,
+                'course_id' => $courseId
+            ])->first();
+
+            if ($userCertificate) {
+                $logoMab        = get_template_directory_uri() . '/static/images/certificates/logo-mab.png';
+                $heartVector    = get_template_directory_uri() . '/static/images/certificates/vectors.png';
+                $firma1         = get_template_directory_uri() . '/static/images/certificates/firma-1.png';
+                $firma2         = get_template_directory_uri() . '/static/images/certificates/firma-2.png';
+
+                $date = sprintf('%s de %s de %s',
+                    date("d", strtotime($userCertificate->created_at)),
+                    array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre")[date("m", strtotime($userCertificate->created_at)) - 1],
+                    date("Y", strtotime($userCertificate->created_at)),
+                );
+
+                $document = '
+                    <html lang="en">
+                        <head>
+                            <style>
+                                body {
+                                    font-family: sans-serif;
+                                }
+
+                                table {
+                                    font-family: arial, sans-serif;
+                                    border-collapse: collapse;
+                                    width: 100%;
+                                    height: 100%;
+                                    background: #fff;
+                                }
+
+                                td, th {
+                                    border: 0
+                                    text-align: left;
+                                    padding: 8px;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                        <table>
+                            <tr>
+                                <td rowspan="12" style="background:#0166d0; width:25%; text-align:center">
+                                    <img src="'. $logoMab .'">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style=" padding: 6rem 4rem 10px; font-size: 18px">
+                                    <div>Certificado de</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style=" padding: 0 4rem 10px;">
+                                    <h2>'. strtoupper($course->title) .'</h2>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style=" padding: 0 4rem 10px;">
+                                    <hr style="border-color: #000">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style=" padding: 0 4rem 20px; font-size: 18px">
+                                    <div>El presente diploma se otorga a </div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td style=" padding: 0 4rem 2rem;">
+                                    <h1>'. strtoupper($userFullname) .'</h1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style=" padding: 0rem 4rem 10px; text-align:center">
+                                    <div>Certificado de aprobación online </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style=" padding: 0 4rem 10px; text-align:center">
+                                    <div style="font-size:21px"><strong>Aprobado el '. $date .'</strong></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style=" padding: 0 4rem 10px; text-align:center">
+                                    <div><strong>'. __getMetaCourse($courseId, -1, 'duration') .' horas de teoría y práctica</strong></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style=" padding: 0 4rem 10px; text-align:center">
+                                    <div> <a href="" style="text-decoration: none" target="_blank"> <strong style="color:#000">https://mabclick.com/@Angela/</a></strong></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style=" padding: 0 4rem 2rem; text-align:center">
+                                    <div>Código '. $userCertificate->signature .'</div>
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td style="padding: 0rem 4rem 5rem">
+                                    <table style="width:100%">
+                                        <tr>
+                                            <td style="text-align: center">
+                                                <div style="width: 400px; border-bottom:2px solid #000;"> 
+                                                    <img style="margin-bottom:0.5rem" src="'. $firma1 .'">
+                                                </div>
+                                                <div style="padding:10px 0 0; text-align: center;">
+                                                    Macarena R. 
+                                                </div>
+                                            </td>
+                                            <td style="text-align: center">
+                                                <img src="'. $heartVector .'">
+                                            </td>
+                                            <td style="text-align: center">
+                                                <div style="width: 400px; border-bottom:2px solid #000;"> 
+                                                    <img style="margin-bottom:0.5rem" src="'. $firma2 .'">
+                                                </div>
+                                                <div style="padding:10px 0 0; text-align: center;">
+                                                    Macarena R. 
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        </body>
+                    </html>
+                ';
+
+                $quotationPDF->SetTitle("Certificado - " . $userFullname);
+                $quotationPDF->WriteHTML($document);
+                $quotationPDF->Output("Certificado - " . $userFullname . '.pdf', 'D');
+            } else {
+                # code...
+            }
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 403 ) );
+        }
     }
 
     private function sendInstructions($request, $recovery_session, $user_id){
