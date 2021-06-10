@@ -1,0 +1,181 @@
+
+.carrito-fake-container {
+  width: 90%;
+  margin: 2rem auto;
+}
+
+.c-mab-carrito {
+  outline: none;
+
+  .c-mab-carrito-product {
+    &__figure {
+      width: 40%;
+    }
+
+    &__title,
+    &__subtitle {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+
+      p {
+        margin: 0;
+      }
+    }
+
+    &__content {
+      width: 60%;
+      padding: 1.5rem 1rem;
+
+      p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        min-height: 49px;
+        font-size: $fs-14;
+        line-height: 17px;
+      }
+    }
+
+    &__price {
+      display: inline-block;
+      padding: 0.2rem 0.8rem;
+      font-size: $fs-14;
+    }
+  }
+
+  .c-mab-carrito-item--primary {
+    .c-mab-carrito-product {
+      &__content {
+        background: $primary-color;
+        color: $white;
+      }
+
+      &__price {
+        background: $warning-alt;
+        color: $dark;
+      }
+    }
+  }
+
+  .c-medios-pagos {
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+    justify-content: center;
+
+    img {
+      height: 18px;
+      margin: 0 0.8rem 0.8rem;
+    }
+  }
+
+  .c-mab-carrito-list-item {
+    border-bottom: 2px solid $dark;
+    padding: 0.5rem 0;
+
+    &__name {
+      display: inline-block;
+      width: 50%;
+    }
+  }
+
+  &__vacio {
+    padding: 3rem 2rem;
+    flex-direction: column;
+  }
+
+  &__vacio-content {
+    max-width: 350px;
+    margin: 3rem auto;
+
+    .c-button {
+      width: 100%;
+    }
+  }
+}
+
+.c-mab-carrito-message {
+  position: fixed;
+  top: 0;
+  left: 0;
+  flex-direction: column;
+  background: rgba(211, 211, 211, 0.8);
+  z-index: 5555;
+  display: none;
+
+  &__content {
+    width: 80%;
+    max-width: 400px;
+    padding: 2rem;
+  }
+
+  &__title {
+    display: inline-block;
+    border-bottom: 2px solid $dark;
+  }
+}
+
+.c-mab-carrito-message.visible {
+  display: flex;
+}
+
+@include breakpoint(large) {
+  .carrito-fake-container {
+    width: 800px;
+  }
+
+  .c-mab-carrito {
+    outline: none;
+
+    &__scroll {
+      max-height: 424px;
+      min-height: 424px;
+      padding-right: 2rem;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      &::-webkit-scrollbar-track {
+        // background: $ligth-grey;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $dark;
+      }
+    }
+
+    .c-medios-pagos {
+      justify-content: flex-start;
+
+      img {
+        margin: 0 1rem 0.8rem 0;
+      }
+    }
+
+    &__vacio-content {
+      .c-button {
+        padding: 0.5rem 3rem;
+        width: auto;
+      }
+    }
+  }
+
+  .c-mab-carrito-message {
+    position: absolute;
+    border-radius: 20px;
+
+    &__content {
+      padding: 3rem 4rem;
+    }
+
+    &__title {
+      border-bottom: 2px solid $dark;
+    }
+  }
+}
