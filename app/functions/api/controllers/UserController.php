@@ -685,6 +685,12 @@ class UserController{
     }
 
     public function renderCertificate($request) {
+        $defaultConfig  = (new Mpdf\Config\ConfigVariables())->getDefaults();
+        $fontDirs       = $defaultConfig['fontDir'];
+
+        $defaultFontConfig  = (new Mpdf\Config\FontVariables())->getDefaults();
+        $fontData           = $defaultFontConfig['fontdata'];
+
         $quotationPDF   = new \Mpdf\Mpdf([
             'mode'          => 'utf-8',
             'margin_top'    => 0,
@@ -692,11 +698,22 @@ class UserController{
             'margin_left'   => 0,
             'margin_right'  => 0,
             'format'        => [190, 236],
-            'orientation'   => 'L'
+            'orientation'   => 'L',
+
+            'fontDir' => array_merge($fontDirs, [
+                __DIR__ . '/../assets/fonts',
+            ]),
+            'fontdata' => $fontData + [
+                'dinround' => [
+                    'R' => 'DINRoundPro-Medi.ttf',
+                    'B' => 'DINRoundPro-Black.ttf'
+                ]
+            ],
+            'default_font' => 'dinround'
         ]);
         
         $logoMab = get_template_directory_uri() . '/static/images/certificates/logo-mab.png';
-        $heartVector = get_template_directory_uri() . '/static/images/certificates/vectors.png';
+        $heartVector = get_template_directory_uri() . '/static/images/certificates/vectors-2.png';
         $firma1 = get_template_directory_uri() . '/static/images/certificates/firma-1.png';
         $firma2 = get_template_directory_uri() . '/static/images/certificates/firma-2.png';
 
@@ -706,11 +723,11 @@ class UserController{
                 <head>
                     <style>
                         body {
-                            font-family: sans-serif;
+                            font-family: dinround, sans-serif;
                         }
 
                         table {
-                            font-family: arial, sans-serif;
+                            font-family: dinround, sans-serif;
                             border-collapse: collapse;
                             width: 100%;
                             height: 100%;
@@ -725,92 +742,96 @@ class UserController{
                     </style>
                 </head>
                 <body>
-                <table>
-                    <tr>
-                        <td rowspan="12" style="background:#0166d0; width:25%; text-align:center">
-                            <img src="'. $logoMab .'">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style=" padding: 6rem 4rem 10px; font-size: 18px">
-                            <div>Certificado de</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style=" padding: 0 4rem 10px;">
-                            <h2>CURSO DE CIENCIAS CREATIVAS</h2>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style=" padding: 0 4rem 10px;">
-                            <hr style="border-color: #000">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style=" padding: 0 4rem 20px; font-size: 18px">
-                            <div>El presente diploma se otorga a </div>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td style=" padding: 0 4rem 2rem;">
-                            <h1>ANGELA RAMOS DURAND</h1>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style=" padding: 0rem 4rem 10px; text-align:center">
-                            <div>Certificado de aprobación online </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style=" padding: 0 4rem 10px; text-align:center">
-                            <div style="font-size:21px"><strong>Aprobado el 25 de Mayo de 2020</strong></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style=" padding: 0 4rem 10px; text-align:center">
-                            <div><strong>40 horas de teoría y práctica</strong></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style=" padding: 0 4rem 10px; text-align:center">
-                            <div> <a href="" style="text-decoration: none" target="_blank"> <strong style="color:#000">https://mabclick.com/@Angela/</a></strong></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style=" padding: 0 4rem 2rem; text-align:center">
-                            <div>Código 1d8d7ebd-4041-a5af-d2d2ed74d4b4</div>
-                        </td>
-                    </tr>
-                    
-                    <tr>
-                        <td style="padding: 0rem 4rem 5rem">
-                            <table style="width:100%">
-                                <tr>
-                                    <td style="text-align: center">
-                                        <div style="width: 400px; border-bottom:2px solid #000;"> 
-                                            <img style="margin-bottom:0.5rem" src="'. $firma1 .'">
-                                        </div>
-                                        <div style="padding:10px 0 0; text-align: center;">
-                                            Macarena R. 
-                                        </div>
-                                    </td>
-                                    <td style="text-align: center">
-                                        <img src="'. $heartVector .'">
-                                    </td>
-                                    <td style="text-align: center">
-                                        <div style="width: 400px; border-bottom:2px solid #000;"> 
-                                            <img style="margin-bottom:0.5rem" src="'. $firma2 .'">
-                                        </div>
-                                        <div style="padding:10px 0 0; text-align: center;">
-                                            Macarena R. 
-                                        </div>
-                                    </td>
-                                </tr>
+                    <table>
+                        <tr>
+                            <td style="padding:4rem 3rem 10px" colspan="4" align="center">
+                                <table style="width:100%"> 
+                                    <tr>
+                                        <td style="width:60%; text-align:left">
+                                            <br>
+                                            <div style="margin-bottom:1rem">Certificado del curso</div> 
+                                            <br>
+                                            <h1 style="font-size:28px; text-tranform: uppercase">CIENCIAS CREATIVAS PARA LA VIDA</h1>
+                                            <br>
+                                            <div style=""> El presente diploma va dirigido a: </div>
+                                        </td>
+                                        <td style="width:40%; text-align: center;">
+                                            <div style="width: 40%;"> 
+                                                <img style="margin-bottom:0.5rem" src="'. $heartVector .'">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td style="background:#0166d0; width:30%; padding:0 2.5rem 0" rowspan="10" align="center">
+                                <img style="margin-bottom:1rem; width: 15%" src="'. $logoMab .'">
+                                <br>
+                                <div style="color:#fff; font-size:18px">
+                                    <strong> Felicitaciones por atreverte a aprender distinto y complementar tu aprendizaje con educación para CRECER</strong>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td  style="color: #0166d0; margin-top: 4rem; padding: 0 3rem 0.5rem; width:70%" align="center">
+                                <br>
+                                <br>
+                                <h1>ANGELA RAMOS DURAND</h1>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style=" padding: 0rem 3rem 10px; text-align:center">
+                                <div>Certificado de aprobación online </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style=" padding: 0 3rem 10px; text-align:center">
+                                <div><strong>Aprobado el 25 de Mayo de 2020</strong></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style=" padding: 0 3rem 10px; text-align:center">
+                                <div>40 horas de teoría y práctica</div>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td colspan="4" align="center" style="padding:3rem 4rem 5rem">
+                                <table style="width:100%">
+                                    <tr>
+                                        <td style="width:50%; text-align: center">
+                                            <img style="height: 60px; border-bottom:2px solid #000;margin-bottom:0.5rem" src="'. $firma2 .'">
+                                            <div style="padding:10px 0 0; text-align: center;">
+                                                Macarena Arribas
+                                            </div>
+                                            <div style="text-align: center;">
+                                                Ceo & Fundadora
+                                            </div>
+                                        </td>
+                                        <td style="width:50%; text-align: center;">
+                                            <img style="height: 60px; border-bottom:2px solid #000;margin-bottom:0.5rem" src="'. $firma1 .'">
+                                            <div style="padding:10px 0 0; text-align: center;">
+                                                Maria Fernanda Cabrera
+                                            </div>
+                                            <div style="text-align: center;">
+                                                Gerente General
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr style="padding:10rem 0rem 3rem;">
+                                        <td style="text-align: left; font-size:12px">
+                                            <br>
+                                            <br>
+                                            <a href="http://aprendemab.com " target="_blank" style="color:#000; text-decoration: none">http://aprendemab.com </a>
+                                        </td>
+                                        <td style="text-align: right; font-size:12px">
+                                            <br>
+                                            <br>
+                                            <span>Código 1d8d8746547-4D-d644565455</span>
+                                        </td>
+                                    </tr>
                             </table>
-                        </td>
-                    </tr>
-                </table>
+                            </td>
+                        </tr>
+                    </table>
                 </body>
             </html>
         ';
