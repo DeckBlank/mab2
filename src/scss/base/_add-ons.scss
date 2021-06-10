@@ -171,6 +171,10 @@ $font-families: (
     &:hover {
       color: $warning-color;
     }
+
+    &:focus {
+      color: $warning-color;
+    }
   }
 
   &--ho-primary {

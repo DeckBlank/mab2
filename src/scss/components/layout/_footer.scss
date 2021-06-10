@@ -1,9 +1,4 @@
 .c-footer {
-  background-image: url('../images/vectors/heart.png');
-  background-size: 200px 200px;
-  background-position: center 118%;
-  background-repeat: no-repeat;
-
   .c-social-cards {
     &__item {
       width: 35px;
@@ -16,12 +11,18 @@
   &__content {
     padding-bottom: 5rem;
   }
+
+  &__vector {
+    position: relative;
+    width: 200px;
+    left: 0;
+    right: 0;
+    bottom: -50px;
+  }
 }
 
 @include breakpoint(medium) {
   .c-footer {
-    background-position: center 135%;
-
     .c-social-cards {
       justify-content: center;
 
@@ -34,13 +35,24 @@
 
 @include breakpoint(large) {
   .c-footer {
-    background-size: 250px 250px;
-    background-position: center 180%;
-
     .c-social-cards {
       &__item {
         margin: 0 1rem;
       }
+    }
+
+    &__vector-container {
+      position: relative;
+      height: 90px;
+    }
+
+    &__vector {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 250px;
     }
   }
 }

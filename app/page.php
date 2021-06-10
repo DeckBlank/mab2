@@ -152,6 +152,8 @@ if(is_page('access')){
             'link'      => $article->link,
         ];
     }, $articles);
+
+    $templates = ['blog/main.twig'];
 }
 
 Timber::render( $templates, $context );

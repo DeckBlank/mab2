@@ -93,7 +93,7 @@ Vue.component('header-main',{
           <button @click="updateStatusBrowserToggle" class="c-search-toggle margin-right-1" :class="{'enable' : isActiveBrowserToggle}">
             <i class="far fa-search"></i>
           </button>
-          <a v-if="logedUser" :href="SITE_URL + '/carrito'" class="c-link c-link--white c-link--ho-warning margin-right-1">
+          <a v-if="logedUser" :href="SITE_URL + '/carrito'" class="c-link fs-21 c-link--white c-link--ho-warning margin-right-1">
             <i class="far fa-shopping-cart"></i>
           </a>
           <a v-if="logedUser" :href="SITE_URL + '/mis-cursos'" class="c-item c-link c-link--white c-link--ho-warning f2 fs-18 w-sbold margin-right-1">Mis cursos</a>

@@ -93,6 +93,7 @@ return [
         'page_articulo'             => get_theme_file_uri( __getResourceURL('js', 'page-articulo.bundle.js') ),
         'page_nosotros'             => get_theme_file_uri( __getResourceURL('js', 'page-nosotros.bundle.js') ),
         'page_psicologos'           => get_theme_file_uri( __getResourceURL('js', 'page-psicologos.bundle.js') ),
+        'page_mab-carrito'           => get_theme_file_uri( __getResourceURL('js', 'page-mab-carrito.bundle.js') ),
 
         //WP
         'wp_session'        => get_theme_file_uri( __getResourceURL('js', 'wp-session.bundle.js') ),
