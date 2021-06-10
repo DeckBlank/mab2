@@ -27,7 +27,6 @@ function baseState(){
     'logedUser',
     'isActiveMenu',
     'sectorMenu',
-    'sectorMenuData',
     'isHeaderWithShadow',
     'isActiveBrowserToggle',
     'isLoadedPage',
@@ -43,7 +42,6 @@ function baseActions(){
       'updateStatusBrowserToggle',
       'hideLoading',
       'updateMetasBehaviour',
-      'updateSectorMenuData',
     ]),
     global: function(){
       this.saveLog();

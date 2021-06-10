@@ -84,3 +84,41 @@ Routes::map('donaciones', function($routeParams) use ($config) {
 
     Routes::load('app.php', $params, "", 200);
 });
+
+Routes::map('carrito', function($routeParams) use ($config) {
+    $params = [
+        'route' => $routeParams,
+        'view'  => 'shopcart',
+    ];
+
+    add_action( 'wp_enqueue_scripts', function () use ($config) {
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/shop-cart',
+            'src'       => $config['resources']['page_shop_cart'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]); 
+    });
+
+    Routes::load('app.php', $params, "", 200);
+});
+
+Routes::map('carrito/success', function($routeParams) use ($config) {
+    $params = [
+        'route' => $routeParams,
+        'view'  => 'shopcart-success',
+    ];
+
+    add_action( 'wp_enqueue_scripts', function () use ($config) {
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/shop-success',
+            'src'       => $config['resources']['page_shop_success'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]); 
+    });
+
+    Routes::load('app.php', $params, "", 200);
+});

@@ -73,7 +73,7 @@ return [
         'page_test_behaviour'       => get_theme_file_uri( __getResourceURL('js', 'page-test-behaviour.bundle.js') ),
         'page_progress'             => get_theme_file_uri( __getResourceURL('js', 'page-progress.bundle.js') ),
         'page_shop_cart'            => get_theme_file_uri( __getResourceURL('js', 'page-shop-cart.bundle.js') ),
-        'page_successfull_buy'      => get_theme_file_uri( __getResourceURL('js', 'page-successfull-buy.bundle.js') ),
+        'page_shop_success'         => get_theme_file_uri( __getResourceURL('js', 'page-shop-success.bundle.js') ),
         'page_recovery_password'    => get_theme_file_uri( __getResourceURL('js', 'page-recovery-password.bundle.js') ),
         'page_faq'                  => get_theme_file_uri( __getResourceURL('js', 'page-faq.bundle.js') ),
         'page_404'                  => get_theme_file_uri( __getResourceURL('js', 'page-404.bundle.js') ),
@@ -93,7 +93,6 @@ return [
         'page_articulo'             => get_theme_file_uri( __getResourceURL('js', 'page-articulo.bundle.js') ),
         'page_nosotros'             => get_theme_file_uri( __getResourceURL('js', 'page-nosotros.bundle.js') ),
         'page_psicologos'           => get_theme_file_uri( __getResourceURL('js', 'page-psicologos.bundle.js') ),
-        'page_mab-carrito'           => get_theme_file_uri( __getResourceURL('js', 'page-mab-carrito.bundle.js') ),
 
         //WP
         'wp_session'        => get_theme_file_uri( __getResourceURL('js', 'wp-session.bundle.js') ),

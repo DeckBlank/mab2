@@ -46,6 +46,8 @@ export const store = new Vuex.Store({
 
     disableLoading(state){
       state.isLoadedPage = true
+
+      console.log(state.isLoadedPage);
     },
 
     setMetasBehaviour(state, behaviour){
