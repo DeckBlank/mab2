@@ -277,6 +277,54 @@
               </div>
             </div>
           </div>
+
+          {# modal de compartir  #}
+          <div v-if="true" class="c-mab-modal visible c-mab-modal--mini flex-container align-center-middle ">
+            <div class="grid-x align-center width-100">
+              <div class="cell small-10 medium-10 large-6">
+                <div class="c-mab-modal-content bg-white text-center position-relative">
+                  <button class="c-mab-modal__cross position-absolute white bg-pri-color fs-18 fñex-container align-center-middle">
+                    <i class="fas fa-times"></i>
+                  </button>
+                  <div class="c-mab-modal__share margin-0 width-100 text-left">
+                    <div class=" f2 w-xbold text-uppercase pri-color fs-21">¡COMPÁRTELO!</div>
+                    <div class="grid-x grid-margin-x grid-margin-y margin-top-1">
+                      <div class="cell small-6 large-3">
+                        <a href="" class="text-center">
+                          <img loading="lazy" class="width-100%" src="{{theme.link}}/static/images/vectors/share-icons/icon-ws.png" alt="">
+                          <span class="dark f2 fs-14">WhastApp</span>
+                        </a>
+                      </div>
+                      <div class="cell small-6 large-3">
+                        <a href="" class="text-center">
+                          <img loading="lazy"  src="{{theme.link}}/static/images/vectors/share-icons/icon-linkedin.png" alt="">
+                          <span class="dark f2 fs-14">Linkedin</span>
+                        </a>
+                      </div>
+                      <div class="cell small-6 large-3">
+                        <a href="" class="text-center">
+                          <img loading="lazy" src="{{theme.link}}/static/images/vectors/share-icons/icon-fb.png" alt="">
+                          <span class="dark f2 fs-14">Facebook</span>
+                        </a>
+                      </div>
+                      <div class="cell small-6 large-3">
+                        <a href="" class="text-center">
+                          <img loading="lazy" src="{{theme.link}}/static/images/vectors/share-icons/icon-twitter.png" alt="">
+                          <span class="dark f2 fs-14">Twitter</span>
+                        </a>
+                      </div>
+                      <div class="cell small-6 large-3">
+                        <a href="" class="text-center">
+                          <img loading="lazy" src="{{theme.link}}/static/images/vectors/share-icons/icon-copy.png" alt="">
+                          <span class="dark f2 fs-14">Copiar enlace</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div> 
     </div>

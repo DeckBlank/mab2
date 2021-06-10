@@ -385,11 +385,51 @@
             <button @click="isOpenedModalCongrats = false" type="button" class="c-mab-modal__cross position-absolute white bg-warning fs-18 flex-container align-center-middle">
               <i class="fas fa-times sec-color"></i>
             </button>
-            <p class="w-bold warning f2 fs-18 margin-top-3">Nos hace muy felices conocerte más </p>
-            <h3 class="c-mab-modal-content__title text-center  text-uppercase ">
-              <span class="white f2 w-xbold">¡GRACIAS POR COMPARTIRNOS TUS <br> HABILIDADES!
-            </h3>
-            <a href="" class="c-link c-link--warning f2 w-xbold"><i class="far fa-share"></i> Compartir</a>
+
+            <div v-if="showShareBox == false">
+              <p class="w-bold warning f2 fs-18 margin-top-3">Nos hace muy felices conocerte más </p>
+              <h3 class="c-mab-modal-content__title text-center  text-uppercase ">
+                <span class="white f2 w-xbold">¡GRACIAS POR COMPARTIRNOS TUS <br> HABILIDADES!
+              </h3>
+              <span @click="showShareBox = true" class="c-link c-link--warning f2 w-xbold"> <i class="fas fa-share"></i>  Compartir</span>
+            </div>
+
+            {# seccion de compartir  #}
+            <div v-if="showShareBox == true" class="c-mab-modal__share text-left">
+              <a href="" class="c-link c-link--warning f2 w-xbold"> Compartir en:</a>
+              <div class="grid-x grid-margin-x grid-margin-y margin-top-1">
+                <div class="cell small-6 large-3">
+                  <a href="" class="text-center">
+                    <img loading="lazy" class="width-100%" src="{{theme.link}}/static/images/vectors/share-icons/icon-ws.png" alt="">
+                    <span class="white f2 fs-14">WhastApp</span>
+                  </a>
+                </div>
+                <div class="cell small-6 large-3">
+                  <a href="" class="text-center">
+                    <img loading="lazy"  src="{{theme.link}}/static/images/vectors/share-icons/icon-linkedin.png" alt="">
+                    <span class="white f2 fs-14">Linkedin</span>
+                  </a>
+                </div>
+                <div class="cell small-6 large-3">
+                  <a href="" class="text-center">
+                    <img loading="lazy" src="{{theme.link}}/static/images/vectors/share-icons/icon-fb.png" alt="">
+                    <span class="white f2 fs-14">Facebook</span>
+                  </a>
+                </div>
+                <div class="cell small-6 large-3">
+                  <a href="" class="text-center">
+                    <img loading="lazy" src="{{theme.link}}/static/images/vectors/share-icons/icon-twitter.png" alt="">
+                    <span class="white f2 fs-14">Twitter</span>
+                  </a>
+                </div>
+                <div class="cell small-6 large-3">
+                  <a href="" class="text-center">
+                    <img loading="lazy" src="{{theme.link}}/static/images/vectors/share-icons/icon-copy.png" alt="">
+                    <span class="white f2 fs-14">Copiar enlace</span>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
