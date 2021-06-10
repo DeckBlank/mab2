@@ -235,21 +235,6 @@ function __getUserCourseProgress($userId, $userEmail, $courseId) {
         'percentage'    => bcdiv( (count($courseTestScores)*100), CourseModel::getTopics($courseId), 2 )
     ];
 
-    if ( floatval($progress['percentage']) == 100 ) {
-        $userCertificate = UserCertificate::where(['user_id' => $userId, 'course_id' => $courseId])->first();
-
-        if (!$userCertificate) {
-            $userCertificate = new UserCertificate();
-
-            $userCertificate->signature     = uniqid();
-            $userCertificate->notification  = 0;
-            $userCertificate->user_id       = $userId;
-            $userCertificate->course_id     = $courseId;
-
-            $userCertificate->save();
-        }
-    }
-
     return ($courseTestScores)
         ? $progress
         : false;
