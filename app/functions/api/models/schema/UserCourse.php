@@ -12,6 +12,8 @@ class UserCourse extends Model {
         'test_count',
         'right_answers',
         'wrong_answers',
+        'progress',
+        'notification',
         'last_date'
     ];
 }

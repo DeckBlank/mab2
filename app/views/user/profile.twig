@@ -375,14 +375,14 @@
       </div>
     </div>
 
-    <div v-if="true" class="c-mab-modal c-mab-modal--bg-blue visible c-mab-modal--mini width-100 flex-container align-center-middle">
+    <div class="c-mab-modal c-mab-modal--bg-blue c-mab-modal--mini width-100 flex-container align-center-middle" :class="{'visible' : isOpenedModalCongrats}">
       <div class="grid-x align-center width-100">
         <div class="cell small-10 medium-10 large-5">
           <div class="c-mab-modal-content bg-sec-color text-center position-relative">
             <div class="text-center">
               <img loading="lazy" class="c-mab-modal__top-image donaciones" src="{{theme.link}}/static/images/vectors/heart-expression.png" alt="">
             </div>
-            <button type="button" class="c-mab-modal__cross position-absolute white bg-warning fs-18 flex-container align-center-middle">
+            <button @click="isOpenedModalCongrats = false" type="button" class="c-mab-modal__cross position-absolute white bg-warning fs-18 flex-container align-center-middle">
               <i class="fas fa-times sec-color"></i>
             </button>
             <p class="w-bold warning f2 fs-18 margin-top-3">Nos hace muy felices conocerte más </p>
