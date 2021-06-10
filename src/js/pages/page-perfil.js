@@ -4,7 +4,7 @@ import {store} from '../store'
 import Swiper from 'swiper';
 import { mapState } from 'vuex';
 
-const perfil = new Vue({
+new Vue({
   ...baseConfig(store),
   data() {
     return {
@@ -107,6 +107,8 @@ const perfil = new Vue({
 
       isLoadingEnroll: true,
       enrolledCourses: [],
+
+      isOpenedModalCongrats: false,
     }
   },
   computed: {
@@ -380,6 +382,7 @@ const perfil = new Vue({
         .then(data => {
           if (data.status) {
             this.skills.view = 1;
+            this.isOpenedModalCongrats = true;
           }
         })
         .catch(err => {

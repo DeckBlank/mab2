@@ -8,7 +8,7 @@ import '../components/likes';
 import '../components/editor';
 import '../components/thread/comment';
 
-const topic = new Vue({
+new Vue({
   ...baseConfig(store),
   data() {
     return {
@@ -70,6 +70,9 @@ const topic = new Vue({
       },
 
       unities: [],
+
+      courseProgress: 0,
+      isOpenedCertificateModal: false,
     }
   },
   components: {
@@ -86,7 +89,16 @@ const topic = new Vue({
     },
     courseLink: function() {
       return (this.unityData) ? `${ this.SITE_URL }/curso/${ this.unityData.course.slug }` : '#';
-    },  
+    },
+
+    hasCertificate: function() {
+      return (this.courseProgress == 100) ? true : false;
+    },
+    certificate: function() {
+      return (this.hasCertificate)
+        ? `${ this.SITE_URL }/wp-json/custom/v1/users/${ this.logedUser.user_id }/certificate?course=${ this.metas.get('course_id') }`
+        : '#';
+    }
   },
   watch: {
     'teacher.email.value': function(){
@@ -108,6 +120,7 @@ const topic = new Vue({
     this.getLikes();
     this.getUnities(  this.metas.get('course_id') );
     this.getComments();
+    this.getCourseProgress( this.metas.get('course_id') );
     
     if (this.logedUser) {
       this.getQuestions();
@@ -176,6 +189,32 @@ const topic = new Vue({
           throw err;          
         })      
     },
+    getCourseProgress: function(course_id) {
+      fetch(`${ this.API }/courses/${ course_id }/progress?user_email=${ this.logedUser.user_email }`)
+      .then(res => { 
+        if (res.status >= 200 && res.status < 300) {
+          return res.json()
+        } else {
+          throw res;
+        }
+      })
+      .then(response => {
+        if (response.status) {
+          this.courseProgress = Number(response.data.percentage);
+
+          if (Number(response.data.percentage) == 100) {
+            this.isOpenedCertificateModal = (!response.data.notification) ? true : false;
+
+            window.setTimeout(() => {
+              document.querySelector('#certificate_download').download = `${ this.logedUser.user_nicename }.pdf`;
+            }, 100);
+          }
+        }
+      })
+      .catch(err => {
+        throw err;
+      })
+    },
 
     changeQuestion: function(direction){
       if (direction == 'next') {
@@ -240,12 +279,18 @@ const topic = new Vue({
             throw res
           }
         })
-        .then(score => {
-          
+        .then(response => {
+          if (response.status) {
+            if (response.data.course_completed) {
+              this.courseProgress = 100;
+
+              if (!response.data.notification) this.isOpenedCertificateModal = true;
+            }
+          }
         })
         .catch(err => {
           throw err;          
-        })      
+        })
     },
     getTestScore: function(){
       fetch(`${this.API}/topic/${this.topicID}/test_score?user=${this.logedUser.user_email}`,{
@@ -439,6 +484,35 @@ const topic = new Vue({
       this.questionsAlter = this.questionsAlter.map(q => {
         return (q != question) ? { ...q, enable : false } : q;
       })
+    },
+
+    closeCertificateModal: function() {
+      const courseId = this.metas.get('course_id');
+
+      const formData = new FormData();
+
+      formData.append('user_email', this.logedUser.user_email);
+      formData.append('_wpnonce', mab.nonce);
+
+      fetch(`${ this.API }/courses/${ courseId }/progress/notification`, {
+        method: 'POST',
+        body: formData,
+      })
+      .then(res => { 
+        if (res.status >= 200 && res.status < 300) {
+          return res.json();
+        } else {
+          throw res;
+        }
+      })
+      .then(response => {
+        console.log('Exit');
+      })
+      .catch(err => {
+        throw err;
+      })
+
+      this.isOpenedCertificateModal = false;
     },
   }
 })

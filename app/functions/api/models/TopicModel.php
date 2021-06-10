@@ -213,12 +213,12 @@ class TopicModel{
             if(CourseModel::saveLog($request, 'test')){
                 $right_answers = json_decode($request['result'])->rights;
                 $wrong_answers = json_decode($request['result'])->wrongs;
-        
+
                 $course = (object)[
                     "id" => $request['course_id'],
                     "security" => $request['course_security'],
                 ];
-        
+
                 $response = DBConnection::getConnection()->query("
                     INSERT INTO 
                         wp_topic_test_logs(

@@ -299,8 +299,48 @@ class TopicController{
     }
 
     public function updateTestScore($request){
-        if( TopicModel::updateTestScore($request) ){
-            return new WP_REST_Response($request['result'], 200);
+        if( TopicModel::updateTestScore($request) ) {
+            $userEmail  = $request['user'];
+            $courseId   = $request['course_id'];
+
+            $user   = get_user_by('email', $userEmail);
+            $userId = $user->ID;
+
+            $courseProgress = __getUserCourseProgress($user->ID, $userEmail, $courseId);
+
+            if ( floatval($courseProgress['percentage']) == 100 ) {
+                $userCertificate = UserCertificate::where(['user_id' => $userId, 'course_id' => $courseId])->first();
+
+                if (!$userCertificate) {
+                    $userCertificate = new UserCertificate();
+
+                    $userCertificate->signature     = uniqid();
+                    $userCertificate->notification  = 0;
+                    $userCertificate->user_id       = $userId;
+                    $userCertificate->course_id     = $courseId;
+
+                    $userCertificate->save();
+
+                    if ($userCertificate) {
+                        return new WP_REST_Response((object)[
+                            'message'   => 'Certificate saved!!',
+                            'data'      => [ 'course_completed' => true ],
+                            'status'    => true
+                        ], 200);
+                    } else {
+                        return new WP_REST_Response((object)[
+                            'message'   => 'Certificate not saved!!',
+                            'status'    => false
+                        ], 200);
+                    }
+                } else {
+                    return new WP_REST_Response((object)[
+                        'message'   => 'Test saved!!',
+                        'data'      => [ 'course_completed' => true, 'notification' => true ],
+                        'status'    => true
+                    ], 200);
+                }
+            }
         }else{
             return new WP_Error( 'no_test_saved', __('No test saved'), array( 'status' => 404 ) );
         }

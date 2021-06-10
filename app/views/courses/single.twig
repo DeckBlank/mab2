@@ -28,7 +28,7 @@
                 <span class="margin-right-1"><i class="fas fa-heart"></i> {{ likes }}</span> 
 
                 {% if trailer %}
-                  <a class="c-banner__link margin-right-1 warning bb-warning" href="">Ver trailer</a> 
+                  <a @click="openTrailer($event)" class="c-banner__link c-link--warning margin-right-1 warning bb-warning" href="#">Ver trailer</a> 
                 {% endif %}
 
                 {% if teacher.link %}
@@ -105,79 +105,42 @@
                         </li>
                       </ul>
                     </div>
-                    <div v-if="true" class="c-tab-recursos br-bottom--large br-top--large padding-2">
-                      <h3 class="w-xbold f2 fs-25 dark margin-bottom-1 text-uppercase">RECURSOS</h3>
+
+                    <div v-if="logedUser" class="c-tab-recursos br-bottom--large br-top--large padding-2">
                       <div class="grid-x align-self-strecht text-center">
-                        <div class="small-3 medium-3 large-3">
-                          <div class="c-tab-recursos__item f2 w-bold">
-                            <div></div>
-                            <figure class="margin-bottom-1">
-                              <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
-                            </figure>
-                            <div>Resúmenes</div>
-                          </div>
-                        </div>
-
-                        <div class="small-3 medium-3 large-3">
-                          <div class="c-tab-recursos__item f2 w-bold">
-                            <figure class="margin-bottom-1">
-                              <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
-                            </figure>
-                            <div>Hojas de trabajo</div>
-                          </div>
-                        </div>
-
-                        <div class="small-3 medium-3 large-3">
-                          <div class="c-tab-recursos__item f2 w-bold">
-                            <figure class="margin-bottom-1">
-                              <img src="{{ theme.link }}/static/images/curso/doc.png" alt="" class=" width-100 height-100 of--contain"> 
-                            </figure>
-                            <div>Solucionarios</div>
-                          </div>
-                        </div>
-
-                        <div class="small-3 medium-3 large-3">
-                          <div class="c-tab-recursos__item f2 w-bold">
-                            <figure class="margin-bottom-1">
-                              <img src="{{ theme.link }}/static/images/curso/doc-2.png" alt="" class=" width-100 height-100 of--contain"> 
-                            </figure>
-                            <div>Mapas mentales</div>
-                          </div>
-                        </div>
                         <div class="cell">
-                          <h3 class="w-xbold f2 fs-25 dark margin-bottom-1 text-uppercase text-left margin-top-2">Certificado</h3>
+                          <h3 class="w-xbold f2 fs-25 dark margin-bottom-1 text-uppercase text-left">Certificado</h3>
                         </div>
                         <div class="small-5 medium-5 large-4">
                           <div class="c-tab-recursos__item c-tab-recursos__item--auto f2 w-bold">
-                            <figure class="margin-bottom-1 position-relative">
-                              <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class=" width-100"> 
-                              <div class="c-tab-recursos__shade width-100 height-100 position-absolute flex-container align-justify flex-dir-column warning-alt">
-                                <div @click="showTooltipCerticado = !showTooltipCerticado" class="width-100 text-right ">
-                                  <i class="far fa-exclamation-circle c-pointer"></i>
-                                </div>
-
-                                <div v-if="showTooltipCerticado == false" class="white">
-                                  <i class="far fa-lock"></i>
-                                </div>
-
-                                <div>
-                                  <div v-if="showTooltipCerticado == true" class="white">
-                                    <span>Debes completar el curso para obtener tu certificado</span> 
+                            <a id="certificate_download" :href="certificate">
+                              <figure class="margin-bottom-1 position-relative">
+                                <img src="{{ theme.link }}/static/images/curso/certificate.jpg" alt="" class=" width-100"> 
+                                <div
+                                  class="width-100 height-100 position-absolute flex-container align-justify flex-dir-column warning-alt"
+                                  :class="{'c-tab-recursos__shade' : !hasCertificate}"
+                                >
+                                  <div v-if="!hasCertificate" @click="showTooltipCerticado = !showTooltipCerticado" class="width-100 text-right ">
+                                    <i class="far fa-exclamation-circle c-pointer"></i>
+                                  </div>
+  
+                                  <div v-if="!hasCertificate && showTooltipCerticado == false" class="white">
+                                    <i class="far fa-lock"></i>
+                                  </div>
+  
+                                  <div v-if="!hasCertificate">
+                                    <div v-if="showTooltipCerticado == true" class="white">
+                                      <span>Debes completar el curso para obtener tu certificado</span> 
+                                    </div>
+                                  </div>
+  
+                                  <div v-if="!hasCertificate" class="opacity-0">
+                                    <i class="far fa-exclamation-circle"></i>
                                   </div>
                                 </div>
-                                
-
-                                <div class="opacity-0">
-                                  <i class="far fa-exclamation-circle"></i>
-                                </div>
-                              </div>
-                            </figure>
-                            <!-- <div>Certificado</div> -->
+                              </figure>
+                            </a>
                           </div>
-                        </div>
-
-                        <div class="cell">
-                          <button class="c-button margin-top-1 c-button--mab-warning-black f2 w-xbold fs-21">¡Descárgalos todos!</button>
                         </div>
                       </div>
                     </div>
@@ -530,48 +493,42 @@
       </div>  
     </div>
 
-    {# modal por completar el curso/ certificado  #}
-    <div v-if="false" class="c-mab-modal c-mab-modal--bg-blue visible c-mab-modal--mini width-100 flex-container align-center-middle">
+    <div class="c-mab-modal c-mab-modal--bg-blue c-mab-modal--mini width-100 flex-container align-center-middle" :class="{'visible' : isOpenedCertificateModal}">
       <div class="grid-x align-center width-100">
         <div class="cell small-10 medium-10 large-5">
           <div class="c-mab-modal-content bg-sec-color text-center position-relative">
             <div class="text-center">
               <img loading="lazy" class="c-mab-modal__top-image donaciones" src="{{theme.link}}/static/images/vectors/heart-expression.png" alt="">
             </div>
-            <button type="button" class="c-mab-modal__cross position-absolute white bg-warning fs-18 flex-container align-center-middle">
+            <button @click="closeCertificateModal()" type="button" class="c-mab-modal__cross position-absolute white bg-warning fs-18 flex-container align-center-middle">
               <i class="fas fa-times sec-color"></i>
             </button>
             <h3 class="c-mab-modal-content__title text-center  text-uppercase margin-top-3">
               <span class="warning f2 w-xbold">¡LO LOGRASTE! FELICIDADES POR COMPLETAR EL CURSO!
             </h3>
             <p class="w-bold white f2 fs-18">Esperamos que hayas aprendido y disfurtado de este curso, no olvides descargar y compartir tu certificado </p>
-            <a href="" class="c-link c-link--warning f2 w-xbold">Ver certificado</a>
+            <a :href="certificate" class="c-link c-link--warning f2 w-xbold">Ver certificado</a>
           </div>
         </div>
       </div>
     </div>
 
-    {# modal de trailer  #}
-    <div v-if="true" class="c-video-modal visible width-100 flex-container align-center-middle">
+    <div class="c-video-modal width-100 flex-container align-center-middle" :class="{'visible' : isOpenedTrailer}">
       <div class="c-video-modal__content bg-white br--large">
-        {# <div class="flex-container align-right">
-          <button class="c-video-modal__cross white bg-warning fs-18 flex-container align-center-middle">
-            <i class="fas fa-times sec-color"></i>
-          </button> 
-        </div> #}
         <div>
           <div class="c-video-modal__iframe-container position-relative width-100">
-            <iframe src="https://www.youtube.com/embed/NZuvfYptle0" class="width-100 height-100 position-absolute" frameborder="0"></iframe>
+            <div style="padding:56.25% 0 0 0;position:relative;">
+              <iframe src="https://player.vimeo.com/video/{{trailer|split('/')[3]}}?color=de0d46&title=0&byline=0" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            </div>
           </div>
         </div>
         <div class="flex-container align-justify align-center margin-top-1">
           <div class="sec-color fs-21 f2">
-            <i class="fas fa-heart"></i> <span>30</span>
+            <i class="fas fa-heart"></i> <span>{{ likes }}</span>
           </div>
-          <button type="button" class="c-button c-button--success f2"> Regresar</button>
+          <button @click="isOpenedTrailer = false" type="button" class="c-button c-button--success f2"> Regresar</button>
         </div>
       </div>
     </div>
-
   </section>
 {% endblock %}

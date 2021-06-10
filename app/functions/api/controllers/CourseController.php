@@ -73,7 +73,25 @@ class CourseController{
                     return true;
                 }
             ));
-    
+
+            register_rest_route('custom/v1', '/courses/(?P<course_id>\d+)/progress', array(
+                'methods' => 'GET',
+                'callback' => array($this,'showCourseProgress'),
+                'permission_callback' => function ($request) {
+                    // return ($request['_wpnonce']) ? true : false;
+                    return true;
+                }
+            ));
+
+            register_rest_route('custom/v1', '/courses/(?P<course_id>\d+)/progress/notification', array(
+                'methods' => 'POST',
+                'callback' => array($this,'storeCourseProgressNotification'),
+                'permission_callback' => function ($request) {
+                    // return ($request['_wpnonce']) ? true : false;
+                    return true;
+                }
+            ));
+
             register_rest_route('custom/v1', '/course/(?P<course_id>\d+)/registration/checkout', array(
                 'methods' => 'GET',
                 'callback' => array($this,'registrationCheckout'),
@@ -409,6 +427,80 @@ class CourseController{
             return new WP_Error( 'no_progess', __("No progess found"), array( 'status' => 404 ) );
         }else{
             return new WP_REST_Response($progess, 200);
+        }
+    }
+
+    public function showCourseProgress($request) {
+        if (
+            !empty($request['user_email'])
+        ) {
+            $userEmail  = $request['user_email'];
+            $courseId   = $request['course_id'];
+
+            $user = get_user_by('email', $userEmail);
+
+            $courseProgress = __getUserCourseProgress($user->ID, $userEmail, $courseId);
+
+            if ($courseProgress) {
+                return new WP_REST_Response((object)[
+                    'message'       => 'Course progress here!!',
+                    'data'          => $courseProgress,
+                    'status'    => true
+                ], 200);
+            } else {
+                return new WP_REST_Response((object)[
+                    'message'   => 'No course progress!!',
+                    'status'    => false
+                ], 200);
+            }
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 403 ) );
+        }
+    }
+
+    public function storeCourseProgressNotification($request) {
+        if (
+            !empty($request['user_email'])
+        ) {
+            $userEmail  = $request['user_email'];
+            $courseId   = $request['course_id'];
+
+            $user = get_user_by('email', $userEmail);
+
+            $userCertificate = UserCertificate::where([
+                'user_id'   => $user->ID,
+                'course_id' => $courseId
+            ])->first();
+
+            if ($userCertificate) {
+                UserCertificate::where([
+                        'user_id'   => $user->ID,
+                        'course_id' => $courseId
+                    ])
+                    ->update([
+                        'notification' => 1,
+                    ]);
+
+                if ($userCertificate) {
+                    return new WP_REST_Response((object)[
+                        'message'   => 'Notification saved!!',
+                        'status'    => true
+                    ], 200);
+                } else {
+                    return new WP_REST_Response((object)[
+                        'message'   => 'No notification saved!!',
+                        'status'    => false
+                    ], 200);
+                }
+            } else {
+                return new WP_REST_Response((object)[
+                    'message'   => 'No user course found!!',
+                    'status'    => false
+                ], 200);
+            }
+
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 403 ) );
         }
     }
 
