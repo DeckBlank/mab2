@@ -189,6 +189,16 @@ body {
   border-bottom-right-radius: 20px;
 }
 
+.br-left--large {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+.br-right--large {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
 .br-10 {
   border-radius: 10px !important;
 }

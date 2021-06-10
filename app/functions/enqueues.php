@@ -818,6 +818,14 @@ add_action( 'wp_enqueue_scripts', function () use ($config) {
             'ver'       => $config['vertion'],
             'in_footer' => true
         ]); 
+    }elseif (is_page('mab-carrito')){               
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/mab-carrito',
+            'src'       => $config['resources']['page_mab-carrito'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]);
     }
 
     /**
