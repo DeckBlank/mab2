@@ -116,11 +116,39 @@
   &__title {
     display: inline-block;
     border-bottom: 2px solid $dark;
+    padding-bottom: 0.5rem;
+    padding-right: 0.7rem;
   }
 }
 
 .c-mab-carrito-message.visible {
   display: flex;
+}
+
+.c-mab-carrito-thankyou {
+  padding: 5rem 0 7rem;
+
+  figure {
+    margin-right: 1rem;
+  }
+
+  &__heart {
+    width: 100px;
+  }
+
+  &__car {
+    width: 90px;
+  }
+
+  .c-button {
+    color: $warning-alt;
+    font-size: $fs-18;
+    border-radius: 8px;
+  }
+
+  &__title {
+    margin-top: 2rem;
+  }
 }
 
 @include breakpoint(large) {
@@ -176,6 +204,35 @@
 
     &__title {
       border-bottom: 2px solid $dark;
+    }
+  }
+
+  .c-mab-carrito-thankyou {
+    padding: 7rem 0 9rem;
+
+    figure {
+      margin-right: 3rem;
+    }
+
+    &__heart {
+      width: 200px;
+    }
+
+    &__car {
+      width: 180px;
+    }
+
+    .c-button {
+      width: 200px;
+    }
+
+    &__title {
+      margin-top: 8rem;
+      font-size: $fs-40;
+    }
+
+    &__subtitle {
+      font-size: $fs-30;
     }
   }
 }

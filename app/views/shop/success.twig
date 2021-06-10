@@ -6,7 +6,7 @@
 
 {% block content %}
   <section class="c-section c-section--mab-carrito">
-    <div class="carrito-fake-container padding-2 position-relative">
+    <div v-if="false" class="carrito-fake-container padding-2 position-relative">
       <div class="c-mab-carrito">
           <div class="grid-x grid-margin-x grid-margin-y">
             {# carrito lleno #}
@@ -194,6 +194,28 @@
           </div>
         </div>
         
+      </div>
+    </div>
+
+    <div class="c-mab-carrito-thankyou bg-warning-alt flex-container align-center-middle">
+      <div class="c-mab-carrito-thankyou__content flex-container">
+        <figure>
+          <div>
+           <img loading="lazy" class="c-mab-carrito-thankyou__heart" src="{{theme.link}}/static/images/vectors/heart-expression.png" alt="">
+          </div>
+          <div>
+            <img loading="lazy" class="c-mab-carrito-thankyou__car" src="{{theme.link}}/static/images/vectors/cart.png" alt="">
+          </div>
+        </figure>
+        <div>
+          <h1 class="c-mab-carrito-thankyou__title dark f2 w-xbold margin-bottom-0">MUCHAS GRACIAS </h1>
+          <h3 class="c-mab-carrito-thankyou__subtitle f2 dark w-xbold">POR TU COMPRA</h3>
+          <div class="margin-top-2 margin-bottom-1">
+            <button class="c-button c-button--secondary f2 w-xbold">
+              Ver mis cursos
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </section>

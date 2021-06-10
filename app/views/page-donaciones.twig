@@ -45,7 +45,7 @@
             </div>
           </transition>
         </div>
-        <div class="cell large-7 overflow-hidden">
+        <div class="cell large-7 overflow-hidden position-relative">
           <div class="c-split-layout__content">
             <transition name="fade" mode="out-in">
               <div v-if="step == 1" key="step1" class="c-split-layout-content c-split-layout-content--dark">
@@ -258,7 +258,7 @@
             </transition>
           </div>
 
-          <div class="c-mab-modal c-mab-modal--mini flex-container align-center-middle" :class="{'visible' : isOpenedModal}">
+          <div class="c-mab-modal width-100 c-mab-modal--absolute c-mab-modal--mini flex-container align-center-middle" :class="{'visible' : isOpenedModal}">
             <div class="grid-x align-center width-100">
               <div class="cell small-10 medium-10 large-6">
                 <div class="c-mab-modal-content bg-white text-center position-relative">
@@ -279,7 +279,7 @@
           </div>
 
           {# modal de compartir  #}
-          <div v-if="true" class="c-mab-modal visible c-mab-modal--mini flex-container align-center-middle ">
+          <div v-if="true" class="c-mab-modal width-100 c-mab-modal--absolute visible c-mab-modal--mini flex-container align-center-middle ">
             <div class="grid-x align-center width-100">
               <div class="cell small-10 medium-10 large-6">
                 <div class="c-mab-modal-content bg-white text-center position-relative">

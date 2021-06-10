@@ -110,6 +110,11 @@
       }
     }
   }
+
+  &--absolute {
+    position: absolute;
+    z-index: auto;
+  }
 }
 
 .c-mab-modal.visible {
