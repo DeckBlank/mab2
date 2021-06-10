@@ -1,0 +1,199 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--mab-carrito">
+    <div class="carrito-fake-container padding-2 position-relative">
+      <div class="c-mab-carrito">
+          <div class="grid-x grid-margin-x grid-margin-y">
+            {# carrito lleno #}
+            <div v-if="true" class="cell">
+              <h2 class="c-mab-carrito__title fs-25 text-uppercase dark">TU CARRITO DE COMPRAS</h2>
+              <h4 class="c-mab-carrito__subtitle f2 fs-18 dark">Tienes <strong>2</strong> item en tu carrito </h4>
+            </div>
+            <div v-if="true" class="cell large-8">
+              <div class="c-mab-carrito__scroll">
+                <div>
+                  <div class="c-mab-carrito-item c-mab-carrito-item--primary margin-bottom-1">
+                    <div class="grid-x grid-margin-x align-middle"> 
+                      <div class="cell small-11 medium-11 large-11">
+                        <div class="c-mab-carrito-product mab-shadow-soft flex-container align-center-middles bg-warning br--large">
+                          <figure class="c-mab-carrito-product__figure">
+                            <img src="http://mab.site/wp-content/uploads/2021/06/Image%202.png" class="width-100 height-100 object-cover br-left--large" alt="">
+                          </figure>
+                          <div class="c-mab-carrito-product__content br-right--large white f2">
+                            <h4 class="c-mab-carrito-product__name fs-18 f2 w-xbold"> Autismo </h4>
+                            <h6 class="c-mab-carrito-product__teacher f2 fs-14">  Con Ernesto Reaño</h6>
+                            <p>Lorem ipsum dolor sit amet, consect etu
+                              er adipiscing elit, sed diam nonummy
+                              nibh euismod nostrud .sd </p>
+    
+                              <div class="text-right">
+                                <div class="c-mab-carrito-product__price w-xbold br--small">
+                                  S/ 35.00
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell small-1 medium-1 large-1">
+                        <div class="dark fs-25 c-link--ho-primary">
+                          <i class="fas fa-trash"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-mab-carrito-item c-mab-carrito-item--primary margin-bottom-1">
+                    <div class="grid-x grid-margin-x align-middle"> 
+                      <div class="cell small-11 medium-11 large-11">
+                        <div class="c-mab-carrito-product mab-shadow-soft flex-container align-center-middles bg-warning br--large">
+                          <figure class="c-mab-carrito-product__figure">
+                            <img src="http://mab.site/wp-content/uploads/2021/06/Image%202.png" class="width-100 height-100 object-cover br-left--large" alt="">
+                          </figure>
+                          <div class="c-mab-carrito-product__content br-right--large white f2">
+                            <h4 class="c-mab-carrito-product__name fs-18 f2 w-xbold"> Autismo </h4>
+                            <h6 class="c-mab-carrito-product__teacher f2 fs-14">  Con Ernesto Reaño</h6>
+                            <p>Lorem ipsum dolor sit amet, consect etu
+                              er adipiscing elit, sed diam nonummy
+                              nibh euismod nostrud .sd </p>
+    
+                              <div class="text-right">
+                                <div class="c-mab-carrito-product__price w-xbold br--small">
+                                  S/ 35.00
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell small-1 medium-1 large-1">
+                        <div class="dark fs-25">
+                          <i class="fas fa-trash"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="c-mab-carrito-item c-mab-carrito-item--primary margin-bottom-1">
+                    <div class="grid-x grid-margin-x align-middle"> 
+                      <div class="cell small-11 medium-11 large-11">
+                        <div class="c-mab-carrito-product mab-shadow-soft flex-container align-center-middles bg-warning br--large">
+                          <figure class="c-mab-carrito-product__figure">
+                            <img src="http://mab.site/wp-content/uploads/2021/06/Image%202.png" class="width-100 height-100 object-cover br-left--large" alt="">
+                          </figure>
+                          <div class="c-mab-carrito-product__content br-right--large white f2">
+                            <h4 class="c-mab-carrito-product__name fs-18 f2 w-xbold"> Autismo </h4>
+                            <h6 class="c-mab-carrito-product__teacher f2 fs-14">  Con Ernesto Reaño</h6>
+                            <p>Lorem ipsum dolor sit amet, consect etu
+                              er adipiscing elit, sed diam nonummy
+                              nibh euismod nostrud .sd </p>
+    
+                              <div class="text-right">
+                                <div class="c-mab-carrito-product__price w-xbold br--small">
+                                  S/ 35.00
+                                </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="cell small-1 medium-1 large-1">
+                        <div class="dark fs-25">
+                          <i class="fas fa-trash"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div v-if="true" class="cell large-4">
+              <div class="c-mab-carrito-list fs-18">
+                <div class="c-mab-carrito-list-item flex-container align-justify align-middle dark f2">
+                  <span class="c-mab-carrito-list-item__name"> Autismo </span>
+                  <span class="c-mab-carrito-list-item__price w-xbold">S/ 35.00</span>
+                </div>
+                <div class="c-mab-carrito-list-item flex-container align-justify align-middle dark f2">
+                  <span class="c-mab-carrito-list-item__name"> Autismo </span>
+                  <span class="c-mab-carrito-list-item__price w-xbold">S/ 35.00</span>
+                </div>
+              </div>
+              <div class="c-mab-carrito-total margin-top-1">
+                <div class="flex-container align-justify align-middle dark f2 fs-21">
+                  <span>TOTAL</span>
+                  <span class="w-xbold">S/ 70.00</span>
+                </div>
+              </div>
+
+              <div class="margin-top-2 margin-bottom-1">
+                <button class="c-button c-button--secondary width-100 f2 w-xbold">
+                  Comprar
+                </button>
+              </div>
+              <div class="text-center">
+                <a href="" class="c-link f2 fs-16 margin-top-1 w-xbold">Seguir comprando</a>
+              </div>
+            </div>
+            {# carrito lleno #}
+
+            {# carrito vacio  #}
+            <div v-if="false" class="cell">
+              <div class="c-mab-carrito__vacio flex-container dark f2 text-center">
+                <div class="c-mab-carrito__vacio-content">
+                  <div class="fs-35">
+                    <i class="fas fa-shopping-cart"></i>
+                  </div>
+                  <h2 class="f2 w-xbold fs-21">¡Tú carrito de compras esta vacío!</h2>
+                  <p class="fs-16">
+                    Aún no has agregado productos a tu carrito
+                    de compras. Visita nuestra página principal y 
+                    descubre todo lo que tenemos para tí.
+                  </p>
+                  <div class="margin-top-2 margin-bottom-1 text-center">
+                    <button class="c-button c-button--secondary f2 w-xbold">
+                      Ver productos
+                    </button>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+            {# carrito vacio  #}
+            <div class="cell">
+              <div class="f2 dark margin-top-2">
+                Compra con todos los medios de pago disponibles: 
+                <div class="c-medios-pagos flex-container align-middle">
+                  <img src="{{ theme.link }}/static/images/vectors/icon-cards/icon-visa.png" alt="">
+                  <img src="{{ theme.link }}/static/images/vectors/icon-cards/icon-mc.png" alt="">
+                  <img src="{{ theme.link }}/static/images/vectors/icon-cards/icon-americanex.png" alt="">
+                  <img src="{{ theme.link }}/static/images/vectors/icon-cards/icon-paypal.png" alt="">
+                  <img src="{{ theme.link }}/static/images/vectors/icon-cards/icon-pagoefectivo.png" alt="">
+                  <img src="{{ theme.link }}/static/images/vectors/icon-cards/icon-diners.png" alt="">
+                  <img src="{{ theme.link }}/static/images/vectors/icon-cards/icon-tambo.png" alt="">
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+      <div v-if="false" class="c-mab-carrito-message visible width-100 height-100 align-center-middle">
+        <div class="c-mab-carrito-message__content br--large bg-white text-center">
+          <h3 class="c-mab-carrito-message__title dark text-uppercase fs-25">
+            <img src="{{ theme.link }}/static/images/vectors/alert.png" alt=""> vaciar CARRITO
+          </h3>
+          <p class="dark fs-16 f2">
+            ¿Estás seguro que deseas vaciar tu carrito? 
+          </p>
+          <div class="margin-top-2 margin-bottom-1">
+            <button class="c-button c-button--secondary width-100 f2 w-xbold">
+              Comprar
+            </button>
+          </div>
+          <div class="text-center">
+            <a href="" class="c-link f2 fs-16 margin-top-1 w-xbold">Seguir comprando</a>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+{% endblock %}
