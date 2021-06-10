@@ -685,6 +685,12 @@ class UserController{
     }
 
     public function renderCertificate($request) {
+        $defaultConfig  = (new Mpdf\Config\ConfigVariables())->getDefaults();
+        $fontDirs       = $defaultConfig['fontDir'];
+
+        $defaultFontConfig  = (new Mpdf\Config\FontVariables())->getDefaults();
+        $fontData           = $defaultFontConfig['fontdata'];
+
         $quotationPDF   = new \Mpdf\Mpdf([
             'mode'          => 'utf-8',
             'margin_top'    => 0,
@@ -692,7 +698,18 @@ class UserController{
             'margin_left'   => 0,
             'margin_right'  => 0,
             'format'        => [190, 236],
-            'orientation'   => 'L'
+            'orientation'   => 'L',
+
+            'fontDir' => array_merge($fontDirs, [
+                __DIR__ . '/../assets/fonts',
+            ]),
+            'fontdata' => $fontData + [
+                'dinround' => [
+                    'R' => 'DINRoundPro-Medi.ttf',
+                    'B' => 'DINRoundPro-Black.ttf'
+                ]
+            ],
+            'default_font' => 'dinround'
         ]);
         
         $logoMab = get_template_directory_uri() . '/static/images/certificates/logo-mab.png';
@@ -706,11 +723,11 @@ class UserController{
                 <head>
                     <style>
                         body {
-                            font-family: sans-serif;
+                            font-family: dinround, sans-serif;
                         }
 
                         table {
-                            font-family: arial, sans-serif;
+                            font-family: dinround, sans-serif;
                             border-collapse: collapse;
                             width: 100%;
                             height: 100%;
