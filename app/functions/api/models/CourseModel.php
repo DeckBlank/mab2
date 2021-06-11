@@ -582,27 +582,31 @@ class CourseModel{
 
         if($topics){        
             foreach($topics as $topic){
-                $tempTopic = [
-                    "id"    => $topic['topic']->ID,
-                    "title" => $topic['topic']->post_title,
-                    "video" => (object)[
-                        "state" => self::__isViewedTopic($topic['topic']->ID, $user),
-                        "link"  => get_the_permalink($topic['topic']->ID)
-                    ],
-                    "summary"   => ( get_field('summary', $topic['topic']->ID) ) ? get_field('summary', $topic['topic']->ID)['url'] : false,
-                    "map"       => ( get_field('map', $topic['topic']->ID) ) ? get_field('map', $topic['topic']->ID)['url'] : false,
-                    "worksheet" => ( get_field('worksheet', $topic['topic']->ID) ) ? get_field('worksheet', $topic['topic']->ID)['url'] : false,
-                    "solutions" => ( get_field('solutions', $topic['topic']->ID) ) ? get_field('solutions', $topic['topic']->ID)['url'] : false
-                ];
+                if ($topic['topic']) {
+                    $tempTopic = '';
 
-                if ($mode == 'deep') {
-                    $tempTopic = array_merge($tempTopic, [
-                        'video_source'  => get_field('source', $topic['topic']->ID),
-                        'questions'     => get_field('questions', $topic['topic']->ID)
-                    ]);
+                    $tempTopic = [
+                        "id"    => $topic['topic']->ID,
+                        "title" => $topic['topic']->post_title,
+                        "video" => (object)[
+                            "state" => self::__isViewedTopic($topic['topic']->ID, $user),
+                            "link"  => get_the_permalink($topic['topic']->ID)
+                        ],
+                        "summary"   => ( get_field('summary', $topic['topic']->ID) ) ? get_field('summary', $topic['topic']->ID)['url'] : false,
+                        "map"       => ( get_field('map', $topic['topic']->ID) ) ? get_field('map', $topic['topic']->ID)['url'] : false,
+                        "worksheet" => ( get_field('worksheet', $topic['topic']->ID) ) ? get_field('worksheet', $topic['topic']->ID)['url'] : false,
+                        "solutions" => ( get_field('solutions', $topic['topic']->ID) ) ? get_field('solutions', $topic['topic']->ID)['url'] : false
+                    ];
+
+                    if ($mode == 'deep') {
+                        $tempTopic = array_merge($tempTopic, [
+                            'video_source'  => get_field('source', $topic['topic']->ID),
+                            'questions'     => get_field('questions', $topic['topic']->ID)
+                        ]);
+                    }
+
+                    array_push($topics_sanitize, $tempTopic);
                 }
-
-                array_push($topics_sanitize, $tempTopic);
             }
         }
     

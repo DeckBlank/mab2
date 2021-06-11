@@ -30,6 +30,8 @@ new Vue({
       signature: '',
       isOpenedModal: false,
       isCreatingSignature: false,
+
+      isOpenedShareModal: false,
     }
   },
   computed: {
@@ -39,6 +41,10 @@ new Vue({
     },
     amount: function() {
       return this.donation.amount.value;
+    },
+
+    donationLink: function() {
+      return `${ this.SITE_URL }/donaciones`;
     },
   },
   watch: {
@@ -63,6 +69,8 @@ new Vue({
     setTimeout(() => {
       const video = document.getElementById("donac_video"); video.play(); 
     }, 1000)
+
+    this.initShare();
   },
   methods: {
     ...baseActions(),
@@ -155,6 +163,26 @@ new Vue({
       this.donation.try = true;
 
       this.nextStep(2);
+    },
+
+    initShare: function() {
+      this.social = {
+        facebook: `https://www.facebook.com/sharer/sharer.php?u=${ this.donationLink }`,
+        linkedin: `http://www.linkedin.com/shareArticle?mini=true&url=${ this.donationLink }`,
+        twitter: `https://twitter.com/share?text=Hola, animate a donar por la educación en MAB&url=${ this.donationLink }`,
+      }
+    },
+    copyDonationLink: function(e) {
+      e.preventDefault();
+
+      let linkToCopy = document.querySelector('#user-donation-link');
+
+      linkToCopy.setAttribute('type', 'text');
+      linkToCopy.select();
+
+      document.execCommand('copy');
+
+      linkToCopy.setAttribute('type', 'hidden');
     },
   }
 })
