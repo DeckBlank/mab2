@@ -285,6 +285,15 @@ body {
   cursor: pointer;
 }
 
+.max-w-450-center {
+  max-width: 450px;
+  margin: 0 auto;
+}
+
+.height-45 {
+  height: 45px;
+}
+
 @include breakpoint(large) {
   .desktop {
     display: block;
