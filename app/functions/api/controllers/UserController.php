@@ -737,7 +737,7 @@ class UserController{
                 $date = sprintf('%s de %s de %s',
                     date("d", strtotime($userCertificate->created_at)),
                     array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre")[date("m", strtotime($userCertificate->created_at)) - 1],
-                    date("Y", strtotime($userCertificate->created_at)),
+                    date("Y", strtotime($userCertificate->created_at))
                 );
 
                 $document = '

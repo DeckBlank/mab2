@@ -80,6 +80,6 @@ switch ($params['view']) {
             "account_id"    => $env['PU_ACCOUNT_ID']
         ];
 
-        Timber::render('shop/cart.twig', $context);
+        Timber::render('shop/success.twig', $context);
         break;
 }
