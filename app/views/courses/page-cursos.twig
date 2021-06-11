@@ -219,7 +219,11 @@
           <div v-if="courses.length" class="grid-x grid-margin-x grid-margin-y">
             <div v-for="course of courses" :key="course.id" class="cell medium-6 large-3">
               <div class="c-course-card br--large" :class="'c-course-card--' + course.color">
-                <figure class="c-course-card__figure ">
+                <figure class="c-course-card__figure position-relative">
+                  <div class="c-course-card__free-tag position-absolute sec-color fs-18 flex-container align-center-middle">
+                    <img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/vectors/heart.png" alt=""> GRATIS
+
+                  </div>
                   <img :src="(course.thumbnail) ? course.thumbnail : courseBasicThumbnail" alt="" class="of--cover br-top--large width-100 height-100"> 
                 </figure>
                 <div class="c-course-card__content flex-container fd-column padding-1 br--large">

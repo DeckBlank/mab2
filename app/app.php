@@ -58,4 +58,28 @@ switch ($params['view']) {
 
         Timber::render('page-donaciones.twig', $context);
         break;
+    case 'shopcart':
+        $env = require(__DIR__ . '/../env.php');
+
+        $context['pasarell'] = (object)[
+            "enviroment"    => $env['ENV'],
+            "action"        => $env['PU_ACTION'],
+            "merchan_id"    => $env['PU_MERCHAND_ID'],
+            "account_id"    => $env['PU_ACCOUNT_ID']
+        ];
+
+        Timber::render('shop/cart.twig', $context);
+        break;
+    case 'shopcart-success':
+        $env = require(__DIR__ . '/../env.php');
+
+        $context['pasarell'] = (object)[
+            "enviroment"    => $env['ENV'],
+            "action"        => $env['PU_ACTION'],
+            "merchan_id"    => $env['PU_MERCHAND_ID'],
+            "account_id"    => $env['PU_ACCOUNT_ID']
+        ];
+
+        Timber::render('shop/success.twig', $context);
+        break;
 }
