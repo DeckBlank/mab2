@@ -24,6 +24,7 @@ function baseState(){
   return Vuex.mapState([
     'API', 
     'SITE_URL',
+    'THEME_URL',
     'logedUser',
     'isActiveMenu',
     'sectorMenu',

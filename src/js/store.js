@@ -29,7 +29,9 @@ export const store = new Vuex.Store({
 
     //Questionary + Poll
     isEnableQuestionary: false,
-    isEnablePoll: false
+    isEnablePoll: false,
+
+    shopCart: (window.localStorage.getItem('mab_shop_cart')) ? JSON.parse(window.localStorage.getItem('mab_shop_cart')) : false,
   },
   mutations: {
     setStatusMenu(state){
@@ -45,9 +47,7 @@ export const store = new Vuex.Store({
     },
 
     disableLoading(state){
-      state.isLoadedPage = true
-
-      console.log(state.isLoadedPage);
+      state.isLoadedPage = true;
     },
 
     setMetasBehaviour(state, behaviour){
@@ -56,7 +56,38 @@ export const store = new Vuex.Store({
       } else if(behaviour.type == 'poll') {
         state.isEnablePoll = behaviour.value
       }
-    }
+    },
+
+    updateShopCart(state, payload) {
+      if (payload.operation == 'add') {
+        let shop_cart = window.localStorage.getItem('mab_shop_cart')
+
+        if(!shop_cart){
+          shop_cart = [{
+            id: payload.product.id,
+            title: payload.product.title,
+            link: payload.product.link,
+          }];
+
+          window.localStorage.setItem('mab_shop_cart', JSON.stringify(shop_cart));
+        }else{
+          shop_cart = JSON.parse(shop_cart);
+
+          if (!shop_cart.find(co => co.id == payload.product.id)) {
+            shop_cart.push({
+              id: payload.product.id,
+              title: payload.product.title,
+              link: payload.product.link,
+            })
+            window.localStorage.setItem('mab_shop_cart', JSON.stringify(shop_cart))
+          }
+        }
+
+        state.shopCart = shop_cart;
+      } else {
+
+      }
+    },
   },
   actions: {
     updateStatusMenu: ({commit})=>{
@@ -79,6 +110,13 @@ export const store = new Vuex.Store({
 
     updateMetasBehaviour: ({commit}, behaviour)=>{
       commit('setMetasBehaviour', {type: behaviour.type, value: behaviour.value})
-    }
+    },
+
+    addCourseToShopCart: function({commit}, product) {
+      commit('updateShopCart', { operation: 'add', product: product });
+    },
+    removeCourseFromShopCart: function({commit}, product) {
+
+    },
   }
 })

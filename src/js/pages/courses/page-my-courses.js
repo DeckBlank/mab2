@@ -1,10 +1,9 @@
 import Vue from 'vue'
-import { mapState } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import {store} from '../../store';
 import Swiper from 'swiper';
 
 import {baseConfig, baseState, baseActions} from '../../app';
-import {addCourseToShopCart} from '../../libs/shop-cart'
 
 import '../../components/lideres';
 
@@ -102,6 +101,7 @@ const myCourses = new Vue({
   },
   methods: {
     ...baseActions(),
+    ...mapActions(['addCourseToShopCart']),
     initSliderEnrolledCourses: function() {
       window.setTimeout(() => {
         new Swiper('.c-mab-continue .swiper-container', {
@@ -230,7 +230,7 @@ const myCourses = new Vue({
     },
 
     addCourse: function(course_id, course_title, course_link){
-      addCourseToShopCart(course_id, course_title, course_link, this.SITE_URL)
+      this.addCourseToShopCart({id: course_id, title: course_title, link: course_link, url: this.SITE_URL});
     },
   }
 })
