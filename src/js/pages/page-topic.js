@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
 import {baseConfig, baseState, baseActions} from '../app'
-import {addCourseToShopCart} from '../libs/shop-cart'
 import {store} from '../store'
 
 import '../components/likes';
 import '../components/editor';
 import '../components/thread/comment';
+import { mapActions } from 'vuex'
 
 new Vue({
   ...baseConfig(store),
@@ -129,6 +129,7 @@ new Vue({
   },
   methods: {
     ...baseActions(),
+    ...mapActions(['addCourseToShopCart']),
     getUnities: function(course_id){
       fetch(`${ this.API }/course/${ course_id }/unities?user=${ this.logedUser.user_email }`)
         .then(res => { 
@@ -354,13 +355,12 @@ new Vue({
           this.hideLoading();
         })
         .catch(err => {
-          addCourseToShopCart(
-            course_id,
-            this.metas.get('course_name'),
-            `${this.SITE_URL}/curso/${this.metas.get('course_name')}`,
-            this.SITE_URL,
-            this.metas
-          );
+          this.addCourseToShopCart({
+            id: course_id,
+            title: this.unityData.course.slug,
+            link: `${ this.SITE_URL }/curso/${ this.unityData.course.slug }`,
+            url: this.SITE_URL
+          });
 
           throw err;
         })

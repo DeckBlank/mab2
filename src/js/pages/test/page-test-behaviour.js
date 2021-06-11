@@ -36,6 +36,9 @@ const test = new Vue({
     filled: function() {
       return (this.questions.list.filter(q => q.answer != '-1').length == this.questions.count) ? true : false;
     },
+    userProfile: function() {
+      return `${ this.SITE_URL}/user/${ this.logedUser.user_nicename }`;
+    },
   },
   created(){
     if(!this.logedUser){

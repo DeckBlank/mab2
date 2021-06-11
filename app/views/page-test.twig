@@ -38,7 +38,7 @@
             <span class="w-ligth f2">TEST DE ESTILOS DE APRENDIZAJE</span>
           </h2>
 
-          <a href="{{ site.url }}/perfil" class="c-button c-button--white-dark margin-right-1 f2 w-xbold text-center margin-bottom-2 display-inline-block">Volver al perfil</a>
+          <a :href="userProfile" class="c-button c-button--white-dark margin-right-1 f2 w-xbold text-center margin-bottom-2 display-inline-block">Volver al perfil</a>
 
           <div class="grid-x align-center align-middle bg-white br-45 padding-vertical-2 padding-horizontal-3 ">
             <div class="cell medium-4 large-4">
@@ -153,7 +153,7 @@
             </section>
           </section>
           <div class="c-bottom-btn flex-container align-center-middle margin-top-3">
-            <a href="{{ site.url }}/perfil" class="c-button c-button--white-dark margin-right-1 f2 w-xbold text-center">Volver al perfil</a>
+            <a :href="userProfile" class="c-button c-button--white-dark margin-right-1 f2 w-xbold text-center">Volver al perfil</a>
             <button @click="saveTest()" :disabled="!filled || isSaving" class="c-button c-button--white-dark f2 w-xbold">Guardar</button>
           </div>
         </div>

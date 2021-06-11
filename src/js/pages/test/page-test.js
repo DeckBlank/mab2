@@ -56,6 +56,9 @@ const test = new Vue({
     filled: function() {
       return (this.testResult.list.filter(q => q.value).length == this.questions.count) ? true : false;
     },
+    userProfile: function() {
+      return `${ this.SITE_URL}/user/${ this.logedUser.user_nicename }`;
+    },
   },
   created(){
     if(!this.logedUser){

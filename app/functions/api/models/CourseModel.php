@@ -37,14 +37,19 @@ class CourseModel{
             $courses_array = [];
 
             for ($i=0; $i < count($courses) ; $i++) {
-                $price_settings = get_field('price_settings', $courses[$i]->ID);
+                $priceSettings      = get_field('price_settings', $courses[$i]->ID);
+                $courseThumbnail    = get_the_post_thumbnail_url($courses[$i]->ID);
+                $courseTeacher      = get_field('teacher', $courses[$i]->ID);
 
                 array_push($courses_array, (object)[
-                    "id" => $courses[$i]->ID,
-                    "title" => $courses[$i]->post_title,
-                    "unities" => get_field('unities', $courses[$i]->ID),
-                    "price" =>  ($price_settings == 'global') ? floatval( $sell['course_price'] ) : floatval( get_field('price', $courses[$i]->ID) ),
-                    "discount" => ($i == 0) ? 0 : floatval( $sell['individual_discount'] )
+                    "id"            => $courses[$i]->ID,
+                    "title"         => $courses[$i]->post_title,
+                    "thumbnail"     => $courseThumbnail ? $courseThumbnail : false,
+                    "teacher"       => ($courseTeacher) ? sprintf('%s %s', $courseTeacher['user_firstname'], $courseTeacher['user_lastname']) : 'MAB',
+                    'description'   => get_the_excerpt($courses[$i]->ID),
+                    "unities"       => get_field('unities', $courses[$i]->ID),
+                    "price"         =>  ($priceSettings == 'global') ? floatval( $sell['course_price'] ) : floatval( get_field('price', $courses[$i]->ID) ),
+                    "discount"      => ($i == 0) ? 0 : floatval( $sell['individual_discount'] )
                 ]);
             }
 

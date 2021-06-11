@@ -76,6 +76,27 @@
     }
   }
 
+  .c-shop-cart {
+    position: relative;
+
+    &__buble {
+      z-index: 100;
+      position: absolute;
+      top: -5px;
+      right: -13px;
+      width: 23px;
+      height: 23px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: $light-font;
+      font-size: $fs-14;
+      color: $white;
+      background-color: $secondary-alt;
+      border-radius: 5000px;
+    }
+  }
+
   .c-menu-dropdown {
     top: 50px;
     margin: auto;
