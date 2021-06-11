@@ -160,6 +160,10 @@ new Vue({
     isProfileOwner: function() {
       return (this.logedUser && this.logedUser.user_id == this.userId) ? true : false;
     },
+
+    userProfile: function() {
+      return `${ this.SITE_URL }/user/${ this.logedUser.user_nicename }`;
+    },
   },
   watch: {
     'user.firstname.value': function() {
@@ -190,10 +194,13 @@ new Vue({
 
     this.getProfile();
 
-    if (this.logedUser)
+    if (this.logedUser) {
       this.getEnrolledCourses();
       this.getTestLearning();
       this.getTestBehaviour();
+    }
+
+    this.initShare();
   },
   methods: {
     ...baseActions(),
@@ -501,6 +508,30 @@ new Vue({
       .finally(() => {
         this.avatar.isLoadingAvatar = false;
       })
+    },
+
+    openShare: function() {
+      this.showShareBox = true;
+      this.isOpenedModalCongrats = true;
+    },
+    initShare: function() {
+      this.social = {
+        facebook: `https://www.facebook.com/sharer/sharer.php?u=${ this.userProfile }`,
+        linkedin: `http://www.linkedin.com/shareArticle?mini=true&url=${ this.userProfile }`,
+        twitter: `https://twitter.com/share?text=Hola, te comparto mis habilidades&url=${ this.userProfile }`,
+      }
+    },
+    copyProfileLink: function(e) {
+      e.preventDefault();
+
+      let linkToCopy = document.querySelector('#user-profile-link');
+
+      linkToCopy.setAttribute('type', 'text');
+      linkToCopy.select();
+
+      document.execCommand('copy');
+
+      linkToCopy.setAttribute('type', 'hidden');
     },
   }
 })

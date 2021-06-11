@@ -51,7 +51,7 @@
               </button> 
             </h2>
             <h4 class="c-user-info__rol text-center large-text-left f2 margin-bottom-0 gray">Estudiante</h4>
-            <button class="c-user-info__share fs-21 f2"> <i class="fas fa-share"></i> Compartir</button>
+            <button @click="openShare()" class="c-user-info__share fs-21 f2"> <i class="fas fa-share"></i> Compartir</button>
           </div>
         </div>
       </div>
@@ -394,36 +394,30 @@
               <span @click="showShareBox = true" class="c-link c-link--warning f2 w-xbold"> <i class="fas fa-share"></i>  Compartir</span>
             </div>
 
-            {# seccion de compartir  #}
             <div v-if="showShareBox == true" class="c-mab-modal__share text-left">
               <a href="" class="c-link c-link--warning f2 w-xbold"> Compartir en:</a>
-              <div class="grid-x grid-margin-x grid-margin-y margin-top-1">
+              <div class="grid-x grid-margin-x grid-margin-y align-center margin-top-1">
                 <div class="cell small-6 large-3">
-                  <a href="" class="text-center">
-                    <img loading="lazy" class="width-100%" src="{{theme.link}}/static/images/vectors/share-icons/icon-ws.png" alt="">
-                    <span class="white f2 fs-14">WhastApp</span>
-                  </a>
-                </div>
-                <div class="cell small-6 large-3">
-                  <a href="" class="text-center">
+                  <a :href="social.linkedin" class="text-center">
                     <img loading="lazy"  src="{{theme.link}}/static/images/vectors/share-icons/icon-linkedin.png" alt="">
                     <span class="white f2 fs-14">Linkedin</span>
                   </a>
                 </div>
                 <div class="cell small-6 large-3">
-                  <a href="" class="text-center">
+                  <a :href="social.facebook" class="text-center">
                     <img loading="lazy" src="{{theme.link}}/static/images/vectors/share-icons/icon-fb.png" alt="">
                     <span class="white f2 fs-14">Facebook</span>
                   </a>
                 </div>
                 <div class="cell small-6 large-3">
-                  <a href="" class="text-center">
+                  <a :href="social.twitter" class="text-center">
                     <img loading="lazy" src="{{theme.link}}/static/images/vectors/share-icons/icon-twitter.png" alt="">
                     <span class="white f2 fs-14">Twitter</span>
                   </a>
                 </div>
                 <div class="cell small-6 large-3">
-                  <a href="" class="text-center">
+                  <input type="hidden" id="user-profile-link" :value="userProfile">
+                  <a href="#" @click="copyProfileLink($event)" class="text-center">
                     <img loading="lazy" src="{{theme.link}}/static/images/vectors/share-icons/icon-copy.png" alt="">
                     <span class="white f2 fs-14">Copiar enlace</span>
                   </a>

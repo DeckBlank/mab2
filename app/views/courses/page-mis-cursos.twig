@@ -156,7 +156,10 @@
             <div class="swiper-wrapper">
               <div v-for="course of recommendCourses" :key="course.id" class="swiper-slide padding-vertical-2">
                 <div class="c-course-card br--large" :class="'c-course-card--' + course.color">
-                  <figure class="c-course-card__figure ">
+                  <figure class="c-course-card__figure position-relative">
+                    <div v-if="Number(course.price) == 0" class="c-course-card__free-tag position-absolute sec-color fs-18 flex-container align-center-middle">
+                      <img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/vectors/heart.png" alt=""> GRATIS
+                    </div>
                     <img :src="(course.thumbnail) ? course.thumbnail : courseBasicThumbnail" alt="" class="of--cover br-top--large width-100 height-100"> 
                   </figure>
                   <div class="c-course-card__content flex-container fd-column padding-1 br--large">
@@ -172,12 +175,11 @@
                         <span class="c-course-card__likes f2"><i class="fas fa-heart mr-05"></i>${ course.likes }</span>
                       </div>
                       <div class="small-7 medium-7 text-right">
-                        <span v-if="course.enroll">Inscrito</span>
+                        <span v-if="course.enroll" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">Inscrito</span>
                         <button v-else-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
                           S/ ${ Number(course.price).toFixed(2) } 
                           <i class="fas fa-shopping-cart"></i>
                         </button>
-                        <span v-else>¡Grátis!</span>
                       </div>
                     </div>
                   </div>
