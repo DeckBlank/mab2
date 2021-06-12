@@ -37,6 +37,8 @@ if(is_page('access')){
         header('Location:' . $context['site']->url . '/mis-cursos');        
     }
 
+    $context['terms'] = get_field('terms', 'options');
+
 }else if(is_page('mis-cursos')){
     if (!is_user_logged_in()) {
         header('Location:' . $context['site']->url . '/access');        

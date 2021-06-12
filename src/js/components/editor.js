@@ -51,7 +51,7 @@ Vue.component('editor',{
       if(this.logedUser){
         this.isActiveEditor = true
       }else{
-        window.location = `${this.SITE_URL}/login`
+        window.location = `${this.SITE_URL}/access`
       }
     },
     addNewComment: function(){

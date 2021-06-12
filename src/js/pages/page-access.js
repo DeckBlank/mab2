@@ -197,6 +197,7 @@ new Vue({
       },
 
       isLoadingStep: false,
+      isOpenedTerms: false,
     }
   },
   computed: {
@@ -843,6 +844,12 @@ new Vue({
 
         throw err;
       })
+    },
+
+    openTerms: function(e) {
+      e.preventDefault();
+
+      this.isOpenedTerms = true;
     },
   }
 })

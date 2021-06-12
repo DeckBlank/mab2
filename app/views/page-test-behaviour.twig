@@ -56,55 +56,59 @@
         <div class="cell medium-10 large-8">
           <section class="c-content c-content--protected position-relative bg-white br-45">
             <section class="c-questions">
-              <div id="slider-questions" class="c-questions__list swiper-container margin-bottom-1">
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                      <h3 class="text-center f2 dark fs-25 margin-bottom-1 margin-top-2">¡Cuéntanos de qué grado escolar eres!</h3>
-                      <div class="c-form-new__input-container margin-vertical-3 max-w-450-center">
-                        <select class="f2 border-black height-45" name="" id="">
-                          <option disabled value="" selected>Selecciona el grado</option>
-                          <option value="1">11</option>
-                        </select>
-                        <p v-if="false" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
-                          Debes seleccionar un grado
-                        </p>
-                      </div>
-                      <div class="text-center margin-top-1 margin-bottom-1">
-                        <button class="c-link sec-color f2 fs-21">Continuar</button>
-                      </div>
-                  </div>
-                  <div v-for="(question, qindex) of questions.list" :key="question.id" class="swiper-slide">
-                    <h3 class="fs-21 f2 dark w-bold">${qindex + 1}. ${question.title}</h3>                  
-                    <ul class="c-question f2 w-medium ul-reset overflow-hidden">
-                      <li
-                        class="c-question__item dark" 
-                        v-for="(option, oindex) of question.options" :key="option.id">
-                        <input
-                          :id="'option-' + qindex + oindex"
-                          :name="'question-' + qindex"
-                          :value="option.credit"
-                          v-model="question.answer"
-                          type="radio" 
-                          class="hide"
-                          @change="enableNext"
-                        >
-                        <label 
-                          :for="'option-' + qindex + oindex" 
-                          class="c-option fs-18 align-middle width-100"
-                        >
-                          <div class="c-option__checkbox position-relative margin-right-1">
-                            <span class="display-block rounded position-relative"></span>
-                          </div>
-                          <p class="margin-bottom-0 dark">                      
-                            ${option.title}
-                          </p>
-                        </label>
-                      </li>
-                    </ul>
-                  </div>
+              <transition name="fade" mode="out-in">
+                <div v-if="!grade.completed" key="grade" class="swiper-slide">
+                    <h3 class="text-center f2 dark fs-25 margin-bottom-1 margin-top-2">¡Cuéntanos de qué grado escolar eres!</h3>
+                    <div class="c-form-new__input-container margin-vertical-3 max-w-450-center">
+                      <select v-model="grade.value" class="f2 border-black height-45">
+                        <option disabled value="" selected>Selecciona el grado</option>
+                        <option v-for="grade of grades" :key="grade.id" :value="grade">${ grade }</option>
+                      </select>
+                      <p v-if="grade.try && !grade.isValid" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium pri-alt">
+                        Debes seleccionar un grado
+                      </p>
+                    </div>
+                    <div class="text-center margin-top-1 margin-bottom-1">
+                      <button @click="startTest()" class="c-link sec-color f2 fs-21">Continuar</button>
+                    </div>
                 </div>
-              </div>
-              <div v-if="questions.list.length > 0" class="flex-container align-center align-right">
+                <section v-else key="questions">
+                  <div id="slider-questions" class="c-questions__list swiper-container margin-bottom-1">
+                    <div class="swiper-wrapper">
+                      <div v-for="(question, qindex) of questions.list" :key="question.id" class="swiper-slide">
+                        <h3 class="fs-21 f2 dark w-bold">${qindex + 1}. ${question.title}</h3>                  
+                        <ul class="c-question f2 w-medium ul-reset overflow-hidden">
+                          <li
+                            class="c-question__item dark" 
+                            v-for="(option, oindex) of question.options" :key="option.id">
+                            <input
+                              :id="'option-' + qindex + oindex"
+                              :name="'question-' + qindex"
+                              :value="option.credit"
+                              v-model="question.answer"
+                              type="radio" 
+                              class="hide"
+                              @change="enableNext"
+                            >
+                            <label 
+                              :for="'option-' + qindex + oindex" 
+                              class="c-option fs-18 align-middle width-100"
+                            >
+                              <div class="c-option__checkbox position-relative margin-right-1">
+                                <span class="display-block rounded position-relative"></span>
+                              </div>
+                              <p class="margin-bottom-0 dark">                      
+                                ${option.title}
+                              </p>
+                            </label>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              </transition>
+              <div v-if="grade.completed && questions.list.length > 0" class="flex-container align-center align-right">
                 <div class="flex-container align-middle" :class="{ enable: isEnableChange, hide: testDone }">
                   <button 
                     class="flex-container f2 fs-21 w-medium align-center-middle"

@@ -14,7 +14,7 @@ new Vue({
   },
   created(){
     if (!this.logedUser) {
-      window.location = `${this.SITE_URL}/login`
+      window.location = `${this.SITE_URL}/access`
     }
   },
   mounted(){

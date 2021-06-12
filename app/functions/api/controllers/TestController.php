@@ -67,6 +67,11 @@ class TestController{
 
     public function saveBehaviourTest($request){
         if (TestModel::saveBehaviourTest($request)) {
+            $userGrade  = $request['user_grade'];
+            $userId     = $request['user_id'];
+
+            if ($userGrade) update_field('grade', $userGrade, 'user_' . $userId);
+
             return new WP_REST_Response('Test saved', 200);
         } else {
             return new WP_Error( 'no_test_saved', __('No test saved'), array( 'status' => 404 ) );

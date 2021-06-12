@@ -32,7 +32,7 @@ Vue.component('likes',{
   methods: {
     addNewLike: function(level){
       if(!this.logedUser){
-        window.location = `${this.SITE_URL}/login`;
+        window.location = `${this.SITE_URL}/access`;
       }else{
         fetch(`${this.API}/${this.target.type}/${this.target.id}/likes?level=${level}&user=${this.logedUser.user_email}`,{
             method: 'PUT'
