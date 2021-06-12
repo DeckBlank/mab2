@@ -58,6 +58,24 @@
     border-radius: 25px;
     padding: 2rem;
 
+    &.w-scroll {
+      padding: 4rem 1.8rem 2rem;
+    }
+
+    &__scroll {
+      height: 75vh;
+      overflow-y: auto;
+      padding: 0 1rem 0 0;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: $dark;
+      }
+    }
+
     &__title {
       font-size: $fs-21;
       margin-bottom: 2rem;
