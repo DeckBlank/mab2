@@ -109,6 +109,8 @@ new Vue({
       enrolledCourses: [],
 
       isOpenedModalCongrats: false,
+
+      device: '',
     }
   },
   computed: {
@@ -200,7 +202,10 @@ new Vue({
       this.getTestBehaviour();
     }
 
+    let breakpoint = window.matchMedia('(min-width: 1024px)');
+
     this.initShare();
+    this.checkDevice(breakpoint); breakpoint.addEventListener('change', this.checkDevice);
   },
   methods: {
     ...baseActions(),
@@ -219,6 +224,13 @@ new Vue({
     },
     isWrongFieldHability: function(field) {
       return this.skills.try && !this.skills.values[field].isValid;
+    },
+    checkDevice: function(breakpoint) {
+      if (breakpoint.matches) {
+        this.device = 'desktop';
+      } else {
+        this.device = 'mobile';
+      }
     },
 
     observePhraseInput: function(evt) {
@@ -516,6 +528,7 @@ new Vue({
     },
     initShare: function() {
       this.social = {
+        whatsapp: `whatsapp://send?text=Hola, te comparto mis habilidades ${ this.userProfile }`,
         facebook: `https://www.facebook.com/sharer/sharer.php?u=${ this.userProfile }`,
         linkedin: `http://www.linkedin.com/shareArticle?mini=true&url=${ this.userProfile }`,
         twitter: `https://twitter.com/share?text=Hola, te comparto mis habilidades&url=${ this.userProfile }`,

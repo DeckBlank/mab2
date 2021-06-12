@@ -32,6 +32,7 @@ new Vue({
       isCreatingSignature: false,
 
       isOpenedShareModal: false,
+      device: '',
     }
   },
   computed: {
@@ -70,7 +71,10 @@ new Vue({
       const video = document.getElementById("donac_video"); video.play(); 
     }, 1000)
 
+    let breakpoint = window.matchMedia('(min-width: 1024px)');
+
     this.initShare();
+    this.checkDevice(breakpoint); breakpoint.addEventListener('change', this.checkDevice);
   },
   methods: {
     ...baseActions(),
@@ -89,9 +93,15 @@ new Vue({
         parameter.isValid = true;
       }
     },
-
     isWrongField: function(field) {
       return (this.donation.try && !this.donation[field].isValid) ? true : false;
+    },
+    checkDevice: function(breakpoint) {
+      if (breakpoint.matches) {
+        this.device = 'desktop';
+      } else {
+        this.device = 'mobile';
+      }
     },
 
     createSignature: function() {

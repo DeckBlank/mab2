@@ -397,6 +397,12 @@
             <div v-if="showShareBox == true" class="c-mab-modal__share text-left">
               <a href="" class="c-link c-link--warning f2 w-xbold"> Compartir en:</a>
               <div class="grid-x grid-margin-x grid-margin-y align-center margin-top-1">
+                <div v-if="device == 'mobile'" class="cell small-6 large-3">
+                  <a :href="social.whatsapp" class="text-center">
+                    <img loading="lazy"  src="{{theme.link}}/static/images/vectors/share-icons/icon-ws.png" alt="">
+                    <span class="white f2 fs-14">Whatsapp</span>
+                  </a>
+                </div>
                 <div class="cell small-6 large-3">
                   <a :href="social.linkedin" class="text-center">
                     <img loading="lazy"  src="{{theme.link}}/static/images/vectors/share-icons/icon-linkedin.png" alt="">

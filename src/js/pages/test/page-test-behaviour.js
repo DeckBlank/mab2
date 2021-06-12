@@ -22,6 +22,28 @@ const test = new Vue({
       sliderQuestions: null,
 
       isSaving: false,
+
+      grades: [
+        "1RO PRIMARIA",
+        "2DO PRIMARIA",
+        "3RO PRIMARIA",
+        "4TO PRIMARIA",
+        "5TO PRIMARIA",
+        "6TO PRIMARIA",
+        "1RO SECUNDARIA",
+        "2DO SECUNDARIA",
+        "3RO SECUNDARIA",
+        "4TO SECUNDARIA",
+        "5TO SECUNDARIA",
+        "6TO SECUNDARIA"
+      ],
+      grade: {
+        try: false,
+        completed: false,
+
+        value: '',
+        isValid: false
+      },
     }
   },
   computed: {
@@ -40,11 +62,16 @@ const test = new Vue({
       return `${ this.SITE_URL}/user/${ this.logedUser.user_nicename }`;
     },
   },
+  watch: {
+    'grade.value': function() {
+      this.validateSelect(this.grade);
+    },
+  },
   created(){
     if(!this.logedUser){
-      window.location = `${this.SITE_URL}/login`;
+      window.location = `${this.SITE_URL}/access`;
     } else if (this.logedUser.user_rol == 'foreign') {
-      window.location = `${this.SITE_URL}/emotional`;
+      window.location = `${this.SITE_URL}`;
     }
   },
   mounted(){
@@ -52,9 +79,29 @@ const test = new Vue({
     this.hideLoading();
     this.getTest();
     this.checkoutEnableTest();
+
+    if (this.logedUser && this.logedUser.user_grade) {
+      this.grade.value      = this.logedUser.user_grade;
+      this.grade.completed  = true;
+      this.grade.isValid    = true;
+    }
   },
   methods: {
     ...baseActions(),
+    validateSelect(parameter, field = 'value') {
+      if(parameter[field] != '' && parameter.isValid == false){
+        parameter.isValid = true;
+      }
+    },
+    startTest: function() {
+      this.grade.try = true;
+
+      if (this.grade.isValid) {
+        this.grade.completed = true;
+        this.initTest();
+      }
+    },
+
     changeQuestion: function(direction){
       if (direction == 'next') {
         if(this.sliderQuestions.slideNext()){
@@ -70,7 +117,8 @@ const test = new Vue({
           this.currentQuestion -= 1;
         }
       }
-    },    
+    },
+    
     enableNext: function(questionIndex, questionValue){
       this.isEnableChange = true;
     },
@@ -101,11 +149,11 @@ const test = new Vue({
           speed: 500,
           loop: false
         })
-      }, 100)
+      }, 1000)
     },
     getUserType: function() {
       if (this.logedUser.user_role = 'student') {
-        switch (this.logedUser.user_grade) {
+        switch (this.grade.value) {
           case '1RO PRIMARIA':
           case '2DO PRIMARIA':
           case '3RO PRIMARIA':
@@ -155,12 +203,9 @@ const test = new Vue({
           this.testExists       = true;
           this.testDone         = true;
 
-          console.log(testResults[testResult.id])
-
           this.hideLoading();
         })
         .catch(err => {
-          this.initTest();
           this.hideLoading();
           throw err;
         })      
@@ -183,11 +228,15 @@ const test = new Vue({
       if (enable) {
         let formData = new FormData();
 
+        formData.append('user_id', this.logedUser.user_id)
         formData.append('user', this.logedUser.user_email)
         formData.append('result', JSON.stringify({
           id: this.questions.result.id,
           title: this.questions.result.title
         }))
+
+        if (!this.logedUser.user_grade)
+          formData.append('user_grade', this.grade.value)
 
         fetch(`${this.API}/test/behaviour`,{
             method: 'POST',

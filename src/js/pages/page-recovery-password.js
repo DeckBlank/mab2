@@ -26,7 +26,7 @@ const recovery_password = new Vue({
   },
   created(){
     if(this.stage && this.stage == 2 && !this.sessionID){
-      window.location = `${this.SITE_URL}/login`;
+      window.location = `${this.SITE_URL}/access`;
     }
   },
   mounted(){

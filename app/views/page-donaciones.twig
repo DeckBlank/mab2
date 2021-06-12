@@ -288,6 +288,12 @@
                   <div class="c-mab-modal__share margin-0 width-100 text-left">
                     <div class=" f2 w-xbold text-uppercase pri-color fs-21">¡COMPÁRTELO!</div>
                     <div class="grid-x grid-margin-x grid-margin-y align-center margin-top-1">
+                      <div v-if="device == 'mobile'" class="cell small-6 large-3">
+                        <a :href="social.whatsapp" class="text-center">
+                          <img loading="lazy"  src="{{theme.link}}/static/images/vectors/share-icons/icon-ws.png" alt="">
+                          <span class="dark f2 fs-14">Whatsapp</span>
+                        </a>
+                      </div>
                       <div class="cell small-6 large-3">
                         <a :href="social.linkedin" class="text-center">
                           <img loading="lazy"  src="{{theme.link}}/static/images/vectors/share-icons/icon-linkedin.png" alt="">
