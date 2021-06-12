@@ -31,6 +31,7 @@
         </div>
       </div>
     </div>
+
     <div class="c-player bg-sec-color">
       <div class="grid-container padding-vertical-3">
         <div class="grid-x grid-margin-x grid-margin-y align-middle">
@@ -50,6 +51,7 @@
         </div>
       </div>
     </div>
+
     <div class="c-metodology bg-pri-alt overflow-hidden">
       <div class="grid-container padding-vertical-3">
         <h2 class="c-metodology__title margin-bottom-3">
@@ -72,6 +74,7 @@
         </div>
       </div>
     </div>
+
     <div class="c-features bg-warning-alt">
       <div class="grid-container padding-vertical-3">
         <div class="grid-x align-center">
@@ -159,6 +162,7 @@
         </div>
       </div>
     </div>
+
     <div class="c-testimonies bg-dark">
       <div class="grid-container padding-vertical-3">
         <div class="text-center large-text-right white margin-bottom-2">
@@ -202,6 +206,7 @@
         </div>
       </div>
     </div>
+
     <div class="c-lideres bg-pri-alt">
       <div class="grid-container padding-vertical-3">
         <h2 class="margin-bottom-1">
@@ -210,6 +215,7 @@
         <lideres :body="lideres" />
       </div>
     </div>
+
     <div class="c-brands bg-pri-alt position-relative">
       <img class="c-brands__mixing position-absolute of--contain" src="{{ theme.link }}/static/images/home/brands/mixing.png" alt="">
       <div class="grid-x">
@@ -235,11 +241,13 @@
         </div>
       </div>
     </div>
+
     <div class="bg-white padding-vertical-1">
       <div class="grid-container">
         <p class="dark fs-30 f2 w-xbold text-center margin-bottom-0">#CómplicesEducativos</p>
       </div>
     </div>
+
     <div class="c-international-brands bg-dark padding-vertical-2">
       <div id="slider-brands" class="swiper-container">
         <div class="swiper-wrapper align-middle">
@@ -252,6 +260,7 @@
         </div>
       </div>
     </div>
+
     <div class="c-faq bg-warning-alt">
       <section class="c-faq__container">
         <div class="grid-container">
@@ -265,19 +274,10 @@
                       <li v-for="(question, qindex) of questions" :key="question.id" class="c-accordion-item">
                         <input v-model="question.enable" @change="resetAccordion(question)" :id="'accordion-item-' + qindex" class="c-accordion hide" type="checkbox">
                         <label class="c-accordion-item__switcher width-100 bg-sec-color" :for="'accordion-item-' + qindex">
-                          <p class="margin-bottom-0 w-bold white f2 fs-18">asdsadsa dsasadasd</p>
+                          <p class="margin-bottom-0 w-bold white f2 fs-18">${ question.title }</p>
                           <i class="c-icon white fs-21 far fa-chevron-up"></i>
                         </label>
-                        <div class="c-accordion-item__content position-relative bg-white f2 dark w-medium">
-                          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem sapiente dolores nulla commodi! Earum et, recusandae unde quaerat suscipit, inventore blanditiis nihil rerum voluptatum autem nulla! Quis voluptate neque quisquam!
-
-                          <ul>
-                            <li>asd asdsadsdsa sad</li>
-                            <li>asd asdsadsdsa sad</li>
-                            <li>asd asdsadsdsa sad</li>
-                            <li>asd asdsadsdsa sad</li>
-                          </ul>
-                        </div>
+                        <div class="c-accordion-item__content position-relative bg-white f2 dark w-medium" v-html="question.answer"></div>
                       </li>
                     </ul>
                   </div>

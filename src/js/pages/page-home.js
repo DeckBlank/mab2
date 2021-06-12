@@ -36,13 +36,7 @@ const home = new Vue({
         },
       ],
 
-      questions: [
-        { enable : true },
-        { enable : false },
-        { enable : false },
-        { enable : false },
-        { enable : false },
-      ],
+      questions: [],
 
       lideres: [
         {
@@ -104,6 +98,17 @@ const home = new Vue({
     this.global();
     this.initTestimoniesSlider();
     this.initBrandsSlider();
+
+    this.questions = mab.questions;
+
+    this.questions = this.questions.map(question => {
+      return {
+        ...question,
+        enable: false
+      }
+    });
+
+    this.questions[0].enable = true;
   },
   methods: {
     ...baseActions(),

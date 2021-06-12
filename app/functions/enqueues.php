@@ -146,7 +146,7 @@ add_action( 'wp_enqueue_scripts', function () use ($config) {
      * --------------------------------------------------------------------------
      *
      */
-    if ( is_front_page() ) {   
+    if ( is_front_page() ) {
         register_assets('package', [
             'handle'    => 'pandawp/package/swiper',
             'src'       => $config['resources']['package_swiper'],
@@ -177,6 +177,10 @@ add_action( 'wp_enqueue_scripts', function () use ($config) {
             'deps'      => [ ],
             'ver'       => $config['vertion'],
             'in_footer' => true
+        ]);
+
+        $enviroment = array_merge($enviroment, [
+            'questions' => get_field('faq', 'options')
         ]);
     }elseif ( is_page('emotional') ) {
         register_assets('package', [
