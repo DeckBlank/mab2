@@ -14,6 +14,26 @@
       width: calc(100% - 100px);
     }
   }
+
+  .c-heart-title {
+    font-size: 50px;
+    line-height: 50px;
+
+    img {
+      right: -80px;
+      top: -50px;
+      width: 100px;
+      display: none;
+    }
+  }
+
+  .c-mab-modal {
+    .c-mab-modal-content {
+      padding: 2rem 3rem;
+      max-width: 430px;
+      margin: 0 auto;
+    }
+  }
 }
 
 @include breakpoint(large) {
@@ -35,6 +55,16 @@
 
     .c-button {
       margin-top: 4rem;
+    }
+
+    .c-heart-title {
+      img {
+        display: inline-block;
+      }
+    }
+
+    .mt-7 {
+      margin-top: 7rem;
     }
   }
 }

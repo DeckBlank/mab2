@@ -294,6 +294,26 @@ body {
   height: 45px;
 }
 
+.br-bottom-0-0 {
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.dark-i {
+  color: $dark !important;
+}
+
+// fondos
+.bg-orange {
+  background-color: $orange;
+}
+
+.bg-cyan {
+  background: $cyan;
+}
+
+// colores
+
 @include breakpoint(large) {
   .desktop {
     display: block;

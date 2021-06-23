@@ -22,7 +22,7 @@
                     <div class="grid-x">
                       <div class="cell medium-10 large-9">
                         <div class="fs-35 lh-35 white margin-bottom-1">
-                          <span class="i-pri-color fs-35">Tú también</span> puedes formar parte del cambio
+                          <span class="i-pri-color fs-35">Tú también puedes formar parte del cambio</span>
                         </div>
                       </div>
                       <div class="cell medium-11 large-11">
@@ -66,19 +66,19 @@
                             <div class="check-group flex-container align-middle align-justify margin-bottom-1">
                               <div class="check-group__item">
                                 <input v-model="donation.amount.value" id="amount-50" name="monto" value="50" type="radio" hidden>
-                                <label class="bg-white br--medium margin-0 f2" for="amount-50">S/ 50</label>
+                                <label class="bg-white br--medium margin-0 f2" for="amount-50">S/. 50</label>
                               </div>
                               <div class="check-group__item margin-horizontal-1">
                                 <input v-model="donation.amount.value" id="amount-100" name="monto" value="100" type="radio" hidden>
-                                <label class="bg-white br--medium margin-0 f2" for="amount-100">S/ 100</label>
+                                <label class="bg-white br--medium margin-0 f2" for="amount-100">S/. 100</label>
                               </div>
                               <div class="check-group__item">
                                 <input v-model="donation.amount.value" id="amount-150" name="monto" value="150" type="radio" hidden>
-                                <label class="bg-white br--medium margin-0 f2" for="amount-150">S/ 150</label>
+                                <label class="bg-white br--medium margin-0 f2" for="amount-150">S/. 150</label>
                               </div>
                             </div>
-                            <label class="text-center f2 white">o ingresa el monto</label>
-                            <input v-model="donation.amount.value" class="f2 input-reset input-dark" type="number" placeholder="250">
+                            <label class="text-center f2 white">o ingresa otro monto</label>
+                            <input v-model="donation.amount.value" class="f2 input-reset input-dark text-center" type="number" placeholder="Ingresar monto">
 
                             <p v-if="isWrongField('amount')" class="c-form-new__error pri-alt margin-bottom-0 fs-18 f2 w-medium">
                               Elige un monto para donar
@@ -103,15 +103,15 @@
                           </div>
 
                           <div class="c-form-new__input-container margin-bottom-2">
-                            <label class="text-center f2 white padding-horizontal-1">Ingresa tu correo electrónico para poder confirmar tu donación</label>
-                            <input v-model="donation.email.value" class="f2 input-reset input-dark" type="email" placeholder="donador@g.com">
+                            <label class="text-center f2 white padding-horizontal-1">Ingresa tu correo electrónico <br> para poder confirmar tu donación</label>
+                            <input v-model="donation.email.value" class="f2 input-reset input-dark text-center" type="email" placeholder="Ingresar correo">
                             <p v-if="isWrongField('email')" class="c-form-new__error pri-alt margin-bottom-0 fs-18 f2 w-medium">
                               Email vacío o incorrecto
                             </p>
                           </div>
                           <div class="text-center">
-                            <button :disabled="isCreatingSignature" class="c-button c-button--primary f2 margin-top-1 text-uppercase br--large padding-horizontal-3">
-                              ${ (isCreatingSignature) ? 'Procesando...' : 'siguiente' }
+                            <button :disabled="isCreatingSignature" class="c-button c-button--ghost-white-primary f2 margin-top-1 br--large padding-horizontal-3">
+                              ${ (isCreatingSignature) ? 'Procesando...' : 'Siguiente' }
                             </button>
                           </div>
                         </form>
@@ -131,7 +131,7 @@
                           <input name="responseUrl"    type="hidden"  value="{{site.url}}/donaciones?step=3">
                         </form>
 
-                        <div class="c-label-login pri-color f2 margin-top-1 margin-bottom-3">
+                        <div class="c-label-login pri-color f2 margin-top-1 margin-bottom-3 margin-top-3">
                           <a href="{{ site.url }}" class="c-link c-link-primary w-bold"><i class="fas fa-chevron-left"></i>  Volver a la página principal</a>
                         </div>
                       </div>
@@ -143,7 +143,7 @@
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
                     <div class="grid-x align-center">
-                      <div class="cell large-6">
+                      <div class="cell large-8">
                         <h1 class="c-split-layout-content__title margin-bottom-2 white fs-35 c-lh--35">
                           <span class="white fs-30 f2 w-xbold">Dona</span><br>
                           <div class="flex-container align-center-middle margin-top-1">
@@ -152,31 +152,31 @@
                         </h1>
 
                         <div class="margin-top-2">
-                          <div class="c-donacion-info text-left">
-                            <p class="white f2 margin-bottom-2">Estos son los datos que necesitas para que puedas realizar
+                          <div class="c-donacion-info text-left fs-18">
+                            <p class="white f2 margin-bottom-2 text-center">Estos son los datos que necesitas para que puedas realizar
                               un depósito por transferencia:  
                             </p>
                             <ul class="ul-reset f2 white">
                               <li>
-                                <span class="warning padding-right">Nombre del titular:</span> Asociación civil educación con propósito
+                                <span class="pri-color padding-right">Nombre del titular:</span> Asociación civil educación con propósito
                               </li>
                               <li class="margin-bottom-1">
-                                <span class="warning padding-right">RUC:</span> 2060629850
+                                <span class="pri-color padding-right">RUC:</span> 2060629850
                               </li>
                               <li>
-                                <p>Número de cuentas MAB:</p> 
+                                <p class="w-xbold">Número de cuentas MAB:</p> 
                               </li>
                               <li>
-                                <span class="warning padding-right">BCP soles:</span> 194-03007578-0-56
+                                <span class="pri-color padding-right">BCP soles:</span> 194-03007578-0-56
                               </li>
                               <li>
-                                <span class="warning padding-right">CCI:</span> 002-19410300757805695
+                                <span class="pri-color padding-right">CCI:</span> 002-19410300757805695
                               </li>                              
                               <li>
-                                <span class="warning padding-right">BCP dólares:</span> 194-2672452-1-73
+                                <span class="pri-color padding-right">BCP dólares:</span> 194-2672452-1-73
                               </li>
                               <li>
-                                <span class="warning padding-right">CCI:</span> 002-19400267245217392
+                                <span class="pri-color padding-right">CCI:</span> 002-19400267245217392
                               </li>
                               <li class="flex-container align-middle">
                                 <span>
@@ -190,7 +190,7 @@
                                 <span>
                                   <img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/donaciones/paypal-logo.png" alt="">
                                 </span>
-                                <a href="https://www.paypal.com/paypalme/MABPeru" target="_blank">
+                                <a href="https://www.paypal.com/paypalme/MABPeru" target="_blank" class="white">
                                   www.paypal.com/paypalme/MABPeru
                                 </a>
                               </li>
@@ -201,12 +201,12 @@
                         <div class="text-center margin-top-3">
                           <button
                             @click="isOpenedModal = true"
-                            class="c-button c-button--primary f2 margin-top-1 text-uppercase br--large padding-horizontal-3 w-xbold"
+                            class="c-button c-button--ghost-white-primary f2 margin-top-1 br--large padding-horizontal-3"
                           >
-                          CONFIRMAR MI DONACIÓN
+                          Confirmar mi donación
                           </button>
                         </div>
-                        <div class="c-label-login pri-color f2 margin-top-1 margin-bottom-3">
+                        <div class="c-label-login pri-color f2 margin-top-1 margin-bottom-3 margin-top-3">
                           <a href="{{ site.url }}" class="c-link c-link-primary w-bold"><i class="fas fa-chevron-left"></i>  Volver a la página principal</a>
                         </div>
                       </div>
@@ -218,7 +218,7 @@
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
                     <div class="grid-x align-center">
-                      <div class="cell large-6">
+                      <div class="cell large-8">
                         <h1 class="c-split-layout-content__title margin-bottom-2 white fs-35 c-lh--35">
                           <span class="white fs-30 f2 w-xbold">Dona</span><br>
                           <div class="flex-container align-center-middle margin-top-1">
@@ -227,27 +227,31 @@
                         </h1>
 
                         <div class="margin-vertical-3">
-                          <div class="grid-x align-bottom">
-                            <div class="cell large-8">
-                              <p class="w-xbold white fs-21 f2 text-left">
-                                GRACIAS A PERSONAS COMO
-                                TÚ, PODEMOS SEGUIR
-                                DIFUNDINDO EDUCACIÓN
-                                INTEGRAL PARA TODOS 
-                                Y PARA TODAS</p>
+                          <div class="grid-x align-bottom align-center mt-7">
+                            <div class="cell large-10">
+                              <span class="c-heart-title position-relative margin-top-3">
+                                <span class="w-xbold pri-color text-center">
+                                  ¡GRACIAS POR <br> TU CONTRIBUCIÓN!
+                                </span>
+                                <img loading="lazy" class="position-absolute" src="{{theme.link}}/static/images/donaciones/heart.png" alt="">
+                              </span>
+                              
+                                <p class="margin-top-1 white fs-18 text-center f2">
+                                  Gracias a personas como tú, podemos seguir difundiendo educación integral para todos y para todas
+                                </p>
                             </div>
                             <div class="cell large-4">
-                              <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/donaciones/heart.png" alt="">
+                              
                             </div>
                           </div>
                         </div>
 
                         <div class="margin-top-3">
-                          <button @click="isOpenedShareModal = true" class="c-button c-button--primary f2 margin-top-1 text-uppercase br--large padding-horizontal-3 w-xbold">
+                          <button @click="isOpenedShareModal = true" class="c-button c-button--ghost-primary f2 margin-top-1 br--large padding-horizontal-3 w-xbold">
                             <i class="fas fa-share-alt"></i> Invita a tus amigos a donar
                           </button>
                         </div>
-                        <div class="c-label-login pri-color f2 margin-top-1 margin-bottom-3">
+                        <div class="c-label-login pri-color f2 margin-top-1 margin-bottom-3 margin-top-3">
                           <a href="{{ site.url }}" class="c-link c-link-primary w-bold"><i class="fas fa-chevron-left"></i>  Volver a la página principal</a>
                         </div>
                       </div>
@@ -258,10 +262,10 @@
             </transition>
           </div>
 
-          <div class="c-mab-modal width-100 c-mab-modal--absolute c-mab-modal--mini flex-container align-center-middle" :class="{'visible' : isOpenedModal}">
+          <div class="c-mab-modal height-100 width-100 c-mab-modal--absolute c-mab-modal--mini flex-container align-center-middle" :class="{'visible' : isOpenedModal}">
             <div class="grid-x align-center width-100">
               <div class="cell small-10 medium-10 large-6">
-                <div class="c-mab-modal-content bg-white text-center position-relative">
+                <div class="c-mab-modal-content br-bottom-0-0 bg-white text-center position-relative">
                   <div class="text-center">
                     <img loading="lazy" class="c-mab-modal__top-image donaciones" src="{{theme.link}}/static/images/donaciones/envelope.png" alt="">
                   </div>
@@ -281,12 +285,12 @@
           <div class="c-mab-modal width-100 c-mab-modal--absolute c-mab-modal--mini flex-container align-center-middle" :class="{'visible' : isOpenedShareModal}">
             <div class="grid-x align-center width-100">
               <div class="cell small-10 medium-10 large-6">
-                <div class="c-mab-modal-content bg-white text-center position-relative">
+                <div class="c-mab-modal-content br-bottom-0-0 bg-white text-center position-relative">
                   <button @click="isOpenedShareModal = false" class="c-mab-modal__cross position-absolute white bg-pri-color fs-18 fñex-container align-center-middle">
                     <i class="fas fa-times"></i>
                   </button>
                   <div class="c-mab-modal__share margin-0 width-100 text-left">
-                    <div class=" f2 w-xbold text-uppercase pri-color fs-21">¡COMPÁRTELO!</div>
+                    <div class="w-xbold text-uppercase pri-color fs-35">¡COMPÁRTELO!</div>
                     <div class="grid-x grid-margin-x grid-margin-y align-center margin-top-1">
                       <div v-if="device == 'mobile'" class="cell small-6 large-3">
                         <a :href="social.whatsapp" class="text-center">
