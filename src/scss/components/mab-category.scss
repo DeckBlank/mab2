@@ -34,22 +34,58 @@
   }
 
   &__text {
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
+    // border-bottom-left-radius: 20px;
+    // border-bottom-right-radius: 20px;
     padding: 0.3rem 1rem;
     font-size: $fs-16;
     min-height: 45px;
     line-height: 15px;
     height: 100%;
+    color: $dark !important;
   }
 
+  // color cambiado
   &--secondary {
     .c-mab-category__gradient {
-      background: $secondary-color;
+      background: $cyan;
     }
 
     .c-mab-category__text {
-      background: $secondary-color;
+      background: $cyan;
+    }
+  }
+
+  // color cambiado
+  &--warning {
+    .c-mab-category__gradient {
+      background: $warning-alt;
+    }
+
+    .c-mab-category__text {
+      background: $warning-alt;
+      color: $dark;
+    }
+  }
+
+  // color cambiado
+  &--success {
+    .c-mab-category__gradient {
+      background: $limon;
+    }
+
+    .c-mab-category__text {
+      background: $limon;
+    }
+  }
+
+  // nuevo color
+  &--magenta {
+    .c-mab-category__gradient {
+      background: $magenta;
+    }
+
+    .c-mab-category__text {
+      background: $magenta;
     }
   }
 
@@ -60,27 +96,6 @@
 
     .c-mab-category__text {
       background: $alert-color;
-    }
-  }
-
-  &--warning {
-    .c-mab-category__gradient {
-      background: $warning-color;
-    }
-
-    .c-mab-category__text {
-      background: $warning-color;
-      color: $dark;
-    }
-  }
-
-  &--success {
-    .c-mab-category__gradient {
-      background: $success-color;
-    }
-
-    .c-mab-category__text {
-      background: $success-color;
     }
   }
 

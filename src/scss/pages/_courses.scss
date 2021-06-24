@@ -15,7 +15,17 @@
       }
     }
 
+    .c-mab-recommended {
+      margin-top: 5rem;
+    }
+
     .c-course-list {
+      margin-bottom: 5rem;
+
+      .cell {
+        padding-bottom: 3rem;
+      }
+
       &__content,
       .c-form-new {
         padding: 0 2rem;
