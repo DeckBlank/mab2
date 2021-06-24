@@ -23,6 +23,8 @@
     left: 0;
     right: 0;
     margin: auto;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   &--secondary {
@@ -34,6 +36,12 @@
   &--warning {
     &::before {
       background-color: $warning-color;
+    }
+  }
+
+  &--primary {
+    &::before {
+      background-color: $primary-color;
     }
   }
 }

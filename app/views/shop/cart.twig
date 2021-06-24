@@ -29,7 +29,7 @@
                             <p> ${ course.description } </p>
 
                               <div class="text-right">
-                                <div class="c-mab-carrito-product__price w-xbold br--small">
+                                <div class="c-mab-carrito-product__price w-xbold">
                                   S/ ${ course.price }.00
                                 </div>
                               </div>
@@ -75,28 +75,29 @@
                   <input name="buyerEmail"    type="hidden"  :value="logedUser.user_email" >
                   <input name="responseUrl"    type="hidden"  value="{{site.url}}/carrito/success" >
                   <input name="confirmationUrl"    type="hidden"  value="http://shipping.mabclick.com/{{pasarell.enviroment}}_confirm.php" >
-                  <input type="submit" class="c-button c-button--secondary f2 w-xbold button-reset width-100 display-block fs-21" @click="buyCourses($event)" value="Comprar" >
+                  <input type="submit" class="c-button c-button--dark-white f2 button-reset width-100 display-block fs-21" @click="buyCourses($event)" value="Comprar" >
                 </form>
               </div>
               <div class="text-center">
-                <a href="{{ site.url }}/cursos" class="c-link f2 fs-16 margin-top-1 w-xbold">Seguir comprando</a>
+                <a href="{{ site.url }}/cursos" class="c-link c-link--ho-dark dark f2 fs-16 margin-top-1 w-xbold">Seguir comprando</a>
               </div>
             </div>
 
             <div v-if="courses.list && !courses.list.length" class="cell">
               <div class="c-mab-carrito__vacio flex-container dark f2 text-center">
                 <div class="c-mab-carrito__vacio-content">
-                  <div class="fs-35">
-                    <i class="fas fa-shopping-cart"></i>
+                  <div class="c-mab-carrito__vacio-figure fs-35 margin-bottom-2">
+                    <!-- <i class="fas fa-shopping-cart"></i> -->
+                    <img src="{{ theme.link }}/static/images/carrito/cart.png" alt="">
                   </div>
-                  <h2 class="f2 w-xbold fs-21">¡Tú carrito de compras esta vacío!</h2>
+                  <h2 class="w-xbold fs-25">¡Tú carrito de compras esta vacío!</h2>
                   <p class="fs-16">
-                    Aún no has agregado productos a tu carrito
-                    de compras. Visita nuestra página principal y 
-                    descubre todo lo que tenemos para tí.
+                    Luego de varios años dando clases particulares a niños y niñas de diferentes
+                    colegios privados de Lima, Macarena expande sus servicios a todo el Perú con el
+                    objetivo de disminuir brechas sociales, educativas y tecnológicas en el país.
                   </p>
                   <div class="margin-top-2 margin-bottom-1 text-center">
-                    <a href="{{ site.url }}/cursos" class="c-button c-button--secondary f2 w-xbold">
+                    <a href="{{ site.url }}/cursos" class="c-button c-button--primary f2">
                       Ver productos
                     </a>
                   </div>
@@ -124,19 +125,20 @@
 
       <div class="c-mab-carrito-message width-100 height-100 align-center-middle" :class="{'visible' : isOpenedAlert}">
         <div class="c-mab-carrito-message__content br--large bg-white text-center">
+          <img class="c-mab-carrito-message__img" src="{{ theme.link }}/static/images/carrito/red-alert.png" alt="">
           <h3 class="c-mab-carrito-message__title dark text-uppercase fs-25">
-            <img src="{{ theme.link }}/static/images/vectors/alert.png" alt=""> vaciar CARRITO
+            vaciar CARRITO
           </h3>
-          <p class="dark fs-16 f2">
+          <p class="dark fs-18 f2">
             ¿Estás seguro que deseas vaciar tu carrito? 
           </p>
           <div class="margin-top-2 margin-bottom-1">
-            <button @click="emptyShopCart()" class="c-button c-button--secondary width-100 f2 w-xbold">
+            <button @click="emptyShopCart()" class="c-button c-button--primary width-100 f2">
               Vaciar carrito
             </button>
           </div>
           <div class="text-center">
-            <a href="#" @click="closeAlert($event)" class="c-link f2 fs-16 margin-top-1 w-xbold">Volver</a>
+            <a href="#" @click="closeAlert($event)" class="c-link c-link--ho-dark dark  f2 fs-16 margin-top-1 w-xbold">Volver</a>
           </div>
         </div>
         

@@ -11,7 +11,7 @@
 
       &__title {
         p {
-          line-height: 35px;
+          line-height: 54px;
         }
       }
 
@@ -25,13 +25,29 @@
         width: 126px;
         top: 81%;
         right: -2rem;
-        transform: rotate(15deg);
+        // transform: rotate(15deg);
       }
+    }
+  }
+
+  .c-hand {
+    left: 1rem;
+    bottom: 0;
+    height: 45%;
+
+    img {
+      object-position: left;
     }
   }
 
   .swiper-wrapper {
     transition-timing-function: linear;
+  }
+
+  .c-us-comment {
+    .c-us-comment__content::after {
+      border-right: solid 50px $secondary-color;
+    }
   }
 }
 
@@ -51,10 +67,10 @@
         }
 
         .c-card-article {
-          margin-left: 7rem;
-          margin-right: -4rem;
-          margin-top: -5rem;
-          transform: rotate(-9deg);
+          margin-left: 4rem;
+          // margin-right: -4rem;
+          // margin-top: -5rem;
+          transform: rotate(9deg);
 
           &__figure {
             height: 330px;
@@ -67,7 +83,7 @@
         }
 
         .c-corner-heart {
-          width: 275px;
+          width: 235px;
           top: 61%;
 
           &.to-left {
@@ -99,6 +115,33 @@
           text-align: right;
           padding: 0 0 0 1rem;
         }
+      }
+    }
+
+    .rotate-left {
+      transform: rotate(-9deg) !important;
+    }
+
+    .big-photo {
+      transform: rotate(-9deg) !important;
+      margin-top: -4rem !important;
+      margin-right: -4rem;
+
+      .c-card-article__figure {
+        height: auto !important;
+      }
+    }
+
+    .c-ceo-bio.bg-cyan {
+      margin-top: 14rem;
+      padding: 0 5rem 0;
+    }
+
+    .c-us-comment {
+      .c-img-corner {
+        width: 13rem;
+        right: -6rem;
+        bottom: 2rem;
       }
     }
   }

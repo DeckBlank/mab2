@@ -190,18 +190,18 @@ $font-families: (
     }
   }
 
+  &--ho-dark {
+    &:hover {
+      color: $dark;
+    }
+  }
+
   &--white {
     color: $white;
   }
 
   &--black {
     color: $dark;
-  }
-
-  &--ho-dark {
-    &:hover {
-      color: $dark;
-    }
   }
 
   &--sec {

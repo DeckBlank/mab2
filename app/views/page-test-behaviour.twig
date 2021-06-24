@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <section class="c-section c-section--test bg-sec-color">
+  <section class="c-section c-section--test bg-pri-color">
     <div v-if="!testDone" class="grid-container">
       <div class="grid-x align-center">
         <div class="cell medium-10 large-8">
@@ -23,16 +23,16 @@
 
           <a :href="userProfile" class="c-button c-button--white-dark margin-right-1 f2 w-xbold text-center margin-bottom-2 display-inline-block">Volver al perfil</a>
 
-          <div class="c-result__container grid-x align-center bg-white br-45 padding-vertical-2">
+          <div class="c-result__container grid-x align-center bg-white br-45 padding-vertical-2 br-bottom-0-0 ">
             <div class="cell medium-10 large-10 dark f2 position-relative">
               <figure class="c-result__figure margin-bottom-1 text-center">
                 <img
                   v-if="questions.result.vector"
                   :src="`${THEME_URL}/static/images/vectors/test/behaviour/${questions.result.vector}.png`"
                   alt="" class="width-100">
-                <img class="width-100" v-else src="{{theme.link}}/static/images/vectors/test/behaviour/1.png}}" alt="">
+                <img class="width-100" v-else src="{{theme.link}}/static/images/vectors/test/behaviour/cohete.png}}" alt="">
               </figure>
-              <h2 class="c-result__title text-center w-bold margin-bottom-0 text-uppercase">${questions.result.title}</h2>
+              <h2 class="c-result__title pri-color text-center w-bold margin-bottom-0 text-uppercase">${questions.result.title}</h2>
               <p v-if="questions.result.subtitle" class="text-center text-uppercase black fs-18 margin-bottom-2">${questions.result.subtitle}</p>
               <div v-if="questions.result.features" class="margin-bottom-2">
                 <h3 class="fs-35">Carácteristicas:</h3>
@@ -42,7 +42,7 @@
               </div>
             </div>
             <div class="cell">
-              <div v-if="questions.result.improvents" class="c-result__list bg-pri-color br-45 white">
+              <div v-if="questions.result.improvents" class="c-result__list bg-cyan br-45 dark">
                 <h3 class="fs-25">Aspectos a mejorar:</h3>
                 <ul>
                   <li v-for="improvent of questions.result.improvents" :key="improvent.id" v-html="improvent" class="mb-05 f2"></li>

@@ -5,10 +5,10 @@
 {% endblock %}
 
 {% block content %}
-  <section class="c-section c-section--psicologos bg-warning-alt">
-    <div class="c-psicologos-list bg-warning-alt">
+  <section class="c-section c-section--psicologos bg-cyan">
+    <div class="c-psicologos-list bg-cyan">
       <div class="grid-container">
-        <h2 class="c-psicologos-list__title dark text-uppercase">
+        <h2 class="c-psicologos-list__title dark text-uppercase text-center">
           <p>Team de Psicólogos</p>
         </h2>
 
@@ -17,12 +17,12 @@
             <div class="c-us-comment">
               <div class="grid-x align-justify align-middle">
                 <div class="cell large-6">
-                  <div class="c-us-comment__content bg-white dark position-relative text-left f2">
+                  <div class="c-us-comment__content bg-pri-color br-bottom-0-0 white position-relative text-left f2">
                     <span class="c-us-comment__figure position-absolute">
                       <img src="{{ theme.link }}/static/images/nosotros/comas.png" alt="" class="width-100 height-100 of--cover">
                     </span> 
                     <p>{{ psicologo.about }}</p> 
-                    <div class="f2 dark">
+                    <div class="f2 white">
                       <strong>Psicóloga, {{ psicologo.fullname }}.</strong>
                       <a href="https://api.whatsapp.com/send?phone=51{{ (psicologo.whatsapp) ? psicologo.whatsapp : main_wsp }}&text=Hola tengo una consulta..." target="_blank" class="padding-left-1 dark fs-25" href="" target="_blank"><i class="fab fa-whatsapp"></i></a>
                     </div>

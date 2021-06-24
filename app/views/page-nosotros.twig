@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <section id="about" data-hitos="{{ time|length }}" class="c-section c-section--nosotros bg-warning-alt">
+  <section id="about" data-hitos="{{ time|length }}" class="c-section c-section--nosotros bg-pri-color">
     {% for hito in time %}
       <div id="template-{{ loop.index }}" style="display: none;">
         <div class="c-timeline-tooltip c-behaviour-template padding-1 f2 w-medium">
@@ -24,17 +24,17 @@
 
     <div class="c-ceo">
       <div class="grid-container">
-        <h2 class="c-article__title margin-bottom-0 dark fs-70 lh-50 margin-bottom-0 text-uppercase">
+        <h2 class="c-article__title margin-bottom-2 white text-center fs-70 lh-50 margin-bottom-0 text-uppercase">
           <p>NOSOTROS</p>
         </h2>
-        <div class="c-ceo-bio bg-sec-color white br--large">
+        <div class="c-ceo-bio bg-warning-alt dark br--large br-bottom-0-0">
           <div class="grid-x align-self-stretch">
             <div class="cell large-7">
-              <h2 class="c-ceo-bio__title margin-bottom-0 white f2 w-xbold fs-30 lh-30 margin-bottom-0 text-uppercase">
+              <h2 class="c-ceo-bio__title margin-bottom-0 w-xbold fs-50 margin-bottom-0 text-uppercase">
                 <p>Macarena Arribas
                   Berckemeyer</p>
               </h2>
-              <div class="c-ceo-bio__text white f2 margin-bottom-2"> 
+              <div class="c-ceo-bio__text f2 margin-bottom-2"> 
                 <p> 
                   Macarena vive apasionada por la educación. Cuando era
                   estudiante en el colegio, le encantaba poder compartir
@@ -70,7 +70,7 @@
         <div class="c-us-comment">
           <div class="grid-x align-justify align-middle">
             <div class="cell large-6">
-              <div class="c-us-comment__content bg-white br--large dark position-relative text-center f2">
+              <div class="c-us-comment__content bg-sec-color br--large white position-relative text-center f2">
                 <span class="c-us-comment__figure position-absolute">
                   <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/nosotros/comas.png" alt="">
                 </span>
@@ -87,13 +87,13 @@
                     technological gaps for kids all around Peru.”
                 </p>
 
-                <div class="f2 dark">
+                <div class="f2 white">
                   <strong>- Joshua Freedman, CEO Six Seconds</strong>
                 </div>
               </div>
             </div>
 
-            <div class="cell large-5">
+            <div class="cell large-5 position-relative">
               <div class="c-card-article bg-white mab-shadow-soft">
                 <figure class="c-card-article__figure margin-bottom-1">
                   <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/nosotros/maca.png" alt="">
@@ -101,18 +101,24 @@
                 <div class="c-card-article__content">
                 </div>
               </div>
+              <div class="c-img-corner position-absolute desktop">
+                <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/nosotros/heart.png" alt="">
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="c-ceo-bio c-ceo-bio--resume  bg-pri-color white br--large">
+        <div class="c-ceo-bio c-ceo-bio--resume br-bottom-0-0  bg-limon white br--large">
           <div class="grid-x align-self-stretch">
             <div class="cell large-6 position-relative desktop">
-              <div class="c-card-article bg-white mab-shadow-soft">
+              <div class="c-card-article bg-white mab-shadow-soft rotate-left position-relative">
                 <figure class="c-card-article__figure margin-bottom-1">
                   <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/nosotros/garage-1.png" alt="">
                 </figure>
                 <div class="c-card-article__content">
+                </div>
+                <div class="c-hand position-absolute">
+                  <img class="width-100 height-100 of--contain" src="{{ theme.link }}/static/images/nosotros/circle.png" alt="">
                 </div>
               </div>
               <div class="c-card-article c-card-article--float bg-white mab-shadow-soft position-absolute desktop">
@@ -122,9 +128,7 @@
                 <div class="c-card-article__content">
                 </div>
               </div>
-              <div class="c-corner-heart position-absolute">
-                <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/nosotros/circle.png" alt="">
-              </div>
+              
             </div>
             <div class="cell large-6">
               <h2 class="c-ceo-bio__title margin-bottom-0 white f2 w-xbold fs-30 lh-30 margin-bottom-0 text-uppercase">
@@ -150,8 +154,8 @@
           </div>
         </div>
 
-        <div @mouseenter="pauseSlider(true)" @mouseleave="pauseSlider(false)" class="c-timeline bg-success white br--large padding-vertical-2 position-relative">
-          <div class="c-timeline__line bg-white width-100 position-absolute">
+        <div @mouseenter="pauseSlider(true)" @mouseleave="pauseSlider(false)" class="c-timeline bg-warning-alt br-bottom-0-0 dark br--large padding-vertical-2 position-relative">
+          <div class="c-timeline__line bg-dark width-100 position-absolute">
           </div>
 
           <div class="swiper-container mySwiper">
@@ -159,7 +163,7 @@
               {% for hito in time %}
                 <div class="swiper-slide">
                   <label for="{{ hito.year }}" class="flex-container align-bottom">
-                    <div class="c-timeline__year white fs-35">{{ hito.year }}</div>
+                    <div class="c-timeline__year dark fs-35">{{ hito.year }}</div>
                     <div class="c-card-article bg-white mab-shadow-soft">
                       <figure id="tooltip-{{ loop.index }}" class="c-card-article__figure margin-bottom-1">
                         <img src="{{ hito.image['url'] }}" alt="" class="width-100 height-100 of--cover">
@@ -179,9 +183,9 @@
         </div>
 
         <div class="c-us-comment c-us-comment--simple">
-          <div class="grid-x align-justify align-middle">
+          <div class="grid-x align-center align-middle">
             <div class="cell large-6">
-              <div class="c-us-comment__content dark position-relative">
+              <div class="c-us-comment__content white position-relative">
                 <p>
                   “Desde que soy
                   mamá, refuerzo
@@ -192,7 +196,7 @@
                   país.”
                 </p>
 
-                <div class="c-us-comment__autor f2 dark f2 ">
+                <div class="c-us-comment__autor f2 white f2 ">
                   — MACARENA ARRIBAS (FUNDADORA MAB)
                 </div>
               </div>
@@ -210,13 +214,13 @@
           </div>
         </div>
 
-        <div class="c-ceo-bio bg-sec-color white br--large">
+        <div class="c-ceo-bio bg-cyan white br--large br-bottom-0-0">
           <div class="grid-x align-self-stretch align-middle">
-            <div class="cell large-7">
-              <h2 class="c-ceo-bio__title margin-bottom-0 white f2 w-xbold fs-30 lh-30 margin-bottom-0 text-uppercase">
+            <div class="cell large-6">
+              <h2 class="c-ceo-bio__title margin-bottom-0 dark w-xbold fs-35 lh-30 margin-bottom-0 text-uppercase">
                 <p>Team MAB</p>
               </h2>
-              <div class="c-ceo-bio__text white f2 margin-bottom-2"> 
+              <div class="c-ceo-bio__text dark f2 margin-bottom-2"> 
                 <p> 
                   Contamos con un equipo interdisciplinario
                   experto en diferentes áreas. Tenemos psicólogos,
@@ -227,8 +231,8 @@
                 </p>
               </div>
             </div>
-            <div class="cell large-5 position-relative">
-              <div class="c-card-article to-bottom bg-white mab-shadow-soft">
+            <div class="cell large-6 position-relative">
+              <div class="c-card-article to-bottom bg-white mab-shadow-soft big-photo">
                 <figure class="c-card-article__figure margin-bottom-1">
                   <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/nosotros/team.png" alt="">
                 </figure>
@@ -245,7 +249,7 @@
         <div class="c-us-comment c-us-comment--simple c-us-comment--reverse">
           <div class="grid-x align-justify align-middle">
             <div class="cell large-6">
-              <div class="c-us-comment__content dark position-relative text-right to-right">
+              <div class="c-us-comment__content white position-relative text-right to-right">
                 <p>
                   “Trabajo en MAB
                     desde hace más de
@@ -255,17 +259,20 @@
                     más que a nada.”
                 </p>
 
-                <div class="c-us-comment__autor f2 dark f2 text-uppercase ">
+                <div class="c-us-comment__autor f2 white f2 text-uppercase ">
                   — almudena (jefa de creatividad en mab)
                 </div>
               </div>
             </div>
             <div class="cell large-5">
-              <div class="c-card-article to-left bg-white mab-shadow-soft">
+              <div class="c-card-article to-left bg-white mab-shadow-soft position-relative">
                 <figure class="c-card-article__figure  margin-bottom-1">
                   <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/nosotros/maca-3.png" alt="">
                 </figure>
                 <div class="c-card-article__content">
+                </div>
+                <div class="c-img-corner position-absolute desktop">
+                  <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/nosotros/heart.png" alt="">
                 </div>
               </div>
             </div>

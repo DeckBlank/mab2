@@ -39,10 +39,15 @@
 
   .c-button {
     padding-right: 0.7rem;
+    border-radius: 7px !important;
+    color: $dark !important;
   }
 
   &__footer {
+    width: 100%;
     padding: 0.5rem;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
 
     &:hover {
       color: $white;
@@ -50,8 +55,11 @@
   }
 
   &__likes {
+    color: $dark !important;
+
     svg {
       margin-right: 0.2rem;
+      color: $white;
     }
   }
 
@@ -78,10 +86,16 @@
       margin-right: 5px;
     }
   }
+
+  &__content {
+    color: $dark;
+  }
 }
 
+// color cambiado
 .c-course-card--secondary {
-  background: $secondary-color;
+  // background: $secondary-color;
+  background: $cyan;
   color: $white;
 
   .c-course-card__likes {
@@ -89,13 +103,16 @@
   }
 
   .c-button--course {
-    background: $secondary-alt;
+    // background: $secondary-alt;
+    background: $white;
     color: $white;
   }
 }
 
+// color cambiado
 .c-course-card--warning {
-  background: $warning-color;
+  // background: $warning-color;
+  background: $warning-alt;
   color: $black;
 
   .c-course-card__likes {
@@ -103,7 +120,8 @@
   }
 
   .c-button--course {
-    background: $warning-light;
+    // background: $warning-light;
+    background: $white;
     color: $black;
   }
 
@@ -113,8 +131,10 @@
   }
 }
 
+// color cambiado
 .c-course-card--success {
-  background: $success-color;
+  // background: $success-color;
+  background: $limon;
   color: $white;
 
   .c-course-card__likes {
@@ -122,7 +142,8 @@
   }
 
   .c-button--course {
-    background: $success-alt;
+    // background: $success-alt;
+    background: $white;
     color: $white;
   }
 }
@@ -136,13 +157,40 @@
   }
 
   .c-button--course {
-    background: $primary-light;
+    // background: $primary-light;
+    background: $white;
     color: $white;
   }
 }
 
 .c-course-card--dark {
   background: $dark;
+  color: $white !important;
+
+  .c-course-card__content {
+    color: $white;
+  }
+
+  .c-course-card__likes {
+    color: $white !important;
+  }
+
+  .c-button--course {
+    background: $dark;
+    color: $primary-color !important;
+    font-size: 13px;
+  }
+
+  .c-course-card__footer {
+    background: $primary-color;
+    color: $white;
+    padding: 0.8rem 0.5rem;
+  }
+}
+
+// nuevo color
+.c-course-card--magenta {
+  background: $magenta;
   color: $white;
 
   .c-course-card__likes {
@@ -150,13 +198,8 @@
   }
 
   .c-button--course {
-    background: $dark;
-    color: $warning-alt;
-  }
-
-  .c-course-card__footer {
-    background: $warning-alt;
-    color: $dark;
+    background: $white;
+    color: $white;
   }
 }
 

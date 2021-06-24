@@ -206,6 +206,17 @@
     }
   }
 
+  &--mab-white-black {
+    background: $white;
+    color: $dark;
+
+    &:hover,
+    &:focus {
+      color: $dark;
+      background-color: $white;
+    }
+  }
+
   &--primary-alt-white {
     background: $primary-alt;
     color: $white;

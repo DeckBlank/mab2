@@ -6,7 +6,7 @@
 
 {% block content %}
   <section class="c-section c-section--my-courses">
-    <div class="c-banner bg-warning mab-shadow">
+    <div class="c-banner bg-cyan mab-shadow">
       <div class="grid-container">
         <div class="grid-x grid-margin-x grid-margin-y align-middle">
           <div class="cell large-4">
@@ -16,7 +16,7 @@
                 <span class="dark text-uppercase">${userName}!</span>
               </h1> 
               <p class="dark f2 fs-25 lh-25">
-                En <strong class="w-xbold">MAB</strong>, estamos orgullosos de que hayas decidido girar tu educación
+                En MAB, estamos orgullosos de que hayas decidido girar tu educación
               </p> 
             </div>
           </div> 
@@ -32,12 +32,12 @@
 
     <div class="c-mab-resume padding-top-2">
       <div class="grid-container padding-vertical-3">
-        <div class="bg-pri-color br--large mab-shadow">
+        <div class="br-bottom-0-0 bg-pri-color br--large mab-shadow">
           <div class="grid-x align-middle">
             <div class="cell large-5">
               <div class="c-mab-resume__content">
                 <h3 class="white fs-40 lh-50">¿Sabías que este proyecto nació en un garaje?</h3>
-                <p class="white fs-18 f2">
+                <p class="white fs-18 f2 margin-bottom-2">
                   Luego de varios años dando clases
                   particulares a niños y niñas de diferentes
                   colegios privados de Lima, Macarena
@@ -45,13 +45,13 @@
                   el objetivo de disminuir brechas sociales,
                   educativas y tecnológicas en el país.
                 </p>
-                <a href="{{site.url}}/nosotros" class="c-link c-link--warning f2 w-bold fs-21">Ver más</a>
+                <a href="{{site.url}}/nosotros" class="c-link dark c-link--ho-dark bg-white f2 w-bold fs-18 c-box-round-btn">Ver más</a>
               </div>
             </div>
             <div class="cell large-7">
               <div class="position-relative flex-container align-center">
                 <img src="{{ theme.link }}/static/images/courses/mine/photo.png" alt="" class="c-mab-resume__photo position-absolute of--contain">
-                <img src="{{ theme.link }}/static/images/courses/mine/resume.png" alt="" class="br--large of--contain position-relative"> 
+                <img src="{{ theme.link }}/static/images/courses/mine/resume.png" alt="" class="principal-img br--large of--contain position-relative"> 
                 <img src="{{ theme.link }}/static/images/courses/mine/circle.png" alt="" class="c-banner__heart position-absolute of--contain">  
               </div>
             </div>
@@ -63,8 +63,8 @@
     <div class="c-mab-continue padding-top-2">
       <div class="grid-container padding-vertical-3">
         <h2 class="margin-bottom-2">
-          <p class="dark fs-50 lh-40 margin-bottom-0">continúa tu aprendizaje</p>
-          <p class="dark fs-25 margin-bottom-0 f2 text-uppercase">tus cursos</p> 
+          <p class="dark fs-50 lh-40 margin-bottom-0 text-center">continúa tu aprendizaje</p>
+          <p class="dark fs-25 margin-bottom-0 f2 text-uppercase text-center">tus cursos</p> 
         </h2>
         <div v-if="isLoadingEnroll">
           <div class="c-loader c-loader--full active">
@@ -129,11 +129,11 @@
       </div>
     </div>
 
-    <div class="c-mab-recommended padding-top-2">
-      <div class="grid-container padding-vertical-3">
+    <div class="c-mab-recommended">
+      <div class="grid-container padding-bottom-3">
         <h2 class="margin-bottom-2">
-          <p class="dark fs-50 lh-40 margin-bottom-0">cursos recomendados</p>
-          <p class="dark fs-25 margin-bottom-0 f2 text-uppercase">según tus intereses</p> 
+          <p class="dark fs-50 lh-40 margin-bottom-0 text-center">cursos recomendados</p>
+          <p class="dark fs-25 margin-bottom-0 f2 text-uppercase text-center">según tus intereses</p> 
         </h2>
 
         <div v-if="isLoadingRecommended">
@@ -178,8 +178,8 @@
                         <span class="c-course-card__likes f2"><i class="fas fa-heart mr-05"></i>${ course.likes }</span>
                       </div>
                       <div class="small-7 medium-7 text-right">
-                        <span v-if="course.enroll" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">Inscrito</span>
-                        <button v-else-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                        <span v-if="course.enroll" class="c-button c-button--mab-white-black lh-14 f2 w-xbold">Inscrito</span>
+                        <button v-else-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-white-black lh-14 f2 w-xbold">
                           S/ ${ Number(course.price).toFixed(2) } 
                           <i class="fas fa-shopping-cart"></i>
                         </button>
@@ -200,21 +200,21 @@
       </div>
     </div>
 
-    <div class="c-lideres padding-top-3">
+    <div class="c-lideres padding-top-3 bg-warning-alt">
       <div class="grid-container padding-vertical-3">
-        <div class="c-lideres__content mab-shadow bg-pri-alt br--large">
+        <div class="c-lideres__content mab-shadow br--large">
           <h2 class="margin-bottom-1">
-            <p class="white fs-50 c-lh--50 margin-bottom-0">LÍDERES MAB</p>
+            <p class="text-center dark fs-50 c-lh--50 margin-bottom-0">LÍDERES MAB</p>
           </h2>
           <lideres :body="lideres" />
         </div>
       </div>
     </div>
 
-    <div class="c-other-services padding-vertical-3">
+    <div class="c-other-services padding-vertical-3 margin-top-2">
       <div class="grid-container">
-        <div class="c-other-services__content mab-shadow bg-sec-color padding-vertical-3 br--large">
-          <h3 class="c-other-services__title white fs-40 lh-50">otros servicios sincrónicos</h3>
+        <h3 class="c-other-services__title dark text-center  fs-50 c-lh--50 margin-bottom-3">otros servicios sincrónicos</h3>
+        <div class="c-other-services__content mab-shadow bg-orange padding-vertical-3 br--large">
           <div class="c-slider">
             <div class="c-slider swiper-container margin-bottom-2">
               <div class="swiper-wrapper">
@@ -222,8 +222,8 @@
                   <div class="grid-x align-middle">
                     <div class="cell large-7">
                       <div class="c-other-services__info margin-bottom-2">
-                        <p class="warning f2 fs-35 w-xbold">MAB Académico</p>
-                        <ul class="white fs-18 f2">
+                        <p class="white fs-40 w-xbold">MAB Académico</p>
+                        <ul class="white fs-18 f2 margin-bottom-2">
                           <li>Tutorías personalizadas de todos
                             los cursos
                           </li>
@@ -244,7 +244,7 @@
                             Prueba Starter
                           </li>
                         </ul>
-                        <a href="https://www.mablovers.com/mab-acadmico" class="c-link c-link--warning f2 w-bold fs-21">Conocer más</a>
+                        <a href="https://www.mablovers.com/mab-acadmico" class="c-link dark c-link--ho-dark bg-white f2 w-bold fs-18 c-box-round-btn">Conocer más</a>
                       </div>
                     </div>
                     <div class="cell large-5">
@@ -259,8 +259,8 @@
                   <div class="grid-x align-middle">
                     <div class="cell large-7">
                       <div class="c-other-services__info margin-bottom-2">
-                        <p class="warning f2 fs-35 w-xbold">MAB Emocional</p>
-                        <ul class="white fs-18 f2">
+                        <p class="white fs-35 w-xbold">MAB Emocional</p>
+                        <ul class="white fs-18 f2 margin-bottom-2">
                           <li>Coaching vocacional (orientación
                             vocacional)
                           </li>
@@ -281,7 +281,7 @@
                             Talleres de Habilidades para la vida, Soft Skills y más
                           </li>
                         </ul>
-                        <a href="{{ site.url }}/psicologos" class="c-link c-link--warning f2 w-bold fs-21">Conocer más</a>
+                        <a href="{{ site.url }}/psicologos" class="c-link dark c-link--ho-dark bg-white f2 w-bold fs-18 c-box-round-btn">Conocer más</a>
                       </div>
                     </div>
                     <div class="cell large-5">
@@ -296,8 +296,8 @@
                   <div class="grid-x align-middle">
                     <div class="cell large-7">
                       <div class="c-other-services__info margin-bottom-2">
-                        <p class="warning f2 fs-35 w-xbold">MAB 360</p>
-                        <ul class="white fs-18 f2">
+                        <p class="white fs-35 w-xbold">MAB 360</p>
+                        <ul class="white fs-18 f2 margin-bottom-2">
                           <li>Arte & creatividad</li>
                           <li>
                             Métodos de estudio
@@ -318,7 +318,7 @@
                             Tecnología
                           </li>
                         </ul>
-                        <a href="https://www.mablovers.com/mab-360" class="c-link c-link--warning f2 w-bold fs-21">Conocer más</a>
+                        <a href="https://www.mablovers.com/mab-360" class="c-link dark c-link--ho-dark bg-white f2 w-bold fs-18 c-box-round-btn">Conocer más</a>
                       </div>
                     </div>
                     <div class="cell large-5">
@@ -333,8 +333,8 @@
                   <div class="grid-x align-middle">
                     <div class="cell large-7">
                       <div class="c-other-services__info margin-bottom-2">
-                        <p class="warning f2 fs-35 w-xbold">Nuestros programas</p>
-                        <ul class="white fs-18 f2">
+                        <p class="white fs-35 w-xbold">Nuestros programas</p>
+                        <ul class="white fs-18 f2 margin-bottom-2">
                           <li>MAB Empresas</li>
                           <li>
                             MAB Socia
@@ -349,7 +349,7 @@
                             MAB Click
                           </li>
                         </ul>
-                        <a href="https://www.mablovers.com/programas" class="c-link c-link--warning f2 w-bold fs-21">Conocer más</a>
+                        <a href="https://www.mablovers.com/programas" class="c-link dark c-link--ho-dark bg-white f2 w-bold fs-18 c-box-round-btn">Conocer más</a>
                       </div>
                     </div>
                     <div class="cell large-5">
@@ -365,9 +365,9 @@
             <div class="c-slider__pagination swiper-pagination"></div>
           </div>
         </div>
-        <a href="https://api.whatsapp.com/send?phone=51{{ information.phone|replace({' ': ''}) }}" target="_blank" class="c-ws position-relative bg-warning br--large dark w-xbold f2 fs-21 display-block">
-          <img src="{{ theme.link }}/static/images/courses/mine/whatsapp.png" alt="" class="position-absolute"> 
-          <span>
+        <a href="https://api.whatsapp.com/send?phone=51{{ information.phone|replace({' ': ''}) }}" target="_blank" class="c-ws position-relative bg-sec-color white w-xbold f2 fs-18 flex-container align-middle">
+          <img src="{{ theme.link }}/static/images/courses/mine/whatsapp.png" alt="" class=""> 
+          <span class="padding-left-1">
             Escríbenos para
             tener acceso
           </span>

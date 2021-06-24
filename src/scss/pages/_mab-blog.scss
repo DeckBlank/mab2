@@ -17,7 +17,7 @@
     outline: none;
 
     .c-blog {
-      padding-bottom: 10rem;
+      padding-bottom: 0;
 
       &__float-figure {
         display: block;
@@ -25,19 +25,23 @@
         height: 270px;
 
         &.f1 {
-          top: -175px;
+          top: 310px;
           right: -5rem;
         }
 
         &.f2 {
-          top: 375px;
+          top: 175px;
           left: -8rem;
-          transform: rotate(-8deg);
+          // transform: rotate(-8deg);
         }
 
         &.f3 {
-          top: 920px;
-          right: -8rem;
+          margin-top: -16rem;
+          bottom: 0;
+          right: 0;
+          width: 50%;
+          height: auto;
+          margin-left: 50%;
         }
 
         &.f4 {

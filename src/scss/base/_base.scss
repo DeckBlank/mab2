@@ -139,6 +139,10 @@ body {
   display: block;
 }
 
+.d-inline-block {
+  display: inline-block;
+}
+
 .lh-40 {
   line-height: 43px;
 }
@@ -303,13 +307,27 @@ body {
   color: $dark !important;
 }
 
+.c-box-round-btn {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  padding: 0.3rem 1rem;
+}
+
 // fondos
 .bg-orange {
   background-color: $orange;
 }
 
+.bg-magenta {
+  background-color: $magenta;
+}
+
 .bg-cyan {
   background: $cyan;
+}
+
+.bg-limon {
+  background: $limon;
 }
 
 // colores
