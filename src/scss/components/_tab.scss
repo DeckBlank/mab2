@@ -11,9 +11,12 @@
       left: calc(50% - 125px);
       width: 250px;
       height: 2px;
-      background: $secondary-color;
       opacity: 0;
       transition: all 0.5s;
+    }
+
+    &__title.pri-color::after {
+      background: $primary-color;
     }
 
     &__title.small::after {
@@ -21,8 +24,8 @@
       width: 130px;
     }
 
-    &__title.active {
-      color: $secondary-color;
+    &__title.pri-color.active {
+      color: $primary-color;
     }
 
     &__title.active::after {
@@ -61,7 +64,7 @@
   }
 
   &__shade {
-    background: rgba($color: $secondary-color, $alpha: 0.8);
+    background: rgba($color: $dark, $alpha: 0.8);
     top: 0;
     left: 0;
     padding-right: 0.3rem;

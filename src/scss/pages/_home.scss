@@ -217,7 +217,7 @@
 @include breakpoint(large) {
   .c-section--home {
     .c-player {
-      padding: 5rem 0;
+      padding: 1rem 0 2rem;
 
       &__logo {
         // height: 300px;
@@ -244,7 +244,7 @@
     }
 
     .c-metodology {
-      padding: 5rem 0;
+      padding: 3rem 0;
 
       .c-advantages {
         p {
@@ -259,7 +259,7 @@
     }
 
     .c-features {
-      padding: 5rem 0;
+      padding: 3rem 0;
     }
 
     .c-testimony {

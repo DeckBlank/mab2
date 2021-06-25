@@ -21,7 +21,15 @@
       }
 
       &__figure {
-        width: 70%;
+        width: 100%;
+      }
+    }
+
+    .c-mab-modal {
+      .c-mab-modal-content {
+        &__title {
+          font-size: $fs-30;
+        }
       }
     }
   }

@@ -237,6 +237,36 @@
     }
   }
 
+  &--cyan {
+    background: $cyan;
+    color: $dark;
+    border-radius: 22px !important;
+
+    &:hover {
+      color: $dark;
+    }
+  }
+
+  &--warning-alt-dark {
+    background: $warning-alt;
+    color: $dark;
+    border-radius: 22px !important;
+
+    &:hover {
+      color: $dark;
+    }
+  }
+
+  &--primary-dark {
+    background: $primary-color;
+    color: $dark;
+    border-radius: 22px !important;
+
+    &:hover {
+      color: $dark;
+    }
+  }
+
   &--dark-white {
     background: $dark;
     color: $white;
