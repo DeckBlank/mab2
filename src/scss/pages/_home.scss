@@ -1,7 +1,7 @@
 .c-section--home {
   .c-banner {
     &__logo {
-      height: 80px;
+      height: 70px;
     }
 
     &__title {
@@ -15,16 +15,22 @@
 
   .c-player {
     &__logo {
-      height: 200px;
+      // height: 200px
+      height: 100px;
+      width: 80%;
     }
 
     &__video {
-      left: -1.5%;
+      // left: -1.5%;
+      left: -0.5%;
       right: 0;
-      top: 4.5%;
+      // top: 4.5%;
+      top: 21%;
       margin: auto;
-      width: 90%;
-      height: 65%;
+      // width: 90%;
+      width: 55%;
+      // height: 65%;
+      height: 61%;
     }
   }
 
@@ -34,10 +40,12 @@
     }
 
     .c-card-advantage {
-      @include box-shadow(center, rgba($primary-dark, 0.9));
+      // @include box-shadow(center, rgba($primary-dark, 0.9));
+      @include box-shadow(center, rgba($black, 0.2));
+
 
       &__vector {
-        height: 70px;
+        height: 120px;
       }
     }
   }
@@ -50,8 +58,8 @@
 
     &__content {
       padding: 2rem;
-      padding-top: 3rem;
-      padding-bottom: 8rem;
+      padding-top: 4rem;
+      padding-bottom: 2rem;
 
       &:before {
         content: "";
@@ -70,7 +78,8 @@
     }
 
     &__avatar {
-      left: 0;
+      // left: 0;
+      left: calc(50% - 40px);
       top: 0;
       width: 80px;
       height: 80px;
@@ -81,9 +90,11 @@
     &__about {
       right: 0;
       bottom: 0;
-      width: 170px;
-      height: 170px;
-      border-radius: 5000px;
+      padding: 1rem;
+      // width: 170px;
+      // height: 170px;
+      // border-radius: 5000px;
+      
     }
 
     &__flag {
@@ -158,6 +169,7 @@
           left: -80px;
           top: 0;
           z-index: -1;
+          display: none;
         }
       }
     }
@@ -205,8 +217,12 @@
 @include breakpoint(large) {
   .c-section--home {
     .c-player {
+      padding: 5rem 0;
+
       &__logo {
-        height: 300px;
+        // height: 300px;
+        height: auto;
+        width: 100%;
       }
     }
 
@@ -228,10 +244,13 @@
     }
 
     .c-metodology {
+      padding: 5rem 0;
+
       .c-advantages {
         p {
-          line-height: 28px;
-          height: calc(100% - 80px);
+          line-height: 26px;
+          // height: calc(100% - 80px);
+          height: calc(100% - 130px);
           display: flex;
           justify-content: center;
           align-items: center;
@@ -239,22 +258,35 @@
       }
     }
 
+    .c-features {
+      padding: 5rem 0;
+    }
+
     .c-testimony {
       padding-right: 4rem;
       padding-bottom: 4rem;
+      
+      .quotes {
+        width: 80px;
+      }
 
       &__avatar {
         width: 110px;
         height: 110px;
+        left: calc(50% - 70px);
       }
 
       &__content {
-        padding-top: 5rem;
+        padding-top: 6rem;
 
         &::before {
           bottom: -25px;
         }
       }
+    }
+
+    .c-lideres {
+      padding: 5rem 0;
     }
 
     .c-brands {
@@ -263,14 +295,24 @@
           height: 250px;
         }
       }
+      
+      &__3,
+      &__4 {
+        height: 280px !important;
+      }
 
       &__mixing {
-        bottom: 40px;
-        width: 400px;
+        // bottom: 40px;
+        // width: 400px;
+
+        bottom: 185px;
+        width: 230px;
       }
     }
 
     .c-faq {
+      padding: 5rem 0 0 ;
+
       &__container {
         margin-bottom: -200px;
       }

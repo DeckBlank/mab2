@@ -330,7 +330,15 @@ body {
   background: $limon;
 }
 
+.bg-indigo {
+  background: $indigo;
+}
+
 // colores
+
+.cyan {
+  color: $cyan;
+}
 
 @include breakpoint(large) {
   .desktop {
