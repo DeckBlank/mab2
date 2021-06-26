@@ -23,4 +23,25 @@
     width: 130px;
     height: 130px;
   }
+
+  .c-section--access {
+    .c-nube {
+      width: 180px;
+      margin-bottom: 4rem;
+    }
+
+    .c-access-img {
+      align-items: flex-end;
+      justify-content: space-between;
+
+      .c-nube {
+        width: 180px;
+        margin-top: 10rem;
+      }
+
+      .c-cohete {
+        width: 80%;
+      }
+    }
+  }
 }

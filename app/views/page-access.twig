@@ -17,14 +17,28 @@
                   alt="">
                 <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
                   <div class="c-cover-gradient__top width-100  flex-container padding-1 padding-horizontal-2">
-                    <div class="c-corner-logo">
+                    <!-- <div class="c-corner-logo">
                       <img v-if="false" loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
+                    </div> -->
+                    <div class="c-corner-text text-left f2 w-bold">
+                      <div class="w-xbold">
+                        ${ gallery.login.author.name }
+                      </div>
+                      ${ gallery.login.author.job }
                     </div>
-                    <div class="c-corner-text text-right f2 w-bold">
-                      ${ gallery.login.author.name } <br> ${ gallery.login.author.job }
+
+                    <div class="c-corner-text text-right w-bold">
+                      <div class="c-corner-title">
+                        <span class="pri-color">¡Hola!</span>
+                        <p class="dark">
+                          qué gusto <br>
+                          verte por <br>
+                          aquí de nuevo
+                        </p>
+                      </div>
                     </div>
                   </div>
-                  <h1 class="c-cover-gradient__bottom width-100 padding-2 margin-bottom-0">
+                  <h1 v-if="false" class="c-cover-gradient__bottom width-100 padding-2 margin-bottom-0">
                     <div class="grid-x">
                       <div class="cell medium-8 large-10">
                         <div class="c-gradient-title" v-html="gallery.login.title"></div>
@@ -43,12 +57,24 @@
                   alt="">
                 <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
                   <div class="c-cover-gradient__top width-100  flex-container padding-1 padding-horizontal-2">
-                    <div></div>
                     <div class="c-corner-text text-right f2 w-bold">
                       ${ gallery.register.author.name } <br> ${ gallery.register.author.job }
                     </div>
+
+                    <div class="c-corner-text text-right w-bold">
+                      <div class="c-corner-title">
+                        <span class="pri-color">¡Hola, <br>
+                          SOY MACA!</span>
+                        <p class="dark">
+                          ¿ESTÁS LISTO <br>
+                          PARA GIRAR LA <br>
+                          EDUCACIÓN?
+                        </p>
+                      </div>
+                    </div>
+
                   </div>
-                  <h1 class="c-cover-gradient__bottom width-100 padding-2 margin-bottom-0">
+                  <h1 v-if="false" class="c-cover-gradient__bottom width-100 padding-2 margin-bottom-0">
                     <div class="grid-x">
                       <div class="cell medium-8 large-10">
                         <div class="c-gradient-title" v-html="gallery.register.title"></div>
@@ -71,9 +97,9 @@
                       <img loading="lazy" class="height-100 of--contain" :src="'{{theme.link}}/static/images/' + gallery.steps[0].sticker" alt="">
                     </div>
                   </div>
-                  <h1 class="c-cover-gradient__bottom width-100 padding-2 padding-top-3 margin-bottom-0">
-                    <div class="grid-x align-right">
-                      <div class="cell medium-8 large-10 text-right margin-top-2">
+                  <h1 class="c-cover-gradient__bottom c-cover-gradient__bottom-primary width-100 padding-2 padding-top-3 margin-bottom-0">
+                    <div class="grid-x">
+                      <div class="cell medium-8 large-10 margin-top-2">
                         <div class="c-gradient-title" v-html="gallery.steps[0].title"></div>
                       </div>
                     </div>
@@ -95,7 +121,7 @@
                       ${ gallery.steps[1].author.name } <br> ${ gallery.steps[1].author.job }
                     </div>
                   </div>
-                  <h1 class="c-cover-gradient__bottom width-100 padding-2 padding-top-3 margin-bottom-0">
+                  <h1 class="c-cover-gradient__bottom c-cover-gradient__bottom-limon width-100 padding-2 padding-top-3 margin-bottom-0">
                     <div class="grid-x">
                       <div class="cell medium-8 large-10 margin-top-2">
                         <div class="c-gradient-title" v-html="gallery.steps[1].title"></div>
@@ -156,11 +182,11 @@
                       <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
                         <div class="c-cover-gradient__top width-100  flex-container padding-1 padding-horizontal-2">
                           <div class="c-corner-logo"></div>
-                          <div class="c-corner-text text-rigth f2 w-bold">
+                          <div class="c-corner-text text-rigth f2 w-bold i-white">
                             ${ slide.author.name }
                           </div>
                         </div>
-                        <h1 class="c-cover-gradient__bottom width-100 padding-2 padding-top-3 margin-bottom-0">
+                        <h1 class="c-cover-gradient__bottom c-cover-gradient__bottom-orange width-100 padding-2 padding-top-3 margin-bottom-0">
                           <div class="grid-x">
                             <div class="cell medium-8 large-10 margin-top-2">
                               <div class="c-gradient-title" v-html="slide.title"></div>
@@ -179,38 +205,39 @@
         <div class="cell large-7">
           <div class="c-split-layout__content">
             <transition name="fade" mode="out-in">
-              <div v-if="view == 'login'" key="r-login" class="c-split-layout-content c-split-layout-content--secondary">
+              <div v-if="view == 'login'" key="r-login" class="c-split-layout-content c-split-layout-content--cyan">
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
-                    <div class="grid-x align-center">
+                    <div class="grid-x align-center ">
                       <div class="cell large-6">
-                        <h1 class="c-split-layout-content__title margin-bottom-2 white fs-35 c-lh--35">
-                          <span class="warning fs-30">inicia sesión</span><br>
+                        <img class="c-nube c-nube--left desktop" src="{{theme.link}}/static/images/access/nube.png" alt="">
+                        <h1 class="c-split-layout-content__title margin-bottom-2 dark fs-35 c-lh--35">
+                          <span class="white fs-30">inicia sesión</span><br>
                           y continúa creciendo con nosotros
                         </h1>
 
                         <form @submit="login($event)" class="c-form-new text-left margin-top-1" action="">
                           <div class="c-form-new__input-container margin-bottom-1">
-                            <label class="w-bold f2 white" for="">Ingresa tu correo electrónico</label>
+                            <label class="w-bold f2 dark" for="">Ingresa tu correo electrónico</label>
                             <input v-model="user.email.value" class="f2 input-reset" type="text">
                             <p v-if="isWrongField('email')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
                               Correo vacío o no válido
                             </p>
                           </div>
                           <div class="c-form-new__input-container margin-bottom-1">
-                            <label class="w-bold f2 white" for="">Contraseña</label>
+                            <label class="w-bold f2 dark" for="">Contraseña</label>
                             <input v-model="user.password.value" class="f2 input-reset" type="password">
                             <p v-if="isWrongField('password')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
                               Contraseña vacía
                             </p>
                           </div>
 
-                          <a :href="SITE_URL + '/recuperar-contrasena'" class="c-link c-link--warning f2 text-left w-medium w-bold display-block">¿Olvidaste tu contraseña?</a>
+                          <a :href="SITE_URL + '/recuperar-contrasena'" class="c-link c-link--ho-dark white f2 text-left w-medium w-bold display-block">¿Olvidaste tu contraseña?</a>
                           <div v-if="user.error" class="margin-top-2 bg-pri-color white br--medium f2 text-left w-medium padding-1">${ user.error }</div>
 
                           <button
                             :disabled="(user.loading) ? true : false"
-                            class="c-button c-button--warning width-100 f2 margin-top-1"
+                            class="c-button c-button--primary width-100 f2 margin-top-1"
                             :class="{'loading' : user.loading}">Ingresar</button>
                         </form>
                         <div class="margin-vertical-2 text-center f2 fs-18 white w-bold">
@@ -228,59 +255,66 @@
                             <span class="f2">Continuar con Google</span>
                           </span>
                         </button>
-                        <div class="c-label-login warning f2 margin-top-1">
-                          ¿Aún no tienes cuenta? <a :href="SITE_URL + '/access?auth=register'" class="c-link c-link--warning w-bold">Regístrate</a>
+                        <div class="c-label-login white f2 margin-top-1">
+                          ¿Aún no tienes cuenta? <a :href="SITE_URL + '/access?auth=register'" class="c-link c-link--ho-dark white w-bold">Regístrate</a>
+                        </div>
+                      </div>
+                      <div class="cell large-4">
+                        <div class="c-access-img height-100 flex-container flex-dir-column align-ends">
+                          <img class="c-nube c-nube--right desktop" src="{{theme.link}}/static/images/access/nube.png" alt="">
+                          <img class="c-cohete desktop" src="{{theme.link}}/static/images/access/cohete.png" alt="">
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div v-else-if="view == 'register'" key="r-register" class="c-split-layout-content c-split-layout-content--secondary">
+              <div v-else-if="view == 'register'" key="r-register" class="c-split-layout-content c-split-layout-content--cyan">
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
                     <div class="grid-x align-center">
                       <div class="cell large-6">
+                        <img class="c-nube c-nube--left desktop" src="{{theme.link}}/static/images/access/nube.png" alt="">
                         <h1 class="c-split-layout-content__title margin-bottom-3 white">
-                          <span class="small-title">Conviértete en un/una</span>
-                          <div class="warning big-title">#MABLover</div> 
+                          <span class="">Conviértete en un/una</span>
+                          <div class="dark big-title">#MABLover</div> 
                         </h1>
                         <button @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
                           <span class="content">
                             <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
-                            <span class="f2">Regístrate con Facebook</span>
+                            <span class="f2">Continuar con Facebook</span>
                           </span>
                         </button>
                         <button @click="authWithGoogle" class="c-btn-input-social w-medium width-100">
                           <span class="content">
                             <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
-                            <span class="f2">Regístrate con Google</span>
+                            <span class="f2">Continuar con Google</span>
                           </span>
                         </button>
                         <form @submit="register($event)" class="c-form-new text-left margin-top-2">
                           <div class="c-form-new__input-container margin-bottom-1">
-                            <label class="w-bold f2 white" for="">Ingresa tu correo electrónico</label>
+                            <label class="w-bold f2 dark" for="">Ingresa tu correo electrónico</label>
                             <input v-model="user.email.value" class="f2" type="text">
                             <p v-if="isWrongField('email')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
                               Correo vacío o no válido
                             </p>
                           </div>
                           <div class="c-form-new__input-container margin-bottom-1">
-                            <label class="w-bold f2 white" for="">Contraseña</label>
+                            <label class="w-bold f2 dark" for="">Contraseña</label>
                             <input v-model="user.password.value" class="f2" type="password">
                             <p v-if="isWrongField('password')" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
                               Contraseña vacía o muy débil (+5 caracteres)
                             </p>
                           </div>
                           <div class="c-form-new__input-container margin-bottom-1">
-                            <label class="w-bold f2 white" for="">Confirma tu contraseña</label>
+                            <label class="w-bold f2 dark" for="">Confirma tu contraseña</label>
                             <input v-model="user.passwordConfirm.value" class="f2 input-reset" type="password">
                             <p v-if="isWrongField('passwordConfirm') && user.password.value.length >= 5" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white ">
                               ${ (!user.passwordConfirm.value.length) ? 'Contraseña vacía' : 'Las contraseñas no coiciden' }
                             </p>
                           </div>
                           <div class="c-form-new__terminos">
-                            <input v-model="user.terms" type="checkbox" value="acepted" /> <a href="#" @click="openTerms($event)" class="f2 warning"> He leido y acepto los <span class="w-sbold">términos y condiciones</span></a>
+                            <input v-model="user.terms" type="checkbox" value="acepted" /> <a href="#" @click="openTerms($event)" class="f2 white c-link--ho-dark"> He leido y acepto los <span class="w-sbold">términos y condiciones</span></a>
                           </div>
                           <p v-if="isWrongField('terms', false)" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
                             Debes aceptar los Términos y Condiciones
@@ -290,11 +324,17 @@
 
                           <button
                             :disabled="(user.loading) ? true : false"
-                            class="c-button c-button--warning width-100 f2 margin-top-3"
+                            class="c-button c-button--primary width-100 f2 margin-top-3"
                             :class="{'loading' : user.loading}">Registrarse</button>
                         </form>
-                        <div class="c-label-login warning f2 margin-top-1">
-                          ¿Ya tienes una cuenta? <a :href="SITE_URL + '/access'" class="c-link--warning w-bold warning ">Inicia sesión</a>
+                        <div class="c-label-login white f2 margin-top-1">
+                          ¿Ya tienes una cuenta? <a :href="SITE_URL + '/access'" class="c-link--ho-dark w-bold white ">Inicia sesión</a>
+                        </div>
+                      </div>
+                      <div class="cell large-4">
+                        <div class="c-access-img height-100 flex-container flex-dir-column align-ends">
+                          <img class="c-nube c-nube--right desktop" src="{{theme.link}}/static/images/access/nube.png" alt="">
+                          <img class="c-cohete desktop" src="{{theme.link}}/static/images/access/cohete.png" alt="">
                         </div>
                       </div>
                     </div>
@@ -310,8 +350,8 @@
                         <div class="grid-x grid-margin-x grid-margin-y align-center">
                           <div class="cell large-10">
                             <h2 class="c-split-layout-content__title margin-bottom-2 white c-lh--40">
-                              <span class="warning">¿a qué sector educativo</span>
-                              <span class="warning">perteneces?</span>     
+                              <span class="dark">¿a qué sector educativo</span>
+                              <span class="dark">perteneces?</span>     
                             </h2>
                           </div>
                           <div class="cell large-6 align-self-stretch">
@@ -340,27 +380,27 @@
                     </div>
                   </div>
                 </div>
-                <div class="width-100 padding-3">
+                <div class="width-100 padding-3 arrows">
                   <div class="grid-x align-center">
                     <div class="cell small-6 medium-5 large-5 text-left">
-                      <button class="c-button c-button--warning-alert c-button--arrow w-xbold " @click="prevStep(-1)"> < Anterior</button>
                     </div>
                     <div class="cell small-6 medium-5 large-5 text-right">
-                      <button class="c-button c-button--warning-alert c-button--arrow w-xbold " @click="nextStep(1)">Siguiente ></button>
+                      <button class="c-button c-button--warning-alert c-button--arrow w-xbold margin-right-1" @click="prevStep(-1)"> <</button>
+                      <button class="c-button c-button--warning-alert c-button--arrow w-xbold " @click="nextStep(1)">></button>
                     </div>
                   </div>
                 </div>
               </div>
-              <div v-else-if="view == 'step-1'" key="r-step-1" class="c-split-layout-content column-between c-split-layout-content--primary">
+              <div v-else-if="view == 'step-1'" key="r-step-1" class="c-split-layout-content column-between c-split-layout-content--limon">
                 <div></div>
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
                     <div class="grid-x align-center">
                       <div class="cell large-10">
                         <h2 class="c-split-layout-content__title white margin-top-3 margin-bottom-0">
-                          <span class="warning">¡Queremos conocerte mejor!</span>     
+                          <span class="white">¡Queremos conocerte mejor!</span>     
                         </h2>
-                        <h3 class="c-split-layout-content__subtitle margin-bottom-2 white fs-30 lh-30">
+                        <h3 class="c-split-layout-content__subtitle margin-bottom-2 dark fs-30 lh-30">
                           completa los siguientes datos     
                         </h3>
                         <form class="c-form-new c-form-new--warning text-left margin-top-2" action="">
@@ -448,12 +488,11 @@
                 <div class="width-100 padding-3">
                   <div class="grid-x align-center">
                     <div class="cell small-6 medium-3 large-3 text-left">
-                      <button class="c-button c-button--warning-primary c-button--arrow w-xbold " @click="prevStep(0)"> < Anterior</button>
                     </div>
                     <div class="cell medium-4 large-4 desktop">
                       <div class="c-bullet-steps text-center">
                         <div class="c-bullet-steps__bullets">
-                          <span class="bg-warning"></span>
+                          <span class="bg-dark"></span>
                           <span class="bg-white"></span>
                           <span class="bg-white"></span>
                           <span class="bg-white"></span>
@@ -463,13 +502,14 @@
                         </div>
                       </div>
                     </div>
-                    <div class="cell small-6 medium-3 large-3 text-right">
-                      <button class="c-button c-button--warning-primary c-button--arrow w-xbold " @click="nextStep(2)">Siguiente ></button>
+                    <div class="cell small-6 medium-3 large-3 text-right arrows">
+                      <button class="c-button c-button--warning-primary c-button--arrow w-xbold margin-right-1" @click="prevStep(0)"> <</button>
+                      <button class="c-button c-button--warning-primary c-button--arrow w-xbold " @click="nextStep(2)">></button>
                     </div>
                   </div>
                 </div>
               </div>
-              <div v-else-if="view == 'step-2'" key="r-step-2" class="c-split-layout-content column-between c-split-layout-content--success">
+              <div v-else-if="view == 'step-2'" key="r-step-2" class="c-split-layout-content column-between c-split-layout-content--warning">
                 <div></div>
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
@@ -478,12 +518,12 @@
                         <div class="grid-x align-center">
                           <div class="cell large-8">
                             <h2 class="c-split-layout-content__title margin-bottom-2 white margin-top-3 c-lh--40">
-                              Buscamos adaptarnos a
-                              <span class="warning">tus necesidades</span> 
+                              Buscamos adaptarnos a <br>
+                              <span class="dark">tus necesidades</span> 
                             </h2>
                           </div>
                         </div>
-                        <h4 class="white margin-bottom-2 f2 w-sbold text-left fs-21">Actualmente, soy...</h4>
+                        <h4 class="dark margin-bottom-2 f2 w-sbold text-left fs-21">Actualmente, soy...</h4>
                         <div class="grid-x grid-margin-y grid-margin-x grid-padding-y align-center">
                           <div class="cell medium-6 large-6 align-self-stretch">
                             <input v-model="user.role.type" id="role-tutor" type="radio" value="tutor" class="hide" />
@@ -582,30 +622,30 @@
                 <div class="width-100 padding-3">
                   <div class="grid-x align-center">
                     <div class="cell small-6 medium-3 large-3 text-left">
-                      <button class="c-button c-button--warning-success c-button--arrow w-xbold " @click="prevStep(1)"> < Anterior</button>
                     </div>
                     <div class="cell medium-4 large-4 desktop">
                       <div class="c-bullet-steps text-center">
                         <div class="c-bullet-steps__bullets">
                           <span class="bg-white"></span>
-                          <span class="bg-warning"></span>
+                          <span class="bg-dark"></span>
                           <span class="bg-white"></span>
                           <span class="bg-white"></span>
                         </div>
-                        <div class="c-bullet-steps__text f2 fs-21 white">
+                        <div class="c-bullet-steps__text f2 fs-21 dark">
                           Paso 2 de 4
                         </div>
                       </div>
                     </div>
-                    <div class="cell small-6 medium-3 large-3 text-right">
+                    <div class="cell small-6 medium-3 large-3 text-right arrows">
+                      <button class="c-button c-button--warning-success c-button--arrow w-xbold " @click="prevStep(1)"> <</button>
                       <button :disabled="isLoadingStep" class="c-button c-button--warning-success c-button--arrow w-xbold " @click="nextStep(3)">
-                        ${ (isLoadingStep) ? 'Procesando...' : 'Siguiente >' }
+                        ${ (isLoadingStep) ? 'Procesando...' : '>' }
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
-              <div v-else-if="view == 'step-3'" key="r-step-3" class="c-split-layout-content column-between c-split-layout-content--warning">
+              <div v-else-if="view == 'step-3'" key="r-step-3" class="c-split-layout-content column-between c-split-layout-content--dark">
                 <div></div>
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
@@ -613,16 +653,16 @@
                       <div class="cell large-10">
                         <div class="grid-x align-center">
                           <div class="cell large-8">
-                            <h2 class="c-split-layout-content__title margin-bottom-1 dark margin-top-3 c-lh--40">
+                            <h2 class="c-split-layout-content__title margin-bottom-1 white margin-top-3 c-lh--40">
                               ¿Qué áreas de aprendizaje te interesan? 
                             </h2>
                           </div>
                         </div>
-                        <h4 class="white margin-bottom-2 f2 fs-21 w-xbold dark">¡No te olvides de escoger al menos 3 categorías!</h4>
+                        <h4 class="white margin-bottom-2 f2 fs-21 w-bold pri-color">¡No te olvides de escoger al menos 3 categorías!</h4>
                         <div class="grid-x grid-margin-y grid-margin-x align-center">
                           <div v-for="category of categories" :key="category.id" class="cell small-6 medium-3 large-3">
                             <input v-model="user.categories.value" :id="'category-' + category.id" type="checkbox" :value="category.id" class="hide">
-                            <label :for="'category-' + category.id" class="c-mab-category mab-shadow" :class="[{'active' : user.categories.value.includes(category.id)}, 'c-mab-category--' + category.color]">
+                            <label :for="'category-' + category.id" class="c-mab-category" :class="[{'active' : user.categories.value.includes(category.id)}, 'c-mab-category--' + category.color]">
                               <figure class="c-mab-category__img position-relative">
                                 <img class="width-100 height-100 object-cover" loading="lazy" :src="category.thumbnail.url" alt="">
                                 <div class="c-mab-category__gradient position-absolute width-100 height-100">
@@ -642,31 +682,31 @@
                 <div class="width-100 padding-3">
                   <div class="grid-x align-center">
                     <div class="cell small-6 medium-3 large-3 text-left">
-                      <button class="c-button c-button--black-warning c-button--arrow w-xbold " @click="prevStep(2)"> < Anterior</button>
                     </div>
                     <div class="cell medium-4 large-4 desktop">
                       <div class="c-bullet-steps text-center">
                         <div class="c-bullet-steps__bullets">
                           <span class="bg-white"></span>
                           <span class="bg-white"></span>
-                          <span class="bg-dark"></span>
+                          <span class="bg-black"></span>
                           <span class="bg-white"></span>
                         </div>
-                        <div class="c-bullet-steps__text f2 fs-21 black">
+                        <div class="c-bullet-steps__text f2 fs-21 white">
                           Paso 3 de 4
                         </div>
                       </div>
                     </div>
-                    <div class="cell small-6 medium-3 large-3 text-right">
+                    <div class="cell small-6 medium-3 large-3 text-right arrows arrows--white">
+                      <button class="c-button c-button--black-warning c-button--arrow w-xbold  margin-right-1" @click="prevStep(2)"> <</button>
                       <button :disabled="isLoadingStep" class="c-button c-button--black-warning c-button--arrow w-xbold " @click="nextStep(4)">
-                        ${ (isLoadingStep) ? 'Procesando...' : 'Siguiente >' }
+                        ${ (isLoadingStep) ? 'Procesando...' : '>' }
                       </button>
                     </div>
                   </div>
                 </div>
               </div>
               <div v-else-if="view == 'step-4'" key="r-step-4">
-                <div class="c-split-layout-content column-between c-split-layout-content--secondary">
+                <div class="c-split-layout-content column-between c-split-layout-content--orange">
                   <div></div>
                   <div class="width-100">
                     <div class="text-center padding-3 width-100">
@@ -674,13 +714,13 @@
                         <div class="cell large-10">
                           <div class="grid-x align-center">
                             <div class="cell large-8">
-                              <h2 class="c-split-layout-content__title margin-bottom-1 white margin-top-3 c-lh--40">
+                              <h2 class="c-split-layout-content__title margin-bottom-1 dark margin-top-3 c-lh--40">
                                 ¿qué temas específicos quieres aprender? 
                               </h2>
                             </div>
                           </div>
-                          <h4 class="white margin-bottom-2 f2 w-xbold white fs-21">¡No te olvides de escoger al menos 3 subcategorías!</h4>
-                          <div class="grid-x grid-margin-y grid-margin-x align-center">
+                          <h4 class="white margin-bottom-2 f2 w-bold dark fs-21">¡No te olvides de escoger al menos 3 subcategorías!</h4>
+                          <div class="grid-x grid-margin-y align-center">
                             <div v-for="subcategory of subcategories" :key="subcategory.id" class="cell small-6 medium-3 large-3 flex-container align-center">
                               <input v-model="user.subcategories.value" :id="'subcategory-' + subcategory.id" type="checkbox" :value="subcategory.id" class="hide">
                               <label
@@ -699,17 +739,17 @@
                             <button
                               :disabled="(user.loading) ? true : false"
                               @click="register($event, 'finish')"
-                              class="c-button c-button--warning-black w-xbold margin-bottom-2 padding-left-2 padding-right-2"
+                              class="c-button c-button--cyan w-xbold margin-bottom-2 padding-left-2 padding-right-2 f2"
                               :class="{'loading' : user.loading}">
                               ¡Comienza a <br> aprender distinto!
                             </button>
-                            <div @click="prevStep(3)" class="c-link c-link--warning f2 w-xbold fs-18">< Volver</div>
+                            <div @click="prevStep(3)" class="c-link c-link--ho-dark dark f2 w-xbold fs-18">< Volver</div>
                             <div class="c-bullet-steps text-center margin-top-1">
                               <div class="c-bullet-steps__bullets">
                                 <span class="bg-white"></span>
                                 <span class="bg-white"></span>
                                 <span class="bg-white"></span>
-                                <span class="bg-warning"></span>
+                                <span class="bg-dark"></span>
                               </div>
                               <div class="c-bullet-steps__text f2 fs-21 white">
                                 Paso 4 de 4
@@ -745,10 +785,10 @@
                     <div class="width-100 margin-top-2">
                       <div class="grid-x grid-margin-x grid-margin-y align-center">
                         <div class="cell small-6 medium-6 large-6 text-left">
-                          <button class="c-button c-button--success c-button--arrow c-button--small width-100 float-r" @click="modals.teacher.isOpened = false">Volver</button>
+                          <button class="c-button c-button--primary c-button--arrow c-button--small width-100 float-r" @click="modals.teacher.isOpened = false">Volver</button>
                         </div>
                         <div class="cell small-6 medium-6 large-6 text-right">
-                          <button class="c-button c-button--success c-button--arrow c-button--small width-100 float-l" @click="validateModal('teacher')">Continuar</button>
+                          <button class="c-button c-button--primary c-button--arrow c-button--small width-100 float-l" @click="validateModal('teacher')">Continuar</button>
                         </div>
                       </div>
                     </div>
@@ -781,10 +821,10 @@
                     <div class="width-100 margin-top-2">
                       <div class="grid-x grid-margin-x grid-margin-y align-center">
                         <div class="cell small-6 medium-6 large-6 text-left">
-                          <button class="c-button c-button--success c-button--arrow c-button--small width-100 float-r" @click="modals.tambero.isOpened = false">Volver</button>
+                          <button class="c-button c-button--primary c-button--arrow c-button--small width-100 float-r" @click="modals.tambero.isOpened = false">Volver</button>
                         </div>
                         <div class="cell small-6 medium-6 large-6 text-right">
-                          <button class="c-button c-button--success c-button--arrow c-button--small width-100 float-l" @click="validateModal('tambero')">Continuar</button>
+                          <button class="c-button c-button--primary c-button--arrow c-button--small width-100 float-l" @click="validateModal('tambero')">Continuar</button>
                         </div>
                       </div>
                     </div>

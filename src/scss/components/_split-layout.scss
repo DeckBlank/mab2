@@ -39,6 +39,18 @@
       background: $dark;
     }
 
+    &--cyan {
+      background: $cyan;
+    }
+
+    &--limon {
+      background: $limon;
+    }
+
+    &--orange {
+      background: $orange;
+    }
+
     .small-title {
       font-size: $fs-25;
     }
@@ -72,7 +84,7 @@
     }
 
     .c-role-card {
-      border-radius: 10px;
+      border-radius: 65px;
       font-size: $fs-16;
       padding: 1.5rem 2rem;
       margin: 0;
@@ -81,7 +93,38 @@
 
       &.enable {
         // box-shadow: $secondary-color 0 0 0 5px;
-        background: $warning-color;
+        background: $primary-color;
+        color: $white;
+      }
+    }
+
+    .arrows {
+      .c-button {
+        background: $dark !important;
+        color: $white !important;
+        font-size: 31px;
+        font-weight: 100;
+        line-height: 20px;
+        padding-bottom: 14px;
+      }
+
+      .c-button:first-child {
+        border-radius: 20px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+      }
+
+      .c-button:nth-child(2) {
+        border-radius: 20px;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    }
+
+    .arrows--white {
+      .c-button {
+        background: $white !important;
+        color: $dark !important;
       }
     }
   }
@@ -91,6 +134,7 @@
   .c-split-layout {
     &__figure {
       display: block;
+      height: 100vh !important;
     }
 
     &__content {
@@ -123,7 +167,7 @@
       .c-role-card {
         font-size: $fs-18;
         margin-left: 2rem;
-        padding: 1.5rem 4rem 1.5rem 2rem;
+        padding: 2rem 4rem 1.5rem 3rem;
         height: 100%;
       }
     }
