@@ -151,6 +151,7 @@
 
   &__heart {
     width: 100px;
+    transform: rotate(-15deg);
   }
 
   &__car {
@@ -250,17 +251,19 @@
       width: 200px;
     }
 
+    &__title {
+      // font-size: 28px;
+      // line-height: 30px;
+      font-size: 50px;
+      line-height: 54px;
+    }
+
     &__car {
       width: 180px;
     }
 
     .c-button {
       width: 200px;
-    }
-
-    &__title {
-      margin-top: 4rem;
-      font-size: $fs-40;
     }
 
     &__subtitle {
@@ -273,8 +276,8 @@
 
     &__arcoiris {
       margin-top: 0;
-      width: 70%;
-      margin-left: 30%;
+      width: 60%;
+      margin-left: 40%;
     }
   }
 }

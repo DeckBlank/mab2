@@ -196,6 +196,14 @@ $font-families: (
     }
   }
 
+  &--ho-white {
+    &:hover,
+    &:focus,
+    &:active {
+      color: $white;
+    }
+  }
+
   &--white {
     color: $white;
   }

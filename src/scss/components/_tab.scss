@@ -28,6 +28,10 @@
       color: $primary-color;
     }
 
+    &__title.active {
+      color: $primary-color;
+    }
+
     &__title.active::after {
       opacity: 1;
     }

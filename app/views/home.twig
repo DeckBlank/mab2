@@ -288,7 +288,7 @@
                         <input v-model="question.enable" @change="resetAccordion(question)" :id="'accordion-item-' + qindex" class="c-accordion hide" type="checkbox">
                         <label class="c-accordion-item__switcher width-100 bg-warning-alt" :for="'accordion-item-' + qindex">
                           <p class="margin-bottom-0 w-bold dark f2 fs-18">${ question.title }</p>
-                          <i class="c-icon white fs-21 far fa-chevron-up"></i>
+                          <i class="c-icon dark fs-21 far fa-chevron-up"></i>
                         </label>
                         <div class="c-accordion-item__content position-relative bg-white f2 dark w-medium" v-html="question.answer"></div>
                       </li>

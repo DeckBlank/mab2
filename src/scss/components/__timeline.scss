@@ -12,10 +12,12 @@
   }
 
   &__gradient {
-    background: rgba($color: $success-color, $alpha: 0.5);
+    background: rgba($color: $dark, $alpha: 0.5);
     top: 0;
     left: 0;
     z-index: 55;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   .c-card-article {
@@ -48,24 +50,25 @@
 }
 
 .tippy-box[data-theme~="mab-secondary"] {
-  background-color: $secondary-color;
-  color: $white;
+  // background-color: $secondary-color;
+  background: $white;
+  color: $dark;
   border-radius: 20px;
 
   &[data-placement^="top"] > .tippy-arrow::before {
-    border-top-color: $secondary-color;
+    border-top-color: $white;
   }
 
   &[data-placement^="bottom"] > .tippy-arrow::before {
-    border-bottom-color: $secondary-color;
+    border-bottom-color: $white;
   }
 
   &[data-placement^="left"] > .tippy-arrow::before {
-    border-left-color: $secondary-color;
+    border-left-color: $white;
   }
 
   &[data-placement^="right"] > .tippy-arrow::before {
-    border-right-color: $secondary-color;
+    border-right-color: $white;
   }
 }
 
@@ -107,7 +110,8 @@
 
     &__year {
       width: auto;
-      padding: 2rem;
+      // padding: 2rem;
+      padding: 2rem 1rem 2rem 0;
     }
   }
 }

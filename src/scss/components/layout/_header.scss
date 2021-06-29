@@ -131,11 +131,13 @@
 
       a:hover {
         color: $white;
-        background-color: $secondary-color;
+        // background-color: $secondary-color;
+        background-color: $primary-color;
       }
 
       a:hover::after {
-        background-color: $secondary-color;
+        // background-color: $secondary-color;
+        background-color: $primary-color;
       }
 
       a::after {
@@ -155,12 +157,14 @@
       }
 
       &.inverse a {
-        color: $secondary-color;
+        // color: $secondary-color;
+        color: $dark;
       }
 
       &.inverse a:hover {
         color: $white;
-        background-color: $secondary-color;
+        // background-color: $secondary-color;
+        background: $primary-color;
       }
     }
 
@@ -170,7 +174,8 @@
       @include box-shadow(right, rgba($dark, 0.3), 0, 0, 10px);
 
       .c-menu-dropdown__item a {
-        color: $secondary-color;
+        // color: $secondary-color;
+        color: $dark;
       }
 
       .c-menu-dropdown__item a:hover {

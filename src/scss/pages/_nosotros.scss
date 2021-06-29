@@ -33,7 +33,7 @@
   .c-hand {
     left: 1rem;
     bottom: 0;
-    height: 45%;
+    height: 55%;
 
     img {
       object-position: left;
@@ -83,11 +83,13 @@
         }
 
         .c-corner-heart {
-          width: 235px;
-          top: 61%;
+          width: 160px;
+          top: 70%;
 
           &.to-left {
             left: -2rem;
+            width: 250px;
+            transform: rotate(-15deg);
           }
         }
 
@@ -139,10 +141,14 @@
 
     .c-us-comment {
       .c-img-corner {
-        width: 13rem;
+        width: 9rem;
         right: -6rem;
         bottom: 2rem;
       }
+    }
+
+    .big-donut {
+      width: 12rem !important;
     }
   }
 }

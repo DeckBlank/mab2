@@ -21,16 +21,12 @@
     }
 
     &__video {
-      // left: -1.5%;
-      left: -0.5%;
+      left: 6%;
       right: 0;
-      // top: 4.5%;
-      top: 21%;
+      top: 26%;
       margin: auto;
-      // width: 90%;
-      width: 55%;
-      // height: 65%;
-      height: 61%;
+      width: 68.5%;
+      height: 58%;
     }
   }
 
@@ -99,6 +95,13 @@
 
     &__flag {
       width: 25px;
+    }
+  }
+
+  .c-testimonies {
+    .c-slider__pagination .swiper-pagination-bullet.swiper-pagination-bullet-active {
+      // box-shadow: #000 0 0 0 3px;
+      background-color: $white !important;
     }
   }
 
@@ -305,7 +308,7 @@
         // bottom: 40px;
         // width: 400px;
 
-        bottom: 185px;
+        bottom: 155px;
         width: 230px;
       }
     }
@@ -315,6 +318,13 @@
 
       &__container {
         margin-bottom: -200px;
+      }
+
+      &__left,
+      &__right {
+        img {
+          width: 560px;
+        }
       }
     }
   }

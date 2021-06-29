@@ -20,6 +20,7 @@ new Vue({
   mounted(){
     this.global();
     this.isOk();
+    this.hideLoading();
   },
   methods: {
     ...baseActions(),
@@ -37,10 +38,10 @@ new Vue({
             }
           })
           .catch(err => {
-            window.location = `${this.SITE_URL}/carrito`; throw err;
+            // window.location = `${this.SITE_URL}/carrito`; throw err;
           })
       }else{
-        window.location = `${this.SITE_URL}/carrito`
+        // window.location = `${this.SITE_URL}/carrito`
       }
     },
     listCourses: function(){

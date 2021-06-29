@@ -16,6 +16,20 @@
       background: $warning-color;
     }
   }
+
+  .c-corner-card-image {
+    height: 70px;
+    border-radius: 50%;
+    border: 3px solid $primary-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $white;
+
+    img {
+      width: 50% !important;
+    }
+  }
 }
 
 @include breakpoint(large) {
@@ -42,6 +56,10 @@
       .c-cohete {
         width: 80%;
       }
+    }
+
+    .c-corner-card-image {
+      height: 100px;
     }
   }
 }
