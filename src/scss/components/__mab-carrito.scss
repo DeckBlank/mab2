@@ -67,7 +67,7 @@
   .c-medios-pagos {
     flex-wrap: wrap;
     margin-top: 0.5rem;
-    justify-content: center;
+    // justify-content: center;
     filter: grayscale(1);
 
     img {
@@ -211,7 +211,7 @@
     }
 
     .c-medios-pagos {
-      justify-content: flex-start;
+      // justify-content: flex-start;
 
       img {
         margin: 0 1rem 0.8rem 0;

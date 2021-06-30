@@ -107,9 +107,9 @@
             </div>
 
             <div class="cell">
-              <div class="f2 dark margin-top-2">
+              <div class="f2 dark margin-top-2" :class="{'text-center' : courses.list && !courses.list.length}">
                 Compra con todos los medios de pago disponibles: 
-                <div class="c-medios-pagos flex-container align-middle">
+                <div class="c-medios-pagos flex-container align-middle" :class="{'align-center' : courses.list && !courses.list.length}">
                   <img src="{{ theme.link }}/static/images/vectors/icon-cards/icon-visa.png" alt="">
                   <img src="{{ theme.link }}/static/images/vectors/icon-cards/icon-mc.png" alt="">
                   <img src="{{ theme.link }}/static/images/vectors/icon-cards/icon-americanex.png" alt="">
