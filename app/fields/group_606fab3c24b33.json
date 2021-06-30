@@ -43,7 +43,8 @@
                 "success": "Verde",
                 "alert": "Rojo",
                 "warning": "Amarillo",
-                "secondary": "Azul"
+                "secondary": "Azul",
+                "magenta": "Magenta"
             },
             "default_value": [],
             "allow_null": 0,
@@ -71,5 +72,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1618384585
+    "modified": 1625032018
 }
