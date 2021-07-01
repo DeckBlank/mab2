@@ -26,11 +26,11 @@
           <div class="c-result__container grid-x align-center bg-white br-45 padding-vertical-2 br-bottom-0-0 ">
             <div class="cell medium-10 large-10 dark f2 position-relative">
               <figure class="c-result__figure margin-bottom-1 text-center">
-                <img
+                <!-- <img
                   v-if="questions.result.vector"
                   :src="`${THEME_URL}/static/images/vectors/test/behaviour/${questions.result.vector}.png`"
-                  alt="" class="width-100">
-                <img class="width-100" v-else src="{{theme.link}}/static/images/vectors/test/behaviour/cohete.png}}" alt="">
+                  alt="" class="width-100"> -->
+                <img class="width-100 img-shadow" src="{{theme.link}}/static/images/vectors/test/behaviour/cohete.png}}" alt="">
               </figure>
               <h2 class="c-result__title pri-color text-center w-bold margin-bottom-0 text-uppercase">${questions.result.title}</h2>
               <p v-if="questions.result.subtitle" class="text-center text-uppercase black fs-18 margin-bottom-2">${questions.result.subtitle}</p>
@@ -134,7 +134,7 @@
             </section>
           </section>
           <div class="c-bottom-btn flex-container align-center-middle margin-top-3">
-            <a :href="userProfile" class="c-button c-button--primary margin-right-1 f2 text-center">Volver al perfil</a>
+            <a :href="userProfile" class="c-button c-button--secondary margin-right-1 f2 text-center">Volver al perfil</a>
             <button @click="saveTest()" :disabled="!filled || isSaving" class="c-button c-button--white-dark f2">Guardar</button>
           </div>
         </div>

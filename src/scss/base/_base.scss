@@ -344,6 +344,10 @@ body {
   color: $cyan;
 }
 
+.img-shadow {
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.5));
+}
+
 @include breakpoint(large) {
   .desktop {
     display: block;
