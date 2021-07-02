@@ -18,7 +18,8 @@
 
   .c-lideres {
     &__content {
-      padding: 2rem 2rem 2rem;
+      // padding: 2rem 2rem 2rem;
+      box-shadow: none;
     }
 
     .c-profile-card {
@@ -29,27 +30,30 @@
   }
 
   .c-other-services {
+    padding: 1rem;
+
     &__content {
       padding: 2rem;
     }
   }
 
   .c-ws {
-    padding: 1rem 1rem 1rem 105px;
+    padding: 1rem 2rem;
     max-width: 300px;
     margin-left: 2rem;
     margin-top: 4rem;
     transition: all 0.5s;
+    border-radius: 50px;
 
     img {
-      width: 120px;
+      width: 70px;
       top: -2rem;
       left: -2rem;
     }
 
     &:hover {
-      color: $dark;
-      background: $warning-alt;
+      color: $white;
+      background: $secondary-alt;
     }
   }
 }
@@ -64,6 +68,8 @@
     }
 
     .c-mab-resume {
+      margin-top: 5rem;
+
       &__photo {
         display: block;
         height: 75%;
@@ -75,6 +81,15 @@
       &__content {
         padding: 2rem 0 2rem 5rem;
       }
+
+      .principal-img {
+        width: 85%;
+        margin-right: 7rem;
+      }
+    }
+
+    .c-mab-recommended {
+      padding-top: 3rem;
     }
 
     .c-mab-slider {
@@ -84,14 +99,20 @@
     }
 
     .c-lideres {
+      margin-top: 5rem;
+      margin-bottom: 5rem;
+
       &__content {
-        padding: 3rem 5rem 2rem;
+        // padding: 3rem 5rem 2rem;
       }
     }
 
     .c-other-services {
+      padding-bottom: 8rem !important;
+
       &__content {
         padding: 0;
+        padding-bottom: 6rem !important;
       }
 
       &__title {
@@ -106,10 +127,14 @@
         padding: 0 5rem 3rem;
         box-sizing: border-box;
       }
+
+      .c-slider__pagination {
+        // margin-top: -45px;
+      }
     }
 
     .c-ws {
-      margin-left: 0;
+      margin-left: calc(50% - 150px);
       margin-top: -3rem;
     }
   }

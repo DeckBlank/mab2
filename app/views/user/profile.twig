@@ -6,16 +6,16 @@
 
 {% block content %}
   <section id="profile" data-user="{{ user.ID }}" class="c-section c-section--perfil">
-    <div class="c-banner mab-shadow-soft bg-sec-color margin-bottom-2">
+    <div class="c-banner mab-shadow-soft bg-orange margin-bottom-2">
       <div class="grid-container">
         <div class="grid-x grid-margin-x grid-margin-y align-bottom">
           <div class="cell large-8">
-            <div class="c-banner__content padding-vertical-3">
+            <div class="c-banner__content">
               <h1 class="c-banner__title text-right position-relative">  
                 <span class="white c-lh--70 big">
                   ${(user.profile && user.profile.phrase) ? user.profile.phrase : 'Estoy aquí porque quiero cambiar el mundo' }
                 </span>
-                <button v-if="isProfileOwner" @click="user.isModalOpened = true" class="c-edit-circle position-absolute bg-white sec-color fs-25">
+                <button v-if="isProfileOwner" @click="user.isModalOpened = true" class="c-edit-circle position-absolute bg-cyan white fs-25">
                   <i class="far fa-pen"></i>
                 </button>
               </h1>
@@ -23,7 +23,7 @@
           </div>
           <div class="cell large-4 margin-0">
             <div class="c-banner__figure position-relative flex-container align-center ">
-              <img class="c-banner__img of--contain" src="{{ theme.link }}/static/images/perfil/banner-perfil.png" alt="">
+              <img class="c-banner__img of--contain width-100" src="{{ theme.link }}/static/images/perfil/banner-perfil.png" alt="">
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@
               <img :src="(user.profile && user.profile.avatar) ? user.profile.avatar.url : userBasicAvatar" alt="" class=" width-100 height-100 of--cover">
 
               <input v-if="isProfileOwner" @change="changeAvatarImage" id="avatar-file" type="file" class="hide" :disabled="avatar.isLoadingAvatar">
-              <label v-if="isProfileOwner" for="avatar-file" class="c-edit-circle position-absolute bg-white sec-color fs-25 flex-container align-center-middle">
+              <label v-if="isProfileOwner" for="avatar-file" class="c-edit-circle position-absolute bg-cyan white fs-25 flex-container align-center-middle">
                 <i class="far fa-pen"></i> 
               </label> 
             </figure>
@@ -59,14 +59,18 @@
 
     <div class="c-skills padding-vertical-3 margin-top-3">
       <div class="grid-container">
-        <h2 class="c-skills__title margin-bottom-3 position-relative">
-          <p class="dark fs-50 lh-40 margin-bottom-0 text-uppercase">mis habilidades</p>
-          <button v-if="isProfileOwner && skills.view == 1" @click="skills.view = 2" type="button" class="c-edit-circle position-absolute bg-white sec-color fs-25">
-            <i class="far fa-pen"></i> 
-          </button> 
-        </h2>
-        <transition name="fade" mode="out-in">
-          <div v-if="skills.view == 1" key="mapa">
+        <div class="center-title">
+          <h2 class="c-skills__title margin-bottom-3 position-relative">
+            <p class="dark fs-50 lh-40 margin-bottom-0 text-uppercase">mis habilidades</p>
+            <button v-if="isProfileOwner && skills.view == 1" @click="skills.view = 2" type="button" class="c-edit-circle position-absolute bg-cyan white fs-25">
+              <i class="far fa-pen"></i> 
+            </button> 
+          </h2>
+        </div>
+        </div>
+      <transition name="fade" mode="out-in">
+        <div v-if="skills.view == 1" key="mapa">
+          <div class="grid-container">
             <div class="c-skills-map position-relative desktop">
               <figure class="c-skills__figure position-relative">
                 <img class="width-100" src="{{ theme.link }}/static/images/perfil/mapa.png" alt="">
@@ -78,39 +82,39 @@
                 >
                   ${ option }
                 </div>
-
+  
                 <div
                   v-for="(option, oindex) of skills.values.hard.value"
                   :key="option.id"
-                  class="c-float-box fb-1 flex-container align-center-middle white f2 position-absolute w-xbold text-center padding-1"
+                  class="c-float-box fb-1 flex-container align-center-middle dark f2 position-absolute w-xbold text-center padding-1"
                   :class="'fb-' + (oindex + 1)"
                 >
                   ${ option }
                 </div>
               </figure>
-              <div class="c-float-legend position-absolute">
-                <div class="c-float-legend__item w-xbold dark f2 fs-25 margin-bottom-1 flex-container align-middle">
-                  <span class="color-circle margin-right-1 bg-warning"></span> Habilidades blandas 
+              <div class="c-float-legend">
+                <div class="c-float-legend__item w-bold dark f2 fs-21 margin-bottom-1 flex-container align-middle">
+                  <span class="color-circle margin-right-1 bg-warning-alt"></span> Habilidades blandas 
                 </div>
-                <div class="c-float-legend__item w-xbold dark f2 fs-25 margin-bottom-1 flex-container align-middle">
-                  <span class="color-box margin-right-1 bg-sec-color"></span> Habilidades duras 
+                <div class="c-float-legend__item w-bold dark f2 fs-21 margin-bottom-1 flex-container align-middle">
+                  <span class="color-box margin-right-1 bg-cyan"></span> Habilidades duras 
                 </div>
               </div>
             </div>
             <div class="c-skills-list c-mobile">
               <div class="c-float-legend">
                 <div class="c-float-legend__item w-xbold dark f2 fs-16 margin-bottom-1 flex-container align-middle">
-                  <span class="color-circle margin-right-1 bg-warning"></span> Habilidades blandas 
+                  <span class="color-circle margin-right-1 bg-warning-alt"></span> Habilidades blandas 
                 </div>
               </div>
               <div v-for="option of skills.values.soft.value" :key="option.id" class="c-skills-list-item w-xbold fs-21 flex-container align-center margin-bottom-1">
                 <img src="{{ theme.link }}/static/images/perfil/head.png" class="of--contain" alt="">
                 <div class="c-skills-list-item__text padding-vertical-1 f2 bg-warning dark">${ option }</div>
               </div>
-
+  
               <div class="c-float-legend margin-top-2">
                 <div class="c-float-legend__item w-xbold dark f2 fs-16 margin-bottom-1 flex-container align-middle">
-                  <span class="color-box margin-right-1 bg-sec-color"></span> Habilidades duras 
+                  <span class="color-box margin-right-1 bg-cyan br-bottom-0-0"></span> Habilidades duras 
                 </div>
               </div>
               <div v-for="option of skills.values.soft.value" :key="option.id" class="c-skills-list-item w-xbold fs-21 flex-container align-center margin-bottom-1">
@@ -119,110 +123,114 @@
               </div>
             </div>
           </div>
-          <div v-else-if="skills.view == 2" key="editor">
-            <div class="c-skills-editor">
-              <h3 class="c-skills-editor__title margin-bottom-0 w-xbold dark f2">Habilidades blandas</h3>
-              <p class="fs-18 f2 gray margin-bottom-1">Elige 5</p>
-              <div class="grid-x grid-margin-x grid-margin-y align-middle">
-                <div class="cell large-7">
-                  <div class="c-skills-editor-list c-skills-editor-list--warning">
-                    <div class="grid-x grid-margin-x align-self-stretch">
-                      <div v-for="option of skills.soft.options" :key="option.id" class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input
-                            v-model="skills.values.soft.value"
-                            :disabled="skills.values.soft.value.length == 5 && skills.values.soft.value.indexOf(option) === -1"
-                            type="checkbox"
-                            :id="'s' + option"
-                            :value="option"
-                            hidden
-                          >
-                          <label :for="'s' + option" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            ${ option }
-                          </lable>
+        </div>
+        <div v-else-if="skills.view == 2" key="editor">
+          <div class="bg-dark vertical-pd">
+            <div class="grid-container">
+              <div class="c-skills-editor">
+                <h3 class="c-skills-editor__title margin-bottom-0 w-xbold dark">Habilidades blandas</h3>
+                <p class="fs-18 f2 pri-color w-xbold margin-bottom-1">Elige 5</p>
+                <div class="grid-x grid-margin-x grid-margin-y align-middle">
+                  <div class="cell large-7">
+                    <div class="c-skills-editor-list c-skills-editor-list--warning">
+                      <div class="grid-x grid-margin-x align-self-stretch">
+                        <div v-for="option of skills.soft.options" :key="option.id" class="cell medium-4 large-3">
+                          <div class="c-skills-editor-item">
+                            <input
+                              v-model="skills.values.soft.value"
+                              :disabled="skills.values.soft.value.length == 5 && skills.values.soft.value.indexOf(option) === -1"
+                              type="checkbox"
+                              :id="'s' + option"
+                              :value="option"
+                              hidden
+                            >
+                            <label :for="'s' + option" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
+                              ${ option }
+                            </lable>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="cell large-5">
-                  <div class="c-skills-editor__description f2 text-center bg-warning br--large padding-2">
-                    <h3 class="c-skills-editor__title margin-bottom-0 w-xbold dark f2 margin-bottom-1">Habilidades blandas</h3>
-                    <p class="fs-18 dark">
-                      Una habilidad blanda es aquella que se
-                      refiere a las capacidades y competencias
-                      que involucran actitudes, emociones y
-                      relaciones sociales. Se trata de cómo
-                      nos comportamos frente a diversas
-                      situaciones. Podemos reconocerlas
-                      cuando conocemos a los otros de
-                      forma más profunda. Estas habilidades
-                      nos permiten convertirnos en mejores
-                      personas. Por ejemplo: la empatía, el
-                      trabajo en equipo o la creatividad.
-                      Por ejemplo: ser rápido nadando, ser
-                      flexible en gimnasia, ser bueno en
-                      historia o matemáticas, ser bueno en
-                      ciencias o en deportes, etc.
-                    </p>
+                  <div class="cell large-5">
+                    <div class="c-skills-editor__description f2 text-center bg-warning-alt br--large padding-2">
+                      <h3 class="c-skills-editor__title margin-bottom-0 w-xbold dark-i margin-bottom-1">Habilidades blandas</h3>
+                      <p class="fs-18 dark">
+                        Una habilidad blanda es aquella que se
+                        refiere a las capacidades y competencias
+                        que involucran actitudes, emociones y
+                        relaciones sociales. Se trata de cómo
+                        nos comportamos frente a diversas
+                        situaciones. Podemos reconocerlas
+                        cuando conocemos a los otros de
+                        forma más profunda. Estas habilidades
+                        nos permiten convertirnos en mejores
+                        personas. Por ejemplo: la empatía, el
+                        trabajo en equipo o la creatividad.
+                        Por ejemplo: ser rápido nadando, ser
+                        flexible en gimnasia, ser bueno en
+                        historia o matemáticas, ser bueno en
+                        ciencias o en deportes, etc.
+                      </p>
+                    </div>
                   </div>
                 </div>
+                <p v-if="isWrongFieldHability('soft')" class="">La cantidad de items esta incompleta</p>
               </div>
-              <p v-if="isWrongFieldHability('soft')" class="">La cantidad de items esta incompleta</p>
-            </div>
-            <div class="c-skills-editor">
-              <h3 class="c-skills-editor__title margin-bottom-0 w-xbold dark f2">Habilidades duras</h3>
-              <p class="fs-18 f2 gray margin-bottom-1">Elige 5</p>
-              <div class="grid-x grid-margin-x grid-margin-y align-middle">
-                <div class="cell large-7">
-                  <div class="c-skills-editor-list c-skills-editor-list--secondary">
-                    <div class="grid-x grid-margin-x align-self-stretch">
-                      <div v-for="option of skills.hard.options" class="cell medium-4 large-3">
-                        <div class="c-skills-editor-item">
-                          <input
-                            v-model="skills.values.hard.value"
-                            type="checkbox"
-                            :disabled="skills.values.hard.value.length == 5 && skills.values.hard.value.indexOf(option) === -1"
-                            :id="'h' + option"
-                            :value="option"
-                            hidden
-                          >
-                          <label :for="'h' + option" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
-                            ${ option }
-                          </lable>
+              <div class="c-skills-editor">
+                <h3 class="c-skills-editor__title margin-bottom-0 w-xbold dark">Habilidades duras</h3>
+                <p class="fs-18 f2 gray margin-bottom-1 pri-color w-xbold margin-bottom-1">Elige 5</p>
+                <div class="grid-x grid-margin-x grid-margin-y align-middle">
+                  <div class="cell large-7">
+                    <div class="c-skills-editor-list c-skills-editor-list--secondary">
+                      <div class="grid-x grid-margin-x align-self-stretch">
+                        <div v-for="option of skills.hard.options" class="cell medium-4 large-3">
+                          <div class="c-skills-editor-item">
+                            <input
+                              v-model="skills.values.hard.value"
+                              type="checkbox"
+                              :disabled="skills.values.hard.value.length == 5 && skills.values.hard.value.indexOf(option) === -1"
+                              :id="'h' + option"
+                              :value="option"
+                              hidden
+                            >
+                            <label :for="'h' + option" class="flex-container align-center-middle dark br--medium width-100 height-100 f2 f2 w-xbold border-black margin-0">
+                              ${ option }
+                            </lable>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="cell large-5">
-                  <div class="c-skills-editor__description f2 text-center bg-sec-color br--large padding-2">
-                    <h3 class="c-skills-editor__title margin-bottom-0 w-xbold white f2 margin-bottom-1">Habilidades duras</h3>
-                    <p class="fs-18 white">
-                      Una habilidad dura es aquella que
-                      se refiere al conocimiento o destreza
-                      de algún deporte, ciencia o actividad.
-                      Podemos reconocerlas fácilmente en
-                      las personas y suelen ser objetivas.
-                    </p>
+                  <div class="cell large-5">
+                    <div class="c-skills-editor__description f2 text-center bg-cyan br--large padding-2">
+                      <h3 class="c-skills-editor__title margin-bottom-0 w-xbold dark-i margin-bottom-1">Habilidades duras</h3>
+                      <p class="fs-18 dark">
+                        Una habilidad dura es aquella que
+                        se refiere al conocimiento o destreza
+                        de algún deporte, ciencia o actividad.
+                        Podemos reconocerlas fácilmente en
+                        las personas y suelen ser objetivas.
+                      </p>
+                    </div>
                   </div>
                 </div>
+                <p v-if="isWrongFieldHability('hard')" class="">La cantidad de items esta incompleta</p>
               </div>
-              <p v-if="isWrongFieldHability('hard')" class="">La cantidad de items esta incompleta</p>
-            </div>
-            <div class="flex-container align-center-middle width-100 margin-top-2">
-              <button @click="skills.view = 1" class="c-button c-button--secondary-warning br--large f2 fs-21 w-xbold margin-right-1">Volver</button>
-              <button @click="updateProfileHabilities()" :disabled="skills.isLoading" class="c-button c-button--secondary-warning br--large f2 fs-21 w-xbold">Guardar</button>
+              <div class="flex-container align-center-middle width-100 margin-top-2 mb-7">
+                <button @click="skills.view = 1" class="c-button c-button--primary br--large f2 fs-21 w-bold margin-right-1">Volver al perfil</button>
+                <button @click="updateProfileHabilities()" :disabled="skills.isLoading" class="c-button c-button--white-dark br--large f2 fs-21 w-bold">Guardar</button>
+              </div>
             </div>
           </div>
-        </transition>
-      </div>
+        </div>
+      </transition>
     </div>
 
     <div v-if="isProfileOwner" class="c-my-courses margin-vertical-3">
       <div class="grid-container">
         <h2 class="margin-bottom-2">
-          <p class="dark fs-50 lh-40 margin-bottom-0 text-uppercase">mis cursos</p>
+          <p class="dark fs-50 lh-40 margin-bottom-0 text-uppercase text-center">mis cursos</p>
         </h2>
 
         <div v-if="isLoadingEnroll">
@@ -291,18 +299,18 @@
     <div v-if="isProfileOwner" class="c-my-tests margin-vertical-3">
       <div class="grid-container">
         <h2 class="margin-bottom-2">
-          <p class="dark fs-50 lh-40 margin-bottom-0 text-uppercase">Mis tests emocionales</p>
+          <p class="dark fs-50 lh-40 margin-bottom-0 text-uppercase text-center">Mis tests emocionales</p>
         </h2>
         <div class="grid-x align-center">
           <div class="cell large-4">
             <div class="c-my-tests__test margin-bottom-2 text-center">
               <h4 class="margin-bottom-1">
-                <p class="dark fs-21 w-xbold lh-40 margin-bottom-0 text-uppercase f2 text-center">Mi tipo de personalidad</p>
+                <p class="dark fs-21 lh-40 margin-bottom-0 text-uppercase f2 text-center">Mi tipo de personalidad</p>
               </h4>
               <figure class="c-my-tests__figure">
                 <img src="{{ theme.link }}/static/images/perfil/test-01.png" alt="" class=" width-100 height-100 of--cover"> 
               </figure>
-              <a href="{{ site.url }}/test-personalidad" class="c-button c-button--secondary-warning f2 fs-21 w-xbold">
+              <a href="{{ site.url }}/test-personalidad" class="c-button c-button--dark-white f2 fs-21 ">
                 ${ (!tests.behaviour) ? 'Tomar test' : 'Ver mi resultado' }
               </a>
             </div>
@@ -310,12 +318,12 @@
           <div class="cell large-4">
             <div class="c-my-tests__test text-center">
               <h4 class="margin-bottom-1">
-                <p class="dark fs-21 w-xbold lh-40 margin-bottom-0 text-uppercase f2 text-center">Mi estilo de aprendizaje</p>
+                <p class="dark fs-21 lh-40 margin-bottom-0 text-uppercase f2 text-center">Mi estilo de aprendizaje</p>
               </h4>
               <figure class="c-my-tests__figure">
                 <img src="{{ theme.link }}/static/images/perfil/test-02.png" alt="" class=" width-100 height-100 of--cover"> 
               </figure>
-              <a href="{{ site.url }}/test" class="c-button c-button--secondary-warning f2 fs-21 w-xbold">
+              <a href="{{ site.url }}/test" class="c-button c-button--dark-white f2 fs-21">
                 ${ (!tests.learning) ? 'Tomar test' : 'Ver mi resultado' }
               </a>
             </div>

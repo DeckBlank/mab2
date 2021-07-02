@@ -145,7 +145,8 @@ $font-families: (
   }
 
   &--medium {
-    border-radius: 10px;
+    // border-radius: 10px;
+    border-radius: 17px;
   }
 
   &--large {
@@ -189,18 +190,26 @@ $font-families: (
     }
   }
 
+  &--ho-dark {
+    &:hover {
+      color: $dark;
+    }
+  }
+
+  &--ho-white {
+    &:hover,
+    &:focus,
+    &:active {
+      color: $white;
+    }
+  }
+
   &--white {
     color: $white;
   }
 
   &--black {
     color: $dark;
-  }
-
-  &--ho-dark {
-    &:hover {
-      color: $dark;
-    }
   }
 
   &--sec {

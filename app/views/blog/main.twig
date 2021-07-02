@@ -6,24 +6,18 @@
 
 {% block content %}
   <section class="c-section c-section--blog">
-    <div class="c-blog bg-warning-alt">
+    <div class="c-blog bg-pri-color position-relative">
+      <figure class="c-blog__float-figure f1 position-absolute">
+        <img class="of--contain" src="{{ theme.link }}/static/images/blog/nube.png" alt="">
+      </figure>
+      <figure class="c-blog__float-figure f2 position-absolute">
+        <img class="of--contain" src="{{ theme.link }}/static/images/blog/nube.png" alt="">
+      </figure>
       <div class="grid-container">
         <h2 class="margin-bottom-3">
-          <p class="dark fs-70 margin-bottom-0 text-uppercase">blog</p>
+          <p class="white fs-70 margin-bottom-0 text-uppercase">blog</p>
         </h2>
         <div class="position-relative">
-          <figure class="c-blog__float-figure f1 position-absolute">
-            <img class="of--contain" src="{{ theme.link }}/static/images/blog/eye.png" alt="">
-          </figure>
-          <figure class="c-blog__float-figure f2 position-absolute">
-            <img class="of--contain" src="{{ theme.link }}/static/images/blog/heart.png" alt="">
-          </figure>
-          <figure class="c-blog__float-figure f3 position-absolute">
-            <img class="of--contain" src="{{ theme.link }}/static/images/blog/green.png" alt="">
-          </figure>
-          <figure class="c-blog__float-figure f4 position-absolute">
-            <img class="of--contain" src="{{ theme.link }}/static/images/blog/lapiz.png" alt="">
-          </figure>
           <div class="grid-x grid-margin-x grid-margin-y position-relative  align-self-stretch">
             {% for article in articles %}
               <div class="cell medium-6 large-4">
@@ -39,7 +33,7 @@
                       <p class="c-card-article__title dark f2 fs-16">{{ article.date }}</p>
                     </div>
                     <div class="text-center padding-top-1">
-                      <a href="{{ article.link }}" class="dark c-link--ho-dark f2 w-xbold fs-16">Leer más</a>
+                      <a href="{{ article.link }}" class="pri-color c-link--ho-primary f2 w-xbold fs-16">Leer más</a>
                     </div>
                   </div>
                 </div>
@@ -48,6 +42,9 @@
           </div>
         </div>
       </div>
+      <figure class="c-blog__float-figure f3">
+        <img class="of--contain width-100" src="{{ theme.link }}/static/images/blog/arcoiris.png" alt="">
+      </figure>
     </div>
   </section>
 {% endblock %}

@@ -68,7 +68,8 @@ $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;
 $foundation-palette: (
-  primary: #c03,
+  // primary: #c03,
+  primary: #f33,
   secondary: #0166d0,
   success: #090,
   warning: #fcee21,
@@ -83,6 +84,12 @@ $shadow: #484747;
 $black: #373737;
 $dark: #000;
 $white: #fff;
+
+$orange: #ff6700;
+$cyan: #36c9cc;
+$magenta: #eb3cec;
+$limon: #22bc22;
+$indigo: #36c;
 
 //Basic Color Alters
 $primary-alt: #f33;

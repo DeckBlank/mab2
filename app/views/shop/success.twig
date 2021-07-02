@@ -197,25 +197,31 @@
       </div>
     </div>
 
-    <div class="c-mab-carrito-thankyou bg-warning-alt flex-container align-center-middle">
-      <div class="c-mab-carrito-thankyou__content flex-container">
-        <figure>
+    <div class="c-mab-carrito-thankyou bg-white grid-container">
+      <div class="flex-container">
+        <div class="c-mab-carrito-thankyou__content flex-container">
+          <figure>
+            <div>
+             <img loading="lazy" class="c-mab-carrito-thankyou__heart" src="{{theme.link}}/static/images/vectors/heart.png" alt="">
+            </div>
+            <!-- <div>
+              <img loading="lazy" class="c-mab-carrito-thankyou__car" src="{{theme.link}}/static/images/vectors/cart.png" alt="">
+            </div> -->
+          </figure>
           <div>
-           <img loading="lazy" class="c-mab-carrito-thankyou__heart" src="{{theme.link}}/static/images/vectors/heart-expression.png" alt="">
-          </div>
-          <div>
-            <img loading="lazy" class="c-mab-carrito-thankyou__car" src="{{theme.link}}/static/images/vectors/cart.png" alt="">
-          </div>
-        </figure>
-        <div>
-          <h1 class="c-mab-carrito-thankyou__title dark f2 w-xbold margin-bottom-0">MUCHAS GRACIAS </h1>
-          <h3 class="c-mab-carrito-thankyou__subtitle f2 dark w-xbold">POR TU COMPRA</h3>
-          <div class="margin-top-2 margin-bottom-1">
-            <button class="c-button c-button--secondary f2 w-xbold">
-              Ver mis cursos
-            </button>
+            <h1 class="c-mab-carrito-thankyou__title dark w-xbold margin-bottom-0">¡MUCHAS GRACIAS <br> POR TU COMPRA!</h1>
+            <h3 class="c-mab-carrito-thankyou__subtitle dark w-xbold"></h3>
+            <div class="margin-top-2 margin-bottom-1">
+              <a href="/mis-cursos" class="c-button c-button--dark-white c-link--ho-dark f2">
+                Ver mis cursos
+              </a>
+            </div>
           </div>
         </div>
+      </div>
+  
+      <div class="c-mab-carrito-thankyou__arcoiris">
+        <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/carrito/arcoiris.png" alt="">
       </div>
     </div>
   </section>

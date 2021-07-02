@@ -222,10 +222,12 @@ const test = new Vue({
         width: 380,
         type: 'pie',
       },
-      colors:['#f32e21', '#0166d0','#090'],
+      // colors:['#f32e21', '#0166d0','#090'],
+      colors: ['#ffd600', '#22bc22', '#eb3cec'],
       labels: ['Kinestésico','Visual','Auditivo'],
       fill: {
-        colors: ['#f32e21', '#0166d0','#090']
+        // colors: ['#f32e21', '#0166d0','#090']
+        colors: ['#ffd600', '#22bc22', '#eb3cec'],
       },
       responsive: [{
         breakpoint: 600,

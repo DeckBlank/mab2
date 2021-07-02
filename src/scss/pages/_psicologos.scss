@@ -23,7 +23,15 @@
 
     .c-card-article {
       max-width: 430px;
-      margin: 5rem auto 0;
+      margin: 2rem auto 0;
+    }
+
+    &__content::after {
+      display: none;
+    }
+
+    .c-ws-icon {
+      width: 25px;
     }
   }
 }

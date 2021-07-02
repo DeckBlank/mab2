@@ -45,6 +45,8 @@
       display: inline-block;
       padding: 0.2rem 0.8rem;
       font-size: $fs-14;
+      background: $white !important;
+      border-radius: 12px;
     }
   }
 
@@ -65,7 +67,8 @@
   .c-medios-pagos {
     flex-wrap: wrap;
     margin-top: 0.5rem;
-    justify-content: center;
+    // justify-content: center;
+    filter: grayscale(1);
 
     img {
       height: 18px;
@@ -96,6 +99,15 @@
       width: 100%;
     }
   }
+
+  &__vacio-figure {
+    margin: 0 auto;
+    width: 150px;
+
+    img {
+      width: 100%;
+    }
+  }
 }
 
 .c-mab-carrito-message {
@@ -113,9 +125,14 @@
     padding: 2rem;
   }
 
+  &__img {
+    width: 120px;
+    margin-bottom: 1rem;
+  }
+
   &__title {
-    display: inline-block;
-    border-bottom: 2px solid $dark;
+    // display: inline-block;
+    // border-bottom: 2px solid $dark;
     padding-bottom: 0.5rem;
     padding-right: 0.7rem;
   }
@@ -126,7 +143,7 @@
 }
 
 .c-mab-carrito-thankyou {
-  padding: 5rem 0 7rem;
+  padding: 5rem 0 0;
 
   figure {
     margin-right: 1rem;
@@ -134,6 +151,7 @@
 
   &__heart {
     width: 100px;
+    transform: rotate(-15deg);
   }
 
   &__car {
@@ -141,13 +159,23 @@
   }
 
   .c-button {
-    color: $warning-alt;
+    // color: $warning-alt;
     font-size: $fs-18;
     border-radius: 8px;
   }
 
   &__title {
-    margin-top: 2rem;
+    // margin-top: 2rem;
+  }
+
+  &__content {
+    padding-left: 2rem;
+  }
+
+  &__arcoiris {
+    margin-top: 3rem;
+    width: 70%;
+    margin-left: 25%;
   }
 }
 
@@ -159,14 +187,18 @@
   .c-mab-carrito {
     outline: none;
 
+    &__title {
+      font-size: $fs-40 !important;
+    }
+
     &__scroll {
       max-height: 424px;
       min-height: 424px;
-      padding-right: 2rem;
+      padding-right: 4rem;
       overflow-y: auto;
 
       &::-webkit-scrollbar {
-        width: 5px;
+        width: 3px;
       }
 
       &::-webkit-scrollbar-track {
@@ -174,12 +206,12 @@
       }
 
       &::-webkit-scrollbar-thumb {
-        background: $dark;
+        background: $gray;
       }
     }
 
     .c-medios-pagos {
-      justify-content: flex-start;
+      // justify-content: flex-start;
 
       img {
         margin: 0 1rem 0.8rem 0;
@@ -203,12 +235,13 @@
     }
 
     &__title {
-      border-bottom: 2px solid $dark;
+      // border-bottom: 2px solid $dark;
+      font-size: $fs-35;
     }
   }
 
   .c-mab-carrito-thankyou {
-    padding: 7rem 0 9rem;
+    padding: 7rem 0 0;
 
     figure {
       margin-right: 3rem;
@@ -216,6 +249,13 @@
 
     &__heart {
       width: 200px;
+    }
+
+    &__title {
+      // font-size: 28px;
+      // line-height: 30px;
+      font-size: 50px;
+      line-height: 54px;
     }
 
     &__car {
@@ -226,13 +266,18 @@
       width: 200px;
     }
 
-    &__title {
-      margin-top: 8rem;
-      font-size: $fs-40;
-    }
-
     &__subtitle {
       font-size: $fs-30;
+    }
+
+    &__content {
+      padding-left: 5rem;
+    }
+
+    &__arcoiris {
+      margin-top: 0;
+      width: 60%;
+      margin-left: 40%;
     }
   }
 }

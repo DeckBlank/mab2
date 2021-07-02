@@ -45,7 +45,7 @@
     }
 
     input:checked + .c-accordion-item__switcher {
-      box-shadow: none;
+      // box-shadow: none;
 
       .c-icon {
         transform: rotateZ(-180deg);

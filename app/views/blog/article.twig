@@ -8,19 +8,19 @@
 
 {% block content %}
   <section class="c-section c-section--articulo overflow-hidden">
-    <div class="c-article bg-warning-alt">
+    <div class="c-article bg-cyan">
       <div class="grid-container">
-        <h2 class="c-article__title margin-bottom-0 dark fs-50 lh-50 margin-bottom-0 text-uppercase">
+        <h2 class="c-article__title margin-bottom-0 dark fs-50 lh-50 margin-bottom-0 text-uppercase text-center">
           <p>{{ post.title }}</p>
         </h2>
-        <h4 class="c-article__autor dark fs-30 lh-30 margin-bottom-0 text-uppercase">
+        <h4 class="c-article__autor dark fs-30 f2 lh-30 margin-bottom-0 text-uppercase text-center">
           <p>por {{ author }}</p>
         </h4>
-        <h5 class="c-article__date dark fs-18 lh-18 margin-bottom-0 text-uppercase margin-bottom-3 f2">
+        <h5 class="c-article__date dark fs-18 lh-18 margin-bottom-0 margin-bottom-3 f2 text-center">
           <p>{{ post.date }}</p>
         </h5>
         <div class="position-relative">
-          <figure class="c-blog__float-figure f1 position-absolute desktop">
+          <!-- <figure class="c-blog__float-figure f1 position-absolute desktop">
             <img class="of--contain" src="{{ theme.link }}/static/images/blog/eye.png" alt="">
           </figure>
           <figure class="c-blog__float-figure f2 position-absolute desktop">
@@ -31,7 +31,7 @@
           </figure>
           <figure class="c-blog__float-figure f4 position-absolute desktop">
             <img class="of--contain" src="{{ theme.link }}/static/images/blog/lapiz.png" alt="">
-          </figure>
+          </figure> -->
           <div class="c-article__content bg-white dark br--large f2 position-relative mab-shadow-soft">
             {{ post.content }}
 
@@ -92,7 +92,7 @@
                         <p class="c-card-article__title dark f2 fs-16">{{ article.date }}</p>
                       </div>
                       <div class="text-center padding-top-1">
-                        <a href="{{ article.link }}" class="dark c-link--ho-dark f2 w-xbold fs-16">Leer más</a>
+                        <a href="{{ article.link }}" class="pri-color c-link--ho-primary f2 w-xbold fs-18">Leer más</a>
                       </div>
                     </div>
                   </div>

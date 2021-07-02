@@ -9,15 +9,15 @@
     ref="topic"
     data-id="{{post.id}}"
     data-area="{{area}}"
-    class="c-section c-section--topic bg-sec-color">
+    class="c-section c-section--topic bg-pri-color">
     <div class="grid-container padding-vertical-3">
       <div class="grid-x align-center">
         <div class="cell medium-10 large-11">
           <h2 v-if="unityData" class="c-course w-medium white margin-bottom-0 lh-65">${ unityData.course.title }</h2>
-          <h2 v-if="unityData" class="c-unity fs-30 f2 w-bold white margin-bottom-3">Unidad ${ metas.get('unity') }: ${ unityData.unity }</h2>
+          <h2 v-if="unityData" class="c-unity fs-30 f2 w-bold dark margin-bottom-3">Unidad ${ metas.get('unity') }: ${ unityData.unity }</h2>
 
           <section class="c-content c-content--protected position-relative br--large bg-white">
-            <a :href="courseLink" class="c-link fs-25 w-medium f2 display-inline-block margin-bottom-1 w-xbold sec-color hover-sec-color margin-bottom-2">
+            <a :href="courseLink" class="c-link fs-25 w-medium f2 display-inline-block margin-bottom-1 w-xbold pri-color hover-sec-color margin-bottom-2">
               <span class="c-icon margin-right-1"><i class="far fa-arrow-left"></i></span> Volver al curso
             </a>
 
@@ -53,13 +53,13 @@
                 <div class="cell large-7">
                   <div v-if="logedUser" class="c-actions__buttons text-center large-text-right">
                     {% if navigation.previous %}
-                      <a href="{{ navigation.previous }}" class="c-button c-button--primary-alt-white display-inline-block f2 w-xbold fs-18 br-10">Anterior</a>
+                      <a href="{{ navigation.previous }}" class="c-button c-button--primary-dark display-inline-block f2  fs-18 br-10">Anterior</a>
                     {% endif %}
 
-                    <button v-if="questions.length > 0" @click="isOpenedQuestionsModal = true" class="c-button c-button--mab-warning-black br-10 f2 w-xbold fs-18 margin-horizontal-1">Repaso</button>
+                    <button v-if="questions.length > 0" @click="isOpenedQuestionsModal = true" class="c-button c-button--warning-alt-dark br-10 f2  fs-18 margin-horizontal-1">Repaso</button>
 
                     {% if navigation.next %}
-                      <a href="{{ navigation.next }}" class="c-button c-button--success display-inline-block f2 w-xbold fs-18">Siguiente</a>
+                      <a href="{{ navigation.next }}" class="c-button c-button--cyan display-inline-block f2 fs-18">Siguiente</a>
                     {% endif %}
                   </div>
                 </div>
@@ -84,10 +84,10 @@
               <div class="c-tab-head text-center">
                 <div class="grid-x">
                   <div class="cell large-6">
-                    <div @click="view = 1" :class="{ active : view == 1 }" class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30 dark border-0">SOBRE EL CURSO</div>
+                    <div @click="view = 1" :class="{ active : view == 1 }" class="c-tab-head__title w-xbold position-relative margin-vertical-1 fs-30 dark border-0">SOBRE EL CURSO</div>
                   </div>
                   <div class="cell large-6">
-                    <div @click="view = 2" :class="{ active : view == 2 }" class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30 small dark">COMENTARIOS</div>
+                    <div @click="view = 2" :class="{ active : view == 2 }" class="c-tab-head__title w-xbold position-relative margin-vertical-1 fs-30 small dark">COMENTARIOS</div>
                   </div>
                 </div>
               </div>
@@ -196,7 +196,7 @@
                                   <p class="margin-bottom-0 dark f2 fs-25 text-uppercase ">Unidad ${ uindex + 1 }</p>
                                   <ul class="ul-reset">
                                     <li v-for="(topic, tindex) of unity.topics" class="c-themes-list__item dark f2 fs-18" :class="{'active' : topicID == topic.id}">
-                                      <a :href="getTopicLink(topic.video.link, tindex + 1, uindex + 1)" class="dark c-link--ho-secondary">
+                                      <a :href="getTopicLink(topic.video.link, tindex + 1, uindex + 1)" class="dark c-link--ho-primary">
                                         <span class="triangle"></span> ${ topic.title }
                                       </a>
                                       <p v-if="topicID == topic.id" class="margin-0"><small class="status">Reproduciendo ahora</small></p>

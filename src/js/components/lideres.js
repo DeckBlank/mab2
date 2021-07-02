@@ -10,16 +10,16 @@ Vue.component('lideres',{
           <div v-for="lider of body" :key="lider.id" class="swiper-slide white">
             <div class="flex-container flex-dir-column align-middle text-center height-100">
               <div class="c-lider-avatar margin-bottom-1 margin-top-1">
-                <div class="c-profile-card c-profile-card--warning position-relative height-100 flex-container align-center align-bottom">
+                <div class="c-profile-card c-profile-card--primary position-relative height-100 flex-container align-center align-bottom">
                   <figure class="c-profile-card__content position-relative" :class="'padding-horizontal-' + lider.padding">
                     <img class="of--contain" :style="'width: ' + lider.width + 'px;'" :src="THEME_URL + '/static/images/home/leaders/' + lider.avatar + '.png'" alt="">
                   </figure>
                 </div>
               </div>
               <div>
-                <h3 class="fs-25 f2 w-xbold white margin-bottom-0">{{ lider.name }}</h3>
-                <p class="fs-18 white f2 margin-bottom-0">{{ lider.job }}</p>
-                <a class="c-link c-link--warning f2 w-bold" :href="SITE_URL + '/lider/' + lider.profile">Leer más</a>
+                <h3 class="fs-25 w-xbold dark margin-bottom-0">{{ lider.name }}</h3>
+                <p class="fs-18 dark f2 margin-bottom-0">{{ lider.job }}</p>
+                <a class="c-button c-button--white-dark f2 w-bold margin-top-1 d-inline-block c-link--ho-dark" :href="SITE_URL + '/lider/' + lider.profile">Leer más</a>
               </div>
             </div>
           </div>

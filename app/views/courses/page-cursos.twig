@@ -6,14 +6,14 @@
 
 {% block content %}
   <section class="c-section c-section--courses">
-    <div class="c-banner bg-sec-color mab-shadow">
+    <div class="c-banner bg-warning-alt mab-shadow">
       <div class="grid-container">
         <div class="grid-x grid-margin-x grid-margin-y align-middle align-self-stretch">
           <div class="cell large-5">
             <div class="padding-vertical-3"> 
               <h1 class="c-banner__title warning">
-                <span class="white text-uppercase">tenemos más de <span class="warning">400</span>
-                  cursos y <br> <span class="warning">30 000</span>
+                <span class="dark text-uppercase">tenemos más de <span class="pri-color">400</span>
+                  cursos y <br> <span class="pri-color">30 000</span>
                   piezas
                   educativas</span><br>
               </h1> 
@@ -22,7 +22,7 @@
           <div class="cell large-7 margin-bottom-0">
             <div class="position-relative flex-container align-center">
               <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="of--contain"> 
-              <img src="{{ theme.link }}/static/images/home/heart.png" alt="" class="c-banner__heart position-absolute of--contain">
+              {# <img src="{{ theme.link }}/static/images/home/heart.png" alt="" class="c-banner__heart position-absolute of--contain"> #}
             </div>
           </div>
         </div>
@@ -33,7 +33,7 @@
       <div class="c-mab-recommended padding-top-2">
         <div class="grid-container padding-vertical-3">
           <h2>
-            <p class="dark fs-50 lh-40 margin-bottom-0">recomendaciones para ti</p>
+            <p class="dark fs-50 lh-40 margin-bottom-0 text-center">recomendaciones para ti</p>
           </h2>
   
           <div v-if="isLoadingRecommended">
@@ -78,8 +78,8 @@
                           <span class="c-course-card__likes f2"><i class="fas fa-heart mr-05"></i>${ course.likes }</span>
                         </div>
                         <div class="small-7 medium-7 text-right">
-                          <span v-if="course.enroll" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">Inscrito</span>
-                          <button v-else-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                          <span v-if="course.enroll" class="c-button c-button--mab-white-black lh-14 f2 w-xbold">Inscrito</span>
+                          <button v-else-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-white-black lh-14 f2 w-xbold">
                             S/ ${ Number(course.price).toFixed(2) } 
                             <i class="fas fa-shopping-cart"></i>
                           </button>
@@ -218,7 +218,7 @@
             </div>
           </div>
 
-          <div v-if="courses.length" class="grid-x grid-margin-x grid-margin-y">
+          <div v-if="courses.length" class="grid-x grid-margin-x grid-margin-y align-center">
             <div v-for="course of courses" :key="course.id" class="cell medium-6 large-3">
               <div class="c-course-card br--large" :class="'c-course-card--' + course.color">
                 <figure class="c-course-card__figure position-relative">
@@ -240,8 +240,8 @@
                       <span class="c-course-card__likes f2"><i class="fas fa-heart mr-05"></i>${ course.likes }</span>
                     </div>
                     <div class="small-7 medium-7 text-right">
-                      <span v-if="course.enroll" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">Inscrito</span>
-                      <button v-else-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-warning-black lh-14 f2 w-xbold">
+                      <span v-if="course.enroll" class="c-button c-button--mab-white-black lh-14 f2 w-xbold">Inscrito</span>
+                      <button v-else-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-white-black lh-14 f2 w-xbold">
                         S/ ${ Number(course.price).toFixed(2) } 
                         <i class="fas fa-shopping-cart"></i>
                       </button>

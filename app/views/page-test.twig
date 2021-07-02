@@ -40,7 +40,7 @@
 
           <a :href="userProfile" class="c-button c-button--white-dark margin-right-1 f2 w-xbold text-center margin-bottom-2 display-inline-block">Volver al perfil</a>
 
-          <div class="grid-x align-center align-middle bg-white br-45 padding-vertical-2 padding-horizontal-3 ">
+          <div class="grid-x align-center align-middle bg-white br-45 padding-vertical-2 padding-horizontal-3 br-bottom-0-0">
             <div class="cell medium-4 large-4">
               <div class="c-chart flex-container flex-dir-column align-justify text-center height-100">
                 <div>
@@ -55,7 +55,7 @@
                 <div class="cell medium-6 large-4">
                   <div class="c-behaviour flex-container flex-dir-column align-middle text-center">
                     <figure id="visual" class="c-behaviour__vector margin-bottom-1">
-                      <img class="of--contain" src="{{theme.link}}/static/images/vectors/test/visual.png?key=20200419" alt="">
+                      <img class="of--contain width-100" src="{{theme.link}}/static/images/vectors/test/visual.png?key=20200419" alt="">
                     </figure>
                     <h3 class="c-behaviour__title">
                       <p class="f2 fs-30 w-bold dark">${testResult.visual}%</p>
@@ -66,7 +66,7 @@
                 <div class="cell medium-6 large-4">
                   <div class="c-behaviour flex-container flex-dir-column align-middle text-center">
                     <figure id="auditive" class="c-behaviour__vector margin-bottom-1">
-                      <img class="of--contain" src="{{theme.link}}/static/images/vectors/test/auditivo.png?key=20200419" alt="">
+                      <img class="of--contain width-100" src="{{theme.link}}/static/images/vectors/test/auditivo.png?key=20200419" alt="">
                     </figure>
                     <h3 class="c-behaviour__title">
                       <p class="f2 fs-30 w-bold dark">${testResult.auditive}%</p>
@@ -77,7 +77,7 @@
                 <div class="cell medium-6 large-4">
                   <div class="c-behaviour flex-container flex-dir-column align-middle text-center">
                     <figure id="kinesthetic" class="c-behaviour__vector margin-bottom-1">
-                      <img class="of--contain" src="{{theme.link}}/static/images/vectors/test/kinestesico.png?key=20200419" alt="">
+                      <img class="of--contain width-100" src="{{theme.link}}/static/images/vectors/test/kinestesico.png?key=20200419" alt="">
                     </figure>
                     <h3 class="c-behaviour__title">
                       <p class="f2 fs-30 w-bold dark">${testResult.kinesthetic}%</p>
@@ -92,7 +92,7 @@
       </div>
       <div class="c-test grid-x align-center" :class="{ hidden : testDone, 'c-test--done' : testDone }">
         <div class="cell medium-10 large-8 padding-bottom-2">
-          <section class="c-content c-content--protected position-relative bg-white br-45">
+          <section class="c-content c-content--protected br-bottom-0-0 position-relative bg-white br-45">
             <section class="c-questions">
               <div id="slider-questions" class="c-questions__list swiper-container margin-bottom-1">
                 <div class="swiper-wrapper">
@@ -153,8 +153,8 @@
             </section>
           </section>
           <div class="c-bottom-btn flex-container align-center-middle margin-top-3">
-            <a :href="userProfile" class="c-button c-button--white-dark margin-right-1 f2 w-xbold text-center">Volver al perfil</a>
-            <button @click="saveTest()" :disabled="!filled || isSaving" class="c-button c-button--white-dark f2 w-xbold">Guardar</button>
+            <a :href="userProfile" class="c-button c-button--primary margin-right-1 f2 text-center">Volver al perfil</a>
+            <button @click="saveTest()" :disabled="!filled || isSaving" class="c-button c-button--white-dark f2">Guardar</button>
           </div>
         </div>
       </div>

@@ -12,35 +12,37 @@
           <div class="cell large-4">
             <div class="c-banner__content padding-vertical-3">
               <img class="c-banner__logo of--contain margin-bottom-2" src="{{ theme.link }}/static/images/logo-white.png" alt="">
-              <h1 class="c-banner__title warning">
+              <h1 class="c-banner__title dark">
                 <span class="fs-50 c-lh--50 display-block">Educación <br> que te hace </span>      
                 <span class="white fs-70 c-lh--70 big">CRECER</span>
               </h1>
-              <p class="white f2 fs-18"> Somos una comunidad de personas que creemos en una educación integral para todos y para todas, donde hay un balance académico, emocional y creativo. </p>
-              <p class="white f2 fs-21 w-bold margin-bottom-0">Macarena Arribas</p>
-              <p class="white f2 fs-16">Fundadora de MAB</p>
-              <a href="{{ site.url }}/nosotros" class="c-link c-link--warning f2 w-bold fs-18">Ver más</a>
+              <p class="white f2 fs-18 lh-21"> Somos una comunidad de personas que creemos en una educación integral para todos y para todas, donde hay un balance académico, emocional y creativo. </p>
+              <p class="white f2 fs-18 w-bold margin-bottom-0">Macarena Arribas</p>
+              <p class="white f2 fs-14 lh-14 margin-bottom-2">Fundadora de MAB</p>
+              <a href="{{ site.url }}/nosotros" class="c-link dark c-link--ho-dark bg-white f2 w-bold fs-18 c-box-round-btn">Ver más</a>
             </div>
           </div>
           <div class="cell large-8">
             <div class="c-banner__figure position-relative flex-container align-center ">
               <img class="c-banner__img of--contain" src="{{ theme.link }}/static/images/home/banner.png" alt="">
-              <img class="c-banner__heart position-absolute of--contain" src="{{ theme.link }}/static/images/home/heart.png" alt="">
+              <!-- <img class="c-banner__heart position-absolute of--contain" src="{{ theme.link }}/static/images/home/heart.png" alt=""> -->
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="c-player bg-sec-color">
+    <div class="c-player bg-white">
       <div class="grid-container padding-vertical-3">
-        <div class="grid-x grid-margin-x grid-margin-y align-middle">
-          <div class="cell large-4">
+        <div class="grid-x grid-margin-x grid-margin-y align-center">
+          <div class="cell large-6">
             <figure class="text-center">
-              <img class="c-player__logo of--contain" src="{{ theme.link }}/static/images/home/mab.png" alt="">
+              <img class="c-player__logo of--contain" src="{{ theme.link }}/static/images/home/mab-new.png" alt="">
             </figure>
           </div>
-          <div class="cell large-8">
+          <div class="cell margin-0">
+          </div>
+          <div class="cell large-11">
             <div class="flex-container">
               <figure class="position-relative text-center">
                 <img src="{{ theme.link }}/static/images/home/laptop.png" alt="">
@@ -52,20 +54,20 @@
       </div>
     </div>
 
-    <div class="c-metodology bg-pri-alt overflow-hidden">
+    <div class="c-metodology bg-cyan overflow-hidden">
       <div class="grid-container padding-vertical-3">
-        <h2 class="c-metodology__title margin-bottom-3">
-          <p class="white fs-30 margin-bottom-0">Por qué nuestra</p>
-          <p class="warning fs-50">Metodología funciona</p>
+        <h2 class="c-metodology__title margin-bottom-3 text-center">
+          <p class="white fs-50 margin-bottom-0">Por qué nuestra</p>
+          <p class="dark fs-50">Metodología funciona</p>
         </h2>
         <div class="grid-x align-center">
           <div class="cell medium-10 large-8">
             <div class="c-advantages position-relative">
               <div class="grid-x grid-margin-x grid-margin-y">
                 <div v-for="item of advantages" :key="item.id" class="cell medium-6 large-4 align-self-stretch">
-                  <div class="c-card-advantage bg-pri-alt br--large padding-2 text-center height-100">
+                  <div class="c-card-advantage bg-white br-bottom-0-0 br--large padding-2 text-center height-100 margin-horizontal-1">
                     <img class="c-card-advantage__vector of--contain margin-bottom-1" :src="'{{ theme.link }}/static/images/home/vectors/' + item.vector + '.png'" alt="">
-                    <p class="margin-bottom-0 white fs-21">${ item.title }</p>
+                    <p class="margin-bottom-0 dark fs-21">${ item.title }</p>
                   </div>
                 </div>
               </div>
@@ -75,20 +77,20 @@
       </div>
     </div>
 
-    <div class="c-features bg-warning-alt">
+    <div class="c-features bg-pri-color">
       <div class="grid-container padding-vertical-3">
         <div class="grid-x align-center">
-          <div class="cell medium-10 large-8">
+          <div class="cell medium-10 large-9">
             <section class="margin-bottom-2">
               <div class="grid-x grid-margin-x grid-margin-y align-middle">
                 <div class="cell large-6">
                   <div class="flex-container align-center large-align-right">
-                    <div class="c-dots-background c-dots-background--warning left position-relative">
-                      <div class="c-profile-card c-profile-card--vector-right c-profile-card--secondary position-relative">
+                    <div class="c-dots-background c-dots-background--primary left position-relative">
+                      <div class="c-profile-card c-profile-card--vector-right c-profile-card--warning position-relative">
                         <figure class="c-profile-card__content position-relative padding-horizontal-3">
                           <img class="of--contain" src="{{ theme.link }}/static/images/home/leaders/maca.png" alt="">
                         </figure>
-                        <img class="c-profile-card__vector of--contain position-absolute" src="{{ theme.link }}/static/images/home/heart.png" alt="">
+                        <!-- <img class="c-profile-card__vector of--contain position-absolute" src="{{ theme.link }}/static/images/home/heart.png" alt=""> -->
                       </div>
                     </div>
                   </div>
@@ -96,10 +98,10 @@
                 <div class="cell large-6">
                   <div class="text-center large-text-left large-pl-2">
                     <h2 class="margin-bottom-0">
-                      <p class="dark fs-40 c-lh--40 margin-bottom-0">BALANCE</p>
-                      <p class="sec-color fs-60 c-lh--60 margin-bottom-0">HARD + SOFT</p>
+                      <p class="white fs-40 c-lh--40 margin-bottom-0">BALANCE</p>
+                      <p class="dark fs-60 c-lh--60 margin-bottom-0">HARD + SOFT</p>
                     </h2>
-                    <p class="margin-bottom-0 f2 fs-18 dark c-lh--21"><span class="w-xbold">Cursos académicos, emocionales y creativos</span>, con reconocidos especialistas y con tutores capacitados para brindar una educación holística.</p>
+                    <p class="margin-bottom-0 f2 fs-18 white c-lh--21"><span class="w-xbold">Cursos académicos, emocionales y creativos</span>, con reconocidos especialistas y con tutores capacitados para brindar una educación holística.</p>
                   </div>
                 </div>
               </div>
@@ -109,23 +111,23 @@
                 <div class="cell large-6 small-order-2 large-order-1">
                   <div class="">
                     <h2 class="flex-container flex-dir-column align-middle large-align-right margin-bottom-1">
-                      <p class="sec-color fs-60 c-lh--60 margin-bottom-0">100%</p>
-                      <p class="sec-color fs-40 c-lh--40 margin-bottom-0">COMPROMETIDOS</p>
+                      <p class="white fs-60 c-lh--60 margin-bottom-0">100%</p>
+                      <p class="white fs-40 c-lh--40 margin-bottom-0">COMPROMETIDOS</p>
                       <p class="dark fs-40 c-lh--40 margin-bottom-0 flex-container align-middle">
                         <span class="fs-16 c-lh--16 text-left mr-05">CON <br> LA</span> EDUCACIÓN
                       </p>
                     </h2>
-                    <p class="margin-bottom-0 f2 fs-18 c-lh--21 dark text-center large-text-right">Empoderamos a estudiantes provenientes del <span class="w-xbold">sector privado y público</span> a través de diferentesproyectos innovadores</p>
+                    <p class="margin-bottom-0 f2 fs-18 c-lh--21 white text-center large-text-right">Empoderamos a estudiantes provenientes del <span class="w-xbold">sector privado y público</span> a través de diferentesproyectos innovadores</p>
                   </div>
                 </div>
                 <div class="cell large-6 small-order-1 large-order-2">
                   <div class="flex-container align-center large-align-right">
-                    <div class="c-dots-background c-dots-background--warning right position-relative">
-                      <div class="c-profile-card c-profile-card--vector-right c-profile-card--secondary position-relative">
+                    <div class="c-dots-background c-dots-background--primary right position-relative">
+                      <div class="c-profile-card c-profile-card--vector-right c-profile-card--warning position-relative">
                         <figure class="c-profile-card__content position-relative padding-horizontal-1">
                           <img class="of--contain" src="{{ theme.link }}/static/images/home/leaders/ernesto.png" alt="">
                         </figure>
-                        <img class="c-profile-card__vector of--contain position-absolute" src="{{ theme.link }}/static/images/home/bolb.png" alt="">
+                        <!-- <img class="c-profile-card__vector of--contain position-absolute" src="{{ theme.link }}/static/images/home/bolb.png" alt=""> -->
                       </div>
                     </div>
                   </div>
@@ -136,12 +138,12 @@
               <div class="grid-x grid-margin-x grid-margin-y align-middle">
                 <div class="cell large-6">
                   <div class="flex-container align-center large-align-right">
-                    <div class="c-dots-background c-dots-background--warning left position-relative">
-                      <div class="c-profile-card c-profile-card--vector-left c-profile-card--secondary position-relative">
+                    <div class="c-dots-background c-dots-background--primary left position-relative">
+                      <div class="c-profile-card c-profile-card--vector-left c-profile-card--warning position-relative">
                         <figure class="c-profile-card__content position-relative padding-horizontal-1">
                           <img class="of--contain" src="{{ theme.link }}/static/images/home/leaders/vanessa.png" alt="">
                         </figure>
-                        <img class="c-profile-card__vector of--contain position-absolute" src="{{ theme.link }}/static/images/home/cup.png" alt="">
+                        <!-- <img class="c-profile-card__vector of--contain position-absolute" src="{{ theme.link }}/static/images/home/cup.png" alt=""> -->
                       </div>
                     </div>
                   </div>
@@ -149,11 +151,11 @@
                 <div class="cell large-6">
                   <div class="text-center large-text-left">
                     <h2 class="margin-bottom-1">
-                      <p class="dark fs-40 c-lh--40 margin-bottom-0">integración</p>
-                      <p class="sec-color fs-60 c-lh--60 margin-bottom-0">rural y</p>
-                      <p class="sec-color fs-60 c-lh--60 margin-bottom-0">urbana</p>
+                      <p class="white fs-40 c-lh--40 margin-bottom-0">integración</p>
+                      <p class="dark fs-60 c-lh--60 margin-bottom-0">rural y</p>
+                      <p class="dark fs-60 c-lh--60 margin-bottom-0">urbana</p>
                     </h2>
-                    <p class="margin-bottom-0 f2 fs-18 c-lh--21 dark">Tenemos <span class="w-xbold">programas presenciales y virtuales en zonas rurales del país,</span> donde educamos a las comunidades.</p>
+                    <p class="margin-bottom-0 f2 fs-18 c-lh--21 white">Tenemos <span class="w-xbold">programas presenciales y virtuales en zonas rurales del país,</span> donde educamos a las comunidades.</p>
                   </div>
                 </div>
               </div>
@@ -163,14 +165,24 @@
       </div>
     </div>
 
+    <div class="c-tree padding-top-3">
+      <div class="grid-container">
+        <div class="grid-x align-center">
+          <div class="cell large-10">
+            <img class="width-100" src="{{ theme.link }}/static/images/home/arbol.png" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="c-testimonies bg-dark">
       <div class="grid-container padding-vertical-3">
-        <div class="text-center large-text-right white margin-bottom-2">
+        <div v-if="false" class="text-center large-text-right white margin-bottom-2">
           <h2 class="fs-50 c-lh--50">Nuestros</h2>
           <h2 class="fs-50 c-lh--50">Números</h2>
           <p class="fs-25 f2 margin-bottom-0 text-uppercase">Hablan por nosotros</p>
         </div>
-        <section class="margin-bottom-3">
+        <section v-if="false" class="margin-bottom-3">
           <div class="c-metric c-metric--left text-left position-relative">
             <img class="of--contain" src="{{ theme.link }}/static/images/home/testimonies/metric1.png" alt="">
           </div>
@@ -184,20 +196,21 @@
               <div v-for="i of [1,2,3,4,4,4,4,4,4,4,4]" :key="i.id" class="swiper-slide white">
                 <div class="c-testimony">
                   <img class="c-testimony__avatar position-absolute of--cover" src="{{ theme.link }}/static/images/home/testimonies/people/juan.png" alt="">
-                  <div class="c-testimony__content position-relative br--large bg-white dark f2 text-center w-medium">
-                    <img src="{{ theme.link }}/static/images/icons/quotes.png" alt="">
+                  <div class="c-testimony__content br-bottom-0-0 position-relative br--large bg-white dark f2 text-center w-medium">
+                    <img class="quotes" src="{{ theme.link }}/static/images/icons/circle-quotes.png" alt="">
                     <p>
                       Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, nisi. Natus harum, accusantium amet, ipsum eveniet eaque unde mollitia quos nemo esse excepturi culpa? Facere illum fuga asperiores facilis a!
                     </p>
-                  </div>
-                  <div class="c-testimony__about position-absolute bg-warning dark flex-container align-center-middle">
-                    <div class="f2 text-center">
-                      <p class="w-xbold margin-bottom-0 c-lh--18">Juan Soto</p>
-                      <p class="margin-bottom-0 c-lh--18">Padre</p>
-                      <p class="margin-bottom-0 c-lh--18">Apurímac</p>
-                      <img class="c-testimony__flag of--contain" src="https://www.countryflags.io/pe/flat/64.png" alt="">
+                    <div class="c-testimony__about dark flex-container align-center-middle">
+                      <div class="f2 text-center">
+                        <p class="w-xbold margin-bottom-0 c-lh--18">Juan Soto</p>
+                        <p class="margin-bottom-0 c-lh--18">Padre</p>
+                        <p class="margin-bottom-0 c-lh--18">Apurímac</p>
+                        <img class="c-testimony__flag of--contain" src="https://www.countryflags.io/pe/flat/64.png" alt="">
+                      </div>
                     </div>
                   </div>
+
                 </div>
               </div>
             </div>
@@ -207,42 +220,42 @@
       </div>
     </div>
 
-    <div class="c-lideres bg-pri-alt">
+    <div class="c-lideres bg-warning-alt">
       <div class="grid-container padding-vertical-3">
         <h2 class="margin-bottom-1">
-          <p class="white fs-50 c-lh--50 margin-bottom-0">LÍDERES MAB</p>
+          <p class="dark fs-50 c-lh--50 margin-bottom-0 text-center">LÍDERES MAB</p>
         </h2>
         <lideres :body="lideres" />
       </div>
     </div>
 
     <div class="c-brands bg-pri-alt position-relative">
-      <img class="c-brands__mixing position-absolute of--contain" src="{{ theme.link }}/static/images/home/brands/mixing.png" alt="">
+      <img class="c-brands__mixing position-absolute of--contain desktop" src="{{ theme.link }}/static/images/home/head.png" alt="">
       <div class="grid-x">
         <div class="cell medium-6 align-self-stretch">
-          <div class="c-brands__1 bg-sec-color padding-2 height-100 flex-container align-center">
-            <h2 class="fs-60 c-lh--60 white">Nuestros <br> compañeros de <br> <span class="warning">sueños</span></h2>
+          <div class="c-brands__1 bg-white padding-2 height-100 flex-container align-center align-middle">
+            <h2 class="fs-60 c-lh--60 dark">Nuestros <br> compañeros de <br> <span class="cyan">sueños</span></h2>
           </div>
         </div>
         <div class="cell small-6 align-self-stretch">
-          <div class="c-brands__2 bg-warning-alt padding-2 text-center height-100 flex-container align-center-middle">
+          <div class="c-brands__2 bg-limon padding-2 text-center height-100 flex-container align-center-middle">
             <img class="of--contain" src="{{ theme.link }}/static/images/home/brands/lindlen.png" alt="">
           </div>
         </div>
         <div class="cell small-6 align-self-stretch">
-          <div class="c-brands__3 bg-pri-color padding-2 text-center height-100 flex-container align-center-middle">
+          <div class="c-brands__3 bg-cyan padding-2 text-center height-100 flex-container align-center-middle">
             <img class="of--contain" src="{{ theme.link }}/static/images/home/brands/tambo.png" alt="">
           </div>
         </div>
         <div class="cell medium-6 align-self-stretch">
-          <div class="c-brands__4 bg-pri-alt padding-2 text-center height-100 flex-container align-center-middle">
+          <div class="c-brands__4  bg-magenta padding-2 text-center height-100 flex-container align-center-middle">
             <img class="of--contain" src="{{ theme.link }}/static/images/home/brands/aruma.png" alt="">
           </div>
         </div>
       </div>
     </div>
 
-    <div class="bg-white padding-vertical-1">
+    <div class="bg-warning-alt padding-vertical-1">
       <div class="grid-container">
         <p class="dark fs-30 f2 w-xbold text-center margin-bottom-0">#CómplicesEducativos</p>
       </div>
@@ -261,21 +274,21 @@
       </div>
     </div>
 
-    <div class="c-faq bg-warning-alt">
+    <div class="c-faq bg-indigo">
       <section class="c-faq__container">
         <div class="grid-container">
           <div class="padding-vertical-3">
             <div class="grid-x align-center">
               <div class="cell medium-8 large-6">
-                <div class="c-accordion position-relative c-dots-background c-dots-background--warning right">
+                <div class="c-accordion position-relative c-dots-background c-dots-background--indigo right">
                   <h3 class="c-accordion__header margin-bottom-0 padding-1 bg-dark white fs-21 f2 text-uppercase text-center w-xbold">Preguntas frecuentes</h3>
                   <div class="c-accordion__body bg-white">
                     <ul class="ul-reset">
                       <li v-for="(question, qindex) of questions" :key="question.id" class="c-accordion-item">
                         <input v-model="question.enable" @change="resetAccordion(question)" :id="'accordion-item-' + qindex" class="c-accordion hide" type="checkbox">
-                        <label class="c-accordion-item__switcher width-100 bg-sec-color" :for="'accordion-item-' + qindex">
-                          <p class="margin-bottom-0 w-bold white f2 fs-18">${ question.title }</p>
-                          <i class="c-icon white fs-21 far fa-chevron-up"></i>
+                        <label class="c-accordion-item__switcher width-100 bg-warning-alt" :for="'accordion-item-' + qindex">
+                          <p class="margin-bottom-0 w-bold dark f2 fs-18">${ question.title }</p>
+                          <i class="c-icon dark fs-21 far fa-chevron-up"></i>
                         </label>
                         <div class="c-accordion-item__content position-relative bg-white f2 dark w-medium" v-html="question.answer"></div>
                       </li>

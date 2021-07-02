@@ -24,6 +24,7 @@
 
     &__list {
       padding: 2rem 1rem;
+      margin-bottom: 4rem;
     }
 
     &__container {
@@ -137,8 +138,10 @@
       }
 
       &__figure {
-        width: 35%;
-        top: -12rem;
+        // width: 35%;
+        // top: -12rem;
+        width: 30%;
+        top: -10rem;
         right: -7rem;
       }
     }

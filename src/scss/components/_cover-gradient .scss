@@ -17,10 +17,28 @@
     justify-content: space-between;
     box-sizing: border-box;
     background: linear-gradient(red, transparent);
+    background: none !important;
+
+    .c-corner-title {
+      span {
+        font-size: 70px;
+        line-height: 70px;
+        display: block;
+        margin-bottom: 0.5rem;
+        color: $primary-color;
+      }
+
+      p {
+        margin-bottom: 0;
+        font-size: 40px;
+        line-height: 40px;
+      }
+    }
   }
 
   &__bottom {
     box-sizing: border-box;
+    background: linear-gradient(to top, rgba($dark, 0.5) 60%, transparent) !important;
 
     .c-gradient-title {
       p {
@@ -58,12 +76,36 @@
     }
   }
 
+  &__bottom-primary {
+    .c-gradient-title {
+      span {
+        color: $primary-color;
+      }
+    }
+  }
+
+  &__bottom-limon {
+    .c-gradient-title {
+      span {
+        color: $limon;
+      }
+    }
+  }
+
+  &__bottom-orange {
+    .c-gradient-title {
+      span {
+        color: $orange;
+      }
+    }
+  }
+
   .c-corner-logo {
     height: 30px;
   }
 
   .c-corner-text {
-    color: $white;
+    color: $dark;
     font-size: $fs-16;
     line-height: 18px;
     padding: 1rem 0;
@@ -130,11 +172,11 @@
 
   &--dark {
     .c-cover-gradient__top {
-      background: linear-gradient($black, transparent);
+      background: linear-gradient($dark, transparent);
     }
 
     .c-cover-gradient__bottom {
-      background: linear-gradient(to top, rgba($black, 0.5) 60%, transparent);
+      background: linear-gradient(to top, rgba($dark, 0.5) 60%, transparent);
     }
   }
 }

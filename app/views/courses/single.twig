@@ -10,37 +10,37 @@
   {% include "components/signup.twig" %}
 
   <section class="c-section c-section--mab-course">
-    <div class="c-banner bg-sec-color mab-shadow">
+    <div class="c-banner bg-pri-color mab-shadow">
       <div class="grid-container">
-        <div class="grid-x grid-margin-x align-bottom align-self-stretch">
+        <div class="grid-x grid-margin-x align-middle align-self-stretch">
           <div class="cell large-5">
             <div class="padding-vertical-3"> 
               <h1 class="c-banner__title warning">
                 <span class="white text-uppercase">{{ post.title }}</span>
               </h1> 
-              {% if teacher and teacher.fullname %} <h5 class="f2 white w-xbold margin-0">Con {{ teacher.fullname }}</h5> {% endif %}
+              {% if teacher and teacher.fullname %} <h5 class="f2 dark w-xbold margin-0">Con {{ teacher.fullname }}</h5> {% endif %}
 
-              {% if teacher and teacher.job %} <h6 class="f2 white fs-16">{{ teacher.job }}</h6> {% endif %}
+              {% if teacher and teacher.job %} <h6 class="f2 dark fs-16">{{ teacher.job }}</h6> {% endif %}
 
-              <p class="f2 white margin-top-1">{{ description }}</p>
-              <button v-if="logedUser" @click="startCourse('{{ post.id }}', '{{ post.title }}', '{{ post.link }}')" class="c-button c-button--mab-warning-black f2 w-xbold">Comenzar curso!</button>
-              <div class="flex-container align-midle f2 white fs-18 padding-top-2">
+              <p class="f2 dark margin-top-1">{{ description }}</p>
+              <button v-if="logedUser" @click="startCourse('{{ post.id }}', '{{ post.title }}', '{{ post.link }}')" class="c-link dark c-link--ho-dark bg-white f2 w-bold fs-18 c-box-round-btn">Comenzar curso!</button>
+              <div class="flex-container align-midle f2 dark fs-18 padding-top-2">
                 <span class="margin-right-1"><i class="fas fa-heart"></i> {{ likes }}</span> 
 
                 {% if trailer %}
-                  <a @click="openTrailer($event)" class="c-banner__link c-link--warning margin-right-1 warning bb-warning" href="#">Ver trailer</a> 
+                  <a @click="openTrailer($event)" class="c-banner__link c-link--ho-dark margin-right-1 dark bb-dark" href="#">Ver trailer</a> 
                 {% endif %}
 
                 {% if teacher.link %}
-                  <a href="{{ teacher.link }}" class="c-banner__link c-link--warning warning bb-warning">Ver más sobre el speaker</a>
+                  <a href="{{ teacher.link }}" class="c-banner__link c-link--ho-dark dark bb-dark">Ver más sobre el speaker</a>
                 {% endif %}
               </div>
             </div>
           </div> 
           <div class="cell large-7 margin-bottom-0">
-            <div class="position-relative flex-container align-center">
-              <img src="{{ teacher.cover.url }}" alt="" class="c-banner__figure of--contain"> 
-              <img src="{{ (vector) ? vector : theme.link }}/static/images/home/heart.png" alt="" class="c-banner__heart position-absolute of--contain">
+            <div class="position-relative flex-container align-center course-bg-figure">
+              <img src="{{ teacher.cover.url }}" alt="" class="c-banner__figure of--contain "> 
+              <!-- <img src="{{ (vector) ? vector : theme.link }}/static/images/home/heart.png" alt="" class="c-banner__heart position-absolute of--contain"> -->
             </div>
           </div>
         </div>
@@ -52,10 +52,10 @@
           <div class="c-tab-head text-center">
             <div class="grid-x">
               <div class="cell">
-                <div @click="view = 1" :class="{ active : view == 1 }" class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30 border-0">SOBRE EL CURSO</div>
+                <div @click="view = 1" :class="{ active : view == 1 }" class="c-tab-head__title pri-color w-xbold position-relative margin-vertical-1 fs-40 border-0">SOBRE EL CURSO</div>
               </div>
               <div v-if="false" class="cell large-6">
-                <div @click="view = 2" :class="{ active : view == 2 }" class="c-tab-head__title f2 w-xbold position-relative margin-vertical-1 fs-30 small">FORO</div>
+                <div @click="view = 2" :class="{ active : view == 2 }" class="c-tab-head__title pri-color w-xbold position-relative margin-vertical-1 fs-40 small">FORO</div>
               </div>
             </div>
           </div>
@@ -69,37 +69,37 @@
                       <ul class="c-tab__list f2 dark margin-left-0 fs-18">
                         <li>
                           <span class="c-icon-course">
-                            <i class="fas fa-clock sec-color"></i>
+                            <i class="fas fa-clock pri-color"></i>
                           </span>
                           {{ duration }}hrs de clases
                         </li>
                         <li>
                           <span class="c-icon-course">
-                            <i class="fas fa-hourglass sec-color"></i>
+                            <i class="fas fa-hourglass pri-color"></i>
                           </span>
                           Acceso indefinido a todas las clases
                         </li>
                         <li>
                           <span class="c-icon-course">
-                            <i class="fas fa-file-download sec-color"></i>
+                            <i class="fas fa-file-download pri-color"></i>
                           </span>
                           Material descargable
                         </li>
                         <li>
                           <span class="c-icon-course">
-                            <i class="fas fa-check-circle sec-color"></i>
+                            <i class="fas fa-check-circle pri-color"></i>
                           </span>
                           Prueba de opción múltiple
                         </li>
                         <li>
                           <span class="c-icon-course">
-                            <i class="fas fa-comments sec-color"></i>
+                            <i class="fas fa-comments pri-color"></i>
                           </span>
                           Acceso al foro del curso
                         </li>
                         <li>
                           <span class="c-icon-course">
-                            <i class="fas fa-clock sec-color"></i>
+                            <i class="fas fa-clock pri-color"></i>
                           </span>
                           Diploma
                         </li>
@@ -163,14 +163,14 @@
                         <ul class="ul-reset">
                           <li v-for="(unity, uindex) of unities" :key="unity.id" class="c-accordion-item">
                             <input v-model="unity.enable" @change="resetAccordion(unity)" :id="'accordion-item-' + uindex" class="c-accordion hide" type="checkbox">
-                            <label class="c-accordion-item__switcher width-100 bg-sec-color" :for="'accordion-item-' + uindex">
-                              <p class="margin-bottom-0 w-bold white f2 fs-18">Unidad ${ uindex + 1 }: ${ unity.title }</p>
-                              <i class="c-icon white fs-21 far fa-chevron-up"></i>
+                            <label class="c-accordion-item__switcher width-100 bg-pri-color" :for="'accordion-item-' + uindex">
+                              <p class="margin-bottom-0 w-bold dark f2 fs-18">Unidad ${ uindex + 1 }: ${ unity.title }</p>
+                              <i class="c-icon dark fs-21 far fa-chevron-up"></i>
                             </label>
                             <div class="c-accordion-item__content position-relative bg-white f2 dark w-medium">
                               <div v-for="(topic, tindex) of unity.topics" :key="topic.id" class="c-mab-toggle fs-21">
                                 <a
-                                  :class="topic.video.state ? 'sec-color c-link--ho-secondary' : 'dark c-link--ho-secondary' "
+                                  :class="topic.video.state ? 'pri-color c-link--ho-primary' : 'dark c-link--ho-primary' "
                                   :href="getTopicLink(topic.video.link, tindex + 1, uindex + 1)"
                                 >
                                   <span class="triangle"></span> ${ topic.title }
@@ -492,27 +492,25 @@
         </div>
       </div>  
     </div>
-
-    <div class="c-mab-modal c-mab-modal--bg-blue c-mab-modal--mini width-100 flex-container align-center-middle" :class="{'visible' : isOpenedCertificateModal}">
+    <div class="c-mab-modal c-mab-modal c-mab-modal--mini width-100 flex-container align-center-middle" :class="{'visible' : isOpenedCertificateModal}">
       <div class="grid-x align-center width-100">
         <div class="cell small-10 medium-10 large-5">
-          <div class="c-mab-modal-content bg-sec-color text-center position-relative">
+          <div class="c-mab-modal-content br-bottom-0-0 bg-warning-alt text-center position-relative ">
             <div class="text-center">
-              <img loading="lazy" class="c-mab-modal__top-image donaciones" src="{{theme.link}}/static/images/vectors/heart-expression.png" alt="">
+              <img loading="lazy" class="c-mab-modal__top-image donaciones" src="{{theme.link}}/static/images/vectors/heart.png" alt="">
             </div>
-            <button @click="closeCertificateModal()" type="button" class="c-mab-modal__cross position-absolute white bg-warning fs-18 flex-container align-center-middle">
-              <i class="fas fa-times sec-color"></i>
+            <button @click="closeCertificateModal()" type="button" class="c-mab-modal__cross position-absolute white bg-dark fs-18 flex-container align-center-middle">
+              <i class="fas fa-times white"></i>
             </button>
             <h3 class="c-mab-modal-content__title text-center  text-uppercase margin-top-3">
-              <span class="warning f2 w-xbold">¡LO LOGRASTE! FELICIDADES POR COMPLETAR EL CURSO!
+              <span class="dark w-xbold">¡LO LOGRASTE! <br> FELICIDADES POR COMPLETAR EL CURSO!
             </h3>
-            <p class="w-bold white f2 fs-18">Esperamos que hayas aprendido y disfurtado de este curso, no olvides descargar y compartir tu certificado </p>
-            <a :href="certificate" class="c-link c-link--warning f2 w-xbold">Ver certificado</a>
+            <p class="dark f2 fs-18">Esperamos que hayas aprendido y disfurtado de este curso, no olvides descargar y compartir tu certificado </p>
+            <a :href="certificate" class="c-link c-link--ho-primary primary f2 w-xbold fs-21">Ver certificado</a>
           </div>
         </div>
       </div>
     </div>
-
     <div class="c-video-modal width-100 flex-container align-center-middle" :class="{'visible' : isOpenedTrailer}">
       <div class="c-video-modal__content bg-white br--large">
         <div>

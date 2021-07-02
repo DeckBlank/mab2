@@ -20,6 +20,7 @@ new Vue({
   mounted(){
     this.global();
     this.isOk();
+    // this.hideLoading();
   },
   methods: {
     ...baseActions(),

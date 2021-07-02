@@ -1,5 +1,10 @@
 .c-section--perfil {
   .c-banner {
+    &__content {
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+    }
+
     .c-edit-circle {
       bottom: -6rem;
     }
@@ -8,6 +13,10 @@
       span {
         font-size: 65px;
       }
+    }
+
+    .cell.margin-0 {
+      margin: 0 auto !important;
     }
   }
 
@@ -95,7 +104,7 @@
       }
 
       .color-box {
-        border-radius: 12px;
+        border-radius: 7px;
         width: 30px;
       }
 
@@ -110,6 +119,7 @@
 
       &__title {
         font-size: $fs-25;
+        color: $white;
       }
 
       .c-skills-editor-list {
@@ -119,22 +129,27 @@
           label {
             padding: 0.5rem 1rem;
             line-height: 17px;
+            background: $white;
           }
         }
 
         &--warning {
           input[type=checkbox]:checked ~ label {
-            background: $warning-color;
+            background: $warning-alt;
           }
         }
 
         &--secondary {
           input[type=checkbox]:checked ~ label {
-            background: $secondary-color;
-            color: $white;
+            background: $cyan;
+            color: $dark;
           }
         }
       }
+    }
+
+    .vertical-pd {
+      padding: 3rem 1rem;
     }
   }
 }
@@ -142,6 +157,11 @@
 @include breakpoint(large) {
   .c-section--perfil {
     .c-banner {
+      &__content {
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+      }
+
       .grid-x {
         flex-direction: row-reverse;
       }
@@ -163,8 +183,12 @@
       }
 
       &__figure {
-        width: 120%;
-        margin-left: -10%;
+        // width: 120%;
+        // margin-left: -10%;
+      }
+
+      .cell.margin-0 {
+        margin: initial !important;
       }
     }
 
@@ -173,7 +197,7 @@
         width: 245px;
         height: 245px;
         margin-left: calc(50% - 115px);
-        margin-top: -4rem;
+        margin-top: -5rem;
       }
 
       &__name {
@@ -204,7 +228,7 @@
         width: 18%;
         height: 24%;
         border-radius: 50%;
-        background: rgba($color: $warning-color, $alpha: 0.5);
+        // background: rgba($color: $warning-color, $alpha: 0.5);
         font-size: $fs-18;
         line-height: 21px;
 
@@ -246,7 +270,7 @@
         width: 14%;
         height: 17%;
         border-radius: 20px;
-        background: rgba($color: $secondary-color, $alpha: 0.5);
+        // background: rgba($color: $secondary-color, $alpha: 0.5);
         font-size: $fs-18;
         line-height: 21px;
 
@@ -279,20 +303,22 @@
       .c-float-legend {
         top: 3rem;
         right: 1rem;
+        background: $light-gray;
+        display: inline-block;
+        border-radius: 80px;
+        padding: 1.5rem 3rem 0.8rem;
 
         span {
-          width: 40px;
-          height: 40px;
+          width: 35px;
+          height: 35px;
         }
 
         .color-box {
-          width: 45px;
+          width: 35px;
         }
       }
 
       .c-skills-editor {
-        margin-bottom: 5rem;
-
         &__title {
           font-size: $fs-30;
         }
@@ -314,6 +340,21 @@
           }
         }
       }
+
+      .vertical-pd {
+        padding: 7rem 0;
+
+        .c-button {
+          margin-top: 3rem;
+          width: 200px;
+          text-align: center;
+        }
+      }
+    }
+
+    .center-title {
+      text-align: center;
+      padding-left: 5rem;
     }
   }
 }
