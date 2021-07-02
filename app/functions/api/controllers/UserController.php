@@ -730,7 +730,7 @@ class UserController{
 
             if ($userCertificate) {
                 $logoMab        = get_template_directory_uri() . '/static/images/certificates/logo-mab.png';
-                $heartVector    = get_template_directory_uri() . '/static/images/certificates/vectors-2.png';
+                $heartVector    = get_template_directory_uri() . '/static/images/certificates/heart.png';
                 $firma1         = get_template_directory_uri() . '/static/images/certificates/firma-1.png';
                 $firma2         = get_template_directory_uri() . '/static/images/certificates/firma-2.png';
 
@@ -777,15 +777,15 @@ class UserController{
                                                     <br>
                                                     <div style=""> El presente diploma va dirigido a: </div>
                                                 </td>
-                                                <td style="width:40%; text-align: center;">
+                                                <td style="width:40%; text-align: right;">
                                                     <div style="width: 40%;"> 
-                                                        <img style="margin-bottom:0.5rem" src="'. $heartVector .'">
+                                                        <img style="margin-bottom:0.5rem; width: 80px" src="'. $heartVector .'">
                                                     </div>
                                                 </td>
                                             </tr>
                                         </table>
                                     </td>
-                                    <td style="background:#0166d0; width:30%; padding:0 2.5rem 0" rowspan="10" align="center">
+                                    <td style="background:#FF3333; width:30%; padding:0 2.5rem 0" rowspan="10" align="center">
                                         <img style="margin-bottom:1rem; width: 15%" src="'. $logoMab .'">
                                         <br>
                                         <div style="color:#fff; font-size:18px">
