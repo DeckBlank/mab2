@@ -588,6 +588,7 @@ class CourseModel{
                 $tempTopic = [
                     "id"    => $topic['topic']->ID,
                     "title" => $topic['topic']->post_title,
+                    "body"  => $topic['topic']->post_content,
                     "video" => (object)[
                         "state" => self::__isViewedTopic($topic['topic']->ID, $user),
                         "link"  => get_the_permalink($topic['topic']->ID)
