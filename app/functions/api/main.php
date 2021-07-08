@@ -315,7 +315,12 @@ add_action( 'rest_api_init', function () {
     register_rest_route( 'custom/v1', '/topics/comments/download', array(
         'methods' => 'GET',
         'callback' => array($topicController,'downloadAllComments'),
-    ));    
+    ));
+
+    register_rest_route( 'custom/v1', '/topics/export', array(
+        'methods' => 'GET',
+        'callback' => array($topicController,'export'),
+    ));
 });
 
 //5. SessionRequest ----------------------------------//

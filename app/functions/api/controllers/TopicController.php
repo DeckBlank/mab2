@@ -246,7 +246,36 @@ class TopicController{
             include_once __DIR__."/../exports/reports/tests.php";
         }     
     }
-    
+
+    public function export($request) {
+        $topics = [];
+
+        if (isset($request['ids'])) {
+            $ids = explode(',', $request['ids']);
+
+            $topics = Timber::get_posts([
+                "post_type"         => "topic",
+                "posts_per_page"    => -1,
+                "post__in"          => $ids,
+                "orderby"           => "post__in"
+            ]);
+        } else {
+            $topics = Timber::get_posts([
+                "post_type"         => "topic",
+                "posts_per_page"    => 20,
+                "paged"             => $request['page']
+            ]);
+        }
+
+        $topics = CourseModel::__getTopicsSanitize($topics, -1, 'deep');
+
+        if(empty($topics)){
+            return new WP_Error( 'no_topics', __('No topics found'), array( 'status' => 404 ) );
+        }else{
+            return new WP_REST_Response($topics, 200);
+        }
+    }
+
     public function __sendCommentNotification($request, $topic){
         $mail = new PHPMailer(true);
         $admins = array_map(function($admin){return $admin->data->user_email;}, get_users(['role' => 'administrator']));
@@ -328,7 +357,7 @@ class TopicController{
             return false;
         }
     }    
-    
+
     public function __sendAnswerNotification($request, $topic){
         $mail = new PHPMailer(true);
         $admins = array_map(function($admin){return $admin->data->user_email;}, get_users(['role' => 'administrator']));
