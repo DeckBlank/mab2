@@ -2,7 +2,7 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1618925795152';
+$assets_version = '1625718110984';
 $config         = require get_theme_file_path('config/base.php');
 
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
@@ -613,6 +613,26 @@ add_action( 'admin_head', function() use ($config, $assets_version) {
                 ]);
 
                 wp_localize_script( 'pandawp/wp/courses', 'mab', [
+                    "site" => get_site_url()
+                ]);
+            } else if ($current->id == 'edit-topic') {
+                register_assets('package', [
+                    'handle'    => 'pandawp/package/babel',
+                    'src'       => $config['resources']['package_babel'],
+                    'deps'      => [ ],
+                    'ver'       => $assets_version,
+                    'in_footer' => true
+                ]);
+
+                register_assets('script', [
+                    'handle'    => 'pandawp/wp/topics',
+                    'src'       =>  $config['resources']['wp_topics'],
+                    'deps'      => [ ],
+                    'ver'       => $assets_version,
+                    'in_footer' => true
+                ]);
+
+                wp_localize_script( 'pandawp/wp/topics', 'mab', [
                     "site" => get_site_url()
                 ]);
             }

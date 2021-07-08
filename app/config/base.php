@@ -86,6 +86,7 @@ return [
         'wp_session'        => get_theme_file_uri('/static/js/wp-session.bundle.js'),
         'wp_registration'   => get_theme_file_uri('/static/js/wp-registration.bundle.js'),
         'wp_questionaries'  => get_theme_file_uri('/static/js/wp-questionaries.bundle.js'),
-        'wp_courses'        => get_theme_file_uri('/static/js/wp-courses.bundle.js')
+        'wp_courses'        => get_theme_file_uri('/static/js/wp-courses.bundle.js'),
+        'wp_topics'         => get_theme_file_uri('/static/js/wp-topics.bundle.js')
     ]
 ];
