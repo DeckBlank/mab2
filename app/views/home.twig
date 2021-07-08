@@ -193,20 +193,20 @@
         <div class="c-slider padding-top-2">
           <div id="slider-testimonies" class="c-slider swiper-container margin-bottom-3">
             <div class="swiper-wrapper">
-              <div v-for="i of [1,2,3,4,4,4,4,4,4,4,4]" :key="i.id" class="swiper-slide white">
+              <div v-for="testimonie of testimonies" :key="testimonie.id" class="swiper-slide white">
                 <div class="c-testimony">
-                  <img class="c-testimony__avatar position-absolute of--cover" src="{{ theme.link }}/static/images/home/testimonies/people/juan.png" alt="">
+                  <img class="c-testimony__avatar position-absolute of--cover" :src="(testimonie.avatar) ? testimonie.avatar.url : ''" alt="">
                   <div class="c-testimony__content br-bottom-0-0 position-relative br--large bg-white dark f2 text-center w-medium">
                     <img class="quotes" src="{{ theme.link }}/static/images/icons/circle-quotes.png" alt="">
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, nisi. Natus harum, accusantium amet, ipsum eveniet eaque unde mollitia quos nemo esse excepturi culpa? Facere illum fuga asperiores facilis a!
-                    </p>
+
+                    <div v-html="testimonie.message"></div>
+
                     <div class="c-testimony__about dark flex-container align-center-middle">
                       <div class="f2 text-center">
-                        <p class="w-xbold margin-bottom-0 c-lh--18">Juan Soto</p>
-                        <p class="margin-bottom-0 c-lh--18">Padre</p>
-                        <p class="margin-bottom-0 c-lh--18">Apurímac</p>
-                        <img class="c-testimony__flag of--contain" src="https://www.countryflags.io/pe/flat/64.png" alt="">
+                        <p class="w-xbold margin-bottom-0 c-lh--18">${ testimonie.author }</p>
+                        <p class="margin-bottom-0 c-lh--18">${ testimonie.job }</p>
+                        <p class="margin-bottom-0 c-lh--18">${ testimonie.location }</p>
+                        <img class="c-testimony__flag of--contain" :src="'https://www.countryflags.io/' + testimonie.country +'/flat/64.png'" alt="">
                       </div>
                     </div>
                   </div>

@@ -166,7 +166,7 @@
             "delay": 0
         },
         {
-            "key": "field_60c42ceb09832",
+            "key": "field_60e727c7154e3",
             "label": "Preguntas frecuentes",
             "name": "faq",
             "type": "repeater",
@@ -185,7 +185,7 @@
             "button_label": "",
             "sub_fields": [
                 {
-                    "key": "field_60c42d3409835",
+                    "key": "field_60e727c7154e4",
                     "label": "Pregunta",
                     "name": "",
                     "type": "accordion",
@@ -202,7 +202,7 @@
                     "endpoint": 0
                 },
                 {
-                    "key": "field_60c42cfb09833",
+                    "key": "field_60e727c7154e5",
                     "label": "Titulo",
                     "name": "title",
                     "type": "text",
@@ -221,9 +221,182 @@
                     "maxlength": ""
                 },
                 {
-                    "key": "field_60c42d0209834",
+                    "key": "field_60e727c7154ea",
                     "label": "Respuesta",
                     "name": "answer",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 1,
+                    "delay": 0
+                }
+            ]
+        },
+        {
+            "key": "field_60e726c73319c",
+            "label": "Testimonios",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_60c42ceb09832",
+            "label": "Testimonios",
+            "name": "testimonies",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_60c42d3409835",
+                    "label": "Testimonio",
+                    "name": "",
+                    "type": "accordion",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "open": 0,
+                    "multi_expand": 0,
+                    "endpoint": 0
+                },
+                {
+                    "key": "field_60c42cfb09833",
+                    "label": "Autor",
+                    "name": "author",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_60e7279b331a0",
+                    "label": "Foto",
+                    "name": "avatar",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
+                },
+                {
+                    "key": "field_60e727353319d",
+                    "label": "Ocupación",
+                    "name": "job",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_60e7274f3319e",
+                    "label": "Ubicación",
+                    "name": "location",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_60e727723319f",
+                    "label": "País",
+                    "name": "country",
+                    "type": "text",
+                    "instructions": "Colocar el codigo del pais para mostrar la bandera ejmpl: ep, co, cl, etc.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "pe",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_60c42d0209834",
+                    "label": "Testimonio",
+                    "name": "message",
                     "type": "wysiwyg",
                     "instructions": "",
                     "required": 0,
@@ -259,5 +432,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1623469382
+    "modified": 1625761905
 }

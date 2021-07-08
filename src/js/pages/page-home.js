@@ -37,6 +37,7 @@ const home = new Vue({
       ],
 
       questions: [],
+      testimonies: [],
 
       lideres: [
         {
@@ -99,7 +100,8 @@ const home = new Vue({
     this.initTestimoniesSlider();
     this.initBrandsSlider();
 
-    this.questions = mab.questions;
+    this.questions  = mab.questions;
+    this.testimonies = mab.testimonies;
 
     this.questions = this.questions.map(question => {
       return {
@@ -113,40 +115,42 @@ const home = new Vue({
   methods: {
     ...baseActions(),
     initTestimoniesSlider: function() {
-      new Swiper('#slider-testimonies', {
-        speed: 900,
-        loop: true,
-        autoplay: true,
-
-        pagination: {
-          el: '#slider-testimonies + .swiper-pagination',
-          type: 'bullets',
-          clickable: true,
-        },
-
-        breakpoints: {
-          320: {
-            slidesPerView: 1,
-            spaceBetween: 10,
+      window.setTimeout(() => {
+        new Swiper('#slider-testimonies', {
+          speed: 3000,
+          loop: true,
+          autoplay: true,
+  
+          pagination: {
+            el: '#slider-testimonies + .swiper-pagination',
+            type: 'bullets',
+            clickable: true,
           },
-          480: {
-            slidesPerView: 2,
-            spaceBetween: 10,
+  
+          breakpoints: {
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            480: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1140: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
           },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-          1140: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-        },
-      })
+        })
+      }, 100);
     },
     initBrandsSlider: function() {
       new Swiper('#slider-brands', {

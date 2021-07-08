@@ -180,7 +180,8 @@ add_action( 'wp_enqueue_scripts', function () use ($config) {
         ]);
 
         $enviroment = array_merge($enviroment, [
-            'questions' => get_field('faq', 'options')
+            'questions'     => get_field('faq', 'options'),
+            'testimonies'   => get_field('testimonies', 'options')
         ]);
     }elseif ( is_page('emotional') ) {
         register_assets('package', [
