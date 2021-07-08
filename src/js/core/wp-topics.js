@@ -4,13 +4,13 @@ const model = {
 
 function exportTopics(button) {
   const paged   = (new URLSearchParams(window.location.search)).get('paged');
-  const courses = [...document.querySelectorAll('.type-course > .check-column > input')].filter(co => co.checked).map(co => co.value);
+  const topcis  = [...document.querySelectorAll('.type-topic > .check-column > input')].filter(co => co.checked).map(co => co.value);
   let request   = (paged)
     ? `${ mab.site }/wp-json/custom/v1/topics/export?page=${paged}`
     : `${ mab.site }/wp-json/custom/v1/topics/export?page=1`;
   
-  request = (courses.length)
-    ? `${request}&ids=${courses.join(',')}`
+  request = (topcis.length)
+    ? `${request}&ids=${topcis.join(',')}`
     : request;
 
   fetch(request)
@@ -21,8 +21,8 @@ function exportTopics(button) {
         throw res
       }      
     })
-    .then(courses => {
-      const dataStr       = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(courses));
+    .then(topcis => {
+      const dataStr       = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(topcis));
       const downloadLink  = document.createElement('a');
 
       downloadLink.setAttribute('href', dataStr);
@@ -46,3 +46,5 @@ document.querySelector('#export-topics').onclick = (e) => {
 
   exportTopics(e.target);
 }
+
+
