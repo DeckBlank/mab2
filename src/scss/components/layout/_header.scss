@@ -204,6 +204,11 @@
     }
   }
 
+  .c-menu-scroll {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
   &--session {
     height: auto;
     position: relative;
