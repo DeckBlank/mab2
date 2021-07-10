@@ -43,7 +43,11 @@ Vue.component('header-main',{
                         <a :href="getSubcategoryLink(subcategory)" class="c-link c-link--black c-link--ho-secondary display-block w-medium fs-18 f2">{{ subcategory.name }}</a>
                       </li>
                     </ul>
-                    <p v-else class="w-bold dark text-center">Sin subcategorias...</p>
+                    <p v-else class="w-bold dark text-center">
+                      <span class="display-block margin-bottom-1">Sin subcategorias...</span>
+
+                      <a :href="categoryLink" class="display-block">Ver cursos de la categoria</a>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -140,10 +144,15 @@ Vue.component('header-main',{
       subcategories: [],
 
       isLoadingSubcategories: false,
+
+      categorySelected: -1,
     }
   },
   computed: {
-    ...mapState(['API', 'SITE_URL', 'THEME_URL', 'isActiveBrowserToggle', 'logedUser', 'shopCart'])
+    ...mapState(['API', 'SITE_URL', 'THEME_URL', 'isActiveBrowserToggle', 'logedUser', 'shopCart']),
+    categoryLink: function() {
+      return `/cursos/?subcategory=${ this.categorySelected }`;
+    },
   },
   watch: {
     'menus.courses.switcher': function(value) {
@@ -228,6 +237,8 @@ Vue.component('header-main',{
         .then(response => {
           if (response.status) {
             this.subcategories = response.data; category.subcategories = response.data;
+          } else {
+            this.categorySelected = category.id;
           }
 
           window.setTimeout(() => {
