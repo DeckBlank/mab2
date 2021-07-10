@@ -20,7 +20,7 @@ Vue.component('header-main',{
             <div @mouseover="blockMenu('courses', true)" @mouseleave="blockMenu('courses', false)" class="c-menu-dropdown c-menu-dropdown--medium left br--medium position-absolute f2">
               <div class="grid-x bg-white br--medium overflow-hidden">
                 <div class="cell small-6">
-                  <div class="c-menu-dropdown__left padding-vertical-2">
+                  <div class="c-menu-dropdown__left c-menu-scroll padding-vertical-2">
                     <ul class="bg-white ul-reset overflow-hidden">
                       <li v-for="category of categories" :key="category.id" class="c-menu-dropdown__item">
                         <a @click="getSubcategories($event, category)" href="#" class="w-xbold padding-horizontal-2">
@@ -36,7 +36,7 @@ Vue.component('header-main',{
                   </div>
                 </div>
                 <div class="cell small-6">
-                  <div class="padding-2">
+                  <div class="padding-2 c-menu-scroll">
                     <p v-if="isLoadingSubcategories" class="w-bold dark text-center">Cargando...</p>
                     <ul v-else-if="subcategories.length" class="ul-reset">
                       <li v-for="subcategory of subcategories" :key="subcategory.id" class="mb-05">
