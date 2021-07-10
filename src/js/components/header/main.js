@@ -46,7 +46,7 @@ Vue.component('header-main',{
                     <p v-else class="w-bold dark text-center">
                       <span class="display-block margin-bottom-1">Sin subcategorias...</span>
 
-                      <a :href="categoryLink" class="display-block">Ver cursos de la categoria</a>
+                      <a :href="categoryLink" class="display-block">Conocer más</a>
                     </p>
                   </div>
                 </div>
