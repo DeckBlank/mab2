@@ -151,7 +151,7 @@ Vue.component('header-main',{
   computed: {
     ...mapState(['API', 'SITE_URL', 'THEME_URL', 'isActiveBrowserToggle', 'logedUser', 'shopCart']),
     categoryLink: function() {
-      return `${ SITE_URL }/cursos/?subcategory=${ this.categorySelected }`;
+      return `${ this.SITE_URL }/cursos/?subcategory=${ this.categorySelected }`;
     },
   },
   watch: {
