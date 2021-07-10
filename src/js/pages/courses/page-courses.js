@@ -182,8 +182,9 @@ const courses = new Vue({
 
     this.getCategories();
 
-    if ( this.metas.get('subcategory') ) {
-      this.filter.category = this.metas.get('subcategory');
+    if ( this.metas.get('subcategory') ||  this.metas.get('query') ) {
+      if ( this.metas.get('subcategory') ) this.filter.category = this.metas.get('subcategory');
+      if ( this.metas.get('query') ) this.filter.search = this.metas.get('query');
 
       this.getCourses('category');
     } else {

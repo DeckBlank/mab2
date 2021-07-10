@@ -65,7 +65,7 @@ Vue.component('header-main',{
                 </li>
                 <li class="c-menu-dropdown__item inverse">
                   <a :href="SITE_URL + '/lideres'" class="w-xbold text-center padding-horizontal-2">
-                    Ponentes
+                    Lideres
                   </a>
                 </li>
                 <li class="c-menu-dropdown__item inverse">
