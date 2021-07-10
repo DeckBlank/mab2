@@ -98,6 +98,7 @@ class DBConnection{
             test_count INT NOT NULL DEFAULT 0,
             right_answers INT NOT NULL DEFAULT 0,
             wrong_answers INT NOT NULL DEFAULT 0,
+            progress DECIMAL NULL,
             last_date DATETIME NULL,
             PRIMARY KEY (user_email, course_id)
         )");
