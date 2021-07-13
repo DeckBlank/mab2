@@ -214,7 +214,62 @@
                   </div>
                 </div>
               </div>
+              <!-- nuevo -->
               <div v-else-if="step == 3" key="step3" class="c-split-layout-content c-split-layout-content--dark position-relative">
+                <div class="width-100">
+                  <div class="text-center padding-3 width-100">
+                    <div class="grid-x align-center">
+                      <div class="cell large-8">
+                        <h1 class="c-split-layout-content__title margin-bottom-2 white fs-35 c-lh--35">
+                          <span class="white fs-30 f2 w-xbold">Dona</span><br>
+                          <div class="flex-container align-center-middle margin-top-1">
+                            A<img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/donaciones/mab-red-logo.png" alt="">LEMENTE
+                          </div>
+                        </h1>
+
+                        <div class="margin-top-2">
+                          <div class="c-donacion-info text-left fs-18">
+                            <p class="white f2 margin-bottom-2 text-center">*Antes de continuar queremos que te sientas seguro de
+                              tu contribución, por favor verifica tus datos ingresados  
+                            </p>
+                            <ul class="ul-reset f2 white bg-pri-color br-red-box">
+                              <li>
+                                <span class="dark padding-right">Monto:</span> s/ 100
+                              </li>
+                              <li class="">
+                                <span class="dark padding-right">Medio de pago:</span> Depósito de transferencia
+                              </li>
+                              <li class="">
+                                <span class="dark padding-right">Entidad bancaria:</span> Banco de la Nación
+                              </li>
+                              <li class="">
+                                <span class="dark padding-right">Número de transferencia: </span> 1221-49397-83352112
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+
+                        <div class="text-center margin-top-3 two-btn">
+                          <button
+                            class="c-button c-button--ghost-white-primary f2 margin-top-1 br--large padding-horizontal-3"
+                          >
+                          Volver
+                          </button>
+                          <button
+                            class="c-button c-button--ghost-white-primary f2 margin-top-1 br--large padding-horizontal-3"
+                          >Confirmar
+                          </button>
+                        </div>
+                        <div class="c-label-login pri-color f2 margin-top-1 margin-bottom-3 margin-top-3">
+                          <a href="{{ site.url }}" class="c-link c-link-primary w-bold"><i class="fas fa-chevron-left"></i>  Volver a la página principal</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- nuevo  -->
+              <div v-else-if="step == 4" key="step4" class="c-split-layout-content c-split-layout-content--dark position-relative">
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
                     <div class="grid-x align-center">
@@ -316,11 +371,10 @@
                           <span class="dark f2 fs-14">Twitter</span>
                         </a>
                       </div>
-                      <div class="cell small-6 large-3">
+                      <div class="cell text-center margin-top-1 margin-bottom-2">
                         <input type="hidden" id="user-donation-link" :value="donationLink">
-                        <a href="#" @click="copyDonationLink($event)" class="text-center">
-                          <img loading="lazy" src="{{theme.link}}/static/images/vectors/share-icons/icon-copy.png" alt="">
-                          <span class="dark f2 fs-14">Copiar enlace</span>
+                        <a href="#" @click="copyDonationLink($event)" class="c-button c-button--ghost-primary f2 margin-top-1 br--large padding-horizontal-3  pri-color d-inline">
+                          Copiar enlace
                         </a>
                       </div>
                     </div>
