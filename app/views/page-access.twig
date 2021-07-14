@@ -215,6 +215,18 @@
                           <span class="white fs-30">inicia sesión</span><br>
                           y continúa creciendo con nosotros
                         </h1>
+                        <button @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
+                          <span class="content">
+                            <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
+                            <span class="f2">Continuar con Facebook</span>
+                          </span>
+                        </button>
+                        <button @click="authWithGoogle" class="c-btn-input-social w-medium width-100 margin-bottom-2">
+                          <span class="content">
+                            <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
+                            <span class="f2">Continuar con Google</span>
+                          </span>
+                        </button>
 
                         <form @submit="login($event)" class="c-form-new text-left margin-top-1" action="">
                           <div class="c-form-new__input-container margin-bottom-1">
@@ -240,23 +252,10 @@
                             class="c-button c-button--primary width-100 f2 margin-top-1"
                             :class="{'loading' : user.loading}">Ingresar</button>
                         </form>
-                        <div class="margin-vertical-2 text-center f2 fs-18 white w-bold">
-                          O
-                        </div>
-                        <button @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
-                          <span class="content">
-                            <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
-                            <span class="f2">Continuar con Facebook</span>
-                          </span>
-                        </button>
-                        <button @click="authWithGoogle" class="c-btn-input-social w-medium width-100">
-                          <span class="content">
-                            <img loading="lazy" src="{{theme.link}}/static/images/access/google-icon.png" alt="">
-                            <span class="f2">Continuar con Google</span>
-                          </span>
-                        </button>
-                        <div class="c-label-login white f2 margin-top-1">
-                          ¿Aún no tienes cuenta? <a :href="SITE_URL + '/access?auth=register'" class="c-link c-link--ho-dark white w-bold">Regístrate</a>
+
+
+                        <div class="c-label-login dark f2 margin-top-1">
+                          ¿Aún no tienes cuenta? <a :href="SITE_URL + '/access?auth=register'" class="c-link c-link--ho-dark dark w-bold">Regístrate</a>
                         </div>
                       </div>
                       <div class="cell large-4">
@@ -327,8 +326,8 @@
                             class="c-button c-button--primary width-100 f2 margin-top-3"
                             :class="{'loading' : user.loading}">Registrarse</button>
                         </form>
-                        <div class="c-label-login white f2 margin-top-1">
-                          ¿Ya tienes una cuenta? <a :href="SITE_URL + '/access'" class="c-link--ho-dark w-bold white ">Inicia sesión</a>
+                        <div class="c-label-login dark f2 margin-top-1">
+                          ¿Ya tienes una cuenta? <a :href="SITE_URL + '/access'" class="c-link--ho-dark w-bold dark ">Inicia sesión</a>
                         </div>
                       </div>
                       <div class="cell large-4">
@@ -536,7 +535,7 @@
                                 <strong class="w-xbold">Un padre / una madre / apoderad@</strong> que busca la mejor educación para su familia
                               </span>
                               <div class="c-corner-card-image position-absolute">
-                                <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/access/roles/head.png" alt="">
+                                <img loading="lazy" class="width-100 max" src="{{theme.link}}/static/images/access/roles/head.png" alt="">
                               </div>
                             </label>
                           </div>
@@ -604,7 +603,7 @@
                                   en zonas rurales del país
                               </span>
                               <div class="c-corner-card-image position-absolute">
-                                <img loading="lazy" class="width-100" src="{{theme.link}}/static/images/access/roles/heart.png" alt="">
+                                <img loading="lazy" class="width-100 heart" src="{{theme.link}}/static/images/access/roles/heart.png" alt="">
                               </div>
                             </label>
                           </div>

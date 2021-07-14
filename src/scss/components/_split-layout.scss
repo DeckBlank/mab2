@@ -86,7 +86,9 @@
     .c-role-card {
       border-radius: 65px;
       font-size: $fs-16;
-      padding: 1.5rem 2rem;
+      // padding: 1.5rem 2rem;
+      display: flex;
+      flex-direction: row-reverse;
       margin: 0;
 
       @include transition;
@@ -166,8 +168,8 @@
 
       .c-role-card {
         font-size: $fs-18;
-        margin-left: 2rem;
-        padding: 2rem 4rem 1.5rem 3rem;
+        margin-left: 1rem;
+        // padding: 2rem 4rem 1.5rem 3rem;
         height: 100%;
       }
     }
