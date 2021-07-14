@@ -66,5 +66,11 @@
         margin-top: 0;
       }
     }
+
+    .c-us-comment:nth-child(even) {
+      .grid-x {
+        flex-direction: row-reverse;
+      }
+    }
   }
 }
