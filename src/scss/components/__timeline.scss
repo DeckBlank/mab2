@@ -100,7 +100,7 @@
 
   .tippy-box[data-theme~="mab-secondary"] {
     max-width: none !important;
-    width: 600px;
+    width: 550px;
   }
 
   .c-timeline-tooltip {
@@ -111,7 +111,8 @@
     &__year {
       width: auto;
       // padding: 2rem;
-      padding: 2rem 1rem 2rem 0;
+      // padding: 2rem 1rem 2rem 0;
+      transform: rotate(-90deg);
     }
   }
 }
