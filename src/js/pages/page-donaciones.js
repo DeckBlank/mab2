@@ -162,6 +162,11 @@ new Vue({
 
         case 3: {
             this.step = 3;
+          }
+          break;
+
+        case 4: {
+            this.step = 4;
             this.isOpenedModal = false;
           }
           break;

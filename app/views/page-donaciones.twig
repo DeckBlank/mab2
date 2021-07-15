@@ -200,7 +200,7 @@
 
                         <div class="text-center margin-top-3">
                           <button
-                            @click="isOpenedModal = true"
+                            @click="nextStep(3)"
                             class="c-button c-button--ghost-white-primary f2 margin-top-1 br--large padding-horizontal-3"
                           >
                           Confirmar mi donación
@@ -214,7 +214,6 @@
                   </div>
                 </div>
               </div>
-              <!-- nuevo -->
               <div v-else-if="step == 3" key="step3" class="c-split-layout-content c-split-layout-content--dark position-relative">
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
@@ -251,11 +250,13 @@
 
                         <div class="text-center margin-top-3 two-btn">
                           <button
+                            @click="nextStep(2)"
                             class="c-button c-button--ghost-white-primary f2 margin-top-1 br--large padding-horizontal-3"
                           >
                           Volver
                           </button>
                           <button
+                            @click="isOpenedModal = true"
                             class="c-button c-button--ghost-white-primary f2 margin-top-1 br--large padding-horizontal-3"
                           >Confirmar
                           </button>
@@ -268,7 +269,6 @@
                   </div>
                 </div>
               </div>
-              <!-- nuevo  -->
               <div v-else-if="step == 4" key="step4" class="c-split-layout-content c-split-layout-content--dark position-relative">
                 <div class="width-100">
                   <div class="text-center padding-3 width-100">
@@ -324,7 +324,7 @@
                   <div class="text-center">
                     <img loading="lazy" class="c-mab-modal__top-image donaciones" src="{{theme.link}}/static/images/donaciones/envelope.png" alt="">
                   </div>
-                  <button @click="nextStep(3)" class="c-mab-modal__cross position-absolute white bg-pri-color fs-18 fñex-container align-center-middle">
+                  <button @click="nextStep(4)" class="c-mab-modal__cross position-absolute white bg-pri-color fs-18 fñex-container align-center-middle">
                     <i class="fas fa-times"></i>
                   </button>
                   <h3 class="c-mab-modal-content__title text-center dark text-uppercase">
