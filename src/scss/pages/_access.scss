@@ -17,17 +17,35 @@
     }
   }
 
+  .c-role-card {
+    span {
+      padding: 2rem 1rem;
+      width: 65%;
+    }
+  }
+
   .c-corner-card-image {
-    height: 70px;
-    border-radius: 50%;
-    border: 3px solid $primary-color;
+    position: initial !important;
+    // height: 70px;
+    height: 100%;
+    border-radius: 65px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    padding: 1rem;
+    width: 35%;
+    // border: 3px solid $primary-color;
     display: flex;
     justify-content: center;
     align-items: center;
     background: $white;
 
     img {
-      width: 50% !important;
+      width: 75% !important;
+    }
+
+    img.heart {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
     }
   }
 }
@@ -59,7 +77,14 @@
     }
 
     .c-corner-card-image {
-      height: 100px;
+      img.max {
+        max-width: 72px;
+      }
+
+      img.heart {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
     }
   }
 }
