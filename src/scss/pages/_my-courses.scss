@@ -31,16 +31,18 @@
 
   .c-other-services {
     padding: 1rem;
+    margin-bottom: 5rem;
 
-    &__content {
-      padding: 2rem;
+    &__info {
+      padding: 0 2rem;
     }
   }
 
   .c-ws {
     padding: 1rem 2rem;
     max-width: 300px;
-    margin-left: 2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
     margin-top: 4rem;
     transition: all 0.5s;
     border-radius: 50px;
@@ -55,6 +57,10 @@
       color: $white;
       background: $secondary-alt;
     }
+  }
+
+  .c-ws.desktop {
+    display: none;
   }
 }
 
@@ -101,14 +107,11 @@
     .c-lideres {
       margin-top: 5rem;
       margin-bottom: 5rem;
-
-      &__content {
-        // padding: 3rem 5rem 2rem;
-      }
     }
 
     .c-other-services {
       padding-bottom: 8rem !important;
+      margin-bottom: 5rem;
 
       &__content {
         padding: 0;
@@ -119,10 +122,6 @@
         padding-left: 5rem;
       }
 
-      &__info {
-        // padding-top: 3rem;
-      }
-
       .swiper-slide {
         padding: 0 5rem 3rem;
         box-sizing: border-box;
@@ -131,11 +130,30 @@
       .c-slider__pagination {
         // margin-top: -45px;
       }
+
+      .swiper-container {
+        .swiper-slide {
+          padding-bottom: 0 !important;
+        }
+      }
+
+      .c-slider {
+        margin-bottom: 8rem !important;
+      }
+    }
+
+    .c-ws.mobile {
+      display: none !important;
+    }
+
+    .c-ws.c-ws.desktop {
+      display: flex;
     }
 
     .c-ws {
       margin-left: calc(50% - 150px);
-      margin-top: -3rem;
+      margin-top: -25rem;
+      z-index: 5555;
     }
   }
 }
