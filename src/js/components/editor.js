@@ -13,7 +13,7 @@ Vue.component('editor',{
         </button>
       </div>
       <input v-model="textContent" class="input-reset margin-0 f2" type="text" placeholder="Escribe un comentario">
-      <button @click="add()" class="fs-25">
+      <button :disabled="isLoading" @click="add()" class="fs-25">
         <i class="far fa-paper-plane"></i>
       </button>
     </div>
@@ -21,7 +21,9 @@ Vue.component('editor',{
   data() {
     return {
       isActiveEditor: false,
-      textContent: ''
+      textContent: '',
+
+      isLoading: false,
     }
   },
   computed: {
@@ -33,19 +35,6 @@ Vue.component('editor',{
     post: Object,
     thread: Object
   },
-  watch: {
-    thread: function(){
-      if(this.textContent != ''){
-        if(this.target.type == "post"){
-          this.addNewComment()
-        
-        }else if(this.target.type == "answer"){
-          this.addNewAnswer()
-        
-        }
-      }
-    }
-  },
   methods: {
     activeEditor: function(){
       if(this.logedUser){
@@ -56,6 +45,8 @@ Vue.component('editor',{
     },
     addNewComment: function(){
       let form_data = new FormData();
+
+      this.isLoading = true;
 
       form_data.append('user', this.logedUser.user_auth)
       form_data.append('user_email', this.logedUser.user_email)
@@ -73,7 +64,9 @@ Vue.component('editor',{
           }
         })
         .then(comment => {
-          this.textContent = ''
+          this.updateThread(comment);
+
+          this.isLoading = false;
         })
         .catch(err => {
           throw err;          
@@ -81,6 +74,8 @@ Vue.component('editor',{
     },
     addNewAnswer: function(){
       let form_data = new FormData();
+
+      this.isLoading = true;
 
       form_data.append('user', this.logedUser.user_auth)
       form_data.append('user_email', this.logedUser.user_email)
@@ -98,17 +93,29 @@ Vue.component('editor',{
           }
         })
         .then(answer => {
-          this.textContent = ''
+          this.updateThread();
+
+          this.isLoading = false;
         })
         .catch(err => {
           throw err;          
         })      
     },
     add: function() {
+      if(this.textContent != ''){
+        if(this.target.type == "post"){
+          this.addNewComment()
+        }else if(this.target.type == "answer"){
+          this.addNewAnswer()
+        }
+      }
+    },
+    updateThread: function(commentId = null) {
       if (this.target.type == 'post') {
         this.$emit('update:thread', {
           number: this.thread.number + 1,
           list: [{
+            id: commentId,
             author: this.logedUser.user_auth,
             authorField: '',
             authorAvatar: this.logedUser.user_avatar,
@@ -128,6 +135,8 @@ Vue.component('editor',{
           ]
         });
       }
+
+      this.textContent = '';
     },
   },
 })
