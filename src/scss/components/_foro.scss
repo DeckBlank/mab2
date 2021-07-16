@@ -73,6 +73,13 @@
       }
     }
 
+    &__images {
+      figure {
+        width: 75px;
+        margin-right: 0.8rem;
+      }
+    }
+
     .c-comment-content {
       padding: 0 0.5rem;
     }
@@ -103,11 +110,15 @@
   }
 
   .c-mab-editor {
+    // background: red;
+    flex-wrap: wrap;
+
     input {
       border: none;
       border-radius: 10px;
       background: $light-gray;
       font-family: $font-family-secondary;
+      width: 80%;
     }
 
     ::placeholder {
@@ -118,9 +129,80 @@
 
     button {
       padding: 0 0.5rem;
+      color: $gray;
 
-      svg {
-        color: $gray;
+      // svg {
+      //   color: $gray;
+      // }
+    }
+
+    &__reactions {
+      width: 20%;
+
+      button {
+        font-size: $fs-21;
+        padding: 0 0.2rem;
+      }
+    }
+
+    &__list-figure {
+      margin: 1rem 0;
+    }
+
+    &__figure {
+      width: 75px;
+      margin-right: 0.8rem;
+
+      figcaption {
+        top: 0;
+        left: 0;
+        background: rgba($color: $dark, $alpha: 0.5);
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        .c-img-cross {
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          font-size: 13px;
+          margin-right: -9px;
+          margin-top: -7px;
+        }
+      }
+
+      .c-img-loader {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background: $gray;
+      }
+
+      .c-img-icon {
+        font-size: 12px;
+        margin-bottom: 0.5rem;
+
+        .trash {
+          padding: 0.2rem 0.2rem 0.2rem;
+          border-radius: 3px;
+
+          button svg {
+            color: #fff;
+          }
+        }
+      }
+    }
+
+    &__list-btn {
+      justify-content: flex-end;
+
+      button {
+        margin-left: 0.8rem;
+        font-size: $fs-14;
+        padding: 0.2rem 0.8rem;
+        font-weight: 700;
       }
     }
   }
@@ -136,7 +218,7 @@
 
     .c-foro-body {
       padding: 1rem 1rem 1rem;
-      height: 450px;
+      height: 495px;
     }
 
     .c-foro-theme {
@@ -155,12 +237,77 @@
         width: 120px;
         height: 120px;
       }
+
+      &__images {
+        figure {
+          width: 125px;
+          margin-right: 0.8rem;
+        }
+      }
     }
 
     .c-comment--small {
       .c-comment__figure {
         width: 95px;
         height: 95px;
+      }
+    }
+
+    .c-mab-editor {
+      &__reactions {
+        width: 85px;
+
+        button {
+          font-size: $fs-25;
+        }
+      }
+
+      input {
+        width: calc(100% - 85px);
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        padding: 1.5rem 1rem 1rem;
+      }
+
+      &__figure {
+        width: 125px;
+        margin-right: 1.5rem;
+
+        figcaption {
+          .c-img-cross {
+            width: 25px;
+            height: 25px;
+          }
+
+          .c-img-icon {
+            font-size: $fs-14;
+            margin-bottom: 0.5rem;
+          }
+
+          .c-img-loader {
+            height: 4px;
+          }
+        }
+      }
+
+      &__list-figure {
+        background: $light-gray;
+        padding: 1rem;
+        margin: 0;
+        margin-left: 85px;
+      }
+
+      &__list-btn {
+        background: $light-gray;
+        padding: 1rem;
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+        margin-left: 85px;
+
+        button {
+          font-size: $fs-18;
+          padding: 0.4rem 1rem;
+        }
       }
     }
   }

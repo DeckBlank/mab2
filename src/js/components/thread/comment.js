@@ -26,6 +26,17 @@ Vue.component('comment',{
               <p class="c-comment__text f2 dark fs-16 lh-18">
                 {{ body.content }}
               </p>
+              <div class="c-comment__images flex-container margin-bottom-1">
+                <figure>
+                  <img class="width-100 height-100 of--cover" src="https://mab.site/wp-content/themes/mab-theme/app/static/images/curso/certificate.jpg">
+                </figure>
+                <figure>
+                  <img class="width-100 height-100 of--cover" src="https://mab.site/wp-content/themes/mab-theme/app/static/images/curso/certificate.jpg">
+                </figure>
+                <figure>
+                  <img class="width-100 height-100 of--cover" src="https://mab.site/wp-content/themes/mab-theme/app/static/images/curso/certificate.jpg">
+                </figure>
+              </div>
             </div>
           </div>
           <div class="cell medium-2 large-2">
