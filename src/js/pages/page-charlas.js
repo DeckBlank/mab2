@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import {baseConfig, baseState, baseActions} from '../app'
 import {store} from '../store'
+import Swiper from 'swiper';
 
 const charlas = new Vue({
   ...baseConfig(store),
@@ -42,6 +43,7 @@ const charlas = new Vue({
   mounted(){
     this.global();
     this.hideLoading();
+    this.initSlider();
   },
   methods: {
     ...baseActions(),
@@ -58,7 +60,44 @@ const charlas = new Vue({
     isWrongField: function(field) {
       return this.user.try && !this.user[field].isValid;
     },
-
+    initSlider: function() {
+      window.setTimeout(() => {
+        new Swiper('.swiper-container', {
+          slidesPerView: 3,
+          spaceBetween: 0,
+          pagination: {
+            el: ".swiper-pagination",
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+          breakpoints: {
+            200: {
+              slidesPerView: 1,
+              spaceBetween: 10
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 0,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 0
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 0
+            }
+          },
+          // on: {
+          //   init: () => {
+          //     this.isLoadingRecommended = false;
+          //   },
+          // },
+        });
+      }, 1000);
+    },
     openInscriptionModal: function(eventId) {
       this.eventSelected = eventId;
       this.isOpenedModal = true;

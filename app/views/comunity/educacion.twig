@@ -1,0 +1,42 @@
+{% extends '_html.twig' %}
+
+{% block hero %}
+  {% include 'templates-parts/hero.twig' %}
+{% endblock %}
+
+{% block content %}
+  <section class="c-section c-section--extra-list bg-dark">
+    <div class="c-extra-list">
+      <div class="grid-container">
+        <h2 class="c-extra-list__title white text-uppercase text-center">
+          <p>Una educación que te hace CRECER</p>
+        </h2>
+
+        <div>
+          <div class="c-extra-block">
+              <div class="grid-x align-middle align-center">
+                <div class="cell large-8">
+                  <div class="c-extra-block__info bg-pri-color br-bottom-0-0 br--large padding-2">
+                    <h3 class="dark">El estudiante como centro</h3>
+                    <p class="dark f2"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas doloribus id impedit deleniti iure? Obcaecati qui suscipit, aperiam velit exercitationem quibusdam dolor a. Similique ex id laudantium fugiat, veritatis sequi.</p>
+                    <a href="https://mab.site/nosotros" class="c-link dark c-link--ho-dark bg-white f2 w-bold fs-18 c-box-round-btn">Ver más</a>
+                  </div>
+                </div>
+                <div class="cell large-4">
+                  <figure class="c-extra-block__figure">
+                    <div class="c-card-article bg-white mab-shadow-soft">
+                      <figure class="c-card-article__figure margin-bottom-1">
+                        <img class="width-100 height-100 of--cover" src="{{ theme.link }}/static/images/nosotros/maca-0.png" alt="">
+                      </figure>
+                      <div class="c-card-article__content">
+                      </div>
+                    </div>
+                  </figure>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

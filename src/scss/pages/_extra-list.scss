@@ -1,0 +1,23 @@
+.c-extra-list {
+  &__title {
+    font-size: $fs-21;
+  }
+}
+
+.c-extra-block {
+  &__info {
+    opacity: 1;
+  }
+
+  &__figure {
+    opacity: 1;
+  }
+}
+
+@include breakpoint(large) {
+  .c-extra-list {
+    &__title {
+      font-size: $fs-21;
+    }
+  }
+}

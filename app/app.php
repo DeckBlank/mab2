@@ -82,4 +82,8 @@ switch ($params['view']) {
 
         Timber::render('shop/success.twig', $context);
         break;
+    case 'educacion':
+
+        Timber::render('comunity/educacion.twig', $context);
+        break;
 }

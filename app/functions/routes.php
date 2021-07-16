@@ -122,3 +122,22 @@ Routes::map('carrito/success', function($routeParams) use ($config) {
 
     Routes::load('app.php', $params, "", 200);
 });
+
+Routes::map('educacion', function($routeParams) use ($config) {
+    $params = [
+        'route' => $routeParams,
+        'view'  => 'educacion',
+    ];
+
+    add_action( 'wp_enqueue_scripts', function () use ($config) {
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/educacion',
+            'src'       => $config['resources']['page_educacion'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]); 
+    });
+
+    Routes::load('app.php', $params, "", 200);
+});
