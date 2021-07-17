@@ -13,7 +13,7 @@ new Vue({
   data() {
     return {
       showTooltipCerticado: false,
-      view: 1,
+      view: 2,
       foro: 1,
       commentbox: 0,
 

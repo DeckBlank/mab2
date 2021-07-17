@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import 'dm-file-uploader';
+import $ from 'jquery';
+
 Vue.component('editor',{
   template: /*html*/`
     <div class="c-mab-editor flex-container align-center-middle margin-bottom-1">
@@ -8,11 +11,14 @@ Vue.component('editor',{
         <button class="">
           <i class="far fa-smile"></i>
         </button>
-        <button class="">
-          <i class="far fa-paperclip"></i>
-        </button>
+        <div :id="'drop-comment-area-' + ( (this.target) ? this.target.id : '' )">
+          <label class="">
+            <i class="far fa-paperclip"></i>
+            <input type="file" class="hide" accept=".jpg, .png, .jpeg, .PNG"/>
+          </label>
+        </div>
       </div>
-      <input  v-model="textContent" class="input-reset margin-0 f2" type="text" placeholder="Escribe un comentario">
+      <input v-model="textContent" class="input-reset margin-0 f2" type="text" placeholder="Escribe un comentario">
       <button v-if="false" :disabled="isLoading" @click="add()" class="fs-25">
         <i class="far fa-paper-plane"></i>
       </button>
@@ -28,7 +34,7 @@ Vue.component('editor',{
                   <i class="fas fa-trash"></i>
                 </span>
               </div>
-              <div><div>
+              <div></div>
             </figcaption>
           </figure>
           <!-- error  -->
@@ -44,7 +50,7 @@ Vue.component('editor',{
                 </span>
                 <span>Error</span>
               </div>
-              <div><div>
+              <div></div>
               <div class="c-img-loader width-100">
                 <div style="width: 50%" class="height-100 bg-pri-color"></div>
               </div>
@@ -92,7 +98,33 @@ Vue.component('editor',{
     post: Object,
     thread: Object
   },
+  mounted() {
+    this.init();
+  },
   methods: {
+    init: function() {
+      $(`#drop-comment-area-${ (this.target) ? this.target.id : '' }`).dmUploader({
+        auto: true,
+        queue: true,
+        url: `${this.API}/topics/comments/attachments`,
+        method: 'POST',
+        maxFileSize: 300000000,
+        fieldName: 'image',
+        dataType: 'json',
+        extFilter: ['png', 'jpg', 'jpeg'],
+        // onNewFile: this.addNewFile,
+        // onUploadProgress: this.updateProgressFile,
+        // onUploadCanceled: this.handleCancel,
+        // onBeforeUpload: this.handleBeforeUpload,
+        // onUploadError: this.handleError,
+        // onUploadSuccess: this.handleUploadSuccess,
+        // onUploadComplete: this.handleUploadComplete,
+        // onFileSizeError: this.handleFileSizeError,
+        // onFileExtError: this.handleFileExtError,
+        // onComplete: this.handleAllFilesCompleted,
+      });
+    },
+
     activeEditor: function(){
       if(this.logedUser){
         this.isActiveEditor = true

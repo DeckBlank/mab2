@@ -98,6 +98,14 @@ class TopicController{
                 }
             ));
 
+            register_rest_route( 'custom/v1', '/topics/comments/attachments', array(
+                'methods' => 'POST',
+                'callback' => array($this,'storeAttachments'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
             register_rest_route( 'custom/v1', '/topic/(?P<post_id>\d+)/Video/log', array(
                 'methods' => 'PUT',
                 'callback' => array($this,'saveVideoLog'),
@@ -383,6 +391,46 @@ class TopicController{
             }
         } else {
             return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 404 ) );
+        }
+    }
+
+    public function storeAttachments($request) {
+        $invoiceFile = (object)[
+            "ext" => pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION),
+            "name" => '' ,
+            "dir" => __DIR__ . "/../../../../../../uploads/attachments/"
+        ];
+
+        if($invoiceFile->ext == 'jpg' || $invoiceFile->ext == 'jpeg' || $invoiceFile->ext == 'png' || $invoiceFile->ext == 'PNG') {
+            $now = date("Y_m_d_H_i");
+            $invoiceFile->name = $invoiceFile->dir . $now . $_FILES['image']['name'];      
+
+            if( is_uploaded_file($_FILES['image']['tmp_name']) ) {			
+                if( !move_uploaded_file($_FILES['image']['tmp_name'], $invoiceFile->name) ) {
+                    return (object)[
+                        "code"      => "no_invoice_saved",
+                        "message"   => "Invoice file (" . $_FILES['image']['name'] . ") not saved",
+                        "status"    => false
+                    ];
+                } else {
+                    return (object)[
+                        "filename"  => $now . $_FILES['image']['name'],
+                        "status"    => true
+                    ];
+                }
+            } else {
+                return (object)[
+                    "code"      => "no_invoice_saved",
+                    "message"   => "Invoice file (" . $_FILES['image']['name'] . ") not uploaded",
+                    "status"    => false
+                ];
+            }
+        } else {
+            return (object)[
+                "code"      => "no_invoice_saved",
+                "message"   => "Invoice file (" . $_FILES['image']['name'] . ") with wrong format",
+                "status"    => false
+            ];    
         }
     }
 

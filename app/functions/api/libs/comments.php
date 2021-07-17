@@ -47,7 +47,7 @@ function __getComments($request){
                 "answers"       => $answers
             ]);
         }
-        
+
         return (object)[
             "number" => intval( get_post_meta($request['post_id'], 'post_comments_count', true)[0] ),
             "list" => $comments_answers
