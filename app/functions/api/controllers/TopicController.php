@@ -8,7 +8,7 @@ require(__DIR__ . '/../models/TopicModel.php');
 
 class TopicController{
 
-    public function __construct(){
+    public function __construct() {
         add_action( 'rest_api_init', function () {
             register_rest_route( 'custom/v1', '/topic/(?P<topic_id>\d+)/questions', array(
                 'methods' => 'GET',
@@ -77,6 +77,22 @@ class TopicController{
             register_rest_route( 'custom/v1', '/topic/(?P<post_id>\d+)/comment/(?P<comment_id>\d+)/answer', array(
                 'methods' => 'POST',
                 'callback' => array($this,'addAnswer'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topics/(?P<post_id>\d+)/comments/(?P<comment_id>\d+)/sticky', array(
+                'methods' => 'POST',
+                'callback' => array($this,'stickyComments'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topics/(?P<post_id>\d+)/comments/(?P<comment_id>\d+)/likes', array(
+                'methods' => 'POST',
+                'callback' => array($this,'likeComments'),
                 'permission_callback' => function ($request) {
                     return true;
                 }
@@ -284,6 +300,89 @@ class TopicController{
             }
         } catch (Exception $e){
             return new WP_Error( 'no_answer_added', __($e->getMessage()), array( 'status' => 404 ) );
+        }
+    }
+
+    public function stickyComments($request) {
+        if (
+            !empty($request['user_id']) &&
+            !empty($request['course_id'])
+        ) {
+            $userId         = $request['user_id'];
+            $commentId      = $request['comment_id'];
+            $topicId        = $request['post_id'];
+            $userId         = $request['user_id'];
+            $user           = get_userdata($userId);
+            $commentData    = get_comment($commentId);
+
+            $isAuthorized = false;
+
+            if (!$commentData) {
+                return new WP_Error( 'not_comment_found', __('Comment not found'), array( 'status' => 404 ) );
+            }
+
+            if ( array_intersect(['administrator', 'mab-teacher'], $user->roles )) {
+                if ( array_intersect(['mab-teacher'], $user->roles )) {
+                    $teacher = get_field('teacher', $request['course_id']);
+
+                    if ($teacher && $teacher['ID'] == $userId) {
+                        $isAuthorized = true;
+                    } else {
+                        return new WP_Error( 'wrong_teacher', __('Teacher not authorized'), array( 'status' => 404 ) );
+                    }
+                } else {
+                    $isAuthorized = true;
+                }
+
+                if ($isAuthorized) {
+                    if ( get_post_meta($topicId, 'comment_sticky') ) {
+                        update_post_meta($topicId, 'comment_sticky', $commentId, true);
+                    } else {
+                        add_post_meta($topicId, 'comment_sticky', $commentId, true);
+                    }
+
+                    return new WP_REST_Response('Comment as sticky', 200);
+                }
+            } else {
+                return new WP_Error( 'invalid_user', __('Invalid user'), array( 'status' => 404 ) );
+            }
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 404 ) );
+        }
+    }
+
+    public function likeComments($request) {
+        if (
+            !empty($request['user_id'])
+        ) {
+            $userId     = $request['user_id'];
+            $commentId  = $request['comment_id'];
+
+            $commentData    = get_comment($commentId);
+
+            if ($commentData) {
+                $userLikes      = get_comment_meta($commentId, 'user_likes');
+                $commentLike    = intval($commentData->comment_karma);
+
+                wp_update_comment([
+                    'comment_ID'    => $commentId,
+                    'comment_karma' => ++$commentLike
+                ]);
+
+                if ($userLikes) {
+                    array_push($userLikes, $userId);
+
+                    update_comment_meta($commentId, 'user_likes', $userLikes, true);
+                } else {
+                    add_comment_meta($commentId, 'user_likes', $userId, true);
+                }
+
+                return new WP_REST_Response('Comment liked', 200);
+            } else {
+                return new WP_Error('not_comment_found', __('Comment not found'), array( 'status' => 404 ));
+            }
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 404 ) );
         }
     }
 

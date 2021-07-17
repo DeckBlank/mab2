@@ -9,7 +9,8 @@ function __getComments($request){
     ]);
 
     if ($comments) {
-        $comments_answers = [];
+        $comments_answers   = [];
+        $userId             = $request['user_id'];
 
         foreach($comments as $comment){
             $user = get_user_by('email', $comment->comment_author_email);
@@ -27,14 +28,23 @@ function __getComments($request){
                 $answer->authorField = get_field('job', 'user_' . $userAnswer->ID);
             }
 
+            $topicCommentSticky = get_post_meta($request['post_id'], 'comment_sticky');
+            $isSticky           = ($topicCommentSticky) ? in_array($comment->comment_ID, $topicCommentSticky) : false;
+
+            $userLikesComment   = get_comment_meta($comment->comment_ID, 'user_likes');
+            $isLikedUser        = ($userLikesComment) ? in_array($userId, $userLikesComment) : false;
+
             array_push($comments_answers, (object)[
-                "id" => $comment->comment_ID,
-                "author" => $comment->comment_author,
+                "id"            => $comment->comment_ID,
+                "author"        => $comment->comment_author,
+                "sticky"        => $isSticky,
                 "authorAvatar"  => get_field('avatar', 'user_' . $user->ID),
                 "authorField"   => get_field('job', 'user_' . $user->ID),
-                "date" => $comment->comment_date,
-                "content" => $comment->comment_content,
-                "answers" => $answers
+                "date"          => $comment->comment_date,
+                "content"       => $comment->comment_content,
+                "likes"         => $comment->comment_karma,
+                "likedUser"     => $isLikedUser,
+                "answers"       => $answers
             ]);
         }
         
