@@ -178,11 +178,20 @@
         width: 100%;
         height: 3px;
         background: $gray;
+
+        div {
+          @include transition;
+        }
       }
 
       .c-img-icon {
         font-size: 12px;
         margin-bottom: 0.5rem;
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: wait;
+        }
 
         .trash {
           padding: 0.2rem 0.2rem 0.2rem;

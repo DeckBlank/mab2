@@ -13,7 +13,7 @@ new Vue({
   data() {
     return {
       showTooltipCerticado: false,
-      view: 2,
+      view: 1,
       foro: 1,
       commentbox: 0,
 
@@ -25,7 +25,10 @@ new Vue({
 
       comments: {
         number: 0,
-        list: []
+        list: [],
+        sticky: null,
+
+        is_user_owner: false,
       },
       commentsPaged: 0,
       isLoadingComments: false,      
@@ -316,9 +319,11 @@ new Vue({
           throw err;          
         })       
     },
-    getComments: function(){
+    getComments: function(reset = false){
+      if (reset) this.commentsPaged = 0;
+
       if(this.commentsPaged != -1){
-        fetch(`${this.API}/topic/${this.topicID}/comments?paged=${this.commentsPaged + 1}`,{
+        fetch(`${this.API}/topic/${this.topicID}/comments?paged=${ this.commentsPaged + 1 }&user_id=${ this.logedUser ? this.logedUser.user_id : '' }&course_id=${ this.metas.get('course_id') }`,{
             method: 'GET'
           })
           .then(res => {
@@ -329,8 +334,14 @@ new Vue({
             }
           })
           .then(comments => {
-            this.comments.number = comments.number;
-            this.comments.list.push(...comments.list);
+            this.comments.number  = comments.number;
+            this.comments.sticky  = comments.sticky;
+
+            this.comments.is_user_owner = comments.is_user_owner;
+
+            if (!reset) this.comments.list.push(...comments.list);
+            else this.comments.list = comments.list;
+
             this.commentsPaged += 1
           })
           .catch(err => {

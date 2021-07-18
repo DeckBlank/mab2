@@ -5,6 +5,7 @@ use PHPMailer\PHPMailer\Exception;
 use Timber\Timber;
 
 require(__DIR__ . '/../models/TopicModel.php');
+require(__DIR__ . '/../models/schema/Attachment.php');
 
 class TopicController{
 
@@ -101,6 +102,14 @@ class TopicController{
             register_rest_route( 'custom/v1', '/topics/comments/attachments', array(
                 'methods' => 'POST',
                 'callback' => array($this,'storeAttachments'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topics/comments/attachments/(?P<attachment_id>\d+)', array(
+                'methods' => 'DELETE',
+                'callback' => array($this,'deleteAttachments'),
                 'permission_callback' => function ($request) {
                     return true;
                 }
@@ -314,43 +323,33 @@ class TopicController{
     public function stickyComments($request) {
         if (
             !empty($request['user_id']) &&
-            !empty($request['course_id'])
+            !empty($request['course_id']) &&
+            !empty($request['mode'])
         ) {
-            $userId         = $request['user_id'];
-            $commentId      = $request['comment_id'];
-            $topicId        = $request['post_id'];
-            $userId         = $request['user_id'];
-            $user           = get_userdata($userId);
-            $commentData    = get_comment($commentId);
+            $userId     = $request['user_id'];
+            $commentId  = $request['comment_id'];
+            $topicId    = $request['post_id'];
+            $courseId   = $request['course_id'];
+            $mode       = $request['mode'];
 
-            $isAuthorized = false;
+            $commentData = get_comment($commentId);
 
             if (!$commentData) {
                 return new WP_Error( 'not_comment_found', __('Comment not found'), array( 'status' => 404 ) );
             }
 
-            if ( array_intersect(['administrator', 'mab-teacher'], $user->roles )) {
-                if ( array_intersect(['mab-teacher'], $user->roles )) {
-                    $teacher = get_field('teacher', $request['course_id']);
-
-                    if ($teacher && $teacher['ID'] == $userId) {
-                        $isAuthorized = true;
+            if ( __isUserOwnerOnCourse($userId, $courseId) ) {
+                if ($mode == 1) {
+                    if ( get_post_meta($topicId, 'comment_sticky') ) {
+                        update_post_meta($topicId, 'comment_sticky', $commentId, false);
                     } else {
-                        return new WP_Error( 'wrong_teacher', __('Teacher not authorized'), array( 'status' => 404 ) );
+                        add_post_meta($topicId, 'comment_sticky', $commentId, false);
                     }
                 } else {
-                    $isAuthorized = true;
+                    delete_post_meta($topicId, 'comment_sticky', $commentId, false);
                 }
 
-                if ($isAuthorized) {
-                    if ( get_post_meta($topicId, 'comment_sticky') ) {
-                        update_post_meta($topicId, 'comment_sticky', $commentId, true);
-                    } else {
-                        add_post_meta($topicId, 'comment_sticky', $commentId, true);
-                    }
-
-                    return new WP_REST_Response('Comment as sticky', 200);
-                }
+                return new WP_REST_Response('Comment as sticky', 200);
             } else {
                 return new WP_Error( 'invalid_user', __('Invalid user'), array( 'status' => 404 ) );
             }
@@ -413,10 +412,25 @@ class TopicController{
                         "status"    => false
                     ];
                 } else {
-                    return (object)[
-                        "filename"  => $now . $_FILES['image']['name'],
-                        "status"    => true
-                    ];
+                    $attachment = new Attachment();
+
+                    $attachment->path       = sprintf("%s/wp-content/uploads/attachments/%s", get_site_url()  , $now . $_FILES['image']['name']);
+                    $attachment->filename   = $now . $_FILES['image']['name'];
+
+                    $attachment->save();
+
+                    if ($attachment) {
+                        return (object)[
+                            "data" => [
+                                "path"  => $now . $_FILES['image']['name'],
+                                "id"    => $attachment->id,
+                            ],
+                            "status"    => true
+                        ];
+                    } else {
+                        return new WP_Error( 'no_invoice_saved', __('Couldnt sore on DB'), array( 'status' => 404 ) );
+                    }
+
                 }
             } else {
                 return (object)[
@@ -431,6 +445,20 @@ class TopicController{
                 "message"   => "Invoice file (" . $_FILES['image']['name'] . ") with wrong format",
                 "status"    => false
             ];    
+        }
+    }
+
+    public function deleteAttachments($request) {
+        $attachment = Attachment::find($request['attachment_id']);
+
+        if ($attachment) {
+            unlink(__DIR__ . "/../../../../../../uploads/attachments/" . $attachment->filename);
+
+            $attachment->delete();
+
+            return new WP_REST_Response('Attachment deleted', 200);
+        } else {
+            return new WP_Error( 'attachment_not_found', __('Attachment not found'), array( 'status' => 404 ) );
         }
     }
 

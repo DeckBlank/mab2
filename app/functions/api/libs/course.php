@@ -239,3 +239,23 @@ function __getUserCourseProgress($userId, $userEmail, $courseId) {
         ? $progress
         : false;
 }
+
+function __isUserOwnerOnCourse($userId, $courseId) {
+    $isAuthorized = false;
+
+    $user = get_userdata($userId);
+
+    if ( array_intersect(['administrator', 'mab-teacher'], $user->roles )) {
+        if ( array_intersect(['mab-teacher'], $user->roles )) {
+            $teacher = get_field('teacher', $courseId);
+
+            if ($teacher && $teacher['ID'] == $userId) {
+                $isAuthorized = true;
+            }
+        } else {
+            $isAuthorized = true;
+        }
+    }
+
+    return $isAuthorized;
+}
