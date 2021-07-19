@@ -110,11 +110,12 @@ class CourseModel{
     }
 
     public static function getUnities($request, $mode = 'surface'){
-        $unities = [];
+        $unities        = get_field('unities', $request['course_id']);
+        $unitiesArray   = [];
 
-        if(get_field('unities', $request['course_id'])){
-            foreach( get_field('unities', $request['course_id']) as $unity){
-                array_push($unities,(object)[
+        if($unities){
+            foreach($unities as $unity){
+                array_push($unitiesArray,(object)[
                     "title"     => $unity['title'],
                     "enable"    => false,
                     "topics"    => self::__getTopicsSanitize($unity['topics'], $request['user'], $mode)
@@ -122,7 +123,7 @@ class CourseModel{
             }
         }        
 
-        return $unities;
+        return $unitiesArray;
     }
 
     public static function getCategories($request){
@@ -580,7 +581,7 @@ class CourseModel{
     public static function __getTopicsSanitize($topics, $user, $mode){
         $topics_sanitize = [];
 
-        if($topics){        
+        if($topics){
             foreach($topics as $topic){
                 if ($topic['topic']) {
                     $tempTopic = '';

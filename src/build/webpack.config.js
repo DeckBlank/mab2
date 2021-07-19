@@ -60,10 +60,6 @@ const config = {
       "window.jQuery": "jquery"
     })
   ],
-
-  externals: {
-    jquery: 'jQuery'
-  }
 };
 
 if( env === 'development' ) {

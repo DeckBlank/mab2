@@ -378,7 +378,10 @@ class CourseController{
         $unities = CourseModel::getUnities($request);
         
         if($unities){
-            return new WP_REST_Response($unities, 200);
+            return new WP_REST_Response([
+                'data'      => $unities,
+                'lastClass' => __getLastTopic($request['course_id'], $request['user'], $request['user_id'], null)
+            ], 200);
         }else{
             return new WP_Error( 'no_unities', __('No unities found'), array( 'status' => 404 ) );
         }  
