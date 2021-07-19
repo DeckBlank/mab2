@@ -15,12 +15,12 @@ function __getComments($request){
         $courseId       = $request['course_id'];
 
         $topicCommentSticky = get_post_meta($request['post_id'], 'comment_sticky');
-        $commentSticky      = ($topicCommentSticky) ? __sanitizeComment( get_comment($topicCommentSticky[0]), $userId ) : false;
+        $commentSticky      = ($topicCommentSticky) ? __sanitizeComment( get_comment($topicCommentSticky[0]), $userId, $request) : false;
 
         foreach($comments as $comment){
             $isSticky = ($topicCommentSticky) ? in_array($comment->comment_ID, $topicCommentSticky) : false;
 
-            $commentObject = __sanitizeComment($comment, $userId);
+            $commentObject = __sanitizeComment($comment, $userId, $request);
 
             if (!$isSticky) array_push($commentsArray, $commentObject);
         }
@@ -104,8 +104,9 @@ function __getAttachments($commentId) {
     }
 }
 
-function __sanitizeComment($comment, $userId) {
-    $user = get_user_by('email', $comment->comment_author_email);
+function __sanitizeComment($comment, $userId, $request) {
+    $userComment        = get_user_by('email', $comment->comment_author_email);
+    $userCommentAvatar  = get_field('avatar', 'user_' . $userComment->ID);
 
     $answers = get_comments([
         "parent" => $comment->comment_ID,
@@ -115,8 +116,9 @@ function __sanitizeComment($comment, $userId) {
 
     foreach($answers as $answer) {
         $userAnswer = get_user_by('email', $answer->comment_author_email);
+        $userAvatar = get_field('avatar', 'user_' . $userAnswer->ID);
 
-        $answer->authorAvatar   = get_field('avatar', 'user_' . $userAnswer->ID);
+        $answer->authorAvatar   = $userAvatar ? $userAvatar['url'] : '';
         $answer->authorField    = get_field('job', 'user_' . $userAnswer->ID);
         $answer->attachments    = __getAttachments($answer->comment_ID);
     }
@@ -127,8 +129,8 @@ function __sanitizeComment($comment, $userId) {
     return (object)[
         "id"            => $comment->comment_ID,
         "author"        => $comment->comment_author,
-        "authorAvatar"  => get_field('avatar', 'user_' . $user->ID),
-        "authorField"   => get_field('job', 'user_' . $user->ID),
+        "authorAvatar"  => $userCommentAvatar ? $userCommentAvatar['url'] : '',
+        "authorField"   => get_field('job', 'user_' . $userComment->ID),
         "date"          => $comment->comment_date,
         "content"       => $comment->comment_content,
         "likes"         => $comment->comment_karma,
