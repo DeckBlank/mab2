@@ -72,8 +72,8 @@ Vue.component('editor',{
         </div>
       </div>
       <div class="c-mab-editor__list-btn width-100 flex-container align-end">
-        <button v-if="target.type == 'answer'" @click="cancel()" class="c-button c-button--white-black">Cancelar</button>
-        <button @click="add()" :disabled="isLoading || !isReadyComment" class="c-button c-button--secondary i-white">Publicar</button>
+        <button v-if="target.type == 'answer'" @click="cancel()" class="c-button c-button--white-black f2">Cancelar</button>
+        <button @click="add()" :disabled="isLoading || !isReadyComment" class="c-button c-button--secondary i-white f2">Publicar</button>
       </div>
     </div>
   `,
