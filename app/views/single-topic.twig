@@ -196,7 +196,7 @@
                                   <p class="margin-bottom-0 dark f2 fs-25 text-uppercase ">Unidad ${ uindex + 1 }</p>
                                   <ul class="ul-reset">
                                     <li v-for="(topic, tindex) of unity.topics" class="c-themes-list__item dark f2 fs-18" :class="{'active' : topicID == topic.id}">
-                                      <a :href="getTopicLink(topic.video.link, tindex + 1, uindex + 1)" class="dark c-link--ho-primary">
+                                      <a :href="getTopicLink(topic.video.link, tindex, uindex)" class="dark c-link--ho-primary">
                                         <span class="triangle"></span> ${ topic.title }
                                       </a>
                                       <p v-if="topicID == topic.id" class="margin-0"><small class="status">Reproduciendo ahora</small></p>

@@ -16,6 +16,7 @@ new Vue({
 
       unities: [],
       courseProgress: 1000,
+      lastClass: '',
 
       view: 1,
       foro: 1,
@@ -29,9 +30,6 @@ new Vue({
   },
   computed: {
     ...baseState(),
-    firstClass: function() {
-      return (this.unities.length) ? this.unities[0].topics[0].video.link : '';
-    },
     hasCertificate: function() {
       return (this.courseProgress == 100) ? true : false;
     },
@@ -55,7 +53,7 @@ new Vue({
     getUnities: function(course_id){
       this.isLoadingUnities = true;
 
-      fetch(`${ this.API }/course/${ course_id }/unities?user=${ this.logedUser.user_email }`)
+      fetch(`${ this.API }/course/${ course_id }/unities?user=${ this.logedUser.user_email }&user_id=${ this.logedUser.user_id }`)
       .then(res => { 
         if (res.status >= 200 && res.status < 300) {
           return res.json()
@@ -63,8 +61,9 @@ new Vue({
           throw res;
         }
       })
-      .then(unities => {
-        this.unities = unities;
+      .then(response => {
+        this.unities    = response.data;
+        this.lastClass  = response.lastClass;
 
         window.setTimeout(() => {
           this.isLoadingUnities = false;
@@ -126,14 +125,29 @@ new Vue({
 
     startCourse: function(course_id, course_title, course_link) {
       if (this.accessGranted) {
-        window.location.href = this.firstClass;
+        window.location.href = (this.lastClass) ? this.lastClass.link : '';
       } else {
         this.addCourseToShopCart({id: course_id, title: course_title, link: course_link, url: this.SITE_URL});
       }
     },
 
-    getTopicLink: function(topicLink, topicNumber, unityNumber) {
-      return (this.accessGranted) ? `${ topicLink }?course_id=${ mab.course_id }&topic_number=${ topicNumber }&unity=${ unityNumber }` : '#';
+    getTopicLink: function(topicLink, topicIndex, unityIndex) {
+      const previousUnities = this.unities.slice(0, unityIndex);
+      let topicNumber = 0;
+
+      if (unityIndex == 0) {
+        topicNumber = topicIndex + (unityIndex + 1);
+      } else {
+        let unitiesLength = 0;
+
+        previousUnities.forEach(element => {
+          unitiesLength += element.topics.length;
+        });
+
+        topicNumber = topicIndex + (unityIndex + 1) + (unitiesLength - unityIndex);
+      }
+
+      return (this.accessGranted) ? `${ topicLink }?course_id=${ mab.course_id }&topic_number=${ topicNumber }&unity=${ unityIndex + 1 }` : '#';
     },
 
     resetAccordion: function(unity) {

@@ -142,8 +142,8 @@ new Vue({
             throw res;
           }
         })
-        .then(unities => {
-          this.unities = unities;
+        .then(response => {
+          this.unities = response.data;
         })
         .catch(err => {
           throw err;
@@ -487,8 +487,23 @@ new Vue({
           throw err;          
         })      
     },
-    getTopicLink: function(topicLink, topicNumber, unityNumber) {
-      return `${ topicLink }?course_id=${ this.metas.get('course_id') }&topic_number=${ topicNumber }&unity=${ unityNumber }`;
+    getTopicLink: function(topicLink, topicIndex, unityIndex) {
+      const previousUnities = this.unities.slice(0, unityIndex);
+      let topicNumber = 0;
+
+      if (unityIndex == 0) {
+        topicNumber = topicIndex + (unityIndex + 1);
+      } else {
+        let unitiesLength = 0;
+
+        previousUnities.forEach(element => {
+          unitiesLength += element.topics.length;
+        });
+
+        topicNumber = topicIndex + (unityIndex + 1) + (unitiesLength - unityIndex);
+      }
+
+      return `${ topicLink }?course_id=${ this.metas.get('course_id') }&topic_number=${ topicNumber }&unity=${ unityIndex + 1 }`;
     },
 
     resetAccordion: function(question) {
