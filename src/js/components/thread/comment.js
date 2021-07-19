@@ -18,7 +18,13 @@ Vue.component('comment',{
           <div class="small-10 medium-8 large-8">
             <div class="c-comment-content">
               <div class="c-comment__autor f2 w-xbold dark fs-21">
-                {{ body.author }} <span v-if="false" class="padding-left-1 fs-16"><i class="far fa-thumbtack"></i></span>
+                {{ body.author }}
+
+                <button v-if="authorized" @click="markAsStickyComment(body.id)" class="padding-left-1 fs-16">
+                  <i v-if="sticky" class="fas fa-thumbtack"></i>
+                  <i v-else class="far fa-thumbtack"></i>
+                </button>
+                <span v-else-if="sticky"><i class="fas fa-thumbtack"></i></span>
               </div>
               <div v-if="body.authorField" class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
                 {{ body.authorField }}
@@ -26,12 +32,25 @@ Vue.component('comment',{
               <p class="c-comment__text f2 dark fs-16 lh-18">
                 {{ body.content }}
               </p>
+              <div class="c-comment__images flex-container margin-bottom-1">
+                <a v-for="attachment of body.attachments" :key="attachment.id" :href="attachment.src" target="_blank">
+                  <figure>
+                    <img class="width-100 height-100 of--cover" :src="attachment.src">
+                  </figure>
+                </a>
+              </div>
             </div>
           </div>
           <div class="cell medium-2 large-2">
             <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-14">
               <button @click="isShowedAnswerEditor = !isShowedAnswerEditor"><span>Responder</span></button>
-              <button v-if="false"><span class="padding-left-1 flex-container align-middle"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span></button>
+              <button @click="likeComment(body.id)" :disabled="body.likedUser">
+                <span class="padding-left-1 flex-container align-middle">
+                  <i v-if="body.likedUser" class="fas fa-heart"></i>
+                  <i v-else class="far fa-heart"></i>
+                  <span class="c-comment__like">{{ body.likes }}</span>
+                </span>
+              </button>
             </div>
           </div>
         </div>
@@ -68,10 +87,16 @@ Vue.component('comment',{
   props: {
     pic: String,
     body: Object,
-    post: Object
+    post: Object,
+    authorized: Boolean,
+    sticky: Boolean,
+    thread: Object,
+    handler: Function,
   },
   data() {
     return {
+      metas: new URLSearchParams(window.location.search),
+
       isShowedAnswers: false,
       isShowedAnswerEditor: false,
       isLoadingAnswers: false,
@@ -106,7 +131,68 @@ Vue.component('comment',{
             throw err;          
           })          
       }
-    }
+    },
+
+    markAsStickyComment: function(commentId) {
+      const formData = new FormData();
+
+      formData.append('user_id', this.logedUser.user_id)
+      formData.append('course_id', this.metas.get('course_id'));
+      formData.append('mode', (!this.sticky) ? 1 : 2);
+
+      if(this.authorized){
+        fetch(`${ this.API }/topics/${ mab.topic_id }/comments/${ commentId }/sticky`,{
+          method: 'POST',
+          body: formData,
+        })
+        .then(response => {
+          this.handler(true);
+        })
+        .catch(err => {
+          throw err;          
+        }) 
+      }
+    },
+    likeComment: function(commentId) {
+      const formData = new FormData();
+
+      formData.append('user_id', this.logedUser.user_id)
+
+      fetch(`${ this.API }/topics/${ mab.topic_id }/comments/${ commentId }/likes`,{
+        method: 'POST',
+        body: formData,
+      })
+      .then(response => {
+        if (this.sticky) {
+          this.$emit('update:thread', {
+            ...this.thread,
+            sticky: {
+              ...this.thread.sticky,
+              likes: Number(this.thread.sticky.likes) + 1,
+              likedUser: true,
+            }
+          });
+        } else {
+          let comments = this.thread.list.slice();
+
+          comments = comments.map(com => {
+            if (com.id == commentId) {
+              com.likes     = Number(com.likes) + 1;
+              com.likedUser = true;
+            }
+
+            return com;
+          });
+
+          this.$emit('update:thread', {
+            ...this.thread,
+            list: comments,
+          });
+        }
+      })
+      .catch(err => {
+        throw err;          
+      }) 
+    },
   },
 })
-              

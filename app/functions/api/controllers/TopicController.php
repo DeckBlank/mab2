@@ -5,10 +5,11 @@ use PHPMailer\PHPMailer\Exception;
 use Timber\Timber;
 
 require(__DIR__ . '/../models/TopicModel.php');
+require(__DIR__ . '/../models/schema/Attachment.php');
 
 class TopicController{
 
-    public function __construct(){
+    public function __construct() {
         add_action( 'rest_api_init', function () {
             register_rest_route( 'custom/v1', '/topic/(?P<topic_id>\d+)/questions', array(
                 'methods' => 'GET',
@@ -77,6 +78,38 @@ class TopicController{
             register_rest_route( 'custom/v1', '/topic/(?P<post_id>\d+)/comment/(?P<comment_id>\d+)/answer', array(
                 'methods' => 'POST',
                 'callback' => array($this,'addAnswer'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topics/(?P<post_id>\d+)/comments/(?P<comment_id>\d+)/sticky', array(
+                'methods' => 'POST',
+                'callback' => array($this,'stickyComments'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topics/(?P<post_id>\d+)/comments/(?P<comment_id>\d+)/likes', array(
+                'methods' => 'POST',
+                'callback' => array($this,'likeComments'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topics/comments/attachments', array(
+                'methods' => 'POST',
+                'callback' => array($this,'storeAttachments'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route( 'custom/v1', '/topics/comments/attachments/(?P<attachment_id>\d+)', array(
+                'methods' => 'DELETE',
+                'callback' => array($this,'deleteAttachments'),
                 'permission_callback' => function ($request) {
                     return true;
                 }
@@ -284,6 +317,148 @@ class TopicController{
             }
         } catch (Exception $e){
             return new WP_Error( 'no_answer_added', __($e->getMessage()), array( 'status' => 404 ) );
+        }
+    }
+
+    public function stickyComments($request) {
+        if (
+            !empty($request['user_id']) &&
+            !empty($request['course_id']) &&
+            !empty($request['mode'])
+        ) {
+            $userId     = $request['user_id'];
+            $commentId  = $request['comment_id'];
+            $topicId    = $request['post_id'];
+            $courseId   = $request['course_id'];
+            $mode       = $request['mode'];
+
+            $commentData = get_comment($commentId);
+
+            if (!$commentData) {
+                return new WP_Error( 'not_comment_found', __('Comment not found'), array( 'status' => 404 ) );
+            }
+
+            if ( __isUserOwnerOnCourse($userId, $courseId) ) {
+                if ($mode == 1) {
+                    if ( get_post_meta($topicId, 'comment_sticky') ) {
+                        update_post_meta($topicId, 'comment_sticky', $commentId, false);
+                    } else {
+                        add_post_meta($topicId, 'comment_sticky', $commentId, false);
+                    }
+                } else {
+                    delete_post_meta($topicId, 'comment_sticky', $commentId, false);
+                }
+
+                return new WP_REST_Response('Comment as sticky', 200);
+            } else {
+                return new WP_Error( 'invalid_user', __('Invalid user'), array( 'status' => 404 ) );
+            }
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 404 ) );
+        }
+    }
+
+    public function likeComments($request) {
+        if (
+            !empty($request['user_id'])
+        ) {
+            $userId     = $request['user_id'];
+            $commentId  = $request['comment_id'];
+
+            $commentData    = get_comment($commentId);
+
+            if ($commentData) {
+                $userLikes      = get_comment_meta($commentId, 'user_likes');
+                $commentLike    = intval($commentData->comment_karma);
+
+                wp_update_comment([
+                    'comment_ID'    => $commentId,
+                    'comment_karma' => ++$commentLike
+                ]);
+
+                if ($userLikes) {
+                    array_push($userLikes, $userId);
+
+                    update_comment_meta($commentId, 'user_likes', $userLikes, true);
+                } else {
+                    add_comment_meta($commentId, 'user_likes', $userId, true);
+                }
+
+                return new WP_REST_Response('Comment liked', 200);
+            } else {
+                return new WP_Error('not_comment_found', __('Comment not found'), array( 'status' => 404 ));
+            }
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 404 ) );
+        }
+    }
+
+    public function storeAttachments($request) {
+        $invoiceFile = (object)[
+            "ext" => pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION),
+            "name" => '' ,
+            "dir" => __DIR__ . "/../../../../../../uploads/attachments/"
+        ];
+
+        if($invoiceFile->ext == 'jpg' || $invoiceFile->ext == 'jpeg' || $invoiceFile->ext == 'png' || $invoiceFile->ext == 'PNG') {
+            $now = date("Y_m_d_H_i");
+            $invoiceFile->name = $invoiceFile->dir . $now . $_FILES['image']['name'];      
+
+            if( is_uploaded_file($_FILES['image']['tmp_name']) ) {			
+                if( !move_uploaded_file($_FILES['image']['tmp_name'], $invoiceFile->name) ) {
+                    return (object)[
+                        "code"      => "no_invoice_saved",
+                        "message"   => "Invoice file (" . $_FILES['image']['name'] . ") not saved",
+                        "status"    => false
+                    ];
+                } else {
+                    $attachment = new Attachment();
+
+                    $attachment->path       = sprintf("%s/wp-content/uploads/attachments/%s", get_site_url()  , $now . $_FILES['image']['name']);
+                    $attachment->filename   = $now . $_FILES['image']['name'];
+
+                    $attachment->save();
+
+                    if ($attachment) {
+                        return (object)[
+                            "data" => [
+                                "path"  => $now . $_FILES['image']['name'],
+                                "id"    => $attachment->id,
+                            ],
+                            "status"    => true
+                        ];
+                    } else {
+                        return new WP_Error( 'no_invoice_saved', __('Couldnt sore on DB'), array( 'status' => 404 ) );
+                    }
+
+                }
+            } else {
+                return (object)[
+                    "code"      => "no_invoice_saved",
+                    "message"   => "Invoice file (" . $_FILES['image']['name'] . ") not uploaded",
+                    "status"    => false
+                ];
+            }
+        } else {
+            return (object)[
+                "code"      => "no_invoice_saved",
+                "message"   => "Invoice file (" . $_FILES['image']['name'] . ") with wrong format",
+                "status"    => false
+            ];    
+        }
+    }
+
+    public function deleteAttachments($request) {
+        $attachment = Attachment::find($request['attachment_id']);
+
+        if ($attachment) {
+            unlink(__DIR__ . "/../../../../../../uploads/attachments/" . $attachment->filename);
+
+            $attachment->delete();
+
+            return new WP_REST_Response('Attachment deleted', 200);
+        } else {
+            return new WP_Error( 'attachment_not_found', __('Attachment not found'), array( 'status' => 404 ) );
         }
     }
 

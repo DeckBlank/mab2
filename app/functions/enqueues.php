@@ -502,6 +502,22 @@ add_action( 'wp_enqueue_scripts', function () use ($config) {
             'in_footer' => true
         ]); 
 
+        register_assets('package', [
+            'handle'    => 'pandawp/package/jquery',
+            'src'       => $config['resources']['package_jquery'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]); 
+
+        register_assets('package', [
+            'handle'    => 'pandawp/package/dm_file_uploader',
+            'src'       => $config['resources']['package_dm_file_uploader'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]); 
+
         register_assets('script', [
             'handle'    => 'pandawp/js/page/topic',
             'src'       => $config['resources']['page_topic'],

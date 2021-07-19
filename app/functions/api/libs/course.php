@@ -71,29 +71,34 @@ function __getLastTopic($courseId, $userEmail, $userID, $course) {
                     array_push(
                         $topics,
                         [
-                            'unity' => $unityIndex,
-                            'title' => ($topic['topic']) ? $topic['topic']->post_title : '',
-                            'id'    => ($topic['topic']) ? $topic['topic']->ID : 0,
-                            'link'  => ($topic['topic']) ? get_the_permalink($topic['topic']->ID) : '',
+                            'unity'     => $unityIndex,
+                            'title'     => ($topic['topic']) ? $topic['topic']->post_title : '',
+                            'id'        => ($topic['topic']) ? $topic['topic']->ID : 0,
+                            'link'      => ($topic['topic']) ? get_the_permalink($topic['topic']->ID) : '',
+                            'number'    => $topicIndex + 1
                         ]
                     );
+
+                    $topicIndex++;
                 }
             }
-        }
 
-        $unityIndex++;
+            $unityIndex++;
+        }
     }
+
+    $topicIndex = 0;
 
     if ( count($topics) ) {
         $firstClass = $topics[0];
         $topics     = array_reverse($topics);
 
         foreach($topics as $topic) {
-            $userTopic = UserTopic::where(['topic_id' => $topic['id']])
+            $userTopic = UserTopic::where(['user_email' => $userEmail, 'topic_id' => $topic['id'], 'video_viewed' => 1])
                 ->first();
 
-            if ($userTopic && $userTopic->video_viewed) {
-                $nextIndex = $topicIndex++;
+            if ($userTopic) {
+                $nextIndex = $topicIndex - 1;
 
                 $lastClass = ($topics[$nextIndex]) ? $topics[$nextIndex] : $topic;
             }
@@ -117,7 +122,7 @@ function __getLastTopic($courseId, $userEmail, $userID, $course) {
                 $lastClass['link'],
                 $courseId,
                 $lastClass['unity'],
-                $topicIndex + 1
+                $lastClass['number']
             );
 
             return $lastClass;
@@ -238,4 +243,24 @@ function __getUserCourseProgress($userId, $userEmail, $courseId) {
     return ($courseTestScores)
         ? $progress
         : false;
+}
+
+function __isUserOwnerOnCourse($userId, $courseId) {
+    $isAuthorized = false;
+
+    $user = get_userdata($userId);
+
+    if ( array_intersect(['administrator', 'mab-teacher'], $user->roles )) {
+        if ( array_intersect(['mab-teacher'], $user->roles )) {
+            $teacher = get_field('teacher', $courseId);
+
+            if ($teacher && $teacher['ID'] == $userId) {
+                $isAuthorized = true;
+            }
+        } else {
+            $isAuthorized = true;
+        }
+    }
+
+    return $isAuthorized;
 }

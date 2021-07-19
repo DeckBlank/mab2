@@ -196,7 +196,7 @@
                                   <p class="margin-bottom-0 dark f2 fs-25 text-uppercase ">Unidad ${ uindex + 1 }</p>
                                   <ul class="ul-reset">
                                     <li v-for="(topic, tindex) of unity.topics" class="c-themes-list__item dark f2 fs-18" :class="{'active' : topicID == topic.id}">
-                                      <a :href="getTopicLink(topic.video.link, tindex + 1, uindex + 1)" class="dark c-link--ho-primary">
+                                      <a :href="getTopicLink(topic.video.link, tindex, uindex)" class="dark c-link--ho-primary">
                                         <span class="triangle"></span> ${ topic.title }
                                       </a>
                                       <p v-if="topicID == topic.id" class="margin-0"><small class="status">Reproduciendo ahora</small></p>
@@ -212,11 +212,37 @@
                   </div>
                   <div v-if="view == 2" key="foro" class="c-tab-slide">
                     <div class="c-foro">
+                      <comment
+                        v-if="comments.sticky"
+                        :body="comments.sticky"
+                        :post="{ type: 'topic', id: {{post.id}} }"
+                        :authorized="comments.is_user_owner"
+                        :sticky="true"
+                        :thread.sync="comments"
+                        :handler="getComments"
+                      >
+                      </comment>
+
                       <div class="c-foro-body">
                         <div class="c-foro-scroll height-100">
                           <div class="position-relative">
-                            <comment v-for="comment of comments.list" :body="comment" :post="{ type: 'topic', id: {{post.id}} }" :key="comment.id"></comment>
+                            <comment
+                              v-for="comment of comments.list"
+                              :body="comment"
+                              :post="{ type: 'topic', id: {{post.id}} }"
+                              :key="comment.id"
+                              :authorized="comments.is_user_owner"
+                              :sticky="false"
+                              :thread.sync="comments"
+                              :handler="getComments"
+                            >
+                            </comment>
                           </div>
+
+                          <button @click="getComments()" v-if="commentsPaged != -1 && comments.list.length != 0" class="sec-alt flex-container f2 w-sbold align-middle">
+                            <span class="c-icon margin-right-1"><i class="far fa-ellipsis-h"></i></span> 
+                            <p class="margin-bottom-0">Mostrar más comentarios</p>
+                          </button> 
                         </div>
                       </div>
                       <div class="c-foro-footer fs-21  padding-1 f2 dark br-bottom--large box-shadow-none">

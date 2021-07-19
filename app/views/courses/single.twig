@@ -40,7 +40,6 @@
           <div class="cell large-7 margin-bottom-0">
             <div class="position-relative flex-container align-center course-bg-figure">
               <img src="{{ teacher.cover.url }}" alt="" class="c-banner__figure of--contain "> 
-              <!-- <img src="{{ (vector) ? vector : theme.link }}/static/images/home/heart.png" alt="" class="c-banner__heart position-absolute of--contain"> -->
             </div>
           </div>
         </div>
@@ -171,7 +170,7 @@
                               <div v-for="(topic, tindex) of unity.topics" :key="topic.id" class="c-mab-toggle fs-21">
                                 <a
                                   :class="topic.video.state ? 'pri-color c-link--ho-primary' : 'dark c-link--ho-primary' "
-                                  :href="getTopicLink(topic.video.link, tindex + 1, uindex + 1)"
+                                  :href="getTopicLink(topic.video.link, tindex, uindex)"
                                 >
                                   <span class="triangle"></span> ${ topic.title }
                                 </a> 
