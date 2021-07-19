@@ -73,9 +73,14 @@
       }
     }
 
+    &__text {
+      overflow-wrap: break-word;
+    }
+
     &__images {
       figure {
         width: 75px;
+        height: 75px;
         margin-right: 0.8rem;
       }
     }
@@ -139,9 +144,12 @@
     &__reactions {
       width: 20%;
 
-      button {
+      button,
+      label {
         font-size: $fs-21;
         padding: 0 0.2rem;
+        color: $gray;
+        cursor: pointer;
       }
     }
 
@@ -151,6 +159,7 @@
 
     &__figure {
       width: 75px;
+      height: 75px;
       margin-right: 0.8rem;
 
       figcaption {
@@ -250,6 +259,7 @@
       &__images {
         figure {
           width: 125px;
+          height: 125px;
           margin-right: 0.8rem;
         }
       }
@@ -280,6 +290,7 @@
 
       &__figure {
         width: 125px;
+        height: 125px;
         margin-right: 1.5rem;
 
         figcaption {
