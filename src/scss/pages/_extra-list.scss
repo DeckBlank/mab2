@@ -1,10 +1,29 @@
 .c-extra-list {
+  padding: 4rem 2rem;
+
   &__title {
-    font-size: $fs-21;
+    font-size: $fs-30;
+    margin-bottom: 3rem;
+  }
+
+  &__message-container {
+    padding: 3rem 2rem;
+  }
+
+  &__message {
+    font-size: $fs-30;
+    line-height: 35px;
+  }
+
+  &__autor {
+    font-size: $fs-16;
+    padding-top: 1rem;
   }
 }
 
 .c-extra-block {
+  margin-bottom: 3rem;
+
   &__info {
     opacity: 1;
   }
@@ -12,12 +31,115 @@
   &__figure {
     opacity: 1;
   }
+
+  &--magenta {
+    .c-extra-block__info {
+      background: $magenta;
+    }
+  }
+
+  &--cyan {
+    .c-extra-block__info {
+      background: $cyan;
+    }
+  }
+
+  &--primary {
+    .c-extra-block__info {
+      background: $primary-color;
+    }
+  }
+
+  &--warning {
+    .c-extra-block__info {
+      background: $warning-alt;
+    }
+  }
+
+  &--white {
+    .c-extra-block__info {
+      background: $white;
+    }
+  }
+
+  &--secondary {
+    .c-extra-block__info {
+      background: $secondary-color;
+    }
+  }
 }
 
 @include breakpoint(large) {
   .c-extra-list {
+    padding: 6rem 0;
+
     &__title {
+      font-size: 55px;
+      margin-bottom: 4rem;
+
+      p {
+        line-height: 58px;
+      }
+    }
+
+    &__message-container {
+      padding: 5rem 0 8rem;
+      background-image: url('../images/blog/arcoiris.png');
+      background-position: 105% 125%;
+      background-size: auto 90%;
+      background-repeat: no-repeat;
+    }
+
+    &__message {
+      font-size: 50px;
+      line-height: 48px;
+    }
+
+    &__autor {
       font-size: $fs-21;
+      padding-top: 1rem;
+    }
+  }
+
+  .c-extra-block {
+    padding: 0 5rem;
+  }
+
+  .c-extra-block:nth-child(even) {
+    .c-extra-block__info {
+      margin-right: -27%;
+      padding: 3rem 35% 3rem 3rem !important;
+    }
+
+    .c-extra-block__figure {
+      .c-card-article {
+        transform: rotate(5deg);
+      }
+    }
+  }
+
+  .c-extra-block:nth-child(odd) {
+    .grid-x {
+      flex-direction: row-reverse;
+    }
+
+    .c-extra-block__info {
+      margin-left: -27%;
+      padding: 3rem 3rem 3rem 35% !important;
+      text-align: right;
+
+      .c-box-round-btn {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+      }
+    }
+
+    .c-extra-block__figure {
+      .c-card-article {
+        transform: rotate(-5deg);
+      }
     }
   }
 }
