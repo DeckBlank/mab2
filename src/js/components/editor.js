@@ -230,7 +230,9 @@ Vue.component('editor',{
       } else {
         this.$emit('update:thread', {
           ...this.thread,
-          list: [{
+          list: [
+            {
+              authorAvatar: this.logedUser.user_avatar,
               comment_author: this.logedUser.user_auth,
               comment_date: new Date(),
               comment_content: this.textContent,
