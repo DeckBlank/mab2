@@ -117,7 +117,8 @@ class DiscussionController{
                 "comment_author_email"  => $request['user_email'],
                 "comment_content"       => $request['content'],
                 "comment_meta"          => [
-                    "discussion" => $request['discussion_id']
+                    "discussion" => $request['discussion_id'],
+                    'attachment' => $request['attachment']
                 ]
             ]);
 
