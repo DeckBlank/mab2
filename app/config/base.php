@@ -96,6 +96,11 @@ return [
         'page_nosotros'             => get_theme_file_uri( __getResourceURL('js', 'page-nosotros.bundle.js') ),
         'page_psicologos'           => get_theme_file_uri( __getResourceURL('js', 'page-psicologos.bundle.js') ),
         'page_educacion'            => get_theme_file_uri( __getResourceURL('js', 'page-educacion.bundle.js') ),
+        'page_empresas'             => get_theme_file_uri( __getResourceURL('js', 'page-empresas.bundle.js') ),
+        'page_proyectos'             => get_theme_file_uri( __getResourceURL('js', 'page-proyectos.bundle.js') ),
+        'page_llegamos'             => get_theme_file_uri( __getResourceURL('js', 'page-llegamos.bundle.js') ),
+        'page_servicios'             => get_theme_file_uri( __getResourceURL('js', 'page-servicios.bundle.js') ),
+
 
 
         //WP

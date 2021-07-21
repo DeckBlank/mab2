@@ -141,3 +141,79 @@ Routes::map('educacion', function($routeParams) use ($config) {
 
     Routes::load('app.php', $params, "", 200);
 });
+
+Routes::map('empresas', function($routeParams) use ($config) {
+    $params = [
+        'route' => $routeParams,
+        'view'  => 'empresas',
+    ];
+
+    add_action( 'wp_enqueue_scripts', function () use ($config) {
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/empresas',
+            'src'       => $config['resources']['page_empresas'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]); 
+    });
+
+    Routes::load('app.php', $params, "", 200);
+});
+
+Routes::map('proyectos', function($routeParams) use ($config) {
+    $params = [
+        'route' => $routeParams,
+        'view'  => 'proyectos',
+    ];
+
+    add_action( 'wp_enqueue_scripts', function () use ($config) {
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/proyectos',
+            'src'       => $config['resources']['page_proyectos'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]); 
+    });
+
+    Routes::load('app.php', $params, "", 200);
+});
+
+Routes::map('llegamos', function($routeParams) use ($config) {
+    $params = [
+        'route' => $routeParams,
+        'view'  => 'llegamos',
+    ];
+
+    add_action( 'wp_enqueue_scripts', function () use ($config) {
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/llegamos',
+            'src'       => $config['resources']['page_llegamos'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]); 
+    });
+
+    Routes::load('app.php', $params, "", 200);
+});
+
+Routes::map('servicios', function($routeParams) use ($config) {
+    $params = [
+        'route' => $routeParams,
+        'view'  => 'servicios',
+    ];
+
+    add_action( 'wp_enqueue_scripts', function () use ($config) {
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/servicios',
+            'src'       => $config['resources']['page_servicios'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]); 
+    });
+
+    Routes::load('app.php', $params, "", 200);
+});
