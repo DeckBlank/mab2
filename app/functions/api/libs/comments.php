@@ -111,7 +111,7 @@ function __sanitizeComment($comment, $userId, $request) {
     $answers = get_comments([
         "parent" => $comment->comment_ID,
         "number" => 5,
-        "paged" => $request['paged']
+        "paged" => ( empty($request['paged']) ) ? 1 : $request['paged']
     ]);
 
     foreach($answers as $answer) {

@@ -33,9 +33,41 @@ class DiscussionController{
                 }
             ));
 
+            register_rest_route('custom/v1', '/discussions/(?P<discussion_id>\d+)/comments/(?P<comment_id>\d+)/answers', array(
+                'methods' => 'POST',
+                'callback' => array($this,'storeAnswer'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route('custom/v1', '/discussions/(?P<discussion_id>\d+)/comments/(?P<comment_id>\d+)/sticky', array(
+                'methods' => 'POST',
+                'callback' => array($this,'stickyComment'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route('custom/v1', '/discussions/(?P<discussion_id>\d+)/comments/(?P<comment_id>\d+)/like', array(
+                'methods' => 'POST',
+                'callback' => array($this,'likeComment'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
             register_rest_route('custom/v1', '/discussions/(?P<discussion_id>\d+)', array(
                 'methods' => 'GET',
                 'callback' => array($this,'show'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
+            register_rest_route('custom/v1', '/discussions/(?P<discussion_id>\d+)/sticky', array(
+                'methods' => 'POST',
+                'callback' => array($this,'sticky'),
                 'permission_callback' => function ($request) {
                     return true;
                 }
@@ -78,7 +110,14 @@ class DiscussionController{
         if (
             !empty($request['course_id'])
         ) {
-            $discussions = [];
+            $discussions        = [];
+            $discussionsArray   = [];
+
+            $userId     = $request['user_id'];
+            $courseId   = $request['course_id'];
+
+            $discussionSticky = get_post_meta($request['course_id'], 'discussion_sticky');
+            $discussionSticky = ($discussionSticky) ? Discussion::find($discussionSticky[0]) : false;
 
             if (isset($request['paged']) && $request['paged'] > 1) {
                 $skip = ($request['paged'] - 1) * 25;
@@ -94,9 +133,23 @@ class DiscussionController{
                     ->get();
             }
 
-            if ( count($discussions) ) {
+            if ($discussions)
+                foreach ($discussions as $disc) {
+                    if ($discussionSticky) {
+                        if ( $disc->id != $discussionSticky->id )
+                            array_push($discussionsArray, $disc);
+                    } else {
+                        array_push($discussionsArray, $disc);
+                    }
+                }
+
+            if ( count($discussionsArray) ) {
                 return new WP_REST_Response([
-                    'data'      => $discussions,
+                    'sticky'    => $discussionSticky,
+                    'data'      => $discussionsArray,
+
+                    'is_user_owner' => __isUserOwnerOnCourse($userId, $courseId),
+
                     'status'    => true
                 ], 200);
             } else {
@@ -138,6 +191,37 @@ class DiscussionController{
         }
     }
 
+    public function storeAnswer($request) {
+        if (
+            !empty($request['user_id']) &&
+            !empty($request['user_email'])
+        ) {
+            $answer = wp_insert_comment([
+                "comment_author"        => $request['user'],
+                "comment_author_email"  => $request['user_email'],
+                "comment_content"       => $request['content'],
+                "comment_parent"        => $request['comment_id'],
+                "comment_meta"          => [
+                    'attachment' => $request['attachment']
+                ]
+            ]);
+
+            if ( $answer ) {
+                $discussion = Discussion::find( $request['discussion_id'] )
+                    ->increment('total_comments', 1);
+
+                return new WP_REST_Response([
+                    'data'      => $answer,
+                    'status'    => true
+                ], 200);
+            } else {
+                throw new Exception("No answer added");
+            }
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 404 ) );
+        }
+    }
+
     public function show($request) {
         if (
             !empty($request['user_id']) &&
@@ -168,18 +252,18 @@ class DiscussionController{
                     $userId         = $request['user_id'];
                     $courseId       = $request['course_id'];
 
-                    $topicCommentSticky = get_post_meta($courseId, 'comment_sticky');
-                    $commentSticky      = ($topicCommentSticky) ? __sanitizeComment( get_comment($topicCommentSticky[0]), $userId, $request) : false;
+                    $discussionCommentSticky = [$discussion->sticky_comment];
+                    $commentSticky = ($discussionCommentSticky) ? __sanitizeComment( get_comment($discussionCommentSticky[0]), $userId, $request) : false;
 
                     foreach($comments as $comment){
-                        $isSticky = ($topicCommentSticky) ? in_array($comment->comment_ID, $topicCommentSticky) : false;
+                        $isSticky = ($discussionCommentSticky) ? in_array($comment->comment_ID, $discussionCommentSticky) : false;
 
                         $commentObject = __sanitizeComment($comment, $userId, $request);
 
                         if (!$isSticky) array_push($commentsArray, $commentObject);
                     }
 
-                    $topicCommentSticky = get_post_meta($courseId, 'comment_sticky');
+                    $discussionCommentSticky = get_post_meta($courseId, 'comment_sticky');
 
                     return (object)[
                         "sticky"        => $commentSticky,
@@ -197,6 +281,102 @@ class DiscussionController{
                 ], 200);
             } else {
                 return new WP_Error( 'comment_not_found', __('Comment not found'), array( 'status' => 404 ) );
+            }
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 404 ) );
+        }
+    }
+
+    public function sticky($request) {
+        if (
+            !empty($request['user_id']) &&
+            !empty($request['course_id'])
+        ) {
+            $userId         = $request['user_id'];
+            $courseId       = $request['course_id'];
+            $discussionId   = $request['discussion_id'];
+            $mode           = $request['mode'];
+
+            if ( __isUserOwnerOnCourse($userId, $courseId) ) {
+                if ($mode == 1) {
+                    if ( get_post_meta($courseId, 'discussion_sticky') ) {
+                        update_post_meta($courseId, 'discussion_sticky', $discussionId, false);
+                    } else {
+                        add_post_meta($courseId, 'discussion_sticky', $discussionId, false);
+                    }
+                } else {
+                    delete_post_meta($courseId, 'discussion_sticky', $discussionId, false);
+                }
+
+                return new WP_REST_Response('Discussion as sticky', 200);
+            } else {
+                return new WP_Error( 'invalid_user', __('Invalid user'), array( 'status' => 404 ) );
+            }
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 404 ) );
+        }
+    }
+
+    public function stickyComment($request) {
+        if (
+            !empty($request['user_id']) &&
+            !empty($request['course_id']) &&
+            !empty($request['mode'])
+        ) {
+            $userId         = $request['user_id'];
+            $commentId      = $request['comment_id'];
+            $discussionId   = $request['discussion_id'];
+            $courseId       = $request['course_id'];
+            $mode           = $request['mode'];
+
+            $commentData = get_comment($commentId);
+
+            if (!$commentData) {
+                return new WP_Error( 'not_comment_found', __('Comment not found'), array( 'status' => 404 ) );
+            }
+
+            if ( __isUserOwnerOnCourse($userId, $courseId) ) {
+                Discussion::where(['id' => $discussionId])
+                    ->update(['sticky_comment' => ($mode == 1) ? $commentId : '0']);
+
+                return new WP_REST_Response('Comment as sticky', 200);
+            } else {
+                return new WP_Error( 'invalid_user', __('Invalid user'), array( 'status' => 404 ) );
+            }
+        } else {
+            return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 404 ) );
+        }
+    }
+
+    public function likeComment($request) {
+        if (
+            !empty($request['user_id'])
+        ) {
+            $userId     = $request['user_id'];
+            $commentId  = $request['comment_id'];
+
+            $commentData = get_comment($commentId);
+
+            if ($commentData) {
+                $userLikes      = get_comment_meta($commentId, 'user_likes');
+                $commentLike    = intval($commentData->comment_karma);
+
+                wp_update_comment([
+                    'comment_ID'    => $commentId,
+                    'comment_karma' => ++$commentLike
+                ]);
+
+                if ($userLikes) {
+                    array_push($userLikes, $userId);
+
+                    update_comment_meta($commentId, 'user_likes', $userLikes, true);
+                } else {
+                    add_comment_meta($commentId, 'user_likes', $userId, true);
+                }
+
+                return new WP_REST_Response('Comment liked', 200);
+            } else {
+                return new WP_Error('not_comment_found', __('Comment not found'), array( 'status' => 404 ));
             }
         } else {
             return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 404 ) );

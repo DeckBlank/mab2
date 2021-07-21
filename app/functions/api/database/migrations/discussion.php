@@ -7,6 +7,7 @@ $database::statement('CREATE TABLE IF NOT EXISTS wp_discussions(
     topic_id INT NULL,
     subject VARCHAR(200) NOT NULL,
     total_comments INT DEFAULT 0,
+    sticky_comment INT NULL,
 
     created_at TIMESTAMP NULL,
     updated_at TIMESTAMP NULL,

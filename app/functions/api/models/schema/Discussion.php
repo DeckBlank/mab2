@@ -9,6 +9,7 @@ class Discussion extends Model {
         'course_id',
         'topic_id',
         'subject',
-        'total_comments'
+        'total_comments',
+        'sticky_comment'
     ];
 }
