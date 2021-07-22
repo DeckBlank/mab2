@@ -61,42 +61,41 @@ const charlas = new Vue({
       return this.user.try && !this.user[field].isValid;
     },
     initSlider: function() {
-      window.setTimeout(() => {
-        new Swiper('.swiper-container', {
-          slidesPerView: 3,
-          spaceBetween: 0,
-          pagination: {
-            el: ".swiper-pagination",
-          },
-          navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-          },
-          breakpoints: {
-            200: {
-              slidesPerView: 1,
-              spaceBetween: 10
+      const sliders = document.querySelectorAll('.c-mab-slider');
+
+      sliders.forEach(sl => {
+        window.setTimeout(() => {
+          new Swiper(`#${ sl.getAttribute('id') } .swiper-container`, {
+            slidesPerView: 3,
+            spaceBetween: 0,
+            pagination: {
+              el: `#${ sl.getAttribute('id') } .swiper-pagination`,
             },
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 0,
+            navigation: {
+              nextEl: `#${ sl.getAttribute('id') } .swiper-button-next`,
+              prevEl: `#${ sl.getAttribute('id') } .swiper-button-prev`,
             },
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 0
+            breakpoints: {
+              200: {
+                slidesPerView: 1,
+                spaceBetween: 10
+              },
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 0,
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 0
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 0
+              }
             },
-            1024: {
-              slidesPerView: 4,
-              spaceBetween: 0
-            }
-          },
-          // on: {
-          //   init: () => {
-          //     this.isLoadingRecommended = false;
-          //   },
-          // },
-        });
-      }, 1000);
+          });
+        }, 1000);
+      })
     },
     openInscriptionModal: function(eventId) {
       this.eventSelected = eventId;
