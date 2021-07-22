@@ -1,0 +1,119 @@
+{
+  "key": "group_608620859d872",
+  "title": "MAB Lider, Teacher y Speaker -  Content",
+  "fields": [
+      {
+          "key": "field_60862098932a9",
+          "label": "Campo de estudio",
+          "name": "job",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "default_value": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "maxlength": ""
+      },
+      {
+          "key": "field_60bc5746e6f39",
+          "label": "Slogan",
+          "name": "slogan",
+          "type": "text",
+          "instructions": "Solo aparecerá en la vista de cada lider",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "default_value": "",
+          "placeholder": "e.g: Fundadora y CEO de Claridad Coaching Estratégico",
+          "prepend": "",
+          "append": "",
+          "maxlength": ""
+      },
+      {
+          "key": "field_608620a8932aa",
+          "label": "Descripción",
+          "name": "about",
+          "type": "wysiwyg",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "default_value": "",
+          "tabs": "visual",
+          "toolbar": "basic",
+          "media_upload": 1,
+          "delay": 0
+      },
+      {
+          "key": "field_609b5c377796d",
+          "label": "Banner (imagen en png)",
+          "name": "cover",
+          "type": "image",
+          "instructions": "La imágen será usada en la vista del lider o curso que dicte el profesor",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "return_format": "array",
+          "preview_size": "medium",
+          "library": "all",
+          "min_width": "",
+          "min_height": "",
+          "min_size": "",
+          "max_width": "",
+          "max_height": "",
+          "max_size": "",
+          "mime_types": ""
+      }
+  ],
+  "location": [
+      [
+          {
+              "param": "user_role",
+              "operator": "==",
+              "value": "leader"
+          }
+      ],
+      [
+          {
+              "param": "user_role",
+              "operator": "==",
+              "value": "mab-teacher"
+          }
+      ],
+      [
+          {
+              "param": "user_role",
+              "operator": "==",
+              "value": "speaker"
+          }
+      ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": 1,
+  "description": "",
+  "modified": 1622955921
+}

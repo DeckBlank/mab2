@@ -1,0 +1,82 @@
+{
+  "key": "group_60b8581ad1ff9",
+  "title": "Charla - Content",
+  "fields": [
+      {
+          "key": "field_60b8582a3e583",
+          "label": "Fecha del evento",
+          "name": "date_event",
+          "type": "date_picker",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "display_format": "F j, Y",
+          "return_format": "Y-m-d",
+          "first_day": 1
+      },
+      {
+          "key": "field_60b8586cac580",
+          "label": "Limite de participantes",
+          "name": "participants_limit",
+          "type": "number",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "default_value": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "min": "",
+          "max": "",
+          "step": ""
+      },
+      {
+          "key": "field_60b85b69e2a72",
+          "label": "Speaker",
+          "name": "speaker",
+          "type": "user",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "role": [
+              "speaker"
+          ],
+          "allow_null": 0,
+          "multiple": 0,
+          "return_format": "array"
+      }
+  ],
+  "location": [
+      [
+          {
+              "param": "post_type",
+              "operator": "==",
+              "value": "event"
+          }
+      ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": 1,
+  "description": "",
+  "modified": 1622695895
+}

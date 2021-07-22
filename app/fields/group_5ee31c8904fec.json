@@ -1,95 +1,208 @@
 {
-    "key": "group_5ee31c8904fec",
-    "title": "Course Side",
-    "fields": [
-        {
-            "key": "field_5ee31c92b62d5",
-            "label": "Precio",
-            "name": "price",
-            "type": "number",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": 40,
-            "placeholder": "",
-            "prepend": "s\/.",
-            "append": "",
-            "min": "",
-            "max": "",
-            "step": ""
-        },
-        {
-            "key": "field_5efa0663abd13",
-            "label": "Configuración",
-            "name": "price_settings",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "global": "Global",
-                "individual": "Individual"
-            },
-            "allow_null": 1,
-            "other_choice": 0,
-            "default_value": "global",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
-        },
-        {
-            "key": "field_5f8140abc913e",
-            "label": "Area",
-            "name": "area",
-            "type": "select",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "creative": "Creativo",
-                "emotional": "Emocional\/Bienestar",
-                "academic": "Académico"
-            },
-            "default_value": [],
-            "allow_null": 0,
-            "multiple": 0,
-            "ui": 0,
-            "return_format": "value",
-            "ajax": 0,
-            "placeholder": ""
-        }
-    ],
-    "location": [
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "course"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "side",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "",
-    "modified": 1602306275
+  "key": "group_5ee31c8904fec",
+  "title": "Course Side",
+  "fields": [
+      {
+          "key": "field_5f8140abc913e",
+          "label": "Area",
+          "name": "area",
+          "type": "select",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "choices": {
+              "creative": "Creativo",
+              "emotional": "Emocional\/Bienestar",
+              "academic": "Académico"
+          },
+          "default_value": [],
+          "allow_null": 0,
+          "multiple": 0,
+          "ui": 0,
+          "return_format": "value",
+          "ajax": 0,
+          "placeholder": ""
+      },
+      {
+          "key": "field_609b5ffedb16d",
+          "label": "Precio",
+          "name": "",
+          "type": "accordion",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "open": 0,
+          "multi_expand": 0,
+          "endpoint": 0
+      },
+      {
+          "key": "field_5ee31c92b62d5",
+          "label": "Precio",
+          "name": "price",
+          "type": "number",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "default_value": 40,
+          "placeholder": "",
+          "prepend": "s\/.",
+          "append": "",
+          "min": "",
+          "max": "",
+          "step": ""
+      },
+      {
+          "key": "field_5efa0663abd13",
+          "label": "Configuración",
+          "name": "price_settings",
+          "type": "radio",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "choices": {
+              "global": "Global",
+              "individual": "Individual"
+          },
+          "allow_null": 1,
+          "other_choice": 0,
+          "default_value": "global",
+          "layout": "vertical",
+          "return_format": "value",
+          "save_other_choice": 0
+      },
+      {
+          "key": "field_609b600cdb16e",
+          "label": "Más información",
+          "name": "",
+          "type": "accordion",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "open": 0,
+          "multi_expand": 0,
+          "endpoint": 0
+      },
+      {
+          "key": "field_608620316aed0",
+          "label": "Teacher",
+          "name": "teacher",
+          "type": "user",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "role": [
+              "mab-teacher"
+          ],
+          "allow_null": 0,
+          "multiple": 0,
+          "return_format": "array"
+      },
+      {
+          "key": "field_609b5d65b4266",
+          "label": "Vector",
+          "name": "vector",
+          "type": "image",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "return_format": "array",
+          "preview_size": "medium",
+          "library": "all",
+          "min_width": "",
+          "min_height": "",
+          "min_size": "",
+          "max_width": "",
+          "max_height": "",
+          "max_size": "",
+          "mime_types": ""
+      },
+      {
+          "key": "field_609b5fe5db16c",
+          "label": "Trailer",
+          "name": "trailer",
+          "type": "url",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "default_value": "",
+          "placeholder": "Enlace (vimeo)"
+      },
+      {
+          "key": "field_60dec4c3cc0a3",
+          "label": "Grado",
+          "name": "grade",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "default_value": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "maxlength": ""
+      }
+  ],
+  "location": [
+      [
+          {
+              "param": "post_type",
+              "operator": "==",
+              "value": "course"
+          }
+      ]
+  ],
+  "menu_order": 0,
+  "position": "side",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": 1,
+  "description": "",
+  "modified": 1625212135
 }

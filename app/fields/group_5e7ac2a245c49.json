@@ -1,133 +1,436 @@
 {
-    "key": "group_5e7ac2a245c49",
-    "title": "Contact Options Content",
-    "fields": [
-        {
-            "key": "field_5f532557c118f",
-            "label": "Contacto",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_5e7ac2cf67aa6",
-            "label": "Teléfono \/ Celular",
-            "name": "phone",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_5e7ac2ef67aa7",
-            "label": "Email",
-            "name": "email",
-            "type": "email",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        },
-        {
-            "key": "field_5f53255fc1190",
-            "label": "Colegios",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_5f5324f1367b9",
-            "label": "ONG's",
-            "name": "ongs",
-            "type": "repeater",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "collapsed": "",
-            "min": 0,
-            "max": 0,
-            "layout": "table",
-            "button_label": "",
-            "sub_fields": [
-                {
-                    "key": "field_5f532522367ba",
-                    "label": "Colegio",
-                    "name": "school",
-                    "type": "text",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "prepend": "",
-                    "append": "",
-                    "maxlength": ""
-                }
-            ]
-        }
-    ],
-    "location": [
-        [
-            {
-                "param": "options_page",
-                "operator": "==",
-                "value": "options-contact"
-            }
-        ]
-    ],
-    "menu_order": 0,
-    "position": "normal",
-    "style": "default",
-    "label_placement": "top",
-    "instruction_placement": "label",
-    "hide_on_screen": "",
-    "active": 1,
-    "description": "",
-    "modified": 1599284592
+  "key": "group_5e7ac2a245c49",
+  "title": "Contact Options Content",
+  "fields": [
+      {
+          "key": "field_5f532557c118f",
+          "label": "Contacto",
+          "name": "",
+          "type": "tab",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "placement": "top",
+          "endpoint": 0
+      },
+      {
+          "key": "field_5e7ac2cf67aa6",
+          "label": "Teléfono \/ Celular (principal)",
+          "name": "phone",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "default_value": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "maxlength": ""
+      },
+      {
+          "key": "field_5e7ac2ef67aa7",
+          "label": "Email",
+          "name": "email",
+          "type": "email",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "default_value": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": ""
+      },
+      {
+          "key": "field_6096d1b045493",
+          "label": "Teléfono \/ Celular (secundario)",
+          "name": "phone_alt",
+          "type": "text",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "default_value": "",
+          "placeholder": "",
+          "prepend": "",
+          "append": "",
+          "maxlength": ""
+      },
+      {
+          "key": "field_5f53255fc1190",
+          "label": "Colegios",
+          "name": "",
+          "type": "tab",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "placement": "top",
+          "endpoint": 0
+      },
+      {
+          "key": "field_5f5324f1367b9",
+          "label": "ONG's",
+          "name": "ongs",
+          "type": "repeater",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "collapsed": "",
+          "min": 0,
+          "max": 0,
+          "layout": "table",
+          "button_label": "",
+          "sub_fields": [
+              {
+                  "key": "field_5f532522367ba",
+                  "label": "Colegio",
+                  "name": "school",
+                  "type": "text",
+                  "instructions": "",
+                  "required": 0,
+                  "conditional_logic": 0,
+                  "wrapper": {
+                      "width": "",
+                      "class": "",
+                      "id": ""
+                  },
+                  "default_value": "",
+                  "placeholder": "",
+                  "prepend": "",
+                  "append": "",
+                  "maxlength": ""
+              }
+          ]
+      },
+      {
+          "key": "field_60c41545b5ed9",
+          "label": "Legal",
+          "name": "",
+          "type": "tab",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "placement": "top",
+          "endpoint": 0
+      },
+      {
+          "key": "field_60c4154fb5eda",
+          "label": "Terminos y condiciones",
+          "name": "terms",
+          "type": "wysiwyg",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "default_value": "",
+          "tabs": "all",
+          "toolbar": "full",
+          "media_upload": 0,
+          "delay": 0
+      },
+      {
+          "key": "field_60e727c7154e3",
+          "label": "Preguntas frecuentes",
+          "name": "faq",
+          "type": "repeater",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "collapsed": "",
+          "min": 0,
+          "max": 0,
+          "layout": "block",
+          "button_label": "",
+          "sub_fields": [
+              {
+                  "key": "field_60e727c7154e4",
+                  "label": "Pregunta",
+                  "name": "",
+                  "type": "accordion",
+                  "instructions": "",
+                  "required": 0,
+                  "conditional_logic": 0,
+                  "wrapper": {
+                      "width": "",
+                      "class": "",
+                      "id": ""
+                  },
+                  "open": 0,
+                  "multi_expand": 0,
+                  "endpoint": 0
+              },
+              {
+                  "key": "field_60e727c7154e5",
+                  "label": "Titulo",
+                  "name": "title",
+                  "type": "text",
+                  "instructions": "",
+                  "required": 0,
+                  "conditional_logic": 0,
+                  "wrapper": {
+                      "width": "",
+                      "class": "",
+                      "id": ""
+                  },
+                  "default_value": "",
+                  "placeholder": "",
+                  "prepend": "",
+                  "append": "",
+                  "maxlength": ""
+              },
+              {
+                  "key": "field_60e727c7154ea",
+                  "label": "Respuesta",
+                  "name": "answer",
+                  "type": "wysiwyg",
+                  "instructions": "",
+                  "required": 0,
+                  "conditional_logic": 0,
+                  "wrapper": {
+                      "width": "",
+                      "class": "",
+                      "id": ""
+                  },
+                  "default_value": "",
+                  "tabs": "all",
+                  "toolbar": "full",
+                  "media_upload": 1,
+                  "delay": 0
+              }
+          ]
+      },
+      {
+          "key": "field_60e726c73319c",
+          "label": "Testimonios",
+          "name": "",
+          "type": "tab",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "placement": "top",
+          "endpoint": 0
+      },
+      {
+          "key": "field_60c42ceb09832",
+          "label": "Testimonios",
+          "name": "testimonies",
+          "type": "repeater",
+          "instructions": "",
+          "required": 0,
+          "conditional_logic": 0,
+          "wrapper": {
+              "width": "",
+              "class": "",
+              "id": ""
+          },
+          "collapsed": "",
+          "min": 0,
+          "max": 0,
+          "layout": "block",
+          "button_label": "",
+          "sub_fields": [
+              {
+                  "key": "field_60c42d3409835",
+                  "label": "Testimonio",
+                  "name": "",
+                  "type": "accordion",
+                  "instructions": "",
+                  "required": 0,
+                  "conditional_logic": 0,
+                  "wrapper": {
+                      "width": "",
+                      "class": "",
+                      "id": ""
+                  },
+                  "open": 0,
+                  "multi_expand": 0,
+                  "endpoint": 0
+              },
+              {
+                  "key": "field_60c42cfb09833",
+                  "label": "Autor",
+                  "name": "author",
+                  "type": "text",
+                  "instructions": "",
+                  "required": 0,
+                  "conditional_logic": 0,
+                  "wrapper": {
+                      "width": "",
+                      "class": "",
+                      "id": ""
+                  },
+                  "default_value": "",
+                  "placeholder": "",
+                  "prepend": "",
+                  "append": "",
+                  "maxlength": ""
+              },
+              {
+                  "key": "field_60e7279b331a0",
+                  "label": "Foto",
+                  "name": "avatar",
+                  "type": "image",
+                  "instructions": "",
+                  "required": 0,
+                  "conditional_logic": 0,
+                  "wrapper": {
+                      "width": "",
+                      "class": "",
+                      "id": ""
+                  },
+                  "return_format": "array",
+                  "preview_size": "medium",
+                  "library": "all",
+                  "min_width": "",
+                  "min_height": "",
+                  "min_size": "",
+                  "max_width": "",
+                  "max_height": "",
+                  "max_size": "",
+                  "mime_types": ""
+              },
+              {
+                  "key": "field_60e727353319d",
+                  "label": "Ocupación",
+                  "name": "job",
+                  "type": "text",
+                  "instructions": "",
+                  "required": 0,
+                  "conditional_logic": 0,
+                  "wrapper": {
+                      "width": "",
+                      "class": "",
+                      "id": ""
+                  },
+                  "default_value": "",
+                  "placeholder": "",
+                  "prepend": "",
+                  "append": "",
+                  "maxlength": ""
+              },
+              {
+                  "key": "field_60e7274f3319e",
+                  "label": "Ubicación",
+                  "name": "location",
+                  "type": "text",
+                  "instructions": "",
+                  "required": 0,
+                  "conditional_logic": 0,
+                  "wrapper": {
+                      "width": "",
+                      "class": "",
+                      "id": ""
+                  },
+                  "default_value": "",
+                  "placeholder": "",
+                  "prepend": "",
+                  "append": "",
+                  "maxlength": ""
+              },
+              {
+                  "key": "field_60e727723319f",
+                  "label": "País",
+                  "name": "country",
+                  "type": "text",
+                  "instructions": "Colocar el codigo del pais para mostrar la bandera ejmpl: ep, co, cl, etc.",
+                  "required": 0,
+                  "conditional_logic": 0,
+                  "wrapper": {
+                      "width": "",
+                      "class": "",
+                      "id": ""
+                  },
+                  "default_value": "pe",
+                  "placeholder": "",
+                  "prepend": "",
+                  "append": "",
+                  "maxlength": ""
+              },
+              {
+                  "key": "field_60c42d0209834",
+                  "label": "Testimonio",
+                  "name": "message",
+                  "type": "wysiwyg",
+                  "instructions": "",
+                  "required": 0,
+                  "conditional_logic": 0,
+                  "wrapper": {
+                      "width": "",
+                      "class": "",
+                      "id": ""
+                  },
+                  "default_value": "",
+                  "tabs": "all",
+                  "toolbar": "full",
+                  "media_upload": 1,
+                  "delay": 0
+              }
+          ]
+      }
+  ],
+  "location": [
+      [
+          {
+              "param": "options_page",
+              "operator": "==",
+              "value": "options-contact"
+          }
+      ]
+  ],
+  "menu_order": 0,
+  "position": "normal",
+  "style": "default",
+  "label_placement": "top",
+  "instruction_placement": "label",
+  "hide_on_screen": "",
+  "active": 1,
+  "description": "",
+  "modified": 1625761905
 }
