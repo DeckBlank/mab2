@@ -216,6 +216,16 @@ add_action( 'rest_api_init', function () {
         'methods' => 'GET',
         'callback' => array($courseController,'export'),
     ));
+
+    register_rest_route( 'custom/v1', '/courses/database', array(
+        'methods' => 'POST',
+        'callback' => array($courseController,'storeDatabase'),
+    ));
+
+    register_rest_route( 'custom/v1', '/courses/mab_categories', array(
+        'methods' => 'POST',
+        'callback' => array($courseController,'storeCategories'),
+    ));
 });
 
 //4. Topic ----------------------------------//

@@ -2,42 +2,10 @@
 
 include_once __DIR__ . '/api/libs/enviroment.php';
 
-$assets_version = '1625719532419';
+$assets_version = '1626939125570';
 $config         = require get_theme_file_path('config/base.php');
 
-add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
-
-    $fa = [
-        'handle'    => 'pandawp/fontawesome/base',
-        'src'       =>  $config['resources']['fontawesome']['cdn']['base'],
-        'deps'      => [ ],
-        'ver'       => $assets_version,
-        'in_footer' => true
-    ];
-
-    register_assets('script', [
-        'handle'    => 'pandawp/js/script/main',
-        'src'       => $config['resources']['script_main'],
-        'deps'      => [ ],
-        'ver'       => $assets_version,
-        'in_footer' => true
-    ]);
-
-    /**
-     * --------------------------------------------------------------------------
-     * Enviroment variables
-     * --------------------------------------------------------------------------
-     *
-     */
-    setEnviromentVariables();
-
-    /**
-     * --------------------------------------------------------------------------
-     * Register Scripts
-     * --------------------------------------------------------------------------
-     *
-     */
-
+function __enqueueGlobalPackges($config, $assets_version) {
     register_assets('package', [
         'handle'    => 'pandawp/package/vue',
         'src'       => $config['resources']['package_vue'],
@@ -93,6 +61,42 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         'ver'       => $assets_version,
         'in_footer' => true
     ]);
+};
+
+
+add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
+
+    $fa = [
+        'handle'    => 'pandawp/fontawesome/base',
+        'src'       =>  $config['resources']['fontawesome']['cdn']['base'],
+        'deps'      => [ ],
+        'ver'       => $assets_version,
+        'in_footer' => true
+    ];
+
+    register_assets('script', [
+        'handle'    => 'pandawp/js/script/main',
+        'src'       => $config['resources']['script_main'],
+        'deps'      => [ ],
+        'ver'       => $assets_version,
+        'in_footer' => true
+    ]);
+
+    /**
+     * --------------------------------------------------------------------------
+     * Enviroment variables
+     * --------------------------------------------------------------------------
+     *
+     */
+    setEnviromentVariables();
+
+    /**
+     * --------------------------------------------------------------------------
+     * Register Scripts
+     * --------------------------------------------------------------------------
+     *
+     */
+    __enqueueGlobalPackges($config, $assets_version);
 
     /**
      * --------------------------------------------------------------------------
@@ -581,7 +585,7 @@ add_action( 'admin_head', function() use ($config, $assets_version) {
                 'deps'      => [ ],
                 'ver'       => $assets_version,
                 'in_footer' => true
-            ]); 
+            ]);
             break;
 
         case 'toplevel_page_acf-options-cuestionario-de-seguimiento':
@@ -591,11 +595,11 @@ add_action( 'admin_head', function() use ($config, $assets_version) {
                 'deps'      => [ ],
                 'ver'       => $assets_version,
                 'in_footer' => true
-            ]); 
+            ]);
             break;
 
         case 'edit':
-            if($current->id == 'edit-course') {
+            if ($current->id == 'edit-course') {
                 register_assets('package', [
                     'handle'    => 'pandawp/package/babel',
                     'src'       => $config['resources']['package_babel'],
@@ -612,10 +616,10 @@ add_action( 'admin_head', function() use ($config, $assets_version) {
                     'in_footer' => true
                 ]);
 
-                wp_localize_script( 'pandawp/wp/courses', 'mab', [
+                wp_localize_script('pandawp/wp/courses', 'mab', [
                     "site" => get_site_url()
                 ]);
-            } else if ($current->id == 'edit-topic') {
+            } elseif ($current->id == 'edit-topic') {
                 register_assets('package', [
                     'handle'    => 'pandawp/package/babel',
                     'src'       => $config['resources']['package_babel'],
@@ -632,10 +636,25 @@ add_action( 'admin_head', function() use ($config, $assets_version) {
                     'in_footer' => true
                 ]);
 
-                wp_localize_script( 'pandawp/wp/topics', 'mab', [
+                wp_localize_script('pandawp/wp/topics', 'mab', [
                     "site" => get_site_url()
                 ]);
             }
+            break;
+        case 'course_page_import-categories':
+            __enqueueGlobalPackges($config, $assets_version);
+
+            register_assets('script', [
+                'handle'    => 'pandawp/wp/categories-import',
+                'src'       =>  $config['resources']['wp_categories_import'],
+                'deps'      => [ ],
+                'ver'       => $assets_version,
+                'in_footer' => true
+            ]);
+
+            wp_localize_script( 'pandawp/wp/categories-import', 'mab', [
+                'nonce' => wp_create_nonce( 'wp_rest' )
+            ]);
             break;
     }
 });
