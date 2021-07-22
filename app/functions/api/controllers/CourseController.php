@@ -25,6 +25,14 @@ class CourseController{
                 }
             ));
 
+            register_rest_route('custom/v1', '/courses/mab_categories/export', array(
+                'methods' => 'GET',
+                'callback' => array($this,'exportMabCategories'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+
             register_rest_route('custom/v1', '/courses/mab_subcategories', array(
                 'methods' => 'GET',
                 'callback' => array($this,'getMabCategories'),
@@ -361,6 +369,39 @@ class CourseController{
                 'message'   => 'No categories found!!',
                 'status'    => false
             ], 200);
+        }
+    }
+
+    public function exportMabCategories($request) {
+        $categoriesArray    = [];
+        $categories         = Timber::get_terms([
+            'parent'    => 0,
+            'taxonomy'  => 'tax-mab-course'
+        ]);
+
+        foreach ($categories as $category) {
+            $subcategories = Timber::get_terms([
+                'parent'    => $category->term_id,
+                'taxonomy'  => 'tax-mab-course'
+            ]);
+
+            array_push($categoriesArray, [
+                'name'          => $category->name,
+                'color'         => get_field('color', 'category_' . $category->term_id),
+                'courses'       => $this::__getCoursesByCategory($category->term_id),
+                'subcategories' => array_map(function($subcategory) {
+                    return [
+                        'name'      => $subcategory->name,
+                        'courses'   => $this::__getCoursesByCategory($subcategory->term_id)
+                    ];
+                }, $subcategories)
+            ]);
+        }
+
+        if ( count($categories) ) {
+            return new WP_REST_Response($categoriesArray, 200);
+        } else {
+            return new WP_Error( 'no_courses', __('No courses found'), array( 'status' => 404 ) );
         }
     }
 
@@ -753,5 +794,22 @@ class CourseController{
         }, $subcategories);
 
         return $subcategories;
+    }
+
+    private function __getCoursesByCategory($categoryId) {
+        $courses = Timber::get_posts([
+            'post_type' => 'course',
+            'tax_query' => [
+                [
+                    'taxonomy' => 'tax-mab-course',
+                    'field'    => 'term_id',
+                    'terms'    => $categoryId
+                ],
+            ]
+        ]);
+
+        $courses = array_map(function($course) { return $course->slug; }, $courses);
+
+        return ( count($courses) ) ? $courses : [];
     }
 }
