@@ -16,7 +16,7 @@
           <h2 v-if="unityData" class="c-course w-medium white margin-bottom-0 lh-65">${ unityData.course.title }</h2>
           <h2 v-if="unityData" class="c-unity fs-30 f2 w-bold dark margin-bottom-3">Unidad ${ metas.get('unity') }: ${ unityData.unity }</h2>
 
-          <section class="c-content c-content--protected position-relative br--large bg-white">
+          <section class="c-content c-content--protected position-relative br--large bg-white br-bottom-0-0">
             <a :href="courseLink" class="c-link fs-25 w-medium f2 display-inline-block margin-bottom-1 w-xbold pri-color hover-sec-color margin-bottom-2">
               <span class="c-icon margin-right-1"><i class="far fa-arrow-left"></i></span> Volver al curso
             </a>
@@ -96,7 +96,7 @@
                   <div v-if="view == 1" key="contenido" class="c-tab-slide">
                     <div class="grid-x align-justify">
                       <div class="cell large-6">
-                        <div class="c-tab-recursos br-bottom--large br-top--large padding-2">
+                        <div class="c-tab-recursos br-bottom--large br-top--large br-bottom-0-0 padding-2">
                           <h3 class="w-xbold f2 fs-25 dark margin-bottom-1 text-uppercase">RECURSOS</h3>
                           <div class="grid-x align-self-strecht text-center">
                             {% if summary %}
@@ -187,7 +187,7 @@
                         </div>
                       </div>
                       <div class="cell large-5">
-                        <div class="c-themes-list br--large padding-2">
+                        <div class="c-themes-list br--large br-bottom-0-0 padding-2">
                           <h2 class="w-xbold f2 fs-25 dark margin-bottom-1 text-uppercase">CONTENIDOS DEL CURSO</h2>
                           <div class="c-themes-list__content">
                             <div class="c-themes-list__scrool">
@@ -269,10 +269,10 @@
                 </button>
               </div>
               <section class="c-modal__body padding-vertical-1 padding-right-1">
-                <h2 class="c-questions__title f1 text-uppercase dark-gray fs-25 w-bold margin-bottom-2 text-center fs-60">{{post.title}}</h2>
+                <h2 class="c-questions__title f1 dark text-uppercase  fs-25 w-bold margin-bottom-2 text-center fs-60">{{post.title}}</h2>
                 <swiper ref="slider_questions" class="c-questions__list margin-bottom-1" :options="swiperOptions">                
                   <swiper-slide v-for="(q_, qindex) of questions" :key="q_.id">
-                    <h3 class="fs-21 f2 dark-gray w-bold  margin-bottom-2">${q_.question.title}</h3>
+                    <h3 class="fs-21 f2 dark w-bold  margin-bottom-2">${q_.question.title}</h3>
                     <figure v-if="q_.question.image" class="margin-bottom-1">
                       <img :src="q_.question.image.url" alt="">
                     </figure>
@@ -292,9 +292,9 @@
                         >
                         <label 
                           :for="'option-' + qindex + oindex" 
-                          class="c-option fs-18 align-middle width-100"
+                          class="c-option fs-18 align-middle dark width-100"
                         >
-                          <div class="c-option__checkbox margin-right-1">
+                          <div class="c-option__checkbox">
                             <span class="display-block rounded position-relative"></span>
                           </div>
                           <p class="margin-bottom-0">                      
@@ -307,20 +307,20 @@
                   </swiper-slide>
                   <swiper-slide>
                     <div class="flex-container f2 flex-dir-column align-center-middle height-100">
-                      <div class="margin-bottom-2">
-                        <h4 class="f2 fs-25 w-bold dark-gray">Resultado</h4>
+                      <div class="margin-bottom-2 c-modal-test-result-figure">
                         <figure v-if="questions.length == totalRightAnswers" class="margin-bottom-1 text-center">
                           <img src="{{theme.link}}/static/images/vectors/topic/award.png" alt="">
                         </figure>
                         <figure v-else class="margin-bottom-1 text-center">
-                          <img src="{{theme.link}}/static/images/vectors/topic/blob.png" alt="">
+                          <img src="{{theme.link}}/static/images/vectors/topic/arcoiris.png" alt="">
                         </figure>
+                        <h4 class="f2 fs-25 w-bold dark text-center">Resultado</h4>
                       </div>
-                      <p class="sec-alt fs-21 w-medium flex-container align-middle">
-                        <span class="fs-35 margin-right-1">${totalRightAnswers}</span> Respuesta(s) correctas <span class="c-icon fs-35 margin-left-1"><i class="far fa-check"></i></span>
+                      <p class="dark fs-21 w-medium flex-container align-middle c-modal-test-result">
+                        <img src="{{theme.link}}/static/images/icons/check-g.png" alt=""> <span class="margin-right-1 w-xbold">${totalRightAnswers}</span> Respuesta(s) correctas <span class="c-icon fs-35 margin-left-1"></span>
                       </p>
-                      <p class="alert fs-21 w-medium flex-container align-middle margin-bottom-0" :class="{ hide : totalWrongAnswers == 0 }">
-                        <span class="fs-35 margin-right-1">${totalWrongAnswers}</span> Respuesta(s) incorrectas <span class="c-icon fs-35 margin-left-1"><i class="far fa-times"></i></span>
+                      <p class="dark fs-21 w-medium flex-container align-middle margin-bottom-0 c-modal-test-result" :class="{ hide : totalWrongAnswers == 0 }">
+                        <img src="{{theme.link}}/static/images/icons/cross.png" alt=""> <span class="margin-right-1 w-xbold">${totalWrongAnswers}</span> Respuesta(s) incorrectas <span class="c-icon fs-35 margin-left-1"></span>
                       </p>
                     </div>
                   </swiper-slide>
@@ -342,7 +342,7 @@
                     </p>
                     <button 
                       class="flex-container align-center-middle"
-                      :class="{ 'sec-color' : isEnableChange }"
+                      :class="{ 'pri-color' : isEnableChange }"
                       @click="changeQuestion('next')" 
                       :disabled="!isEnableChange">
                       <span class="c-icon"><i class="far fa-arrow-right"></i></span>

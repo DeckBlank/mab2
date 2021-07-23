@@ -105,6 +105,71 @@
       }
     }
   }
+
+  .c-modal--test {
+    background-color: rgba($color: $dark, $alpha: 0.6);
+
+    .c-questions__title {
+      padding-top: 0;
+      font-size: $body-font-family;
+    }
+
+    .c-button--ghost-gray {
+      border-radius: 30px;
+      border: solid 2px $gray;
+      color: $gray;
+    }
+
+    .c-modal-test-result-figure {
+      max-width: 250px;
+    }
+
+    .c-modal-test-result {
+      width: 100%;
+      max-width: 350px;
+
+      img {
+        width: 40px;
+        margin-right: 1rem;
+      }
+    }
+
+    .c-modal__content {
+      border-bottom-left-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+
+    .c-modal__body {
+      padding-top: 0;
+
+      &::-webkit-scrollbar-thumb {
+        background: $primary-color;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: $primary-light;
+        border-radius: 5px;
+      }
+    }
+
+    .c-option__checkbox {
+      margin-right: 0.5rem;
+    }
+
+    .c-question {
+      height: auto;
+    }
+
+    .c-question__item {
+      input[type=radio]:checked ~ label {
+        background: $primary-color;
+      }
+
+      input:checked + .c-option .c-option__checkbox span::after {
+        background: $white;
+      }
+    }
+  }
 }
 
 @include breakpoint(medium) {
@@ -150,7 +215,8 @@
         top: 40%;
         left: 0;
         background-size: contain;
-        background-image: url('../images/vectors/topic/left-hand.png?key=20200420');
+        // background-image: url('../images/vectors/topic/left-hand.png?key=20200420');
+        background-image: url('../images/vectors/topic/left-hand-1.png');
         background-repeat: no-repeat;
       }
 
@@ -162,7 +228,8 @@
         bottom: 10%;
         right: 0;
         background-size: contain;
-        background-image: url('../images/vectors/topic/right-hand.png?key=20200420');
+        // background-image: url('../images/vectors/topic/right-hand.png?key=20200420');
+        background-image: url('../images/vectors/topic/right-hand-1.png');
         background-repeat: no-repeat;
       }
 
