@@ -510,6 +510,102 @@
         </div>
       </div>
     </div>
+
+    <div class="c-mab-modal c-mab-modal c-mab-modal--mini width-100 flex-container align-center-middle c-mab-modal--certificado visible ">
+      <div class="grid-x align-center width-100">
+        <div class="cell small-11 medium-11 large-8">
+          <div class="c-mab-modal-content br-bottom-0-0 bg-warning-alt text-center position-relative ">
+            <div class="text-center">
+              {# <img loading="lazy" class="c-mab-modal__top-image donaciones" src="{{theme.link}}/static/images/vectors/heart.png" alt=""> #}
+              <div class="c-certificado">
+                    <div class="grid-x align-self-stretch">
+                      <div class="cell large-8 bg-white">
+                          <div class="padding-2 margin-botom-2 text-left">
+                            <div class="grid-x">
+                              <div class="cell large-8">
+                                <div class="dark">
+                                  <p class="c-certificado__top-subtitle f2">Certificado de curso</p>
+                                  <h2 class="c-certificado__top-title">Ciencia Creativas para la vida</h2>
+                                  <p class="c-certificado__top-subtitle f2">El presente diploma se otroga a</p>
+                                </div>
+                              </div>
+                              <div class="cell large-4">
+                                <div class="height-100 flex-container align-middle align-right">
+                                  <img loading="lazy" class="c-certificado__heart" src="{{theme.link}}/static/images/vectors/heart.png" alt="">
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="margin-bottom-2">
+                            <h1 class="c-certificado__name text-uppercase sec-color">Angela Ramon Duranf</h1>
+                            <p class="c-certificado__sub f2 dark">Certificado de aprobación online</p>
+                            <p class="c-certificado__sub f2 dark"><strong>Aprobado el 25 de mayo del 2020</strong></p>
+                            <p class="c-certificado__sub f2 dark">40 horas de Teoría y práctica</p>
+                          </div>
+                          <div class="c-certificado__firmas flex-container align-justify align-middle">
+                            <div class="c-certificado__firma">
+                              <img loading="lazy" class="" src="{{theme.link}}/static/images/certificates/firma-1.png" alt="">
+                              <div class="f2 dark">Macarena Arribas <br> Ceo y fundadora de Mab</div>
+                            </div>
+                            <div class="c-certificado__firma">
+                              <img loading="lazy" class="" src="{{theme.link}}/static/images/certificates/firma-2.png" alt="">
+                              <div class="f2 dark">Macarena Arribas <br> Ceo y fundadora de Mab</div>
+                            </div>
+                          </div>
+                          <div class="c-certificado__bottom flex-container align-justify align-middle">
+                            <div class="c-certificado__side">
+                              <div class="f2 dark">http://aprendemab.com/</div>
+                            </div>
+                            <div class="c-certificado__side">
+                              <div class="f2 dark">cod  1222222222222</div>
+                            </div>
+                          </div>
+                      </div>
+                      <div class="cell large-4 bg-pri-color">
+                        <div class="c-certificado__aside height-100 flex-container align-center-middle">
+                          <img loading="lazy" class="" src="{{theme.link}}/static/images/logo-white.png" alt="">
+                          <p class="white f2">Felicitaciones por atreverte a aprender distinto y complementar tu aprendizaje con educación para CRECER</p>
+                        </div>
+                        
+                      </div>
+                    </div>
+              </div>
+            </div>
+            <button @click="closeCertificateModal()" type="button" class="c-mab-modal__cross position-absolute white bg-dark fs-18 flex-container align-center-middle">
+              <i class="fas fa-times white"></i>
+            </button>
+            <h3 class="c-mab-modal-content__title text-center  text-uppercase margin-top-3">
+              <span class="dark w-xbold">COMPARTE TUS LOGROS CON TU FAMILIA, <br> AMIGOS Y TUS REDES SOCIALES
+            </h3>
+            <p class=" f2 fs-18 pri-color w-xbold">Compártelo</p>
+            <div class="c-modal-share-list">
+              <div class="grid-x grid-margin-y align-center">
+                <div class="cell small-3 large-3">
+                  <a href="" class="text-center">
+                    <img loading="lazy"  src="{{theme.link}}/static/images/vectors/share-icons/icon-ws.png" alt="">
+                  </a>
+                </div>
+                <div class="cell small-3 large-3">
+                  <a href="" class="text-center">
+                    <img loading="lazy"  src="{{theme.link}}/static/images/vectors/share-icons/icon-linkedin.png" alt="">
+                  </a>
+                </div>
+                <div class="cell small-3 large-3">
+                  <a href="" class="text-center">
+                    <img loading="lazy" src="{{theme.link}}/static/images/vectors/share-icons/icon-fb.png" alt="">
+                  </a>
+                </div>
+                <div class="cell small-3 large-3">
+                  <a href="" class="text-center">
+                    <img loading="lazy" src="{{theme.link}}/static/images/vectors/share-icons/icon-twitter.png" alt="">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="c-video-modal width-100 flex-container align-center-middle" :class="{'visible' : isOpenedTrailer}">
       <div class="c-video-modal__content bg-white br--large">
         <div>

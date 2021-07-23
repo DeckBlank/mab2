@@ -750,7 +750,30 @@ add_action( 'wp_enqueue_scripts', function () use ($config) {
             'ver'       => $config['vertion'],
             'in_footer' => true
         ]); 
-    }elseif (is_page('charlas')){               
+    }elseif (is_page('charlas')){
+        register_assets('package', [
+            'handle'    => 'pandawp/package/swiper',
+            'src'       => $config['resources']['package_swiper'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]);
+
+        register_assets('package', [
+            'handle'    => 'pandawp/package/dom7',
+            'src'       => $config['resources']['package_dom7'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]);
+
+        register_assets('package', [
+            'handle'    => 'pandawp/package/ssrwindow',
+            'src'       => $config['resources']['package_ssr_window'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]);            
         register_assets('script', [
             'handle'    => 'pandawp/js/page/charlas',
             'src'       => $config['resources']['page_charlas'],

@@ -75,6 +75,21 @@ Vue.component('header-mobile', {
                   <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
                     <a :href="SITE_URL + '/nosotros'" class="position-relative">Nosotros</a>
                   </div>
+                  <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                    <a :href="SITE_URL + '/educacion'" class="position-relative">Educación</a>
+                  </div>
+                  <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                    <a :href="SITE_URL + '/empresas'" class="position-relative">MAB Empresas</a>
+                  </div>
+                  <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                    <a :href="SITE_URL + '/proyectos'" class="position-relative">Proyectos</a>
+                  </div>
+                  <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                    <a :href="SITE_URL + '/llegamos'" class="position-relative">¿Cómo llegamos a ti?</a>
+                  </div>
+                  <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                    <a :href="SITE_URL + '/servicios'" class="position-relative">Servicios</a>
+                  </div>
                 </ul>
               </li>
 

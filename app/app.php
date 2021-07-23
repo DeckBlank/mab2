@@ -82,4 +82,24 @@ switch ($params['view']) {
 
         Timber::render('shop/success.twig', $context);
         break;
+    case 'educacion':
+
+        Timber::render('comunity/educacion.twig', $context);
+        break;
+    case 'empresas':
+
+        Timber::render('comunity/empresas.twig', $context);
+        break;
+    case 'proyectos':
+
+        Timber::render('comunity/proyectos.twig', $context);
+        break;
+    case 'llegamos':
+
+        Timber::render('comunity/llegamos.twig', $context);
+        break;
+    case 'servicios':
+
+        Timber::render('comunity/servicios.twig', $context);
+        break;
 }

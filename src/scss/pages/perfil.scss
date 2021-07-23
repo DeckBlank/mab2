@@ -105,6 +105,8 @@
 
       .color-box {
         border-radius: 7px;
+        border-bottom-left-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
         width: 30px;
       }
 
@@ -233,36 +235,36 @@
         line-height: 21px;
 
         &.fc-1 {
-          top: 7%;
+          top: 1%;
           left: 20%;
         }
 
         &.fc-2 {
-          top: 1%;
-          left: 45%;
+          top: 1.5%;
+          left: 47.5%;
           height: 22%;
           width: 16%;
         }
 
         &.fc-3 {
-          top: 26.5%;
-          left: 40.5%;
+          top: 25.5%;
+          left: 44%;
           width: 15.5%;
           height: 20%;
         }
 
         &.fc-4 {
-          top: 18.5%;
-          left: 60%;
+          top: 13.5%;
+          left: 65.5%;
           width: 16%;
           height: 20.5%;
         }
 
         &.fc-5 {
           top: 24.5%;
-          left: 78%;
-          width: 20%;
-          height: 25%;
+          left: 82%;
+          width: 17%;
+          height: 23%;
         }
       }
 
@@ -275,28 +277,28 @@
         line-height: 21px;
 
         &.fb-1 {
-          top: 36.5%;
+          top: 29.5%;
           left: 1.5%;
         }
 
         &.fb-2 {
-          top: 36.5%;
-          left: 23%;
+          top: 29.5%;
+          left: 24%;
         }
 
         &.fb-3 {
-          top: 57.5%;
-          left: 16%;
+          top: 54.5%;
+          left: 18%;
         }
 
         &.fb-4 {
-          top: 43.5%;
+          top: 42.5%;
           left: 60.5%;
         }
 
         &.fb-5 {
-          top: 58%;
-          left: 81%;
+          top: 55%;
+          left: 84%;
         }
       }
 

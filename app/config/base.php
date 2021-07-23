@@ -95,6 +95,13 @@ return [
         'page_articulo'             => get_theme_file_uri( __getResourceURL('js', 'page-articulo.bundle.js') ),
         'page_nosotros'             => get_theme_file_uri( __getResourceURL('js', 'page-nosotros.bundle.js') ),
         'page_psicologos'           => get_theme_file_uri( __getResourceURL('js', 'page-psicologos.bundle.js') ),
+        'page_educacion'            => get_theme_file_uri( __getResourceURL('js', 'page-educacion.bundle.js') ),
+        'page_empresas'             => get_theme_file_uri( __getResourceURL('js', 'page-empresas.bundle.js') ),
+        'page_proyectos'             => get_theme_file_uri( __getResourceURL('js', 'page-proyectos.bundle.js') ),
+        'page_llegamos'             => get_theme_file_uri( __getResourceURL('js', 'page-llegamos.bundle.js') ),
+        'page_servicios'             => get_theme_file_uri( __getResourceURL('js', 'page-servicios.bundle.js') ),
+
+
 
         //WP
         'wp_session'        => get_theme_file_uri( __getResourceURL('js', 'wp-session.bundle.js') ),
@@ -102,5 +109,5 @@ return [
         'wp_questionaries'  => get_theme_file_uri( __getResourceURL('js', 'wp-questionaries.bundle.js') ),
         'wp_courses'        => get_theme_file_uri( __getResourceURL('js', 'wp-courses.bundle.js') )
     ],
-    'vertion' => '1626737741181'
+    'vertion' => '1626939430211'
 ];
