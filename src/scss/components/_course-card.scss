@@ -87,6 +87,24 @@
     }
   }
 
+  &__grade-tag {
+    width: 116px;
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: 0;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    background-image: none;
+    // box-shadow: 1px 1px 10px $dark;
+    border-top-left-radius: 10px;
+
+    img {
+      width: 25px;
+      margin-right: 5px;
+    }
+  }
+
   &__content {
     color: $dark;
   }
