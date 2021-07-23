@@ -79,6 +79,8 @@ Vue.component('editor',{
   `,
   data() {
     return {
+      metas: new URLSearchParams(window.location.search),
+
       isActiveEditor: false,
       textContent: '',
 
@@ -145,6 +147,7 @@ Vue.component('editor',{
       this.isLoading        = true;
 
       form_data.append('user', this.logedUser.user_auth)
+      form_data.append('course_id', this.metas.get('course_id'))
       form_data.append('user_email', this.logedUser.user_email)
       form_data.append('content', this.textContent)
       form_data.append('attachment', this.attachments.data.map(atch => atch.idRemote).join())
@@ -176,6 +179,7 @@ Vue.component('editor',{
       this.isLoading        = true;
 
       form_data.append('user', this.logedUser.user_auth)
+      form_data.append('course_id', this.metas.get('course_id'))
       form_data.append('user_email', this.logedUser.user_email)
       form_data.append('content', this.textContent)
       form_data.append('attachment', this.attachments.data.map(atch => atch.idRemote).join())

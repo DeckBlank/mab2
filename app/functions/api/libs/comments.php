@@ -54,7 +54,11 @@ function __addComment($request){
         $comments_count = get_post_meta($request['post_id'], 'post_comments_count', true)[0];
         update_post_meta($request['post_id'], 'post_comments_count', ++$comments_count);
 
-        return $result;
+        if ( __initDiscussion($request['user_email'], $request['course_id'], $request['post_id']) ) {
+            return $result;
+        } else {
+            throw new Exception("No discussion started");
+        }
     } else {
         throw new Exception("No comment added");
     }    
@@ -74,8 +78,12 @@ function __addAnswer($request){
     if ( $result ) {
         $comments_count = get_post_meta($request['post_id'], 'post_comments_count', true)[0];
         update_post_meta($request['post_id'], 'post_comments_count', ++$comments_count);
-        
-        return $result;
+
+        if ( __initDiscussion($request['user_email'], $request['course_id'], $request['post_id']) ) {
+            return $result;
+        } else {
+            throw new Exception("Nodiscussion started");
+        }
     } else {
         throw new Exception("No answer added");
     }
@@ -138,4 +146,34 @@ function __sanitizeComment($comment, $userId, $request) {
         "attachments"   => __getAttachments($comment->comment_ID),
         "answers"       => $answers
     ];
+}
+
+function __initDiscussion($userEmail, $courseId, $topicId) {
+    $discussion = Discussion::where([ 'topic_id' => $topicId ])
+        ->first();
+
+    if (!$discussion) {
+        $user = get_user_by('email', $userEmail);
+
+        $newDiscussion = new Discussion();
+
+        $newDiscussion->user_id         = $user->ID;
+        $newDiscussion->course_id       = $courseId;
+        $newDiscussion->topic_id        = $topicId;
+        $newDiscussion->subject         = 'Empty';
+        $newDiscussion->total_comments  = 1;
+
+        $newDiscussion->save();
+
+        if ($newDiscussion) {
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        Discussion::where([ 'topic_id' => $topicId ])
+            ->update(['total_comments' => $discussion->total_comments + 1]);
+
+        return true;
+    }
 }

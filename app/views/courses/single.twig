@@ -511,7 +511,7 @@
       </div>
     </div>
 
-    <div class="c-mab-modal c-mab-modal c-mab-modal--mini width-100 flex-container align-center-middle c-mab-modal--certificado visible ">
+    <div class="c-mab-modal c-mab-modal c-mab-modal--mini width-100 flex-container align-center-middle c-mab-modal--certificado" :class="{'visible' : isOpenedCertificateModal}">
       <div class="grid-x align-center width-100">
         <div class="cell small-11 medium-11 large-8">
           <div class="c-mab-modal-content br-bottom-0-0 bg-warning-alt text-center position-relative ">
@@ -606,6 +606,7 @@
         </div>
       </div>
     </div>
+
     <div class="c-video-modal width-100 flex-container align-center-middle" :class="{'visible' : isOpenedTrailer}">
       <div class="c-video-modal__content bg-white br--large">
         <div>
