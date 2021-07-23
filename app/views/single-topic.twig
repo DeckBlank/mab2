@@ -245,7 +245,7 @@
                           </button> 
                         </div>
                       </div>
-                      <div class="c-foro-footer fs-21  padding-1 f2 dark br-bottom--large box-shadow-none">
+                      <div class="c-foro-footer fs-21  padding-1 f2 dark br-bottom--large box-shadow-none bg-white-i">
                         <editor :target="{ id: {{post.id}}, type: 'post'}" :post="{ type: 'topic' }" :thread.sync="comments"></editor>
                       </div>
                     </div>
@@ -264,15 +264,15 @@
           <div class="cell medium-10 large-9">
             <div class="c-modal__content position-relative flex-container flex-dir-column questions br--medium bg-white">
               <div class="flex-container align-right margin-bottom-1">
-                <button @click="isOpenedQuestionsModal = false">
-                  <span class="c-icon fs-30"><i class="far fa-times"></i></span>
+                <button @click="isOpenedQuestionsModal = false" class="c-modal-text-btn-cross bg-pri-color ">
+                  <span class="c-icon"><i class="far fa-times"></i></span>
                 </button>
               </div>
               <section class="c-modal__body padding-vertical-1 padding-right-1">
                 <h2 class="c-questions__title f1 dark text-uppercase  fs-25 w-bold margin-bottom-2 text-center fs-60">{{post.title}}</h2>
                 <swiper ref="slider_questions" class="c-questions__list margin-bottom-1" :options="swiperOptions">                
                   <swiper-slide v-for="(q_, qindex) of questions" :key="q_.id">
-                    <h3 class="fs-21 f2 dark w-bold  margin-bottom-2">${q_.question.title}</h3>
+                    <h3 class="fs-21 f2 dark w-xbold  margin-bottom-2">${q_.question.title}</h3>
                     <figure v-if="q_.question.image" class="margin-bottom-1">
                       <img :src="q_.question.image.url" alt="">
                     </figure>
