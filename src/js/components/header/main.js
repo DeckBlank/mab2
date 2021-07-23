@@ -86,6 +86,31 @@ Vue.component('header-main',{
                     Nosotros
                   </a>
                 </li>
+                <li class="c-menu-dropdown__item inverse">
+                  <a :href="SITE_URL + '/educacion'" class="w-xbold text-center padding-horizontal-2 ">
+                    Educación
+                  </a>
+                </li>
+                <li class="c-menu-dropdown__item inverse">
+                  <a :href="SITE_URL + '/empresas'" class="w-xbold text-center padding-horizontal-2 ">
+                    MAB Empresas
+                  </a>
+                </li>
+                <li class="c-menu-dropdown__item inverse">
+                  <a :href="SITE_URL + '/proyectos'" class="w-xbold text-center padding-horizontal-2 ">
+                    Proyectos
+                  </a>
+                </li>
+                <li class="c-menu-dropdown__item inverse">
+                  <a :href="SITE_URL + '/llegamos'" class="w-xbold text-center padding-horizontal-2 ">
+                    ¿Cómo llegamos a ti?
+                  </a>
+                </li>
+                <li class="c-menu-dropdown__item inverse">
+                  <a :href="SITE_URL + '/servicios'" class="w-xbold text-center padding-horizontal-2 ">
+                    Servicios
+                  </a>
+                </li>
               </ul>
             </div>
           </div>
