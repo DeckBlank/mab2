@@ -58,7 +58,7 @@ new Vue({
 
       formData.append('database_id', databaseId)
 
-      fetch(`${this.API}/courses`, {
+      fetch(`${this.API}/courses/mab_categories`, {
         method: 'POST',
         body: formData,
       })
