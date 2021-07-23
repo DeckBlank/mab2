@@ -345,5 +345,7 @@ class CourseController{
 
             return true;
         }
+
+        return true;
     }
 }
