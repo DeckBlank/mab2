@@ -282,14 +282,20 @@ class CourseController{
 
                 update_field('color', $category->color, 'category_' . $categoryObject['term_id']);
 
-                foreach ($category->courses as $course) {
-                    $this::__appenCourseCategories($course, $categoryObject['term_id']);
+                foreach ($category->courses as $courseCategory) {
+                    if ( $this::__appenCourseCategories($courseCategory, $categoryObject['term_id']) ) {}
+                    else {
+                        throw new Exception($courseCategory);
+                    }
+                }
 
-                    foreach ($category->subcategories as $subcategory) {
-                        $subcategoryObject = wp_insert_term($subcategory->name, 'tax-mab-course', [ 'parent' => $categoryObject['term_id'] ]);
+                foreach ($category->subcategories as $subcategory) {
+                    $subcategoryObject = wp_insert_term($subcategory->name, 'tax-mab-course', [ 'parent' => $categoryObject['term_id'] ]);
 
-                        foreach ($subcategory->courses as $course) {
-                            $this::__appenCourseCategories($course, $subcategoryObject['term_id']);
+                    foreach ($subcategory->courses as $courseSubcategory) {
+                        if ( $this::__appenCourseCategories($courseSubcategory, $subcategoryObject['term_id']) ) {}
+                        else {
+                            throw new Exception($courseSubcategory);
                         }
                     }
                 }
@@ -297,7 +303,7 @@ class CourseController{
 
             return new WP_REST_Response('Categories created', 200);
         } catch (Exception $e) {
-            return new WP_Error( 'no_categories_created', __('No categories created by: ' + $e->getMessage()), array( 'status' => 404 ) );
+            return new WP_Error( 'no_categories_created', __('No categories created by: ' . $e->getMessage()), array( 'status' => 404 ) );
         }
     }
 
@@ -334,8 +340,10 @@ class CourseController{
             'name'      => $courseSlug
         ]);
 
-        if ($courseObject) {
-            wp_set_object_terms( $courseObject->ID, [ $categoryId ], 'tax-mab-course', true);
+        if ($courseObject && $courseObject->ID) {
+            $courseCategory = wp_set_object_terms( $courseObject->ID, [ $categoryId ], 'tax-mab-course', true);
+
+            return true;
         }
     }
 }
