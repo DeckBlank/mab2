@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <section class="c-section c-section--test bg-pri-color">
+  <section class="c-section c-section--test " :class="testDone ? 'bg-pri-color' : 'bg-sec-color'">
     <div v-if="!testDone" class="grid-container">
       <div class="grid-x align-center">
         <div class="cell medium-10 large-8">
