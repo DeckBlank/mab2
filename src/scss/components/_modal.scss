@@ -139,6 +139,17 @@
   display: flex !important;
 }
 
+.c-mab-modal--certificado {
+  .c-modal-share-list {
+    width: 210px;
+    margin: 0 auto;
+
+    .cell {
+      padding: 0 6px;
+    }
+  }
+}
+
 .c-video-modal {
   position: fixed;
   top: 0;
@@ -208,6 +219,26 @@
           max-width: 50px;
         }
       }
+    }
+  }
+
+  .c-mab-modal--certificado {
+    .c-mab-modal-content {
+      max-width: 830px;
+      margin: 6rem auto 0;
+    }
+
+    .c-modal-share-list {
+      width: 210px;
+      margin: 0 auto;
+
+      .cell {
+        padding: 0 6px;
+      }
+    }
+
+    .c-mab-modal-content__title {
+      margin-bottom: 0;
     }
   }
 
