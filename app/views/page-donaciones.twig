@@ -226,61 +226,6 @@
                           </div>
                         </h1>
 
-                        <div class="margin-top-2">
-                          <div class="c-donacion-info text-left fs-18">
-                            <p class="white f2 margin-bottom-2 text-center">*Antes de continuar queremos que te sientas seguro de
-                              tu contribución, por favor verifica tus datos ingresados  
-                            </p>
-                            <ul class="ul-reset f2 white bg-pri-color br-red-box">
-                              <li>
-                                <span class="dark padding-right">Monto:</span> s/ 100
-                              </li>
-                              <li class="">
-                                <span class="dark padding-right">Medio de pago:</span> Depósito de transferencia
-                              </li>
-                              <li class="">
-                                <span class="dark padding-right">Entidad bancaria:</span> Banco de la Nación
-                              </li>
-                              <li class="">
-                                <span class="dark padding-right">Número de transferencia: </span> 1221-49397-83352112
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-
-                        <div class="text-center margin-top-3 two-btn">
-                          <button
-                            @click="nextStep(2)"
-                            class="c-button c-button--ghost-white-primary f2 margin-top-1 br--large padding-horizontal-3"
-                          >
-                          Volver
-                          </button>
-                          <button
-                            @click="isOpenedModal = true"
-                            class="c-button c-button--ghost-white-primary f2 margin-top-1 br--large padding-horizontal-3"
-                          >Confirmar
-                          </button>
-                        </div>
-                        <div class="c-label-login pri-color f2 margin-top-1 margin-bottom-3 margin-top-3">
-                          <a href="{{ site.url }}" class="c-link c-link-primary w-bold"><i class="fas fa-chevron-left"></i>  Volver a la página principal</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div v-else-if="step == 4" key="step4" class="c-split-layout-content c-split-layout-content--dark position-relative">
-                <div class="width-100">
-                  <div class="text-center padding-3 width-100">
-                    <div class="grid-x align-center">
-                      <div class="cell large-8">
-                        <h1 class="c-split-layout-content__title margin-bottom-2 white fs-35 c-lh--35">
-                          <span class="white fs-30 f2 w-xbold">Dona</span><br>
-                          <div class="flex-container align-center-middle margin-top-1">
-                            A<img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/donaciones/mab-red-logo.png" alt="">LEMENTE
-                          </div>
-                        </h1>
-
                         <div class="margin-vertical-3">
                           <div class="grid-x align-bottom align-center mt-7">
                             <div class="cell large-10">
@@ -324,7 +269,7 @@
                   <div class="text-center">
                     <img loading="lazy" class="c-mab-modal__top-image donaciones" src="{{theme.link}}/static/images/donaciones/envelope.png" alt="">
                   </div>
-                  <button @click="nextStep(4)" class="c-mab-modal__cross position-absolute white bg-pri-color fs-18 fñex-container align-center-middle">
+                  <button @click="isOpenedModal = false" class="c-mab-modal__cross position-absolute white bg-pri-color fs-18 fñex-container align-center-middle">
                     <i class="fas fa-times"></i>
                   </button>
                   <h3 class="c-mab-modal-content__title text-center dark text-uppercase">
