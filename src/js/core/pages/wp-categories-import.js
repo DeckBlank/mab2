@@ -40,7 +40,7 @@ new Vue({
           }
         })
         .then(response => {
-          // this.createCourses(response.id);
+          this.createCourses(response.id);
         })
         .catch(err => {
           alert('La base de datos no se pudo subir correctamente, intentelo más tarde');
