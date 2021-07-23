@@ -194,200 +194,47 @@
                         <h2 class="c-foro-head__title fs-21 white w-xbold text-uppercase margin-0 f2">RESPUESTAS</h2>
                       </div>
                     </div>
-                    <div v-if="foro == 2">
-                        <h2 class="c-foro-head__title fs-18 white w-xbold text-uppercase margin-0 f2 padding-horizontal-1 text-left">Clase 1: ¿Qué es la nutrición?</h2>
+                    <div v-if="foro == 2 && selectedDiscussion">
+                        <h2 class="c-foro-head__title fs-18 white w-xbold text-uppercase margin-0 f2 padding-horizontal-1 text-left">${ selectedDiscussion.subject }</h2>
                     </div>
                   </div>
                   <div class="c-foro-body">
                     <div class="c-foro-scroll height-100">
                       <div v-if="foro == 1">
-                        <div class="c-foro-theme">
-                          <div class="grid-x align-middle">
-                            <div class="small-8 medium-7 large-7">
-                              <div class="c-foro-theme__info flex-container align-justify align-middle">
-                                <div>
-                                  <a class="c-foro-theme__title f2 w-xbold dark" href="">Clase 1: ¿Qué es la nutrición?</a>
-                                  <div>
-                                    <span class="f2 fs-14 w-bold">Maca Wellness,</span> <span class="f2 fs-14">15 Marzo 2021</span>
-                                  </div>
-                                </div>
-                                <div>
-                                  <span class="fs-21">
-                                    <i class="far fa-thumbtack"></i>
-                                  </span>
-                                  <span class="c-foro-theme__circle bg-success margin-left-1">
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="small-4 medium-5 large-5">
-                              <div class="text-center">
-                                <span class="f2 w-bold fs-21">10</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="c-foro-theme">
-                          <div class="grid-x align-middle">
-                            <div class="small-8 medium-7 large-7">
-                              <div class="c-foro-theme__info flex-container align-justify align-middle">
-                                <div>
-                                  <a class="c-foro-theme__title f2 w-xbold dark" href="">Clase 1: ¿Qué es la nutrición?</a>
-                                  <div>
-                                    <span class="f2 fs-14 w-bold">Maca Wellness,</span> <span class="f2 fs-14">15 Marzo 2021</span>
-                                  </div>
-                                </div>
-                                <div>
-                                  <span class="fs-21">
-                                    <i class="far fa-thumbtack"></i>
-                                  </span>
-                                  <span class="c-foro-theme__circle bg-success margin-left-1">
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="small-4 medium-5 large-5">
-                              <div class="text-center">
-                                <span class="f2 w-bold fs-21">10</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="c-foro-theme">
-                          <div class="grid-x align-middle">
-                            <div class="small-8 medium-7 large-7">
-                              <div class="c-foro-theme__info flex-container align-justify align-middle">
-                                <div>
-                                  <a class="c-foro-theme__title f2 w-xbold dark" href="">Clase 1: ¿Qué es la nutrición?</a>
-                                  <div>
-                                    <span class="f2 fs-14 w-bold">Maca Wellness,</span> <span class="f2 fs-14">15 Marzo 2021</span>
-                                  </div>
-                                </div>
-                                <div>
-                                  <span class="fs-21">
-                                    <i class="far fa-thumbtack"></i>
-                                  </span>
-                                  <span class="c-foro-theme__circle bg-success margin-left-1">
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="small-4 medium-5 large-5">
-                              <div class="text-center">
-                                <span class="f2 w-bold fs-21">10</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="c-foro-theme">
-                          <div class="grid-x align-middle">
-                            <div class="small-8 medium-7 large-7">
-                              <div class="c-foro-theme__info flex-container align-justify align-middle">
-                                <div>
-                                  <a class="c-foro-theme__title f2 w-xbold dark" href="">Clase 1: ¿Qué es la nutrición?</a>
-                                  <div>
-                                    <span class="f2 fs-14 w-bold">Maca Wellness,</span> <span class="f2 fs-14">15 Marzo 2021</span>
-                                  </div>
-                                </div>
-                                <div>
-                                  <span class="fs-21">
-                                    <i class="far fa-thumbtack"></i>
-                                  </span>
-                                  <span class="c-foro-theme__circle bg-success margin-left-1">
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="small-4 medium-5 large-5">
-                              <div class="text-center">
-                                <span class="f2 w-bold fs-21">10</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="c-foro-theme">
-                          <div class="grid-x align-middle">
-                            <div class="small-8 medium-7 large-7">
-                              <div class="c-foro-theme__info flex-container align-justify align-middle">
-                                <div>
-                                  <a class="c-foro-theme__title f2 w-xbold dark" href="">Clase 1: ¿Qué es la nutrición?</a>
-                                  <div>
-                                    <span class="f2 fs-14 w-bold">Maca Wellness,</span> <span class="f2 fs-14">15 Marzo 2021</span>
-                                  </div>
-                                </div>
-                                <div>
-                                  <span class="fs-21">
-                                    <i class="far fa-thumbtack"></i>
-                                  </span>
-                                  <span class="c-foro-theme__circle bg-success margin-left-1">
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="small-4 medium-5 large-5">
-                              <div class="text-center">
-                                <span class="f2 w-bold fs-21">10</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="c-foro-theme">
-                          <div class="grid-x align-middle">
-                            <div class="small-8 medium-7 large-7">
-                              <div class="c-foro-theme__info flex-container align-justify align-middle">
-                                <div>
-                                  <a class="c-foro-theme__title f2 w-xbold dark" href="">Clase 1: ¿Qué es la nutrición?</a>
-                                  <div>
-                                    <span class="f2 fs-14 w-bold">Maca Wellness,</span> <span class="f2 fs-14">15 Marzo 2021</span>
-                                  </div>
-                                </div>
-                                <div>
-                                  <span class="fs-21">
-                                    <i class="far fa-thumbtack"></i>
-                                  </span>
-                                  <span class="c-foro-theme__circle bg-success margin-left-1">
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="small-4 medium-5 large-5">
-                              <div class="text-center">
-                                <span class="f2 w-bold fs-21">10</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="c-foro-theme">
-                          <div class="grid-x align-middle">
-                            <div class="small-8 medium-7 large-7">
-                              <div class="c-foro-theme__info flex-container align-justify align-middle">
-                                <div>
-                                  <a class="c-foro-theme__title f2 w-xbold dark" href="">Clase 1: ¿Qué es la nutrición?</a>
-                                  <div>
-                                    <span class="f2 fs-14 w-bold">Maca Wellness,</span> <span class="f2 fs-14">15 Marzo 2021</span>
-                                  </div>
-                                </div>
-                                <div>
-                                  <span class="fs-21">
-                                    <i class="far fa-thumbtack"></i>
-                                  </span>
-                                  <span class="c-foro-theme__circle bg-success margin-left-1">
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="small-4 medium-5 large-5">
-                              <div class="text-center">
-                                <span class="f2 w-bold fs-21">10</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        <discussion
+                          v-if="discussions.sticky"
+                          class="margin-bottom-1"
+                          :body="discussions.sticky"
+                          :selected.sync="selectedDiscussion"
+                          :view.sync="foro"
+                          :authorized="discussions.is_user_owner"
+                          :sticky="true"
+                          :handler="getDiscussions"
+                        >
+                        </discussion>
+
+                        <discussion
+                          v-for="discussion of discussions.data"
+                          :key="discussion.id"
+                          class="margin-bottom-1"
+                          :body="discussion"
+                          :selected.sync="selectedDiscussion"
+                          :view.sync="foro"
+                          :authorized="discussions.is_user_owner"
+                          :sticky="false"
+                          :handler="getDiscussions"
+                        >
+                        </discussion>
+
+                        <button @click="getDiscussions()" v-if="discussionsPaged != -1 && discussions.data.length != 0" class="sec-alt flex-container f2 w-sbold align-middle">
+                          <span class="c-icon margin-right-1"><i class="far fa-ellipsis-h"></i></span> 
+                          <p class="margin-bottom-0">Mostrar más discusiones</p>
+                        </button> 
                       </div>
-                      <div v-if="foro == 2" class="position-relative">
+                      <div v-else-if="foro == 2 && selectedDiscussion" class="position-relative">
                         <div class="c-foro__subtitle bg-white width-100 margin-bottom-1">
-                          <div class="f2 fs-14 w-bold">Publicado por Maca Wellness</div> 
-                          <span class="f2 fs-14">15 Marzo 2021</span>
+                          <div class="f2 fs-14 w-bold">Publicado por ${ selectedDiscussion.author }</div> 
+                          <span class="f2 fs-14">${ getDateFormated(selectedDiscussion.created_at) }</span>
                         </div>
                         <div class="c-comment br-top--large br-bottom--large margin-bottom-1">
                           <div class="grid-x">
@@ -478,7 +325,7 @@
                   <div class="c-foro-footer fs-21  padding-1 f2 dark br-bottom--large br-bottom-0-0">
                     <div v-if="foro == 1" class="text-center">
                       <div>
-                        <span @click="foro = 2" class="w-xbold padding-right-1">Abrir debate</span><i class="far fa-plus-circle"></i>
+                        <span @click="isOpenedCreateDiscussion = true" class="w-xbold padding-right-1">Abrir debate</span><i class="far fa-plus-circle"></i>
                       </div>
                     </div>
                     <div v-if="foro == 2" class="flex-container align-justify padding-horizontal-1">
@@ -623,6 +470,38 @@
             <i class="fas fa-heart"></i> <span>{{ likes }}</span>
           </div>
           <button @click="isOpenedTrailer = false" type="button" class="c-button c-button--success f2"> Regresar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-mab-modal c-mab-modal--bg-blue c-mab-modal--mini flex-container align-center-middle width-100" :class="{'visible' : isOpenedCreateDiscussion}">
+      <div class="grid-x align-center width-100">
+        <div class="cell small-10 medium-10 large-4">
+          <div class="c-mab-modal-content bg-white ">
+            <h3 class="c-mab-modal-content__title text-center f2 text-uppercase dark">
+              Abrir una discusión
+            </h3>
+            <div class="c-form-new">
+              <div class="c-form-new__input-container margin-bottom-2">
+                <div class="">
+                  <input v-model="discussion.name.value" class="f2 border-gray input-dark" type="text" placeholder="Asunto">
+                  <p v-if="isWrongField('name')" class="c-form-new__error margin-bottom-0 fs-16 f2 w-medium pri-alt">Asunto vacío o incorrecto</p>  
+                </div>
+              </div>
+              <div class="width-100 margin-top-2">
+                <div class="grid-x grid-margin-x grid-margin-y align-center">
+                  <div class="cell small-6 medium-6 large-6 text-left">
+                    <button @click="isOpenedCreateDiscussion = false" class="c-button c-button--success c-button--arrow c-button--small width-100 float-r w-mab-light">Volver</button>
+                  </div>
+                  <div class="cell small-6 medium-6 large-6 text-right">
+                    <button @click="saveDiscussion()" :disabled="discussion.isLoading" class="c-button c-button--success c-button--arrow c-button--small width-100 float-l w-mab-light">
+                      ${ (discussion.isLoading) ? 'Creando...' : 'Crear' }
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

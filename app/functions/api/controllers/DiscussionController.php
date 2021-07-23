@@ -94,7 +94,7 @@ class DiscussionController{
 
             if ($discussion && $this::__sendDiscussionNotification($request)) {
                 return new WP_REST_Response([
-                    'data'      => $discussion,
+                    'data'      => $this::__sanitizeDiscussion($discussion),
                     'status'    => true
                 ], 200);
             } else {
@@ -137,15 +137,15 @@ class DiscussionController{
                 foreach ($discussions as $disc) {
                     if ($discussionSticky) {
                         if ( $disc->id != $discussionSticky->id )
-                            array_push($discussionsArray, $disc);
+                            array_push($discussionsArray, $this::__sanitizeDiscussion($disc));
                     } else {
-                        array_push($discussionsArray, $disc);
+                        array_push($discussionsArray, $this::__sanitizeDiscussion($disc));
                     }
                 }
 
             if ( count($discussionsArray) ) {
                 return new WP_REST_Response([
-                    'sticky'    => $discussionSticky,
+                    'sticky'    => $discussionSticky ? $this::__sanitizeDiscussion($discussionSticky) : false,
                     'data'      => $discussionsArray,
 
                     'is_user_owner' => __isUserOwnerOnCourse($userId, $courseId),
@@ -460,5 +460,23 @@ class DiscussionController{
         } catch (Exception $e) {
             return false;
         }
+    }
+
+    private function __sanitizeDiscussion($discussion) {
+        $userFirstName  = get_user_meta($discussion->user_id, 'first_name', true);
+        $userLastName   = get_user_meta($discussion->user_id, 'last_name', true);
+
+        $discussion['author'] = $userFirstName . ' ' . $userLastName;
+
+        if ($discussion->topic_id) {
+            $topic = Timber::get_post([
+                'post_type' => 'topic',
+                'p'         => $discussion->topic_id
+            ]);
+
+            $discussion['subject'] = 'Clase: ' . $topic->title;
+        }
+
+        return $discussion;
     }
 }
