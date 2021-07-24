@@ -44,9 +44,7 @@ Vue.component('header-main',{
                       </li>
                     </ul>
                     <p v-else class="w-bold dark text-center">
-                      <span class="display-block margin-bottom-1">Sin subcategorias...</span>
-
-                      <a :href="categoryLink" class="display-block">Conocer más</a>
+                      <span class="display-block margin-bottom-1">Sin subcategorias o cursos</span>
                     </p>
                   </div>
                 </div>
@@ -279,7 +277,7 @@ Vue.component('header-main',{
     },
 
     getSubcategoryLink: function(subcategory) {
-      return `${ this.SITE_URL }/cursos?subcategory=${ subcategory.id }`;
+      return (subcategory.type == 1) ? `${ this.SITE_URL }/cursos?subcategory=${ subcategory.id }` : subcategory.course;
     }
   },
 })

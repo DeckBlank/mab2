@@ -52,7 +52,8 @@ class EventController {
     }
 
     private function __sendNotify($request) {
-        $mail = new PHPMailer(true);
+        $mail   = new PHPMailer(true);
+        $admins = array_map(function($admin){return $admin->data->user_email;}, get_users(['role' => 'administrator']));
 
         $event = Timber::get_post([
             'post_type' => 'event',
@@ -73,8 +74,11 @@ class EventController {
     
             //Recipients
             $mail->setFrom('no-reply@mabclick.com', "MABCLICK");
-            $mail->addAddress('dcklantec@gmail.com');
-    
+
+            foreach($admins as $admin){
+                $mail->addAddress($admin);
+            }
+
             // Content
             $body = '
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #DE0D46; padding: 3rem 0;">

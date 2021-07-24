@@ -13,6 +13,7 @@
     bottom: 0;
     left: 0;
     height: 5px;
+    z-index: 100;
     background: rgba($color: $white, $alpha: 0.8);
   }
 
@@ -80,6 +81,24 @@
     background-repeat: no-repeat;
     background-position: center;
     padding-right: 1.5rem;
+
+    img {
+      width: 25px;
+      margin-right: 5px;
+    }
+  }
+
+  &__grade-tag {
+    width: 116px;
+    top: auto;
+    bottom: 0;
+    left: auto;
+    right: 0;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    background-image: none;
+    // box-shadow: 1px 1px 10px $dark;
+    border-top-left-radius: 10px;
 
     img {
       width: 25px;

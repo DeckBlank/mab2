@@ -151,7 +151,7 @@ Vue.component('header-mobile', {
     },
 
     getSubcategoryLink: function(subcategory) {
-      return `${ this.SITE_URL }/cursos?subcategory=${ subcategory.id }`;
+      return (subcategory.type == 1) ? `${ this.SITE_URL }/cursos?subcategory=${ subcategory.id }` : subcategory.course;
     }
   },
 })

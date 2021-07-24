@@ -84,6 +84,8 @@ const test = new Vue({
       this.grade.value      = this.logedUser.user_grade;
       this.grade.completed  = true;
       this.grade.isValid    = true;
+
+      this.startTest();
     }
   },
   methods: {

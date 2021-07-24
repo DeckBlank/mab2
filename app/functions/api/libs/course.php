@@ -198,6 +198,7 @@ function __sanitizeCourse($courseId, $userEmail, $userID, $type = 'enrolled') {
             'likes'         => __getMetaCourse($courseId, $userEmail, 'likes'),
             'color'         => ($mabCategory) ? get_field('color', 'category_' . $mabCategory->term_id) : 'primary',
             'link'          => get_the_permalink($course->ID),
+            'grade'         => get_field('grade', $course->ID)
         ];
 
         if ($type == 'recommend' || $type == 'general') {

@@ -21,7 +21,8 @@ class CourseController{
                 'methods' => 'GET',
                 'callback' => array($this,'getMabCategories'),
                 'permission_callback' => function ($request) {
-                    return ($request['_wpnonce']) ? true : false;
+                    // return ($request['_wpnonce']) ? true : false;
+                    return true;
                 }
             ));
 
@@ -352,8 +353,10 @@ class CourseController{
 
         if ( count($categories) ) {
             $categories = array_map( function($category) use ($parentCategories) {
+                $subcategories = $this::__getSubcategories($category->term_id);
+
                 return array_merge(
-                    [ 'name' => $category->name, 'id' => $category->term_id, 'subcategories' => $this::__getSubcategories($category->term_id) ],
+                    [ 'name' => $category->name, 'id' => $category->term_id, 'subcategories' => $subcategories ],
                     ( !$parentCategories ) ? [ 'thumbnail' => get_field('image', 'category_' . $category->term_id) ] : [],
                     ( !$parentCategories ) ? [ 'color'     => get_field('color', 'category_' . $category->term_id) ] : []
                 );
@@ -787,11 +790,30 @@ class CourseController{
             'taxonomy'  => 'tax-mab-course'
         ]);
 
-        $subcategories = array_map( function($subcategory) {
-            return array_merge(
-                [ 'name' => $subcategory->name, 'id' => $subcategory->term_id ]
-            );
-        }, $subcategories);
+        if ( count($subcategories) ) {
+            $subcategories = array_map( function($subcategory) {
+                return array_merge(
+                    [ 'name' => $subcategory->name, 'id' => $subcategory->term_id, 'type' => 1 ]
+                );
+            }, $subcategories);
+        } else {
+            $courses = Timber::get_posts([
+                'post_type' => 'course',
+                'tax_query' => [
+                    [
+                        'taxonomy'  => 'tax-mab-course',
+                        'field'     => 'id',
+                        'terms'     => [ $categoryId ]
+                    ]
+                ]
+            ]);
+
+            $subcategories = array_map( function($course) {
+                return array_merge(
+                    [ 'name' => $course->title, 'course' => $course->link , 'type' => 2]
+                );
+            }, $courses);
+        }
 
         return $subcategories;
     }
