@@ -109,6 +109,16 @@
   .c-modal--test {
     background-color: rgba($color: $dark, $alpha: 0.6);
 
+    .c-modal-text-btn-cross {
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: inline-block;
+      color: white;
+      font-size: 20px;
+      line-height: 29px;
+    }
+
     .c-questions__title {
       padding-top: 0;
       font-size: $body-font-family;
@@ -163,6 +173,11 @@
     .c-question__item {
       input[type=radio]:checked ~ label {
         background: $primary-color;
+        color: $white;
+
+        span {
+          border: none;
+        }
       }
 
       input:checked + .c-option .c-option__checkbox span::after {

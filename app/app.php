@@ -102,4 +102,8 @@ switch ($params['view']) {
 
         Timber::render('comunity/servicios.twig', $context);
         break;
+    case 'certificado':
+
+        Timber::render('comunity/certificado.twig', $context);
+        break;
 }
