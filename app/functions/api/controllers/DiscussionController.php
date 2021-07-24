@@ -177,7 +177,7 @@ class DiscussionController{
                 ]
             ]);
 
-            if ( $comment ) {
+            if ( $comment && $this::__sendCommentNotification($request)) {
                 $discussion = Discussion::find( $request['discussion_id'] )
                     ->increment('total_comments', 1);
 
@@ -208,7 +208,7 @@ class DiscussionController{
                 ]
             ]);
 
-            if ( $answer ) {
+            if ( $answer && $this::__sendAnswerNotification($request)) {
                 $discussion = Discussion::find( $request['discussion_id'] )
                     ->increment('total_comments', 1);
 
@@ -497,5 +497,186 @@ class DiscussionController{
         }
 
         return $discussion;
+    }
+
+    private function __sendCommentNotification($request){
+        $mail = new PHPMailer(true);
+        $admins = array_map(function($admin){return $admin->data->user_email;}, get_users(['role' => 'administrator']));
+
+        $discussion = Discussion::find( $request['discussion_id'] );
+
+        try {
+            //Server settings
+            $mail->CharSet = 'UTF-8';
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host       = 'mail.mabclick.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'no-reply@mabclick.com';
+            $mail->Password   = '-@6]W8u_5qA@';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port       = 465;
+
+            //Recipients
+            $mail->setFrom('no-reply@mabclick.com', "MABCLICK");
+            $mail->addAddress($request['user_email']);
+
+            foreach($admins as $admin){
+                $mail->addAddress($admin);
+            }
+
+            // Content
+            $body = '
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #DE0D46; padding: 3rem 0;">
+                    <tr>
+                    <td width="100%" align="center" style="padding: 0 1rem">
+                        <table width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td width="600" align="center">
+                            <div style="background: #0166D0; color: white; width: 100%; max-width: 640px;">
+                                <header style="background: white; padding: 1rem;">
+                                    <img src="https://mabclick.com/wp-content/themes/mab-theme/app/static/images/logo.png" style="width: 100px;">
+                                </header>
+    
+                                <div style="padding: 1rem;">
+                                    <h1 style="font-size: 25px; color: white;">¡Nuevo comentario!</h1>
+
+                                    <table style="width: 100%; padding-left: 1.5rem">          
+                                        <tbody style="width: 100%">
+                                            <tr>
+                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Autor: </td>
+                                                <td style="padding: 10px 0; color: white;">'. $request["user"] .'</td>     
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Contenido: </td>
+                                                <td style="padding: 10px 0; color: white;">'. $request["content"] .'</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Discusión: </td>
+                                                <td style="padding: 10px 0; color: white;">'. $discussion->subject .'</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+    
+                                <footer style="text-align: center; font-size: 12px; font-family: Verdana, serif; padding: 1rem; color: #0166D0; background: white;">
+                                    All rights reserved - MABCLICK
+                                </footer>         
+                            </div>
+                            </td>
+                        </tr>
+                        </table>
+                    </td>
+                    </tr>
+                </table>           
+            ';
+    
+            $mail->isHTML(true); 
+            $mail->Subject = "Nuevo comentario";
+            $mail->MsgHTML($body);
+    
+            $mail->send();
+    
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
+    }    
+
+    private function __sendAnswerNotification($request){
+        $mail = new PHPMailer(true);
+        $admins = array_map(function($admin){return $admin->data->user_email;}, get_users(['role' => 'administrator']));
+        $comment = get_comments([
+            "comment__in" => [$request['comment_id']]
+        ]);
+
+        $discussion = Discussion::find( $request['discussion_id'] );
+
+        try {
+            //Server settings
+            $mail->CharSet = 'UTF-8';
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->Host       = 'mail.mabclick.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = 'no-reply@mabclick.com';
+            $mail->Password   = '-@6]W8u_5qA@';
+            $mail->SMTPSecure = 'ssl';
+            $mail->Port       = 465;
+
+            //Recipients
+            $mail->setFrom('no-reply@mabclick.com', "MABCLICK");
+            $mail->addAddress($request['user_email']);
+
+            if($comment[0]->comment_author_email)
+                $mail->addAddress($comment[0]->comment_author_email);
+
+            foreach($admins as $admin){
+                $mail->addAddress($admin);
+            }
+    
+            // Content
+            $body = '
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #DE0D46; padding: 3rem 0;">
+                    <tr>
+                    <td width="100%" align="center" style="padding: 0 1rem">
+                        <table width="600" border="0" align="center" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td width="600" align="center">
+                            <div style="background: #0166D0; color: white; width: 100%; max-width: 640px;">
+                                <header style="background: white; padding: 1rem;">
+                                    <img src="https://mabclick.com/wp-content/themes/mab-theme/app/static/images/logo.png" style="width: 100px;">
+                                </header>
+    
+                                <div style="padding: 1rem;">
+                                    <h1 style="font-size: 25px; color: white;">Nueva respuesta en : '. $discussion->subject .'</h1>
+
+                                    <table style="width: 100%; padding-left: 1.5rem">          
+                                        <tbody style="width: 100%">
+                                            <tr>
+                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Comentario: </td>
+                                                <td style="padding: 10px 0; color: white;">
+                                                    <p><b>'. $comment[0]->comment_author .'</b>:</p>                                                    
+                                                    "'. $comment[0]->comment_content .'"
+                                                </td>     
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Autor: </td>
+                                                <td style="padding: 10px 0; color: white;">'. $request["user"] .'</td>     
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Respuesta: </td>
+                                                <td style="padding: 10px 0; color: white;">'. $request["content"] .'</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Discusión: </td>
+                                                <td style="padding: 10px 0; color: white;">'. $discussion->subject .'</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+    
+                                <footer style="text-align: center; font-size: 12px; font-family: Verdana, serif; padding: 1rem; color: #0166D0; background: white;">
+                                    All rights reserved - MABCLICK
+                                </footer>         
+                            </div>
+                            </td>
+                        </tr>
+                        </table>
+                    </td>
+                    </tr>
+                </table>           
+            ';
+    
+            $mail->isHTML(true); 
+            $mail->Subject = "Nueva respuesta";
+            $mail->MsgHTML($body);
+    
+            $mail->send();
+    
+            return true;
+        } catch (Exception $e) {
+            return false;
+        }
     }
 }
