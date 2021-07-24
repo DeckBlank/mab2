@@ -195,7 +195,7 @@
                       </div>
                     </div>
                     <div v-if="foro == 2 && selectedDiscussion">
-                        <h2 class="c-foro-head__title fs-18 white w-xbold text-uppercase margin-0 f2 padding-horizontal-1 text-left">${ selectedDiscussion.subject }</h2>
+                      <h2 class="c-foro-head__title fs-18 white w-xbold text-uppercase margin-0 f2 padding-horizontal-1 text-left">${ selectedDiscussion.subject }</h2>
                     </div>
                   </div>
                   <div class="c-foro-body">
@@ -236,89 +236,44 @@
                           <div class="f2 fs-14 w-bold">Publicado por ${ selectedDiscussion.author }</div> 
                           <span class="f2 fs-14">${ getDateFormated(selectedDiscussion.created_at) }</span>
                         </div>
-                        <div class="c-comment br-top--large br-bottom--large margin-bottom-1">
-                          <div class="grid-x">
-                            <div class="small-2 medium-2 large-2">
-                              <figure class="c-comment__figure">
-                                <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="width-100 height-100 of--cover"> 
-                              </figure>
-                            </div>
-                            <div class="small-10 medium-8 large-8">
-                              <div class="c-comment-content">
-                                <div class="c-comment__autor f2 w-xbold dark fs-21">
-                                  Maca Wellness <span class="padding-left-1 fs-16"><i class="far fa-thumbtack"></i></span>
-                                </div>
-                                <div class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
-                                  Estudiante
-                                </div>
-                                <div class="c-comment__theme f2 w-xbold dark fs-16">
-                                  Carbohidratos en la noche
-                                </div>
-                                <p class="c-comment__text f2 dark fs-16 lh-18">
-                                  ¡Gracias Maca! Súper interesante. ¿Es cierto que comer carbohidratos en la noche es malo para nuestra salud?
-                                </p>
-                              </div>
-                            </div>
-                            <div class="cell medium-2 large-2">
-                              <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-18">
-                                <span>Responder</span>
-                                <span class="padding-left-1"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="grid-x align-right">
-                          <div class="small-11 medium-11 large-11">
-                            <div class="c-comment br-top--large br-bottom--large margin-bottom-1">
-                              <div class="grid-x">
-                                <div class="small-2 medium-2 large-2">
-                                  <figure class="c-comment__figure">
-                                    <img src="{{ theme.link }}/static/images/courses/banner.png" alt="" class="width-100 height-100 of--cover"> 
-                                  </figure>
-                                </div>
-                                <div class="small-10 medium-8 large-8">
-                                  <div class="c-comment-content">
-                                    <div class="c-comment__autor f2 w-xbold dark fs-21">
-                                      Maca Wellness <span class="padding-left-1 fs-16"><i class="far fa-thumbtack"></i></span>
-                                    </div>
-                                    <div class="c-comment__rol f2 margin-bottom-1 fs-14 lh-14">
-                                      Estudiante
-                                    </div>
-                                    <div class="c-comment__theme f2 w-xbold dark fs-16">
-                                      Carbohidratos en la noche
-                                    </div>
-                                    <p class="c-comment__text f2 dark fs-16 lh-18">
-                                      ¡Gracias Maca! Súper interesante. ¿Es cierto que comer carbohidratos en la noche es malo para nuestra salud?
-                                    </p>
-                                  </div>
-                                </div>
-                                <div class="cell medium-2 large-2">
-                                  <div class="flex-container align-bottom align-right text-right f2 height-100 padding-right-1 fs-18">
-                                    <span>Responder</span>
-                                    <span class="padding-left-1"><i class="far fa-heart"></i><span class="c-comment__like">12</span></span>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                        <div v-if="commentbox == 1" class="c-comment-box br-top--large br-bottom--large margin-bottom-1 padding-vertical-1">
-                          <div class="c-comment-box__subject flex-container align-middle">
-                            <label class="f2 fs-18 margin-right-1 dark">Asunto:</label>
-                            <input class="f2 fs-18 margin-0" type="text">
-                          </div>
-                          <div class="">
-                            <div class="c-comment-box__assets fs-25">
-                              <span><i class="far fa-smile-beam"></i> <input type="file" hidden></span>
-                              <span><i class="far fa-paperclip"></i> <input type="file" hidden></span>
-                              <span><i class="far fa-square"></i> <input type="file" hidden></span>
-                              <span><i class="far fa-square"></i> <input type="file" hidden></span>
+                        <section>
+                          <comment
+                            v-if="comments.sticky"
+                            :body="comments.sticky"
+                            :post="{ type: (selectedDiscussion.topic_id) ? 'topic' : 'discussion', id: selectedDiscussion.id, topic: selectedDiscussion.topic_id }"
+                            :authorized="comments.is_user_owner"
+                            :sticky="true"
+                            :thread.sync="comments"
+                            :handler="getDiscussion"
+                          >
+                          </comment>
 
-                            </div>
-                            <textarea name="" id="" cols="30" rows="10"></textarea>
-                          </div>
+                          <comment
+                            v-for="comment of comments.list"
+                            :body="comment"
+                            :post="{ type: (selectedDiscussion.topic_id) ? 'topic' : 'discussion', id: selectedDiscussion.id, topic: selectedDiscussion.topic_id }"
+                            :key="comment.id"
+                            :authorized="comments.is_user_owner"
+                            :sticky="false"
+                            :thread.sync="comments"
+                            :handler="getDiscussion"
+                          >
+                          </comment>
 
-                        </div>
+                          <button @click="getComments()" v-if="commentsPaged != -1 && comments.list.length != 0" class="sec-alt flex-container f2 w-sbold align-middle">
+                            <span class="c-icon margin-right-1"><i class="far fa-ellipsis-h"></i></span> 
+                            <p class="margin-bottom-0">Mostrar más comentarios</p>
+                          </button>
+
+                          <div v-if="commentbox == 1" class="c-foro-footer fs-21  padding-1 f2 dark br-bottom--large box-shadow-none bg-white-i">
+                            <editor
+                              :target="{ id: (selectedDiscussion.topic_id) ? selectedDiscussion.topic_id : selectedDiscussion.id, type: 'post'}"
+                              :post="{ type: (selectedDiscussion.topic_id) ? 'topic' : 'discussion' }"
+                              :thread.sync="comments"
+                            >
+                            </editor>
+                          </div>
+                        </section>
                       </div>
                     </div>
                   </div>

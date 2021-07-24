@@ -122,13 +122,15 @@ class DiscussionController{
             if (isset($request['paged']) && $request['paged'] > 1) {
                 $skip = ($request['paged'] - 1) * 25;
 
-                $discussions = Discussion::orderBy('updated_at', 'desc')
+                $discussions = Discussion::where(['course_id' => $courseId])
+                    ->orderBy('updated_at', 'desc')
                     ->skip($skip)
                     ->take(25)
                     ->get();
 
             } else {
-                $discussions = Discussion::orderBy('updated_at', 'desc')
+                $discussions = Discussion::where(['course_id' => $courseId])
+                    ->orderBy('updated_at', 'desc')
                     ->limit(25)
                     ->get();
             }
@@ -166,7 +168,7 @@ class DiscussionController{
             !empty($request['user_email'])
         ) {
             $comment = wp_insert_comment([
-                "comment_author"        => $request['user_id'],
+                "comment_author"        => $request['user'],
                 "comment_author_email"  => $request['user_email'],
                 "comment_content"       => $request['content'],
                 "comment_meta"          => [
@@ -230,21 +232,31 @@ class DiscussionController{
             $discussion = Discussion::find( $request['discussion_id'] );
 
             if ($discussion) {
-                $commentsQuery = new WP_Comment_Query;
-                $paged = ( empty($request['paged']) ) ? 1 : $request['paged'];
+                $commentsQuery  = new WP_Comment_Query;
+                $comments       = [];
+                $paged          = ( empty($request['paged']) ) ? 1 : $request['paged'];
 
-                $comments = $commentsQuery->query([
-                    "parent"        => 0,
-                    "number"        => 5,
-                    "paged"         => $paged,
-                    'meta_query'    => [
-                        [
-                            'key'       => 'discussion',
-                            'value'     => 1,
-                            'compare'   => '='
+                if ($discussion->topic_id) {
+                    $comments = $commentsQuery->query([
+                        "parent"    => 0,
+                        "number"    => 5,
+                        "paged"     => $paged,
+                        "post_id"   => $discussion->topic_id,
+                    ]);
+                } else {
+                    $comments = $commentsQuery->query([
+                        "parent"        => 0,
+                        "number"        => 5,
+                        "paged"         => $paged,
+                        'meta_query'    => [
+                            [
+                                'key'       => 'discussion',
+                                'value'     =>  $discussion->id,
+                                'compare'   => '='
+                            ]
                         ]
-                    ]
-                ]);
+                    ]);
+                }
 
                 if ($comments) {
                     $commentSticky  = null;
@@ -252,7 +264,14 @@ class DiscussionController{
                     $userId         = $request['user_id'];
                     $courseId       = $request['course_id'];
 
-                    $discussionCommentSticky = [$discussion->sticky_comment];
+                    $discussionCommentSticky = false;
+
+                    if ($discussion->topic_id) {
+                        $discussionCommentSticky = get_post_meta($discussion->topic_id, 'comment_sticky');
+                    } else {
+                        $discussionCommentSticky = $discussion->sticky_comment ? [$discussion->sticky_comment] : false;
+                    }
+
                     $commentSticky = ($discussionCommentSticky) ? __sanitizeComment( get_comment($discussionCommentSticky[0]), $userId, $request) : false;
 
                     foreach($comments as $comment){
@@ -272,7 +291,7 @@ class DiscussionController{
                         'is_user_owner' => __isUserOwnerOnCourse($userId, $courseId)
                     ];
                 } else {
-                    throw new Exception("No comments");
+                    return new WP_Error( 'comments_not_found', __('Comments not found'), array( 'status' => 404 ) );
                 }   
 
                 return new WP_REST_Response([

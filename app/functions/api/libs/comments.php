@@ -92,7 +92,7 @@ function __addAnswer($request){
 function __getAttachments($commentId) {
     $attachments = get_comment_meta($commentId, 'attachment');
 
-    if (count($attachments)) {
+    if ($attachments) {
         $attachments        = ($attachments[0]) ? explode(',', $attachments[0]) : [];
         $attachmentsArray   = [];
 
