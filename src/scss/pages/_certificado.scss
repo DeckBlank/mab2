@@ -1,0 +1,103 @@
+.c-section--certificado {
+  .c-certificado {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .c-certificado-view {
+    &__info {
+      padding: 4rem 1rem 6rem;
+
+      .c-img-cohete {
+        width: 59%;
+        margin: 0 auto;
+        transform: rotate(64deg);
+      }
+    }
+
+    &__top-tittle {
+      font-size: $fs-18;
+    }
+
+    &__name-course {
+      font-size: $fs-30;
+      padding-right: 2rem;
+    }
+
+    &__card {
+      padding: 2rem 1rem;
+      font-size: $fs-21;
+    }
+
+    &__date,
+    &__time {
+      font-size: $fs-18;
+    }
+
+    &__text {
+      font-size: $fs-18;
+      padding: 2rem 2rem 1rem;
+      text-align: center;
+    }
+
+    .button-cotainer {
+      text-align: center;
+    }
+
+    .c-button {
+      border-radius: 15px;
+      padding: 0.5rem 1.5rem;
+      background: $purple;
+      font-size: $fs-18;
+    }
+  }
+}
+
+@include breakpoint(large) {
+  .c-section--certificado {
+    .c-certificado {
+      margin-top: 5rem;
+      margin-bottom: 5rem;
+      margin-right: 3rem;
+    }
+
+    .c-certificado-view {
+      &__info {
+        padding: 4rem 1rem 6rem;
+
+        .c-img-cohete {
+          width: 59%;
+          margin: 0 auto;
+          transform: rotate(64deg);
+        }
+      }
+
+      &__name-course {
+        font-size: $fs-30;
+        padding-right: 8rem;
+        margin-bottom: 2rem;
+      }
+
+      &__card {
+        font-size: $fs-18;
+      }
+
+      &__date,
+      &__time {
+        font-size: $fs-16;
+      }
+
+      &__text {
+        margin-top: 1rem;
+        font-size: $fs-16;
+        text-align: left;
+        padding: 2rem 0 1rem;
+      }
+
+      .button-cotainer {
+        margin-top: 1rem;
+        text-align: right;
+      }
+    }
+  }
+}

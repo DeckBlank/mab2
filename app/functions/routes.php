@@ -217,3 +217,22 @@ Routes::map('servicios', function($routeParams) use ($config) {
 
     Routes::load('app.php', $params, "", 200);
 });
+
+Routes::map('certificado', function($routeParams) use ($config) {
+    $params = [
+        'route' => $routeParams,
+        'view'  => 'certificado',
+    ];
+
+    add_action( 'wp_enqueue_scripts', function () use ($config) {
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/certificado',
+            'src'       => $config['resources']['page_certificado'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]); 
+    });
+
+    Routes::load('app.php', $params, "", 200);
+});

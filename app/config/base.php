@@ -100,6 +100,7 @@ return [
         'page_proyectos'             => get_theme_file_uri( __getResourceURL('js', 'page-proyectos.bundle.js') ),
         'page_llegamos'             => get_theme_file_uri( __getResourceURL('js', 'page-llegamos.bundle.js') ),
         'page_servicios'             => get_theme_file_uri( __getResourceURL('js', 'page-servicios.bundle.js') ),
+        'page_certificado'          => get_theme_file_uri( __getResourceURL('js', 'page-certificado.bundle.js') ),
 
 
 

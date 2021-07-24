@@ -3,12 +3,16 @@ import { mapActions } from 'vuex'
 import {baseConfig, baseState, baseActions} from '../app'
 import {store} from '../store'
 
+import '../components/thread/discussion';
+import '../components/thread/comment';
+
 new Vue({
   ...baseConfig(store),
   data() {
     return {
-      showTooltipCerticado: false,
       metas: new URLSearchParams(window.location.search),
+
+      showTooltipCerticado: false,
       isActiveUnity: false,
       isAvaibleCourse: true,
       isActiveSignUp: false,
@@ -26,6 +30,36 @@ new Vue({
 
       isOpenedTrailer: false,
       isOpenedCertificateModal: false,
+
+      isOpenedCreateDiscussion: false,
+      discussion: {
+        isLoading: false,
+        try: false,
+        sent: 0,
+
+        name: {
+          value: '',
+          isValid: false,
+        },
+      },
+      discussions: {
+        data: [],
+        sticky: null,
+
+        is_user_owner: false,
+      },
+      discussionsPaged: 0,
+      selectedDiscussion: null,
+
+      comments: {
+        number: 0,
+        list: [],
+        sticky: null,
+
+        is_user_owner: false,
+      },
+      commentsPaged: 0,
+      isLoadingComments: false, 
     }
   },
   computed: {
@@ -39,6 +73,14 @@ new Vue({
         : '#';
     }
   },
+  watch: {
+    'discussion.name.value': function (value) {
+      this.discussion.name.isValid = (value.length) ? true : false;
+    },
+    'foro': function (value) {
+      if (value == 2) this.getDiscussion();
+    },
+  },
   mounted: function(){
     this.global();
     this.hideLoading();
@@ -46,10 +88,15 @@ new Vue({
     this.isUserAuthOnCourse( mab.course_id )
     this.getUnities( mab.course_id );
     this.getCourseProgress( mab.course_id );
+    this.getDiscussions( mab.course_id );
   },
   methods: {
     ...baseActions(),
     ...mapActions(['addCourseToShopCart']),
+    isWrongField: function(field) {
+      return this.discussion.try && !this.discussion[field].isValid;
+    },
+
     getUnities: function(course_id){
       this.isLoadingUnities = true;
 
@@ -183,6 +230,157 @@ new Vue({
       })
 
       this.isOpenedCertificateModal = false;
+    },
+
+    getDiscussions: function(reset = false) {
+      if (reset) this.discussionsPaged = 0;
+
+      if(this.discussionsPaged != -1){
+        fetch(`${this.API}/discussions?paged=${ this.discussionsPaged + 1 }&user_id=${ this.logedUser ? this.logedUser.user_id : '' }&course_id=${ mab.course_id }`,{
+          method: 'GET'
+        })
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            return res.json()
+          }else{
+            throw res
+          }
+        })
+        .then(response => {
+          if (response.status) {
+            this.discussions.sticky         = response.sticky;
+            this.discussions.is_user_owner  = response.is_user_owner;
+
+            if (!reset) this.discussions.data = this.discussions.data.concat(response.data);
+            else this.discussions.data = response.data;
+
+            this.discussionsPaged += 1
+          }
+        })
+        .catch(err => {
+          this.discussionsPaged = -1
+          throw err;          
+        })
+      }
+    },
+    getDiscussion: function() {
+      this.comments = {
+        number: 0,
+        list: [],
+        sticky: null,
+
+        is_user_owner: false,
+      };
+
+      fetch(`${this.API}/discussions/${ this.selectedDiscussion.id }?user_id=${ this.logedUser ? this.logedUser.user_id : '' }&course_id=${ mab.course_id }`,{
+        method: 'GET'
+      })
+      .then(res => {
+        if (res.status >= 200 && res.status < 300) {
+          return res.json();
+        }else{
+          throw res;
+        }
+      })
+      .then(comments => {
+        this.comments = comments;
+
+        this.commentsPaged += 1
+      })
+      .catch(err => {
+        this.comments = {
+          number: 0,
+          list: [],
+          sticky: null,
+
+          is_user_owner: false,
+        };
+        this.commentsPaged = -1;
+
+        throw err;          
+      })
+    },
+    saveDiscussion: function() {
+      this.discussion.try = true;
+
+      if (this.discussion.name.isValid) {
+        this.discussion.isLoading = true;
+
+        const formData = new FormData();
+
+        formData.append('subject', this.discussion.name.value);
+        formData.append('course_id', mab.course_id);
+        formData.append('user_id', this.logedUser.user_id);
+        formData.append('user_email', this.logedUser.user_email);
+        formData.append('_wpnonce', mab.nonce);
+
+        fetch(`${ this.API }/discussions`, {
+          method: 'POST',
+          body: formData,
+        })
+        .then(res => { 
+          if (res.status >= 200 && res.status < 300) {
+            return res.json();
+          } else {
+            throw res;
+          }
+        })
+        .then(response => {
+          if (response.status) {
+            this.isOpenedCreateDiscussion = false;
+
+            this.discussions.data = [
+              response.data,
+              ...this.discussions.data,
+            ];
+          }
+          else
+            alert('Error inesperado, intentelo de nuevo');
+          })
+        .catch(err => {
+          alert('Error inesperado, intentelo de nuevo');
+
+          throw err;
+        })
+      }
+    },
+    getDateFormated: function(dateAt) {
+      const dateTime  = new Date(dateAt);
+      const day       = dateTime.toLocaleDateString('es', { month: 'long', day: 'numeric' });
+
+      return `${ day }, ${ dateTime.getFullYear() }`;
+    },
+
+    getComments: function(reset = false){
+      if (reset) this.commentsPaged = 0;
+
+      if(this.commentsPaged != -1){
+        fetch(`${this.API}/topic/${ this.selectedDiscussion.topic_id }/comments?paged=${ this.commentsPaged + 1 }&user_id=${ this.logedUser ? this.logedUser.user_id : '' }&course_id=${ mab.course_id }`,{
+            method: 'GET'
+          })
+          .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              return res.json()
+            }else{
+              throw res
+            }
+          })
+          .then(comments => {
+            this.comments.number  = comments.number;
+            this.comments.sticky  = comments.sticky;
+
+            this.comments.is_user_owner = comments.is_user_owner;
+
+            if (!reset) this.comments.list.push(...comments.list);
+            else this.comments.list = comments.list;
+
+            this.commentsPaged += 1
+          })
+          .catch(err => {
+            this.commentsPaged = -1
+            throw err;          
+          })          
+      }
     },
   }
 })

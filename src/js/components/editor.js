@@ -79,6 +79,8 @@ Vue.component('editor',{
   `,
   data() {
     return {
+      metas: new URLSearchParams(window.location.search),
+
       isActiveEditor: false,
       textContent: '',
 
@@ -145,11 +147,17 @@ Vue.component('editor',{
       this.isLoading        = true;
 
       form_data.append('user', this.logedUser.user_auth)
+      form_data.append('course_id', ( this.metas.get('course_id') ) ? this.metas.get('course_id') : mab.course_id)
+      form_data.append('user_id', this.logedUser.user_id)
       form_data.append('user_email', this.logedUser.user_email)
       form_data.append('content', this.textContent)
       form_data.append('attachment', this.attachments.data.map(atch => atch.idRemote).join())
 
-      fetch(`${this.API}/${this.post.type}/${this.target.id}/comment`,{
+      const request = (this.post.type == 'topic')
+        ? `${this.API}/${this.post.type}/${this.target.id}/comment`
+        : `${this.API}/discussions/${this.target.id}/comments`;
+
+      fetch(request, {
           method: 'POST',
           body: form_data,
         })
@@ -176,11 +184,17 @@ Vue.component('editor',{
       this.isLoading        = true;
 
       form_data.append('user', this.logedUser.user_auth)
+      form_data.append('course_id', ( this.metas.get('course_id') ) ? this.metas.get('course_id') : mab.course_id)
+      form_data.append('user_id', this.logedUser.user_id)
       form_data.append('user_email', this.logedUser.user_email)
       form_data.append('content', this.textContent)
       form_data.append('attachment', this.attachments.data.map(atch => atch.idRemote).join())
 
-      fetch(`${this.API}/${this.post.type}/${this.post.id}/comment/${this.target.id}/answer`,{
+      const request = (this.post.type == 'topic')
+        ? `${this.API}/${this.post.type}/${this.post.id}/comment/${this.target.id}/answer`
+        : `${this.API}/discussions/${this.post.id}/comments/${this.target.id}/answers`;
+
+      fetch(request, {
           method: 'POST',
           body: form_data,
         })
