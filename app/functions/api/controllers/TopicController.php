@@ -301,7 +301,7 @@ class TopicController{
             return new WP_Error( 'no_comment_added', __($e->getMessage()), array( 'status' => 404 ) );
         }
     }
-    
+
     public function addAnswer($request){
         try {
             $answer_result = TopicModel::addAnswer($request);

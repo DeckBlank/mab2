@@ -137,11 +137,15 @@ Vue.component('comment',{
       const formData = new FormData();
 
       formData.append('user_id', this.logedUser.user_id)
-      formData.append('course_id', this.metas.get('course_id'));
+      formData.append('course_id', ( this.metas.get('course_id') ) ? this.metas.get('course_id') : mab.course_id);
       formData.append('mode', (!this.sticky) ? 1 : 2);
 
       if(this.authorized){
-        fetch(`${ this.API }/topics/${ mab.topic_id }/comments/${ commentId }/sticky`,{
+        const request = (this.post.type == 'topic')
+          ? `${ this.API }/topics/${ (mab.topic_id) ? mab.topic_id : this.post.topic }/comments/${ commentId }/sticky`
+          : `${ this.API }/discussions/${ this.post.id }/comments/${ commentId }/sticky`;
+
+        fetch(request, {
           method: 'POST',
           body: formData,
         })
@@ -158,7 +162,11 @@ Vue.component('comment',{
 
       formData.append('user_id', this.logedUser.user_id)
 
-      fetch(`${ this.API }/topics/${ mab.topic_id }/comments/${ commentId }/likes`,{
+      const request = (this.post.type == 'topic')
+        ? `${ this.API }/topics/${ (mab.topic_id) ? mab.topic_id : this.post.topic }/comments/${ commentId }/likes`
+        : `${ this.API }/discussions/${ this.post.id }/comments/${ commentId }/likes`;
+
+      fetch(request, {
         method: 'POST',
         body: formData,
       })
