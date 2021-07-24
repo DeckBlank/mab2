@@ -103,7 +103,15 @@ switch ($params['view']) {
         Timber::render('comunity/servicios.twig', $context);
         break;
     case 'certificado':
+        $userCertificate = __getCertificate($params['route']['certificate_id']);
 
-        Timber::render('comunity/certificado.twig', $context);
+        if ($userCertificate) {
+            $context['certificate'] = $userCertificate;
+
+            Timber::render('user/certificado.twig', $context);
+        } else {
+            Timber::render('404.twig', $context);
+        }
+
         break;
 }

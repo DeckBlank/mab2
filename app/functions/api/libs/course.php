@@ -234,11 +234,15 @@ function __getUserCourseProgress($userId, $userEmail, $courseId) {
         'course_id' => $courseId
     ])->get();
 
+    $userCertificate = UserCertificate::where(['user_id' => $userId, 'course_id' => $courseId])
+        ->first();
+
     $progress = [
         'notification'  => ($userCert) ? true : false,
         'completed'     => count($courseTestScores),
         'total'         => CourseModel::getTopics($courseId),
-        'percentage'    => bcdiv( (count($courseTestScores)*100), CourseModel::getTopics($courseId), 2 )
+        'percentage'    => bcdiv( (count($courseTestScores)*100), CourseModel::getTopics($courseId), 2 ),
+        'certificate'   => ($userCertificate) ? __getCertificate($userCertificate->id) : false
     ];
 
     return ($courseTestScores)

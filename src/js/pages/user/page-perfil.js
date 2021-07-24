@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import {baseConfig, baseState, baseActions} from '../app'
-import {store} from '../store'
+import {baseConfig, baseState, baseActions} from '../../app'
+import {store} from '../../store'
 import Swiper from 'swiper';
 import { mapState } from 'vuex';
 

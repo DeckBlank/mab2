@@ -2,7 +2,7 @@ import Vue from 'vue'
 import {baseConfig, baseState, baseActions} from '../../app'
 import {store} from '../../store'
 
-const certificado = new Vue({
+new Vue({
   ...baseConfig(store),
   data() {
     return {

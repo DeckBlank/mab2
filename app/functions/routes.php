@@ -218,7 +218,7 @@ Routes::map('servicios', function($routeParams) use ($config) {
     Routes::load('app.php', $params, "", 200);
 });
 
-Routes::map('certificado', function($routeParams) use ($config) {
+Routes::map('certificado/:certificate_id', function($routeParams) use ($config) {
     $params = [
         'route' => $routeParams,
         'view'  => 'certificado',

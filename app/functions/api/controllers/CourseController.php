@@ -21,7 +21,6 @@ class CourseController{
                 'methods' => 'GET',
                 'callback' => array($this,'getMabCategories'),
                 'permission_callback' => function ($request) {
-                    // return ($request['_wpnonce']) ? true : false;
                     return true;
                 }
             ));
@@ -70,7 +69,6 @@ class CourseController{
                 'methods' => 'GET',
                 'callback' => array($this,'index'),
                 'permission_callback' => function ($request) {
-                    // return ($request['_wpnonce']) ? true : false;
                     return true;
                 }
             ));
@@ -87,7 +85,6 @@ class CourseController{
                 'methods' => 'GET',
                 'callback' => array($this,'showCourseProgress'),
                 'permission_callback' => function ($request) {
-                    // return ($request['_wpnonce']) ? true : false;
                     return true;
                 }
             ));
@@ -96,7 +93,6 @@ class CourseController{
                 'methods' => 'POST',
                 'callback' => array($this,'storeCourseProgressNotification'),
                 'permission_callback' => function ($request) {
-                    // return ($request['_wpnonce']) ? true : false;
                     return true;
                 }
             ));

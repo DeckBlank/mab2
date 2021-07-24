@@ -75,7 +75,11 @@ new Vue({
       unities: [],
 
       courseProgress: 0,
+      courseCertificate: null,
+      courseCertificateSocial: null,
       isOpenedCertificateModal: false,
+
+      device: '',
     }
   },
   components: {
@@ -129,10 +133,22 @@ new Vue({
       this.getQuestions();
       this.saveViewLog( this.metas.get('course_id') );
     }
+
+    let breakpoint = window.matchMedia('(min-width: 1024px)');
+
+    this.checkDevice(breakpoint); breakpoint.addEventListener('change', this.checkDevice);
   },
   methods: {
     ...baseActions(),
     ...mapActions(['addCourseToShopCart']),
+    checkDevice: function(breakpoint) {
+      if (breakpoint.matches) {
+        this.device = 'desktop';
+      } else {
+        this.device = 'mobile';
+      }
+    },
+
     getUnities: function(course_id){
       fetch(`${ this.API }/course/${ course_id }/unities?user=${ this.logedUser.user_email }`)
         .then(res => { 
@@ -204,7 +220,8 @@ new Vue({
       })
       .then(response => {
         if (response.status) {
-          this.courseProgress = Number(response.data.percentage);
+          this.courseProgress     = Number(response.data.percentage);
+          this.courseCertificate  = response.data.certificate;
 
           if (Number(response.data.percentage) == 100) {
             this.isOpenedCertificateModal = (!response.data.notification) ? true : false;
@@ -212,6 +229,17 @@ new Vue({
             window.setTimeout(() => {
               document.querySelector('#certificate_download').download = `${ this.logedUser.user_nicename }.pdf`;
             }, 100);
+
+            if (this.courseCertificate) {
+              const certificateLink = `${ this.SITE_URL }/certificado/${ this.courseCertificate.data.id }`;
+
+              this.courseCertificateSocial = {
+                whatsapp: `whatsapp://send?text=Termine mi curso de ${ this.courseCertificate.course } en Aprende MAB, ${ certificateLink }`,
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${ certificateLink }`,
+                linkedin: `http://www.linkedin.com/shareArticle?mini=true&url=${ certificateLink }`,
+                twitter: `https://twitter.com/share?text=Hola, Termine mi curso de ${ this.courseCertificate.course } en Aprende MAB&url=${ certificateLink }`,
+              }
+            }
           }
         }
       })
@@ -286,7 +314,20 @@ new Vue({
         .then(response => {
           if (response.status) {
             if (response.data.course_completed) {
-              this.courseProgress = 100;
+              this.isOpenedQuestionsModal = false;
+              this.courseProgress         = 100;
+              this.courseCertificate      = response.data.certificate;
+
+              if (this.courseCertificate) {
+                const certificateLink = `${ this.SITE_URL }/certificado/${ this.courseCertificate.data.id }`;
+  
+                this.courseCertificateSocial = {
+                  whatsapp: `whatsapp://send?text=Termine mi curso de ${ this.courseCertificate.course } en Aprende MAB, ${ certificateLink }`,
+                  facebook: `https://www.facebook.com/sharer/sharer.php?u=${ certificateLink }`,
+                  linkedin: `http://www.linkedin.com/shareArticle?mini=true&url=${ certificateLink }`,
+                  twitter: `https://twitter.com/share?text=Hola, Termine mi curso de ${ this.courseCertificate.course } en Aprende MAB&url=${ certificateLink }`,
+                }
+              }
 
               if (!response.data.notification) this.isOpenedCertificateModal = true;
             }

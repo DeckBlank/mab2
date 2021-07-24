@@ -17,9 +17,6 @@
                   alt="">
                 <figcaption class="c-cover-gradient__figcaption width-100 height-100 position-absolute flex-container">
                   <div class="c-cover-gradient__top width-100  flex-container padding-1 padding-horizontal-2">
-                    <!-- <div class="c-corner-logo">
-                      <img v-if="false" loading="lazy" class="height-100" src="{{theme.link}}/static/images/logo.png" alt="">
-                    </div> -->
                     <div class="c-corner-text text-left f2 w-bold">
                       <div class="w-xbold">
                         ${ gallery.login.author.name }
@@ -215,7 +212,7 @@
                           <span class="white fs-30">inicia sesión</span><br>
                           y continúa creciendo con nosotros
                         </h1>
-                        <button @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
+                        <button v-if="false" @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
                           <span class="content">
                             <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
                             <span class="f2">Continuar con Facebook</span>
@@ -278,7 +275,7 @@
                           <span class="">Conviértete en un/una</span>
                           <div class="dark big-title">#MABLover</div> 
                         </h1>
-                        <button @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
+                        <button v-if="false" @click="authWithFacebook" class="c-btn-input-social w-medium width-100">
                           <span class="content">
                             <img loading="lazy" src="{{theme.link}}/static/images/access/fb-icon.png" alt="">
                             <span class="f2">Continuar con Facebook</span>
