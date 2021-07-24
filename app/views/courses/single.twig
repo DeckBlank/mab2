@@ -50,10 +50,10 @@
         <div class="c-tab">
           <div class="c-tab-head text-center">
             <div class="grid-x">
-              <div class="cell">
+              <div class="cell large-6">
                 <div @click="view = 1" :class="{ active : view == 1 }" class="c-tab-head__title pri-color w-xbold position-relative margin-vertical-1 fs-40 border-0">SOBRE EL CURSO</div>
               </div>
-              <div v-if="false" class="cell large-6">
+              <div v-if="true" class="cell large-6">
                 <div @click="view = 2" :class="{ active : view == 2 }" class="c-tab-head__title pri-color w-xbold position-relative margin-vertical-1 fs-40 small">FORO</div>
               </div>
             </div>
@@ -105,7 +105,7 @@
                       </ul>
                     </div>
 
-                    <div v-if="logedUser" class="c-tab-recursos br-bottom--large br-top--large padding-2">
+                    <div v-if="logedUser" class="c-tab-recursos br-bottom--large br-bottom-0-0 br-top--large padding-2">
                       <div class="grid-x align-self-strecht text-center">
                         <div class="cell">
                           <h3 class="w-xbold f2 fs-25 dark margin-bottom-1 text-uppercase text-left">Certificado</h3>
@@ -156,7 +156,7 @@
                         </div>
                       </div>
                     </div>
-                    <div v-else class="c-accordion position-relative">
+                    <div v-else class="c-accordion position-relative padding-top-1 padding-horizontal-2">
                       <h3 class="c-accordion__header margin-bottom-0 padding-1 bg-dark white fs-21 f2 text-uppercase text-center w-xbold">CONTENIDOS</h3>
                       <div class="c-accordion__body bg-white">
                         <ul class="ul-reset">
@@ -183,7 +183,7 @@
                   </div>
                 </div>
               </div>
-              <div v-else-if="view == 2" key="foro" class="c-tab-slide">
+              <div v-else-if="view == 2" key="foro" class="c-tab-slide padding-horizontal-1">
                 <div class="c-foro mab-shadow">
                   <div class="c-foro-head bg-dark br-top--large text-center padding-horizontal-1">
                     <div v-if="foro == 1" class="grid-x">
@@ -475,9 +475,11 @@
                       </div>
                     </div>
                   </div>
-                  <div class="c-foro-footer fs-21  padding-1 f2 dark br-bottom--large">
+                  <div class="c-foro-footer fs-21  padding-1 f2 dark br-bottom--large br-bottom-0-0">
                     <div v-if="foro == 1" class="text-center">
-                      <span @click="foro = 2" class="w-xbold">Abrir debate</span><i class="far fa-plus-circle"></i>
+                      <div>
+                        <span @click="foro = 2" class="w-xbold padding-right-1">Abrir debate</span><i class="far fa-plus-circle"></i>
+                      </div>
                     </div>
                     <div v-if="foro == 2" class="flex-container align-justify padding-horizontal-1">
                       <div @click="foro = 1" class="fs-16"><i class="far fa-chevron-left"></i> <span class="padding-left-1">Volver a todos los debates</span></div>
