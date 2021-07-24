@@ -410,23 +410,98 @@
           </div>
         </div>
       </div>
-    </section> 
+    </section>
 
-    <div class="c-mab-modal c-mab-modal--bg-blue c-mab-modal--mini width-100 flex-container align-center-middle" :class="{'visible' : isOpenedCertificateModal}">
+    <div class="c-mab-modal c-mab-modal c-mab-modal--mini width-100 flex-container align-center-middle c-mab-modal--certificado" :class="{'visible' : isOpenedCertificateModal}">
       <div class="grid-x align-center width-100">
-        <div class="cell small-10 medium-10 large-5">
-          <div class="c-mab-modal-content bg-sec-color text-center position-relative">
+        <div class="cell small-11 medium-11 large-8">
+          <div class="c-mab-modal-content br-bottom-0-0 bg-warning-alt text-center position-relative ">
             <div class="text-center">
-              <img loading="lazy" class="c-mab-modal__top-image donaciones" src="{{theme.link}}/static/images/vectors/heart-expression.png" alt="">
+              <div v-if="courseCertificate" class="c-certificado">
+                <div class="grid-x align-self-stretch">
+                  <div class="cell large-8 bg-white">
+                      <div class="padding-2 margin-botom-2 text-left">
+                        <div class="grid-x">
+                          <div class="cell large-8">
+                            <div class="dark">
+                              <p class="c-certificado__top-subtitle f2">Certificado de curso</p>
+                              <h2 class="c-certificado__top-title">${ courseCertificate.course }</h2>
+                              <p class="c-certificado__top-subtitle f2">El presente diploma se otroga a</p>
+                            </div>
+                          </div>
+                          <div class="cell large-4">
+                            <div class="height-100 flex-container align-middle align-right">
+                              <img loading="lazy" class="c-certificado__heart" src="{{theme.link}}/static/images/vectors/heart.png" alt="">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="margin-bottom-2">
+                        <h1 class="c-certificado__name text-uppercase sec-color">${ courseCertificate.user }</h1>
+                        <p class="c-certificado__sub f2 dark">Certificado de aprobación online</p>
+                        <p class="c-certificado__sub f2 dark"><strong>Aprobado el ${ courseCertificate.date }</strong></p>
+                        <p class="c-certificado__sub f2 dark">${ courseCertificate.duration } horas de Teoría y práctica</p>
+                      </div>
+                      <div class="c-certificado__firmas flex-container align-justify align-middle">
+                        <div class="c-certificado__firma">
+                          <img loading="lazy" class="" src="{{theme.link}}/static/images/certificates/firma-1.png" alt="">
+                          <div class="f2 dark">Macarena Arribas <br> Ceo y fundadora de Mab</div>
+                        </div>
+                        <div class="c-certificado__firma">
+                          <img loading="lazy" class="" src="{{theme.link}}/static/images/certificates/firma-2.png" alt="">
+                          <div class="f2 dark">Macarena Arribas <br> Ceo y fundadora de Mab</div>
+                        </div>
+                      </div>
+                      <div class="c-certificado__bottom flex-container align-justify align-middle">
+                        <div class="c-certificado__side">
+                          <div class="f2 dark">http://aprendemab.com/</div>
+                        </div>
+                        <div class="c-certificado__side">
+                          <div class="f2 dark">cod  ${ courseCertificate.data.signature }</div>
+                        </div>
+                      </div>
+                  </div>
+                  <div class="cell large-4 bg-pri-color">
+                    <div class="c-certificado__aside height-100 flex-container align-center-middle">
+                      <img loading="lazy" class="" src="{{theme.link}}/static/images/logo-white.png" alt="">
+                      <p class="white f2">Felicitaciones por atreverte a aprender distinto y complementar tu aprendizaje con educación para CRECER</p>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
             </div>
-            <button @click="closeCertificateModal()" type="button" class="c-mab-modal__cross position-absolute white bg-warning fs-18 flex-container align-center-middle">
-              <i class="fas fa-times sec-color"></i>
+            <button @click="closeCertificateModal()" type="button" class="c-mab-modal__cross position-absolute white bg-dark fs-18 flex-container align-center-middle">
+              <i class="fas fa-times white"></i>
             </button>
             <h3 class="c-mab-modal-content__title text-center  text-uppercase margin-top-3">
-              <span class="warning f2 w-xbold">¡LO LOGRASTE! FELICIDADES POR COMPLETAR EL CURSO!
+              <span class="dark w-xbold">COMPARTE TUS LOGROS CON TU FAMILIA, <br> AMIGOS Y TUS REDES SOCIALES
             </h3>
-            <p class="w-bold white f2 fs-18">Esperamos que hayas aprendido y disfurtado de este curso, no olvides descargar y compartir tu certificado </p>
-            <a :href="certificate" class="c-link c-link--warning f2 w-xbold">Ver certificado</a>
+            <p class=" f2 fs-18 pri-color w-xbold">Compártelo</p>
+            <div v-if="courseCertificateSocial" class="c-modal-share-list">
+              <div class="grid-x grid-margin-y align-center">
+                <div v-if="device == 'mobile'" class="cell small-3 large-3">
+                  <a :href="courseCertificateSocial.whatsapp" class="text-center">
+                    <img loading="lazy"  src="{{theme.link}}/static/images/vectors/share-icons/icon-ws.png" alt="">
+                  </a>
+                </div>
+                <div class="cell small-3 large-3">
+                  <a :href="courseCertificateSocial.linkedin" class="text-center">
+                    <img loading="lazy"  src="{{theme.link}}/static/images/vectors/share-icons/icon-linkedin.png" alt="">
+                  </a>
+                </div>
+                <div class="cell small-3 large-3">
+                  <a :href="courseCertificateSocial.facebook" class="text-center">
+                    <img loading="lazy" src="{{theme.link}}/static/images/vectors/share-icons/icon-fb.png" alt="">
+                  </a>
+                </div>
+                <div class="cell small-3 large-3">
+                  <a :href="courseCertificateSocial.twitter" class="text-center">
+                    <img loading="lazy" src="{{theme.link}}/static/images/vectors/share-icons/icon-twitter.png" alt="">
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

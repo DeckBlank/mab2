@@ -507,7 +507,7 @@ class TopicController{
                     if ($userCertificate) {
                         return new WP_REST_Response((object)[
                             'message'   => 'Certificate saved!!',
-                            'data'      => [ 'course_completed' => true ],
+                            'data'      => [ 'course_completed' => true, 'certificate' => __getCertificate($userCertificate->id) ],
                             'status'    => true
                         ], 200);
                     } else {

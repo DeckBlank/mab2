@@ -1,10 +1,10 @@
 import Vue from 'vue'
 import { mapActions } from 'vuex'
-import {baseConfig, baseState, baseActions} from '../app'
-import {store} from '../store'
+import {baseConfig, baseState, baseActions} from '../../app'
+import {store} from '../../store'
 
-import '../components/thread/discussion';
-import '../components/thread/comment';
+import '../../components/thread/discussion';
+import '../../components/thread/comment';
 
 new Vue({
   ...baseConfig(store),
@@ -20,6 +20,8 @@ new Vue({
 
       unities: [],
       courseProgress: 1000,
+      courseCertificate: null,
+      courseCertificateSocial: null,
       lastClass: '',
 
       view: 1,
@@ -60,6 +62,8 @@ new Vue({
       },
       commentsPaged: 0,
       isLoadingComments: false, 
+
+      device: '',
     }
   },
   computed: {
@@ -89,12 +93,23 @@ new Vue({
     this.getUnities( mab.course_id );
     this.getCourseProgress( mab.course_id );
     this.getDiscussions( mab.course_id );
+
+    let breakpoint = window.matchMedia('(min-width: 1024px)');
+
+    this.checkDevice(breakpoint); breakpoint.addEventListener('change', this.checkDevice);
   },
   methods: {
     ...baseActions(),
     ...mapActions(['addCourseToShopCart']),
     isWrongField: function(field) {
       return this.discussion.try && !this.discussion[field].isValid;
+    },
+    checkDevice: function(breakpoint) {
+      if (breakpoint.matches) {
+        this.device = 'desktop';
+      } else {
+        this.device = 'mobile';
+      }
     },
 
     getUnities: function(course_id){
@@ -131,7 +146,8 @@ new Vue({
       })
       .then(response => {
         if (response.status) {
-          this.courseProgress = Number(response.data.percentage);
+          this.courseProgress     = Number(response.data.percentage);
+          this.courseCertificate  = response.data.certificate;
 
           if (Number(response.data.percentage) == 100) {
             this.isOpenedCertificateModal = (!response.data.notification) ? true : false;
@@ -139,6 +155,17 @@ new Vue({
             window.setTimeout(() => {
               document.querySelector('#certificate_download').download = `${ this.logedUser.user_nicename }.pdf`;
             }, 100);
+
+            if (this.courseCertificate) {
+              const certificateLink = `${ this.SITE_URL }/certificado/${ this.courseCertificate.data.id }`;
+
+              this.courseCertificateSocial = {
+                whatsapp: `whatsapp://send?text=Termine mi curso de ${ this.courseCertificate.course } en Aprende MAB, ${ certificateLink }`,
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${ certificateLink }`,
+                linkedin: `http://www.linkedin.com/shareArticle?mini=true&url=${ certificateLink }`,
+                twitter: `https://twitter.com/share?text=Hola, Termine mi curso de ${ this.courseCertificate.course } en Aprende MAB&url=${ certificateLink }`,
+              }
+            }
           }
         }
       })

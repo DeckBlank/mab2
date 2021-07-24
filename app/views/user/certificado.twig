@@ -4,6 +4,19 @@
   {% include 'templates-parts/hero.twig' %}
 {% endblock %}
 
+{% block metas %}
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Termine mi curso de {{ certificate.course }} | DIPLOMA DEL CURSO" />
+  <meta property="og:image" content="{{ theme.link }}/static/images/og_image_certificate.png" />	
+  <meta property="og:description" content="Perfil de {{ certificate.user }} en Aprende MAB, la plataforma con más de 400 cursos y 30 000 piezas educativas." />	
+
+  <meta name="twitter:image" content="{{ theme.link }}/static/images/og_image_certificate.png">  
+  <meta property="twitter:card" content="summary_large_image">  
+  <meta property="twitter:title" content="Termine mi curso de {{ certificate.course }} | DIPLOMA DEL CURSO">  
+  <meta property="twitter:site" content="@aprende_mab"/>
+  <meta property="twitter:description" content="Perfil de {{ certificate.user }} en Aprende MAB, la plataforma con más de 400 cursos y 30 000 piezas educativas.">
+{% endblock %}
+
 {% block content %}
   <section class="c-section c-section--certificado bg-white">
     <div class="c-certificado-view">
@@ -18,7 +31,7 @@
                         <div class="cell large-8">
                           <div class="dark">
                             <p class="c-certificado__top-subtitle f2">Certificado de curso</p>
-                            <h2 class="c-certificado__top-title">Ciencia Creativas para la vida</h2>
+                            <h2 class="c-certificado__top-title">{{ certificate.course }}</h2>
                             <p class="c-certificado__top-subtitle f2">El presente diploma se otroga a</p>
                           </div>
                         </div>
@@ -30,10 +43,10 @@
                       </div>
                     </div>
                     <div class="margin-bottom-2 text-center">
-                      <h1 class="c-certificado__name text-uppercase sec-color">Angela Ramon Duranf</h1>
+                      <h1 class="c-certificado__name text-uppercase sec-color">{{ certificate.user }}</h1>
                       <p class="c-certificado__sub f2 dark">Certificado de aprobación online</p>
-                      <p class="c-certificado__sub f2 dark"><strong>Aprobado el 25 de mayo del 2020</strong></p>
-                      <p class="c-certificado__sub f2 dark">40 horas de Teoría y práctica</p>
+                      <p class="c-certificado__sub f2 dark"><strong>Aprobado el {{ certificate.date }}</strong></p>
+                      <p class="c-certificado__sub f2 dark">{{ certificate.duration }} horas de Teoría y práctica</p>
                     </div>
                     <div class="c-certificado__firmas flex-container align-justify align-middle">
                       <div class="c-certificado__firma">
@@ -50,7 +63,7 @@
                         <div class="f2 dark">http://aprendemab.com/</div>
                       </div>
                       <div class="c-certificado__side">
-                        <div class="f2 dark">cod  1222222222222</div>
+                        <div class="f2 dark">cod  {{ certificate.data.signature }}</div>
                       </div>
                     </div>
                 </div>
@@ -71,7 +84,7 @@
                 Certificado del curso
               </div>
               <h2 class="c-certificado-view__name-course f2 dark w-xbold">
-                CIENCIAS CREATIVAS PARA LA VIDA
+                {{ certificate.course }}
               </h2>
 
               <div class="grid-x align-middle">
@@ -81,13 +94,13 @@
                 <div class="cell large-8">
                   <div class="c-certificado-view__card bg-cyan dark br--large br-bottom-0-0 f2 dark">
                     <div>
-                      <span>Completado por</span> <span class="w-xbold">ANGELA RAMOS</span>
+                      <span>Completado por</span> <span class="w-xbold">{{ certificate.user }}</span>
                     </div>
                     <div class="c-certificado-view__date">
-                      25 de mayo del 2020
+                      {{ certificate.date }}
                     </div>
                     <div class="c-certificado-view__time">
-                      40 horas de teoría y práctica
+                      {{ certificate.duration }} horas de teoría y práctica
                     </div>
                   </div>
                 </div>
@@ -98,7 +111,7 @@
                 </div>
                 <div class="cell large-6">
                   <div class="button-cotainer">
-                    <a href="" class="c-button bg-purple dark f2">
+                    <a href="{{ certificate.course_link }}" class="c-button bg-purple dark f2">
                       Tomar el curso
                     </a>
                   </div>

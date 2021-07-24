@@ -198,6 +198,14 @@ class UserController{
                     return true;
                 }
             ));
+
+            register_rest_route( 'custom/v1', '/users/certificates/(?P<certificate_id>\d+)', array(
+                'methods' => 'GET',
+                'callback' => array($this, 'getCertificate'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
         });
     }
 
@@ -862,8 +870,18 @@ class UserController{
                 $quotationPDF->WriteHTML($document);
                 $quotationPDF->Output("Certificado - " . $userFullname . '.pdf', 'D');
             }
-        }else {
+        } else {
             return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 403 ) );
+        }
+    }
+
+    public function getCertificate($request) {
+        $userCertificate = __getCertificate($request['certificate_id']);
+
+        if ($userCertificate) {
+            return new WP_REST_Response($userCertificate, 200);
+        } else {
+            return new WP_Error( 'certificate_not_found', __('Certificate not found'), array( 'status' => 403 ) );
         }
     }
 
