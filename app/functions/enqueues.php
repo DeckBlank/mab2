@@ -86,6 +86,14 @@ add_action( 'wp_enqueue_scripts', function () use ($config) {
         'in_footer' => true
     ]);
 
+    register_assets('package', [
+        'handle'    => 'pandawp/package/pure-md5',
+        'src'       => $config['resources']['package_pure_md5'],
+        'deps'      => [ ],
+        'ver'       => $config['vertion'],
+        'in_footer' => true
+    ]);
+
     /**
      * --------------------------------------------------------------------------
      * Register Styles

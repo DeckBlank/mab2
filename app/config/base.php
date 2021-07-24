@@ -54,6 +54,7 @@ return [
         'package_ssr_window'        => get_theme_file_uri( __getResourceURL('js', 'package.ssr-window.bundle.js') ),
         'package_dm_file_uploader'  => get_theme_file_uri( __getResourceURL('js', 'package.dm-file-uploader.bundle.js') ),
         'package_jquery'            => get_theme_file_uri( __getResourceURL('js', 'package.jquery.bundle.js') ),
+        'package_pure_md5'          => get_theme_file_uri( __getResourceURL('js', 'package.pure-md5.bundle.js') ),
 
         /**
          * Styles
