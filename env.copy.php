@@ -32,5 +32,5 @@
          * Social Media
          */
         'GOOGLE_ID'     => '999086702146-87q1a9kleriolc0ro8g7ob1qvp3k09d3.apps.googleusercontent.com',
-        'FACEBOOK_ID'   => '482615179540101'
+        'FACEBOOK_ID'   => '971211936774008'
     ];
