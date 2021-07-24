@@ -2,6 +2,7 @@ import Vue from 'vue'
 import {mapState, mapActions } from 'vuex'
 import '../browser';
 import '../profile';
+import './shop-cart';
 
 Vue.component('header-main',{
   template: /*html*/`
@@ -120,10 +121,23 @@ Vue.component('header-main',{
           <button @click="updateStatusBrowserToggle" class="c-search-toggle margin-right-1" :class="{'enable' : isActiveBrowserToggle}">
             <i class="far fa-search"></i>
           </button>
-          <a v-if="logedUser" :href="SITE_URL + '/carrito'" class="c-shop-cart c-link fs-21 c-link--white c-link--ho-warning margin-right-1">
+          <div v-if="logedUser && device == 'desktop'" class="c-item position-relative">
+            <input v-model="menus.shop.switcher" id="cbx-shop" class="hide" type="checkbox">
+            <label @mouseover="blockMenu('shop', true)" @mouseleave="blockMenu('shop', false)" for="cbx-shop" class="c-shop-cart c-link fs-21 c-link--white c-link--ho-warning margin-right-1">
+              <i class="far fa-shopping-cart"></i>
+              <span v-if="shopCart" class="c-shop-cart__buble">{{ shopCart.length }}</span>
+            </label>
+
+            <div @mouseover="blockMenu('shop', true)" @mouseleave="blockMenu('shop', false)" class="c-menu-dropdown c-menu-dropdown--shop-cart right br--medium position-absolute f2 bg-white">
+              <shopcart></shopcart>
+            </div>
+          </div>
+
+          <a v-if="device == 'mobile'" href="SITE_URL + '/carrito'" class="c-shop-cart c-link fs-21 c-link--white c-link--ho-warning margin-right-1">
             <i class="far fa-shopping-cart"></i>
             <span v-if="shopCart" class="c-shop-cart__buble">{{ shopCart.length }}</span>
           </a>
+
           <a v-if="logedUser" :href="SITE_URL + '/mis-cursos'" class="c-item c-link c-link--white c-link--ho-warning f2 fs-18 w-sbold margin-right-1">Mis cursos</a>
           <profile v-if="logedUser"></profile>
           <a 
@@ -161,6 +175,11 @@ Vue.component('header-main',{
           isActiveMenuOptions: false,
           switcher: false,
         },
+
+        shop: {
+          isActiveMenuOptions: false,
+          switcher: false,
+        },
       },
 
       categories: [],
@@ -169,6 +188,8 @@ Vue.component('header-main',{
       isLoadingSubcategories: false,
 
       categorySelected: -1,
+
+      device: '',
     }
   },
   computed: {
@@ -193,9 +214,18 @@ Vue.component('header-main',{
         this.unblockMenu('world');
       }
     },
+    'menus.shop.switcher': function(value) {
+      document.onclick = () => {
+        this.unblockMenu('shop');
+      }
+    },
   },
   mounted() {
     this.getCategories();
+
+    let breakpoint = window.matchMedia('(min-width: 1024px)');
+
+    this.checkDevice(breakpoint); breakpoint.addEventListener('change', this.checkDevice);
   },
   methods: {
     ...mapActions(['updateStatusBrowserToggle']),
@@ -220,6 +250,9 @@ Vue.component('header-main',{
 
       if ('world' != menu)
         this.menus.world.switcher = false;
+
+      if ('shop' != menu)
+        this.menus.shop.switcher = false;
     },
 
     getCategories: function() {
@@ -278,6 +311,17 @@ Vue.component('header-main',{
 
     getSubcategoryLink: function(subcategory) {
       return (subcategory.type == 1) ? `${ this.SITE_URL }/cursos?subcategory=${ subcategory.id }` : subcategory.course;
-    }
+    },
+
+    openCart: function(e) {
+      if (this.device == 'desktop') e.preventDefault();
+    },
+    checkDevice: function(breakpoint) {
+      if (breakpoint.matches) {
+        this.device = 'desktop';
+      } else {
+        this.device = 'mobile';
+      }
+    },
   },
 })

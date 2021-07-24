@@ -2,8 +2,14 @@
 
 function setEnviromentVariables($context = []) {
     $context = array_merge($context, [
-        'nonce' => wp_create_nonce( 'wp_rest' ),
-        'api'   => get_rest_url() . "custom/v1"
+        'nonce'     => wp_create_nonce( 'wp_rest' ),
+        'api'       => get_rest_url() . "custom/v1",
+        'pasarell'  => [
+            "enviroment"    => ENV['ENV'],
+            "action"        => ENV['PU_ACTION'],
+            "merchan_id"    => ENV['PU_MERCHAND_ID'],
+            "account_id"    => ENV['PU_ACCOUNT_ID']
+        ]
     ]);
 
     if(is_user_logged_in()){
