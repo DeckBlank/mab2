@@ -261,6 +261,9 @@
                     <div class="c-course-card__progress-bar position-absolute width-100">
                       <div :style="'width: '+ course.progress +'%'" class="bg-pri-alt height-100"></div>
                     </div>
+                    <div v-if="course.grade" class="c-course-card__grade-tag  position-absolute dark fs-18 flex-container align-center-middle bg-warning-alt">
+                      ${course.grade}
+                    </div>
                   </figure>
                   <div class="c-course-card__content flex-container fd-column padding-1 br--large">
                     <div>
