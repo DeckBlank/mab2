@@ -188,6 +188,22 @@ class CourseController{
                     return true;
                 }
             ));
+    
+            register_rest_route('custom/v1', '/courses/database', array(
+                'methods' => 'POST',
+                'callback' => array($this,'expostoreDatabasert'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
+    
+            register_rest_route('custom/v1', '/courses/mab_categories', array(
+                'methods' => 'POST',
+                'callback' => array($this,'storeCategories'),
+                'permission_callback' => function ($request) {
+                    return true;
+                }
+            ));
         });
     }
 
@@ -728,6 +744,81 @@ class CourseController{
         }
     }
 
+    public function storeDatabase($request) {
+        $usersDatabaseFile = (object)[
+            "ext" => pathinfo($_FILES['database']['name'], PATHINFO_EXTENSION),
+            "name" => '' ,
+            "dir" => __DIR__ . "/../../../../../../uploads/databases/"
+        ];
+
+        if($usersDatabaseFile->ext == 'json'){
+            $now = date("Y_m_d_H_i");
+            $usersDatabaseFile->name = $usersDatabaseFile->dir . $now . $_FILES['database']['name'];      
+
+            if( is_uploaded_file($_FILES['database']['tmp_name']) ) {			
+                if( !move_uploaded_file($_FILES['database']['tmp_name'], $usersDatabaseFile->name) ) {
+                    return new WP_Error(
+                        'no_database_file_saved',
+                        __("Database file (" . $_FILES['database']['name'] . ") not saved"),
+                        array( 'status' => 500 )
+                    );                    
+                }else{
+                    return new WP_REST_Response((object)[
+                        "message"   => "Database file uploaded!!",
+                        "id"        => $now . $_FILES['database']['name']
+                    ], 200);
+                }
+            }else{
+                return new WP_Error(
+                    'no_database_file_uploaded',
+                    __("Database file (" . $_FILES['database']['name'] . ") not uploaded"),
+                    array( 'status' => 500 )
+                );                
+            }
+        }else{
+            return new WP_Error(
+                'no_right_database_file',
+                __("Database file (" . $_FILES['database']['name'] . ") with wrong format"),
+                array( 'status' => 500 )
+            );
+        }
+    }
+
+    public function storeCategories($request) {
+        $databaseFile   = __DIR__ . '/../../../../../../uploads/databases/' . $request['database_id'];
+        $categories     = json_decode(file_get_contents($databaseFile));
+
+        try {
+            foreach($categories as $category) {
+                $categoryObject = wp_insert_term($category->name, 'tax-mab-course', [ 'parent' => 0 ]);
+
+                update_field('color', $category->color, 'category_' . $categoryObject['term_id']);
+
+                foreach ($category->courses as $courseCategory) {
+                    if ( $this::__appenCourseCategories($courseCategory, $categoryObject['term_id']) ) {}
+                    else {
+                        throw new Exception($courseCategory);
+                    }
+                }
+
+                foreach ($category->subcategories as $subcategory) {
+                    $subcategoryObject = wp_insert_term($subcategory->name, 'tax-mab-course', [ 'parent' => $categoryObject['term_id'] ]);
+
+                    foreach ($subcategory->courses as $courseSubcategory) {
+                        if ( $this::__appenCourseCategories($courseSubcategory, $subcategoryObject['term_id']) ) {}
+                        else {
+                            throw new Exception($courseSubcategory);
+                        }
+                    }
+                }
+            }
+
+            return new WP_REST_Response('Categories created', 200);
+        } catch (Exception $e) {
+            return new WP_Error( 'no_categories_created', __('No categories created by: ' . $e->getMessage()), array( 'status' => 404 ) );
+        }
+    }
+
     //Logs-----------------------------------------------/
     public function getUserCourseLogs($request){
         $user_course_logs = CourseModel::getUserCourseLogs($request);
@@ -833,5 +924,20 @@ class CourseController{
         $courses = array_map(function($course) { return $course->slug; }, $courses);
 
         return ( count($courses) ) ? $courses : [];
+    }
+
+    private function __appenCourseCategories($courseSlug, $categoryId) {
+        $courseObject = Timber::get_post([
+            'post_type' => 'course',
+            'name'      => $courseSlug
+        ]);
+
+        if ($courseObject && $courseObject->ID) {
+            $courseCategory = wp_set_object_terms( $courseObject->ID, [ $categoryId ], 'tax-mab-course', true);
+
+            return true;
+        }
+
+        return true;
     }
 }

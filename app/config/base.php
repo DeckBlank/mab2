@@ -106,10 +106,12 @@ return [
 
 
         //WP
-        'wp_session'        => get_theme_file_uri( __getResourceURL('js', 'wp-session.bundle.js') ),
-        'wp_registration'   => get_theme_file_uri( __getResourceURL('js', 'wp-registration.bundle.js') ),
-        'wp_questionaries'  => get_theme_file_uri( __getResourceURL('js', 'wp-questionaries.bundle.js') ),
-        'wp_courses'        => get_theme_file_uri( __getResourceURL('js', 'wp-courses.bundle.js') )
+        'wp_session'            => get_theme_file_uri( __getResourceURL('js', 'wp-session.bundle.js') ),
+        'wp_registration'       => get_theme_file_uri( __getResourceURL('js', 'wp-registration.bundle.js') ),
+        'wp_questionaries'      => get_theme_file_uri( __getResourceURL('js', 'wp-questionaries.bundle.js') ),
+        'wp_courses'            => get_theme_file_uri( __getResourceURL('js', 'wp-courses.bundle.js') ),
+        'wp_topics'             => get_theme_file_uri( __getResourceURL('js', 'wp-topics.bundle.js') ),
+        'wp_categories_import'  => get_theme_file_uri( __getResourceURL('js', 'wp-categories-import.bundle.js') ),
     ],
-    'vertion' => '1626939430211'
+    'vertion' => '1627118025093'
 ];

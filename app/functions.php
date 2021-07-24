@@ -27,7 +27,7 @@ array_map(function ($file) {
 
 array_map(function ($file) {
     require_once get_theme_file_path("functions/") . "{$file}.php";
-}, ['admin/pages/reports/main', 'admin/pages/enrollments/main']);
+}, ['admin/pages/reports/main', 'admin/pages/enrollments/main', 'admin/pages/courses/main']);
 
 
 /**
