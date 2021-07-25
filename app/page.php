@@ -143,13 +143,14 @@ if(is_page('access')){
         'posts_per_page'    => -1
     ]);
 
-    $context['articles'] = array_map(function($article) use ($context){
+    $context['articles']        = array_map(function($article) use ($context){
         $author = get_field('author', $article->ID);
         $avatar = ($author) ? get_field('avatar', 'user_' . $author['ID']) : false;
 
         return [
             'title'     => $article->title,
-            'author'    => ($avatar) ? $avatar['url'] : $context['theme']->link . 'static/images/og_image.png',
+            // 'author'    => ($avatar) ? $avatar['url'] : $context['theme']->link . '/static/images/og_image.png',
+            'author'    => $context['theme']->link . '/static/images/og_image.png',
             'date'      => $article->date,
             'link'      => $article->link,
         ];

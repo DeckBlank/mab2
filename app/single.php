@@ -133,7 +133,7 @@ if ($post->post_type == "video") {
 
     $articles = Timber::get_posts([
         'post_type'         => 'post',
-        'posts_per_page'    => -1,
+        'posts_per_page'    => 3,
         'post__not_in'      => [$post->ID],
         'orderby'           => 'rand'
     ]);
@@ -144,7 +144,8 @@ if ($post->post_type == "video") {
 
         return [
             'title'     => $article->title,
-            'author'    => ($avatar) ? $avatar['url'] : $context['theme']->link . 'static/images/og_image.png',
+            // 'author'    => ($avatar) ? $avatar['url'] : $context['theme']->link . '/static/images/og_image.png',
+            'author'    => $context['theme']->link . '/static/images/og_image.png',
             'date'      => $article->date,
             'link'      => $article->link,
         ];
