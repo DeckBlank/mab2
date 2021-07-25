@@ -369,7 +369,12 @@ class CourseController{
 
                 return array_merge(
                     [ 'name' => $category->name, 'id' => $category->term_id, 'subcategories' => $subcategories ],
-                    ( !$parentCategories ) ? [ 'thumbnail' => get_field('image', 'category_' . $category->term_id) ] : [],
+                    ( !$parentCategories )
+                        ? [ 'thumbnail' => ( get_field('image', 'category_' . $category->term_id) )
+                            ? get_field('image', 'category_' . $category->term_id)
+                            : [ 'url' => get_template_directory_uri() . '/static/images/og_image.png' ]
+                        ]
+                        : [ ],
                     ( !$parentCategories ) ? [ 'color'     => get_field('color', 'category_' . $category->term_id) ] : []
                 );
             }, $categories);
