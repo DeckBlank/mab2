@@ -16,12 +16,18 @@ function setEnviromentVariables($context = []) {
         $current_user   = wp_get_current_user();
         $avatar         = get_field('avatar', 'user_' . $current_user->ID);
 
+        $userFirstName  = get_user_meta($current_user->ID, 'first_name', true);
+        $userLastName   = get_user_meta($current_user->ID, 'last_name', true);
+
+        $userLastNameSplit  = explode('-panda-', $userLastName);
+        $userLastName       = ( count($userLastNameSplit) > 1 ) ? $userLastNameSplit[0] . ' ' . $userLastNameSplit[1] : $userLastName;
+
         $context = array_merge(
             $context,
             [
                 "user_id"           => $current_user->ID,
                 "user_nicename"     => $current_user->data->user_nicename,
-                "user_auth"         => $current_user->data->display_name,
+                "user_auth"         => $userFirstName . ' ' . $userLastName,
                 "user_email"        => $current_user->data->user_email,
                 "user_firstname"    => get_user_meta( $current_user->ID, 'first_name', true ),
                 "user_lastname"     => get_user_meta( $current_user->ID, 'last_name', true ),

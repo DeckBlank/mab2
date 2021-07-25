@@ -485,6 +485,9 @@ class DiscussionController{
         $userFirstName  = get_user_meta($discussion->user_id, 'first_name', true);
         $userLastName   = get_user_meta($discussion->user_id, 'last_name', true);
 
+        $userLastNameSplit  = explode('-panda-', $userLastName);
+        $userLastName       = ( count($userLastNameSplit) > 1 ) ? $userLastNameSplit[0] . ' ' . $userLastNameSplit[1] : $userLastName;
+
         $discussion['author'] = $userFirstName . ' ' . $userLastName;
 
         if ($discussion->topic_id) {
