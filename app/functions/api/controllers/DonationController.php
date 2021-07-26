@@ -33,7 +33,7 @@ class DonationController {
 
             return new WP_REST_Response((object)[
                 'message'   => 'Signature generated succesfully!!',
-                'data'      => md5($pasarell->api_key . '~' . $pasarell->merchan_id . '~' . $referenceCode . '~' . $amount . '~USD'),
+                'data'      => md5($pasarell->api_key . '~' . $pasarell->merchan_id . '~' . $referenceCode . '~' . $amount . '~PEN'),
                 'status'    => true
             ], 200);
         } else {
