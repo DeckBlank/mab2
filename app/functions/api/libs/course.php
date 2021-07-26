@@ -152,7 +152,7 @@ function __checkEnrollOnCourse($courseId, $userEmail) {
                                 $registration['registration']['state'] == true
                             )
                         ){
-            
+
                             return true;
                         }
                     }
@@ -173,7 +173,7 @@ function __checkEnrollOnCourse($courseId, $userEmail) {
 
         if($courses_enrollment->num_rows > 0){
             return true;
-        }            
+        }  
     }
 }
 
@@ -205,10 +205,25 @@ function __sanitizeCourse($courseId, $userEmail, $userID, $type = 'enrolled') {
             $sell = get_field('sell', 'options');
             $priceSettings = get_field('price_settings', $courseId);
 
-            $courseObject = array_merge($courseObject, [
-                'price'     => ($priceSettings == 'global') ? floatval( $sell['course_price'] ) : floatval( get_field('price', $courseId) ),
-                'enroll'    => ($userEmail) ? __checkEnrollOnCourse($course->ID, $userEmail) : false
-            ]);
+            if ( get_field('school_type', 'user_' . $userID) == 'publico' ) {
+                if ( __isCourseOnPublic($courseId) ) {
+                    $courseObject = array_merge($courseObject, [
+                        'price'     => 0,
+                        'enroll'    => true
+                    ]);
+                } else {
+                    $courseObject = array_merge($courseObject, [
+                        'price'     => ($priceSettings == 'global') ? floatval( $sell['course_price'] ) : floatval( get_field('price', $courseId) ),
+                        'enroll'    => ($userEmail) ? __checkEnrollOnCourse($course->ID, $userEmail) : false
+                    ]);
+                }
+                
+            } else {
+                $courseObject = array_merge($courseObject, [
+                    'price'     => ($priceSettings == 'global') ? floatval( $sell['course_price'] ) : floatval( get_field('price', $courseId) ),
+                    'enroll'    => ($userEmail) ? __checkEnrollOnCourse($course->ID, $userEmail) : false
+                ]);
+            }
         } else {
             $courseObject = array_merge($courseObject, [
                 'last_class'    => __getLastTopic($courseId, $userEmail, $userID, $course),
@@ -268,4 +283,35 @@ function __isUserOwnerOnCourse($userId, $courseId) {
     }
 
     return $isAuthorized;
+}
+
+function __isCourseOnPublic($courseId) {
+    $sector             = SectorModel::getAll(['type' => 'public']) /* Publico */;
+    $isCourseOnPublic   = false;
+
+    foreach ($sector->levels as $level) {
+        if ($level)
+            foreach ($level['grades'] as $grade) {
+                if ($grade)
+                    if ($grade['courses']->isAreas) {
+                        foreach ($grade['courses']->areas->emotional['courses'] as $course) {
+                            if ($course['id'] == $courseId) $isCourseOnPublic = true; 
+                        }
+
+                        foreach ($grade['courses']->areas->academic['courses'] as $course) {
+                            if ($course['id'] == $courseId) $isCourseOnPublic = true; 
+                        }
+
+                        foreach ($grade['courses']->areas->creative['courses'] as $course) {
+                            if ($course['id'] == $courseId) $isCourseOnPublic = true; 
+                        }
+                    } else {
+                        foreach ($grade['courses']->courses as $course) {
+                            if ($course['id'] == $courseId) $isCourseOnPublic = true; 
+                        }
+                    }
+            }
+    }
+
+    return $isCourseOnPublic;
 }

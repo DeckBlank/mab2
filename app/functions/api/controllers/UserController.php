@@ -147,7 +147,8 @@ class UserController{
                 'methods' => 'GET',
                 'callback' => array($this, 'getRecommendedCourses'),
                 'permission_callback' => function ($request) {
-                    return ($request['_wpnonce']) ? true : false;
+                    // return ($request['_wpnonce']) ? true : false;
+                    return true;
                 }
             ));
 

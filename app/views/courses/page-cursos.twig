@@ -175,7 +175,7 @@
         <div class="c-form-new margin-bottom-2">
           <div class="grid-x grid-margin-x grid-margin-y">
             <div class="cell medium-6 large-3">
-              <div class="c-form-new__input-container margin-bottom-1">
+              <div class="c-form-new__input-container margin-bottom-1 hide">
                 <label class="w-bold dark" for="">Nivel</label>
                 <select v-model="filter.level" @change="getCourses('level')" class="f2 mab-shadow-soft text-last-left">
                   <option disabled value="-1">Escoge un opción</option>
@@ -184,7 +184,7 @@
               </div>
             </div>
             <div class="cell medium-6 large-3">
-              <div class="c-form-new__input-container margin-bottom-1">
+              <div class="c-form-new__input-container margin-bottom-1 hide">
                 <label class="w-bold dark" for="">Grado</label>
                 <select v-model="filter.grade" @change="getCourses('grade')" class="f2 mab-shadow-soft text-last-left">
                   <option disabled value="-1">Escoge un opción</option>

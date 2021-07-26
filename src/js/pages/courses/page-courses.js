@@ -304,7 +304,7 @@ const courses = new Vue({
         this.courses  = [];
       }
 
-      fetch(`${ this.API }/courses/all?_wpnonce=${ mab.nonce }${ this.coursesQuery }${ (this.hasPagination) ? '&paged=' + this.page : '' }`)
+      fetch(`${ this.API }/courses/all?_wpnonce=${ mab.nonce }${ this.coursesQuery }${ (this.hasPagination) ? '&paged=' + this.page : '' }&user_email=${ this.logedUser.user_email }&user_id=${ this.logedUser.user_id }`)
       .then(res => { 
         if (res.status >= 200 && res.status < 300) {
           return res.json();
