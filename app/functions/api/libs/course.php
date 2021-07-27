@@ -47,11 +47,22 @@ function __getMetaCourse($courseId, $userEmail, $meta) {
 
             if ( $unities && count($unities) ) {
                 foreach($unities as $unity) {
-                    $topics += ($unity['topics']) ? count($unity['topics']) : 0;
+                    if ( $unity['topics'] ) {
+                        foreach ($unity['topics'] as $topic) {
+                            if ( $topic['topic'] )
+                                if ( get_field('questions', $topic['topic']->ID) && count (get_field('questions', $topic['topic']->ID)) )
+                                    $topics += 1;
+                        }
+                    }
                 }
             }
 
-            return ($topics) ? bcdiv( (count($tests) * 100), $topics, 2 ) : 0;
+            $percentage = ($topics) ? bcdiv( (count($tests) * 100), $topics, 2 ) : 0;
+
+            return [
+                'percentage'    => $percentage,
+                'topics'        => $topics
+            ];
 
             break;
     }
@@ -225,7 +236,7 @@ function __sanitizeCourse($courseId, $userEmail, $userID, $type = 'enrolled') {
         } else {
             $courseObject = array_merge($courseObject, [
                 'last_class'    => __getLastTopic($courseId, $userEmail, $userID, $course),
-                'progress'      => __getMetaCourse($courseId, $userEmail, 'progress'),
+                'progress'      => __getMetaCourse($courseId, $userEmail, 'progress')['percentage'],
             ]);
         }
 
@@ -247,15 +258,17 @@ function __getUserCourseProgress($userId, $userEmail, $courseId) {
         'course_id' => $courseId
     ])->get();
 
-    $userCertificate = UserCertificate::where(['user_id' => $userId, 'course_id' => $courseId])
-        ->first();
+    $totalTopics        = __getMetaCourse($courseId, $userEmail, 'progress')['topics'];
+    $coursePercentage   = ( $totalTopics ) ? bcdiv( (count($courseTestScores)*100), $totalTopics, 2 ) : 0;
 
     $progress = [
         'notification'  => ($userCert) ? true : false,
         'completed'     => count($courseTestScores),
-        'total'         => CourseModel::getTopics($courseId),
-        'percentage'    => bcdiv( (count($courseTestScores)*100), CourseModel::getTopics($courseId), 2 ),
-        'certificate'   => ($userCertificate) ? __getCertificate($userCertificate->id) : false
+        'total'         => $totalTopics,
+        'percentage'    => $coursePercentage,
+        'certificate'   => ($coursePercentage == 100)
+            ? __getCertificate(-1, $userId, $courseId)
+            : false,
     ];
 
     return ($courseTestScores)
