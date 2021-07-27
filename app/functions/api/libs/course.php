@@ -34,7 +34,9 @@ function __getMetaCourse($courseId, $userEmail, $meta) {
                 }
             }
 
-            return intdiv( ($topics * 8) , 60);
+            $duration = intdiv( ($topics * 8) , 60);
+
+            return $duration ? $duration : 1;
 
             break;
 

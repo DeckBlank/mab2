@@ -17,48 +17,7 @@ const myCourses = new Vue({
       isLoadingEnroll: true,
       isLoadingRecommended: true,
 
-      lideres: [
-        {
-          name: 'Maca Wellness',
-          avatar: 'maca',
-          job: 'Nutrición',
-          profile: 'maca-wellness',
-          padding: 3,
-          width: 250,
-        },
-        {
-          name: 'Ernesto Reaño',
-          avatar: 'ernesto',
-          job: 'Autismo',
-          profile: 'ernesto-reano',
-          padding: 1,
-          width: 320,
-        },
-        {
-          name: 'Viviana de Ferrari',
-          avatar: 'viviana',
-          job: 'Amor Propio',
-          profile: 'viviana-de-ferrari',
-          padding: 2,
-          width: 280,
-        },
-        {
-          name: 'Vanessa Vasquez',
-          avatar: 'vanessa',
-          job: 'El Poder de la Empatía',
-          profile: 'vanessa-vasquez',
-          padding: 1,
-          width: 280,
-        },
-        {
-          name: 'Menta Days',
-          avatar: 'menta',
-          job: 'Arte para la Vida',
-          profile: 'menta-days',
-          padding: 2,
-          width: 260,
-        },
-      ],
+      lideres: [],
     }
   },
   computed: {
@@ -78,6 +37,8 @@ const myCourses = new Vue({
     this.hideLoading();
     this.getEnrolledCourses();
     this.getRecommendedCoures();
+
+    this.lideres = mab.leaders;
 
     setTimeout(function() {
       new Swiper('.c-other-services .swiper-container', {

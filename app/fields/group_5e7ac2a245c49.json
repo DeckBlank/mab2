@@ -19,6 +19,24 @@
             "endpoint": 0
         },
         {
+            "key": "field_5e7ac2ef67aa7",
+            "label": "Email",
+            "name": "email",
+            "type": "email",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_5e7ac2cf67aa6",
             "label": "Teléfono \/ Celular (principal)",
             "name": "phone",
@@ -36,24 +54,6 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
-        },
-        {
-            "key": "field_5e7ac2ef67aa7",
-            "label": "Email",
-            "name": "email",
-            "type": "email",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
         },
         {
             "key": "field_6096d1b045493",
@@ -413,6 +413,105 @@
                     "delay": 0
                 }
             ]
+        },
+        {
+            "key": "field_6100417f17ce3",
+            "label": "Lideres",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6100413b17cdf",
+            "label": "Lideres",
+            "name": "leaders",
+            "type": "repeater",
+            "instructions": "Padding promedio: 2,\r\nAncho promedio: 250\r\n\r\nLa unidad de medida es pixeles",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_6100415317ce0",
+                    "label": "Perfil",
+                    "name": "profile",
+                    "type": "user",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "role": [
+                        "leader"
+                    ],
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "return_format": "array"
+                },
+                {
+                    "key": "field_6100416b17ce1",
+                    "label": "Padding",
+                    "name": "padding",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                },
+                {
+                    "key": "field_6100417417ce2",
+                    "label": "Width",
+                    "name": "width",
+                    "type": "number",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "min": "",
+                    "max": "",
+                    "step": ""
+                }
+            ]
         }
     ],
     "location": [
@@ -432,5 +531,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1625761905
+    "modified": 1627406822
 }

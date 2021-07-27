@@ -193,7 +193,17 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
 
         $enviroment = array_merge($enviroment, [
             'questions'     => get_field('faq', 'options'),
-            'testimonies'   => get_field('testimonies', 'options')
+            'testimonies'   => get_field('testimonies', 'options'),
+            'leaders'       => array_map(function($leader) {
+                $avatar = get_field('cover', 'user_' . $leader['profile']['ID']);
+
+                $leader['job']      = get_field('job', 'user_' . $leader['profile']['ID']);
+                $leader['avatar']   = ($avatar) ? $avatar['url'] : false;
+                $leader['name']     = $leader['profile']['user_firstname'] . ' ' .$leader['profile']['user_lastname'];
+                $leader['profile']  = $leader['profile']['user_nicename'];
+
+                return $leader;
+            }, get_field('leaders', 'options'))
         ]);
     }elseif ( is_page('emotional') ) {
         register_assets('package', [
@@ -674,8 +684,20 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'deps'      => [ ],
             'ver'       => $config['vertion'],
             'in_footer' => true
-        ]);        
+        ]);   
 
+        $enviroment = array_merge($enviroment, [
+            'leaders'       => array_map(function($leader) {
+                $avatar = get_field('cover', 'user_' . $leader['profile']['ID']);
+
+                $leader['job']      = get_field('job', 'user_' . $leader['profile']['ID']);
+                $leader['avatar']   = ($avatar) ? $avatar['url'] : false;
+                $leader['name']     = $leader['profile']['user_firstname'] . ' ' .$leader['profile']['user_lastname'];
+                $leader['profile']  = $leader['profile']['user_nicename'];
+
+                return $leader;
+            }, get_field('leaders', 'options'))
+        ]);
     }elseif (is_page('access')){ 
         $enviroment = array_merge(
             $enviroment, [
@@ -785,7 +807,20 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'deps'      => [ ],
             'ver'       => $config['vertion'],
             'in_footer' => true
-        ]); 
+        ]);
+
+        $enviroment = array_merge($enviroment, [
+            'leaders'       => array_map(function($leader) {
+                $avatar = get_field('cover', 'user_' . $leader['profile']['ID']);
+
+                $leader['job']      = get_field('job', 'user_' . $leader['profile']['ID']);
+                $leader['avatar']   = ($avatar) ? $avatar['url'] : false;
+                $leader['name']     = $leader['profile']['user_firstname'] . ' ' .$leader['profile']['user_lastname'];
+                $leader['profile']  = $leader['profile']['user_nicename'];
+
+                return $leader;
+            }, get_field('leaders', 'options'))
+        ]);
     }elseif (is_page('charlas')){
         register_assets('package', [
             'handle'    => 'pandawp/package/swiper',
