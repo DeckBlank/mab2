@@ -55,6 +55,7 @@ return [
         'package_dm_file_uploader'  => get_theme_file_uri( __getResourceURL('js', 'package.dm-file-uploader.bundle.js') ),
         'package_jquery'            => get_theme_file_uri( __getResourceURL('js', 'package.jquery.bundle.js') ),
         'package_pure_md5'          => get_theme_file_uri( __getResourceURL('js', 'package.pure-md5.bundle.js') ),
+        'package_vimeo'             => get_theme_file_uri( __getResourceURL('js', 'package.vimeo.bundle.js') ),
 
         /**
          * Styles
@@ -113,5 +114,5 @@ return [
         'wp_topics'             => get_theme_file_uri( __getResourceURL('js', 'wp-topics.bundle.js') ),
         'wp_categories_import'  => get_theme_file_uri( __getResourceURL('js', 'wp-categories-import.bundle.js') ),
     ],
-    'vertion' => '1627260303143'
+    'vertion' => '1627366728691'
 ];

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { mapActions } from 'vuex'
+import Player from '@vimeo/player';
 import {baseConfig, baseState, baseActions} from '../../app'
 import {store} from '../../store'
 
@@ -32,6 +33,7 @@ new Vue({
 
       isOpenedTrailer: false,
       isOpenedCertificateModal: false,
+      player: null,
 
       isOpenedCreateDiscussion: false,
       discussion: {
@@ -89,6 +91,7 @@ new Vue({
     this.global();
     this.hideLoading();
 
+    this.initCourseTrailer();
     this.isUserAuthOnCourse( mab.course_id )
     this.getUnities( mab.course_id );
     this.getCourseProgress( mab.course_id );
@@ -110,6 +113,19 @@ new Vue({
       } else {
         this.device = 'mobile';
       }
+    },
+
+    initCourseTrailer: function() {
+      const trailer = document.querySelector('#video-trailer');
+
+      if (trailer) {
+        this.player = new Player(trailer);
+      }
+    },
+    closeTrailer: function() {
+      if (this.player) this.player.pause();
+
+      this.isOpenedTrailer = false
     },
 
     getUnities: function(course_id){
