@@ -29,7 +29,8 @@ function __getMetaCourse($courseId, $userEmail, $meta) {
 
             if ( $unities && count($unities) ) {
                 foreach($unities as $unity) {
-                    $topics += count($unity['topics']);
+                    if ($unity['topics'])
+                        $topics += count($unity['topics']);
                 }
             }
 
@@ -137,43 +138,41 @@ function __getLastTopic($courseId, $userEmail, $userID, $course) {
 function __checkEnrollOnCourse($courseId, $userEmail) {
     $courses = get_field('courses', 'options');
 
-    if ((get_field('price', $courseId) == 0 and get_field('price_settings', $courseId) == 'individual')) {
-        return true;
-    } else {
-        if (!empty($courses)){
-            foreach($courses as $course){
-                if( $course['course']['course'] && ($course['course']['course']->ID == $courseId) ){
-                    
-                    foreach($course['course']['registrations'] as $registration){
-                        if(
-                            $registration['registration']['user'] &&
-                            (
-                                $registration['registration']['user']['user_email'] == $userEmail and
-                                $registration['registration']['state'] == true
-                            )
-                        ){
+    if (!empty($courses)){
+        foreach($courses as $course){
+            if( $course['course']['course'] && ($course['course']['course']->ID == $courseId) ){
+                
+                foreach($course['course']['registrations'] as $registration){
+                    if(
+                        $registration['registration']['user'] &&
+                        (
+                            $registration['registration']['user']['user_email'] == $userEmail and
+                            $registration['registration']['state'] == true
+                        )
+                    ){
 
-                            return true;
-                        }
+                        return true;
                     }
                 }
             }
         }
+    }
 
-        $courses_enrollment = DBConnection::getConnection()->query("
-            SELECT
-                *
-            FROM
-                wp_user_course_enrollment
-            WHERE
-                state = 1 AND
-                user_email = '". $userEmail ."' AND
-                course_id = '". $courseId ."'
-        ");
+    $courses_enrollment = DBConnection::getConnection()->query("
+        SELECT
+            *
+        FROM
+            wp_user_course_enrollment
+        WHERE
+            state = 1 AND
+            user_email = '". $userEmail ."' AND
+            course_id = '". $courseId ."'
+    ");
 
-        if($courses_enrollment->num_rows > 0){
-            return true;
-        }  
+    if($courses_enrollment->num_rows > 0){
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -206,22 +205,21 @@ function __sanitizeCourse($courseId, $userEmail, $userID, $type = 'enrolled') {
             $priceSettings = get_field('price_settings', $courseId);
 
             if ( get_field('school_type', 'user_' . $userID) == 'publico' ) {
-                if ( __isCourseOnPublic($courseId) ) {
-                    $courseObject = array_merge($courseObject, [
-                        'price'     => 0,
-                        'enroll'    => true
-                    ]);
-                } else {
-                    $courseObject = array_merge($courseObject, [
-                        'price'     => ($priceSettings == 'global') ? floatval( $sell['course_price'] ) : floatval( get_field('price', $courseId) ),
-                        'enroll'    => ($userEmail) ? __checkEnrollOnCourse($course->ID, $userEmail) : false
-                    ]);
-                }
-                
-            } else {
+                $courseObject = array_merge($courseObject, [
+                    'price'     => 0,
+                    'enroll'    => ($userEmail) ? __checkEnrollOnCourse($course->ID, $userEmail) : false
+                ]);
+            } else if ( get_field('school_type', 'user_' . $userID) == 'privado' ) {
                 $courseObject = array_merge($courseObject, [
                     'price'     => ($priceSettings == 'global') ? floatval( $sell['course_price'] ) : floatval( get_field('price', $courseId) ),
                     'enroll'    => ($userEmail) ? __checkEnrollOnCourse($course->ID, $userEmail) : false
+                ]);
+            } else {
+                $courseObject = array_merge($courseObject, [
+                    'price'     => ( __isCourseOnPublic($courseId) )
+                        ? 0
+                        : ($priceSettings == 'global') ? floatval( $sell['course_price'] ) : floatval( get_field('price', $courseId) ),
+                    'enroll'    => false
                 ]);
             }
         } else {
@@ -314,4 +312,15 @@ function __isCourseOnPublic($courseId) {
     }
 
     return $isCourseOnPublic;
+}
+
+function __isHasMABCategories($terms) {
+    $isMabCategory = false;
+
+    if ($terms)
+        foreach ($terms as $term) {
+            if ($term->taxonomy == 'tax-mab-course') $isMabCategory = true;
+        }
+
+    return $isMabCategory;
 }

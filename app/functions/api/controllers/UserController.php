@@ -147,7 +147,6 @@ class UserController{
                 'methods' => 'GET',
                 'callback' => array($this, 'getRecommendedCourses'),
                 'permission_callback' => function ($request) {
-                    // return ($request['_wpnonce']) ? true : false;
                     return true;
                 }
             ));
@@ -562,10 +561,19 @@ class UserController{
             }
 
             foreach ($courses as $course) {
-                $sanitizedCourse = __sanitizeCourse($course->ID, $userEmail, $userId, 'recommend');
+                if ( __isHasMABCategories($course->terms) ) {
+                    if ( get_field('school_type', 'user_' . $userId) == 'publico' && __isCourseOnPublic($course->ID) ) {
+                        $sanitizedCourse = __sanitizeCourse($course->ID, $userEmail, $userId, 'recommend');
 
-                if ( $sanitizedCourse && !in_array($sanitizedCourse, $coursesArray) )
-                    array_push($coursesArray, $sanitizedCourse);
+                        if ( $sanitizedCourse && !in_array($sanitizedCourse, $coursesArray) )
+                            array_push($coursesArray, $sanitizedCourse);
+                    } else if ( get_field('school_type', 'user_' . $userId) == 'privado' ) {
+                        $sanitizedCourse = __sanitizeCourse($course->ID, $userEmail, $userId, 'recommend');
+
+                        if ( $sanitizedCourse && !in_array($sanitizedCourse, $coursesArray) )
+                            array_push($coursesArray, $sanitizedCourse);
+                    }
+                }
             }
 
             if ( count($coursesArray) ) {

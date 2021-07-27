@@ -240,7 +240,7 @@ class CourseController{
 
                     foreach ($coursesArray as $course) {
                         if ( stripos($course->name, $search) !== false ) {
-                            array_push( $coursesFinal, __sanitizeCourse($course->object_id, $userEmail, $userId, 'general') );
+                            if ( __isHasMABCategories($course->terms) ) array_push( $coursesFinal, __sanitizeCourse($course->object_id, $userEmail, $userId, 'general') );
                         }
                     }
                 } else {
@@ -260,7 +260,7 @@ class CourseController{
                     }
 
                     foreach($coursesArray as $course) {
-                        array_push($coursesFinal, __sanitizeCourse($course->object_id, $userEmail, $userId, 'general'));
+                        if ( __isHasMABCategories($course->terms) ) array_push($coursesFinal, __sanitizeCourse($course->object_id, $userEmail, $userId, 'general'));
                     }
                 }
             } else if ( !empty($search) ) {
@@ -312,7 +312,7 @@ class CourseController{
             ));
 
             foreach($courses as $course) {
-                array_push($coursesFinal, __sanitizeCourse($course->ID, $userEmail, $userId, 'general'));
+                if ( __isHasMABCategories($course->terms) ) array_push($coursesFinal, __sanitizeCourse($course->ID, $userEmail, $userId, 'general'));
             }
 
             $hasPagination = ( count($coursesFinal) ) ? true : false;
