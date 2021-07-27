@@ -58,14 +58,6 @@ const myCourses = new Vue({
           padding: 2,
           width: 260,
         },
-        {
-          name: 'Verónica Álvarez',
-          avatar: 'veronica',
-          job: 'Danza para la Vida',
-          profile: 'veronica-alvarez',
-          padding: 3,
-          width: 240,
-        },
       ],
     }
   },
