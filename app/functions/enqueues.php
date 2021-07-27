@@ -71,7 +71,6 @@ function __enqueueGlobalPackges($config, $assets_version) {
     ]);
 };
 
-
 add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
     $enviroment = [];
 
@@ -484,6 +483,14 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'in_footer' => true
         ]);
 
+        register_assets('package', [
+            'handle'    => 'pandawp/package/vimeo',
+            'src'       => $config['resources']['package_vimeo'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]);
+
         register_assets('script', [
             'handle'    => 'pandawp/js/page/course',
             'src'       => $config['resources']['page_course'],
@@ -545,7 +552,15 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
             'deps'      => [ ],
             'ver'       => $config['vertion'],
             'in_footer' => true
-        ]); 
+        ]);
+
+        register_assets('package', [
+            'handle'    => 'pandawp/package/vimeo',
+            'src'       => $config['resources']['package_vimeo'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]);
 
         register_assets('script', [
             'handle'    => 'pandawp/js/page/topic',
@@ -727,14 +742,6 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         register_assets('script', [
             'handle'    => 'pandawp/js/page/courses',
             'src'       => $config['resources']['page_courses'],
-            'deps'      => [ ],
-            'ver'       => $config['vertion'],
-            'in_footer' => true
-        ]);
-    }elseif (is_page('cursito')){               
-        register_assets('script', [
-            'handle'    => 'pandawp/js/page/curso',
-            'src'       => $config['resources']['page_curso'],
             'deps'      => [ ],
             'ver'       => $config['vertion'],
             'in_footer' => true

@@ -149,8 +149,7 @@ if(is_page('access')){
 
         return [
             'title'     => $article->title,
-            // 'author'    => ($avatar) ? $avatar['url'] : $context['theme']->link . '/static/images/og_image.png',
-            'author'    => $context['theme']->link . '/static/images/og_image.png',
+            'author'    => ($avatar) ? $avatar['url'] : $context['theme']->link . '/static/images/og_image.png',
             'date'      => $article->date,
             'link'      => $article->link,
         ];

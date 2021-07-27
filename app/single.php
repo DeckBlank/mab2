@@ -99,7 +99,7 @@ if ($post->post_type == "video") {
             'fullname'  => $teacher['user_firstname'] . ' ' . $teacher['user_lastname'],
             'job'       => get_field('job', 'user_' . $teacher['ID']),
             'cover'     => get_field('cover', 'user_' . $teacher['ID']),
-            'link'      => ( in_array( 'leader', (array) $teacherUser->roles ) ) ? sprintf('/lider/%s', $teacher['user_nicename']) : '',
+            'link'      => ( in_array( 'speaker', (array) $teacherUser->roles ) ) ? sprintf('/speaker/%s', $teacher['user_nicename']) : '',
         ];
     }
 
@@ -144,8 +144,7 @@ if ($post->post_type == "video") {
 
         return [
             'title'     => $article->title,
-            // 'author'    => ($avatar) ? $avatar['url'] : $context['theme']->link . '/static/images/og_image.png',
-            'author'    => $context['theme']->link . '/static/images/og_image.png',
+            'author'    => ($avatar) ? $avatar['url'] : $context['theme']->link . '/static/images/og_image.png',
             'date'      => $article->date,
             'link'      => $article->link,
         ];

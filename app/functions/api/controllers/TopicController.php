@@ -492,37 +492,25 @@ class TopicController{
             $courseProgress = __getUserCourseProgress($user->ID, $userEmail, $courseId);
 
             if ( floatval($courseProgress['percentage']) == 100 ) {
-                $userCertificate = UserCertificate::where(['user_id' => $userId, 'course_id' => $courseId])->first();
+                $userCertificate = __getCertificate(-1, $userId, $courseId);
 
-                if (!$userCertificate) {
-                    $userCertificate = new UserCertificate();
-
-                    $userCertificate->signature     = uniqid();
-                    $userCertificate->notification  = 0;
-                    $userCertificate->user_id       = $userId;
-                    $userCertificate->course_id     = $courseId;
-
-                    $userCertificate->save();
-
-                    if ($userCertificate) {
-                        return new WP_REST_Response((object)[
-                            'message'   => 'Certificate saved!!',
-                            'data'      => [ 'course_completed' => true, 'certificate' => __getCertificate($userCertificate->id) ],
-                            'status'    => true
-                        ], 200);
-                    } else {
-                        return new WP_REST_Response((object)[
-                            'message'   => 'Certificate not saved!!',
-                            'status'    => false
-                        ], 200);
-                    }
-                } else {
+                if ($userCertificate) {
                     return new WP_REST_Response((object)[
-                        'message'   => 'Test saved!!',
-                        'data'      => [ 'course_completed' => true, 'notification' => true ],
+                        'message'   => 'Certificate saved!!',
+                        'data'      => [ 'course_completed' => true, 'certificate' => $userCertificate ],
                         'status'    => true
                     ], 200);
+                } else {
+                    return new WP_REST_Response((object)[
+                        'message'   => 'Certificate not saved!!',
+                        'status'    => false
+                    ], 200);
                 }
+            } else {
+                return new WP_REST_Response((object)[
+                    'message'   => 'Test saved!!',
+                    'status'    => true
+                ], 200);
             }
         }else{
             return new WP_Error( 'no_test_saved', __('No test saved'), array( 'status' => 404 ) );

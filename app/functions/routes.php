@@ -66,6 +66,25 @@ Routes::map('lider/:user_nicename', function($routeParams) use ($config) {
     Routes::load('app.php', $params, "", 200);
 });
 
+Routes::map('speaker/:user_nicename', function($routeParams) use ($config) {
+    $params = [
+        'route' => $routeParams,
+        'view'  => 'leader',
+    ];
+
+    add_action( 'wp_enqueue_scripts', function () use ($config) {
+        register_assets('script', [
+            'handle'    => 'pandawp/js/page/lideres-single',
+            'src'       => $config['resources']['page_lideres-single'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]); 
+    });
+
+    Routes::load('app.php', $params, "", 200);
+});
+
 Routes::map('donaciones', function($routeParams) use ($config) {
     $params = [
         'route' => $routeParams,

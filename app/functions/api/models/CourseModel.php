@@ -113,6 +113,19 @@ class CourseModel{
         $unities        = get_field('unities', $request['course_id']);
         $unitiesArray   = [];
 
+        if ( $request['user_id'] ) {
+            $userSector = get_field('school_type', 'user_' . $request['user_id']);
+
+            if ( $userSector == 'publico') {
+                UserModel::saveEnrollments(['courses' => json_encode([ $request['course_id'] ]), 'user' => $request['user']]);
+            } else {
+                if ((get_field('price', $courseId) == 0 and get_field('price_settings', $courseId) == 'individual')) {
+                    UserModel::saveEnrollments(['courses' => json_encode([ $request['course_id'] ]), 'user' => $request['user']]);
+                }
+            }
+
+        }
+
         if($unities){
             foreach($unities as $unity){
                 array_push($unitiesArray,(object)[

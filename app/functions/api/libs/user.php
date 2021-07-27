@@ -45,8 +45,27 @@ function __getUserDataById($user) {
     }
 }
 
-function __getCertificate($certificate) {
-    $userCertificate = UserCertificate::find($certificate);
+function __getCertificate($certificate, $userId = -1, $courseId = -1) {
+    $userCertificate = null;
+
+    if ( $userId != -1 && $courseId != -1 ) {
+        $userCertificate = UserCertificate::where(['user_id' => $userId, 'course_id' => $courseId])
+            ->first();
+    } else {
+        $userCertificate = UserCertificate::find($certificate);
+    }
+
+    if (!$userCertificate) {
+        $userCertificate = new UserCertificate();
+
+        $userCertificate->signature     = uniqid();
+        $userCertificate->notification  = 0;
+        $userCertificate->user_id       = $userId;
+        $userCertificate->course_id     = $courseId;
+
+        $userCertificate->save();
+    }
+
 
     if ($userCertificate) {
         $userFullname = get_user_meta( $userCertificate->user_id, 'first_name', true ) . ' ' . get_user_meta( $userCertificate->user_id, 'last_name', true );

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { Swiper, SwiperSlide, directive } from 'vue-awesome-swiper'
+import Player from '@vimeo/player';
 import {baseConfig, baseState, baseActions} from '../app'
 import {store} from '../store'
 
@@ -80,6 +81,8 @@ new Vue({
       isOpenedCertificateModal: false,
 
       device: '',
+
+      player: null,
     }
   },
   components: {
@@ -405,6 +408,16 @@ new Vue({
         })
         .then(registration => {
           this.hideLoading();
+
+          const trailer = document.querySelector('#video-topic');
+
+          if (trailer) {
+            this.player = new Player(trailer);
+
+            trailer.muted = false;
+
+            this.player.play();
+          }
         })
         .catch(err => {
           this.addCourseToShopCart({

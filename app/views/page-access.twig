@@ -310,7 +310,13 @@
                             </p>
                           </div>
                           <div class="c-form-new__terminos">
-                            <input v-model="user.terms" type="checkbox" value="acepted" /> <a href="#" @click="openTerms($event)" class="f2 white c-link--ho-dark"> He leido y acepto los <span class="w-sbold">términos y condiciones</span></a>
+                            <input v-model="user.terms" type="checkbox" value="acepted" />
+
+                            {% if terms %}
+                              <a href="#" @click="openTerms($event)" class="f2 white c-link--ho-dark"> He leido y acepto los <span class="w-sbold">términos y condiciones</span></a>
+                            {% else %}
+                              <p class="margin-bottom-0 f2 white display-inline-block"> He leido y acepto los <span class="w-sbold">términos y condiciones</span> </p>
+                            {% endif %}
                           </div>
                           <p v-if="isWrongField('terms', false)" class="c-form-new__error margin-bottom-0 fs-18 f2 w-medium white">
                             Debes aceptar los Términos y Condiciones
