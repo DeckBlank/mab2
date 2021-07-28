@@ -179,7 +179,7 @@
   }
 }
 
-.c-course-card--primary {
+.c-course-card--alert {
   background: $primary-alt;
   color: $white;
 
@@ -188,7 +188,6 @@
   }
 
   .c-button--course {
-    // background: $primary-light;
     background: $white;
     color: $white;
   }
@@ -219,7 +218,6 @@
   }
 }
 
-// nuevo color
 .c-course-card--magenta {
   background: $magenta;
   color: $white;
@@ -231,25 +229,6 @@
   .c-button--course {
     background: $white;
     color: $white;
-  }
-}
-
-// nuevo color
-.c-course-card--white {
-  background: $white;
-  color: $dark;
-
-  .c-course-card__likes {
-    color: $dark;
-
-    svg {
-      color: $dark;
-    }
-  }
-
-  .c-button--course {
-    background: $light-gray;
-    color: $dark;
   }
 }
 
