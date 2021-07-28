@@ -75,37 +75,21 @@
             class="c-arrow-prev swiper-button-prev position-absolute flex-container align-center-middle"
           >
             prev
-          </button>
-          <button
-            v-if="enrolledCoursesPaged != -1"
-            @click="navigateEnroll('right')"
-            :disabled="isLoadingEnroll"
-            class="c-arrow-next swiper-button-next position-absolute flex-container align-center-middle"
-          >
-            next
-          </button>
-
-          <transition name="fade" mode="out-in">
-            <div key="enroll-loading" v-if="isLoadingEnroll" class="c-courses-grid">
-              <article v-for="sk of [1,2,3,4]" :key="sk.id" class="c-course-card-skeleton"></article>
-            </div>
-
-            <div key="enroll-courses" v-else-if="enrolledCourses.length" class="c-courses-grid">
-              <div v-for="course of enrolledCourses" :key="course.id" class="c-course-card br--large" :class="'c-course-card--' + course.color">
-                <figure class="c-course-card__figure position-relative">
-                  <img :src="(course.thumbnail) ? course.thumbnail : courseBasicThumbnail" alt="" class="of--cover br-top--large width-100 height-100"> 
-                  <div class="c-course-card__progress-bar position-absolute width-100">
-                    <div :style="'width: '+ course.progress +'%'" class="bg-pri-alt height-100"></div>
-                  </div>
-                  <div v-if="course.grade" class="c-course-card__grade-tag  position-absolute dark fs-18 flex-container align-center-middle bg-warning-alt">
-                    ${course.grade}
-                  </div>
-                </figure>
-                <div class="c-course-card__content flex-container fd-column padding-1 br--large">
-                  <div>
-                    <div class="c-course-card__titles">
-                      <p class="c-course-card__name w-xbold fs-18 f2 margin-0">${ course.name }</p>
-                      <p class="c-course-card__teacher fs-16 f2">Con ${ (course.teacher) ? course.teacher : '"Sin docente"' }</p>
+          </div>
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div v-for="course of enrolledCourses" :key="course.id" class="swiper-slide padding-vertical-2">
+                <div class="c-course-card br--large" :class="'c-course-card--' + course.color">
+                  <figure class="c-course-card__figure position-relative">
+                    <img :src="(course.thumbnail) ? course.thumbnail : courseBasicThumbnail" alt="" class="of--cover br-top--large width-100 height-100"> 
+                    <div class="c-course-card__progress-bar position-absolute width-100">
+                      <div :style="'width: '+ course.progress +'%'" class="bg-pri-alt height-100"></div>
+                    </div>
+                    <!-- <div v-if="course.grade" class="c-course-card__grade-tag  position-absolute dark fs-18 flex-container align-center-middle bg-warning-alt">
+                      ${course.grade}
+                    </div> -->
+                    <div class="c-course-card__grade-tag  position-absolute dark fs-18 flex-container align-center-middle bg-warning-alt">
+                      inicial 3 años
                     </div>
                     <p class="c-course-card__description fs-16 f2 lh-18">${ course.description }</p>
                   </div>
