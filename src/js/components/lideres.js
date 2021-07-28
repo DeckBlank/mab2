@@ -12,7 +12,7 @@ Vue.component('lideres',{
               <div class="c-lider-avatar margin-bottom-1 margin-top-1">
                 <div class="c-profile-card c-profile-card--primary position-relative height-100 flex-container align-center align-bottom">
                   <figure class="c-profile-card__content position-relative" :class="'padding-horizontal-' + lider.padding">
-                    <img class="of--contain" :style="'width: ' + lider.width + 'px;'" :src="THEME_URL + '/static/images/home/leaders/' + lider.avatar + '.png'" alt="">
+                    <img class="of--contain" :style="'width: ' + lider.width + 'px;'" :src="lider.avatar" alt="">
                   </figure>
                 </div>
               </div>

@@ -139,7 +139,8 @@ class UserController{
                 'methods' => 'GET',
                 'callback' => array($this, 'getEnrolledCourses'),
                 'permission_callback' => function ($request) {
-                    return ($request['_wpnonce']) ? true : false;
+                    // return ($request['_wpnonce']) ? true : false;
+                    return true;
                 }
             ));
 
@@ -453,34 +454,31 @@ class UserController{
 
     public function getEnrolledCourses($request) {
         if ( !empty($request['user_email']) ) {
-            $userEmail      = $request['user_email'];
-            $userID         = $request['user_id'];
-            $coursesArray   = [];
+            $userEmail          = $request['user_email'];
+            $userID             = $request['user_id'];
+            $coursesArray       = [];
+            $enrolledCourses    = [];
 
-            /*
-            $courses = UserCourse::where(['user_email' => $userEmail])
-                ->orderBy('last_date', 'DESC')
-                ->get();
-            */
+            if ( isset($request['paged']) && $request['paged'] > 1 ) {
+                $skip = ($request['paged'] - 1) * 4;
 
-            $enrolledCourses = UserCourseEnrollment::where(['user_email' => $userEmail])
-                ->orderBy('last_date', 'DESC')
-                ->get();
-
-            /*
-            foreach ($courses as $course) {
-                $sanitizedCourse = __sanitizeCourse($course->course_id, $userEmail, $userID);
-
-                if ( $sanitizedCourse && !in_array($sanitizedCourse, $coursesArray) ) {
-                    if ( __checkEnrollOnCourse($course->course_id, $userEmail) ) array_push($coursesArray, $sanitizedCourse);
-                }
-            }*/
+                $enrolledCourses = UserCourseEnrollment::where(['user_email' => $userEmail])
+                    ->orderBy('last_date', 'DESC')
+                    ->skip($skip)
+                    ->take(4)
+                    ->get();
+            } else {
+                $enrolledCourses = UserCourseEnrollment::where(['user_email' => $userEmail])
+                    ->orderBy('last_date', 'DESC')
+                    ->limit(4)
+                    ->get();
+            }
 
             foreach ($enrolledCourses as $course) {
                 $sanitizedCourse = __sanitizeCourse($course->course_id, $userEmail, $userID);
 
                 if ( $sanitizedCourse && !in_array($sanitizedCourse, $coursesArray) ) {
-                    if ( __checkEnrollOnCourse($course->course_id, $userEmail) ) array_push($coursesArray, $sanitizedCourse);
+                    array_push($coursesArray, $sanitizedCourse);
                 }
             }
 
@@ -513,7 +511,8 @@ class UserController{
             if ( $userPreferences &&  $userPreferences[0]) {
                 $courses = Timber::get_posts([
                     'post_type'         => 'course',
-                    'posts_per_page'    => -1,
+                    'posts_per_page'    => 4,
+                    'paged'             => $request['paged'],
                     'tax_query' => array( 
                         array(
                             'taxonomy' => 'tax-mab-course',
@@ -525,9 +524,9 @@ class UserController{
             } else {
                 $coursesIds         = [];
                 $courseCategories   = [];
-                $userCourses        = UserCourse::where([
-                        'user_email' => $userEmail
-                    ])
+                $userCourses        = [];
+
+                $userCourses = UserCourse::where(['user_email' => $userEmail])
                     ->where('topic_views', '>', 0)
                     ->orderBy('last_date', 'DESC')
                     ->get();
@@ -549,7 +548,8 @@ class UserController{
 
                 $courses = Timber::get_posts([
                     'post_type'         => 'course',
-                    'posts_per_page'    => 16,
+                    'posts_per_page'    => 4,
+                    'paged'             => $request['paged'],
                     'tax_query' => array( 
                         array(
                             'taxonomy' => 'tax-course',

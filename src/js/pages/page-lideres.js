@@ -8,48 +8,7 @@ const lideres = new Vue({
   ...baseConfig(store),
   data() {
     return {
-      lideres: [
-        {
-          name: 'Maca Wellness',
-          avatar: 'maca',
-          job: 'Nutrición',
-          profile: 'maca-wellness',
-          padding: 3,
-          width: 250,
-        },
-        {
-          name: 'Ernesto Reaño',
-          avatar: 'ernesto',
-          job: 'Autismo',
-          profile: 'ernesto-reano',
-          padding: 2,
-          width: 320,
-        },
-        {
-          name: 'Viviana de Ferrari',
-          avatar: 'viviana',
-          job: 'Amor Propio',
-          profile: 'viviana-de-ferrari',
-          padding: 2,
-          width: 280,
-        },
-        {
-          name: 'Vanessa Vasquez',
-          avatar: 'vanessa',
-          job: 'El Poder de la Empatía',
-          profile: 'vanessa-vasquez',
-          padding: 1,
-          width: 300,
-        },
-        {
-          name: 'Menta Days',
-          avatar: 'menta',
-          job: 'Arte para la Vida',
-          profile: 'menta-days',
-          padding: 2,
-          width: 260,
-        },
-      ],
+      lideres: [],
     }
   },
   computed: {
@@ -58,6 +17,8 @@ const lideres = new Vue({
   mounted(){
     this.global();
     this.hideLoading();
+
+    this.lideres = mab.leaders;
   },
   methods: {
     ...baseActions()
