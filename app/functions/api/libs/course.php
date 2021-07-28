@@ -208,7 +208,7 @@ function __sanitizeCourse($courseId, $userEmail, $userID, $type = 'enrolled') {
             'teacher'       => ($teacher) ? sprintf('%s %s', $teacher['user_firstname'], $teacher['user_lastname']) : '',
             'description'   => get_the_excerpt($course->ID),
             'likes'         => __getMetaCourse($courseId, $userEmail, 'likes'),
-            'color'         => ($mabCategory) ? get_field('color', 'category_' . $mabCategory->term_id) : 'primary',
+            'color'         => ($mabCategory) ? get_field('color', 'category_' . $mabCategory->term_id) : 'alert',
             'link'          => get_the_permalink($course->ID),
             'grade'         => get_field('grade', $course->ID)
         ];
