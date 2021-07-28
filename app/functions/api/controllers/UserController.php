@@ -457,30 +457,15 @@ class UserController{
             $userID         = $request['user_id'];
             $coursesArray   = [];
 
-            /*
-            $courses = UserCourse::where(['user_email' => $userEmail])
-                ->orderBy('last_date', 'DESC')
-                ->get();
-            */
-
             $enrolledCourses = UserCourseEnrollment::where(['user_email' => $userEmail])
                 ->orderBy('last_date', 'DESC')
                 ->get();
-
-            /*
-            foreach ($courses as $course) {
-                $sanitizedCourse = __sanitizeCourse($course->course_id, $userEmail, $userID);
-
-                if ( $sanitizedCourse && !in_array($sanitizedCourse, $coursesArray) ) {
-                    if ( __checkEnrollOnCourse($course->course_id, $userEmail) ) array_push($coursesArray, $sanitizedCourse);
-                }
-            }*/
 
             foreach ($enrolledCourses as $course) {
                 $sanitizedCourse = __sanitizeCourse($course->course_id, $userEmail, $userID);
 
                 if ( $sanitizedCourse && !in_array($sanitizedCourse, $coursesArray) ) {
-                    if ( __checkEnrollOnCourse($course->course_id, $userEmail) ) array_push($coursesArray, $sanitizedCourse);
+                    array_push($coursesArray, $sanitizedCourse);
                 }
             }
 
