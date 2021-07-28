@@ -222,6 +222,29 @@
   }
 }
 
+.c-course-card-skeleton {
+  background-color: $medium-gray;
+  height: 450px;
+  border-radius: 10px;
+  animation: an-skeleton 1s infinite alternate ease-in-out;
+}
+
+@keyframes an-skeleton {
+  from {
+    opacity: 0.3;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.c-courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+  grid-gap: 32px 32px;
+}
+
 @include breakpoint(large) {
   .c-course-card {
     height: 100%;

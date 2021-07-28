@@ -671,6 +671,14 @@ add_action( 'wp_enqueue_scripts', function () use ($config, $assets_version) {
         ]);
 
         register_assets('package', [
+            'handle'    => 'pandawp/package/vaswiper',
+            'src'       => $config['resources']['package_vaswiper'],
+            'deps'      => [ ],
+            'ver'       => $config['vertion'],
+            'in_footer' => true
+        ]);
+
+        register_assets('package', [
             'handle'    => 'pandawp/package/ssrwindow',
             'src'       => $config['resources']['package_ssr_window'],
             'deps'      => [ ],

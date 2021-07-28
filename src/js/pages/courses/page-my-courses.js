@@ -1,21 +1,25 @@
 import Vue from 'vue'
 import { mapActions, mapState } from 'vuex';
 import {store} from '../../store';
-import Swiper from 'swiper';
+import Swiper from 'swiper'
 
 import {baseConfig, baseState, baseActions} from '../../app';
 
 import '../../components/lideres';
 
-const myCourses = new Vue({
+new Vue({
   ...baseConfig(store),
   data() {
     return {
       enrolledCourses: [],
-      recommendCourses: [],
-
+      enrolledGroupCourses: {},
+      enrolledCoursesPaged: 1,
       isLoadingEnroll: true,
-      isLoadingRecommended: true,
+
+      recommendCourses: [],
+      recommendGroupCourses: {},
+      recommendCoursesPaged: 1,
+      isLoadingRecommend: true,
 
       lideres: [],
     }
@@ -36,7 +40,7 @@ const myCourses = new Vue({
     this.global();
     this.hideLoading();
     this.getEnrolledCourses();
-    this.getRecommendedCoures();
+    this.getRecommendCourses();
 
     this.lideres = mab.leaders;
 
@@ -55,78 +59,10 @@ const myCourses = new Vue({
   methods: {
     ...baseActions(),
     ...mapActions(['addCourseToShopCart']),
-    initSliderEnrolledCourses: function() {
-      window.setTimeout(() => {
-        new Swiper('.c-mab-continue .swiper-container', {
-          slidesPerView: 3,
-          spaceBetween: 0,
-          navigation: {
-            nextEl: '.c-mab-continue .swiper-button-next',
-            prevEl: '.c-mab-continue .swiper-button-prev',
-          },
-          breakpoints: {
-            200: {
-              slidesPerView: 1,
-              spaceBetween: 10
-            },
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 0,
-            },
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 0
-            },
-            1024: {
-              slidesPerView: 4,
-              spaceBetween: 0
-            }
-          },
-          on: {
-            init: () => {
-              this.isLoadingEnroll = false;
-            },
-          },
-        });
-      }, 1000)
-    },
-    initSliderRecommendedCourses: function() {
-      window.setTimeout(() => {
-        new Swiper('.c-mab-recommended .swiper-container', {
-          slidesPerView: 3,
-          spaceBetween: 0,
-          navigation: {
-            nextEl: '.c-mab-recommended .swiper-button-next',
-            prevEl: '.c-mab-recommended .swiper-button-prev',
-          },
-          breakpoints: {
-            200: {
-              slidesPerView: 1,
-              spaceBetween: 10
-            },
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 0,
-            },
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 0
-            },
-            1024: {
-              slidesPerView: 4,
-              spaceBetween: 0
-            }
-          },
-          on: {
-            init: () => {
-              this.isLoadingRecommended = false;
-            },
-          },
-        });
-      }, 1000);
-    },
     getEnrolledCourses: function() {
-      fetch(`${ this.API }/users/${ this.logedUser.user_id }/courses?user_email=${ this.logedUser.user_email }&_wpnonce=${ mab.nonce }`)
+      this.isLoadingEnroll = true;
+
+      fetch(`${ this.API }/users/${ this.logedUser.user_id }/courses?user_email=${ this.logedUser.user_email }&_wpnonce=${ mab.nonce }&paged=${ this.enrolledCoursesPaged }`)
       .then(res => { 
         if (res.status >= 200 && res.status < 300) {
           return res.json();
@@ -136,9 +72,10 @@ const myCourses = new Vue({
       })
       .then(response => {
         if (response.status) {
+          this.enrolledGroupCourses[ this.enrolledCoursesPaged ] = response.data;
           this.enrolledCourses = response.data;
 
-          this.initSliderEnrolledCourses();
+          this.isLoadingEnroll = false;
         } else {
           window.setTimeout(() => {
             this.isLoadingEnroll = false;
@@ -153,8 +90,31 @@ const myCourses = new Vue({
         throw err;
       })
     },
-    getRecommendedCoures: function() {
-      fetch(`${ this.API }/users/${ this.logedUser.user_id }/courses/recommended?user_email=${ this.logedUser.user_email }&_wpnonce=${ mab.nonce }`)
+    navigateEnroll: function(direction) {
+      let paged = ( direction == 'right' )
+        ? this.enrolledCoursesPaged + 1
+        : this.enrolledCoursesPaged - 1;
+
+      if ( !this.enrolledGroupCourses[paged] ) {
+        this.enrolledCoursesPaged = paged;
+        this.isLoadingEnroll      = true;
+
+        this.getEnrolledCourses();
+      } else {
+        this.isLoadingEnroll      = true;
+        this.enrolledCoursesPaged = paged;
+        this.enrolledCourses      = this.enrolledGroupCourses[paged];
+
+        window.setTimeout(() => {
+          this.isLoadingEnroll = false;
+        }, 1000)
+      }
+    },
+
+    getRecommendCourses: function() {
+      this.isLoadingRecommend = true;
+
+      fetch(`${ this.API }/users/${ this.logedUser.user_id }/courses/recommended?user_email=${ this.logedUser.user_email }&_wpnonce=${ mab.nonce }&paged=${ this.recommendCoursesPaged }`)
       .then(res => { 
         if (res.status >= 200 && res.status < 300) {
           return res.json();
@@ -164,22 +124,43 @@ const myCourses = new Vue({
       })
       .then(response => {
         if (response.status) {
+          this.recommendGroupCourses[ this.recommendCoursesPaged ] = response.data;
           this.recommendCourses = response.data;
 
-          this.initSliderRecommendedCourses();
+          this.isLoadingRecommend = false;
         } else {
           window.setTimeout(() => {
-            this.isLoadingRecommended = false;
+            this.isLoadingRecommend = false;
           }, 1000);
         }
       })
       .catch(err => {
         window.setTimeout(() => {
-          this.isLoadingRecommended = false;
+          this.isLoadingRecommend = false;
         }, 1000);
 
         throw err;
       })
+    },
+    navigateRecommend: function(direction) {
+      let paged = ( direction == 'right' )
+        ? this.recommendCoursesPaged + 1
+        : this.recommendCoursesPaged - 1;
+
+      if ( !this.recommendGroupCourses[paged] ) {
+        this.recommendCoursesPaged = paged;
+        this.isLoadingRecommend      = true;
+
+        this.getRecommendCourses();
+      } else {
+        this.isLoadingRecommend      = true;
+        this.recommendCoursesPaged = paged;
+        this.recommendCourses      = this.recommendGroupCourses[paged];
+
+        window.setTimeout(() => {
+          this.isLoadingRecommend = false;
+        }, 1000)
+      }
     },
 
     addCourse: function(course_id, course_title, course_link){

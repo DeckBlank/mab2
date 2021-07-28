@@ -136,16 +136,19 @@ const courses = new Vue({
         category: '',
       },
 
-      recommendCourses: [],
       courses: [],
       page: 1,
       hasPagination: false,
 
       isLoadingCategories: true,
-      isLoadingRecommended: true,
       isLoadingCourses: false,
 
       categories: [],
+
+      recommendCourses: [],
+      recommendGroupCourses: {},
+      recommendCoursesPaged: 1,
+      isLoadingRecommend: true,
     }
   },
   computed: {
@@ -178,7 +181,7 @@ const courses = new Vue({
     this.global();
     this.hideLoading();
 
-    if (this.logedUser) this.getRecommendedCoures();
+    if (this.logedUser) this.getRecommendCourses();
 
     this.getCategories();
 
@@ -265,8 +268,10 @@ const courses = new Vue({
       }, 1000);
     },
 
-    getRecommendedCoures: function() {
-      fetch(`${ this.API }/users/${ this.logedUser.user_id }/courses/recommended?user_email=${ this.logedUser.user_email }&_wpnonce=${ mab.nonce }`)
+    getRecommendCourses: function() {
+      this.isLoadingRecommend = true;
+
+      fetch(`${ this.API }/users/${ this.logedUser.user_id }/courses/recommended?user_email=${ this.logedUser.user_email }&_wpnonce=${ mab.nonce }&paged=${ this.recommendCoursesPaged }`)
       .then(res => { 
         if (res.status >= 200 && res.status < 300) {
           return res.json();
@@ -276,22 +281,45 @@ const courses = new Vue({
       })
       .then(response => {
         if (response.status) {
+          this.recommendGroupCourses[ this.recommendCoursesPaged ] = response.data;
           this.recommendCourses = response.data;
-          this.initSliderRecommendedCourses();
+
+          this.isLoadingRecommend = false;
         } else {
           window.setTimeout(() => {
-            this.isLoadingRecommended = false;
+            this.isLoadingRecommend = false;
           }, 1000);
         }
       })
       .catch(err => {
         window.setTimeout(() => {
-          this.isLoadingRecommended = false;
+          this.isLoadingRecommend = false;
         }, 1000);
 
         throw err;
       })
     },
+    navigateRecommend: function(direction) {
+      let paged = ( direction == 'right' )
+        ? this.recommendCoursesPaged + 1
+        : this.recommendCoursesPaged - 1;
+
+      if ( !this.recommendGroupCourses[paged] ) {
+        this.recommendCoursesPaged = paged;
+        this.isLoadingRecommend      = true;
+
+        this.getRecommendCourses();
+      } else {
+        this.isLoadingRecommend      = true;
+        this.recommendCoursesPaged = paged;
+        this.recommendCourses      = this.recommendGroupCourses[paged];
+
+        window.setTimeout(() => {
+          this.isLoadingRecommend = false;
+        }, 1000)
+      }
+    },
+
     getCourses: function(from = false) {
       this.isLoadingCourses = true;
 
