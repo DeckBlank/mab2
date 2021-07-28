@@ -757,6 +757,9 @@ class UserController{
                     date("Y", strtotime($userCertificate->created_at))
                 );
 
+                $duration = __getMetaCourse($courseId, -1, 'duration');
+                $duration = ( intval($duration) > 1 ) ? $duration . ' horas' : '1 hora';
+
                 $document = '
                     <html lang="en">
                         <head>
@@ -829,12 +832,12 @@ class UserController{
                                 </tr>
                                 <tr>
                                     <td style=" padding: 0 3rem 10px; text-align:center">
-                                        <div>'. __getMetaCourse($courseId, -1, 'duration') .' horas de teoría y práctica</div>
+                                        <div>'. $duration . ' de teoría y práctica</div>
                                     </td>
                                 </tr>
                                 <tr >
                                     <td colspan="4" align="center" style="padding:3rem 4rem 5rem">
-                                        <table style="width:100%">
+                                        <table style="width:100%;">
                                             <tr>
                                                 <td style="width:50%; text-align: center">
                                                     <img style="height: 60px; border-bottom:2px solid #000;margin-bottom:0.5rem" src="'. $firma2 .'">
@@ -842,7 +845,7 @@ class UserController{
                                                         Macarena Arribas
                                                     </div>
                                                     <div style="text-align: center;">
-                                                        Ceo & Fundadora
+                                                        CEO & Fundadora de MAB
                                                     </div>
                                                 </td>
                                                 <td style="width:50%; text-align: center;">
@@ -867,7 +870,7 @@ class UserController{
                                                     <span>Código '. $userCertificate->signature .'</span>
                                                 </td>
                                             </tr>
-                                    </table>
+                                        </table>
                                     </td>
                                 </tr>
                             </table>

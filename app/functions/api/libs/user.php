@@ -79,11 +79,14 @@ function __getCertificate($certificate, $userId = -1, $courseId = -1) {
             date("Y", strtotime($userCertificate->created_at))
         );
 
+        $duration = __getMetaCourse($userCertificate->course_id, -1, 'duration');
+        $duration = ( intval($duration) > 1 ) ? $duration . ' horas' : '1 hora';
+
         $certificate = [
             'user'          => $userFullname,
             'course'        => $course->title,
             'date'          => $date,
-            'duration'      => __getMetaCourse($userCertificate->course_id, -1, 'duration'),
+            'duration'      => $duration,
             'course_link'   => $course->link,
             'data'          => $userCertificate,
         ];
