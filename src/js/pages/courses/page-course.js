@@ -190,22 +190,23 @@ new Vue({
       })
     },
     isUserAuthOnCourse: function(course_id){
-      fetch(`${ this.API }/course/${ course_id }/registration/checkout?user=${ this.logedUser.user_email }`,{
-        method: 'GET'
-      })
-      .then(res => {
-        if (res.status >= 200 && res.status < 300) {
-          return res.json();
-        } else {
-          throw res;
-        }
-      })
-      .then(registration => {
-        this.accessGranted = true;
-      })
-      .catch(err => {
-        throw err;          
-      })
+      if (this.logedUser)
+        fetch(`${ this.API }/course/${ course_id }/registration/checkout?user=${ this.logedUser.user_email }`,{
+          method: 'GET'
+        })
+        .then(res => {
+          if (res.status >= 200 && res.status < 300) {
+            return res.json();
+          } else {
+            throw res;
+          }
+        })
+        .then(registration => {
+          this.accessGranted = true;
+        })
+        .catch(err => {
+          throw err;          
+        })
     },
     openTrailer: function(e) {
       e.preventDefault();
@@ -237,7 +238,9 @@ new Vue({
         topicNumber = topicIndex + (unityIndex + 1) + (unitiesLength - unityIndex);
       }
 
-      return (this.accessGranted) ? `${ topicLink }?course_id=${ mab.course_id }&topic_number=${ topicNumber }&unity=${ unityIndex + 1 }` : '#';
+      return (topicNumber == 1 || this.accessGranted)
+        ? `${ topicLink }?course_id=${ mab.course_id }&topic_number=${ topicNumber }&unity=${ unityIndex + 1 }`
+        : (!this.logedUser) ? '/access?auth=register' : '#';
     },
 
     resetAccordion: function(unity) {
@@ -275,6 +278,13 @@ new Vue({
       this.isOpenedCertificateModal = false;
     },
 
+    openCreateDiscussion: function() {
+      if (this.logedUser) {
+        this.openCreateDiscussion = true;
+      } else {
+        window.location.href = '/access';
+      }
+    },
     getDiscussions: function(reset = false) {
       if (reset) this.discussionsPaged = 0;
 

@@ -1,10 +1,12 @@
 import Vue from 'vue'
-import { mapActions, mapState } from 'vuex';
+import { mapState } from 'vuex';
 import {store} from '../../store';
 import Swiper from 'swiper'
 
 import {baseConfig, baseState, baseActions} from '../../app';
 
+import '../../components/courses/course-enroll';
+import '../../components/courses/course';
 import '../../components/lideres';
 
 new Vue({
@@ -58,7 +60,6 @@ new Vue({
   },
   methods: {
     ...baseActions(),
-    ...mapActions(['addCourseToShopCart']),
     getEnrolledCourses: function() {
       this.isLoadingEnroll = true;
 
@@ -161,10 +162,6 @@ new Vue({
           this.isLoadingRecommend = false;
         }, 1000)
       }
-    },
-
-    addCourse: function(course_id, course_title, course_link){
-      this.addCourseToShopCart({id: course_id, title: course_title, link: course_link, url: this.SITE_URL});
     },
   }
 })

@@ -13,6 +13,8 @@ new Vue({
   ...baseConfig(store),
   data() {
     return {
+      accessGranted: false,
+
       showTooltipCerticado: false,
       view: 1,
       foro: 1,
@@ -125,8 +127,7 @@ new Vue({
     this.area     = this.$refs.topic.getAttribute('data-area');
 
     this.getCourseUnity();
-    
-    this.isUserAuthOnTopic(this.metas.get('course_id'))
+
     this.getLikes();
     this.getUnities(  this.metas.get('course_id') );
     this.getComments();
@@ -398,37 +399,37 @@ new Vue({
       if(!this.metas.get('course_id') && !this.metas.get('unity')){
         window.location = this.courseLink;
       }else{
-        fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}&topic=${this.topicID}`)
-        .then(res => {
-          if (res.status >= 200 && res.status < 300) {
-            return res.json()
-          }else{
-            throw res
-          }
-        })
-        .then(registration => {
+        if (this.logedUser) {
+          fetch(`${this.API}/course/${course_id}/registration/checkout?user=${this.logedUser.user_email}&topic=${this.topicID}`)
+          .then(res => {
+            if (res.status >= 200 && res.status < 300) {
+              return res.json()
+            }else{
+              throw res
+            }
+          })
+          .then(registration => {
+            this.hideLoading();
+            this.accessGranted = true;
+
+            const trailer = document.querySelector('#video-topic');
+
+            if (trailer) {
+              this.player = new Player(trailer);
+
+              trailer.muted = false;
+
+              this.player.play();
+            }
+          })
+          .catch(err => {
+            window.location = this.courseLink;
+
+            throw err;
+          })
+        }
+        else
           this.hideLoading();
-
-          const trailer = document.querySelector('#video-topic');
-
-          if (trailer) {
-            this.player = new Player(trailer);
-
-            trailer.muted = false;
-
-            this.player.play();
-          }
-        })
-        .catch(err => {
-          this.addCourseToShopCart({
-            id: course_id,
-            title: this.unityData.course.slug,
-            link: `${ this.SITE_URL }/curso/${ this.unityData.course.slug }`,
-            url: this.SITE_URL
-          });
-
-          throw err;
-        })
       }
     },
     downloadMaterial: function(url, media){
@@ -534,8 +535,11 @@ new Vue({
           }
         })
         .then(response => {
-          if (response.status)
+          if (response.status) {
             this.unityData = response.data;
+
+            this.isUserAuthOnTopic( this.metas.get('course_id') );
+          }
         })
         .catch(err => {
           throw err;          
@@ -557,7 +561,9 @@ new Vue({
         topicNumber = topicIndex + (unityIndex + 1) + (unitiesLength - unityIndex);
       }
 
-      return `${ topicLink }?course_id=${ this.metas.get('course_id') }&topic_number=${ topicNumber }&unity=${ unityIndex + 1 }`;
+      return (topicNumber == 1 || this.accessGranted)
+        ? `${ topicLink }?course_id=${ this.metas.get('course_id') }&topic_number=${ topicNumber }&unity=${ unityIndex + 1 }`
+        : (!this.logedUser) ? '/access?auth=register' : '#';
     },
 
     resetAccordion: function(question) {

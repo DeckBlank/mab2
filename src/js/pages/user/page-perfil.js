@@ -4,6 +4,8 @@ import {store} from '../../store'
 import Swiper from 'swiper';
 import { mapState } from 'vuex';
 
+import '../../components/courses/course-enroll';
+
 new Vue({
   ...baseConfig(store),
   data() {

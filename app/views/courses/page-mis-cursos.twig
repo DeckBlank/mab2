@@ -91,40 +91,7 @@
             </div>
 
             <div key="enroll-courses" v-else-if="enrolledCourses.length" class="c-courses-grid">
-              <div v-for="course of enrolledCourses" :key="course.id" class="c-course-card br--large" :class="'c-course-card--' + course.color">
-                <figure class="c-course-card__figure position-relative">
-                  <img :src="(course.thumbnail) ? course.thumbnail : courseBasicThumbnail" alt="" class="of--cover br-top--large width-100 height-100"> 
-                  <div class="c-course-card__progress-bar position-absolute width-100">
-                    <div :style="'width: '+ course.progress +'%'" class="bg-pri-alt height-100"></div>
-                  </div>
-                  <div v-if="course.grade" class="c-course-card__grade-tag  position-absolute dark fs-18 flex-container align-center-middle bg-warning-alt">
-                    ${course.grade}
-                  </div>
-                </figure>
-                <div class="c-course-card__content flex-container fd-column padding-1 br--large">
-                  <div>
-                    <div class="c-course-card__titles">
-                      <p class="c-course-card__name w-xbold fs-18 f2 margin-0">${ course.name }</p>
-                      <p class="c-course-card__teacher fs-16 f2">Con ${ (course.teacher) ? course.teacher : '"Sin docente"' }</p>
-                    </div>
-                    <p class="c-course-card__description fs-16 f2 lh-18">${ course.description }</p>
-                  </div>
-                  <div class="grid-x align-middle">
-                    <div class="small-6 medium-6">
-                      <span class="c-course-card__likes f2"> <i class="fas fa-heart mr-05"></i> ${ course.likes }</span>
-                    </div>
-                    <div class="small-6 medium-6 text-right">
-                      <a v-if="course.last_class" :href="course.last_class.link" class="c-button c-button--course display-block lh-14 f2">
-                        Siguiente clase:
-                        <span>${ course.last_class.title }</span>
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <a :href="(course.last_class) ? course.last_class.link : '#'" class="c-course-card__footer display-block text-uppercase white fs-18 text-center bg-dark br-bottom--large">
-                  ¡continuar curso!
-                </a>
-              </div>
+              <course-enroll v-for="course of enrolledCourses" :key="course.id" :body="course"></course-enroll>
             </div>
 
             <div key="enroll-not-found" v-else-if="!isLoadingEnroll">
@@ -166,41 +133,7 @@
             </div>
 
             <div key="recommend-courses" v-else-if="recommendCourses.length" class="c-courses-grid">
-              <div v-for="course of recommendCourses" :key="course.id" class="c-course-card br--large" :class="'c-course-card--' + course.color">
-                <figure class="c-course-card__figure position-relative">
-                  <div v-if="Number(course.price) == 0" class="c-course-card__free-tag position-absolute sec-color fs-18 flex-container align-center-middle">
-                    <img loading="lazy" class="donaciones" src="{{theme.link}}/static/images/vectors/heart.png" alt=""> GRATIS
-                  </div>
-                  <div v-if="course.grade" class="c-course-card__grade-tag  position-absolute dark fs-18 flex-container align-center-middle bg-warning-alt">
-                    ${course.grade}
-                  </div>
-                  <img :src="(course.thumbnail) ? course.thumbnail : courseBasicThumbnail" alt="" class="of--cover br-top--large width-100 height-100"> 
-                </figure>
-                <div class="c-course-card__content flex-container fd-column padding-1 br--large">
-                  <div>
-                    <div class="c-course-card__titles">
-                      <p class="c-course-card__name w-xbold fs-18 f2 margin-0">${ course.name }</p>
-                      <p class="c-course-card__teacher fs-16 f2">Con ${ (course.teacher) ? course.teacher : '"Sin docente"' }</p>
-                    </div>
-                    <p class="c-course-card__description fs-16 f2 lh-18">${ course.description }</p>
-                  </div>
-                  <div class="grid-x align-middle">
-                    <div class="small-5 medium-5">
-                      <span class="c-course-card__likes f2"><i class="fas fa-heart mr-05"></i>${ course.likes }</span>
-                    </div>
-                    <div class="small-7 medium-7 text-right">
-                      <span v-if="course.enroll" class="c-button c-button--mab-white-black lh-14 f2 w-xbold">Inscrito</span>
-                      <button v-else-if="Number(course.price) > 0" @click="addCourse(course.id, course.name, course.link)" class="c-button c-button--mab-white-black lh-14 f2 w-xbold">
-                        S/ ${ Number(course.price).toFixed(2) } 
-                        <i class="fas fa-shopping-cart"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-                <a :href="course.link" class="c-course-card__footer text-uppercase white fs-18 text-center bg-dark br-bottom--large display-block">
-                  ¡comenzar curso!
-                </a>
-              </div>
+              <course v-for="course of recommendCourses" :key="course.id" :body="course" ></course>
             </div>
 
             <div key="recommend-not-found" v-else-if="!isLoadingRecommend">

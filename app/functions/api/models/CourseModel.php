@@ -227,7 +227,7 @@ class CourseModel{
     
     public static function registrationCheckout($request){
         $courses = get_field('courses', 'options');
-        // $first_unity =  get_field('unities', $request['course_id'])[0];
+        $first_unity =  get_field('unities', $request['course_id'])[0];
 
         if ((get_field('price', $request['course_id']) == 0 and get_field('price_settings', $request['course_id']) == 'individual')) {
             return true;
@@ -263,11 +263,11 @@ class CourseModel{
             }            
         }
 
-        // if( $first_unity['topics'][0]['topic']->ID == $request['topic'] ){
-        //     return true;
-        // }else{
-        //      return false;
-        // }
+        if( $first_unity['topics'][0]['topic']->ID == $request['topic'] ){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public static function getExpiredRegistrations($request){

@@ -265,7 +265,7 @@
                             <p class="margin-bottom-0">Mostrar más comentarios</p>
                           </button>
 
-                          <div v-if="commentbox == 1" class="c-foro-footer fs-21  padding-1 f2 dark br-bottom--large box-shadow-none bg-white-i">
+                          <div v-if="commentbox == 1 && logedUser" class="c-foro-footer fs-21  padding-1 f2 dark br-bottom--large box-shadow-none bg-white-i">
                             <editor
                               :target="{ id: (selectedDiscussion.topic_id) ? selectedDiscussion.topic_id : selectedDiscussion.id, type: 'post'}"
                               :post="{ type: (selectedDiscussion.topic_id) ? 'topic' : 'discussion' }"
@@ -279,8 +279,8 @@
                   </div>
                   <div class="c-foro-footer fs-21  padding-1 f2 dark br-bottom--large br-bottom-0-0">
                     <div v-if="foro == 1" class="text-center">
-                      <div>
-                        <span @click="isOpenedCreateDiscussion = true" class="w-xbold padding-right-1">Abrir debate</span><i class="far fa-plus-circle"></i>
+                      <div @click="openCreateDiscussion()">
+                        <span class="w-xbold padding-right-1">Abrir debate</span><i class="far fa-plus-circle"></i>
                       </div>
                     </div>
                     <div v-if="foro == 2" class="flex-container align-justify padding-horizontal-1">

@@ -1,12 +1,14 @@
 import Vue from 'vue'
 import Swiper from 'swiper'
-import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 import {baseConfig, baseState, baseActions} from '../../app';
 import {store} from '../../store';
-// import {addCourseToShopCart} from '../../libs/shop-cart';
 
-const courses = new Vue({
+import '../../components/courses/course-enroll';
+import '../../components/courses/course';
+
+new Vue({
   ...baseConfig(store),
   data() {
     return {
@@ -196,7 +198,6 @@ const courses = new Vue({
   },
   methods: {
     ...baseActions(),
-    ...mapActions(['addCourseToShopCart']),
     initSliderRecommendedCourses: function() {
       window.setTimeout(() => {
         new Swiper('.c-mab-recommended .swiper-container', {
@@ -393,10 +394,6 @@ const courses = new Vue({
       .catch(err => {
         this.isLoadingCategories = false; throw err;
       })
-    },
-
-    addCourse: function(course_id, course_title, course_link){
-      this.addCourseToShopCart({id: course_id, title: course_title, link: course_link, url: this.SITE_URL});
     },
   }
 })
