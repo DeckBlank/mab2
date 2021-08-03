@@ -44,6 +44,9 @@ Vue.component('course',{
   },
   computed: {
     ...mapState(['API', 'SITE_URL', 'THEME_URL', 'logedUser']),
+    courseBasicThumbnail: function() {
+      return `${ this.THEME_URL }/static/images/og_image.png`;
+    },
   },
   methods: {
     ...mapActions(['addCourseToShopCart']),

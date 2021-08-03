@@ -34,9 +34,6 @@ new Vue({
 
       return (firstname.length) ? firstname[0] : this.logedUser.user_firstname;
     },
-    courseBasicThumbnail: function() {
-      return `${ this.THEME_URL }/static/images/og_image.png`;
-    },
   },
   mounted(){
     this.global();

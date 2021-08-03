@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import { mapState } from 'vuex';
 
 Vue.component('course-enroll',{
   template: /*html*/`
@@ -39,5 +40,11 @@ Vue.component('course-enroll',{
   `,
   props: {
     body: Object,
+  },
+  computed: {
+    ...mapState(['THEME_URL']),
+    courseBasicThumbnail: function() {
+      return `${ this.THEME_URL }/static/images/og_image.png`;
+    },
   },
 })
