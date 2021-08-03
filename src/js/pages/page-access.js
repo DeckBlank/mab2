@@ -538,11 +538,7 @@ new Vue({
         case 4:
           if ( !this.validateStep(3) ) return true;
 
-          if (!this.subcategories.length) {
-            this.getSubcategories(4);
-          } else {
-            this.view = `step-${ step }`;
-          }
+          this.getSubcategories(4);
 
           this.user.try = false;
           break;

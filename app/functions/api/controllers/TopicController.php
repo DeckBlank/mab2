@@ -660,7 +660,7 @@ class TopicController{
             $mail->Port       = 465;
 
             //Recipients
-            $mail->setFrom('no-reply@mabclick.com', "MABCLICK");
+            $mail->setFrom('no-reply@mabclick.com', "Aprende MAB");
             $mail->addAddress($request['user_email']);
 
             foreach($admins as $admin){
@@ -669,48 +669,37 @@ class TopicController{
 
             // Content
             $body = '
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #DE0D46; padding: 3rem 0;">
-                    <tr>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding: 3rem 0;">
+                <tr>
                     <td width="100%" align="center" style="padding: 0 1rem">
-                        <table width="600" border="0" align="center" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td width="600" align="center">
-                            <div style="background: #0166D0; color: white; width: 100%; max-width: 640px;">
-                                <header style="background: white; padding: 1rem;">
-                                    <img src="https://mabclick.com/wp-content/themes/mab-theme/app/static/images/logo.png" style="width: 100px;">
-                                </header>
-    
-                                <div style="padding: 1rem;">
-                                    <h1 style="font-size: 25px; color: white;">¡Nuevo comentario!</h1>
-
-                                    <table style="width: 100%; padding-left: 1.5rem">          
-                                        <tbody style="width: 100%">
-                                            <tr>
-                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Autor: </td>
-                                                <td style="padding: 10px 0; color: white;">'. $request["user"] .'</td>     
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Contenido: </td>
-                                                <td style="padding: 10px 0; color: white;">'. $request["content"] .'</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Tema: </td>
-                                                <td style="padding: 10px 0; color: white;">'. $topic->post_title .'</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-    
-                                <footer style="text-align: center; font-size: 12px; font-family: Verdana, serif; padding: 1rem; color: #0166D0; background: white;">
-                                    All rights reserved - MABCLICK
-                                </footer>         
-                            </div>
-                            </td>
-                        </tr>
+                        <table width="600" cellspacing="0" cellpadding="0" style="margin: 0 auto; max-width: 1350px; background: #F8D549; text-align: left; font-family: Verdana,sans-serif">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img style="width:100%; max-width: 1350px;" src="'. get_template_directory_uri() .'/static/images/mailing/banner-2.jpg">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3rem 3rem; color: black; text-align: center;">
+                                        <h1 style="color: black; font-size: 25px; margin-top: 0; margin-bottom: 2rem; text-transform: uppercase;">¡NUEVO COMENTARIO!</h1>
+                                        <p style="color: black; margin-top: 0; margin-bottom: 1rem; line-height: 30px"><span style="font-weight: bold">Autores:</span> '. $request["user"] .'</p>
+                                        <p style="color: black; margin-top: 0; margin-bottom: 1rem; line-height: 30px"><span style="font-weight: bold">Contenido:</span> '. $request["content"] .'</p>
+                                        <p style="color: black; margin-top: 0; margin-bottom: 2rem; line-height: 30px"><span style="font-weight: bold">Temas:</span> '. $topic->post_title .'</p>
+                                        <a href="' . get_site_url() . '/access" style="background-color: white; color: black; padding: 1rem; border-radius: 100px; font-weight: bold; display: inline-block; text-decoration: none;">INICIAR SESIÓN</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1rem 3rem; text-align: center; ">
+                                        <img style="width:100%; max-width: 400px;" src="'. get_template_directory_uri() .'/static/images/mailing/logo-black.png?key=213123123"/>
+                                        <div style="margin: 1rem 0; height: 1px; background-color: black;"></div>
+                                        <p style="color: black; font-size: 14px; line-height: 21px">RECIBES ESTE CORREO PORQUE CONTIENE INFORMACIÓN IMPORTANTE ACERCA DE TU CUENTA EN APRENDE MAB</p>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </td>
-                    </tr>
-                </table>           
+                </tr>
+            </table>
             ';
     
             $mail->isHTML(true); 
@@ -745,7 +734,7 @@ class TopicController{
             $mail->Port       = 465;
 
             //Recipients
-            $mail->setFrom('no-reply@mabclick.com', "MABCLICK");
+            $mail->setFrom('no-reply@mabclick.com', "Aprende MAB");
             $mail->addAddress($request['user_email']);
 
             if($comment[0]->comment_author_email)
@@ -757,55 +746,37 @@ class TopicController{
     
             // Content
             $body = '
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #DE0D46; padding: 3rem 0;">
-                    <tr>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding: 3rem 0;">
+                <tr>
                     <td width="100%" align="center" style="padding: 0 1rem">
-                        <table width="600" border="0" align="center" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td width="600" align="center">
-                            <div style="background: #0166D0; color: white; width: 100%; max-width: 640px;">
-                                <header style="background: white; padding: 1rem;">
-                                    <img src="https://mabclick.com/wp-content/themes/mab-theme/app/static/images/logo.png" style="width: 100px;">
-                                </header>
-    
-                                <div style="padding: 1rem;">
-                                    <h1 style="font-size: 25px; color: white;">Nueva respuesta en : '. $topic->post_title .'</h1>
-
-                                    <table style="width: 100%; padding-left: 1.5rem">          
-                                        <tbody style="width: 100%">
-                                            <tr>
-                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Comentario: </td>
-                                                <td style="padding: 10px 0; color: white;">
-                                                    <p><b>'. $comment[0]->comment_author .'</b>:</p>                                                    
-                                                    "'. $comment[0]->comment_content .'"
-                                                </td>     
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Autor: </td>
-                                                <td style="padding: 10px 0; color: white;">'. $request["user"] .'</td>     
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Respuesta: </td>
-                                                <td style="padding: 10px 0; color: white;">'. $request["content"] .'</td>
-                                            </tr>
-                                            <tr>
-                                                <td style="padding: 10px 0; width: 30%; font-weight: bold; color: white; font-weight:bold">Tema: </td>
-                                                <td style="padding: 10px 0; color: white;">'. $topic->post_title .'</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-    
-                                <footer style="text-align: center; font-size: 12px; font-family: Verdana, serif; padding: 1rem; color: #0166D0; background: white;">
-                                    All rights reserved - MABCLICK
-                                </footer>         
-                            </div>
-                            </td>
-                        </tr>
+                        <table width="600" cellspacing="0" cellpadding="0" style="margin: 0 auto; max-width: 1350px; background: #F8D549; text-align: left; font-family: Verdana,sans-serif">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img style="width:100%; max-width: 1350px;" src="'. get_template_directory_uri() .'/static/images/mailing/banner-2.jpg">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3rem 3rem; color: black; text-align: center;">
+                                        <h1 style="color: black; font-size: 25px; margin-top: 0; margin-bottom: 2rem; text-transform: uppercase;">NUEVA RESPUESTA EN: ' . $topic->post_title . '</h1>
+                                        <p style="color: black; margin-top: 0; margin-bottom: 1rem; line-height: 30px"><span style="font-weight: bold">Comentario principal:</span> '. $comment[0]->comment_content .'</p>
+                                        <p style="color: black; margin-top: 0; margin-bottom: 1rem; line-height: 30px"><span style="font-weight: bold">Autores:</span> '. $request["user"] .'</p>
+                                        <p style="color: black; margin-top: 0; margin-bottom: 2rem; line-height: 30px"><span style="font-weight: bold">Respuesta:</span> '. $request["content"] .'</p>
+                                        <a href="' . get_site_url() . '/access" style="background-color: white; color: black; padding: 1rem; border-radius: 100px; font-weight: bold; display: inline-block; text-decoration: none;">INICIAR SESIÓN</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1rem 3rem; text-align: center; ">
+                                        <img style="width:100%; max-width: 400px;" src="'. get_template_directory_uri() .'/static/images/mailing/logo-black.png?key=213123123"/>
+                                        <div style="margin: 1rem 0; height: 1px; background-color: black;"></div>
+                                        <p style="color: black; font-size: 14px; line-height: 21px">RECIBES ESTE CORREO PORQUE CONTIENE INFORMACIÓN IMPORTANTE ACERCA DE TU CUENTA EN APRENDE MAB</p>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </td>
-                    </tr>
-                </table>           
+                </tr>
+            </table>
             ';
     
             $mail->isHTML(true); 

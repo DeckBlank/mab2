@@ -40,44 +40,46 @@ Vue.component('lideres',{
   },
   methods: {
     initLideresSlider: function() {
-      new Swiper('#slider-lideres', {
-        speed: 900,
-        loop: true,
-        allowTouchMove: false,
-        autoplay: {
-          delay: 5000,
-          disableOnInteraction: false,
-        },
-
-        pagination: {
-          el: '#slider-lideres + .swiper-pagination',
-          type: 'bullets',
-          clickable: true,
-        },
-
-        breakpoints: {
-          320: {
-            slidesPerView: 1,
-            spaceBetween: 10,
+      window.setTimeout(() => {
+        new Swiper('#slider-lideres', {
+          speed: 900,
+          loop: true,
+          allowTouchMove: false,
+          autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
           },
-          480: {
-            slidesPerView: 2,
-            spaceBetween: 10,
+  
+          pagination: {
+            el: '#slider-lideres + .swiper-pagination',
+            type: 'bullets',
+            clickable: true,
           },
-          640: {
-            slidesPerView: 2,
-            spaceBetween: 10,
+  
+          breakpoints: {
+            320: {
+              slidesPerView: 1,
+              spaceBetween: 10,
+            },
+            480: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            640: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            1140: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
           },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-          1140: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-        },
-      })
+        })
+      }, 100)
     },
   },
 });

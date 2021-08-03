@@ -132,7 +132,7 @@ class AuthController {
                         break;
                 }
 
-                if ( $this::__sendNotification($email, $profile->name, $profile->father_name . $profile->mother_name) ) {
+                if ( $this::__sendNotification($email, $profile->name, $profile->father_name . ' ' . $profile->mother_name) ) {
                     wp_set_auth_cookie($userID, true);
                     wp_set_current_user($userID, $email);
                     do_action('wp_login', $email);
@@ -205,47 +205,40 @@ class AuthController {
             $mail->Port       = 465;
 
             //Recipients
-            $mail->setFrom('no-reply@mabclick.com', "MABCLICK");
+            $mail->setFrom('no-reply@mabclick.com', "Aprende MAB");
             $mail->addAddress($email);
 
             // Content
             $body = '
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #DE0D46; padding: 3rem 0;">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding: 3rem 0;">
                     <tr>
-                    <td width="100%" align="center" style="padding: 0 1rem">
-                        <table width="600" border="0" align="center" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td width="600" align="center">
-                            <div style="background: #0166D0; color: white; width: 100%; max-width: 640px;">
-                                <header style="background: white; padding: 1rem;">
-                                    <img src="https://mabclick.com/wp-content/themes/mab-theme/app/static/images/logo.png" style="width: 100px;">
-                                </header>
-    
-                                <div style="padding: 1rem;">
-                                    <h1 style="margin-bottom: 3rem; color: white; font-size: 18px; font-weight: 700; font-family: Verdana, serif;">
-                                        Hola, '. $firstName .' '. $lastName .'
-                                    </h1>
-                                    <div style="text-align: center; margin-bottom: 2rem;">
-                                        <p style="font-family: Verdana, serif; margin-bottom: 3rem; color: white">
-                                            Te damos la bienvenida a MABCLICK 🤩. Desde hoy eres parte de nuestra comunidad de estudiantes, profesores y padres/tutores.<br><br>
-                                            Para iniciar sesión lo puedes hacer desde aquí:                                        
-                                        </p>
-                                        <p style="font-family: Verdana, serif; margin-bottom: 3rem">
-                                            <a href="'. get_site_url() .'/login" style="text-decoration: none; padding: 1rem; color: white; background: #DE0D46">INICIAR SESIÓN</a>
-                                        </p>                                  
-                                    </div>
-                                </div>
-
-                                <footer style="text-align: center; font-size: 12px; font-family: Verdana, serif; padding: 1rem; color: #0166D0; background: white;">
-                                    All rights reserved - MABCLICK
-                                </footer>         
-                            </div>
-                            </td>
-                        </tr>
+                        <td width="100%" align="center" style="padding: 0 1rem">
+                        <table width="600" cellspacing="0" cellpadding="0" style="margin: 0 auto; max-width: 1350px; background: #FF3333; text-align: left; font-family: Verdana,sans-serif">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img style="width:100%; max-width: 1350px;" src="'. get_template_directory_uri() .'/static/images/mailing/banner.jpg">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3rem 3rem; color: white; text-align: center;">
+                                        <h1 style="font-size: 25px; margin-top: 0; margin-bottom: 2rem; text-transform: uppercase;">HOLA, ' . $firstName . ' ' . $lastName . '</h1>
+                                        <p style="margin-top: 0; margin-bottom: 2rem; line-height: 30px">Te damos la bienvenida a Aprende MAB. Desde hoy eres parte de nuestra comunidad de estudiantes, padres, docentes y tutores.</p>
+                                        <p style="margin-top: 0; margin-bottom: 2rem; line-height: 30px">Para iniciar sesión lo puedes hacer desde aquí</p>
+                                        <a href="' . get_site_url() . '/access" style="background-color: white; color: black; padding: 1rem; border-radius: 100px; font-weight: bold; display: inline-block; text-decoration: none;">INICIAR SESIÓN</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1rem 3rem; text-align: center; ">
+                                        <img style="width:100%; max-width: 400px;" src="'. get_template_directory_uri() .'/static/images/mailing/logo-white.png"/>
+                                        <div style="margin: 1rem 0; height: 1px; background-color: white;"></div>
+                                        <p style="color: white; font-size: 14px; line-height: 21px">RECIBES ESTE CORREO PORQUE CONTIENE INFORMACIÓN IMPORTANTE ACERCA DE TU CUENTA EN APRENDE MAB</p>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
-                    </td>
                     </tr>
-                </table>           
+                </table>
             ';
     
             $mail->isHTML(true); 

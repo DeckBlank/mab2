@@ -898,9 +898,11 @@ class UserController{
     }
 
     private function sendInstructions($request, $recovery_session, $user_id){
-        $username = get_user_by('id', $user_id)->data->user_login;
+        $userFullname   = get_user_meta( $user_id, 'first_name', true ) . ' ' . get_user_meta( $user_id, 'last_name', true );
+        $userFullname   = count( explode('-panda-', $userFullname) ) ? str_replace(['-panda-'], ' ', $userFullname) : $userFullname;
+
         $mail = new PHPMailer(true);
-    
+
         try {
             //Server settings
             $mail->SMTPDebug = 0;
@@ -913,53 +915,48 @@ class UserController{
             $mail->Port       = 465;
     
             //Recipients
-            $mail->setFrom('no-reply@mabclick.com', "MABCLICK");
+            $mail->setFrom('no-reply@mabclick.com', "Aprende MAB");
             $mail->addAddress($request['user']);
+
+            $recoveryLink = get_site_url() .'/actualizar-contrasena?recuperar-contrasena?stage=2&session_id='. $recovery_session;
     
             // Content
             $body = '
-                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: #DE0D46; padding: 3rem 0;">
-                    <tr>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="padding: 3rem 0;">
+                <tr>
                     <td width="100%" align="center" style="padding: 0 1rem">
-                        <table width="600" border="0" align="center" cellpadding="0" cellspacing="0">
-                        <tr>
-                            <td width="600" align="center">
-                            <div style="background: #0166D0; color: white; width: 100%; max-width: 640px;">
-                                <header style="background: white; padding: 1rem;">
-                                    <img src="https://mabclick.com/wp-content/themes/mab-theme/app/static/images/logo.png" style="width: 80px;">
-                                </header>
-    
-                                <div style="padding: 1rem;">
-                                    <h1 style="margin-bottom: 3rem; color: white; font-size: 18px; font-weight: 700; font-family: Verdana, serif;">
-                                        Hola, '. $username .'
-                                    </h1>
-                                    <div style="text-align: center; margin-bottom: 2rem;">
-                                        <p style="font-family: Verdana, serif; margin-bottom: 2rem; color: white">
-                                            Recibimos una solicitud para cambiar la contraseña de su cuenta de MABCLICK.<br>
-                                            Si no realizó esta solicitud, simplemente ignore este correo electrónico. De lo contrario, haga click en el botón a continuación para cambiar su contraseña:                                        
-                                        </p>
-                                        <p style="font-family: Verdana, serif; margin-bottom: 3rem">
-                                            <a href="'. get_site_url() .'/recuperar-contrasena?stage=2&session_id='. $recovery_session .'" style="text-decoration: none; padding: 1rem; color: white; background: #DE0D46">CAMBIAR CONTRASEÑA</a>
-                                        </p>
-                                        <p style="font-family: Verdana, serif; margin-bottom: 2rem">
-                                            También puede cambiar y pegar esta URL en su navegador web: <a href="'. get_site_url() .'/recuperar-contrasena?stage=2&session_id='. $recovery_session .'" style="color: white; font-weight: 700">'. get_site_url() .'/actualizar-contrasena?recuperar-contrasena?stage=2&session_id='. $recovery_session .'</a>                                       
-                                        </p>                                        
-                                    </div>
-                                    <footer style="text-align: center; font-size: 12px; font-family: Verdana, serif; padding: 1rem; color: white;">
-                                        All rights reserved - MABLICK
-                                    </footer>         
-                                </div>
-                            </div>
-                            </td>
-                        </tr>
+                        <table width="600" cellspacing="0" cellpadding="0" style="margin: 0 auto; max-width: 1350px; background: #EB3CEC; text-align: left; font-family: Verdana,sans-serif">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <img style="width:100%; max-width: 1350px;" src="'. get_template_directory_uri() .'/static/images/mailing/banner.jpg">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 3rem 3rem; color: white; text-align: center;">
+                                        <h1 style="color: white; font-size: 25px; margin-top: 0; margin-bottom: 2rem; text-transform: uppercase;">HOLA, ' . $userFullname . '</h1>
+                                        <p style="color: white; margin-top: 0; margin-bottom: 2rem; line-height: 30px">Recibimos una solicitud para <span style="font-weight: bold">cambiar la contraseña de su cuenta</span> Aprende MAB. Si no realizó esta solicitud, simplemente ignore este correo electrónico. De lo contrario, haga click en el siguiente botón para realizar el cambio</p>
+                                        <p style="color: white; margin-top: 0; margin-bottom: 2rem; line-height: 30px">Para iniciar sesión lo puedes hacer desde aquí</p>
+                                        <a href="'. $recoveryLink .'" style="background-color: white; color: black; margin-bottom: 2rem; padding: 1rem; border-radius: 100px; font-weight: bold; display: inline-block; text-decoration: none;">CAMBIAR CONTRASEÑA</a>
+                                        <p style="color: white; margin-top: 0; margin-bottom: 2rem; line-height: 30px">También puede cambiar y pegar esta URL en su navegador web: <span style="font-weight: bold; color: white;">'. $recoveryLink .'</span></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 1rem 3rem; text-align: center; ">
+                                        <img style="width:100%; max-width: 400px;" src="'. get_template_directory_uri() .'/static/images/mailing/logo-white.png?key=213123123"/>
+                                        <div style="margin: 1rem 0; height: 1px; background-color: white;"></div>
+                                        <p style="color: white; font-size: 14px; line-height: 21px">DERECHOS RESERVADOS</p>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
                     </td>
-                    </tr>
-                </table>           
+                </tr>
+            </table>
             ';
     
             $mail->isHTML(true); 
-            $mail->Subject = "Solicitud de cambio de contrasena - MABCLICK";
+            $mail->Subject = "Solicitud de cambio de contrasena";
             $mail->MsgHTML($body);
     
             $mail->send();
