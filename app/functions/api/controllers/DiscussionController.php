@@ -419,7 +419,7 @@ class DiscussionController{
             $mail->Port       = 465;
 
             //Recipients
-            $mail->setFrom('no-reply@mabclick.com', "MABCLICK");
+            $mail->setFrom('no-reply@mabclick.com', "Aprende MAB");
             $mail->addAddress($request['user_email']);
 
             /* TODO: Descomment */
@@ -521,7 +521,7 @@ class DiscussionController{
             $mail->Port       = 465;
 
             //Recipients
-            $mail->setFrom('no-reply@mabclick.com', "MABCLICK");
+            $mail->setFrom('no-reply@mabclick.com', "Aprende MAB");
             $mail->addAddress($request['user_email']);
 
             foreach($admins as $admin){
@@ -608,7 +608,7 @@ class DiscussionController{
             $mail->Port       = 465;
 
             //Recipients
-            $mail->setFrom('no-reply@mabclick.com', "MABCLICK");
+            $mail->setFrom('no-reply@mabclick.com', "Aprende MAB");
             $mail->addAddress($request['user_email']);
 
             if($comment[0]->comment_author_email)
