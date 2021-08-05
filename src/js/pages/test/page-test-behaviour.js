@@ -261,7 +261,7 @@ const test = new Vue({
         behaviour_timer: new Date().getTime() / 1000
       }))
 
-      window.location = `${this.SITE_URL}/emotional/`;
+      window.location = this.userProfile;
     },
     calculateBehaviour: function() {
       if (this.getUserType() == 'primary') {

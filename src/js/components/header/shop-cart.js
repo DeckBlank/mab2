@@ -174,7 +174,7 @@ Vue.component('shopcart',{
   watch: {
     'total': function(val) {
       if(val == 0){
-        this.total_discount = 0;  window.location = `${this.SITE_URL}/cursos`
+        this.total_discount = 0;
 
       }else {
         if(this.courses.list.length > 1){
@@ -200,8 +200,6 @@ Vue.component('shopcart',{
       this.listCourses();
 
       this.pasarell = (mab.pasarell) ? mab.pasarell : {};
-    } else {
-      window.location = `${this.SITE_URL}/access`
     }
   },
   methods: {
@@ -234,7 +232,6 @@ Vue.component('shopcart',{
           })
           .catch(err => {
             window.localStorage.removeItem('mab_shop_cart');
-            window.location = `${this.SITE_URL}/cursos`
 
             throw err;
           })

@@ -35,6 +35,10 @@
     &__name {
       font-size: $fs-35;
       margin-top: 2rem;
+
+      span {
+        width: 80%;
+      }
     }
 
     &__share {

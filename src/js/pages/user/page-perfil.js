@@ -194,7 +194,6 @@ new Vue({
   },
   mounted(){
     this.global();
-    this.hideLoading();
 
     this.userId = document.querySelector('#profile').getAttribute('data-user');
 
@@ -302,9 +301,9 @@ new Vue({
           if (lastname.length == 2) {
             this.user.fatherName.value  = lastname[0];
             this.user.motherName.value  = lastname[1];
-          } else {
-            this.user.fatherName.value  = lastname.substr(0, lastname.indexOf(' '));
-            this.user.motherName.value  = lastname.substr(lastname.indexOf(' ') + 1);
+          } else if (lastname.length) {
+            this.user.fatherName.value  = response.data.user_lastname.substr(0, response.data.user_lastname.indexOf(' '));
+            this.user.motherName.value  = response.data.user_lastname.substr(response.data.user_lastname.indexOf(' ') + 1);
           }
 
           this.skills.values.soft.value = response.data.habilites.soft;
@@ -313,15 +312,15 @@ new Vue({
           if (response.data.phrase) {
             this.user.phrase.value = response.data.phrase;
           }
+
+          this.hideLoading();
         }
       })
       .catch(err => {
         throw err;
       }) 
     },
-    updateProfileData: function(e) {
-      e.preventDefault();
-
+    updateProfileData: function() {
       this.user.try = true;
 
       if (
@@ -333,7 +332,6 @@ new Vue({
         this.user.isLoading = true;
 
         const formData = new FormData();
-
 
         formData.append('_wpnonce', mab.nonce);
 
@@ -359,6 +357,7 @@ new Vue({
         .then(data => {
           if (data.status) {
             this.user.profile = {
+              ...this.user.profile,
               firstname: this.user.firstname.value,
               father_name: this.user.fatherName.value,
               mother_name: this.user.motherName.value,

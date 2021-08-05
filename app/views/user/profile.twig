@@ -45,8 +45,8 @@
           </div>
           <div class="cell large-8 position-relative ">
             <h2 class="c-user-info__name w-xbold dark text-center large-text-left f2 margin-bottom-0"> 
-              <span>${ userFullName }</span>   
-              <button v-if="isProfileOwner" @click="user.isModalOpened = true" class="c-edit-circle c-edit-circle--text bg-white gray margine-left-1 fs-14">
+              <span class="display-inline-block">${ userFullName }</span>   
+              <button v-if="isProfileOwner" @click="user.isModalOpened = true" class="c-edit-circle c-edit-circle--text bg-white gray margine-left-1 fs-14 display-block">
                 EDITAR <i class="far fa-pen"></i>
               </button> 
             </h2>
@@ -307,7 +307,7 @@
     <div v-if="isProfileOwner" class="c-mab-modal padding-2 width-100 flex-container align-center-middle" :class="{'visible' : user.isModalOpened}">
       <div class="c-mab-modal__content bg-white br--large padding-2">
         <h3 class="c-modal-editor__title dark w-xbold fs-25 f2 text-uppercase margin-bottom-1">Tus datos</h3>
-        <form @submit="updateProfileData($event)" class="c-form-new text-left margin-top-1" action="">
+        <div class="c-form-new text-left margin-top-1">
           <div class="grid-x grid-margin-x grid-margin-y">
             <div class="cell">
               <div class="c-form-new__input-container">
@@ -347,7 +347,7 @@
             </div>
             <div class="cell text-right">
               <button @click="user.isModalOpened = false" class="c-button c-button--primary--real-ghost f2 margin-right-1">Cancelar</button>
-              <button :disabled="user.isLoading" class="c-button c-button--primary f2">
+              <button @click="updateProfileData()" :disabled="user.isLoading" class="c-button c-button--primary f2">
                 ${(user.isLoading) ? 'Actualizando...' : 'Aceptar'}
               </button>
             </div>
