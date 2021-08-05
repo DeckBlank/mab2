@@ -718,7 +718,7 @@ class UserController{
                 'margin_bottom' => 0,
                 'margin_left'   => 0,
                 'margin_right'  => 0,
-                'format'        => [190, 236],
+                'format'        => [180, 230],
                 'orientation'   => 'L',
 
                 'fontDir' => array_merge($fontDirs, [
@@ -773,7 +773,7 @@ class UserController{
                                     border-collapse: collapse;
                                     width: 100%;
                                     height: 100%;
-                                    background: #fff;
+                                    background: white;
                                 }
                         
                                 td, th {
@@ -805,7 +805,7 @@ class UserController{
                                             </tr>
                                         </table>
                                     </td>
-                                    <td style="background:#FF3333; width:30%; padding:0 2.5rem 0" rowspan="10" align="center">
+                                    <td style="background:#FF3333; width:30%; padding:0 2.5rem 0;" rowspan="10" align="center">
                                         <img style="margin-bottom:1rem; width: 15%" src="'. $logoMab .'">
                                         <br>
                                         <div style="color:#fff; font-size:18px">
@@ -880,7 +880,8 @@ class UserController{
 
                 $quotationPDF->SetTitle("Certificado - " . $userFullname);
                 $quotationPDF->WriteHTML($document);
-                $quotationPDF->Output("Certificado - " . $userFullname . '.pdf', 'D');
+                // $quotationPDF->Output("Certificado - " . $userFullname . '.pdf', 'D');
+                $quotationPDF->Output();
             }
         } else {
             return new WP_Error( 'invalid_params', __('Invalid params'), array( 'status' => 403 ) );

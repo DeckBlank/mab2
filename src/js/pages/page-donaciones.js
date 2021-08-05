@@ -181,7 +181,7 @@ new Vue({
       this.social = {
         facebook: `https://www.facebook.com/sharer/sharer.php?u=${ this.donationLink }`,
         linkedin: `http://www.linkedin.com/shareArticle?mini=true&url=${ this.donationLink }`,
-        twitter: `https://twitter.com/share?text=Hola, animate a donar por la educación en MAB&url=${ this.donationLink }`,
+        twitter: `https://twitter.com/share?text=Hola, anímate a donar por la educación en MAB&url=${ this.donationLink }`,
       }
     },
     copyDonationLink: function(e) {
