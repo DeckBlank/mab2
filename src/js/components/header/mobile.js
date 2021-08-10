@@ -55,9 +55,9 @@ Vue.component('header-mobile', {
                   <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
                     <a :href="SITE_URL + '/charlas'" class="position-relative">Charlas</a>
                   </div>
-                  <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                  <!-- <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
                     <a :href="SITE_URL + '/lideres'" class="position-relative">Líderes</a>
-                  </div>
+                  </div> -->
                   <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
                     <a :href="SITE_URL + '/blog'" class="position-relative">Blog</a>
                   </div>

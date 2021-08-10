@@ -62,11 +62,11 @@ Vue.component('header-main',{
                     Charlas
                   </a>
                 </li>
-                <li class="c-menu-dropdown__item inverse">
+               <!---<li class="c-menu-dropdown__item inverse">
                   <a :href="SITE_URL + '/lideres'" class="w-xbold text-center padding-horizontal-2">
                     Líderes
                   </a>
-                </li>
+                </li>-->
                 <li class="c-menu-dropdown__item inverse">
                   <a :href="SITE_URL + '/blog'" class="w-xbold text-center padding-horizontal-2">
                     Blog
