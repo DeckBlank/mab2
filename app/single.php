@@ -111,6 +111,7 @@ if ($post->post_type == "video") {
     ];
 
     $context['source']          = get_field('source', $post->ID);
+    $context['mp4']    = get_field('mp4', $post->ID);
     $context['source_type']     = get_field('source_type', $post->ID);
     $context['source_banner']   = ($context['source_type'] == 'ebook') ? get_field('source_banner', $post->ID) : '';
     $context['summary']         = ( get_field('summary', $post->ID) ) ? get_field('summary', $post->ID)['url'] : false;

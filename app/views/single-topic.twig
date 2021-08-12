@@ -27,18 +27,21 @@
             <h2 class="fs-25 f2 w-ligth dark margin-bottom-2 text-uppercase">
               clase ${ metas.get('topic_number') }
             </h2>
-
             {% if source_type and source_type == 'ebook' %}
               <figure class="margin-bottom-1">
                 <img class="width-100 of--contain" src="{{source_banner['url']}}" alt="">
               </figure>
               <a href="{{source}}" target="_blank" class="c-button c-button--secondary display-block f2 w-bold fs-18 w-100 text-center margin-bottom-2">Leer libro</a>
             {% else %}
+              <img src="{{mp4['url']}}">
               <div class="c-player margin-bottom-1">
                 <div style="padding:56.25% 0 0 0;position:relative;">
                   <iframe id="video-topic" src="https://player.vimeo.com/video/{{source|split('/')[3]}}?color=de0d46&title=0&byline=0&autoplay=0" muted style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
                 </div>
               </div>
+               {# <video id="player" playsinline controls>
+                <source src="{{ source_video ? source_video['url'] : '' }}" type="video/mp4" />
+              </video> #}
             {% endif %}
 
             <div class="c-actions margin-bottom-1 margin-top-1">
