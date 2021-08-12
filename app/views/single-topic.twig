@@ -33,7 +33,9 @@
               </figure>
               <a href="{{source}}" target="_blank" class="c-button c-button--secondary display-block f2 w-bold fs-18 w-100 text-center margin-bottom-2">Leer libro</a>
             {% else %}
-              <img src="{{mp4['url']}}">
+              {# <div>${API}</div>
+              <div :algo="API">API</div>
+              <img src="{{mp4['url']}}"> #}
               <div class="c-player margin-bottom-1">
                 <div style="padding:56.25% 0 0 0;position:relative;">
                   <iframe id="video-topic" src="https://player.vimeo.com/video/{{source|split('/')[3]}}?color=de0d46&title=0&byline=0&autoplay=0" muted style="position:absolute;top:0;left:0;width:100%;height:100%;" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
