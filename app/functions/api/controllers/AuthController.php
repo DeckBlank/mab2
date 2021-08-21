@@ -70,6 +70,7 @@ class AuthController {
     }
 
     public function register($request) {
+        $env = require(__DIR__ . '/../../../../env.php');
         if (
             !empty($request['email']) &&
             !empty($request['password']) &&
@@ -132,7 +133,7 @@ class AuthController {
                         break;
                 }
 
-                if ( $this::__sendNotification($email, $profile->name, $profile->father_name . ' ' . $profile->mother_name) ) {
+                if ( true) { //$this::__sendNotification($email, $profile->name, $profile->father_name . ' ' . $profile->mother_name)
                     wp_set_auth_cookie($userID, true);
                     wp_set_current_user($userID, $email);
                     do_action('wp_login', $email);
@@ -190,6 +191,7 @@ class AuthController {
     }
 
     private function __sendNotification($email, $firstName, $lastName){
+        if($env['TAMBOS']) return true;
         $mail = new PHPMailer(true);
     
         try {

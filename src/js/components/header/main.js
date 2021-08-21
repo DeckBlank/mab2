@@ -57,16 +57,16 @@ Vue.component('header-main',{
             <label @mouseover="blockMenu('comunity', true)" @mouseleave="blockMenu('comunity', false)" for="cbx-comunity" class="white f2 fs-18 w-medium">Comunidad <i class="far fa-chevron-down fs-16 ml-05"></i></label>
             <div @mouseover="blockMenu('comunity', true)" @mouseleave="blockMenu('comunity', false)" class="c-menu-dropdown left br--medium position-absolute f2">
               <ul class="bg-white ul-reset br--medium overflow-hidden">
-                <li class="c-menu-dropdown__item inverse">
+                <!-- <li class="c-menu-dropdown__item inverse">
                   <a :href="SITE_URL + '/charlas'" class="w-xbold text-center padding-horizontal-2">
                     Charlas
                   </a>
-                </li>
-                <li class="c-menu-dropdown__item inverse">
+                </li> _TAMBOS -->
+               <!---<li class="c-menu-dropdown__item inverse">
                   <a :href="SITE_URL + '/lideres'" class="w-xbold text-center padding-horizontal-2">
                     Líderes
                   </a>
-                </li>
+                </li>-->
                 <li class="c-menu-dropdown__item inverse">
                   <a :href="SITE_URL + '/blog'" class="w-xbold text-center padding-horizontal-2">
                     Blog
@@ -105,23 +105,23 @@ Vue.component('header-main',{
                     ¿Cómo llegamos a ti?
                   </a>
                 </li>
-                <li class="c-menu-dropdown__item inverse">
+                <!--<li class="c-menu-dropdown__item inverse">
                   <a :href="SITE_URL + '/servicios'" class="w-xbold text-center padding-horizontal-2 ">
                     Servicios
                   </a>
-                </li>
+                </li> _TAMBOS-->
               </ul>
             </div>
           </div>
-          <div class="c-item margin-left-1">
+          <!-- <div class="c-item margin-left-1">
             <a :href="SITE_URL + '/donaciones'" class="c-item c-link c-link--ho-warning f2 fs-18 w-sbold white">Donaciones</a>
-          </div>
+          </div> _TAMBOS-->
         </div>
         <div class="c-nav__right flex-container align-middle">
           <button @click="updateStatusBrowserToggle" class="c-search-toggle margin-right-1" :class="{'enable' : isActiveBrowserToggle}">
             <i class="far fa-search"></i>
           </button>
-          <div v-if="logedUser && device == 'desktop'" class="c-item position-relative">
+          <!-- <div v-if="logedUser && device == 'desktop'" class="c-item position-relative">
             <input v-model="menus.shop.switcher" id="cbx-shop" class="hide" type="checkbox">
             <label @mouseover="blockMenu('shop', true)" @mouseleave="blockMenu('shop', false)" for="cbx-shop" class="c-shop-cart c-link fs-21 c-link--white c-link--ho-warning margin-right-1">
               <i class="far fa-shopping-cart"></i>
@@ -136,7 +136,7 @@ Vue.component('header-main',{
           <a v-if="device == 'mobile'" href="SITE_URL + '/carrito'" class="c-shop-cart c-link fs-21 c-link--white c-link--ho-warning margin-right-1">
             <i class="far fa-shopping-cart"></i>
             <span v-if="shopCart" class="c-shop-cart__buble">{{ shopCart.length }}</span>
-          </a>
+          </a> _TAMBOS -->
 
           <a v-if="logedUser" :href="SITE_URL + '/mis-cursos'" class="c-item c-link c-link--white c-link--ho-warning f2 fs-18 w-sbold margin-right-1">Mis cursos</a>
           <profile v-if="logedUser"></profile>

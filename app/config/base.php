@@ -114,5 +114,5 @@ return [
         'wp_topics'             => get_theme_file_uri( __getResourceURL('js', 'wp-topics.bundle.js') ),
         'wp_categories_import'  => get_theme_file_uri( __getResourceURL('js', 'wp-categories-import.bundle.js') ),
     ],
-    'vertion' => '1628289465274'
+    'vertion' => '1629510076305'
 ];

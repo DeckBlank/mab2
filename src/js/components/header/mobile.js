@@ -52,12 +52,12 @@ Vue.component('header-mobile', {
                 <input id="mob-cbx-comunidad" type="checkbox" class="hide">
 
                 <ul class="c-submenu ul-reset bg-sec-color br--medium width-100 overflow-hidden">
-                  <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                  <!-- <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
                     <a :href="SITE_URL + '/charlas'" class="position-relative">Charlas</a>
-                  </div>
-                  <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                  </div> _TAMBOS-->
+                  <!-- <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
                     <a :href="SITE_URL + '/lideres'" class="position-relative">Líderes</a>
-                  </div>
+                  </div> -->
                   <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
                     <a :href="SITE_URL + '/blog'" class="position-relative">Blog</a>
                   </div>
@@ -87,17 +87,17 @@ Vue.component('header-mobile', {
                   <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
                     <a :href="SITE_URL + '/llegamos'" class="position-relative">¿Cómo llegamos a ti?</a>
                   </div>
-                  <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
+                 <!-- <div class="c-submenu__item flex-container align-justify align-middle padding-horizontal-1" :class="{ active : true }">
                     <a :href="SITE_URL + '/servicios'" class="position-relative">Servicios</a>
-                  </div>
+                  </div> _TAMBOS-->
                 </ul>
               </li>
 
-              <li class="flex-container flex-dir-column">
+              <!-- <li class="flex-container flex-dir-column">
                 <div class="c-menu__item flex-container align-justify padding-1">
                   <a :href="SITE_URL + '/donaciones'" class="c-link c-link--sec position-relative f2 fs-18 w-sbold">Donaciones</a>
                 </div>
-              </li>
+              </li> _TAMBOS-->
 
               <li v-if="logedUser" class="flex-container flex-dir-column">
                 <div class="c-menu__item flex-container align-justify padding-1">
