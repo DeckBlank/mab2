@@ -5,9 +5,9 @@ Vue.component('course',{
   template: /*html*/`
     <div class="c-course-card br--large" :class="'c-course-card--' + body.color">
       <figure class="c-course-card__figure position-relative">
-        <div v-if="Number(body.price) == 0 && logedUser" class="c-course-card__free-tag position-absolute sec-color fs-18 flex-container align-center-middle">
+        <!--<div v-if="Number(body.price) == 0 && logedUser" class="c-course-card__free-tag position-absolute sec-color fs-18 flex-container align-center-middle">
           <img loading="lazy" class="donaciones" :src="THEME_URL + '/static/images/vectors/heart.png'" alt=""> GRATIS
-        </div>
+        </div> _TAMBOS -->
         <div v-if="body.grade" class="c-course-card__grade-tag  position-absolute dark fs-18 flex-container align-center-middle bg-warning-alt">
           {{body.grade}}
         </div>
