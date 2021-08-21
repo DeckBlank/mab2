@@ -45,13 +45,17 @@
                 <source src="{{ source|split('/')[4] }}" type="video/mp4" />
               </video> #}
               {% if source|split('/')[5] %}
-                <video id="player" playsinline controls>
-                  <source src="http://mab.site/wp-content/uploads/videos_tambos/{{ source|split('/')[5] }}.mp4" type="video/mp4" />
-                </video>
+                <div class="margin-top-3 margin-bottom-2 f2 fs-18 w-medium black">
+                  <video id="player" playsinline controls>
+                    <source src="http://mab.site/wp-content/uploads/videos_tambos/{{ source|split('/')[5] }}.mp4" type="video/mp4" />
+                  </video>
+                  </div>
               {% else %}
-                <video id="player" playsinline controls>
-                  <source src="http://mab.site/wp-content/uploads/videos_tambos/{{ source|split('/')[3] }}.mp4" type="video/mp4" />
-                </video>
+                <div class="margin-top-3 margin-bottom-2 f2 fs-18 w-medium black">
+                  <video id="player" playsinline controls style="width:100%">
+                    <source src="http://mab.site/wp-content/uploads/videos_tambos/{{ source|split('/')[3] }}.mp4" type="video/mp4" />
+                  </video>
+                  </div>
               {% endif %}
             {% endif %}
 
